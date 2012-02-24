@@ -1,3 +1,0 @@
-[submodule "bridge/numpy"]
-	path = bridge/numpy
-	url = git@github.com:cphvb/numpy.git
