@@ -1,0 +1,947 @@
+[
+    [
+        "cache.py --size=10485760*10*1", 
+        false, 
+        "simple", 
+        1, 
+        21.087364000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        false, 
+        "simple", 
+        2, 
+        21.09057
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        false, 
+        "simple", 
+        3, 
+        21.089305
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "simple", 
+        1, 
+        21.069737
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "simple", 
+        2, 
+        21.033947999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "simple", 
+        3, 
+        21.042407000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        1, 
+        25.165503000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        2, 
+        25.109822999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        3, 
+        25.149198999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        1, 
+        21.288679999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        2, 
+        21.222892000000002
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        3, 
+        21.235514999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        1, 
+        21.139906
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        2, 
+        21.121317999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        3, 
+        21.091632000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        1, 
+        21.044096
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        2, 
+        21.046095000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        3, 
+        21.047561999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        1, 
+        21.015892000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        2, 
+        20.999866999999998
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        3, 
+        20.993608999999999
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        1, 
+        21.00601
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        2, 
+        21.032343000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "score", 
+        3, 
+        21.016739000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "mcore", 
+        1, 
+        5.3996240000000002
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "mcore", 
+        2, 
+        5.3349310000000001
+    ], 
+    [
+        "cache.py --size=10485760*10*1", 
+        true, 
+        "mcore", 
+        3, 
+        5.3977969999999997
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        false, 
+        "simple", 
+        1, 
+        4.5369299999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        false, 
+        "simple", 
+        2, 
+        4.5397970000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        false, 
+        "simple", 
+        3, 
+        4.5835759999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "simple", 
+        1, 
+        28.522078
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "simple", 
+        2, 
+        28.678314
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "simple", 
+        3, 
+        28.792556999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        1, 
+        40.804133
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        2, 
+        40.637262
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        3, 
+        41.138278999999997
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        1, 
+        29.431882000000002
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        2, 
+        29.257532000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        3, 
+        29.376681000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        1, 
+        28.897615999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        2, 
+        28.960547999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        3, 
+        30.259028000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        1, 
+        29.359985999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        2, 
+        29.07452
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        3, 
+        28.816047000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        1, 
+        28.747655999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        2, 
+        28.689944000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        3, 
+        28.724779999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        1, 
+        28.545549000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        2, 
+        28.793603000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "score", 
+        3, 
+        28.668372000000002
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "mcore", 
+        1, 
+        24.618911000000001
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "mcore", 
+        2, 
+        24.697223999999999
+    ], 
+    [
+        "MonteCarlo.py --size=100000000*1", 
+        true, 
+        "mcore", 
+        3, 
+        24.625107
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        false, 
+        "simple", 
+        1, 
+        7.6770990000000001
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        false, 
+        "simple", 
+        2, 
+        7.6544239999999997
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        false, 
+        "simple", 
+        3, 
+        7.6674860000000002
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "simple", 
+        1, 
+        8.5129009999999994
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "simple", 
+        2, 
+        8.6630610000000008
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "simple", 
+        3, 
+        8.5216329999999996
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        1, 
+        38.997647999999998
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        2, 
+        38.949750999999999
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        3, 
+        38.916018999999999
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        1, 
+        9.6162139999999994
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        2, 
+        9.4468200000000007
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        3, 
+        9.3299599999999998
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        1, 
+        9.2835210000000004
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        2, 
+        9.1585909999999995
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        3, 
+        9.2398600000000002
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        1, 
+        9.0077350000000003
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        2, 
+        9.0381219999999995
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        3, 
+        8.7985620000000004
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        1, 
+        8.7300160000000009
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        2, 
+        8.7072760000000002
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        3, 
+        8.7219230000000003
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        1, 
+        8.5298949999999998
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        2, 
+        8.6314770000000003
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "score", 
+        3, 
+        8.5894539999999999
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "mcore", 
+        1, 
+        5.5871599999999999
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "mcore", 
+        2, 
+        5.6391559999999998
+    ], 
+    [
+        "swater.py --size=3600*1", 
+        true, 
+        "mcore", 
+        3, 
+        5.5899099999999997
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        false, 
+        "simple", 
+        1, 
+        6.1547919999999996
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        false, 
+        "simple", 
+        2, 
+        6.2452730000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        false, 
+        "simple", 
+        3, 
+        6.1946459999999997
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "simple", 
+        1, 
+        3.8187310000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "simple", 
+        2, 
+        3.685492
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "simple", 
+        3, 
+        3.703014
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        1, 
+        27.858015999999999
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        2, 
+        27.881581000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        3, 
+        28.016494999999999
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        1, 
+        4.3585529999999997
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        2, 
+        4.3335929999999996
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        3, 
+        4.3431639999999998
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        1, 
+        4.0608180000000003
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        2, 
+        4.0352350000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        3, 
+        4.0268360000000003
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        1, 
+        3.8619509999999999
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        2, 
+        3.8536250000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        3, 
+        3.8655439999999999
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        1, 
+        3.7282009999999999
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        2, 
+        3.714181
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        3, 
+        3.7110080000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        1, 
+        3.7533820000000002
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        2, 
+        3.741482
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "score", 
+        3, 
+        3.7005189999999999
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "mcore", 
+        1, 
+        1.555418
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "mcore", 
+        2, 
+        1.4921450000000001
+    ], 
+    [
+        "stencil.py --size=10240*1024*10", 
+        true, 
+        "mcore", 
+        3, 
+        1.5133719999999999
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        false, 
+        "simple", 
+        1, 
+        5.0585399999999998
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        false, 
+        "simple", 
+        2, 
+        5.0285599999999997
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        false, 
+        "simple", 
+        3, 
+        5.0470069999999998
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "simple", 
+        1, 
+        14.291808
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "simple", 
+        2, 
+        14.626842999999999
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "simple", 
+        3, 
+        14.475904
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        1, 
+        21.400455999999998
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        2, 
+        21.227070000000001
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        3, 
+        21.421842999999999
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        1, 
+        14.579050000000001
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        2, 
+        14.554836
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        3, 
+        14.58154
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        1, 
+        14.512055
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        2, 
+        14.432589
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        3, 
+        14.493895
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        1, 
+        14.424519999999999
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        2, 
+        14.355273
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        3, 
+        14.359571000000001
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        1, 
+        14.312143000000001
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        2, 
+        14.333193
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        3, 
+        14.325707
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        1, 
+        14.299289999999999
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        2, 
+        14.347629
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "score", 
+        3, 
+        14.347068
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "mcore", 
+        1, 
+        5.1604260000000002
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "mcore", 
+        2, 
+        8.0631710000000005
+    ], 
+    [
+        "kNN.py --size=10000*120", 
+        true, 
+        "mcore", 
+        3, 
+        8.0586870000000008
+    ]
+]
