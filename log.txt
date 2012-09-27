@@ -1,0 +1,576 @@
+-{[ simple , False , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=False .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: False, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.102687
+None 21.102687
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: False, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.049587
+None 21.049587
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: False, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.106800
+None 21.106800
+
+]}-
+-{[ simple , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.003476
+None 21.003476
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.013205
+None 21.013205
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.003013
+None 21.003013
+
+]}-
+-{[ score , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 25.114889
+None 25.114889
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 25.093329
+None 25.093329
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 25.303067
+None 25.303067
+
+]}-
+-{[ score , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.04170901  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.188484
+None 21.188484
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.207843
+None 21.207843
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.194043
+None 21.194043
+
+]}-
+-{[ score , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.099788
+None 21.099788
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.092208
+None 21.092208
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.094782
+None 21.094782
+
+]}-
+-{[ score , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.036929
+None 21.036929
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.068522
+None 21.068522
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.043521
+None 21.043521
+
+]}-
+-{[ score , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.001525
+None 21.001525
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 20.997587
+None 20.997587
+
+RUN 3 [ 3.14157916  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 20.993944
+None 20.993944
+
+]}-
+-{[ score , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 21.004776
+None 21.004776
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 20.983572
+None 20.983572
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 20.989781
+None 20.989781
+
+]}-
+-{[ mcore , True , ../../benchmark/Python/cache.py --size=10485760*10*1 --cphvb=True .
+RUN 1 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 5.322458
+None 5.322458
+
+RUN 2 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 5.319418
+None 5.319418
+
+RUN 3 [ 3.14159265  3.14159265  3.14159265 ...,  3.14159265  3.14159265
+  3.14159265]
+cache.py - cphvb: True, nthd: 8, nblocks: 16 size: [10485760, 10, 1], total time: 5.321483
+None 5.321483
+
+]}-
+-{[ simple , False , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=False .
+RUN 1 Pi:  3.14165728
+MonteCarlo.py - cphvb: False, nthd: 8, nblocks: 16 size: [100000000], total time: 4.545379
+None 4.545379
+
+RUN 2 Pi:  3.14145112
+MonteCarlo.py - cphvb: False, nthd: 8, nblocks: 16 size: [100000000], total time: 4.615077
+None 4.615077
+
+RUN 3 Pi:  3.14151172
+MonteCarlo.py - cphvb: False, nthd: 8, nblocks: 16 size: [100000000], total time: 4.544686
+None 4.544686
+
+]}-
+-{[ simple , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.628311
+None 28.628311
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.663872
+None 28.663872
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.613349
+None 28.613349
+
+]}-
+-{[ score , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 40.809431
+None 40.809431
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 40.655045
+None 40.655045
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 40.585168
+None 40.585168
+
+]}-
+-{[ score , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 29.335739
+None 29.335739
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 29.310986
+None 29.310986
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 29.358664
+None 29.358664
+
+]}-
+-{[ score , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 29.016420
+None 29.016420
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 29.054853
+None 29.054853
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 29.037036
+None 29.037036
+
+]}-
+-{[ score , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.976538
+None 28.976538
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.845185
+None 28.845185
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.978065
+None 28.978065
+
+]}-
+-{[ score , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.865585
+None 28.865585
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.838099
+None 28.838099
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.784159
+None 28.784159
+
+]}-
+-{[ score , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.669937
+None 28.669937
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.734832
+None 28.734832
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 28.662148
+None 28.662148
+
+]}-
+-{[ mcore , True , ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True .
+RUN 1 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 24.627028
+None 24.627028
+
+RUN 2 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 24.581919
+None 24.581919
+
+RUN 3 Pi:  0.0
+MonteCarlo.py - cphvb: True, nthd: 8, nblocks: 16 size: [100000000], total time: 24.640099
+None 24.640099
+
+]}-
+-{[ simple , False , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=False .
+RUN 1 swater.py - cphvb: False, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.081976
+None 9.081976
+
+RUN 2 swater.py - cphvb: False, nthd: 8, nblocks: 16 size: [3600, 1], total time: 7.584446
+None 7.584446
+
+RUN 3 swater.py - cphvb: False, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.064069
+None 9.064069
+
+]}-
+-{[ simple , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.129932
+None 9.129932
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.431135
+None 9.431135
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.033063
+None 9.033063
+
+]}-
+-{[ score , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 39.422490
+None 39.422490
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 39.286510
+None 39.286510
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 39.403426
+None 39.403426
+
+]}-
+-{[ score , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 10.059579
+None 10.059579
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 10.232369
+None 10.232369
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 10.059499
+None 10.059499
+
+]}-
+-{[ score , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 10.038581
+None 10.038581
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.806796
+None 9.806796
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 10.032989
+None 10.032989
+
+]}-
+-{[ score , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.569681
+None 9.569681
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.528859
+None 9.528859
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.598511
+None 9.598511
+
+]}-
+-{[ score , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.655269
+None 9.655269
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.385086
+None 9.385086
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.584792
+None 9.584792
+
+]}-
+-{[ score , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.132932
+None 9.132932
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.442530
+None 9.442530
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 9.185082
+None 9.185082
+
+]}-
+-{[ mcore , True , ../../benchmark/Python/swater.py --size=3600*1 --cphvb=True .
+RUN 1 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 5.601042
+None 5.601042
+
+RUN 2 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 5.623442
+None 5.623442
+
+RUN 3 swater.py - cphvb: True, nthd: 8, nblocks: 16 size: [3600, 1], total time: 5.605157
+None 5.605157
+
+]}-
+-{[ simple , False , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=False .
+RUN 1 stencil.py - cphvb: False, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 6.111725
+None 6.111725
+
+RUN 2 stencil.py - cphvb: False, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 6.603013
+None 6.603013
+
+RUN 3 stencil.py - cphvb: False, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 6.110464
+None 6.110464
+
+]}-
+-{[ simple , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.708728
+None 3.708728
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.716689
+None 3.716689
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.724658
+None 3.724658
+
+]}-
+-{[ score , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 27.853104
+None 27.853104
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 27.877265
+None 27.877265
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 27.824734
+None 27.824734
+
+]}-
+-{[ score , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 4.355652
+None 4.355652
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 4.377761
+None 4.377761
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 4.366091
+None 4.366091
+
+]}-
+-{[ score , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 4.029554
+None 4.029554
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 4.026458
+None 4.026458
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 4.021956
+None 4.021956
+
+]}-
+-{[ score , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.855728
+None 3.855728
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.875399
+None 3.875399
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.873817
+None 3.873817
+
+]}-
+-{[ score , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.717335
+None 3.717335
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.728036
+None 3.728036
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.714198
+None 3.714198
+
+]}-
+-{[ score , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.690129
+None 3.690129
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.674766
+None 3.674766
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 3.691123
+None 3.691123
+
+]}-
+-{[ mcore , True , ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True .
+RUN 1 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 1.477342
+None 1.477342
+
+RUN 2 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 1.529131
+None 1.529131
+
+RUN 3 stencil.py - cphvb: True, nthd: 8, nblocks: 16 size: [10240, 1024, 10], total time: 1.497323
+None 1.497323
+
+]}-
+-{[ simple , False , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=False .
+RUN 1 kNN.py - cphvb: False, nthd: 8, nblocks: 16 size: [10000, 120], total time: 5.127976
+None 5.127976
+
+RUN 2 kNN.py - cphvb: False, nthd: 8, nblocks: 16 size: [10000, 120], total time: 5.100000
+None 5.100000
+
+RUN 3 kNN.py - cphvb: False, nthd: 8, nblocks: 16 size: [10000, 120], total time: 5.131306
+None 5.131306
+
+]}-
+-{[ simple , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.371343
+None 14.371343
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.372742
+None 14.372742
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.347003
+None 14.347003
+
+]}-
+-{[ score , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 21.146739
+None 21.146739
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 21.260825
+None 21.260825
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 21.184795
+None 21.184795
+
+]}-
+-{[ score , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.811699
+None 14.811699
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.601617
+None 14.601617
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.638546
+None 14.638546
+
+]}-
+-{[ score , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.487448
+None 14.487448
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.570687
+None 14.570687
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.495055
+None 14.495055
+
+]}-
+-{[ score , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.442738
+None 14.442738
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.525625
+None 14.525625
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.480346
+None 14.480346
+
+]}-
+-{[ score , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.382797
+None 14.382797
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.395677
+None 14.395677
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.370664
+None 14.370664
+
+]}-
+-{[ score , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.418547
+None 14.418547
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.579683
+None 14.579683
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 14.496587
+None 14.496587
+
+]}-
+-{[ mcore , True , ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True .
+RUN 1 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 8.077429
+None 8.077429
+
+RUN 2 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 8.077327
+None 8.077327
+
+RUN 3 kNN.py - cphvb: True, nthd: 8, nblocks: 16 size: [10000, 120], total time: 8.114646
+None 8.114646
+
+]}-
