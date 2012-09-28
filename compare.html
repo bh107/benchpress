@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Quicklook for cphvbbuildgraphs</title>
+<script language="javascript">
+var imgels = {}
+var ids = ['jacobi', 'knn', 'montecarlo', 'stencil', 'shallowwater'];
+
+function ondocloaded()
+{
+	for(n in ids)
+	{
+		var id1 = ids[n] + "-1";
+		var id2 = ids[n] + "-2";
+		var el = document.getElementById(id1);
+		if (el != null)
+			imgels[id1] = el.src;
+		var el = document.getElementById(id2);
+		if (el != null)
+			imgels[id2] = el.src;
+	}
+}
+
+function updatepaths(index)
+{
+	var newtag = document.getElementById('committag' + '-' + index).value;
+	for(n in ids)
+	{
+		var id = ids[n] + "-" + index;
+		var el = document.getElementById(id);
+		var path = imgels[id];
+		if (el != null && path != null)
+		{
+			el.src = path.replace("/master/", "/" + newtag + "/")
+		}
+	}
+		
+	return false;
+}
+</script>
+
+</head>
+<body onload="ondocloaded()">
+
+<table>
+<tr>
+<td>
+
+<form onsubmit="return updatepaths(1)">
+<table>
+<tr><td>Commit tag</td><td><input type="text" id="committag-1" value="master" /></td><td><input type="submit" value="Update"></td></tr>
+</table>
+</form>
+
+<div id="readme" class="sane-defaults sane-defaults-2">
+      <!--<p>This is the daily build results for cphVB generated from Marge.</p>-->
+<p><img alt="Jacobi fixed Speedup" id="jacobi-1" src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/jacobi%20fixed_speedup.png">
+<img alt="kNN Speedup" id="knn-1" src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/knn_speedup.png">
+<img alt="Monte Carlo Speedup" id="montecarlo-1"  src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/monte%20carlo_speedup.png">
+<img alt="Stencil Speedup" id="stencil-1" src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/stencil%20synth_speedup.png">
+<img alt="Shallow Water Speedup" id="shallowwater-1"  src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/shallow%20water_speedup.png"></p>
+</div>
+
+</td>
+<td>
+
+<form onsubmit="return updatepaths(2)">
+<table>
+<tr><td>Commit tag</td><td><input type="text" id="committag-2" value="63167291483f" /></td><td><input type="submit" value="Update"></td></tr>
+</table>
+</form>
+
+<div id="readme" class="sane-defaults sane-defaults-2">
+      <!--<p>This is the daily build results for cphVB generated from Marge.</p>-->
+<p><img alt="Jacobi fixed Speedup" id="jacobi-2" src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/jacobi%20fixed_speedup.png">
+<img alt="kNN Speedup" id="knn-2" src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/knn_speedup.png">
+<img alt="Monte Carlo Speedup" id="montecarlo-2"  src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/monte%20carlo_speedup.png">
+<img alt="Stencil Speedup" id="stencil-2" src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/stencil%20synth_speedup.png">
+<img alt="Shallow Water Speedup" id="shallowwater-2"  src="https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/shallow%20water_speedup.png"></p>
+</div>
+</td>
+</tr>
+
+</body>
+</html>
