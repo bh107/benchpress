@@ -1,6 +1,6 @@
 This is the daily build results for cphVB generated from Marge.
 
-[Click here to compare two revisions](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/compare.html)
+To compare two builds, download an run this [html](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/compare.html).
 
 ![Jacobi fixed Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/jacobi%20fixed_speedup.png)
 ![kNN Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/knn_speedup.png)
