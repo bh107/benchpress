@@ -1,161 +1,161 @@
-Benchmarks are written to: /home/kenneth/buildbot/cphvb/doc/benchpress/results/benchmark-z1Kcfd.
+Benchmarks are written to: /home/kenneth/buildbot/cphvb/doc/benchpress/results/benchmark-UeYRQF.
 { Jacobi Fixed - numpy ( None ),
   python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  3.080459
-  2/5,  3.079958
-  3/5,  3.071304
-  4/5,  3.075452
-  5/5,  3.078391
+  1/5,  3.075326
+  2/5,  3.066466
+  3/5,  3.073337
+  4/5,  3.066859
+  5/5,  3.076778
 }
 { Jacobi Fixed - simple ( simple ),
   python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.631024
-  2/5,  3.62278
-  3/5,  3.639003
-  4/5,  3.620133
-  5/5,  3.627194
+  1/5,  3.626353
+  2/5,  3.629492
+  3/5,  3.628535
+  4/5,  3.632479
+  5/5,  3.622015
 }
 { Jacobi Fixed - score ( score ),
   python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.250848
-  2/5,  3.249294
-  3/5,  3.249473
-  4/5,  3.248312
-  5/5,  3.261511
+  1/5,  3.249036
+  2/5,  3.247651
+  3/5,  3.250059
+  4/5,  3.248659
+  5/5,  3.248463
 }
 { Jacobi Fixed - mcore ( mcore ),
   python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  1.784491
-  2/5,  1.78374
-  3/5,  1.765476
-  4/5,  1.783393
-  5/5,  1.781784
+  1/5,  1.787309
+  2/5,  1.780461
+  3/5,  1.76421
+  4/5,  1.792999
+  5/5,  1.765162
 }
 { Monte Carlo - numpy ( None ),
   python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=False
-  1/5,  4.54647
-  2/5,  4.553203
-  3/5,  4.548716
-  4/5,  4.544111
-  5/5,  4.546825
+  1/5,  4.543497
+  2/5,  4.539465
+  3/5,  4.55187
+  4/5,  4.556169
+  5/5,  4.544772
 }
 { Monte Carlo - simple ( simple ),
   python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  28.526487
-  2/5,  28.518668
-  3/5,  28.513801
-  4/5,  28.521317
-  5/5,  28.766099
+  1/5,  28.518955
+  2/5,  28.526901
+  3/5,  28.502709
+  4/5,  28.533625
+  5/5,  28.516429
 }
 { Monte Carlo - score ( score ),
   python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  28.576191
-  2/5,  28.87315
-  3/5,  28.595244
-  4/5,  28.589511
-  5/5,  28.694579
+  1/5,  28.572516
+  2/5,  28.581192
+  3/5,  28.590772
+  4/5,  28.579531
+  5/5,  28.572463
 }
 { Monte Carlo - mcore ( mcore ),
   python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  24.634322
-  2/5,  24.574674
-  3/5,  24.609444
-  4/5,  24.582309
-  5/5,  24.632296
+  1/5,  24.649449
+  2/5,  24.583401
+  3/5,  24.633849
+  4/5,  24.574698
+  5/5,  24.631413
 }
 { Shallow Water - numpy ( None ),
   python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=False
-  1/5,  3.040392
-  2/5,  3.017396
-  3/5,  3.038372
-  4/5,  3.023188
-  5/5,  3.038397
+  1/5,  3.034322
+  2/5,  3.011317
+  3/5,  3.044934
+  4/5,  3.009105
+  5/5,  3.040676
 }
 { Shallow Water - simple ( simple ),
   python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=True
-  1/5,  3.195828
-  2/5,  3.194214
-  3/5,  3.183633
-  4/5,  3.182725
-  5/5,  3.188472
+  1/5,  3.182338
+  2/5,  3.180388
+  3/5,  3.175939
+  4/5,  3.194447
+  5/5,  3.178935
 }
 { Shallow Water - score ( score ),
   python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=True
-  1/5,  4.639531
-  2/5,  4.647536
-  3/5,  4.645124
-  4/5,  4.649619
-  5/5,  4.648647
+  1/5,  4.665653
+  2/5,  4.663366
+  3/5,  4.650818
+  4/5,  4.636661
+  5/5,  4.630056
 }
 { Shallow Water - mcore ( mcore ),
   python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=True
-  1/5,  2.13818
-  2/5,  2.142836
-  3/5,  2.151408
-  4/5,  2.133327
-  5/5,  2.136948
+  1/5,  2.127654
+  2/5,  2.132755
+  3/5,  2.175475
+  4/5,  2.133498
+  5/5,  2.13764
 }
 { kNN - numpy ( None ),
   python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=False
-  1/5,  5.1509
-  2/5,  5.112321
-  3/5,  5.168375
-  4/5,  5.124549
-  5/5,  5.184634
+  1/5,  5.103163
+  2/5,  5.169981
+  3/5,  5.110223
+  4/5,  5.160404
+  5/5,  5.104852
 }
 { kNN - simple ( simple ),
   python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True
-  1/5,  14.319656
-  2/5,  14.324396
-  3/5,  14.31212
-  4/5,  14.319877
-  5/5,  14.31297
+  1/5,  14.313665
+  2/5,  14.315725
+  3/5,  14.315036
+  4/5,  14.311844
+  5/5,  14.317736
 }
 { kNN - score ( score ),
   python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True
-  1/5,  14.337933
-  2/5,  14.335633
-  3/5,  14.370526
-  4/5,  14.413975
-  5/5,  14.338234
+  1/5,  14.338163
+  2/5,  14.347002
+  3/5,  14.330391
+  4/5,  14.361682
+  5/5,  14.348517
 }
 { kNN - mcore ( mcore ),
   python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True
-  1/5,  8.070723
-  2/5,  8.035993
-  3/5,  8.078737
-  4/5,  8.062557
-  5/5,  8.070223
+  1/5,  8.067516
+  2/5,  8.063611
+  3/5,  8.109947
+  4/5,  8.065329
+  5/5,  8.068098
 }
 { Stencil Synth - numpy ( None ),
   python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=False
-  1/5,  6.263953
-  2/5,  6.234704
-  3/5,  6.246807
-  4/5,  6.223747
-  5/5,  6.277418
+  1/5,  6.170746
+  2/5,  6.291776
+  3/5,  6.199069
+  4/5,  6.280408
+  5/5,  6.240187
 }
 { Stencil Synth - simple ( simple ),
   python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  3.724588
-  2/5,  3.712378
-  3/5,  3.72982
-  4/5,  3.716755
-  5/5,  3.729106
+  1/5,  3.721084
+  2/5,  3.732788
+  3/5,  3.712164
+  4/5,  3.722543
+  5/5,  3.698345
 }
 { Stencil Synth - score ( score ),
   python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  6.572133
-  2/5,  6.571229
-  3/5,  6.578466
-  4/5,  6.565183
-  5/5,  6.579899
+  1/5,  6.572227
+  2/5,  6.560573
+  3/5,  6.574376
+  4/5,  6.565302
+  5/5,  6.579025
 }
 { Stencil Synth - mcore ( mcore ),
   python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  1.479712
-  2/5,  1.514622
-  3/5,  1.478363
-  4/5,  1.479869
-  5/5,  1.485503
+  1/5,  1.479308
+  2/5,  1.485785
+  3/5,  1.518351
+  4/5,  1.485393
+  5/5,  1.474603
 }
