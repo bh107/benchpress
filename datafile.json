@@ -7,11 +7,11 @@
             null, 
             "python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=False", 
             [
-                3.074894, 
-                3.0651510000000002, 
-                3.0756100000000002, 
-                3.0641889999999998, 
-                3.0778629999999998
+                3.0592410000000001, 
+                3.052028, 
+                3.0539109999999998, 
+                3.0504060000000002, 
+                3.0928390000000001
             ]
         ], 
         [
@@ -21,11 +21,11 @@
             null, 
             "python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
             [
-                3.6184340000000002, 
-                3.6255359999999999, 
-                3.6305640000000001, 
-                3.626223, 
-                3.6357240000000002
+                3.6219489999999999, 
+                3.616682, 
+                3.614913, 
+                3.615748, 
+                3.6167829999999999
             ]
         ], 
         [
@@ -35,11 +35,11 @@
             null, 
             "python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
             [
-                3.2462249999999999, 
-                3.2455509999999999, 
-                3.2438380000000002, 
-                3.247779, 
-                3.2419790000000002
+                3.2436389999999999, 
+                3.241708, 
+                3.243401, 
+                3.238388, 
+                3.2435290000000001
             ]
         ], 
         [
@@ -49,11 +49,11 @@
             null, 
             "python ../../benchmark/Python/jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
             [
-                1.757897, 
-                1.788659, 
-                1.7853779999999999, 
-                1.7602789999999999, 
-                1.7716400000000001
+                1.761469, 
+                1.778179, 
+                1.739962, 
+                1.7519420000000001, 
+                1.760138
             ]
         ], 
         [
@@ -63,11 +63,11 @@
             null, 
             "python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=False", 
             [
-                4.5358150000000004, 
-                4.5384479999999998, 
-                4.5387180000000003, 
-                4.5438369999999999, 
-                4.5433120000000002
+                4.5265899999999997, 
+                4.5189789999999999, 
+                4.525112, 
+                4.528505, 
+                4.5289789999999996
             ]
         ], 
         [
@@ -77,11 +77,11 @@
             null, 
             "python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True", 
             [
-                28.806885999999999, 
-                28.493431000000001, 
-                28.487546999999999, 
-                28.494364000000001, 
-                28.589174
+                28.681939, 
+                28.463417, 
+                28.483018000000001, 
+                28.490798999999999, 
+                28.481223
             ]
         ], 
         [
@@ -91,11 +91,11 @@
             null, 
             "python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True", 
             [
-                28.543918000000001, 
-                28.551358, 
-                28.557241999999999, 
-                28.554041000000002, 
-                28.671040999999999
+                28.541497, 
+                28.652539999999998, 
+                28.532435, 
+                28.745189, 
+                28.552049
             ]
         ], 
         [
@@ -105,11 +105,11 @@
             null, 
             "python ../../benchmark/Python/MonteCarlo.py --size=100000000*1 --cphvb=True", 
             [
-                24.594868999999999, 
-                24.557555000000001, 
-                24.629341, 
-                24.565425000000001, 
-                24.586835000000001
+                24.651488000000001, 
+                24.615109, 
+                24.558477, 
+                24.608604, 
+                24.598759999999999
             ]
         ], 
         [
@@ -119,11 +119,11 @@
             null, 
             "python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=False", 
             [
-                2.885364, 
-                2.8255140000000001, 
-                2.9013360000000001, 
-                2.8263449999999999, 
-                2.9092419999999999
+                2.8316129999999999, 
+                2.8462670000000001, 
+                2.8247110000000002, 
+                2.9163749999999999, 
+                2.8355440000000001
             ]
         ], 
         [
@@ -133,11 +133,11 @@
             null, 
             "python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=True", 
             [
-                3.183951, 
-                3.1595140000000002, 
-                3.173988, 
-                3.1803129999999999, 
-                3.1686299999999998
+                3.1739999999999999, 
+                3.1708340000000002, 
+                3.2105869999999999, 
+                3.2566389999999998, 
+                3.174811
             ]
         ], 
         [
@@ -147,11 +147,11 @@
             null, 
             "python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=True", 
             [
-                4.5361820000000002, 
-                4.5399409999999998, 
-                4.5583080000000002, 
-                4.552956, 
-                4.5636469999999996
+                4.5530340000000002, 
+                4.8332660000000001, 
+                4.5575130000000001, 
+                4.5732650000000001, 
+                4.5504119999999997
             ]
         ], 
         [
@@ -161,11 +161,11 @@
             null, 
             "python ../../benchmark/Python/swater.py --size=2200*1 --cphvb=True", 
             [
-                2.1380409999999999, 
-                2.1552920000000002, 
-                2.3252459999999999, 
-                2.1483219999999998, 
-                2.1337709999999999
+                2.1484670000000001, 
+                2.1503749999999999, 
+                2.1338659999999998, 
+                2.138649, 
+                2.1280260000000002
             ]
         ], 
         [
@@ -175,11 +175,11 @@
             null, 
             "python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=False", 
             [
-                5.0229600000000003, 
-                5.0277539999999998, 
-                5.0282859999999996, 
-                5.0566319999999996, 
-                5.0230410000000001
+                5.0204310000000003, 
+                5.0679879999999997, 
+                5.0240150000000003, 
+                5.0679800000000004, 
+                5.0211680000000003
             ]
         ], 
         [
@@ -189,11 +189,11 @@
             null, 
             "python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True", 
             [
-                14.294579000000001, 
-                14.338963, 
-                14.29735, 
-                14.28093, 
-                14.286948000000001
+                14.285811000000001, 
+                14.285793999999999, 
+                14.295921, 
+                14.286656000000001, 
+                14.322051999999999
             ]
         ], 
         [
@@ -203,11 +203,11 @@
             null, 
             "python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True", 
             [
-                14.462778, 
-                14.341148, 
-                14.440545, 
-                14.319335000000001, 
-                14.308095
+                14.332043000000001, 
+                14.311806000000001, 
+                14.308847, 
+                14.440041000000001, 
+                14.309241999999999
             ]
         ], 
         [
@@ -217,11 +217,11 @@
             null, 
             "python ../../benchmark/Python/kNN.py --size=10000*120 --cphvb=True", 
             [
-                8.0578070000000004, 
-                8.0713249999999999, 
-                8.0555190000000003, 
-                8.0399309999999993, 
-                8.0960699999999992
+                8.0505549999999992, 
+                8.0882120000000004, 
+                8.0966880000000003, 
+                8.0762750000000008, 
+                8.0888399999999994
             ]
         ], 
         [
@@ -231,11 +231,11 @@
             null, 
             "python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=False", 
             [
-                5.7695720000000001, 
-                5.6432120000000001, 
-                5.6834199999999999, 
-                5.6542680000000001, 
-                5.6634690000000001
+                5.6883119999999998, 
+                5.6748620000000001, 
+                5.6618589999999998, 
+                5.8240170000000004, 
+                5.650881
             ]
         ], 
         [
@@ -245,11 +245,11 @@
             null, 
             "python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True", 
             [
-                3.7636310000000002, 
-                3.7762869999999999, 
-                3.7450670000000001, 
-                3.7378239999999998, 
-                3.7420369999999998
+                3.7314069999999999, 
+                3.7475459999999998, 
+                3.7404199999999999, 
+                3.7256300000000002, 
+                3.7457769999999999
             ]
         ], 
         [
@@ -259,11 +259,11 @@
             null, 
             "python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True", 
             [
-                6.4263260000000004, 
-                6.3913019999999996, 
-                6.44618, 
-                6.3852789999999997, 
-                6.4371919999999996
+                6.3990869999999997, 
+                6.5418000000000003, 
+                6.4047349999999996, 
+                6.4307119999999998, 
+                6.3973969999999998
             ]
         ], 
         [
@@ -273,17 +273,17 @@
             null, 
             "python ../../benchmark/Python/stencil.py --size=10240*1024*10 --cphvb=True", 
             [
-                1.4768619999999999, 
-                1.483044, 
-                1.493886, 
-                1.4755480000000001, 
-                1.4717119999999999
+                1.476521, 
+                1.4727110000000001, 
+                1.4760610000000001, 
+                1.480653, 
+                1.478596
             ]
         ]
     ], 
     "meta": {
-        "date": "2012-09-30 07:59:03.566696", 
+        "date": "2012-10-01 07:54:31.034323", 
         "os": "Linux version 2.6.35-30-server (buildd@allspice) (gcc version 4.4.5 (Ubuntu/Linaro 4.4.4-14ubuntu5) ) #61-Ubuntu SMP Tue Oct 11 18:09:44 UTC 2011\n", 
-        "cpu": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 4\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5332.71\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 4\napicid\t\t: 32\ninitial apicid\t: 32\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 2\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 2660.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 4\napicid\t\t: 2\ninitial apicid\t: 2\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 3\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 4\napicid\t\t: 34\ninitial apicid\t: 34\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 4\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 9\ncpu cores\t: 4\napicid\t\t: 18\ninitial apicid\t: 18\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 5\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 9\ncpu cores\t: 4\napicid\t\t: 50\ninitial apicid\t: 50\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.50\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 6\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 10\ncpu cores\t: 4\napicid\t\t: 20\ninitial apicid\t: 20\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.53\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 7\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 10\ncpu cores\t: 4\napicid\t\t: 52\ninitial apicid\t: 52\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\n"
+        "cpu": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 2660.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 4\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5332.71\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 4\napicid\t\t: 32\ninitial apicid\t: 32\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 2\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 4\napicid\t\t: 2\ninitial apicid\t: 2\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 3\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 4\napicid\t\t: 34\ninitial apicid\t: 34\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 4\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 9\ncpu cores\t: 4\napicid\t\t: 18\ninitial apicid\t: 18\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 5\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 9\ncpu cores\t: 4\napicid\t\t: 50\ninitial apicid\t: 50\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.50\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 6\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 10\ncpu cores\t: 4\napicid\t\t: 20\ninitial apicid\t: 20\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.53\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 7\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 44\nmodel name\t: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz\nstepping\t: 2\ncpu MHz\t\t: 1596.000\ncache size\t: 12288 KB\nphysical id\t: 1\nsiblings\t: 4\ncore id\t\t: 10\ncpu cores\t: 4\napicid\t\t: 52\ninitial apicid\t: 52\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 11\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt aes lahf_lm arat dts tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 5333.52\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 40 bits physical, 48 bits virtual\npower management:\n\n"
     }
 }
