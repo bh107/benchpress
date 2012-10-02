@@ -109,7 +109,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--output',
         dest='output',
-        default="gfx",
+        default="graphs",
         help='Where to store generated graphs.'
     )
     args = parser.parse_args()
