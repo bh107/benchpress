@@ -70,7 +70,7 @@ test = {
 def meta(src_dir):
 
     p = Popen(              # Try grabbing the repos-revision
-        ["git", "log", "--pretty=format:'%H'", "-n", "1"],
+        ["git", "log", "--pretty=format:%H", "-n", "1"],
         stdin   = PIPE,
         stdout  = PIPE,
         cwd     = src_dir
