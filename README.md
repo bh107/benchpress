@@ -7,3 +7,9 @@ To compare two builds, download an run this [html](https://bitbucket.org/cphvb/c
 ![Monte Carlo Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/monte%20carlo_speedup.png)
 ![Stencil Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/stencil%20synth_speedup.png)
 ![Shallow Water Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/shallow%20water_speedup.png)
+
+Results
+-------
+
+results/scipy2012
+
