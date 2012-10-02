@@ -50,9 +50,8 @@ scripts   = [
     ('Stencil Synth2',  'twonine.py',      '--size=10240*1024*10'),
     ('1D 4way Stencil', 'simplest.py',     '--size=100000000*1')
 ]
-
                                 # DEFAULT BENCHMARK
-default = {                     # Define a benchmark which runs
+default = {                     # Define a benchmark "suite" which runs:
     'scripts': [0,1,2,3,4],     # these scripts
     'engines': [0,1,2,3]        # using these engines
 } 
@@ -67,7 +66,13 @@ test = {
     'engines': [0,1]
 }
 
-def meta(src_dir):
+suites = {
+    'default':      default,
+    'cache_tiling': cache_tiling,
+    'test':         test
+}
+
+def meta(src_dir, suite):
 
     p = Popen(              # Try grabbing the repos-revision
         ["git", "log", "--pretty=format:%H", "-n", "1"],
@@ -91,23 +96,25 @@ def meta(src_dir):
         'rev':  rev if rev else 'Unknown',
         'started':    str(datetime.now()),
         'ended':      None,
+        'suite': suite,
     }
 
     return info
 
-def main(config, src_root, output, benchmark, runs=5):
+def main(config, src_root, output, suite, runs=5):
 
+    benchmark   = suites[suite]
     script_path = src_root +os.sep+ 'benchmark' +os.sep+ 'Python' +os.sep
     
     parser = SafeConfigParser()     # Parser to modify the cphvb configuration file.
     parser.read(config)             # Read current configuration
 
     results = {
-        'meta': meta(src_root),
+        'meta': meta(src_root, suite),
         'runs': []
     }
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-') as fd:
-        print "Benchmarks are written to: %s." % fd.name
+        print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in (scripts[snr] for snr in benchmark['scripts']):
             for alias, engine, env in (engines[enr] for enr in benchmark['engines']):
 
@@ -160,10 +167,16 @@ def main(config, src_root, output, benchmark, runs=5):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='Benchmark runner.')
+    parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
     parser.add_argument(
         'src',
         help='Path to the cphvb source-code.'
+    )
+    parser.add_argument(
+        '--suite',
+        default="default",
+        choices=[x for x in suites],
+        help="Name of the benchmark suite to run."
     )
     parser.add_argument(
         '--output',
@@ -176,6 +189,6 @@ if __name__ == "__main__":
         os.getenv('HOME')+os.sep+'.cphvb'+os.sep+'config.ini',
         args.src,
         args.output,
-        test
+        args.suite
     )
 
