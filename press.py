@@ -9,7 +9,6 @@ import os
 
 # Engines with various parameter setups
 # (alias, runs, engine, env-vars)
-
 engines = [
     ('numpy',        None,        None),
     ('simple',       'simple',    None),
@@ -72,26 +71,26 @@ def meta(src_dir):
 
     p = Popen(              # Try grabbing the repos-revision
         ["git", "log", "--pretty=format:'%H'", "-n", "1"],
-        stdin=PIPE,
-        stdout=PIPE,
-        cwd=src_dir
+        stdin   = PIPE,
+        stdout  = PIPE,
+        cwd     = src_dir
     )
     rev, err = p.communicate()
 
     p = Popen(              # Try grabbing hw-info
         ["lshw", "-quiet", "-numeric"],
-        stdin=PIPE,
-        stdout=PIPE,
+        stdin   = PIPE,
+        stdout  = PIPE,
     )
     hw, err = p.communicate()
 
     info = {
-        'start': str(datetime.now()),
-        'end': None,
         'cpu':  open('/proc/cpuinfo','r').read(),
-        'hw':   hw if hw else 'Unknown',
         'os':   open('/proc/version','r').read(),
-        'rev':  rev if rev else 'Unknown'
+        'hw':   hw if hw else 'Unknown',
+        'rev':  rev if rev else 'Unknown',
+        'started':    str(datetime.now()),
+        'ended':      None,
     }
 
     return info
@@ -163,14 +162,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Benchmark runner.')
     parser.add_argument(
-        '--src',
-        dest='src_dir',
-        required=True,
+        'src',
         help='Path to the cphvb source-code.'
     )
     parser.add_argument(
         '--output',
-        dest='output',
         default="results",
         help='Where to store benchmark results.'
     )
@@ -178,7 +174,7 @@ if __name__ == "__main__":
 
     main(
         os.getenv('HOME')+os.sep+'.cphvb'+os.sep+'config.ini',
-        args.src_dir,
+        args.src,
         args.output,
         test
     )

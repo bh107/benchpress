@@ -6,6 +6,7 @@ from pylab import *
 import argparse
 import json
 import sys
+import os
 
 def stats( times ):
     """Returns: (avg, lowest, highest, deviation)"""
@@ -92,18 +93,17 @@ def main( benchmark, output ):
             title(mark)
             grid(True)
                                         # Output them
-            savefig("%s/%s_%s.pdf" % ( output, mark.lower(), graph.lower() ))
-            savefig("%s/%s_%s.eps" % ( output, mark.lower(), graph.lower() ))
-            savefig("%s/%s_%s.png" % ( output, mark.lower(), graph.lower() ))
+            fn = output +os.sep+ mark.lower() +'_'+ graph.lower()
+            savefig("%s.pdf" % ( fn ))
+            savefig("%s.eps" % ( fn ))
+            savefig("%s.png" % ( fn ))
             show()
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Generate graphs / diagrams from benchmarks.')
     parser.add_argument(
-        '--benchmark',
-        dest='benchmark',
-        required=True,
+        'benchmark',
         help='Path to benchmark.'
     )
     parser.add_argument(
