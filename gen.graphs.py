@@ -103,8 +103,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Generate graphs / diagrams from benchmarks.')
     parser.add_argument(
-        'benchmark',
-        help='Path to benchmark.'
+        'results',
+        help='Path to benchmark results.'
     )
     parser.add_argument(
         '--output',
@@ -114,4 +114,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main( args.benchmark, args.output )
+    main( args.results, args.output )
