@@ -1,18 +1,18 @@
 A Benchmark a day keeps the Professor at bay
 ============================================
 
-Below are graphs of the most current benchmark results available. All benchmark results are available in json-format from https://bitbucket.org/cphvb/benchpress/raw/master/results.
+Below are speedup graphs of the most current benchmark results available. All benchmark results are available in json-format from [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
 
 To compare different benchmark-results, download an run this [html](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/compare.html).
 
 Marge
 -----
 
-![Jacobi fixed Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/jacobi%20fixed_speedup.png)
-![kNN Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/knn_speedup.png)
-![Monte Carlo Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/monte%20carlo_speedup.png)
-![Stencil Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/stencil%20synth_speedup.png)
-![Shallow Water Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/shallow%20water_speedup.png)
+![Jacobi Fixed](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/jacobi%20fixed.png)
+![kNN](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/knn_speedup.png)
+![Monte Carlo](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/monte$20carlo_speedup.png)
+![Stencil](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/stencil%20synth_speedup.png)
+![Shallow Water](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/shallow%20water_speedup.png)
 
 Akira
 -----
