@@ -8,11 +8,11 @@ To compare different benchmark-results, download an run this [html](https://bitb
 Marge
 -----
 
-![Jacobi Fixed](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/jacobi%20fixed.png)
-![kNN](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/knn_speedup.png)
-![Monte Carlo](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/monte$20carlo_speedup.png)
-![Stencil](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/stencil%20synth_speedup.png)
-![Shallow Water](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/shallow%20water_speedup.png)
+![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/jacobi%20fixed_speedup.png)
+![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/knn_speedup.png)
+![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/monte$20carlo_speedup.png)
+![Stencil       ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/stencil%20synth_speedup.png)
+![Shallow Water ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/shallow%20water_speedup.png)
 
 Akira
 -----
