@@ -26,6 +26,7 @@ BUILD_ROOT="$HOME/buildbot"
 BENCH_SRC="$BUILD_ROOT/benchpress"
 CPHVB_SRC="$BUILD_ROOT/cphvb"
 CPHVB_LIB="$BUILD_ROOT/cphvb.lib"
+SUITE="default"
 
 #
 # STOP: Do not modify anything below unless you want to change the functionality of the build-n-test script.
@@ -37,28 +38,53 @@ OLDLD=$LD_LIBRARY_PATH
 PYTHONVER=`python -c 'import sys; (major,minor, _,_,_) = sys.version_info; print "%d.%d" % (major, minor)'`
 START=`date`
 
+SKIP_PURGE="0" 
+SKIP_UPDATE="0" 
+ 
+if [ "$1" == "1" ] 
+then 
+    SKIP_PURGE="1" 
+fi 
+ 
+if [ "$2" == "1" ] 
+then 
+    SKIP_UPDATE="1" 
+fi
+
 #
 #   GRAB THE LATEST AND GREATEST
 #
-echo "Grabbing repos $1"
-cd $BUILD_ROOT
-rm -rf $CPHVB_LIB
-rm -rf $CPHVB_SRC
-rm -rf $BENCH_SRC
+if [$SKIP_PURGE != "1"]
+then
+  echo "Grabbing repos $1"
+  cd $BUILD_ROOT
+  rm -rf $CPHVB_LIB
+  rm -rf $CPHVB_SRC
+  rm -rf $BENCH_SRC
 
-mkdir $CPHVB_LIB
-git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
-git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
-cd $CPHVB_SRC
-git submodule init
-git submodule update
-git pull
+  mkdir $CPHVB_LIB
+  git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
+  git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
+  cd $CPHVB_SRC
+  git submodule init
+fi
 
-REV=`git log --format=%H -n 1`
+if [$SKIP_UPDATE != "1"]
+then
+  cd $CPHVB_SRC
+  echo "Updating repos."
+  git submodule update
+  git pull
+  cd $BENCH_SRC
+  git pull
+fi
 
 #
 #   BUILD AND INSTALL
 #
+cd $CPHVB_SRC
+REV=`git log --format=%H -n 1`
+
 echo "** Rebuilding cphVB"
 python build.py rebuild
 
@@ -82,17 +108,29 @@ fi
 #
 cd $BENCH_SRC
 echo "** Running benchmarks"
-mkdir -p $BENCH_SRC/results/$MACHINE/$REV
-python press.py $CPHVB_SRC --output $BENCH_SRC/results/$MACHINE/$REV > $BENCH_SRC/$MACHINE.log
+mkdir -p "$BENCH_SRC/results/$MACHINE/$REV"
+python press.py $CPHVB_SRC --output "$BENCH_SRC/results/$MACHINE/$REV" --suite $SUITE > "$BENCH_SRC/$MACHINE.log"
+cd "$BENCH_SRC/results/$MACHINE/$REV"
+BENCHFILE=`ls -t1 benchmark-* | head -n1`
+
+echo "** Copying results."
+cp "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" "$BENCH_SRC/results/$MACHINE/latest.json"
 
 RETURN=$?
 if [ $RETURN -ne 0 ]; then
-  echo "!!!EXITING: Something went wrong while benching."
+  echo "!!!EXITING: Something went wrong while bencmarking."
   exit
 fi
 
-cd $BENCH_SRC/results/$MACHINE/$REV
-BENCHFILE=`ls -t1 benchmark-* | head -n1`
+
+#
+#   Commit & Push benchmark results
+#
+cd $BENCH_SRC
+git add $MACHINE.log
+git add results/$MACHINE/$REV/$BENCHFILE
+git commit -m "Results from running '$SUITE' on '$MACHINE'."
+git push -u origin master
 
 #
 #   GRAPHS
@@ -102,7 +140,10 @@ export PYTHONPATH=$OLDPP
 export LD_LIBRARY_PATH=$OLDLD
 
 mkdir -p $BENCH_SRC/graphs/$MACHINE/$REV
+mkdir -p $BENCH_SRC/graphs/$MACHINE/latest
+rm $BENCH_SRC/graphs/$MACHINE/latest/*
 python "$BENCH_SRC/gen.graphs.py" "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" --output "$BENCH_SRC/graphs/$MACHINE/$REV"
+cp "$BENCH_SRC/graphs/$MACHINE/$REV/*" "$BENCH_SRC/graphs/$MACHINE/latest/"
 
 RETURN=$?
 if [ $RETURN -ne 0 ]; then
@@ -114,8 +155,6 @@ fi
 #   Commit & Push
 #
 cd $BENCH_SRC
-git add $MACHINE.log
-git add results/$MACHINE/$REV/$BENCHFILE
 git add graphs/$MACHINE/$REV/*
-git commit -m "Daily update from $MACHINE."
+git commit -m "Graphs from running '$SUITE' on '$MACHINE'."
 git push -u origin master

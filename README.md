@@ -1,4 +1,7 @@
-This is the daily build results for cphVB generated from Marge.
+A Benchmark a'day keeps the Professor at bay
+--------------------------------------------
+
+These are the most current benchmark results for cphVB generated from Marge.
 
 To compare two builds, download an run this [html](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/compare.html).
 
@@ -11,9 +14,9 @@ To compare two builds, download an run this [html](https://bitbucket.org/cphvb/c
 Results
 -------
 
-results/scipy2012
+The raw benchmark results are available from https://bitbucket.org/cphvb/benchpress/raw/master/results.
 
-Deploying the buildbot
+Deploying the Buildbot
 ----------------------
 
 Log into the machine you want to run benchmarks on. Then do the following::
