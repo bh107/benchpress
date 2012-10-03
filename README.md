@@ -10,7 +10,7 @@ Akira
 
 ![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/jacobi%20fixed_speedup.png)
 ![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/knn_speedup.png)
-![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/monte$20carlo_speedup.png)
+![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/monte%20carlo_speedup.png)
 ![Stencil       ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/stencil%20synth_speedup.png)
 ![Shallow Water ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/shallow%20water_speedup.png)
 
@@ -19,7 +19,7 @@ Marge
 
 ![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/jacobi%20fixed_speedup.png)
 ![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/knn_speedup.png)
-![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/monte$20carlo_speedup.png)
+![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/monte%20carlo_speedup.png)
 ![Stencil       ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/stencil%20synth_speedup.png)
 ![Shallow Water ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/shallow%20water_speedup.png)
 
@@ -29,7 +29,7 @@ P31sd
 
 ![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/jacobi%20fixed_speedup.png)
 ![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/knn_speedup.png)
-![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/monte$20carlo_speedup.png)
+![Monte Carlo   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/monte%20carlo_speedup.png)
 ![Stencil       ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/stencil%20synth_speedup.png)
 ![Shallow Water ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/shallow%20water_speedup.png)
 
