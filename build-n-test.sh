@@ -21,7 +21,7 @@
 #
 # Modify the lines below to reflect the local environment. 
 #
-MACHINE="p31sd"
+MACHINE="unknown"
 BUILD_ROOT="$HOME/buildbot"
 BENCH_SRC="$BUILD_ROOT/benchpress"
 CPHVB_SRC="$BUILD_ROOT/cphvb"
