@@ -1,161 +1,17 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/ee8f8974e1d9d8e07d279fda8d91a06403d6b2de/benchmark-tgS7md.
+Running benchmark suite 'test'; results are written to: /home/safl/buildbot/benchpress/results/akira/ee8f8974e1d9d8e07d279fda8d91a06403d6b2de/benchmark-i8VrM2.
 { Jacobi Fixed - numpy ( None ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  5.396524
-  2/5,  5.382679
-  3/5,  5.418365
-  4/5,  5.379552
-  5/5,  5.372164
+  1/5,  5.401242
+  2/5,  5.395789
+  3/5,  5.410885
+  4/5,  5.397252
+  5/5,  5.404647
 }
 { Jacobi Fixed - simple ( simple ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  5.111421
-  2/5,  5.126363
-  3/5,  5.099635
-  4/5,  5.079372
-  5/5,  5.115959
-}
-{ Jacobi Fixed - score ( score ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.747579
-  2/5,  3.765199
-  3/5,  3.778162
-  4/5,  3.778284
-  5/5,  3.764668
-}
-{ Jacobi Fixed - mcore ( mcore ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  1.693942
-  2/5,  1.696364
-  3/5,  1.677794
-  4/5,  1.686644
-  5/5,  1.682519
-}
-{ Monte Carlo - numpy ( None ),
-  python MonteCarlo.py --size=100000000*1 --cphvb=False
-  1/5,  6.6854
-  2/5,  6.727982
-  3/5,  6.727203
-  4/5,  6.690964
-  5/5,  6.689297
-}
-{ Monte Carlo - simple ( simple ),
-  python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  33.827261
-  2/5,  33.882304
-  3/5,  33.839198
-  4/5,  33.900799
-  5/5,  33.80856
-}
-{ Monte Carlo - score ( score ),
-  python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  33.709599
-  2/5,  33.582444
-  3/5,  33.615571
-  4/5,  33.660376
-  5/5,  33.592303
-}
-{ Monte Carlo - mcore ( mcore ),
-  python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  30.965267
-  2/5,  31.228882
-  3/5,  31.223123
-  4/5,  31.006726
-  5/5,  30.93312
-}
-{ Shallow Water - numpy ( None ),
-  python swater.py --size=2200*1 --cphvb=False
-  1/5,  5.652268
-  2/5,  5.649743
-  3/5,  5.655915
-  4/5,  5.660206
-  5/5,  5.660966
-}
-{ Shallow Water - simple ( simple ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.781269
-  2/5,  3.809634
-  3/5,  3.762867
-  4/5,  3.786624
-  5/5,  3.756139
-}
-{ Shallow Water - score ( score ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  6.320018
-  2/5,  6.31844
-  3/5,  6.315648
-  4/5,  6.328625
-  5/5,  6.339996
-}
-{ Shallow Water - mcore ( mcore ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.418155
-  2/5,  2.409733
-  3/5,  2.417385
-  4/5,  2.40505
-  5/5,  2.396514
-}
-{ kNN - numpy ( None ),
-  python kNN.py --size=10000*120 --cphvb=False
-  1/5,  5.794387
-  2/5,  5.788421
-  3/5,  5.805105
-  4/5,  5.803841
-  5/5,  5.781211
-}
-{ kNN - simple ( simple ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  17.943912
-  2/5,  17.906101
-  3/5,  17.933038
-  4/5,  17.961753
-  5/5,  17.975358
-}
-{ kNN - score ( score ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  17.990631
-  2/5,  18.003844
-  3/5,  18.014028
-  4/5,  18.951829
-  5/5,  18.633917
-}
-{ kNN - mcore ( mcore ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  9.553324
-  2/5,  10.350963
-  3/5,  10.364276
-  4/5,  10.35171
-  5/5,  10.358863
-}
-{ Stencil Synth - numpy ( None ),
-  python stencil.py --size=10240*1024*10 --cphvb=False
-  1/5,  11.850055
-  2/5,  11.855357
-  3/5,  11.76026
-  4/5,  11.825139
-  5/5,  11.75376
-}
-{ Stencil Synth - simple ( simple ),
-  python stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  5.155672
-  2/5,  5.144175
-  3/5,  5.151245
-  4/5,  5.138849
-  5/5,  5.150481
-}
-{ Stencil Synth - score ( score ),
-  python stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  10.176223
-  2/5,  10.197657
-  3/5,  10.15997
-  4/5,  10.195855
-  5/5,  10.177367
-}
-{ Stencil Synth - mcore ( mcore ),
-  python stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  2.235314
-  2/5,  2.231025
-  3/5,  1.763869
-  4/5,  2.247337
-  5/5,  2.260963
+  1/5,  5.099845
+  2/5,  5.098985
+  3/5,  5.08513
+  4/5,  5.123989
+  5/5,  5.109479
 }
