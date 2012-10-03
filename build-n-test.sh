@@ -109,7 +109,7 @@ fi
 cd $BENCH_SRC
 echo "** Running benchmarks"
 mkdir -p "$BENCH_SRC/results/$MACHINE/$REV"
-python press.py $CPHVB_SRC --output "$BENCH_SRC/results/$MACHINE/$REV" --suite $SUITE > "$BENCH_SRC/$MACHINE.log"
+python press.py "$CPHVB_SRC" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" > "$BENCH_SRC/$MACHINE.log"
 cd "$BENCH_SRC/results/$MACHINE/$REV"
 BENCHFILE=`ls -t1 benchmark-* | head -n1`
 
@@ -135,15 +135,15 @@ git push -u origin master
 #
 #   GRAPHS
 #
-echo "** Generating graphs from $BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE"
+echo "** Generating graphs from '$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE'."
 export PYTHONPATH=$OLDPP
 export LD_LIBRARY_PATH=$OLDLD
 
-mkdir -p $BENCH_SRC/graphs/$MACHINE/$REV
-mkdir -p $BENCH_SRC/graphs/$MACHINE/latest
+mkdir -p "$BENCH_SRC/graphs/$MACHINE/$REV"
+mkdir -p "$BENCH_SRC/graphs/$MACHINE/latest"
 rm $BENCH_SRC/graphs/$MACHINE/latest/*
-python "$BENCH_SRC/gen.graphs.py" "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" --output "$BENCH_SRC/graphs/$MACHINE/$REV"
-cp "$BENCH_SRC/graphs/$MACHINE/$REV/*" "$BENCH_SRC/graphs/$MACHINE/latest/"
+python $BENCH_SRC/gen.graphs.py $BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE --output $BENCH_SRC/graphs/$MACHINE/$REV
+cp $BENCH_SRC/graphs/$MACHINE/$REV/* $BENCH_SRC/graphs/$MACHINE/latest/
 
 RETURN=$?
 if [ $RETURN -ne 0 ]; then

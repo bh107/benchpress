@@ -1,9 +1,12 @@
-A Benchmark a'day keeps the Professor at bay
---------------------------------------------
+A Benchmark a day keeps the Professor at bay
+============================================
 
-These are the most current benchmark results for cphVB generated from Marge.
+Below are graphs of the most current benchmark results available. All benchmark results are available in json-format from https://bitbucket.org/cphvb/benchpress/raw/master/results.
 
-To compare two builds, download an run this [html](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/compare.html).
+To compare different benchmark-results, download an run this [html](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/compare.html).
+
+Marge
+-----
 
 ![Jacobi fixed Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/jacobi%20fixed_speedup.png)
 ![kNN Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/knn_speedup.png)
@@ -11,13 +14,22 @@ To compare two builds, download an run this [html](https://bitbucket.org/cphvb/c
 ![Stencil Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/stencil%20synth_speedup.png)
 ![Shallow Water Speedup](https://bitbucket.org/cphvb/cphvbbuildgraphs/raw/master/shallow%20water_speedup.png)
 
+Akira
+-----
+
+
+
+P31sd
+-----
+
+
+
 Results
 -------
 
-The raw benchmark results are available from https://bitbucket.org/cphvb/benchpress/raw/master/results.
 
 Deploying the Buildbot
-----------------------
+======================
 
 Log into the machine you want to run benchmarks on. Then do the following::
 
