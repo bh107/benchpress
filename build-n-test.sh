@@ -22,10 +22,10 @@
 # Modify the lines below to reflect the local environment. 
 #
 MACHINE="unknown"
-BUILD_ROOT="~/buildbot"
-BENCH_SRC="$ROOT/benchpress"
-CPHVB_SRC="$ROOT/cphvb"
-CPHVB_LIB="$ROOT/cphvb.lib"
+BUILD_ROOT="$HOME/buildbot"
+BENCH_SRC="$BUILD_ROOT/benchpress"
+CPHVB_SRC="$BUILD_ROOT/cphvb"
+CPHVB_LIB="$BUILD_ROOT/cphvb.lib"
 
 #
 # STOP: Do not modify anything below unless you want to change the functionality of the build-n-test script.
@@ -35,34 +35,26 @@ cd $BUILD_ROOT
 OLDPP=$PYTHONPATH
 OLDLD=$LD_LIBRARY_PATH
 PYTHONVER=`python -c 'import sys; (major,minor, _,_,_) = sys.version_info; print "%d.%d" % (major, minor)'`
+START=`date`
 
 #
 #   GRAB THE LATEST AND GREATEST
 #
-if [ "$1" == "FULL" ]       # Remove previous source-code and libraries.
-then                        # and then clone the most recent.
-    echo "Cleaning repo: $1"
-    cd $BUILD_ROOT
-    rm -rf $CPHVB_LIB
-    rm -rf $CPHVB_SRC
-    rm -rf $BENCH_SRC
-    git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
-    git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
-    mkdir $CPHVB_LIB
-    cd $CPHVB_SRC
-    git submodule init
-fi
+echo "Grabbing repos $1"
+cd $BUILD_ROOT
+rm -rf $CPHVB_LIB
+rm -rf $CPHVB_SRC
+rm -rf $BENCH_SRC
 
-echo "** Pulling benchmark-updates"
-cd $BENCH_SRC
-git pull
-
-echo "** Pulling cphvb-updates"
+mkdir $CPHVB_LIB
+git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
+git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
 cd $CPHVB_SRC
-git pull
+git submodule init
 git submodule update
+git pull
 
-REV=`git log -pretty-format:%H -n 1`
+REV=`git log --format=%H -n 1`
 
 #
 #   BUILD AND INSTALL
@@ -79,12 +71,26 @@ export PYTHONPATH="$PYTHONPATH:$CPHVB_LIB/lib/python$PYTHONVER/site-packages"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CPHVB_LIB"
 python $CPHVB_SRC/test/numpy/numpytest.py
 
+RETURN=$?
+if [ $RETURN -ne 0 ]; then
+  echo "!!!EXITING: Something is wrong with the installation."
+  exit
+fi
+
 #
 #   BENCHMARK-SUITE
 #
+cd $BENCH_SRC
 echo "** Running benchmarks"
 mkdir -p $BENCH_SRC/results/$MACHINE/$REV
 python press.py $CPHVB_SRC --output $BENCH_SRC/results/$MACHINE/$REV > $BENCH_SRC/$MACHINE.log
+
+RETURN=$?
+if [ $RETURN -ne 0 ]; then
+  echo "!!!EXITING: Something went wrong while benching."
+  exit
+fi
+
 cd $BENCH_SRC/results/$MACHINE/$REV
 BENCHFILE=`ls -t1 benchmark-* | head -n1`
 
@@ -98,6 +104,12 @@ export LD_LIBRARY_PATH=$OLDLD
 mkdir -p $BENCH_SRC/graphs/$MACHINE/$REV
 python "$BENCH_SRC/gen.diagrams.py" "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" --output "$BENCH_SRC/graphs/$MACHINE/$REV"
 
+RETURN=$?
+if [ $RETURN -ne 0 ]; then
+  echo "!!!EXITING: Something went wrong while generating graphs."
+  exit
+fi
+
 #
 #   Commit & Push
 #
@@ -107,4 +119,3 @@ git add results/$MACHINE/$REV/$BENCHFILE
 git add graphs/$MACHINE/$REV/*
 git commit -m "Daily update from $MACHINE."
 git push -u origin master
-

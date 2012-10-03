@@ -157,7 +157,7 @@ def main(config, src_root, output, suite, runs=5):
                 print "}"
                                                             # Accumulate results
                 results['runs'].append(( mark, alias, engine, env, args_str, times ))
-                results['meta']['end'] = str(datetime.now())
+                results['meta']['ended'] = str(datetime.now())
 
                 fd.truncate(0)                              # Store the results in a file...
                 fd.seek(0)
