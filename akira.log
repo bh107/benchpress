@@ -1,17 +1,17 @@
-Running benchmark suite 'test'; results are written to: /home/safl/buildbot/benchpress/results/akira/ee8f8974e1d9d8e07d279fda8d91a06403d6b2de/benchmark-S6Fd_D.
+Running benchmark suite 'test'; results are written to: /home/safl/buildbot/benchpress/results/akira/ee8f8974e1d9d8e07d279fda8d91a06403d6b2de/benchmark-WfpXyZ.
 { Jacobi Fixed - numpy ( None ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  5.393496
-  2/5,  5.401585
-  3/5,  5.401892
-  4/5,  5.400358
-  5/5,  5.400147
+  1/5,  5.40069
+  2/5,  5.40512
+  3/5,  5.39516
+  4/5,  5.393413
+  5/5,  5.403044
 }
 { Jacobi Fixed - simple ( simple ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  5.126334
-  2/5,  5.104149
-  3/5,  5.137861
-  4/5,  5.096737
-  5/5,  5.121469
+  1/5,  5.096606
+  2/5,  5.14675
+  3/5,  5.085275
+  4/5,  5.123092
+  5/5,  5.069664
 }
