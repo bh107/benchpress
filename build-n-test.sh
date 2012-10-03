@@ -21,7 +21,7 @@
 #
 # Modify the lines below to reflect the local environment. 
 #
-MACHINE="unknown"
+MACHINE="p31sd"
 BUILD_ROOT="$HOME/buildbot"
 BENCH_SRC="$BUILD_ROOT/benchpress"
 CPHVB_SRC="$BUILD_ROOT/cphvb"
@@ -54,7 +54,7 @@ fi
 #
 #   GRAB THE LATEST AND GREATEST
 #
-if [$SKIP_PURGE != "1"]
+if [ "$SKIP_PURGE" != "1" ]
 then
   echo "Grabbing repos $1"
   cd $BUILD_ROOT
@@ -69,7 +69,7 @@ then
   git submodule init
 fi
 
-if [$SKIP_UPDATE != "1"]
+if [ "$SKIP_UPDATE" != "1" ]
 then
   cd $CPHVB_SRC
   echo "Updating repos."
