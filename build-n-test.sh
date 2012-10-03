@@ -97,12 +97,12 @@ BENCHFILE=`ls -t1 benchmark-* | head -n1`
 #
 #   GRAPHS
 #
-echo "** Generating diagrams from $BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE"
+echo "** Generating graphs from $BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE"
 export PYTHONPATH=$OLDPP
 export LD_LIBRARY_PATH=$OLDLD
 
 mkdir -p $BENCH_SRC/graphs/$MACHINE/$REV
-python "$BENCH_SRC/gen.diagrams.py" "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" --output "$BENCH_SRC/graphs/$MACHINE/$REV"
+python "$BENCH_SRC/gen.graphs.py" "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" --output "$BENCH_SRC/graphs/$MACHINE/$REV"
 
 RETURN=$?
 if [ $RETURN -ne 0 ]; then
