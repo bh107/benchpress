@@ -25,13 +25,21 @@ Log into the machine you want to run benchmarks on. Then do the following::
     cd buildbot
     git archive --remote=ssh://git@bitbucket.org/cphvb/benchpress.git HEAD: --format=tar bootstrap.sh -o bootstrap.sh.tar
     tar xf bootstrap.sh.tar
+    rm bootstrap.sh.tar
     chmod +x bootstrap.sh
     # Adjust the script to the local environment
     vim bootstrap.sh
     # Execute it to see that it works.
     ./bootstrap.sh
 
-Run it once, inspect the $MACHINE.log file, then add it to a cron-job or something like that.
+After you have confirmed that the scripts runs without error, inspect the $MACHINE.log file
+Then add it to a cron-job or something like that::
+
+    crontab -e
+
+With a line something like::
+
+    30      1       *       *       *       /home/safl/buildbot/bootstrap.sh
 
 Auth to repos
 -------------
