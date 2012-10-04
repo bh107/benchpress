@@ -28,6 +28,15 @@ CPHVB_SRC="$BUILD_ROOT/cphvb"
 CPHVB_LIB="$BUILD_ROOT/cphvb.lib"
 SUITE="default"
 
+#
+# Do not modify anything beow this line.
+# Unless you want to change the bootstrap-script...
+#
+if [ "$MACHINE" == "unknown" ]; then
+    echo "Please set the MACHINE variable, and make sure that the other variables are sane."
+    exit
+fi
+
 if [ ! -d "$BENCH_SRC" ]; then
     git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
 fi
