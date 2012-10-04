@@ -23,11 +23,14 @@ Log into the machine you want to run benchmarks on. Then do the following::
     cd ~
     mkdir buildbot
     cd buildbot
-    git archive --remote=ssh://git@bitbucket.org/cphvb/benchpress.git HEAD: --format=tar build-n-test.sh -o build-n-test.sh.tar
-    tar xf build-n-test.sh.tar
-    chmod +x build-n-test.sh
+    git archive --remote=ssh://git@bitbucket.org/cphvb/benchpress.git HEAD: --format=tar bootstrap.sh -o bootstrap.sh.tar
+    tar xf bootstrap.sh.tar
+    chmod +x bootstrap.sh
+    # Adjust the script to the local environment
+    vim bootstrap.sh
+    # Execute it to see that it works.
+    ./bootstrap.sh
 
-Then adjust the "build-n-test.sh" script to match the local environment.
 Run it once, inspect the $MACHINE.log file, then add it to a cron-job or something like that.
 
 Auth to repos
