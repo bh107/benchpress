@@ -19,7 +19,8 @@
 #
 
 #
-# STOP: Do not modify anything below unless you want to change the functionality of the build-n-test script.
+#   This script clones, compiles, installs, tests and benchmarks cphvb.
+#   Another script produces graphs based on the results produced in this script.
 #
 cd $BUILD_ROOT
 
@@ -30,7 +31,6 @@ START=`date`
 
 SKIP_PURGE="0" 
 SKIP_UPDATE="0"
-SKIP_GRAPHS="1"
 
 #
 #   GRAB THE LATEST AND GREATEST
@@ -112,32 +112,3 @@ git add results/$MACHINE/benchmark-latest.json
 git commit -m "Results from running '$SUITE' on '$MACHINE'."
 git push -u origin master
 
-#
-#   GRAPHS
-#
-if [ "$SKIP_GRAPHS" != "1" ]
-then
-
-    echo "** Generating graphs from '$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE'."
-
-    mkdir -p "$BENCH_SRC/graphs/$MACHINE/$REV"
-    mkdir -p "$BENCH_SRC/graphs/$MACHINE/latest"
-    rm $BENCH_SRC/graphs/$MACHINE/latest/*
-    python $BENCH_SRC/gen.graphs.py $BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE --output $BENCH_SRC/graphs/$MACHINE/$REV
-    cp $BENCH_SRC/graphs/$MACHINE/$REV/* $BENCH_SRC/graphs/$MACHINE/latest/
-
-    RETURN=$?
-    if [ $RETURN -ne 0 ]; then
-      echo "!!!EXITING: Something went wrong while generating graphs."
-      exit
-    fi
-
-fi
-
-#
-#   Commit & Push
-#
-cd $BENCH_SRC
-git add graphs/$MACHINE/$REV/*
-git commit -m "Graphs from running '$SUITE' on '$MACHINE'."
-git push -u origin master
