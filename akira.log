@@ -1,17 +1,161 @@
-Running benchmark suite 'test'; results are written to: /home/safl/buildbot/benchpress/results/akira/ee8f8974e1d9d8e07d279fda8d91a06403d6b2de/benchmark-WfpXyZ.
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/ee8f8974e1d9d8e07d279fda8d91a06403d6b2de/benchmark-lE54UM.
 { Jacobi Fixed - numpy ( None ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  5.40069
-  2/5,  5.40512
-  3/5,  5.39516
-  4/5,  5.393413
-  5/5,  5.403044
+  1/5,  5.357153
+  2/5,  5.406146
+  3/5,  5.399427
+  4/5,  6.187922
+  5/5,  5.378462
 }
 { Jacobi Fixed - simple ( simple ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  5.096606
-  2/5,  5.14675
-  3/5,  5.085275
-  4/5,  5.123092
-  5/5,  5.069664
+  1/5,  5.137928
+  2/5,  5.081657
+  3/5,  5.081473
+  4/5,  5.154807
+  5/5,  5.110149
+}
+{ Jacobi Fixed - score ( score ),
+  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
+  1/5,  3.778166
+  2/5,  3.759769
+  3/5,  3.755405
+  4/5,  3.764809
+  5/5,  3.762724
+}
+{ Jacobi Fixed - mcore ( mcore ),
+  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
+  1/5,  1.704445
+  2/5,  1.678343
+  3/5,  1.659164
+  4/5,  1.707169
+  5/5,  2.923346
+}
+{ Monte Carlo - numpy ( None ),
+  python MonteCarlo.py --size=100000000*1 --cphvb=False
+  1/5,  6.674961
+  2/5,  6.742173
+  3/5,  6.721119
+  4/5,  6.718834
+  5/5,  6.703132
+}
+{ Monte Carlo - simple ( simple ),
+  python MonteCarlo.py --size=100000000*1 --cphvb=True
+  1/5,  33.864998
+  2/5,  34.216833
+  3/5,  33.84467
+  4/5,  34.182511
+  5/5,  34.035765
+}
+{ Monte Carlo - score ( score ),
+  python MonteCarlo.py --size=100000000*1 --cphvb=True
+  1/5,  33.754648
+  2/5,  33.835469
+  3/5,  33.806552
+  4/5,  33.698534
+  5/5,  33.714876
+}
+{ Monte Carlo - mcore ( mcore ),
+  python MonteCarlo.py --size=100000000*1 --cphvb=True
+  1/5,  30.568266
+  2/5,  31.016695
+  3/5,  29.850638
+  4/5,  30.953546
+  5/5,  30.793352
+}
+{ Shallow Water - numpy ( None ),
+  python swater.py --size=2200*1 --cphvb=False
+  1/5,  6.017261
+  2/5,  6.035711
+  3/5,  5.726693
+  4/5,  5.721174
+  5/5,  5.726876
+}
+{ Shallow Water - simple ( simple ),
+  python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.793136
+  2/5,  3.794683
+  3/5,  3.796981
+  4/5,  3.772984
+  5/5,  3.800395
+}
+{ Shallow Water - score ( score ),
+  python swater.py --size=2200*1 --cphvb=True
+  1/5,  6.302249
+  2/5,  6.418365
+  3/5,  6.404953
+  4/5,  6.374652
+  5/5,  6.357875
+}
+{ Shallow Water - mcore ( mcore ),
+  python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.403048
+  2/5,  2.388859
+  3/5,  2.424213
+  4/5,  2.404512
+  5/5,  2.395575
+}
+{ kNN - numpy ( None ),
+  python kNN.py --size=10000*120 --cphvb=False
+  1/5,  5.808791
+  2/5,  5.798879
+  3/5,  5.809941
+  4/5,  5.822589
+  5/5,  5.812647
+}
+{ kNN - simple ( simple ),
+  python kNN.py --size=10000*120 --cphvb=True
+  1/5,  17.956934
+  2/5,  18.015875
+  3/5,  18.224001
+  4/5,  18.186473
+  5/5,  17.926539
+}
+{ kNN - score ( score ),
+  python kNN.py --size=10000*120 --cphvb=True
+  1/5,  18.206628
+  2/5,  18.286676
+  3/5,  18.281249
+  4/5,  18.254702
+  5/5,  18.284065
+}
+{ kNN - mcore ( mcore ),
+  python kNN.py --size=10000*120 --cphvb=True
+  1/5,  10.362035
+  2/5,  10.342737
+  3/5,  10.354486
+  4/5,  10.31703
+  5/5,  10.332483
+}
+{ Stencil Synth - numpy ( None ),
+  python stencil.py --size=10240*1024*10 --cphvb=False
+  1/5,  12.036371
+  2/5,  11.849781
+  3/5,  11.803017
+  4/5,  11.925755
+  5/5,  11.82556
+}
+{ Stencil Synth - simple ( simple ),
+  python stencil.py --size=10240*1024*10 --cphvb=True
+  1/5,  5.146673
+  2/5,  5.145432
+  3/5,  5.137963
+  4/5,  5.114512
+  5/5,  5.132378
+}
+{ Stencil Synth - score ( score ),
+  python stencil.py --size=10240*1024*10 --cphvb=True
+  1/5,  10.196621
+  2/5,  10.1771
+  3/5,  10.179245
+  4/5,  10.153367
+  5/5,  10.193951
+}
+{ Stencil Synth - mcore ( mcore ),
+  python stencil.py --size=10240*1024*10 --cphvb=True
+  1/5,  1.737978
+  2/5,  1.813959
+  3/5,  2.260989
+  4/5,  1.626654
+  5/5,  2.241828
 }
