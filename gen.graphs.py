@@ -41,8 +41,7 @@ def gen( benchmark, output ):
         meta    = raw['meta']
         runs    = raw['runs']
     except:
-        print "Failed loading benchmark."
-        return 1
+        return [1, "Failed loading benchmark %s." % benchmark]
 
     bench       = {}
     baselines   = {}
@@ -104,32 +103,31 @@ def gen( benchmark, output ):
             savefig("%s.png" % ( fn ))
             show()
 
-    return 0
+    return (0, None)
 
 def main( results, output, multi ):
 
     if multi:
 
         if not os.path.isdir( results ):
-            print "ERR: '%s' is not a directory." % ( results )
-            return -1
+            return [(-1, "ERR: '%s' is not a directory." % ( results ))]
 
         if not os.path.isdir( output ):
-            print "ERR: '%s' is not a directory." % ( output )
-            return -1
+            return [(-1, "ERR: '%s' is not a directory." % ( output ))]
 
+        res = []
         for root, dirs, files in os.walk( results ):
             for fn in [x for x in files if 'json' in x or 'benchmark' in x]:
                 r_input     = root +os.sep+ fn
                 r_output    = root.replace('results', 'graphs') +os.sep
                 if "latest" in fn:
                     r_output = r_output +os.sep+ 'latest'
-                gen( r_input, r_output )
+                res.append( gen( r_input, r_output ) )
         
-        return 0
+        return res
 
     else:
-        return gen( results, output )
+        return [gen( results, output )]
 
 if __name__ == "__main__":
 
@@ -153,5 +151,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    res = main( args.results, args.output, args.m )
-    print res
+    res = [msg for r, msg in main( args.results, args.output, args.m ) if msg]
+    print ''.join( res )

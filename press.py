@@ -15,26 +15,26 @@ engines = [
     ('score',        'score', None),
     ('mcore',        'mcore', None),
 
-    ('score_1',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1"}),
-    ('score_2',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2"}),
-    ('score_4',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4"}),
-    ('score_16',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"16"}),
-    ('score_32',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"32"}),
-    ('score_64',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"64"}),
-    ('score_512',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"512"}),
-    ('score_1024',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1024"}),
-    ('score_2048',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2048"}),
-    ('score_4096',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4096"}),
-    ('score_8192',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"8192"}),
-    ('score_16384',  'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"16384"}),
-    ('score_32768',  'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"32768"}),
-    ('score_65536',  'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"65536"}),
-    ('score_131072',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"131072"}),
-    ('score_262144',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"262144"}),
-    ('score_524288',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"524288"}),
-    ('score_1048576',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1048576"}),
-    ('score_2097152',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2097152"}),
-    ('score_4194304',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4194304"}),
+    ('score_1',         'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1"}),
+    ('score_2',         'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2"}),
+    ('score_4',         'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4"}),
+    ('score_16',        'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"16"}),
+    ('score_32',        'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"32"}),
+    ('score_64',        'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"64"}),
+    ('score_512',       'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"512"}),
+    ('score_1024',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1024"}),
+    ('score_2048',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2048"}),
+    ('score_4096',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4096"}),
+    ('score_8192',      'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"8192"}),
+    ('score_16384',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"16384"}),
+    ('score_32768',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"32768"}),
+    ('score_65536',     'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"65536"}),
+    ('score_131072',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"131072"}),
+    ('score_262144',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"262144"}),
+    ('score_524288',    'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"524288"}),
+    ('score_1048576',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1048576"}),
+    ('score_2097152',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2097152"}),
+    ('score_4194304',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4194304"}),
 ]
 
 # Scripts and their arguments
@@ -52,7 +52,7 @@ scripts   = [
 ]
                                 # DEFAULT BENCHMARK
 default = {                     # Define a benchmark "suite" which runs:
-    'scripts': [0,1,2,3,4],     # these scripts
+    'scripts': [0,7,1,2,3,4],   # these scripts
     'engines': [0,1,2,3]        # using these engines
 } 
 
