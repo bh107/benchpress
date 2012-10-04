@@ -137,6 +137,7 @@ export LD_LIBRARY_PATH=$OLDLD
 cd $BENCH_SRC
 git add $MACHINE.log
 git add results/$MACHINE/$REV/$BENCHFILE
+git add results/$MACHINE/benchmark-latest.json
 git commit -m "Results from running '$SUITE' on '$MACHINE'."
 git push -u origin master
 
