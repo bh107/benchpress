@@ -114,7 +114,7 @@ cd "$BENCH_SRC/results/$MACHINE/$REV"
 BENCHFILE=`ls -t1 benchmark-* | head -n1`
 
 echo "** Copying results."
-cp "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" "$BENCH_SRC/results/$MACHINE/latest.json"
+cp "$BENCH_SRC/results/$MACHINE/$REV/$BENCHFILE" "$BENCH_SRC/results/$MACHINE/benchmark-latest.json"
 
 RETURN=$?
 if [ $RETURN -ne 0 ]; then

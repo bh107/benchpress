@@ -4,6 +4,7 @@ matplotlib.use('Agg')       # Essential for generating graphs "headless".
 
 from pylab import *
 import argparse
+import glob
 import json
 import sys
 import os
@@ -33,11 +34,15 @@ def lintify( text ):
 
     return ints
 
-def main( benchmark, output ):
+def gen( benchmark, output ):
 
-    raw     = json.load(open(benchmark))
-    meta    = raw['meta']
-    runs    = raw['runs']
+    try:
+        raw     = json.load(open(benchmark))
+        meta    = raw['meta']
+        runs    = raw['runs']
+    except:
+        print "Failed loading benchmark."
+        return 1
 
     bench       = {}
     baselines   = {}
@@ -99,12 +104,46 @@ def main( benchmark, output ):
             savefig("%s.png" % ( fn ))
             show()
 
+    return 0
+
+def main( results, output, multi ):
+
+    if multi:
+
+        if not os.path.isdir( results ):
+            print "ERR: '%s' is not a directory." % ( results )
+            return -1
+
+        if not os.path.isdir( output ):
+            print "ERR: '%s' is not a directory." % ( output )
+            return -1
+
+        for root, dirs, files in os.walk( results ):
+            for fn in [x for x in files if 'json' in x or 'benchmark' in x]:
+                r_input     = root +os.sep+ fn
+                r_output    = root.replace('results', 'graphs') +os.sep
+                if "latest" in fn:
+                    r_output = r_output +os.sep+ 'latest'
+                gen( r_input, r_output )
+        
+        return 0
+
+    else:
+        return gen( results, output )
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Generate graphs / diagrams from benchmarks.')
     parser.add_argument(
         'results',
         help='Path to benchmark results.'
+    )
+    parser.add_argument(
+        '-m',
+        dest='m',
+        action="store_true",
+        default=False,
+        help="Recursively find multiple files."
     )
     parser.add_argument(
         '--output',
@@ -114,4 +153,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main( args.results, args.output )
+    res = main( args.results, args.output, args.m )
+    print res
