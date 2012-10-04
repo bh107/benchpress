@@ -28,8 +28,7 @@ CPHVB_SRC="$BUILD_ROOT/cphvb"
 CPHVB_LIB="$BUILD_ROOT/cphvb.lib"
 SUITE="default"
 
-if [ -d "$BENCH_src"]
-then
+if [ ! -d "$BENCH_SRC" ]; then
     git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
 fi
 
