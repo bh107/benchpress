@@ -19,16 +19,6 @@
 #
 
 #
-# Modify the lines below to reflect the local environment. 
-#
-MACHINE="unknown"
-BUILD_ROOT="$HOME/buildbot"
-BENCH_SRC="$BUILD_ROOT/benchpress"
-CPHVB_SRC="$BUILD_ROOT/cphvb"
-CPHVB_LIB="$BUILD_ROOT/cphvb.lib"
-SUITE="default"
-
-#
 # STOP: Do not modify anything below unless you want to change the functionality of the build-n-test script.
 #
 cd $BUILD_ROOT
@@ -41,21 +31,6 @@ START=`date`
 SKIP_PURGE="0" 
 SKIP_UPDATE="0"
 SKIP_GRAPHS="1"
- 
-if [ "$1" != "" ] 
-then 
-    SKIP_PURGE=$1
-fi 
- 
-if [ "$2" != "" ] 
-then 
-    SKIP_UPDATE=$2
-fi
-
-if [ "$3" != "" ] 
-then 
-    SKIP_GRAPHS=$3
-fi
 
 #
 #   GRAB THE LATEST AND GREATEST
@@ -66,11 +41,9 @@ then
   cd $BUILD_ROOT
   rm -rf $CPHVB_LIB
   rm -rf $CPHVB_SRC
-  rm -rf $BENCH_SRC
 
   mkdir $CPHVB_LIB
   git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
-  git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
   cd $CPHVB_SRC
   git submodule init
 fi
@@ -80,8 +53,6 @@ then
   cd $CPHVB_SRC
   echo "Updating repos."
   git submodule update
-  git pull
-  cd $BENCH_SRC
   git pull
 fi
 
