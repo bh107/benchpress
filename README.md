@@ -4,6 +4,7 @@ A Benchmark a day keeps the Professor at bay
 The speedup graphs below represent the latest results (raw form available [here](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/benchmark-latest.json)) of running benchmarks on akira.
 
 All benchmark results are stored in json-format and are available [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
+Benchmarks are run automatically in a daily fashion on akira and marge, results for p31sd and smithers01 are obtained manually.
 
 To compare benchmark-results from different machines and revisions, download an run this [html](https://bitbucket.org/cphvb/benchpress/raw/master/compare.html).
 
