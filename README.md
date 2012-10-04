@@ -1,15 +1,11 @@
 A Benchmark a day keeps the Professor at bay
 ============================================
 
-Below are the latest results from running benchmarks on akira, the results are represented as speedup-graphs.
-All benchmark results are stored in json-format and are avaiable [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
+The graphs below represent the latest results  (available here [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/benchmark-latest.json)) in the form of speedup graphs of running benchmarks on akira.
+
+All benchmark results are stored in json-format and are available [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
 
 To compare benchmark-results from different machines and revisions, download an run this [html](https://bitbucket.org/cphvb/benchpress/raw/master/compare.html).
-
-Akira
------
-
-Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/benchmark-latest.json) result.
 
 ![Jacobi Fixed   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/jacobi%20fixed_speedup.png)
 ![1D 4way-Stencil](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/1d%204way%20stencil_speedup.png)
