@@ -1,7 +1,7 @@
 A Benchmark a day keeps the Professor at bay
 ============================================
 
-The graphs below represent the latest results  (available here [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/benchmark-latest.json)) in the form of speedup graphs of running benchmarks on akira.
+The speedup graphs below represent the latest results (raw form available [here](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/benchmark-latest.json)) of running benchmarks on akira.
 
 All benchmark results are stored in json-format and are available [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
 
