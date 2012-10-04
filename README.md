@@ -1,10 +1,10 @@
 A Benchmark a day keeps the Professor at bay
 ============================================
 
-Below are speedup graphs of the most current benchmark results available.
-Benchmark results are stored in json-format [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
+Below are the latest results from running benchmarks on akira, the results are represented as speedup-graphs.
+All benchmark results are stored in json-format and are avaiable [here](https://bitbucket.org/cphvb/benchpress/raw/master/results).
 
-To compare different benchmark-results, download an run this [html](https://bitbucket.org/cphvb/benchpress/raw/master/compare.html).
+To compare benchmark-results from different machines and revisions, download an run this [html](https://bitbucket.org/cphvb/benchpress/raw/master/compare.html).
 
 Akira
 -----
@@ -18,30 +18,6 @@ Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/mast
 ![Stencil        ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/stencil%20synth_speedup.png)
 ![Shallow Water  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/shallow%20water_speedup.png)
 
-Marge
------
-
-Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/marge/benchmark-latest.json) result.
-
-![Jacobi Fixed   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/jacobi%20fixed_speedup.png)
-![1D 4way-Stencil](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/1d%204way%20stencil_speedup.png)
-![kNN            ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/knn_speedup.png)
-![Monte Carlo    ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/monte%20carlo_speedup.png)
-![Stencil        ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/stencil%20synth_speedup.png)
-![Shallow Water  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/shallow%20water_speedup.png)
-
-
-P31sd
------
-
-Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/p31sd/benchmark-latest.json) result.
-
-![Jacobi Fixed   ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/jacobi%20fixed_speedup.png)
-![1D 4way-Stencil](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/1d%204way%20stencil_speedup.png)
-![kNN            ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/knn_speedup.png)
-![Monte Carlo    ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/monte%20carlo_speedup.png)
-![Stencil        ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/stencil%20synth_speedup.png)
-![Shallow Water  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/shallow%20water_speedup.png)
 
 Deploying the Buildbot
 ======================
