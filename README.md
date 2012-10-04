@@ -9,7 +9,7 @@ To compare different benchmark-results, download an run this [html](https://bitb
 Akira
 -----
 
-Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/latest.json) result.
+Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/akira/benchmark-latest.json) result.
 
 ![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/jacobi%20fixed_speedup.png)
 ![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/akira/latest/knn_speedup.png)
@@ -20,7 +20,7 @@ Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/mast
 Marge
 -----
 
-Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/marge/latest.json) result.
+Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/marge/benchmark-latest.json) result.
 
 ![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/jacobi%20fixed_speedup.png)
 ![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/marge/latest/knn_speedup.png)
@@ -32,7 +32,7 @@ Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/mast
 P31sd
 -----
 
-Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/p31sd/latest.json) result.
+Graphs below are based on [this](https://bitbucket.org/cphvb/benchpress/raw/master/results/p31sd/benchmark-latest.json) result.
 
 ![Jacobi Fixed  ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/jacobi%20fixed_speedup.png)
 ![kNN           ](https://bitbucket.org/cphvb/benchpress/raw/master/graphs/p31sd/latest/knn_speedup.png)
