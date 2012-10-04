@@ -22,6 +22,9 @@
 #   This script clones, compiles, installs, tests and benchmarks cphvb.
 #   Another script produces graphs based on the results produced in this script.
 #
+[[ $BUILD_ROOT ]] && echo "** Benchmarking" || echo "Exiting, you must run via bootstrap.sh"; exit
+
+
 cd $BUILD_ROOT
 
 OLDPP=$PYTHONPATH
@@ -84,9 +87,10 @@ fi
 #   BENCHMARK-SUITE
 #
 cd $BENCH_SRC
+
 echo "** Running benchmarks"
 mkdir -p "$BENCH_SRC/results/$MACHINE/$REV"
-python press.py "$CPHVB_SRC" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" > "$BENCH_SRC/$MACHINE.log"
+python press.py "$CPHVB_SRC" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" > "$BENCH_SRC/results/$MACHINE/$MACHINE.log"
 cd "$BENCH_SRC/results/$MACHINE/$REV"
 BENCHFILE=`ls -t1 benchmark-* | head -n1`
 
@@ -106,7 +110,8 @@ export LD_LIBRARY_PATH=$OLDLD
 #   Commit & Push benchmark results
 #
 cd $BENCH_SRC
-git add $MACHINE.log
+git pull
+git add results/$MACHINE/$MACHINE.log
 git add results/$MACHINE/$REV/$BENCHFILE
 git add results/$MACHINE/benchmark-latest.json
 git commit -m "Results from running '$SUITE' on '$MACHINE'."
