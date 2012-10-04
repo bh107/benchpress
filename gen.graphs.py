@@ -76,6 +76,10 @@ def gen( benchmark, output ):
             ('Speedup', su),
         ]
 
+        try:
+            os.makedirs(output)
+        except:
+            pass
         for graph, data in graphs:
 
             lbl = [engine_lbl for engine_lbl, time in data]
