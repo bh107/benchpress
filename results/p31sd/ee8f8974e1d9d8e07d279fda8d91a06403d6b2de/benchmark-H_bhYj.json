@@ -1,0 +1,349 @@
+{
+    "runs": [
+        [
+            "Jacobi Fixed", 
+            "numpy", 
+            null, 
+            null, 
+            "python jacobi_fixed.py --size=7168*7168*4 --cphvb=False", 
+            [
+                3.914334, 
+                4.007208, 
+                4.127015, 
+                4.115653, 
+                3.905803
+            ]
+        ], 
+        [
+            "Jacobi Fixed", 
+            "simple", 
+            "simple", 
+            null, 
+            "python jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
+            [
+                3.866142, 
+                3.875778, 
+                3.921837, 
+                3.981255, 
+                3.853909
+            ]
+        ], 
+        [
+            "Jacobi Fixed", 
+            "score", 
+            "score", 
+            null, 
+            "python jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
+            [
+                2.340008, 
+                2.33149, 
+                2.331315, 
+                2.332356, 
+                2.331208
+            ]
+        ], 
+        [
+            "Jacobi Fixed", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
+            [
+                1.917095, 
+                2.078661, 
+                2.413592, 
+                1.757299, 
+                1.770112
+            ]
+        ], 
+        [
+            "1D 4way Stencil", 
+            "numpy", 
+            null, 
+            null, 
+            "python simplest.py --size=100000000*1 --cphvb=False", 
+            [
+                2.581128, 
+                2.511731, 
+                2.535535, 
+                2.530761, 
+                2.52039
+            ]
+        ], 
+        [
+            "1D 4way Stencil", 
+            "simple", 
+            "simple", 
+            null, 
+            "python simplest.py --size=100000000*1 --cphvb=True", 
+            [
+                2.595077, 
+                2.569545, 
+                2.596428, 
+                2.577435, 
+                2.651235
+            ]
+        ], 
+        [
+            "1D 4way Stencil", 
+            "score", 
+            "score", 
+            null, 
+            "python simplest.py --size=100000000*1 --cphvb=True", 
+            [
+                2.004349, 
+                1.992707, 
+                1.992277, 
+                1.994613, 
+                1.984261
+            ]
+        ], 
+        [
+            "1D 4way Stencil", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python simplest.py --size=100000000*1 --cphvb=True", 
+            [
+                2.065101, 
+                2.048724, 
+                2.075855, 
+                2.057359, 
+                2.121054
+            ]
+        ], 
+        [
+            "Monte Carlo", 
+            "numpy", 
+            null, 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=False", 
+            [
+                4.1737, 
+                4.146415, 
+                4.101846, 
+                4.142497, 
+                4.1201
+            ]
+        ], 
+        [
+            "Monte Carlo", 
+            "simple", 
+            "simple", 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=True", 
+            [
+                25.344074, 
+                25.256395, 
+                25.195248, 
+                25.220337, 
+                25.222035
+            ]
+        ], 
+        [
+            "Monte Carlo", 
+            "score", 
+            "score", 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=True", 
+            [
+                25.030443, 
+                25.194975, 
+                25.085323, 
+                25.848098, 
+                25.399261
+            ]
+        ], 
+        [
+            "Monte Carlo", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=True", 
+            [
+                16.976025, 
+                17.080717, 
+                17.677788, 
+                17.539729, 
+                17.234841
+            ]
+        ], 
+        [
+            "Shallow Water", 
+            "numpy", 
+            null, 
+            null, 
+            "python swater.py --size=2200*1 --cphvb=False", 
+            [
+                2.889078, 
+                2.844943, 
+                2.873821, 
+                2.853419, 
+                2.902207
+            ]
+        ], 
+        [
+            "Shallow Water", 
+            "simple", 
+            "simple", 
+            null, 
+            "python swater.py --size=2200*1 --cphvb=True", 
+            [
+                2.918791, 
+                2.93586, 
+                2.993775, 
+                2.964563, 
+                3.091324
+            ]
+        ], 
+        [
+            "Shallow Water", 
+            "score", 
+            "score", 
+            null, 
+            "python swater.py --size=2200*1 --cphvb=True", 
+            [
+                4.293395, 
+                3.637221, 
+                3.675514, 
+                3.64629, 
+                3.632662
+            ]
+        ], 
+        [
+            "Shallow Water", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python swater.py --size=2200*1 --cphvb=True", 
+            [
+                1.744895, 
+                1.801691, 
+                1.679742, 
+                1.746081, 
+                1.808957
+            ]
+        ], 
+        [
+            "kNN", 
+            "numpy", 
+            null, 
+            null, 
+            "python kNN.py --size=10000*120 --cphvb=False", 
+            [
+                5.739771, 
+                5.121278, 
+                5.649177, 
+                5.58799, 
+                5.263318
+            ]
+        ], 
+        [
+            "kNN", 
+            "simple", 
+            "simple", 
+            null, 
+            "python kNN.py --size=10000*120 --cphvb=True", 
+            [
+                12.166507, 
+                12.099385, 
+                12.146471, 
+                12.873373, 
+                12.962757
+            ]
+        ], 
+        [
+            "kNN", 
+            "score", 
+            "score", 
+            null, 
+            "python kNN.py --size=10000*120 --cphvb=True", 
+            [
+                12.103422, 
+                12.011692, 
+                12.051533, 
+                12.247395, 
+                12.225555
+            ]
+        ], 
+        [
+            "kNN", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python kNN.py --size=10000*120 --cphvb=True", 
+            [
+                5.264858, 
+                4.533819, 
+                4.831218, 
+                5.008751, 
+                4.916624
+            ]
+        ], 
+        [
+            "Stencil Synth", 
+            "numpy", 
+            null, 
+            null, 
+            "python stencil.py --size=10240*1024*10 --cphvb=False", 
+            [
+                5.728767, 
+                5.844706, 
+                5.731082, 
+                5.790062, 
+                5.8142
+            ]
+        ], 
+        [
+            "Stencil Synth", 
+            "simple", 
+            "simple", 
+            null, 
+            "python stencil.py --size=10240*1024*10 --cphvb=True", 
+            [
+                4.198676, 
+                4.296836, 
+                4.290023, 
+                4.297741, 
+                4.385454
+            ]
+        ], 
+        [
+            "Stencil Synth", 
+            "score", 
+            "score", 
+            null, 
+            "python stencil.py --size=10240*1024*10 --cphvb=True", 
+            [
+                5.393234, 
+                5.550933, 
+                5.511512, 
+                5.480326, 
+                5.510051
+            ]
+        ], 
+        [
+            "Stencil Synth", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python stencil.py --size=10240*1024*10 --cphvb=True", 
+            [
+                2.362303, 
+                2.454125, 
+                2.012008, 
+                2.347714, 
+                2.453445
+            ]
+        ]
+    ], 
+    "meta": {
+        "started": "2012-10-04 14:36:41.323929", 
+        "rev": "ee8f8974e1d9d8e07d279fda8d91a06403d6b2de", 
+        "hw": "p31sd\n    description: Computer\n    width: 64 bits\n    capabilities: vsyscall32\n  *-core\n       description: Motherboard\n       physical id: 0\n     *-memory\n          description: System memory\n          physical id: 0\n          size: 3866MiB\n     *-cpu\n          product: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\n          vendor: Intel Corp.\n          physical id: 1\n          bus info: cpu@0\n          size: 2301MHz\n          capacity: 2301MHz\n          width: 64 bits\n          capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp x86-64 constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid cpufreq\n     *-pci\n          description: Host bridge\n          product: 2nd Generation Core Processor Family DRAM Controller [8086:104]\n          vendor: Intel Corporation [8086]\n          physical id: 100\n          bus info: pci@0000:00:00.0\n          version: 09\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=agpgart-intel\n          resources: irq:0\n        *-pci:0\n             description: PCI bridge\n             product: Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port [8086:101]\n             vendor: Intel Corporation [8086]\n             physical id: 1\n             bus info: pci@0000:00:01.0\n             version: 09\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:40 ioport:d000(size=4096) memory:dc000000-dd0fffff ioport:c0000000(size=301989888)\n           *-display\n                description: VGA compatible controller\n                product: GF119 [GeForce GT 520M] [10DE:1050]\n                vendor: NVIDIA Corporation [10DE]\n                physical id: 0\n                bus info: pci@0000:01:00.0\n                version: a1\n                width: 64 bits\n                clock: 33MHz\n                capabilities: vga_controller bus_master cap_list rom\n                configuration: driver=nouveau latency=0\n                resources: irq:16 memory:dc000000-dcffffff memory:c0000000-cfffffff memory:d0000000-d1ffffff ioport:d000(size=128) memory:dd000000-dd07ffff\n        *-pci:1\n             description: PCI bridge\n             product: Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port [8086:105]\n             vendor: Intel Corporation [8086]\n             physical id: 1.1\n             bus info: pci@0000:00:01.1\n             version: 09\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:41\n        *-display\n             description: VGA compatible controller\n             product: 2nd Generation Core Processor Family Integrated Graphics Controller [8086:116]\n             vendor: Intel Corporation [8086]\n             physical id: 2\n             bus info: pci@0000:00:02.0\n             version: 09\n             width: 64 bits\n             clock: 33MHz\n             capabilities: vga_controller bus_master cap_list rom\n             configuration: driver=i915 latency=0\n             resources: irq:43 memory:dd400000-dd7fffff memory:b0000000-bfffffff ioport:e000(size=64)\n        *-communication\n             description: Communication controller\n             product: 6 Series/C200 Series Chipset Family MEI Controller #1 [8086:1C3A]\n             vendor: Intel Corporation [8086]\n             physical id: 16\n             bus info: pci@0000:00:16.0\n             version: 04\n             width: 64 bits\n             clock: 33MHz\n             capabilities: bus_master cap_list\n             configuration: driver=mei latency=0\n             resources: irq:44 memory:df60b000-df60b00f\n        *-usb:0\n             description: USB controller\n             product: 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #2 [8086:1C2D]\n             vendor: Intel Corporation [8086]\n             physical id: 1a\n             bus info: pci@0000:00:1a.0\n             version: 05\n             width: 32 bits\n             clock: 33MHz\n             capabilities: ehci bus_master cap_list\n             configuration: driver=ehci_hcd latency=0\n             resources: irq:16 memory:df608000-df6083ff\n        *-multimedia\n             description: Audio device\n             product: 6 Series/C200 Series Chipset Family High Definition Audio Controller [8086:1C20]\n             vendor: Intel Corporation [8086]\n             physical id: 1b\n             bus info: pci@0000:00:1b.0\n             version: 05\n             width: 64 bits\n             clock: 33MHz\n             capabilities: bus_master cap_list\n             configuration: driver=snd_hda_intel latency=0\n             resources: irq:45 memory:df600000-df603fff\n        *-pci:2\n             description: PCI bridge\n             product: 6 Series/C200 Series Chipset Family PCI Express Root Port 1 [8086:1C10]\n             vendor: Intel Corporation [8086]\n             physical id: 1c\n             bus info: pci@0000:00:1c.0\n             version: b5\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:16 ioport:c000(size=4096) memory:dec00000-df5fffff ioport:d3700000(size=10485760)\n        *-pci:3\n             description: PCI bridge\n             product: 6 Series/C200 Series Chipset Family PCI Express Root Port 2 [8086:1C12]\n             vendor: Intel Corporation [8086]\n             physical id: 1c.1\n             bus info: pci@0000:00:1c.1\n             version: b5\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:17 ioport:b000(size=4096) memory:de200000-debfffff ioport:d2c00000(size=10485760)\n           *-network DISABLED\n                description: Wireless interface\n                product: AR9285 Wireless Network Adapter (PCI-Express) [168C:2B]\n                vendor: Atheros Communications Inc. [168C]\n                physical id: 0\n                bus info: pci@0000:04:00.0\n                logical name: wlan0\n                version: 01\n                serial: e0:b9:a5:c7:59:3c\n                width: 64 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list ethernet physical wireless\n                configuration: broadcast=yes driver=ath9k driverversion=3.2.0-30-generic firmware=N/A latency=0 multicast=yes wireless=IEEE 802.11bgn\n                resources: irq:17 memory:de200000-de20ffff\n        *-pci:4\n             description: PCI bridge\n             product: 6 Series/C200 Series Chipset Family PCI Express Root Port 6 [8086:1C1A]\n             vendor: Intel Corporation [8086]\n             physical id: 1c.5\n             bus info: pci@0000:00:1c.5\n             version: b5\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:17 ioport:a000(size=4096) memory:dd800000-de1fffff ioport:d2100000(size=10485760)\n           *-network\n                description: Ethernet interface\n                product: AR8151 v2.0 Gigabit Ethernet [1969:1083]\n                vendor: Atheros Communications Inc. [1969]\n                physical id: 0\n                bus info: pci@0000:05:00.0\n                logical name: eth0\n                version: c0\n                serial: f4:6d:04:59:90:ef\n                size: 100Mbit/s\n                capacity: 1Gbit/s\n                width: 64 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation\n                configuration: autonegotiation=on broadcast=yes driver=atl1c driverversion=1.0.1.0-NAPI duplex=full firmware=N/A ip=172.24.16.32 latency=0 multicast=yes port=twisted pair speed=100Mbit/s\n                resources: irq:46 memory:dd800000-dd83ffff ioport:a000(size=128)\n        *-usb:1\n             description: USB controller\n             product: 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #1 [8086:1C26]\n             vendor: Intel Corporation [8086]\n             physical id: 1d\n             bus info: pci@0000:00:1d.0\n             version: 05\n             width: 32 bits\n             clock: 33MHz\n             capabilities: ehci bus_master cap_list\n             configuration: driver=ehci_hcd latency=0\n             resources: irq:23 memory:df607000-df6073ff\n        *-isa\n             description: ISA bridge\n             product: HM65 Express Chipset Family LPC Controller [8086:1C49]\n             vendor: Intel Corporation [8086]\n             physical id: 1f\n             bus info: pci@0000:00:1f.0\n             version: 05\n             width: 32 bits\n             clock: 33MHz\n             capabilities: isa bus_master cap_list\n             configuration: latency=0\n        *-storage\n             description: SATA controller\n             product: 6 Series/C200 Series Chipset Family 6 port SATA AHCI Controller [8086:1C03]\n             vendor: Intel Corporation [8086]\n             physical id: 1f.2\n             bus info: pci@0000:00:1f.2\n             version: 05\n             width: 32 bits\n             clock: 66MHz\n             capabilities: storage ahci_1.0 bus_master cap_list\n             configuration: driver=ahci latency=0\n             resources: irq:42 ioport:e0b0(size=8) ioport:e0a0(size=4) ioport:e090(size=8) ioport:e080(size=4) ioport:e060(size=32) memory:df606000-df6067ff\n        *-serial UNCLAIMED\n             description: SMBus\n             product: 6 Series/C200 Series Chipset Family SMBus Controller [8086:1C22]\n             vendor: Intel Corporation [8086]\n             physical id: 1f.3\n             bus info: pci@0000:00:1f.3\n             version: 05\n             width: 64 bits\n             clock: 33MHz\n             configuration: latency=0\n             resources: memory:df605000-df6050ff ioport:e040(size=32)\n  *-scsi\n       physical id: 1\n       bus info: scsi@7\n       logical name: scsi7\n       capabilities: scsi-host\n       configuration: driver=usb-storage\n", 
+        "ended": "2012-10-04 14:50:37.833293", 
+        "suite": "default", 
+        "os": "Linux version 3.2.0-30-generic (buildd@batsu) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #48-Ubuntu SMP Fri Aug 24 16:52:48 UTC 2012\n", 
+        "cpu": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 2301.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 2\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.67\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 800.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 2\napicid\t\t: 2\ninitial apicid\t: 2\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.55\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 2\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 2301.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 2\napicid\t\t: 1\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.54\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 3\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 800.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 2\napicid\t\t: 3\ninitial apicid\t: 3\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.55\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\n"
+    }
+}
