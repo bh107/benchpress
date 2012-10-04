@@ -113,7 +113,7 @@ def main(config, src_root, output, suite, runs=5):
         'meta': meta(src_root, suite),
         'runs': []
     }
-    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-', suffix='json') as fd:
+    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-', suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in (scripts[snr] for snr in benchmark['scripts']):
             for alias, engine, env in (engines[enr] for enr in benchmark['engines']):
