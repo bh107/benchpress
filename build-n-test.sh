@@ -22,7 +22,7 @@
 #   This script clones, compiles, installs, tests and benchmarks cphvb.
 #   Another script produces graphs based on the results produced in this script.
 #
-[[ $BUILD_ROOT ]] && echo "** Benchmarking" || echo "Exiting, you must run via bootstrap.sh"; exit
+[[ $BUILD_ROOT ]] && echo "** Benchmarking" || (echo "Exiting, you must run via bootstrap.sh"; exit)
 
 
 cd $BUILD_ROOT
