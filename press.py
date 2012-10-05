@@ -97,6 +97,7 @@ def meta(src_dir, suite):
         'started':    str(datetime.now()),
         'ended':      None,
         'suite': suite,
+        'envs': os.environ.copy()
     }
 
     return info

@@ -24,7 +24,6 @@
 #
 [[ $BUILD_ROOT ]] && echo "** Benchmarking" || (echo "Exiting, you must run via bootstrap.sh"; exit)
 
-
 cd $BUILD_ROOT
 
 OLDPP=$PYTHONPATH
@@ -75,6 +74,7 @@ echo "** Testing cphVB installation."
 
 export PYTHONPATH="$PYTHONPATH:$CPHVB_LIB/lib/python$PYTHONVER/site-packages"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CPHVB_LIB"
+source $BENCH_SRC/envs/$MACHINE
 python $CPHVB_SRC/test/numpy/numpytest.py
 
 RETURN=$?
