@@ -74,7 +74,7 @@ echo "** Testing cphVB installation."
 
 export PYTHONPATH="$PYTHONPATH:$CPHVB_LIB/lib/python$PYTHONVER/site-packages"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CPHVB_LIB"
-source $BENCH_SRC/envs/$MACHINE
+source $BENCH_SRC/envs/$MACHINE.sh
 python $CPHVB_SRC/test/numpy/numpytest.py
 
 RETURN=$?
