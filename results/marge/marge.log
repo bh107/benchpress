@@ -1,193 +1,83 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/marge/ce28242b00d83a8b089cd9f7a970840b7e20f621/benchmark-8Jio7p.json.
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/marge/ce28242b00d83a8b089cd9f7a970840b7e20f621/benchmark-IsbYfM.json.
 { Jacobi Fixed - numpy ( None ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  3.047806
-  2/5,  3.926499
-  3/5,  3.050355
-  4/5,  3.921613
-  5/5,  3.052135
+  1/5,  3.916967
+  2/5,  3.049341
+  3/5,  3.919635
+  4/5,  3.052832
+  5/5,  3.916039
 }
 { Jacobi Fixed - simple ( simple ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  4.227286
-  2/5,  3.613756
-  3/5,  4.202794
-  4/5,  3.619246
-  5/5,  4.21571
+  1/5,  3.617161
+  2/5,  4.208726
+  3/5,  3.615529
+  4/5,  4.216184
+  5/5,  3.612926
 }
 { Jacobi Fixed - score ( score ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.29356
-  2/5,  3.525045
-  3/5,  3.291226
-  4/5,  3.521175
-  5/5,  3.291177
+  1/5,  3.520522
+  2/5,  3.296129
+  3/5,  3.520861
+  4/5,  3.295397
+  5/5,  3.520323
 }
 { Jacobi Fixed - mcore ( mcore ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  1.227972
-  2/5,  1.212583
-  3/5,  1.284422
-  4/5,  1.215013
-  5/5,  1.255376
+  1/5,  1.204431
+  2/5,  1.187814
+  3/5,  1.261144
+  4/5,  1.223902
+  5/5,  1.159214
 }
 { 1D 4way Stencil - numpy ( None ),
   python simplest.py --size=100000000*1 --cphvb=False
-  1/5,  2.234824
-  2/5,  2.83334
-  3/5,  2.240356
-  4/5,  2.833274
-  5/5,  2.240597
+  1/5,  2.24214
+  2/5,  2.832114
+  3/5,  2.240535
+  4/5,  2.832903
+  5/5,  2.242111
 }
 { 1D 4way Stencil - simple ( simple ),
   python simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.807681
-  2/5,  2.547455
-  3/5,  2.805268
-  4/5,  2.545988
-  5/5,  2.820677
+  1/5,  2.807065
+  2/5,  2.547699
+  3/5,  2.8067
+  4/5,  2.543748
+  5/5,  2.808248
 }
 { 1D 4way Stencil - score ( score ),
   python simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.46703
-  2/5,  2.593836
-  3/5,  2.467616
-  4/5,  2.605741
-  5/5,  2.466217
+  1/5,  2.465753
+  2/5,  2.59782
+  3/5,  2.463489
+  4/5,  2.593394
+  5/5,  2.466622
 }
 { 1D 4way Stencil - mcore ( mcore ),
   python simplest.py --size=100000000*1 --cphvb=True
-  1/5,  1.162671
-  2/5,  1.114425
-  3/5,  1.146431
-  4/5,  1.148433
-  5/5,  1.180969
+  1/5,  1.138141
+  2/5,  1.124977
+  3/5,  1.146486
+  4/5,  1.192711
+  5/5,  1.133398
 }
 { Monte Carlo - numpy ( None ),
   python MonteCarlo.py --size=100000000*1 --cphvb=False
-  1/5,  4.52253
-  2/5,  4.762345
-  3/5,  4.530057
-  4/5,  4.770194
-  5/5,  4.514561
+  1/5,  4.52042
+  2/5,  4.76825
+  3/5,  4.522209
+  4/5,  4.769367
+  5/5,  4.522393
 }
 { Monte Carlo - simple ( simple ),
   python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  28.736396
-  2/5,  28.472219
-  3/5,  28.992968
-  4/5,  28.481059
-  5/5,  28.741484
+  1/5,  29.083674
+  2/5,  28.471887
+  3/5,  28.713919
+  4/5,  28.486504
+  5/5,  28.715202
 }
 { Monte Carlo - score ( score ),
   python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  28.536499
-  2/5,  28.690897
-  3/5,  28.456769
-  4/5,  28.679795
-  5/5,  28.503313
-}
-{ Monte Carlo - mcore ( mcore ),
-  python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  17.261657
-  2/5,  15.974732
-  3/5,  17.406138
-  4/5,  17.36389
-  5/5,  14.687781
-}
-{ Shallow Water - numpy ( None ),
-  python swater.py --size=2200*1 --cphvb=False
-  1/5,  3.296975
-  2/5,  2.830372
-  3/5,  3.297259
-  4/5,  2.829628
-  5/5,  3.301049
-}
-{ Shallow Water - simple ( simple ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.184939
-  2/5,  3.511689
-  3/5,  3.184479
-  4/5,  3.529448
-  5/5,  3.202547
-}
-{ Shallow Water - score ( score ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  4.636922
-  2/5,  4.405628
-  3/5,  4.621161
-  4/5,  4.401367
-  5/5,  4.630444
-}
-{ Shallow Water - mcore ( mcore ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  1.517526
-  2/5,  1.443244
-  3/5,  1.436609
-  4/5,  1.412045
-  5/5,  1.485397
-}
-{ kNN - numpy ( None ),
-  python kNN.py --size=10000*120 --cphvb=False
-  1/5,  5.16557
-  2/5,  5.015954
-  3/5,  5.163552
-  4/5,  5.020854
-  5/5,  5.173237
-}
-{ kNN - simple ( simple ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  14.284016
-  2/5,  14.539399
-  3/5,  14.277446
-  4/5,  14.440944
-  5/5,  14.282233
-}
-{ kNN - score ( score ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  14.415424
-  2/5,  14.264129
-  3/5,  14.414931
-  4/5,  14.289006
-  5/5,  14.428389
-}
-{ kNN - mcore ( mcore ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  5.590694
-  2/5,  5.598924
-  3/5,  5.596249
-  4/5,  4.604984
-  5/5,  5.588712
-}
-{ Stencil Synth - numpy ( None ),
-  python stencil.py --size=10240*1024*10 --cphvb=False
-  1/5,  6.533799
-  2/5,  5.584262
-  3/5,  6.60769
-  4/5,  5.584812
-  5/5,  6.539241
-}
-{ Stencil Synth - simple ( simple ),
-  python stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  3.71723
-  2/5,  4.49527
-  3/5,  3.72132
-  4/5,  4.505149
-  5/5,  3.722672
-}
-{ Stencil Synth - score ( score ),
-  python stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  6.736871
-  2/5,  6.213151
-  3/5,  6.695329
-  4/5,  6.215244
-  5/5,  6.718942
-}
-{ Stencil Synth - mcore ( mcore ),
-  python stencil.py --size=10240*1024*10 --cphvb=True
-  1/5,  1.157612
-  2/5,  1.210029
-  3/5,  1.120737
-  4/5,  1.227773
-  5/5,  1.166974
-}
