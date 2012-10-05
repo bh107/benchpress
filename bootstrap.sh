@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # This file is part of cphVB and copyright (c) 2012 the cphVB team:
 # http://cphvb.bitbucket.org

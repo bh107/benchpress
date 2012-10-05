@@ -34,13 +34,13 @@ Log into the machine you want to run benchmarks on. Then do the following::
     ./bootstrap.sh
 
 After you have confirmed that the scripts runs without error, inspect the $MACHINE.log file
-Then add it to a cron-job or something like that::
+Then add it to a cron-job or something like that:
 
     crontab -e
 
-With a line something like::
+With a line something like:
 
-    30      1       *       *       *       /home/safl/buildbot/bootstrap.sh
+    01      3       *       *       *       $HOME/buildbot/bootstrap.sh >> $HOME/buildbot/cron.log 2>&1
 
 Auth to repos
 -------------
