@@ -1,83 +1,21 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/marge/ce28242b00d83a8b089cd9f7a970840b7e20f621/benchmark-IsbYfM.json.
-{ Jacobi Fixed - numpy ( None ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  3.916967
-  2/5,  3.049341
-  3/5,  3.919635
-  4/5,  3.052832
-  5/5,  3.916039
-}
-{ Jacobi Fixed - simple ( simple ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.617161
-  2/5,  4.208726
-  3/5,  3.615529
-  4/5,  4.216184
-  5/5,  3.612926
-}
-{ Jacobi Fixed - score ( score ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.520522
-  2/5,  3.296129
-  3/5,  3.520861
-  4/5,  3.295397
-  5/5,  3.520323
-}
-{ Jacobi Fixed - mcore ( mcore ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  1.204431
-  2/5,  1.187814
-  3/5,  1.261144
-  4/5,  1.223902
-  5/5,  1.159214
-}
-{ 1D 4way Stencil - numpy ( None ),
-  python simplest.py --size=100000000*1 --cphvb=False
-  1/5,  2.24214
-  2/5,  2.832114
-  3/5,  2.240535
-  4/5,  2.832903
-  5/5,  2.242111
-}
-{ 1D 4way Stencil - simple ( simple ),
-  python simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.807065
-  2/5,  2.547699
-  3/5,  2.8067
-  4/5,  2.543748
-  5/5,  2.808248
-}
-{ 1D 4way Stencil - score ( score ),
-  python simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.465753
-  2/5,  2.59782
-  3/5,  2.463489
-  4/5,  2.593394
-  5/5,  2.466622
-}
-{ 1D 4way Stencil - mcore ( mcore ),
-  python simplest.py --size=100000000*1 --cphvb=True
-  1/5,  1.138141
-  2/5,  1.124977
-  3/5,  1.146486
-  4/5,  1.192711
-  5/5,  1.133398
-}
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/marge/38079fc596f3fa7559cf9c037abea1691c1a65ca/benchmark-NpYXjT.json.
 { Monte Carlo - numpy ( None ),
   python MonteCarlo.py --size=100000000*1 --cphvb=False
-  1/5,  4.52042
-  2/5,  4.76825
-  3/5,  4.522209
-  4/5,  4.769367
-  5/5,  4.522393
+  1/2,  4.521377
+  2/2,  4.760665
 }
 { Monte Carlo - simple ( simple ),
   python MonteCarlo.py --size=100000000*1 --cphvb=True
-  1/5,  29.083674
-  2/5,  28.471887
-  3/5,  28.713919
-  4/5,  28.486504
-  5/5,  28.715202
+  1/2,  6.311482
+  2/2,  6.509833
 }
 { Monte Carlo - score ( score ),
   python MonteCarlo.py --size=100000000*1 --cphvb=True
+  1/2,  6.274824
+  2/2,  6.484902
+}
+{ Monte Carlo - mcore ( mcore ),
+  python MonteCarlo.py --size=100000000*1 --cphvb=True
+  1/2,  10.584745
+  2/2,  10.652113
+}
