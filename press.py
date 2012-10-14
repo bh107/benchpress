@@ -40,22 +40,21 @@ engines = [
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
-    ('Jacobi Fixed',    'jacobi_fixed.py', '--size=7168*7168*4'),
-    ('Monte Carlo PI - RIL',     'MonteCarlo.py',   '--size=10*1000000*10'),
-    ('Shallow Water',   'swater.py',       '--size=2200*1'),
-    ('kNN',             'kNN.py',          '--size=10000*120'),
-    ('Stencil Synth',   'stencil.py',      '--size=10240*1024*10'),
+    ('Jacobi Fixed',                'jacobi_fixed.py',      '--size=7168*7168*4'),
+    ('Monte Carlo PI - RIL',        'MonteCarlo.py',        '--size=10*1000000*10'),
+    ('Shallow Water',               'swater.py',            '--size=2200*1'),
+    ('kNN',                         'kNN.py',               '--size=10000*120'),
+    ('Stencil - 1D 4way - Copy',    'stencil.twonine.py',   '--size=10240*1024*10'),
+    ('Stencil - 1D 4way - No-Copy', 'stencil.simplest.py',  '--size=100000000*1'),
 
-    ('Cache Synth',     'cache.py',        '--size=10485760*10*1'),
-    ('Stencil Synth2',  'twonine.py',      '--size=10240*1024*10'),
-    ('1D 4way Stencil', 'simplest.py',     '--size=100000000*1'),
-
-    ('Monte Carlo PI - 2byN', 'mc.2byN.py', '--size=10000000*20'),
-    ('Monte Carlo PI - Nby2', 'mc.2byN.py', '--size=10000000*20'),
+    ('Stencil - 2D',            'stencil.2d.py',      '--size=10240*1024*10'),
+    ('Cache Synth',             'cache.py',        '--size=10485760*10*1'),
+    ('Monte Carlo PI - 2byN',   'mc.2byN.py', '--size=10000000*20'),
+    ('Monte Carlo PI - Nby2',   'mc.2byN.py', '--size=10000000*20'),
 ]
                                 # DEFAULT BENCHMARK
 default = {                     # Define a benchmark "suite" which runs:
-    'scripts': [0,7,1,2,3,4],   # these scripts
+    'scripts': [0,1,2,3,4,5],   # these scripts
     'engines': [0,1,2,3]        # using these engines
 } 
 
@@ -70,15 +69,15 @@ test = {
 }
 
 montecarlo = {
-    'scripts': [1,8,9],
+    'scripts': [1,9,10],
     'engines':  [0,1,2,3]
 }
 
 suites = {
     'default':      default,
     'cache_tiling': cache_tiling,
+    'test':         test,
     'monte':        montecarlo,
-    'test':         test
 }
 
 def meta(src_dir, suite):
