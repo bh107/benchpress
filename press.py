@@ -41,14 +41,17 @@ engines = [
 # (alias, script, parameters)
 scripts   = [
     ('Jacobi Fixed',    'jacobi_fixed.py', '--size=7168*7168*4'),
-    ('Monte Carlo',     'MonteCarlo.py',   '--size=100000000*1'),
+    ('Monte Carlo PI - RIL',     'MonteCarlo.py',   '--size=10*1000000*10'),
     ('Shallow Water',   'swater.py',       '--size=2200*1'),
     ('kNN',             'kNN.py',          '--size=10000*120'),
     ('Stencil Synth',   'stencil.py',      '--size=10240*1024*10'),
 
     ('Cache Synth',     'cache.py',        '--size=10485760*10*1'),
     ('Stencil Synth2',  'twonine.py',      '--size=10240*1024*10'),
-    ('1D 4way Stencil', 'simplest.py',     '--size=100000000*1')
+    ('1D 4way Stencil', 'simplest.py',     '--size=100000000*1'),
+
+    ('Monte Carlo PI - 2byN', 'mc.2byN.py', '--size=10000000*20'),
+    ('Monte Carlo PI - Nby2', 'mc.2byN.py', '--size=10000000*20'),
 ]
                                 # DEFAULT BENCHMARK
 default = {                     # Define a benchmark "suite" which runs:
@@ -66,9 +69,15 @@ test = {
     'engines': [0,1]
 }
 
+montecarlo = {
+    'scripts': [1,8,9],
+    'engines':  [0,1,2,3]
+}
+
 suites = {
     'default':      default,
     'cache_tiling': cache_tiling,
+    'monte':        montecarlo,
     'test':         test
 }
 
@@ -89,10 +98,18 @@ def meta(src_dir, suite):
     )
     hw, err = p.communicate()
 
+    p = Popen(              # Try grabbing hw-info
+        ["hostname"],
+        stdin   = PIPE,
+        stdout  = PIPE,
+    )
+    hostname, err = p.communicate()
+
     info = {
         'cpu':  open('/proc/cpuinfo','r').read(),
         'os':   open('/proc/version','r').read(),
         'hw':   hw if hw else 'Unknown',
+        'hostname': hostname if hostname else 'Unknown',
         'rev':  rev if rev else 'Unknown',
         'started':    str(datetime.now()),
         'ended':      None,
@@ -190,6 +207,7 @@ if __name__ == "__main__":
         os.getenv('HOME')+os.sep+'.cphvb'+os.sep+'config.ini',
         args.src,
         args.output,
-        args.suite
+        args.suite,
+        5
     )
 
