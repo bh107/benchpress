@@ -1,0 +1,120 @@
+{
+    "runs": [
+        [
+            "Monte Carlo PI - RIL", 
+            "numpy", 
+            null, 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=False", 
+            [
+                4.216572
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "simple", 
+            "simple", 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=True", 
+            [
+                5.030788
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score", 
+            "score", 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=True", 
+            [
+                4.848693
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "mcore", 
+            "mcore", 
+            null, 
+            "python MonteCarlo.py --size=100000000*1 --cphvb=True", 
+            [
+                11.067269
+            ]
+        ], 
+        [
+            "Monte Carlo PI - 2byN", 
+            "numpy", 
+            null, 
+            null, 
+            "python mc.2byN.py --size=10000000*20 --cphvb=False", 
+            [
+                5.321354
+            ]
+        ], 
+        [
+            "Monte Carlo PI - 2byN", 
+            "simple", 
+            "simple", 
+            null, 
+            "python mc.2byN.py --size=10000000*20 --cphvb=True", 
+            [
+                5.416827
+            ]
+        ]
+    ], 
+    "meta": {
+        "ended": "2012-10-14 19:13:18.784637", 
+        "envs": {
+            "GLADE_PIXMAP_PATH": ":", 
+            "LESSOPEN": "| /usr/bin/lesspipe %s", 
+            "LOGNAME": "safl", 
+            "USER": "safl", 
+            "GNOME_KEYRING_CONTROL": "/tmp/keyring-Y51FIW", 
+            "PATH": "/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games", 
+            "DISPLAY": ":0.0", 
+            "SSH_AGENT_PID": "2120", 
+            "LANG": "en_US.UTF-8", 
+            "TERM": "xterm", 
+            "SHELL": "/bin/bash", 
+            "XDG_SESSION_PATH": "/org/freedesktop/DisplayManager/Session0", 
+            "XAUTHORITY": "/home/safl/.Xauthority", 
+            "LANGUAGE": "en_US:en", 
+            "SESSION_MANAGER": "local/p31sd:@/tmp/.ICE-unix/2139,unix/p31sd:/tmp/.ICE-unix/2139", 
+            "SHLVL": "1", 
+            "MANDATORY_PATH": "/usr/share/gconf/xubuntu.mandatory.path", 
+            "TERMINATOR_UUID": "urn:uuid:3395f105-7c92-4ed3-9e38-6a0c2040a773", 
+            "LD_LIBRARY_PATH": ":/home/safl/cphvb.lib", 
+            "WINDOWID": "73400324", 
+            "ORBIT_SOCKETDIR": "/tmp/orbit-safl", 
+            "GLADE_CATALOG_PATH": ":", 
+            "HOME": "/home/safl", 
+            "GLADE_MODULE_PATH": ":", 
+            "PYTHONPATH": ":/home/safl/cphvb.lib/lib/python2.7/site-packages", 
+            "SSH_AUTH_SOCK": "/tmp/ssh-mFCgOURy2088/agent.2088", 
+            "GDMSESSION": "xubuntu", 
+            "DEFAULTS_PATH": "/usr/share/gconf/xubuntu.default.path", 
+            "XDG_SEAT_PATH": "/org/freedesktop/DisplayManager/Seat0", 
+            "XDG_CONFIG_DIRS": "/etc/xdg/xdg-xubuntu:/etc/xdg:/etc/xdg", 
+            "XDG_CURRENT_DESKTOP": "XFCE", 
+            "DBUS_SESSION_BUS_ADDRESS": "unix:abstract=/tmp/dbus-qpvnhHwV8J,guid=efbe8276a98799e5b0aca4b80000005a", 
+            "_": "./press.py", 
+            "XDG_SESSION_COOKIE": "9d84de2de8e1686e0ac46be200000008-1350212071.663653-1283868837", 
+            "DESKTOP_SESSION": "xubuntu", 
+            "LESSCLOSE": "/usr/bin/lesspipe %s %s", 
+            "GNOME_KEYRING_PID": "2077", 
+            "OLDPWD": "/home/safl/Desktop", 
+            "LIBGLADE_MODULE_PATH": ":", 
+            "XDG_DATA_DIRS": "/usr/share/xubuntu:/usr/local/share/:/usr/share/:/usr/share", 
+            "PWD": "/home/safl/Desktop/benchpress", 
+            "COLORTERM": "gnome-terminal", 
+            "XDG_MENU_PREFIX": "xfce-", 
+            "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:"
+        }, 
+        "suite": "monte", 
+        "started": "2012-10-14 19:12:38.469735", 
+        "rev": "4319b32c7347d7b37160b563a1d9dcedc48f93bb", 
+        "hostname": "p31sd\n", 
+        "os": "Linux version 3.2.0-32-generic (buildd@batsu) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #51-Ubuntu SMP Wed Sep 26 21:33:09 UTC 2012\n", 
+        "cpu": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 2301.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 2\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4590.04\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 800.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 2\napicid\t\t: 2\ninitial apicid\t: 2\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.36\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 2\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 800.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 0\ncpu cores\t: 2\napicid\t\t: 1\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.36\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 3\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 42\nmodel name\t: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\nstepping\t: 7\nmicrocode\t: 0x18\ncpu MHz\t\t: 800.000\ncache size\t: 3072 KB\nphysical id\t: 0\nsiblings\t: 4\ncore id\t\t: 1\ncpu cores\t: 2\napicid\t\t: 3\ninitial apicid\t: 3\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid\nbogomips\t: 4589.37\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 36 bits physical, 48 bits virtual\npower management:\n\n", 
+        "hw": "p31sd\n    description: Computer\n    width: 64 bits\n    capabilities: vsyscall32\n  *-core\n       description: Motherboard\n       physical id: 0\n     *-memory\n          description: System memory\n          physical id: 0\n          size: 3866MiB\n     *-cpu\n          product: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz\n          vendor: Intel Corp.\n          physical id: 1\n          bus info: cpu@0\n          size: 2301MHz\n          capacity: 2301MHz\n          width: 64 bits\n          capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp x86-64 constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid cpufreq\n     *-pci\n          description: Host bridge\n          product: 2nd Generation Core Processor Family DRAM Controller [8086:104]\n          vendor: Intel Corporation [8086]\n          physical id: 100\n          bus info: pci@0000:00:00.0\n          version: 09\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=agpgart-intel\n          resources: irq:0\n        *-pci:0\n             description: PCI bridge\n             product: Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port [8086:101]\n             vendor: Intel Corporation [8086]\n             physical id: 1\n             bus info: pci@0000:00:01.0\n             version: 09\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:40 ioport:d000(size=4096) memory:dc000000-dd0fffff ioport:c0000000(size=301989888)\n           *-display\n                description: VGA compatible controller\n                product: GF119 [GeForce GT 520M] [10DE:1050]\n                vendor: NVIDIA Corporation [10DE]\n                physical id: 0\n                bus info: pci@0000:01:00.0\n                version: a1\n                width: 64 bits\n                clock: 33MHz\n                capabilities: vga_controller bus_master cap_list rom\n                configuration: driver=nouveau latency=0\n                resources: irq:16 memory:dc000000-dcffffff memory:c0000000-cfffffff memory:d0000000-d1ffffff ioport:d000(size=128) memory:dd000000-dd07ffff\n        *-pci:1\n             description: PCI bridge\n             product: Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port [8086:105]\n             vendor: Intel Corporation [8086]\n             physical id: 1.1\n             bus info: pci@0000:00:01.1\n             version: 09\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:41\n        *-display\n             description: VGA compatible controller\n             product: 2nd Generation Core Processor Family Integrated Graphics Controller [8086:116]\n             vendor: Intel Corporation [8086]\n             physical id: 2\n             bus info: pci@0000:00:02.0\n             version: 09\n             width: 64 bits\n             clock: 33MHz\n             capabilities: vga_controller bus_master cap_list rom\n             configuration: driver=i915 latency=0\n             resources: irq:43 memory:dd400000-dd7fffff memory:b0000000-bfffffff ioport:e000(size=64)\n        *-communication\n             description: Communication controller\n             product: 6 Series/C200 Series Chipset Family MEI Controller #1 [8086:1C3A]\n             vendor: Intel Corporation [8086]\n             physical id: 16\n             bus info: pci@0000:00:16.0\n             version: 04\n             width: 64 bits\n             clock: 33MHz\n             capabilities: bus_master cap_list\n             configuration: driver=mei latency=0\n             resources: irq:44 memory:df60b000-df60b00f\n        *-usb:0\n             description: USB controller\n             product: 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #2 [8086:1C2D]\n             vendor: Intel Corporation [8086]\n             physical id: 1a\n             bus info: pci@0000:00:1a.0\n             version: 05\n             width: 32 bits\n             clock: 33MHz\n             capabilities: ehci bus_master cap_list\n             configuration: driver=ehci_hcd latency=0\n             resources: irq:16 memory:df608000-df6083ff\n        *-multimedia\n             description: Audio device\n             product: 6 Series/C200 Series Chipset Family High Definition Audio Controller [8086:1C20]\n             vendor: Intel Corporation [8086]\n             physical id: 1b\n             bus info: pci@0000:00:1b.0\n             version: 05\n             width: 64 bits\n             clock: 33MHz\n             capabilities: bus_master cap_list\n             configuration: driver=snd_hda_intel latency=0\n             resources: irq:45 memory:df600000-df603fff\n        *-pci:2\n             description: PCI bridge\n             product: 6 Series/C200 Series Chipset Family PCI Express Root Port 1 [8086:1C10]\n             vendor: Intel Corporation [8086]\n             physical id: 1c\n             bus info: pci@0000:00:1c.0\n             version: b5\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:16 ioport:c000(size=4096) memory:dec00000-df5fffff ioport:d3700000(size=10485760)\n        *-pci:3\n             description: PCI bridge\n             product: 6 Series/C200 Series Chipset Family PCI Express Root Port 2 [8086:1C12]\n             vendor: Intel Corporation [8086]\n             physical id: 1c.1\n             bus info: pci@0000:00:1c.1\n             version: b5\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:17 ioport:b000(size=4096) memory:de200000-debfffff ioport:d2c00000(size=10485760)\n           *-network\n                description: Wireless interface\n                product: AR9285 Wireless Network Adapter (PCI-Express) [168C:2B]\n                vendor: Atheros Communications Inc. [168C]\n                physical id: 0\n                bus info: pci@0000:04:00.0\n                logical name: wlan0\n                version: 01\n                serial: e0:b9:a5:c7:59:3c\n                width: 64 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list ethernet physical wireless\n                configuration: broadcast=yes driver=ath9k driverversion=3.2.0-32-generic firmware=N/A latency=0 multicast=yes wireless=IEEE 802.11bgn\n                resources: irq:17 memory:de200000-de20ffff\n        *-pci:4\n             description: PCI bridge\n             product: 6 Series/C200 Series Chipset Family PCI Express Root Port 6 [8086:1C1A]\n             vendor: Intel Corporation [8086]\n             physical id: 1c.5\n             bus info: pci@0000:00:1c.5\n             version: b5\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:17 ioport:a000(size=4096) memory:dd800000-de1fffff ioport:d2100000(size=10485760)\n           *-network\n                description: Ethernet interface\n                product: AR8151 v2.0 Gigabit Ethernet [1969:1083]\n                vendor: Atheros Communications Inc. [1969]\n                physical id: 0\n                bus info: pci@0000:05:00.0\n                logical name: eth0\n                version: c0\n                serial: f4:6d:04:59:90:ef\n                size: 100Mbit/s\n                capacity: 1Gbit/s\n                width: 64 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation\n                configuration: autonegotiation=on broadcast=yes driver=atl1c driverversion=1.0.1.0-NAPI duplex=full firmware=N/A ip=172.24.16.32 latency=0 multicast=yes port=twisted pair speed=100Mbit/s\n                resources: irq:46 memory:dd800000-dd83ffff ioport:a000(size=128)\n        *-usb:1\n             description: USB controller\n             product: 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #1 [8086:1C26]\n             vendor: Intel Corporation [8086]\n             physical id: 1d\n             bus info: pci@0000:00:1d.0\n             version: 05\n             width: 32 bits\n             clock: 33MHz\n             capabilities: ehci bus_master cap_list\n             configuration: driver=ehci_hcd latency=0\n             resources: irq:23 memory:df607000-df6073ff\n        *-isa\n             description: ISA bridge\n             product: HM65 Express Chipset Family LPC Controller [8086:1C49]\n             vendor: Intel Corporation [8086]\n             physical id: 1f\n             bus info: pci@0000:00:1f.0\n             version: 05\n             width: 32 bits\n             clock: 33MHz\n             capabilities: isa bus_master cap_list\n             configuration: latency=0\n        *-storage\n             description: SATA controller\n             product: 6 Series/C200 Series Chipset Family 6 port SATA AHCI Controller [8086:1C03]\n             vendor: Intel Corporation [8086]\n             physical id: 1f.2\n             bus info: pci@0000:00:1f.2\n             version: 05\n             width: 32 bits\n             clock: 66MHz\n             capabilities: storage ahci_1.0 bus_master cap_list\n             configuration: driver=ahci latency=0\n             resources: irq:42 ioport:e0b0(size=8) ioport:e0a0(size=4) ioport:e090(size=8) ioport:e080(size=4) ioport:e060(size=32) memory:df606000-df6067ff\n        *-serial UNCLAIMED\n             description: SMBus\n             product: 6 Series/C200 Series Chipset Family SMBus Controller [8086:1C22]\n             vendor: Intel Corporation [8086]\n             physical id: 1f.3\n             bus info: pci@0000:00:1f.3\n             version: 05\n             width: 64 bits\n             clock: 33MHz\n             configuration: latency=0\n             resources: memory:df605000-df6050ff ioport:e040(size=32)\n"
+    }
+}

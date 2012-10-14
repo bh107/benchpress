@@ -8,6 +8,7 @@ import glob
 import json
 import sys
 import os
+import re
 
 def stats( times ):
     """Returns: (avg, lowest, highest, deviation)"""
@@ -102,6 +103,9 @@ def gen( benchmark, output ):
             grid(True)
                                         # Output them
             fn = output +os.sep+ mark.lower() +'_'+ graph.lower()
+            dname = os.path.dirname(fn)
+            bname = re.sub('\W', '_', os.path.basename(fn))
+            fn = dname +os.sep+ bname
             savefig("%s.pdf" % ( fn ))
             savefig("%s.eps" % ( fn ))
             savefig("%s.png" % ( fn ))
@@ -109,7 +113,7 @@ def gen( benchmark, output ):
 
     return (0, None)
 
-def main( results, output, multi ):
+def main( results, output, multi, only_latest ):
 
     if multi:
 
@@ -121,7 +125,7 @@ def main( results, output, multi ):
 
         res = []
         for root, dirs, files in os.walk( results ):
-            for fn in [x for x in files if 'json' in x or 'benchmark' in x]:
+            for fn in [x for x in files if ('json' in x or 'benchmark' in x) and ('latest' in x or not only_latest)]:
                 r_input     = root +os.sep+ fn
                 r_output    = root.replace('results', 'graphs') +os.sep
                 if "latest" in fn:
@@ -148,6 +152,13 @@ if __name__ == "__main__":
         help="Recursively find multiple files."
     )
     parser.add_argument(
+        '-l',
+        dest='l',
+        action="store_true",
+        default=False,
+        help="Only look for 'latest' when using multiple results."
+    )
+    parser.add_argument(
         '--output',
         dest='output',
         default="graphs",
@@ -155,5 +166,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    res = [msg for r, msg in main( args.results, args.output, args.m ) if msg]
+    res = [msg for r, msg in main( args.results, args.output, args.m, args.l ) if msg]
     print ''.join( res )
