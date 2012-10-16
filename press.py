@@ -104,16 +104,36 @@ def meta(src_dir, suite):
     )
     hostname, err = p.communicate()
 
+    p = Popen(              # Try grabbing python version
+        ["python", "-V"],
+        stdin   = PIPE,
+        stdout  = PIPE,
+    )
+    python_ver, err = p.communicate()
+
+    p = Popen(              # Try grabbing python version
+        ["gcc", "-v"],
+        stdin   = PIPE,
+        stdout  = PIPE,
+    )
+    gcc_ver, err = p.communicate()
+
     info = {
-        'cpu':  open('/proc/cpuinfo','r').read(),
-        'os':   open('/proc/version','r').read(),
-        'hw':   hw if hw else 'Unknown',
+        'suite':    suite,
+        'rev':      rev if rev else 'Unknown',
         'hostname': hostname if hostname else 'Unknown',
-        'rev':  rev if rev else 'Unknown',
-        'started':    str(datetime.now()),
-        'ended':      None,
-        'suite': suite,
-        'envs': os.environ.copy()
+        'started':  str(datetime.now()),
+        'ended':    None,
+        'hw':       {
+            'cpu':  open('/proc/cpuinfo','r').read(),
+            'list': hw if hw else 'Unknown',
+        },
+        'sw':   {
+            'os':       open('/proc/version','r').read(),
+            'python':   python_ver if python_ver else 'Unknown',
+            'gcc':      gcc_ver if gcc_ver else 'Unknown',
+            'env':      os.environ.copy(),
+        },
     }
 
     return info
