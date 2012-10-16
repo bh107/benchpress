@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from ConfigParser import SafeConfigParser
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, STDOUT
 from datetime import datetime
 import tempfile
 import argparse
@@ -58,6 +58,11 @@ default = {                     # Define a benchmark "suite" which runs:
     'engines': [0,1,2,3]        # using these engines
 } 
 
+waters = {
+    'scripts':  [2],
+    'engines':  [0, 1,2]
+}
+
 cache_tiling = {
     'scripts': [7],
     'engines': [0,1]+ range(4, len(engines))
@@ -78,6 +83,7 @@ suites = {
     'cache_tiling': cache_tiling,
     'test':         test,
     'monte':        montecarlo,
+    'waters':       waters
 }
 
 def meta(src_dir, suite):
@@ -108,15 +114,19 @@ def meta(src_dir, suite):
         ["python", "-V"],
         stdin   = PIPE,
         stdout  = PIPE,
+        stderr  = PIPE
     )
     python_ver, err = p.communicate()
+    python_ver  += err
 
     p = Popen(              # Try grabbing python version
         ["gcc", "-v"],
         stdin   = PIPE,
         stdout  = PIPE,
+        stderr  = PIPE
     )
     gcc_ver, err = p.communicate()
+    gcc_ver += err
 
     info = {
         'suite':    suite,

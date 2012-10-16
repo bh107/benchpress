@@ -123,6 +123,18 @@ def main( B, runs=5 ):
 
 if __name__ == "__main__":
 
+    parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
+    parser.add_argument(
+        'src',
+        help='Path to the cphvb source-code.'
+    )
+    parser.add_argument(
+        '--output',
+        default="results",
+        help='Where to store benchmark results.'
+    )
+    args = parser.parse_args()
+
     B = util.Benchmark()
     B.start()
     results = main( B, 3 )
