@@ -7,11 +7,11 @@
             null, 
             "python jacobi_fixed.py --size=7168*7168*4 --cphvb=False", 
             [
-                5.418767, 
-                5.36025, 
-                5.430646, 
-                5.435811, 
-                5.427715
+                5.403943, 
+                5.353645, 
+                5.415986, 
+                5.829027, 
+                5.410427
             ]
         ], 
         [
@@ -21,11 +21,11 @@
             null, 
             "python jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
             [
-                5.258039, 
-                5.252549, 
-                5.254152, 
-                5.226111, 
-                5.271161
+                5.26796, 
+                5.250484, 
+                5.235947, 
+                5.241759, 
+                5.209144
             ]
         ], 
         [
@@ -35,11 +35,11 @@
             null, 
             "python jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
             [
-                3.801208, 
-                3.785447, 
-                3.784648, 
-                3.785839, 
-                3.802338
+                3.78808, 
+                3.791487, 
+                3.794108, 
+                3.795368, 
+                3.797495
             ]
         ], 
         [
@@ -49,11 +49,11 @@
             null, 
             "python jacobi_fixed.py --size=7168*7168*4 --cphvb=True", 
             [
-                1.155073, 
-                0.986773, 
-                1.329141, 
-                0.793437, 
-                1.323302
+                0.55777, 
+                0.544058, 
+                1.264495, 
+                0.702264, 
+                0.594857
             ]
         ], 
         [
@@ -63,11 +63,11 @@
             null, 
             "python MonteCarlo.py --size=10*1000000*10 --cphvb=False", 
             [
-                8.362835, 
-                8.368626, 
-                8.491659, 
-                8.337988, 
-                8.30613
+                8.359988, 
+                8.380493, 
+                8.383375, 
+                8.342606, 
+                8.375635
             ]
         ], 
         [
@@ -77,11 +77,11 @@
             null, 
             "python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
             [
-                8.444338, 
-                8.398813, 
-                8.862021, 
-                8.499915, 
-                8.393711
+                8.469635, 
+                8.461494, 
+                8.38301, 
+                8.483809, 
+                8.508163
             ]
         ], 
         [
@@ -91,11 +91,11 @@
             null, 
             "python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
             [
-                8.194656, 
-                8.220086, 
-                8.187593, 
-                8.263302, 
-                8.20982
+                8.243141, 
+                8.221793, 
+                8.204892, 
+                8.209337, 
+                8.219669
             ]
         ], 
         [
@@ -105,11 +105,11 @@
             null, 
             "python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
             [
-                7.72771, 
-                7.853631, 
-                7.783788, 
-                7.808497, 
-                7.839035
+                7.667427, 
+                7.759399, 
+                7.751073, 
+                7.801646, 
+                7.649632
             ]
         ], 
         [
@@ -119,11 +119,11 @@
             null, 
             "python swater.py --size=2200*1 --cphvb=False", 
             [
-                5.334429, 
-                5.33726, 
-                5.335635, 
-                5.356214, 
-                5.328992
+                5.339983, 
+                5.324437, 
+                5.341203, 
+                5.319606, 
+                5.375311
             ]
         ], 
         [
@@ -133,11 +133,11 @@
             null, 
             "python swater.py --size=2200*1 --cphvb=True", 
             [
-                2.460404, 
-                2.558922, 
-                2.543017, 
-                2.503729, 
-                2.521887
+                2.410452, 
+                2.453841, 
+                2.517868, 
+                2.507708, 
+                2.423882
             ]
         ], 
         [
@@ -147,11 +147,11 @@
             null, 
             "python swater.py --size=2200*1 --cphvb=True", 
             [
-                4.528297, 
-                4.519924, 
-                4.509226, 
-                4.513367, 
-                4.523808
+                4.50469, 
+                4.535027, 
+                4.541683, 
+                4.52382, 
+                4.541759
             ]
         ], 
         [
@@ -161,11 +161,11 @@
             null, 
             "python swater.py --size=2200*1 --cphvb=True", 
             [
-                1.185107, 
-                0.643019, 
-                0.462672, 
-                1.02265, 
-                0.811307
+                0.521182, 
+                1.172268, 
+                0.666556, 
+                1.190121, 
+                0.628934
             ]
         ], 
         [
@@ -175,11 +175,11 @@
             null, 
             "python kNN.py --size=10000*120 --cphvb=False", 
             [
-                5.591501, 
-                5.526865, 
-                5.573546, 
-                5.553611, 
-                5.536973
+                5.575529, 
+                5.571752, 
+                5.579957, 
+                5.583679, 
+                5.573271
             ]
         ], 
         [
@@ -189,11 +189,11 @@
             null, 
             "python kNN.py --size=10000*120 --cphvb=True", 
             [
-                2.822, 
-                2.836618, 
-                2.828539, 
-                2.833819, 
-                2.833177
+                2.830604, 
+                2.849085, 
+                2.832783, 
+                2.828537, 
+                2.825895
             ]
         ], 
         [
@@ -203,11 +203,11 @@
             null, 
             "python kNN.py --size=10000*120 --cphvb=True", 
             [
-                2.696473, 
-                2.699291, 
-                2.68302, 
-                2.689296, 
-                2.703189
+                2.69116, 
+                2.696819, 
+                2.686201, 
+                2.710019, 
+                2.684529
             ]
         ], 
         [
@@ -217,11 +217,11 @@
             null, 
             "python kNN.py --size=10000*120 --cphvb=True", 
             [
-                0.758974, 
-                0.873696, 
-                0.824525, 
-                0.746076, 
-                0.883135
+                0.775438, 
+                0.996492, 
+                0.754299, 
+                0.755996, 
+                0.898988
             ]
         ], 
         [
@@ -231,11 +231,11 @@
             null, 
             "python stencil.twonine.py --size=10240*1024*10 --cphvb=False", 
             [
-                0.13188, 
-                0.126145, 
-                0.125747, 
-                0.125612, 
-                0.125859
+                0.126093, 
+                0.126081, 
+                0.125067, 
+                0.125644, 
+                0.125985
             ]
         ], 
         [
@@ -245,11 +245,11 @@
             null, 
             "python stencil.twonine.py --size=10240*1024*10 --cphvb=True", 
             [
-                0.228247, 
-                0.225551, 
-                0.227095, 
-                0.229073, 
-                0.228978
+                0.226265, 
+                0.227455, 
+                0.225442, 
+                0.233002, 
+                0.226434
             ]
         ], 
         [
@@ -259,11 +259,11 @@
             null, 
             "python stencil.twonine.py --size=10240*1024*10 --cphvb=True", 
             [
-                0.496074, 
-                0.497233, 
-                0.497919, 
-                0.493892, 
-                0.499261
+                0.501844, 
+                0.505304, 
+                0.510204, 
+                0.49915, 
+                0.498592
             ]
         ], 
         [
@@ -273,11 +273,11 @@
             null, 
             "python stencil.twonine.py --size=10240*1024*10 --cphvb=True", 
             [
-                0.226302, 
-                0.227018, 
-                0.229557, 
-                0.225904, 
-                0.226868
+                0.229492, 
+                0.227181, 
+                0.226143, 
+                0.229027, 
+                0.226787
             ]
         ], 
         [
@@ -287,11 +287,11 @@
             null, 
             "python stencil.simplest.py --size=100000000*1 --cphvb=False", 
             [
-                4.340044, 
-                4.337418, 
-                4.338893, 
-                4.332796, 
-                4.332264
+                4.326635, 
+                4.363508, 
+                4.323255, 
+                4.320899, 
+                4.350294
             ]
         ], 
         [
@@ -301,11 +301,11 @@
             null, 
             "python stencil.simplest.py --size=100000000*1 --cphvb=True", 
             [
-                3.027894, 
-                3.604754, 
-                3.019177, 
-                3.053055, 
-                3.066969
+                3.038004, 
+                3.188114, 
+                3.057898, 
+                3.044387, 
+                3.070114
             ]
         ], 
         [
@@ -315,11 +315,11 @@
             null, 
             "python stencil.simplest.py --size=100000000*1 --cphvb=True", 
             [
-                2.349627, 
-                2.404553, 
-                2.351937, 
-                2.348383, 
-                2.350986
+                2.405294, 
+                2.358522, 
+                2.428997, 
+                2.364854, 
+                2.372257
             ]
         ], 
         [
@@ -329,16 +329,16 @@
             null, 
             "python stencil.simplest.py --size=100000000*1 --cphvb=True", 
             [
-                0.700108, 
-                0.726581, 
-                0.698926, 
-                0.370931, 
-                0.463146
+                0.694045, 
+                0.709747, 
+                0.711775, 
+                0.390619, 
+                0.698766
             ]
         ]
     ], 
     "meta": {
-        "ended": "2012-10-16 09:43:53.931152", 
+        "ended": "2012-10-15 18:43:49.753857", 
         "envs": {
             "LANG": "en_US.UTF-8", 
             "SHELL": "/bin/sh", 
@@ -357,8 +357,8 @@
             "_": "/usr/bin/python"
         }, 
         "suite": "default", 
-        "started": "2012-10-16 09:33:48.119340", 
-        "rev": "95e87137ee9e41659142c4f5fcd4e2ed91ba96a9", 
+        "started": "2012-10-15 18:33:45.359945", 
+        "rev": "da797b0b217279b8e6bfb0f3f4e2053a2f5b7c22", 
         "hostname": "akira\n", 
         "os": "Linux version 3.2.0-25-generic (buildd@crested) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #40-Ubuntu SMP Wed May 23 20:30:51 UTC 2012\n", 
         "cpu": "processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 32\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.04\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 1\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 33\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.88\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 2\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 34\ninitial apicid\t: 2\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 3\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 35\ninitial apicid\t: 3\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.00\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 4\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 36\ninitial apicid\t: 4\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.99\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 5\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 37\ninitial apicid\t: 5\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.99\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 6\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 38\ninitial apicid\t: 6\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.00\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 7\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 39\ninitial apicid\t: 7\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.99\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 8\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 40\ninitial apicid\t: 8\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 9\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 41\ninitial apicid\t: 9\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 10\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 42\ninitial apicid\t: 10\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 11\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 43\ninitial apicid\t: 11\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 12\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 44\ninitial apicid\t: 12\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.90\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 13\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 45\ninitial apicid\t: 13\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 14\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 46\ninitial apicid\t: 14\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.03\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 15\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 47\ninitial apicid\t: 15\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.95\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 16\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 64\ninitial apicid\t: 32\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.91\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 17\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 65\ninitial apicid\t: 33\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 18\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 66\ninitial apicid\t: 34\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.99\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 19\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 67\ninitial apicid\t: 35\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 20\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 68\ninitial apicid\t: 36\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 21\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 69\ninitial apicid\t: 37\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.91\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 22\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 70\ninitial apicid\t: 38\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.99\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 23\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 71\ninitial apicid\t: 39\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 24\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 72\ninitial apicid\t: 40\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.92\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 25\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 73\ninitial apicid\t: 41\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.95\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 26\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 74\ninitial apicid\t: 42\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.92\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 27\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 75\ninitial apicid\t: 43\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 28\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 76\ninitial apicid\t: 44\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 29\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 77\ninitial apicid\t: 45\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 30\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 78\ninitial apicid\t: 46\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.02\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 31\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 1400.000\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 79\ninitial apicid\t: 47\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.95\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\n", 
