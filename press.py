@@ -76,7 +76,7 @@ waters = {
 
 swaters = {
     'scripts':  [2],
-    'engines':  [x for x in engines if 'score_b' in x] 
+    'engines':  [c for c, x in enumerate(engines) if 'score_b' in x[0]] 
 }
 
 cache_tiling = {
