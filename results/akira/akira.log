@@ -1,22 +1,12 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/abe4b06e67f09632d837e1203bcbc4df1828edb6/benchmark-nfzFeU.json.
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/abe4b06e67f09632d837e1203bcbc4df1828edb6/benchmark-MEtrqh.json.
 { Jacobi Fixed - numpy ( None ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  10.591259
-  2/5,  10.491657
-  3/5,  10.60082
-  4/5,  10.860693
-  5/5,  11.694523
+  taskset -c 1 python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
+  1/5,  5.550013
+  2/5,  5.59201
+  3/5,  5.608562
+  4/5,  5.552763
+  5/5,  5.556955
 }
 { Jacobi Fixed - simple ( simple ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  5.436549
-  2/5,  17.274955
-  3/5,  5.440686
-  4/5,  5.401943
-  5/5,  5.612968
-}
-{ Jacobi Fixed - score ( score ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  4.380185
-  2/5,  4.45644
-  3/5,  4.431967
+  taskset -c 1 python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
+  1/5,  5.401914
