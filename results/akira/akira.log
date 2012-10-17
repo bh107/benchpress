@@ -1,145 +1,23 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/10c17fafecc5dae04a7d1c2f427b6d1b76cad28a/benchmark-DfEgqH.json.
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/abe4b06e67f09632d837e1203bcbc4df1828edb6/benchmark-motml0.json.
 { Jacobi Fixed - numpy ( None ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/3,  9.9412
-  2/3,  9.761245
-  3/3,  9.692751
+  1/3,  27.45871
+  2/3,  27.61148
+  3/3,  27.547542
 }
 { Jacobi Fixed - simple ( simple ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/3,  9.175859
-  2/3,  9.196074
-  3/3,  9.583933
+  1/3,  28.266848
+  2/3,  28.133674
+  3/3,  28.000436
 }
 { Jacobi Fixed - score ( score ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/3,  6.547695
-  2/3,  6.987469
-  3/3,  6.715061
+  1/3,  23.930497
+  2/3,  23.927548
+  3/3,  23.821483
 }
 { Jacobi Fixed - mcore ( mcore ),
   python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/3,  1.012549
-  2/3,  1.044543
-  3/3,  0.975997
-}
-{ Monte Carlo PI - RIL - numpy ( None ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=False
-  1/3,  15.059941
-  2/3,  14.692224
-  3/3,  14.704753
-}
-{ Monte Carlo PI - RIL - simple ( simple ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=True
-  1/3,  14.869803
-  2/3,  14.653512
-  3/3,  14.779977
-}
-{ Monte Carlo PI - RIL - score ( score ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=True
-  1/3,  14.532245
-  2/3,  14.446958
-  3/3,  14.529129
-}
-{ Monte Carlo PI - RIL - mcore ( mcore ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=True
-  1/3,  13.517644
-  2/3,  13.725731
-  3/3,  13.460702
-}
-{ Shallow Water - numpy ( None ),
-  python swater.py --size=2200*1 --cphvb=False
-  1/3,  10.434078
-  2/3,  10.44531
-  3/3,  10.318056
-}
-{ Shallow Water - simple ( simple ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/3,  4.698355
-  2/3,  4.72846
-  3/3,  4.40957
-}
-{ Shallow Water - score ( score ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/3,  4.811458
-  2/3,  4.59377
-  3/3,  4.905274
-}
-{ Shallow Water - mcore ( mcore ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/3,  1.870754
-  2/3,  1.809163
-  3/3,  2.789643
-}
-{ kNN - numpy ( None ),
-  python kNN.py --size=10000*120 --cphvb=False
-  1/3,  9.93729
-  2/3,  9.950929
-  3/3,  10.046592
-}
-{ kNN - simple ( simple ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/3,  5.293913
-  2/3,  5.035039
-  3/3,  5.213904
-}
-{ kNN - score ( score ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/3,  4.942501
-  2/3,  4.727446
-  3/3,  4.682368
-}
-{ kNN - mcore ( mcore ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/3,  1.575096
-  2/3,  1.233761
-  3/3,  1.316401
-}
-{ Stencil - 1D 4way - Copy - numpy ( None ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=False
-  1/3,  0.357155
-  2/3,  0.274269
-  3/3,  0.287039
-}
-{ Stencil - 1D 4way - Copy - simple ( simple ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=True
-  1/3,  0.418653
-  2/3,  0.429923
-  3/3,  0.439035
-}
-{ Stencil - 1D 4way - Copy - score ( score ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=True
-  1/3,  0.462045
-  2/3,  0.508979
-  3/3,  0.390403
-}
-{ Stencil - 1D 4way - Copy - mcore ( mcore ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=True
-  1/3,  0.403167
-  2/3,  0.456574
-  3/3,  0.409185
-}
-{ Stencil - 1D 4way - No-Copy - numpy ( None ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=False
-  1/3,  7.671527
-  2/3,  7.629506
-  3/3,  7.604839
-}
-{ Stencil - 1D 4way - No-Copy - simple ( simple ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/3,  5.95211
-  2/3,  5.25279
-  3/3,  5.207519
-}
-{ Stencil - 1D 4way - No-Copy - score ( score ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/3,  4.16521
-  2/3,  4.138203
-  3/3,  4.176985
-}
-{ Stencil - 1D 4way - No-Copy - mcore ( mcore ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/3,  0.446277
-  2/3,  0.459492
-  3/3,  0.472976
-}
+  1/3,  1.624585
+  2/3,  1.591893
