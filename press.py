@@ -35,6 +35,17 @@ engines = [
     ('score_1048576',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1048576"}),
     ('score_2097152',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2097152"}),
     ('score_4194304',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4194304"}),
+
+    ('score_b1',   'score',    {"CPHVB_VE_SCORE_BINMAX":"1"}),
+    ('score_b2',   'score',    {"CPHVB_VE_SCORE_BINMAX":"2"}),
+    ('score_b4',   'score',    {"CPHVB_VE_SCORE_BINMAX":"4"}),
+    ('score_b8',   'score',    {"CPHVB_VE_SCORE_BINMAX":"8"}),
+    ('score_b16',   'score',    {"CPHVB_VE_SCORE_BINMAX":"16"}),
+    ('score_b20',   'score',    {"CPHVB_VE_SCORE_BINMAX":"20"}),
+    ('score_b22',   'score',    {"CPHVB_VE_SCORE_BINMAX":"22"}),
+    ('score_b24',   'score',    {"CPHVB_VE_SCORE_BINMAX":"24"}),
+    ('score_b30',   'score',    {"CPHVB_VE_SCORE_BINMAX":"30"}),
+
 ]
 
 # Scripts and their arguments
@@ -63,6 +74,11 @@ waters = {
     'engines':  [0, 1,2]
 }
 
+swaters = {
+    'scripts':  [2],
+    'engines':  [x for x in engines if 'score_b' in x] 
+}
+
 cache_tiling = {
     'scripts': [7],
     'engines': [0,1]+ range(4, len(engines))
@@ -83,7 +99,8 @@ suites = {
     'cache_tiling': cache_tiling,
     'test':         test,
     'monte':        montecarlo,
-    'waters':       waters
+    'waters':       waters,
+    'swaters':      swaters,
 }
 
 def meta(src_dir, suite):
