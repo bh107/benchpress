@@ -45,10 +45,8 @@ engines = [
     ('score_bins10',    'score',    {"CPHVB_VE_SCORE_BINMAX":"10"}),
     ('score_bins12',    'score',    {"CPHVB_VE_SCORE_BINMAX":"12"}),
 
-
-]
-+
-[('score_bs%d_bm%d' % (2**i, j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": 2**i, "CPHVB_VE_SCORE_BINMAX": j})  for j in xrange(1,20) for i in xrange(2,26)]
+] + \
+[('score_bs%d_bm%d' % (2**i, j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str(2**i), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(1,20) for i in xrange(2,26)]
 
 # Scripts and their arguments
 # (alias, script, parameters)
