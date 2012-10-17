@@ -192,7 +192,7 @@ def main(config, src_root, output, suite, runs=5):
                     envs = os.environ.copy()
                     envs.update(env)
                                                             # Setup process + arguments
-                args        = ['python', script, arg, '--cphvb=%s' % cphvb ]
+                args        = ['taskset', '-c', '1', 'python', script, arg, '--cphvb=%s' % cphvb ]
                 args_str    = ' '.join(args)
                 print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
 
