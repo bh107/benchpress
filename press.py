@@ -36,15 +36,14 @@ engines = [
     ('score_2097152',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2097152"}),
     ('score_4194304',   'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"4194304"}),
 
-    ('score_b1',   'score',    {"CPHVB_VE_SCORE_BINMAX":"1"}),
-    ('score_b2',   'score',    {"CPHVB_VE_SCORE_BINMAX":"2"}),
-    ('score_b4',   'score',    {"CPHVB_VE_SCORE_BINMAX":"4"}),
-    ('score_b8',   'score',    {"CPHVB_VE_SCORE_BINMAX":"8"}),
-    ('score_b16',   'score',    {"CPHVB_VE_SCORE_BINMAX":"16"}),
-    ('score_b20',   'score',    {"CPHVB_VE_SCORE_BINMAX":"20"}),
-    ('score_b22',   'score',    {"CPHVB_VE_SCORE_BINMAX":"22"}),
-    ('score_b24',   'score',    {"CPHVB_VE_SCORE_BINMAX":"24"}),
-    ('score_b30',   'score',    {"CPHVB_VE_SCORE_BINMAX":"30"}),
+    ('score_bins1',    'score',    {"CPHVB_VE_SCORE_BINMAX":"1"}),
+    ('score_bins2',    'score',    {"CPHVB_VE_SCORE_BINMAX":"2"}),
+    ('score_bins4',    'score',    {"CPHVB_VE_SCORE_BINMAX":"4"}),
+    ('score_bins5 ',   'score',    {"CPHVB_VE_SCORE_BINMAX":"5"}),
+    ('score_bins6',    'score',    {"CPHVB_VE_SCORE_BINMAX":"6"}),
+    ('score_bins8',    'score',    {"CPHVB_VE_SCORE_BINMAX":"8"}),
+    ('score_bins10',    'score',    {"CPHVB_VE_SCORE_BINMAX":"10"}),
+    ('score_bins12',    'score',    {"CPHVB_VE_SCORE_BINMAX":"12"}),
 
 ]
 
