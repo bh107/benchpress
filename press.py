@@ -55,8 +55,8 @@ scripts   = [
     ('Monte Carlo PI - RIL',        'MonteCarlo.py',        '--size=10*1000000*10'),
     ('Shallow Water',               'swater.py',            '--size=2200*1'),
     ('kNN',                         'kNN.py',               '--size=10000*120'),
-    ('Stencil - 1D 4way - Copy',    'stencil.twonine.py',   '--size=10240*1024*10'),
-    ('Stencil - 1D 4way - No-Copy', 'stencil.simplest.py',  '--size=100000000*1'),
+    ('Stencil - 1D 4way',           'stencil.simplest.py',  '--size=100000000*1'),
+    ('Black Scholes',               'BlackSholes.py',       '--size=2000000*4'),
 
     ('Stencil - 2D',            'stencil.2d.py',      '--size=10240*1024*10'),
     ('Cache Synth',             'cache.py',        '--size=10485760*10*1'),
