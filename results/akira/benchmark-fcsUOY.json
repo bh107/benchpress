@@ -6396,6 +6396,2063 @@
                 10.498986, 
                 10.596988
             ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm4", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "4"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.622252, 
+                10.663526, 
+                10.565201, 
+                10.616942, 
+                10.699802
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm4", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "4"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.72095, 
+                10.675311, 
+                10.713022, 
+                10.709128, 
+                10.712622
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.927687, 
+                10.730446, 
+                10.863378, 
+                10.880699, 
+                10.850579
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.671833, 
+                10.578678, 
+                10.658642, 
+                10.64346, 
+                10.633093
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.619659, 
+                10.542879, 
+                10.463493, 
+                10.55401, 
+                10.567379
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.53415, 
+                10.510203, 
+                10.511204, 
+                10.481594, 
+                10.419044
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.500303, 
+                10.509517, 
+                10.328982, 
+                10.324904, 
+                10.472881
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.533756, 
+                10.587907, 
+                10.484015, 
+                10.476599, 
+                10.528913
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.50637, 
+                10.491692, 
+                10.386104, 
+                10.481049, 
+                10.311621
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.462139, 
+                10.467863, 
+                10.432929, 
+                10.503746, 
+                10.51936
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.463503, 
+                10.505352, 
+                10.454731, 
+                10.542786, 
+                10.523874
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.542844, 
+                10.345112, 
+                10.487033, 
+                10.37833, 
+                10.543006
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.887347, 
+                10.380674, 
+                10.484745, 
+                10.508907, 
+                10.5919
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.459891, 
+                10.577494, 
+                10.560314, 
+                10.75193, 
+                10.523825
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.756732, 
+                10.70082, 
+                10.666338, 
+                10.48335, 
+                10.621597
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.635092, 
+                10.635026, 
+                10.504331, 
+                10.745939, 
+                10.585645
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm5", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "5"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.890124, 
+                10.939685, 
+                10.826697, 
+                10.902142, 
+                10.993013
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.221016, 
+                11.235112, 
+                11.203565, 
+                11.324865, 
+                11.328556
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.865438, 
+                10.94373, 
+                11.00193, 
+                10.99151, 
+                10.822493
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.717421, 
+                10.792751, 
+                10.875045, 
+                10.791433, 
+                10.75992
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.796171, 
+                10.838251, 
+                10.740224, 
+                10.64793, 
+                10.778373
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.613355, 
+                10.741075, 
+                10.743148, 
+                10.751162, 
+                10.645293
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.624217, 
+                10.63306, 
+                10.735575, 
+                10.656233, 
+                10.639845
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.622725, 
+                10.432403, 
+                10.625925, 
+                10.629527, 
+                10.635531
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.625358, 
+                10.513246, 
+                10.583831, 
+                10.487414, 
+                10.605468
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.528619, 
+                10.513165, 
+                10.524523, 
+                10.415009, 
+                10.57954
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.526549, 
+                10.591288, 
+                10.58549, 
+                10.59959, 
+                10.67962
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.74262, 
+                10.95961, 
+                10.695349, 
+                10.717425, 
+                10.736621
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.699636, 
+                10.787317, 
+                12.079559, 
+                12.123666, 
+                11.909958
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                12.045433, 
+                12.048608, 
+                12.031231, 
+                12.010785, 
+                10.664598
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.855172, 
+                10.978238, 
+                10.852581, 
+                10.785694, 
+                10.854683
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm6", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "6"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.945491, 
+                10.933346, 
+                11.158654, 
+                10.994286, 
+                10.787662
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.291188, 
+                11.211112, 
+                11.138781, 
+                11.032388, 
+                11.202767
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.949336, 
+                10.794387, 
+                10.917703, 
+                10.791293, 
+                10.813517
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.656189, 
+                10.695946, 
+                10.669381, 
+                10.719941, 
+                10.758782
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.549089, 
+                10.619243, 
+                10.679636, 
+                10.647767, 
+                10.72766
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.624832, 
+                10.727444, 
+                10.732649, 
+                10.693685, 
+                10.733718
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.740659, 
+                10.628787, 
+                10.695682, 
+                10.727752, 
+                10.652261
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.607351, 
+                10.70685, 
+                10.69471, 
+                10.560183, 
+                10.612121
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.689653, 
+                10.783631, 
+                10.611431, 
+                10.605011, 
+                10.73883
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.598137, 
+                10.709707, 
+                10.54697, 
+                10.476361, 
+                10.353492
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.481711, 
+                10.446722, 
+                10.407736, 
+                10.444051, 
+                10.502789
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.298203, 
+                10.602439, 
+                10.519116, 
+                10.658797, 
+                10.732134
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.35649, 
+                10.420132, 
+                10.397787, 
+                10.425344, 
+                10.463399
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                13.103088, 
+                10.425285, 
+                10.605784, 
+                10.425342, 
+                10.428579
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.399204, 
+                10.515503, 
+                10.528267, 
+                10.629036, 
+                10.533743
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm7", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "7"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.719835, 
+                10.538448, 
+                10.683953, 
+                10.605674, 
+                10.611563
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.155758, 
+                10.953128, 
+                11.027384, 
+                10.994888, 
+                10.972791
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.711833, 
+                10.617862, 
+                10.693445, 
+                10.683069, 
+                10.696814
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.680125, 
+                10.557541, 
+                10.576693, 
+                10.481169, 
+                10.430024
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.494843, 
+                10.46919, 
+                10.483414, 
+                10.448851, 
+                10.61808
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.390275, 
+                10.415261, 
+                10.477335, 
+                10.408468, 
+                10.339262
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.402369, 
+                10.400037, 
+                10.487951, 
+                10.523838, 
+                10.370309
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.352648, 
+                10.407748, 
+                10.531973, 
+                10.384883, 
+                10.343889
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.414191, 
+                10.533865, 
+                10.419246, 
+                10.359084, 
+                10.449988
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.448161, 
+                10.444259, 
+                10.379651, 
+                10.520075, 
+                10.385033
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.467611, 
+                10.449652, 
+                10.625483, 
+                10.506434, 
+                10.463449
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.417791, 
+                10.61076, 
+                10.453425, 
+                10.450329, 
+                10.508565
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.401924, 
+                10.365174, 
+                10.506821, 
+                10.504816, 
+                10.456606
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.497382, 
+                10.590111, 
+                10.563517, 
+                10.459604, 
+                10.51587
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.593115, 
+                10.62877, 
+                10.463696, 
+                10.623209, 
+                10.914917
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm8", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "8"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.633782, 
+                10.760617, 
+                10.676097, 
+                10.673773, 
+                10.570786
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.007358, 
+                10.931724, 
+                10.956249, 
+                11.044881, 
+                11.049443
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.647051, 
+                10.675767, 
+                10.635801, 
+                10.576607, 
+                10.706308
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.471188, 
+                10.502654, 
+                10.415749, 
+                10.517748, 
+                10.453976
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.4314, 
+                10.341452, 
+                10.381237, 
+                10.47864, 
+                10.423573
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.404059, 
+                10.490371, 
+                10.457361, 
+                10.516666, 
+                10.402851
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.415069, 
+                10.348025, 
+                10.444851, 
+                10.356681, 
+                10.462097
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.497565, 
+                10.496951, 
+                10.509999, 
+                10.452455, 
+                10.350172
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.457612, 
+                10.45548, 
+                10.407764, 
+                10.472646, 
+                10.473469
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.282748, 
+                10.459779, 
+                10.464735, 
+                10.393314, 
+                10.536114
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.421425, 
+                10.511178, 
+                10.516692, 
+                10.278445, 
+                10.721434
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.423557, 
+                10.326488, 
+                10.339565, 
+                10.369431, 
+                10.409404
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.497723, 
+                13.083159, 
+                10.365523, 
+                10.496837, 
+                10.429521
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.521045, 
+                10.541251, 
+                10.476431, 
+                10.557432, 
+                10.617061
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.604803, 
+                10.617132, 
+                10.564863, 
+                10.588446, 
+                10.382643
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm9", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "9"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.692214, 
+                10.642941, 
+                10.687663, 
+                10.602291, 
+                10.481853
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.979288, 
+                10.942701, 
+                10.951831, 
+                10.968812, 
+                10.958185
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.631579, 
+                10.574124, 
+                10.612564, 
+                10.715995, 
+                10.648976
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.455322, 
+                10.558568, 
+                10.518751, 
+                10.614206, 
+                10.810612
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.566703, 
+                10.499844, 
+                10.523013, 
+                10.514254, 
+                10.407651
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.526855, 
+                10.508971, 
+                10.44977, 
+                10.384978, 
+                10.319807
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.503947, 
+                10.554205, 
+                10.491056, 
+                10.440753, 
+                10.471248
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.386452, 
+                10.432333, 
+                10.434209, 
+                10.398713, 
+                10.547125
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.461704, 
+                10.489093, 
+                10.38503, 
+                10.514294, 
+                10.426074
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.538248, 
+                10.487795, 
+                10.420947, 
+                10.47783, 
+                10.420294
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.486428, 
+                10.463113, 
+                10.520714, 
+                10.423588, 
+                10.476516
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.432519, 
+                10.414513, 
+                10.440473, 
+                10.314569, 
+                10.413444
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.487103, 
+                10.495368, 
+                10.427649, 
+                10.45287, 
+                10.699398
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.417022, 
+                10.542552, 
+                10.730819, 
+                10.541763, 
+                10.569034
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.605765, 
+                10.553177, 
+                10.585989, 
+                10.529965, 
+                10.516757
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm10", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "10"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.821718, 
+                10.643732, 
+                10.636268, 
+                10.636533, 
+                10.567084
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.991759, 
+                11.018155, 
+                10.985853, 
+                10.976495, 
+                11.031751
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.764713, 
+                10.628566, 
+                11.384888, 
+                10.632163, 
+                10.619868
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.573285, 
+                10.470122, 
+                10.557646, 
+                10.367523, 
+                10.554251
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.398352, 
+                10.453597, 
+                10.442747, 
+                10.505724, 
+                10.473549
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.542059, 
+                10.5595, 
+                10.441818, 
+                10.386387, 
+                10.353896
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.629509, 
+                10.449879, 
+                10.408612, 
+                10.492247, 
+                10.449183
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.628088, 
+                10.507871, 
+                10.469144, 
+                10.373481, 
+                10.47884
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.340797, 
+                10.34357, 
+                10.396584, 
+                10.466105, 
+                10.455384
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.289289, 
+                10.457835, 
+                10.42105, 
+                10.386642, 
+                10.452746
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.554661, 
+                10.481602, 
+                10.390378, 
+                10.320705, 
+                10.483167
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.507487, 
+                10.470299, 
+                10.443629, 
+                10.564595, 
+                10.407047
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.356203, 
+                10.511427, 
+                10.436369, 
+                10.468764, 
+                10.479486
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.498729, 
+                10.593595, 
+                10.592578, 
+                10.493088, 
+                10.488871
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.593236, 
+                10.488247, 
+                10.679048, 
+                10.546038, 
+                10.555938
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks917504_binm11", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "917504", 
+                "CPHVB_VE_SCORE_BINMAX": "11"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.750974, 
+                10.516512, 
+                10.598635, 
+                10.599687, 
+                10.771202
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks56_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "56", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.04427, 
+                10.850824, 
+                10.950477, 
+                10.981387, 
+                10.990624
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks112_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "112", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.618751, 
+                10.646652, 
+                10.608949, 
+                10.566477, 
+                10.627434
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks224_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "224", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.532587, 
+                10.590867, 
+                10.448809, 
+                10.40746, 
+                10.535101
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks448_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "448", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.50925, 
+                10.409876, 
+                10.512415, 
+                10.497498, 
+                10.52189
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks896_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "896", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.51398, 
+                10.404292, 
+                10.302979, 
+                10.473725, 
+                10.487681
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks1792_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "1792", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.393128, 
+                10.444439, 
+                10.351601, 
+                10.499433, 
+                10.403927
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks3584_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "3584", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                10.395399, 
+                10.505144, 
+                10.432057, 
+                10.384983, 
+                10.403527
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks7168_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "7168", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.250753, 
+                11.588291, 
+                11.477663, 
+                11.299767, 
+                11.344247
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks14336_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "14336", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.275057, 
+                11.408807, 
+                11.11459, 
+                13.498588, 
+                11.214223
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks28672_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "28672", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.08273, 
+                11.3522, 
+                11.331433, 
+                11.111057, 
+                11.258729
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks57344_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "57344", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.340655, 
+                11.132784, 
+                11.047814, 
+                11.014006, 
+                11.33136
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks114688_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "114688", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.389937, 
+                11.645997, 
+                11.217942, 
+                11.080644, 
+                11.233403
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks229376_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "229376", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.315728, 
+                11.183068, 
+                11.544433, 
+                11.488678, 
+                11.623173
+            ]
+        ], 
+        [
+            "Monte Carlo PI - RIL", 
+            "score_blks458752_binm12", 
+            "score", 
+            {
+                "CPHVB_VE_SCORE_BLOCKSIZE": "458752", 
+                "CPHVB_VE_SCORE_BINMAX": "12"
+            }, 
+            "taskset -c 1 python MonteCarlo.py --size=10*1000000*10 --cphvb=True", 
+            [
+                11.60636, 
+                11.443304, 
+                11.745903, 
+                11.55916, 
+                11.750122
+            ]
         ]
     ], 
     "meta": {
@@ -6438,7 +8495,7 @@
             "list": "akira\n    description: Computer\n    width: 64 bits\n    capabilities: vsyscall32\n  *-core\n       description: Motherboard\n       physical id: 0\n     *-memory\n          description: System memory\n          physical id: 0\n          size: 125GiB\n     *-cpu:0\n          product: AMD Opteron(TM) Processor 6274\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 1\n          bus info: cpu@0\n          width: 64 bits\n          capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp x86-64 constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\n     *-cpu:1\n          product: AMD Opteron(TM) Processor 6274\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 2\n          bus info: cpu@1\n          width: 64 bits\n          capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp x86-64 constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\n     *-pci:0\n          description: Host bridge\n          product: RD890 Northbridge only dual slot (2x16) PCI-e GFX Hydra part [1002:5A10]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 100\n          bus info: pci@0000:00:00.0\n          version: 02\n          width: 32 bits\n          clock: 33MHz\n        *-pci:0\n             description: PCI bridge\n             product: RD890 PCI to PCI bridge (PCI express gpp port B) [1002:5A16]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 2\n             bus info: pci@0000:00:02.0\n             version: 00\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:18 ioport:d000(size=4096) memory:def00000-dfffffff ioport:ce000000(size=167772160)\n           *-display\n                description: VGA compatible controller\n                product: NVIDIA Corporation [10DE:1180]\n                vendor: NVIDIA Corporation [10DE]\n                physical id: 0\n                bus info: pci@0000:04:00.0\n                version: a1\n                width: 64 bits\n                clock: 33MHz\n                capabilities: vga_controller bus_master cap_list rom\n                configuration: driver=nvidia latency=0\n                resources: irq:18 memory:df000000-dfffffff memory:d0000000-d7ffffff memory:ce000000-cfffffff ioport:d800(size=128) memory:def80000-deffffff\n           *-multimedia\n                description: Audio device\n                product: NVIDIA Corporation [10DE:E0A]\n                vendor: NVIDIA Corporation [10DE]\n                physical id: 0.1\n                bus info: pci@0000:04:00.1\n                version: a1\n                width: 32 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list\n                configuration: driver=snd_hda_intel latency=0\n                resources: irq:19 memory:def7c000-def7ffff\n        *-pci:1\n             description: PCI bridge\n             product: Advanced Micro Devices [AMD] nee ATI [1002:5A20]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: c\n             bus info: pci@0000:00:0c.0\n             version: 00\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:16 ioport:c000(size=4096) memory:dee00000-deefffff\n           *-storage\n                description: Serial Attached SCSI controller\n                product: SAS2008 PCI-Express Fusion-MPT SAS-2 [Falcon] [1000:72]\n                vendor: LSI Logic / Symbios Logic [1000]\n                physical id: 0\n                bus info: pci@0000:03:00.0\n                version: 03\n                width: 64 bits\n                clock: 33MHz\n                capabilities: storage bus_master cap_list rom\n                configuration: driver=mpt2sas latency=0\n                resources: irq:16 ioport:c000(size=256) memory:dee3c000-dee3ffff memory:dee40000-dee7ffff memory:dee80000-deefffff\n        *-pci:2\n             description: PCI bridge\n             product: RD890 PCI to PCI bridge (external gfx1 port B) [1002:5A1E]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: d\n             bus info: pci@0000:00:0d.0\n             version: 00\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:17 ioport:b000(size=4096) memory:ded00000-dedfffff\n           *-network:0\n                description: Ethernet interface\n                product: 82576 Gigabit Network Connection [8086:10C9]\n                vendor: Intel Corporation [8086]\n                physical id: 0\n                bus info: pci@0000:02:00.0\n                logical name: eth0\n                version: 01\n                serial: 00:25:90:71:04:b8\n                size: 100Mbit/s\n                capacity: 1Gbit/s\n                width: 32 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list rom ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation\n                configuration: autonegotiation=on broadcast=yes driver=igb driverversion=3.2.10-k duplex=full firmware=1.5-3 ip=130.225.212.176 latency=0 multicast=yes port=twisted pair speed=100Mbit/s\n                resources: irq:17 memory:dede0000-dedfffff memory:dedc0000-deddffff ioport:b800(size=32) memory:ded9c000-ded9ffff memory:deda0000-dedbffff\n           *-network:1\n                description: Ethernet interface\n                product: 82576 Gigabit Network Connection [8086:10C9]\n                vendor: Intel Corporation [8086]\n                physical id: 0.1\n                bus info: pci@0000:02:00.1\n                logical name: eth1\n                version: 01\n                serial: 00:25:90:71:04:b9\n                capacity: 1Gbit/s\n                width: 32 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list rom ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation\n                configuration: autonegotiation=on broadcast=yes driver=igb driverversion=3.2.10-k firmware=1.5-3 latency=0 multicast=yes port=twisted pair\n                resources: irq:18 memory:ded60000-ded7ffff memory:ded40000-ded5ffff ioport:b400(size=32) memory:ded1c000-ded1ffff memory:ded20000-ded3ffff\n        *-storage\n             description: SATA controller\n             product: SB7x0/SB8x0/SB9x0 SATA Controller [IDE mode] [1002:4390]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 11\n             bus info: pci@0000:00:11.0\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: storage ahci_1.0 bus_master cap_list\n             configuration: driver=ahci latency=64\n             resources: irq:22 ioport:a000(size=8) ioport:9000(size=4) ioport:8000(size=8) ioport:7000(size=4) ioport:6000(size=16) memory:decf8400-decf87ff\n        *-usb:0\n             description: USB controller\n             product: SB7x0/SB8x0/SB9x0 USB OHCI0 Controller [1002:4397]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 12\n             bus info: pci@0000:00:12.0\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ohci bus_master\n             configuration: driver=ohci_hcd latency=64\n             resources: irq:16 memory:decf7000-decf7fff\n        *-usb:1\n             description: USB controller\n             product: SB7x0 USB OHCI1 Controller [1002:4398]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 12.1\n             bus info: pci@0000:00:12.1\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ohci bus_master\n             configuration: driver=ohci_hcd latency=64\n             resources: irq:16 memory:decf6000-decf6fff\n        *-usb:2\n             description: USB controller\n             product: SB7x0/SB8x0/SB9x0 USB EHCI Controller [1002:4396]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 12.2\n             bus info: pci@0000:00:12.2\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ehci bus_master cap_list\n             configuration: driver=ehci_hcd latency=64\n             resources: irq:17 memory:decf8800-decf88ff\n        *-usb:3\n             description: USB controller\n             product: SB7x0/SB8x0/SB9x0 USB OHCI0 Controller [1002:4397]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 13\n             bus info: pci@0000:00:13.0\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ohci bus_master\n             configuration: driver=ohci_hcd latency=64\n             resources: irq:18 memory:decfa000-decfafff\n        *-usb:4\n             description: USB controller\n             product: SB7x0 USB OHCI1 Controller [1002:4398]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 13.1\n             bus info: pci@0000:00:13.1\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ohci bus_master\n             configuration: driver=ohci_hcd latency=64\n             resources: irq:18 memory:decf9000-decf9fff\n        *-usb:5\n             description: USB controller\n             product: SB7x0/SB8x0/SB9x0 USB EHCI Controller [1002:4396]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 13.2\n             bus info: pci@0000:00:13.2\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ehci bus_master cap_list\n             configuration: driver=ehci_hcd latency=64\n             resources: irq:19 memory:decf8c00-decf8cff\n        *-serial\n             description: SMBus\n             product: SBx00 SMBus Controller [1002:4385]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 14\n             bus info: pci@0000:00:14.0\n             version: 3d\n             width: 32 bits\n             clock: 66MHz\n             capabilities: cap_list\n             configuration: driver=piix4_smbus latency=0\n             resources: irq:0\n        *-ide\n             description: IDE interface\n             product: SB7x0/SB8x0/SB9x0 IDE Controller [1002:439C]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 14.1\n             bus info: pci@0000:00:14.1\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ide bus_master cap_list\n             configuration: driver=pata_atiixp latency=64\n             resources: irq:16 ioport:1f0(size=8) ioport:3f6 ioport:170(size=8) ioport:376 ioport:ff00(size=16)\n        *-isa\n             description: ISA bridge\n             product: SB7x0/SB8x0/SB9x0 LPC host controller [1002:439D]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 14.3\n             bus info: pci@0000:00:14.3\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: isa bus_master\n             configuration: latency=0\n        *-pci:3\n             description: PCI bridge\n             product: SBx00 PCI to PCI Bridge [1002:4384]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 14.4\n             bus info: pci@0000:00:14.4\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: pci subtractive_decode bus_master\n             resources: memory:ddf00000-de7fffff memory:dc000000-dcffffff\n           *-display UNCLAIMED\n                description: VGA compatible controller\n                product: MGA G200eW WPCM450 [102B:532]\n                vendor: Matrox Graphics, Inc. [102B]\n                physical id: 4\n                bus info: pci@0000:01:04.0\n                version: 0a\n                width: 32 bits\n                clock: 33MHz\n                capabilities: vga_controller cap_list\n                configuration: latency=64 maxlatency=32 mingnt=16\n                resources: memory:dc000000-dcffffff memory:ddffc000-ddffffff memory:de000000-de7fffff\n        *-usb:6\n             description: USB controller\n             product: SB7x0/SB8x0/SB9x0 USB OHCI2 Controller [1002:4399]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: 14.5\n             bus info: pci@0000:00:14.5\n             version: 00\n             width: 32 bits\n             clock: 66MHz\n             capabilities: ohci bus_master\n             configuration: driver=ohci_hcd latency=64\n             resources: irq:18 memory:decfb000-decfbfff\n     *-pci:1\n          description: Host bridge\n          product: Family 15h Processor Function 0 [1022:1600]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 101\n          bus info: pci@0000:00:18.0\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:2\n          description: Host bridge\n          product: Family 15h Processor Function 1 [1022:1601]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 102\n          bus info: pci@0000:00:18.1\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:3\n          description: Host bridge\n          product: Family 15h Processor Function 2 [1022:1602]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 103\n          bus info: pci@0000:00:18.2\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=amd64_edac\n          resources: irq:0\n     *-pci:4\n          description: Host bridge\n          product: Family 15h Processor Function 3 [1022:1603]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 104\n          bus info: pci@0000:00:18.3\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=k10temp\n          resources: irq:0\n     *-pci:5\n          description: Host bridge\n          product: Family 15h Processor Function 4 [1022:1604]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 105\n          bus info: pci@0000:00:18.4\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=fam15h_power\n          resources: irq:0\n     *-pci:6\n          description: Host bridge\n          product: Family 15h Processor Function 5 [1022:1605]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 106\n          bus info: pci@0000:00:18.5\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:7\n          description: Host bridge\n          product: Family 15h Processor Function 0 [1022:1600]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 107\n          bus info: pci@0000:00:19.0\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:8\n          description: Host bridge\n          product: Family 15h Processor Function 1 [1022:1601]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 108\n          bus info: pci@0000:00:19.1\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:9\n          description: Host bridge\n          product: Family 15h Processor Function 2 [1022:1602]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 109\n          bus info: pci@0000:00:19.2\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=amd64_edac\n          resources: irq:0\n     *-pci:10\n          description: Host bridge\n          product: Family 15h Processor Function 3 [1022:1603]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 10a\n          bus info: pci@0000:00:19.3\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=k10temp\n          resources: irq:0\n     *-pci:11\n          description: Host bridge\n          product: Family 15h Processor Function 4 [1022:1604]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 10b\n          bus info: pci@0000:00:19.4\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:12\n          description: Host bridge\n          product: Family 15h Processor Function 5 [1022:1605]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 10c\n          bus info: pci@0000:00:19.5\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:13\n          description: Host bridge\n          product: Family 15h Processor Function 0 [1022:1600]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 10d\n          bus info: pci@0000:00:1a.0\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:14\n          description: Host bridge\n          product: Family 15h Processor Function 1 [1022:1601]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 10e\n          bus info: pci@0000:00:1a.1\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:15\n          description: Host bridge\n          product: Family 15h Processor Function 2 [1022:1602]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 10f\n          bus info: pci@0000:00:1a.2\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=amd64_edac\n          resources: irq:0\n     *-pci:16\n          description: Host bridge\n          product: Family 15h Processor Function 3 [1022:1603]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 110\n          bus info: pci@0000:00:1a.3\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=k10temp\n          resources: irq:0\n     *-pci:17\n          description: Host bridge\n          product: Family 15h Processor Function 4 [1022:1604]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 111\n          bus info: pci@0000:00:1a.4\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=fam15h_power\n          resources: irq:0\n     *-pci:18\n          description: Host bridge\n          product: Family 15h Processor Function 5 [1022:1605]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 112\n          bus info: pci@0000:00:1a.5\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:19\n          description: Host bridge\n          product: Family 15h Processor Function 0 [1022:1600]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 113\n          bus info: pci@0000:00:1b.0\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:20\n          description: Host bridge\n          product: Family 15h Processor Function 1 [1022:1601]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 114\n          bus info: pci@0000:00:1b.1\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:21\n          description: Host bridge\n          product: Family 15h Processor Function 2 [1022:1602]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 115\n          bus info: pci@0000:00:1b.2\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=amd64_edac\n          resources: irq:0\n     *-pci:22\n          description: Host bridge\n          product: Family 15h Processor Function 3 [1022:1603]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 116\n          bus info: pci@0000:00:1b.3\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n          configuration: driver=k10temp\n          resources: irq:0\n     *-pci:23\n          description: Host bridge\n          product: Family 15h Processor Function 4 [1022:1604]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 117\n          bus info: pci@0000:00:1b.4\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:24\n          description: Host bridge\n          product: Family 15h Processor Function 5 [1022:1605]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 118\n          bus info: pci@0000:00:1b.5\n          version: 00\n          width: 32 bits\n          clock: 33MHz\n     *-pci:25\n          description: Host bridge\n          product: RD890 Northbridge only dual slot (2x16) PCI-e GFX Hydra part [1002:5A10]\n          vendor: Hynix Semiconductor (Hyundai Electronics)\n          physical id: 119\n          bus info: pci@0000:40:00.0\n          version: 02\n          width: 32 bits\n          clock: 33MHz\n        *-pci\n             description: PCI bridge\n             product: RD890 PCI to PCI bridge (NB-SB link) [1002:5A1F]\n             vendor: Hynix Semiconductor (Hyundai Electronics)\n             physical id: b\n             bus info: pci@0000:40:0b.0\n             version: 00\n             width: 32 bits\n             clock: 33MHz\n             capabilities: pci normal_decode bus_master cap_list\n             configuration: driver=pcieport\n             resources: irq:40 ioport:e000(size=4096) memory:ccf00000-cdffffff ioport:be000000(size=167772160)\n           *-display\n                description: VGA compatible controller\n                product: NVIDIA Corporation [10DE:1180]\n                vendor: NVIDIA Corporation [10DE]\n                physical id: 0\n                bus info: pci@0000:41:00.0\n                version: a1\n                width: 64 bits\n                clock: 33MHz\n                capabilities: vga_controller bus_master cap_list rom\n                configuration: driver=nvidia latency=0\n                resources: irq:16 memory:cd000000-cdffffff memory:c0000000-c7ffffff memory:be000000-bfffffff ioport:e800(size=128) memory:ccf80000-ccffffff\n           *-multimedia\n                description: Audio device\n                product: NVIDIA Corporation [10DE:E0A]\n                vendor: NVIDIA Corporation [10DE]\n                physical id: 0.1\n                bus info: pci@0000:41:00.1\n                version: a1\n                width: 32 bits\n                clock: 33MHz\n                capabilities: bus_master cap_list\n                configuration: driver=snd_hda_intel latency=0\n                resources: irq:17 memory:ccf7c000-ccf7ffff\n", 
             "cpu": "processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 32\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.07\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 1\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 33\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.90\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 2\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 34\ninitial apicid\t: 2\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.95\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 3\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 35\ninitial apicid\t: 3\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.01\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 4\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 36\ninitial apicid\t: 4\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.01\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 5\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 37\ninitial apicid\t: 5\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 6\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 38\ninitial apicid\t: 6\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.95\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 7\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 39\ninitial apicid\t: 7\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4400.00\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 8\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 40\ninitial apicid\t: 8\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.94\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 9\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 41\ninitial apicid\t: 9\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 10\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 42\ninitial apicid\t: 10\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 11\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 43\ninitial apicid\t: 11\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 12\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 44\ninitial apicid\t: 12\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 13\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 45\ninitial apicid\t: 13\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 14\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 46\ninitial apicid\t: 14\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.95\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 15\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 0\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 47\ninitial apicid\t: 15\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 16\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 64\ninitial apicid\t: 32\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 17\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 65\ninitial apicid\t: 33\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 18\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 66\ninitial apicid\t: 34\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 19\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 67\ninitial apicid\t: 35\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 20\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 68\ninitial apicid\t: 36\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.99\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 21\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 69\ninitial apicid\t: 37\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 22\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 70\ninitial apicid\t: 38\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 23\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 71\ninitial apicid\t: 39\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 24\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 0\ncpu cores\t: 8\napicid\t\t: 72\ninitial apicid\t: 40\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 25\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 1\ncpu cores\t: 8\napicid\t\t: 73\ninitial apicid\t: 41\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 26\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 2\ncpu cores\t: 8\napicid\t\t: 74\ninitial apicid\t: 42\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 27\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 3\ncpu cores\t: 8\napicid\t\t: 75\ninitial apicid\t: 43\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 28\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 4\ncpu cores\t: 8\napicid\t\t: 76\ninitial apicid\t: 44\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.96\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 29\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 5\ncpu cores\t: 8\napicid\t\t: 77\ninitial apicid\t: 45\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 30\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 6\ncpu cores\t: 8\napicid\t\t: 78\ninitial apicid\t: 46\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.97\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\nprocessor\t: 31\nvendor_id\t: AuthenticAMD\ncpu family\t: 21\nmodel\t\t: 1\nmodel name\t: AMD Opteron(TM) Processor 6274                 \nstepping\t: 2\nmicrocode\t: 0x6000626\ncpu MHz\t\t: 2200.037\ncache size\t: 2048 KB\nphysical id\t: 1\nsiblings\t: 16\ncore id\t\t: 7\ncpu cores\t: 8\napicid\t\t: 79\ninitial apicid\t: 47\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core arat cpb npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold\nbogomips\t: 4399.98\nTLB size\t: 1536 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 48 bits physical, 48 bits virtual\npower management: ts ttp tm 100mhzsteps hwpstate cpb\n\n"
         }, 
-        "ended": "2012-10-19 18:21:18.076378", 
+        "ended": "2012-10-19 20:13:56.083325", 
         "suite": "cache_tiling"
     }
 }
