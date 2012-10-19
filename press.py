@@ -115,6 +115,7 @@ suites = {
     'default':      default,
     'cache_tiling': cache_tiling,
     'test':         test,
+    'most':         most,
     'monte':        montecarlo,
     'waters':       waters,
     'swaters':      swaters,
