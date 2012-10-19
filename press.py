@@ -56,7 +56,8 @@ engines += [
     'score',
     {
         "CPHVB_VE_SCORE_BLOCKSIZE": blksize,
-        "CPHVB_VE_SCORE_BINMAX":    basemax
+        "CPHVB_VE_SCORE_BINMAX":    40
+        "CPHVB_VE_SCORE_BASEMAX":   basemax
     }) for basemax in base_maxes for blksize in block_sizes
 ]
 
