@@ -68,7 +68,7 @@ scripts   = [
     ('Shallow Water',               'swater.py',            '--size=2200*1'),
     ('kNN',                         'knn.py',               '--size=10000*120'),
     ('Stencil - 1D 4way',           'stencil.simplest.py',  '--size=100000000*1'),
-    ('Black Scholes',               'bsholes.py',           '--size=2000000*4'),
+    ('Black Scholes',               'bscholes.py',           '--size=2000000*4'),
 
     ('Stencil - 2D',            'stencil.2d.py',    '--size=10000*1000*10'),
     ('Cache Synth',             'cache.py',         '--size=10500000*10*1'),
