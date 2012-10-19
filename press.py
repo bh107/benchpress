@@ -46,8 +46,7 @@ engines = [
     ('score_bins12',    'score',    {"CPHVB_VE_SCORE_BINMAX":"12"}),
 
 ] + \
-
-[('score_blks%d_binm%d' % ((2**i-(2**(i-2)/2)), j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str((2**i-(2**(i-2)/2))), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(2,24) for i in xrange(8,21)]
+[('score_blks%d_binm%d' % ((2**i-(2**(i-2)/2)), j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str((2**i-(2**(i-2)/2))), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(2,24) for i in xrange(7,21)]
 #[('score_blks%d_binm%d' % (2**i, j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str(2**i), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(2,24) for i in xrange(8,23)]
 
 # Scripts and their arguments
@@ -82,8 +81,8 @@ swaters = {
 }
 
 cache_tiling = {
-    'scripts': [0],
-    'engines': [0,1]+[c for c, x in enumerate(engines) if 'score_bs' in x[0]]
+    'scripts': [0,1,2],
+    'engines': [0,1]+[c for c, x in enumerate(engines) if 'score_blks' in x[0]]
 }
 
 test = {
