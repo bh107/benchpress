@@ -46,20 +46,22 @@ engines = [
     ('score_bins12',    'score',    {"CPHVB_VE_SCORE_BINMAX":"12"}),
 
 ] + \
-[('score_bs%d_bm%d' % (2**i, j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str(2**i), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(1,20) for i in xrange(2,26)]
+
+[('score_blks%d_binm%d' % ((2**i-(2**(i-2)/2)), j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str((2**i-(2**(i-2)/2))), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(2,24) for i in xrange(8,21)]
+#[('score_blks%d_binm%d' % (2**i, j), 'score', {"CPHVB_VE_SCORE_BLOCKSIZE": str(2**i), "CPHVB_VE_SCORE_BINMAX": str(j)})  for j in xrange(2,24) for i in xrange(8,23)]
 
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
-    ('Jacobi Fixed',                'jacobi_fixed.py',      '--size=7168*7168*4'),
+    ('Jacobi Fixed',                'jacobi_fixed.py',      '--size=7000*7000*4'),
     ('Monte Carlo PI - RIL',        'MonteCarlo.py',        '--size=10*1000000*10'),
     ('Shallow Water',               'swater.py',            '--size=2200*1'),
     ('kNN',                         'kNN.py',               '--size=10000*120'),
     ('Stencil - 1D 4way',           'stencil.simplest.py',  '--size=100000000*1'),
     ('Black Scholes',               'BlackSholes.py',       '--size=2000000*4'),
 
-    ('Stencil - 2D',            'stencil.2d.py',      '--size=10240*1024*10'),
-    ('Cache Synth',             'cache.py',        '--size=10485760*10*1'),
+    ('Stencil - 2D',            'stencil.2d.py',      '--size=10000*1024*10'),
+    ('Cache Synth',             'cache.py',        '--size=10500000*10*1'),
     ('Monte Carlo PI - 2byN',   'mc.2byN.py', '--size=10000000*20'),
     ('Monte Carlo PI - Nby2',   'mc.2byN.py', '--size=10000000*20'),
 ]
