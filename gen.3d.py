@@ -5,8 +5,8 @@ import json
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib
-#matplotlib.use('GTKAgg')
-matplotlib.use('Agg')
+matplotlib.use('GTKAgg')
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 from pylab import clf, title, savefig, show
@@ -17,6 +17,13 @@ import matplotlib.ticker as ticker
 def avg( times ):
     return sum(times)/len(times)
 
+def pretty_bytes( num_bytes ):
+
+    if num_bytes <= 1000:
+        return "%d" % num_bytes
+    else:
+        return "%dk" % (num_bytes / 1000)
+
 def main():
 
     set01 = [
@@ -25,9 +32,10 @@ def main():
         'results/akira/benchmark-UWf6Gx.json'
     ] 
     set02 = ['results/akira/benchmark-TmMOCJ.json']
+    set03 = ['results/akira/benchmark-3UFkXR.json']
 
     results = {}
-    for fn in set02:
+    for fn in set03:
         with open(fn) as fd:
             for bm, alias, eng, param, cmd, times in json.load(fd)["runs"]:
                 run = (bm, alias, eng, param, cmd, times)
@@ -45,7 +53,8 @@ def main():
         ax  = fig.add_subplot(111, projection='3d')
 
         score   = (r for r in runs if r[2] == "score")
-        score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BINMAX"]) for (bm, alias, _, p, _, times) in score)
+        #score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BINMAX"]) for (bm, alias, _, p, _, times) in score)
+        score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BASEMAX"]) for (bm, alias, _, p, _, times) in score)
         score_r = [(bm, alias, avg_time, int(blocksize), int(binmax) ) for (bm, alias, avg_time, blocksize, binmax) in score_t]
 
         scatter = [(bs, bm, at) for _,_, at, bs, bm in score_r]
@@ -60,6 +69,10 @@ def main():
 
         bin_len = len(bin_sizes)
         blk_len = len(blk_sizes)
+
+        print "The best: "
+        for r in rank_elapsed[:3]:
+            print r
 
         best = []
         for i in xrange(0,3):
@@ -87,18 +100,20 @@ def main():
         y = bin_sizes
         X, Y = np.meshgrid(x,y)
         ax.set_xlabel('Blocksize')
-        ax.set_ylabel('Binsize')
+        #ax.set_ylabel('Binmax')
+        ax.set_ylabel('Basemax')
         ax.set_zlabel('Runtime')
         title(name)
 
-        ax.scatter(*best[0], color='red',   s=50)
-        ax.scatter(*best[1], color='green', s=50)
-        ax.scatter(*best[2], color='blue',  s=50)
+        ax.scatter(*best[0], color='red',   s=50, label='Best')
+        ax.scatter(*best[1], color='green', s=50, label='Second')
+        ax.scatter(*best[2], color='blue',  s=50, label='Third')
         ax.plot_wireframe(X,Y,z, rstride=1, cstride=1)
         ax.legend()
 
         labels = ax.get_xticklabels()
-        ax.set_xticklabels([blk_sizes[i] for i in xrange(0, blk_len-1, int((blk_len-1)/4))])
+        ax.set_xticklabels([pretty_bytes(blk_sizes[i]) for i in xrange(0, blk_len-1, 2)])
+        #ax.set_xticklabels([blk_sizes[i] for i in xrange(0, blk_len-1, int((blk_len-1)/4))])
         show()
 
         fn = "/tmp/%s" % name
