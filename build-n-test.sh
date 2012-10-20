@@ -51,8 +51,8 @@ then
   mkdir $CPHVB_LIB
   git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
   cd $CPHVB_SRC
-  git submodule init
   git checkout $CPHVB_BRANCH
+  git submodule init
 fi
 
 if [ "$SKIP_UPDATE" != "1" ]
