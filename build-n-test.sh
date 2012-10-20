@@ -40,6 +40,14 @@ if [ -z "$CPHVB_BRANCH" ]; then
     CPHVB_BRANCH="master"
 fi
 
+if [ -z "$SUITE" ]; then
+    SUITE="default"
+fi
+
+if [ -z "$SUITE" ]; then
+    RUNS="5"
+fi
+
 #
 #   GRAB THE LATEST AND GREATEST
 #
