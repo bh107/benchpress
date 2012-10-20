@@ -73,9 +73,10 @@ scripts   = [
     ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py',    '--size=7000*7000*4'),
 
     ('kNN',             'knn.py',       '--size=10000*120'),
-    ('kNN - Naive',     'knn.naive.py', '--size=10000*120*10'),
+    # This is fall back to the bridge
+    #('kNN - Naive',     'knn.naive.py', '--size=10000*120*10'),
 
-    ('Lattice Boltzmann 2D', 'lbm.2d.py', '--size=15*200000'),
+    ('Lattice Boltzmann 2D', 'lbm.2d.py', '--size=15*200000*2'),
     ('Lattice Boltzmann 3D', 'lbm.3d.py', '--size=100*100*100*2'),
 
     # This one seems to be broken
