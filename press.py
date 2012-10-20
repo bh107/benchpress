@@ -10,10 +10,10 @@ import os
 # Engines with various parameter setups
 # (alias, runs, engine, env-vars)
 engines = [
-    ('numpy',        None,        None),
-    ('simple',       'simple',    None),
-    ('score',        'score', None),
-    ('mcore',        'mcore', None),
+    ('numpy',   None,       None),
+    ('simple',  'simple',   None),
+    ('score',   'score',    None),
+    ('mcore',   'mcore',    None),
 
     ('score_1',         'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"1"}),
     ('score_2',         'score',    {"CPHVB_VE_SCORE_BLOCKSIZE":"2"}),
@@ -64,17 +64,35 @@ engines += [
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
-    ('Jacobi Fixed',            'jacobi.iterative.py',  '--size=7000*7000*4'),
-    ('Monte Carlo PI - RIL',    'mc.py',                '--size=10*1000000*10'),
-    ('Shallow Water',           'swater.py',            '--size=2200*1'),
-    ('kNN',                     'knn.py',               '--size=10000*120'),
-    ('Stencil - 1D 4way',       'stencil.simplest.py',  '--size=100000000*1'),
-    ('Black Scholes',           'bscholes.py',          '--size=2000000*4'),
-    ('Stencil - 2D',            'stencil.2d.py',    '--size=10000*1000*10'),
-    ('Cache Synth',             'cache.py',         '--size=10500000*10*1'),
+    ('Black Scholes',   'bscholes.py',  '--size=2000000*4'),
+    ('Cache Synth',     'cache.py',     '--size=10500000*10*1'),
 
-    ('Monte Carlo PI - 2byN',   'mc.2byN.py',       '--size=10000000*20'),
-    ('Monte Carlo PI - Nby2',   'mc.2byN.py',       '--size=10000000*20'),
+    ('Jacobi Iterative',            'jacobi.iterative.py',          '--size=7000*7000*4'),
+    # This one seems to be broken.
+    #('Jacobi Iterative - No Views', 'jacobi.iterative.noviews.py',  '--size=7000*7000*4'),
+    ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py',    '--size=7000*7000*4'),
+
+    ('kNN',             'knn.py',       '--size=10000*120'),
+    ('kNN - Naive',     'knn.naive.py', '--size=10000*120*10'),
+
+    ('Lattice Boltzmann 2D', 'lbm.2d.py', '--size=15*200000'),
+    ('Lattice Boltzmann 3D', 'lbm.3d.py', '--size=100*100*100*2'),
+
+    # This one seems to be broken
+    #('LU Factorization', 'lu.py', '--size=5000*10'),   
+
+    ('Monte Carlo PI - RIL',    'mc.py',        '--size=10*1000000*10'),
+    ('Monte Carlo PI - 2xN',    'mc.2byN.py',   '--size=10*1000000*10'),
+    ('Monte Carlo PI - Nx2',    'mc.Nby2.py',   '--size=10*1000000*10'),
+
+    # This one seems to be broken
+    #('N-Body',  'nbody.py', '--size=2500*10'),
+
+    ('Stencil - 1D 4way',       'stencil.simplest.py',  '--size=100000000*1'),
+    ('Stencil - 2D',            'stencil.2d.py',        '--size=10000*1000*10'),
+
+    ('Shallow Water',           'swater.py',            '--size=2200*1'),
+
 ]
                                 # DEFAULT BENCHMARK
 default = {                     # Define a benchmark "suite" which runs:
@@ -103,6 +121,11 @@ test = {
     'engines': [0,1]
 }
 
+test_all = {
+    'scripts': [i for i in range(0, len(scripts))],
+    'engines': [0,1,2]
+}
+
 montecarlo = {
     'scripts': [1,9,10],
     'engines':  [0,1,2,3]
@@ -115,8 +138,9 @@ most = {
 
 suites = {
     'default':      default,
-    'cache_tiling': cache_tiling,
     'test':         test,
+    'test_all':     test_all,
+    'cache_tiling': cache_tiling,
     'most':         most,
     'monte':        montecarlo,
     'waters':       waters,
@@ -267,6 +291,11 @@ if __name__ == "__main__":
         default="results",
         help='Where to store benchmark results.'
     )
+    parser.add_argument(
+        '--runs',
+        default=5,
+        help="How many times should each benchmark run"
+    )
     args = parser.parse_args()
 
     main(
@@ -274,6 +303,6 @@ if __name__ == "__main__":
         args.src,
         args.output,
         args.suite,
-        5
+        int(args.runs)
     )
 
