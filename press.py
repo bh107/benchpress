@@ -56,7 +56,7 @@ engines += [
     'score',
     {
         "CPHVB_VE_SCORE_BLOCKSIZE": blksize,
-        "CPHVB_VE_SCORE_BINMAX":    str(25),
+        "CPHVB_VE_SCORE_BINMAX":    str(20),
         "CPHVB_VE_SCORE_BASEMAX":   basemax,
     }) for basemax in base_maxes for blksize in block_sizes
 ]
@@ -64,12 +64,12 @@ engines += [
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
-    ('Jacobi Fixed',                'jacobi.iterative.py',  '--size=7000*7000*4'),
-    ('Monte Carlo PI - RIL',        'mc.py',                '--size=10*1000000*10'),
-    ('Shallow Water',               'swater.py',            '--size=2200*1'),
-    ('kNN',                         'knn.py',               '--size=10000*120'),
-    ('Stencil - 1D 4way',           'stencil.simplest.py',  '--size=100000000*1'),
-    ('Black Scholes',               'bscholes.py',           '--size=2000000*4'),
+    ('Jacobi Fixed',		'jacobi.iterative.py',  '--size=7000*7000*4'),
+    ('Monte Carlo PI - RIL',    'mc.py',                '--size=10*1000000*10'),
+    ('Shallow Water',           'swater.py',            '--size=2200*1'),
+    ('kNN',                     'knn.py',               '--size=10000*120'),
+    ('Stencil - 1D 4way',       'stencil.simplest.py',  '--size=100000000*1'),
+    ('Black Scholes',           'bscholes.py',          '--size=2000000*4'),
 
     ('Stencil - 2D',            'stencil.2d.py',    '--size=10000*1000*10'),
     ('Cache Synth',             'cache.py',         '--size=10500000*10*1'),
@@ -79,7 +79,8 @@ scripts   = [
                                 # DEFAULT BENCHMARK
 default = {                     # Define a benchmark "suite" which runs:
     'scripts': [0,1,2,3,4,5],   # these scripts
-    'engines': [0,1,2,3]        # using these engines
+    'engines': [0,1,2]        # using these engines
+    #'engines': [0,1,2,3]        # using these engines
 } 
 
 waters = {
