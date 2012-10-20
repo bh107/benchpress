@@ -1,3 +1,3 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/238cea99ebca800b34d2616255d6d3dbf064e968/benchmark-jzh69j.json.
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/akira/238cea99ebca800b34d2616255d6d3dbf064e968/benchmark-KJNTst.json.
 { Jacobi Fixed - numpy ( None ),
   taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=False
