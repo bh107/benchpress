@@ -27,15 +27,16 @@ def pretty_bytes( num_bytes ):
 def main():
 
     set01 = [
-        'results/akira/benchmark-RP29oC.json',
-        'results/akira/benchmark-av1GUr.json',
-        'results/akira/benchmark-UWf6Gx.json'
+        'results/akira/misc/benchmark-RP29oC.json',
+        'results/akira/misc/benchmark-av1GUr.json',
+        'results/akira/misc/benchmark-UWf6Gx.json'
     ] 
-    set02 = ['results/akira/benchmark-TmMOCJ.json']
-    set03 = ['results/akira/benchmark-3UFkXR.json']
+    set02 = ['results/akira/misc/benchmark-TmMOCJ.json']
+    set03 = ['results/akira/misc/benchmark-3UFkXR.json']
+    set04 = ['results/akira/misc/benchmark-577e5F.json']    # knn par-search
 
     results = {}
-    for fn in set03:
+    for fn in set04:
         with open(fn) as fd:
             for bm, alias, eng, param, cmd, times in json.load(fd)["runs"]:
                 run = (bm, alias, eng, param, cmd, times)
