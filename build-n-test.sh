@@ -34,6 +34,10 @@ START=`date`
 SKIP_PURGE="0" 
 SKIP_UPDATE="0"
 
+if [ -z "$CPHVB_BRANCH" ]; then
+    CPHVB_BRANCH="master"
+fi
+
 #
 #   GRAB THE LATEST AND GREATEST
 #
@@ -48,11 +52,13 @@ then
   git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
   cd $CPHVB_SRC
   git submodule init
+  git checkout $CPHVB_BRANCH
 fi
 
 if [ "$SKIP_UPDATE" != "1" ]
 then
   cd $CPHVB_SRC
+  git checkout $CPHVB_BRANCH
   echo "Updating repos."
   git submodule update
   git pull
@@ -114,6 +120,6 @@ git pull
 git add results/$MACHINE/$MACHINE.log
 git add results/$MACHINE/$REV/$BENCHFILE
 git add results/$MACHINE/benchmark-latest.json
-git commit -m "Results from running '$SUITE' on '$MACHINE'."
+git commit -m "Results from running '$SUITE' of cphvb rev '$REV' on branch '$CPHVB_BRANCH' on '$MACHINE'."
 git push -u origin master
 
