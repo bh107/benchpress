@@ -64,15 +64,15 @@ engines += [
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
-    ('Jacobi Fixed',		'jacobi.iterative.py',  '--size=7000*7000*4'),
+    ('Jacobi Fixed',            'jacobi.iterative.py',  '--size=7000*7000*4'),
     ('Monte Carlo PI - RIL',    'mc.py',                '--size=10*1000000*10'),
     ('Shallow Water',           'swater.py',            '--size=2200*1'),
     ('kNN',                     'knn.py',               '--size=10000*120'),
     ('Stencil - 1D 4way',       'stencil.simplest.py',  '--size=100000000*1'),
     ('Black Scholes',           'bscholes.py',          '--size=2000000*4'),
-
     ('Stencil - 2D',            'stencil.2d.py',    '--size=10000*1000*10'),
     ('Cache Synth',             'cache.py',         '--size=10500000*10*1'),
+
     ('Monte Carlo PI - 2byN',   'mc.2byN.py',       '--size=10000000*20'),
     ('Monte Carlo PI - Nby2',   'mc.2byN.py',       '--size=10000000*20'),
 ]
