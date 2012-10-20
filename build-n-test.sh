@@ -34,6 +34,8 @@ START=`date`
 SKIP_PURGE="0" 
 SKIP_UPDATE="0"
 
+source $BENCH_SRC/envs/$MACHINE.sh
+
 if [ -z "$CPHVB_BRANCH" ]; then
     CPHVB_BRANCH="master"
 fi
@@ -43,7 +45,7 @@ fi
 #
 if [ "$SKIP_PURGE" != "1" ]
 then
-  echo "Grabbing repos $1"
+  echo "Grabbing repos $1 on branch '$CPHVB_BRANCH'."
   cd $BUILD_ROOT
   rm -rf $CPHVB_LIB
   rm -rf $CPHVB_SRC
@@ -80,7 +82,6 @@ echo "** Testing cphVB installation."
 
 export PYTHONPATH="$PYTHONPATH:$CPHVB_LIB/lib/python$PYTHONVER/site-packages"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CPHVB_LIB"
-source $BENCH_SRC/envs/$MACHINE.sh
 python $CPHVB_SRC/test/numpy/numpytest.py
 
 RETURN=$?
