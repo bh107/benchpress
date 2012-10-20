@@ -127,6 +127,11 @@ test_all = {
     'engines': [0,1,2]
 }
 
+score_test = {
+    'scripts': [i for i in range(0, len(scripts))],
+    'engines': [0,1,2]
+}
+
 montecarlo = {
     'scripts': [1,9,10],
     'engines':  [0,1,2,3]
@@ -141,6 +146,7 @@ suites = {
     'default':      default,
     'test':         test,
     'test_all':     test_all,
+    'score_test':     score_test,
     'cache_tiling': cache_tiling,
     'most':         most,
     'monte':        montecarlo,
