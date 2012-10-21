@@ -44,7 +44,7 @@ if [ -z "$SUITE" ]; then
     SUITE="default"
 fi
 
-if [ -z "$SUITE" ]; then
+if [ -z "$RUNS" ]; then
     RUNS="5"
 fi
 
