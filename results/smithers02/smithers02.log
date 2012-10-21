@@ -1,193 +1,145 @@
-Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/smithers02/10c17fafecc5dae04a7d1c2f427b6d1b76cad28a/benchmark-edhST4.json.
-{ Jacobi Fixed - numpy ( None ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=False
-  1/5,  2.824273
-  2/5,  2.806478
-  3/5,  2.810959
-  4/5,  2.806174
-  5/5,  2.826353
+Running benchmark suite 'default'; results are written to: /home/safl/buildbot/benchpress/results/smithers02/9633e6d168a33781e0d29e95962a7623e60cbf04/benchmark-xib_GD.json.
+{ Black Scholes - numpy ( None ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  6.022255
+  2/5,  6.019527
+  3/5,  6.028687
+  4/5,  6.02011
+  5/5,  6.010415
 }
-{ Jacobi Fixed - simple ( simple ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.454805
-  2/5,  3.475618
-  3/5,  3.482535
-  4/5,  3.491595
-  5/5,  3.499902
+{ Black Scholes - simple ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.625553
+  2/5,  5.633297
+  3/5,  5.625872
+  4/5,  5.617049
+  5/5,  5.637091
 }
-{ Jacobi Fixed - score ( score ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  3.158627
-  2/5,  3.165452
-  3/5,  3.15517
-  4/5,  3.164494
-  5/5,  3.156607
+{ Black Scholes - score ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.684069
+  2/5,  5.644404
+  3/5,  5.650514
+  4/5,  5.661227
+  5/5,  5.653436
 }
-{ Jacobi Fixed - mcore ( mcore ),
-  python jacobi_fixed.py --size=7168*7168*4 --cphvb=True
-  1/5,  1.300416
-  2/5,  1.293853
-  3/5,  1.283519
-  4/5,  1.300488
-  5/5,  1.314529
+{ Cache Synth - numpy ( None ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
+  1/5,  16.619234
+  2/5,  16.619153
+  3/5,  16.618069
+  4/5,  16.620237
+  5/5,  16.625877
 }
-{ Monte Carlo PI - RIL - numpy ( None ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=False
-  1/5,  4.853082
-  2/5,  4.829785
-  3/5,  4.825958
-  4/5,  4.824935
-  5/5,  4.837294
+{ Cache Synth - simple ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.603373
+  2/5,  16.575381
+  3/5,  16.523887
+  4/5,  16.528439
+  5/5,  16.517285
 }
-{ Monte Carlo PI - RIL - simple ( simple ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=True
-  1/5,  5.280863
-  2/5,  5.279281
-  3/5,  5.281609
-  4/5,  5.285985
-  5/5,  5.28064
+{ Cache Synth - score ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.596928
+  2/5,  16.611145
+  3/5,  16.617435
+  4/5,  16.617763
+  5/5,  16.763304
 }
-{ Monte Carlo PI - RIL - score ( score ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=True
-  1/5,  5.291436
-  2/5,  5.283406
-  3/5,  5.311249
-  4/5,  5.286533
-  5/5,  5.28264
+{ Jacobi Iterative - numpy ( None ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=False
+  1/5,  2.661865
+  2/5,  2.646478
+  3/5,  2.669
+  4/5,  2.641434
+  5/5,  2.65367
 }
-{ Monte Carlo PI - RIL - mcore ( mcore ),
-  python MonteCarlo.py --size=10*1000000*10 --cphvb=True
-  1/5,  5.14186
-  2/5,  5.168711
-  3/5,  5.145407
-  4/5,  5.148565
-  5/5,  5.144422
+{ Jacobi Iterative - simple ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.351565
+  2/5,  3.34366
+  3/5,  3.340436
+  4/5,  3.343758
+  5/5,  3.341235
 }
-{ Shallow Water - numpy ( None ),
-  python swater.py --size=2200*1 --cphvb=False
-  1/5,  2.212933
-  2/5,  2.206823
-  3/5,  2.218667
-  4/5,  2.213434
-  5/5,  2.214009
+{ Jacobi Iterative - score ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.114476
+  2/5,  3.113005
+  3/5,  3.107418
+  4/5,  3.098284
+  5/5,  3.095516
 }
-{ Shallow Water - simple ( simple ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  1.496488
-  2/5,  1.494123
-  3/5,  1.492307
-  4/5,  1.496191
-  5/5,  1.493359
+{ Jacobi Iterative - Reduce - numpy ( None ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
+  1/5,  6.9137
+  2/5,  6.923092
+  3/5,  6.913638
+  4/5,  6.933148
+  5/5,  6.921489
 }
-{ Shallow Water - score ( score ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  1.608866
-  2/5,  1.611437
-  3/5,  1.610173
-  4/5,  1.610476
-  5/5,  1.609997
+{ Jacobi Iterative - Reduce - simple ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.098706
+  2/5,  5.099386
+  3/5,  5.102335
+  4/5,  5.090177
+  5/5,  5.088559
 }
-{ Shallow Water - mcore ( mcore ),
-  python swater.py --size=2200*1 --cphvb=True
-  1/5,  0.547781
-  2/5,  0.546809
-  3/5,  0.555091
-  4/5,  0.550437
-  5/5,  0.548138
+{ Jacobi Iterative - Reduce - score ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.787203
+  2/5,  4.774932
+  3/5,  4.762879
+  4/5,  4.746675
+  5/5,  4.777744
 }
 { kNN - numpy ( None ),
-  python kNN.py --size=10000*120 --cphvb=False
-  1/5,  3.774449
-  2/5,  3.769495
-  3/5,  3.762067
-  4/5,  3.77832
-  5/5,  3.758363
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=False
+  1/5,  3.894216
+  2/5,  3.7713
+  3/5,  3.773311
+  4/5,  3.771049
+  5/5,  3.785497
 }
 { kNN - simple ( simple ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  1.747399
-  2/5,  1.744876
-  3/5,  1.745959
-  4/5,  1.758235
-  5/5,  1.753006
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.767869
+  2/5,  1.797573
+  3/5,  1.751865
+  4/5,  1.751255
+  5/5,  1.753262
 }
 { kNN - score ( score ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  1.727225
-  2/5,  1.735167
-  3/5,  1.735235
-  4/5,  1.734967
-  5/5,  1.746958
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.740242
+  2/5,  1.732841
+  3/5,  1.738163
+  4/5,  1.743407
+  5/5,  1.752184
 }
-{ kNN - mcore ( mcore ),
-  python kNN.py --size=10000*120 --cphvb=True
-  1/5,  0.860442
-  2/5,  0.872001
-  3/5,  0.858145
-  4/5,  0.866071
-  5/5,  0.858795
+{ Lattice Boltzmann 2D - numpy ( None ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=False
+  1/5,  5.420634
+  2/5,  5.399619
+  3/5,  5.391916
+  4/5,  5.418203
+  5/5,  5.396564
 }
-{ Stencil - 1D 4way - Copy - numpy ( None ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=False
-  1/5,  0.073671
-  2/5,  0.073332
-  3/5,  0.072887
-  4/5,  0.074293
-  5/5,  0.074148
+{ Lattice Boltzmann 2D - simple ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.584049
+  2/5,  4.577792
+  3/5,  4.589362
+  4/5,  4.585813
+  5/5,  4.577524
 }
-{ Stencil - 1D 4way - Copy - simple ( simple ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=True
-  1/5,  0.203235
-  2/5,  0.199881
-  3/5,  0.206472
-  4/5,  0.204905
-  5/5,  0.205721
-}
-{ Stencil - 1D 4way - Copy - score ( score ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=True
-  1/5,  0.211987
-  2/5,  0.213471
-  3/5,  0.213571
-  4/5,  0.214503
-  5/5,  0.213132
-}
-{ Stencil - 1D 4way - Copy - mcore ( mcore ),
-  python stencil.twonine.py --size=10240*1024*10 --cphvb=True
-  1/5,  0.196983
-  2/5,  0.196654
-  3/5,  0.195799
-  4/5,  0.197821
-  5/5,  0.200936
-}
-{ Stencil - 1D 4way - No-Copy - numpy ( None ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=False
-  1/5,  1.844944
-  2/5,  1.83917
-  3/5,  1.839523
-  4/5,  1.839181
-  5/5,  1.842739
-}
-{ Stencil - 1D 4way - No-Copy - simple ( simple ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.271384
-  2/5,  2.272721
-  3/5,  2.27062
-  4/5,  2.273593
-  5/5,  2.273627
-}
-{ Stencil - 1D 4way - No-Copy - score ( score ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.203942
-  2/5,  2.205563
-  3/5,  2.205923
-  4/5,  2.201815
-  5/5,  2.205391
-}
-{ Stencil - 1D 4way - No-Copy - mcore ( mcore ),
-  python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  1.097529
-  2/5,  1.102748
-  3/5,  1.098024
-  4/5,  1.101999
-  5/5,  1.100231
+{ Lattice Boltzmann 2D - score ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.572389
+  2/5,  4.576163
+  3/5,  4.570215
+  4/5,  4.566384
+  5/5,  4.569413
 }
