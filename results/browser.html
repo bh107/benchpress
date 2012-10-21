@@ -11,10 +11,23 @@ var runs;
 var meta;
 var i = 0;
 
+var times       = [];
+var times_avg   = 0.0;
+var times_i     = 0;
+var perfs = [];
+var banner = '';
+
 function load_results( benchmark ) {
 
     var url = result_prefix + benchmark;
-    console.log(url);
+
+    i = 0;
+    times = [];
+    times_avg = 0.0;
+    times_i     = 0;
+    perfs = [];
+    banner = '';
+
     $.getJSON(url, function(data) {
 
         $.each(data, function(key, val) {
@@ -28,6 +41,8 @@ function load_results( benchmark ) {
             }
 
         });
+
+        banner = 'Results from "'+meta["hostname"] +'" running "'+ meta["suite"] +'" rev "'+ meta["rev"]+'".';
         render(this, i );
 
     });
@@ -51,35 +66,62 @@ function render( e, run )  {
     var engine  = runs[run][2];
     var env     = runs[run][3];
     var args_str= runs[run][4];
-    var times   = runs[run][5]; 
-    var avg_time= avg( times );
-    var perfs   = runs[run][6];
 
+    times       = runs[run][5]; 
+    times_avg   = avg( times );
+    perfs       = runs[run][6];
+
+    $('#meta').html($('<p/>', {html: banner}));
+    $('#page').html('Run '+(i+1)+'/'+runs.length);
     $('#result').html($(
-        '<p/>', {html: bm +' '+ alias +' '+ engine +' '+ avg_time}
+        '<p/>', {html: '<b>'+bm+'</b>' +' - '+ alias +' - '+ engine +' '+ times_avg+' seconds<br />'+args_str}
     ));
 
-    var items = [];
-
-    $.each(perfs, function(key, val) {
-        items.push('<li id="perf_' + key + '"><pre>' + val + '</pre></li>');
-    });
-
-    $('#nav').html((i+1)+'/'+runs.length);
-    $('<ul/>', {
-        'class': 'my-new-list',
-        html: items.join('')
+    $('<pre/>', {
+        'class': 'perf',
+        html: perfs[times_i]
     }).appendTo('#result');
+    $('.perf').html(1+times_i+ '/'+ times.length+' - Elapsed '+ times[times_i] + perfs[times_i]);
+
 }
+
+function prev(e) {
+    i = (i<1) ? 0 : i-1;
+    render(e, i);
+}
+
+function next(e) {
+    i = (i<(runs.length-1)) ? i+1: runs.length-1;
+    render(e, i);
+}
+
+function up(e) {
+    times_i = (times_i<1) ? 0 : times_i-1;
+    $('.perf').html(1+times_i+ '/'+ times.length+' - Elapsed '+ times[times_i] + perfs[times_i]);
+}
+
+function down(e) {
+    times_i = (times_i<(times.length-1)) ? times_i+1: times.length-1;
+    $('.perf').html(perfs[times_i]);
+    $('.perf').html(1+times_i+ '/'+ times.length+' - Elapsed '+ times[times_i] + perfs[times_i]);
+}
+
 </script>
 </head>
 <body>
 
-<a id="reload" href="#" style="display: inline;">Load</a>
-<input id="benchmark" type="text" value="akira/benchmark-latest.json" />
+<form>
+<input id="benchmark" type="text" value="akira/benchmark-latest.json" size="50"/>
+<input id="reload" type="submit" action="return false;" value="Load">
+</form>
+
+<div id="meta"></div>
+
+<div id="nav" style="display: inline;">
 <a id="prev" href="#" style="display: inline;" >Prev</a>
-<div id="nav"  style="display: inline;"></div>
+<div id="page"  style="display: inline;"></div>
 <a id="next" href="#" style="display: inline;">Next</a>
+</div>
 
 <div id="result">
 This script probably only works in Firefox.
@@ -92,12 +134,30 @@ This script probably only works in Firefox.
     });
 
     $('#prev').bind('click', function(e) {
-        i = (i<1) ? 0 : i-1;
-        render(e, i);
+        prev(e);
     });
     $('#next').bind('click', function(e) {
-        i = (i>(runs.length-1)) ? runs.length-1: i+1;
-        render(e, i);
+        next(e);
+    });
+
+    $(document).keydown(function (e) {
+        var keyCode = e.keyCode || e.which, arrow = {left: 37, up: 38, right: 39, down: 40 };
+
+        switch (keyCode) {
+        case arrow.left:
+            prev(e);
+        break;
+        case arrow.right:
+            next(e);
+        break;
+
+        case arrow.up:
+            up(e);
+        break;
+        case arrow.down:
+            down(e);
+        break;
+        }
     });
     
 </script>
