@@ -272,11 +272,13 @@ def main(config, src_root, output, suite, runs=5, use_perf=True):
                 for i in xrange(1, runs+1):
 
                     if use_perf:
-                        pfd     = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-                        args    = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
+                        pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
+                        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
+
+                    cmd = args
 
                     p = Popen(                              # Run the command
-                        args,
+                        cmd,
                         stdin=PIPE,
                         stdout=PIPE,
                         env=envs,
