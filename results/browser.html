@@ -74,8 +74,9 @@ function render( e, run )  {
 </script>
 </head>
 <body>
-<input id="benchmark" type="text" value="akira/benchmark-latest.json" />
 
+<a id="reload" href="#" style="display: inline;">Load</a>
+<input id="benchmark" type="text" value="akira/benchmark-latest.json" />
 <a id="prev" href="#" style="display: inline;" >Prev</a>
 <div id="nav"  style="display: inline;"></div>
 <a id="next" href="#" style="display: inline;">Next</a>
@@ -85,6 +86,10 @@ This script probably only works in Firefox.
 </div>
 <script language="JavaScript">
     load_results($('#benchmark').val());
+
+    $('#reload').bind('click', function(e) {
+        load_results($('#benchmark').val());
+    });
 
     $('#prev').bind('click', function(e) {
         i = (i<1) ? 0 : i-1;
