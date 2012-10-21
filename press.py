@@ -274,8 +274,8 @@ def main(config, src_root, output, suite, runs=5, use_perf=True):
                     if use_perf:
                         pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
                         cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
-
-                    cmd = args
+                    else:
+                        cmd = args
 
                     p = Popen(                              # Run the command
                         cmd,
