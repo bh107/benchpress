@@ -6,6 +6,7 @@ import tempfile
 import argparse
 import json
 import os
+import re
 
 # Engines with various parameter setups
 # (alias, runs, engine, env-vars)
@@ -216,7 +217,23 @@ def meta(src_dir, suite):
 
     return info
 
-def main(config, src_root, output, suite, runs=5):
+def perf_counters():
+    """Grabs all events pre-defined by 'perf'."""
+
+    p = Popen(              # Try grabbing the repos-revision
+        ["perf", "list"],
+        stdin   = PIPE,
+        stdout  = PIPE
+    )
+    out, err = p.communicate()
+
+    events = []
+    for m in re.finditer('  (\w+-[\w-]+) ', out):
+        events.append( m.group(1) )
+
+    return ','.join(events)
+
+def main(config, src_root, output, suite, runs=5, use_perf=True):
 
     benchmark   = suites[suite]
     script_path = src_root +os.sep+ 'benchmark' +os.sep+ 'Python' +os.sep
@@ -228,6 +245,7 @@ def main(config, src_root, output, suite, runs=5):
         'meta': meta(src_root, suite),
         'runs': []
     }
+
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-', suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in (scripts[snr] for snr in benchmark['scripts']):
@@ -244,12 +262,18 @@ def main(config, src_root, output, suite, runs=5):
                     envs = os.environ.copy()
                     envs.update(env)
                                                             # Setup process + arguments
-                args        = ['taskset', '-c', '1', 'python', script, arg, '--cphvb=%s' % cphvb ]
+                args        = []
+                args        += ['taskset', '-c', '1', 'python', script, arg, '--cphvb=%s' % cphvb ]
                 args_str    = ' '.join(args)
                 print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
 
                 times = []
+                perfs = []
                 for i in xrange(1, runs+1):
+
+                    if use_perf:
+                        pfd     = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
+                        args    = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
 
                     p = Popen(                              # Run the command
                         args,
@@ -268,10 +292,12 @@ def main(config, src_root, output, suite, runs=5):
                     print "  %d/%d, " % (i, runs), elapsed
                     
                     times.append( elapsed )
+                    if use_perf:
+                        perfs.append( open(pfd.name).read() )
 
                 print "}"
                                                             # Accumulate results
-                results['runs'].append(( mark, alias, engine, env, args_str, times ))
+                results['runs'].append(( mark, alias, engine, env, args_str, times, perfs ))
                 results['meta']['ended'] = str(datetime.now())
 
                 fd.truncate(0)                              # Store the results in a file...
