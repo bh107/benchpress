@@ -35,6 +35,14 @@ def lintify( text ):
 
     return ints
 
+def normalize( runs ):
+
+    for r in runs:
+        if len(r) == 6:
+            yield r + [[]]
+        elif len(r) == 7:
+            yield r
+
 def gen( benchmark, output ):
 
     try:
@@ -46,7 +54,7 @@ def gen( benchmark, output ):
 
     bench       = {}
     baselines   = {}
-    for mark, engine_lbl, engine, engine_args, cmd, times in runs:
+    for mark, engine_lbl, engine, engine_args, cmd, times, perf in normalize( runs ):
 
         t_avg, t_max, t_min, t_dev = stats(times)
         if engine:                                  # Results with cphvb enabled.
