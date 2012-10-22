@@ -144,13 +144,14 @@ most = {
 }
 
 engines += [
-    ('score_mcache_size%' % (i),
+    ('score_mcache_%s' % (mcache_size),
     'score',
     {
         "CPHVB_CORE_MCACHE_SIZE":   str(mcache_size),
     }) for mcache_size in range(1, 11)
-] + [
-    ('simple_mcache_size%' % (i),
+]
+engines += [
+    ('simple_mcache_%s' % (mcache_size),
     'simple',
     {
         "CPHVB_CORE_MCACHE_SIZE":   str(mcache_size),
