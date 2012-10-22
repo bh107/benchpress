@@ -28,6 +28,7 @@ BENCH_SRC="$BUILD_ROOT/benchpress"
 CPHVB_SRC="$BUILD_ROOT/cphvb"
 CPHVB_LIB="$BUILD_ROOT/cphvb.lib"
 SUITE="default"
+CPHVB_BRANCH="master"
 
 #
 # Do not modify anything beow this line.
