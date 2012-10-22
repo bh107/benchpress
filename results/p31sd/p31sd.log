@@ -1,313 +1,2393 @@
-Running benchmark suite 'score_test'; results are written to: /home/safl/buildbot/benchpress/results/p31sd/3191cc618ba3a9f1455652a38267f355c0dfb0fb/benchmark-EsNsAn.json.
+Running benchmark suite 'mcache'; results are written to: /home/safl/buildbot/benchpress/results/p31sd/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-oYPM6L.json.
 { Black Scholes - numpy ( None ),
   taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  7.212549
-  2/5,  7.174792
-  3/5,  7.180782
-  4/5,  7.182592
-  5/5,  7.169365
+  1/5,  7.060568
+  2/5,  7.0625
+  3/5,  7.065207
+  4/5,  7.065902
+  5/5,  7.057975
 }
 { Black Scholes - simple ( simple ),
   taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  6.719977
-  2/5,  6.703622
-  3/5,  6.687791
-  4/5,  6.685267
-  5/5,  6.710464
+  1/5,  6.575179
+  2/5,  6.576578
+  3/5,  6.575686
+  4/5,  6.581087
+  5/5,  6.580489
 }
 { Black Scholes - score ( score ),
   taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  6.577263
-  2/5,  6.571867
-  3/5,  6.566312
-  4/5,  6.575018
-  5/5,  6.598349
+  1/5,  6.482114
+  2/5,  6.468999
+  3/5,  6.470046
+  4/5,  6.484646
+  5/5,  6.547593
+}
+{ Black Scholes - score_mcache_1 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  7.308908
+  2/5,  7.303258
+  3/5,  7.301274
+  4/5,  7.300306
+  5/5,  7.298832
+}
+{ Black Scholes - score_mcache_2 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.980985
+  2/5,  6.976299
+  3/5,  6.973301
+  4/5,  6.97014
+  5/5,  6.992769
+}
+{ Black Scholes - score_mcache_3 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.749618
+  2/5,  6.75405
+  3/5,  6.745106
+  4/5,  6.760145
+  5/5,  6.746652
+}
+{ Black Scholes - score_mcache_4 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.627574
+  2/5,  6.631274
+  3/5,  6.63793
+  4/5,  6.659097
+  5/5,  6.633373
+}
+{ Black Scholes - score_mcache_5 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.597159
+  2/5,  6.590816
+  3/5,  6.597982
+  4/5,  6.589858
+  5/5,  6.588417
+}
+{ Black Scholes - score_mcache_6 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.569562
+  2/5,  6.570664
+  3/5,  6.566324
+  4/5,  6.572198
+  5/5,  6.560035
+}
+{ Black Scholes - score_mcache_7 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.560135
+  2/5,  6.574809
+  3/5,  6.554516
+  4/5,  6.545551
+  5/5,  6.712683
+}
+{ Black Scholes - score_mcache_8 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.527084
+  2/5,  6.508502
+  3/5,  6.502829
+  4/5,  6.50894
+  5/5,  6.512734
+}
+{ Black Scholes - score_mcache_9 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.488354
+  2/5,  6.493863
+  3/5,  6.498399
+  4/5,  6.494486
+  5/5,  6.500489
+}
+{ Black Scholes - score_mcache_10 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.471105
+  2/5,  6.479213
+  3/5,  6.473066
+  4/5,  6.472737
+  5/5,  6.473232
+}
+{ Black Scholes - simple_mcache_1 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.880247
+  2/5,  6.874974
+  3/5,  6.870332
+  4/5,  6.883176
+  5/5,  6.871331
+}
+{ Black Scholes - simple_mcache_2 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.707803
+  2/5,  6.696434
+  3/5,  6.697545
+  4/5,  6.715716
+  5/5,  6.707299
+}
+{ Black Scholes - simple_mcache_3 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.704114
+  2/5,  6.688237
+  3/5,  6.687456
+  4/5,  6.704659
+  5/5,  6.690479
+}
+{ Black Scholes - simple_mcache_4 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.661676
+  2/5,  6.664156
+  3/5,  6.657179
+  4/5,  6.666809
+  5/5,  6.666707
+}
+{ Black Scholes - simple_mcache_5 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.649094
+  2/5,  6.636386
+  3/5,  6.634992
+  4/5,  6.670896
+  5/5,  6.644136
+}
+{ Black Scholes - simple_mcache_6 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.61248
+  2/5,  6.617887
+  3/5,  6.610991
+  4/5,  6.613112
+  5/5,  6.619466
+}
+{ Black Scholes - simple_mcache_7 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.911667
+  2/5,  6.603545
+  3/5,  6.609942
+  4/5,  6.61673
+  5/5,  6.607323
+}
+{ Black Scholes - simple_mcache_8 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.595099
+  2/5,  6.589953
+  3/5,  6.551949
+  4/5,  6.558137
+  5/5,  6.549083
+}
+{ Black Scholes - simple_mcache_9 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.585437
+  2/5,  6.584999
+  3/5,  6.59046
+  4/5,  6.590669
+  5/5,  6.572856
+}
+{ Black Scholes - simple_mcache_10 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.587737
+  2/5,  6.580569
+  3/5,  6.586557
+  4/5,  6.581097
+  5/5,  6.594988
 }
 { Cache Synth - numpy ( None ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
-  1/5,  18.434688
-  2/5,  18.498154
-  3/5,  18.434541
-  4/5,  18.449799
-  5/5,  18.474505
+  1/5,  18.394776
+  2/5,  18.359676
+  3/5,  18.374302
+  4/5,  18.399756
+  5/5,  18.361004
 }
 { Cache Synth - simple ( simple ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  18.271526
-  2/5,  18.308485
-  3/5,  18.253138
-  4/5,  18.345846
-  5/5,  18.268754
+  1/5,  18.171998
+  2/5,  18.19913
+  3/5,  18.204603
+  4/5,  18.205625
+  5/5,  18.261418
 }
 { Cache Synth - score ( score ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  18.24399
-  2/5,  18.239037
-  3/5,  18.257451
-  4/5,  18.233092
-  5/5,  18.257561
+  1/5,  18.193656
+  2/5,  18.254455
+  3/5,  18.172981
+  4/5,  18.171336
+  5/5,  18.174376
+}
+{ Cache Synth - score_mcache_1 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.298247
+  2/5,  18.297076
+  3/5,  18.298596
+  4/5,  18.296817
+  5/5,  18.291055
+}
+{ Cache Synth - score_mcache_2 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.252519
+  2/5,  18.282037
+  3/5,  18.253444
+  4/5,  18.251148
+  5/5,  18.25722
+}
+{ Cache Synth - score_mcache_3 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.321848
+  2/5,  18.24368
+  3/5,  18.31068
+  4/5,  18.330161
+  5/5,  18.309146
+}
+{ Cache Synth - score_mcache_4 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.30366
+  2/5,  18.232483
+  3/5,  18.175656
+  4/5,  18.210623
+  5/5,  18.185915
+}
+{ Cache Synth - score_mcache_5 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.253744
+  2/5,  18.175932
+  3/5,  18.174547
+  4/5,  18.171898
+  5/5,  18.174361
+}
+{ Cache Synth - score_mcache_6 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.172401
+  2/5,  18.246624
+  3/5,  18.213988
+  4/5,  18.169113
+  5/5,  18.453918
+}
+{ Cache Synth - score_mcache_7 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.194232
+  2/5,  18.173766
+  3/5,  18.257125
+  4/5,  18.169688
+  5/5,  18.249342
+}
+{ Cache Synth - score_mcache_8 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.185236
+  2/5,  18.247379
+  3/5,  18.177985
+  4/5,  18.202398
+  5/5,  18.17123
+}
+{ Cache Synth - score_mcache_9 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.188823
+  2/5,  18.173575
+  3/5,  18.164863
+  4/5,  18.164519
+  5/5,  18.195934
+}
+{ Cache Synth - score_mcache_10 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.320552
+  2/5,  18.18994
+  3/5,  18.173836
+  4/5,  18.170186
+  5/5,  18.224963
+}
+{ Cache Synth - simple_mcache_1 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.189636
+  2/5,  18.309671
+  3/5,  18.328227
+  4/5,  18.193123
+  5/5,  18.274508
+}
+{ Cache Synth - simple_mcache_2 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.321213
+  2/5,  18.241392
+  3/5,  18.239331
+  4/5,  18.186632
+  5/5,  18.173596
+}
+{ Cache Synth - simple_mcache_3 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.179546
+  2/5,  18.173931
+  3/5,  18.17405
+  4/5,  18.23261
+  5/5,  18.400487
+}
+{ Cache Synth - simple_mcache_4 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.180192
+  2/5,  18.188166
+  3/5,  18.178746
+  4/5,  18.22042
+  5/5,  18.200074
+}
+{ Cache Synth - simple_mcache_5 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.174778
+  2/5,  18.193094
+  3/5,  18.177864
+  4/5,  18.264342
+  5/5,  18.204629
+}
+{ Cache Synth - simple_mcache_6 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.284696
+  2/5,  18.185445
+  3/5,  18.187142
+  4/5,  18.17719
+  5/5,  18.195742
+}
+{ Cache Synth - simple_mcache_7 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.256362
+  2/5,  18.179751
+  3/5,  18.18852
+  4/5,  18.183537
+  5/5,  18.214552
+}
+{ Cache Synth - simple_mcache_8 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.18824
+  2/5,  18.175682
+  3/5,  18.201529
+  4/5,  18.181743
+  5/5,  18.189718
+}
+{ Cache Synth - simple_mcache_9 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.211516
+  2/5,  18.313784
+  3/5,  18.196207
+  4/5,  18.215158
+  5/5,  18.24463
+}
+{ Cache Synth - simple_mcache_10 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  18.211406
+  2/5,  18.267466
+  3/5,  18.277439
+  4/5,  18.335267
+  5/5,  18.311018
 }
 { Jacobi Iterative - numpy ( None ),
   taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=False
-  1/5,  3.718024
-  2/5,  3.71543
-  3/5,  3.706508
-  4/5,  3.719598
-  5/5,  3.729456
+  1/5,  3.480011
+  2/5,  3.480928
+  3/5,  3.494593
+  4/5,  3.80639
+  5/5,  3.631229
 }
 { Jacobi Iterative - simple ( simple ),
   taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.683294
-  2/5,  3.680311
-  3/5,  3.675805
-  4/5,  3.681455
-  5/5,  3.679036
+  1/5,  3.498683
+  2/5,  3.467047
+  3/5,  3.47754
+  4/5,  3.46674
+  5/5,  3.484095
 }
 { Jacobi Iterative - score ( score ),
   taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  2.432089
-  2/5,  2.422783
-  3/5,  2.437564
-  4/5,  2.428118
-  5/5,  2.435447
+  1/5,  2.35841
+  2/5,  2.365709
+  3/5,  2.353407
+  4/5,  2.352133
+  5/5,  2.3624
+}
+{ Jacobi Iterative - score_mcache_1 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.357075
+  2/5,  2.363763
+  3/5,  2.365359
+  4/5,  2.372324
+  5/5,  2.44455
+}
+{ Jacobi Iterative - score_mcache_2 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.356225
+  2/5,  2.359617
+  3/5,  2.376562
+  4/5,  2.380927
+  5/5,  2.397157
+}
+{ Jacobi Iterative - score_mcache_3 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.353938
+  2/5,  2.369773
+  3/5,  2.365566
+  4/5,  2.369253
+  5/5,  2.378941
+}
+{ Jacobi Iterative - score_mcache_4 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.359123
+  2/5,  2.361323
+  3/5,  2.37948
+  4/5,  2.349895
+  5/5,  2.365637
+}
+{ Jacobi Iterative - score_mcache_5 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.438744
+  2/5,  2.364736
+  3/5,  2.363238
+  4/5,  2.365966
+  5/5,  2.352595
+}
+{ Jacobi Iterative - score_mcache_6 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.368398
+  2/5,  2.369064
+  3/5,  2.362303
+  4/5,  2.363617
+  5/5,  2.365687
+}
+{ Jacobi Iterative - score_mcache_7 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.38669
+  2/5,  2.360701
+  3/5,  2.362543
+  4/5,  2.366354
+  5/5,  2.364634
+}
+{ Jacobi Iterative - score_mcache_8 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.415108
+  2/5,  2.41091
+  3/5,  2.36298
+  4/5,  2.375353
+  5/5,  2.379852
+}
+{ Jacobi Iterative - score_mcache_9 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.388338
+  2/5,  2.418573
+  3/5,  2.381153
+  4/5,  2.387818
+  5/5,  2.465814
+}
+{ Jacobi Iterative - score_mcache_10 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.407703
+  2/5,  2.357974
+  3/5,  2.373172
+  4/5,  2.358065
+  5/5,  2.370798
+}
+{ Jacobi Iterative - simple_mcache_1 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.494974
+  2/5,  3.518799
+  3/5,  3.513107
+  4/5,  3.670968
+  5/5,  3.839428
+}
+{ Jacobi Iterative - simple_mcache_2 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.70246
+  2/5,  3.563355
+  3/5,  3.47314
+  4/5,  3.73553
+  5/5,  3.652719
+}
+{ Jacobi Iterative - simple_mcache_3 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.594826
+  2/5,  3.596144
+  3/5,  3.494416
+  4/5,  3.472717
+  5/5,  3.456744
+}
+{ Jacobi Iterative - simple_mcache_4 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.475383
+  2/5,  3.458429
+  3/5,  3.48289
+  4/5,  3.463744
+  5/5,  3.472803
+}
+{ Jacobi Iterative - simple_mcache_5 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.488238
+  2/5,  3.488717
+  3/5,  3.47684
+  4/5,  3.458862
+  5/5,  3.492279
+}
+{ Jacobi Iterative - simple_mcache_6 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.465156
+  2/5,  3.455816
+  3/5,  3.488442
+  4/5,  3.456648
+  5/5,  3.457992
+}
+{ Jacobi Iterative - simple_mcache_7 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.468876
+  2/5,  3.457077
+  3/5,  3.471119
+  4/5,  3.469639
+  5/5,  3.487192
+}
+{ Jacobi Iterative - simple_mcache_8 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.472695
+  2/5,  3.475914
+  3/5,  3.460888
+  4/5,  3.475047
+  5/5,  3.487353
+}
+{ Jacobi Iterative - simple_mcache_9 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.476838
+  2/5,  3.472376
+  3/5,  3.47128
+  4/5,  3.459625
+  5/5,  3.491244
+}
+{ Jacobi Iterative - simple_mcache_10 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.577412
+  2/5,  3.501743
+  3/5,  3.480407
+  4/5,  3.503025
+  5/5,  3.493676
 }
 { Jacobi Iterative - Reduce - numpy ( None ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
-  1/5,  8.435994
-  2/5,  8.404234
-  3/5,  8.40867
-  4/5,  8.402746
-  5/5,  8.416562
+  1/5,  8.071455
+  2/5,  8.062901
+  3/5,  8.074084
+  4/5,  8.069875
+  5/5,  8.087312
 }
 { Jacobi Iterative - Reduce - simple ( simple ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  5.497796
-  2/5,  5.486447
-  3/5,  5.492172
-  4/5,  5.491837
-  5/5,  5.469035
+  1/5,  5.219174
+  2/5,  5.158242
+  3/5,  5.161201
+  4/5,  5.164695
+  5/5,  5.167022
 }
 { Jacobi Iterative - Reduce - score ( score ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.817781
-  2/5,  3.837509
-  3/5,  3.837089
-  4/5,  3.822357
-  5/5,  3.830424
+  1/5,  3.670732
+  2/5,  3.687088
+  3/5,  3.665648
+  4/5,  3.669328
+  5/5,  3.672087
+}
+{ Jacobi Iterative - Reduce - score_mcache_1 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.403633
+  2/5,  4.397334
+  3/5,  4.403921
+  4/5,  4.393694
+  5/5,  4.398022
+}
+{ Jacobi Iterative - Reduce - score_mcache_2 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.980587
+  2/5,  3.985186
+  3/5,  3.982375
+  4/5,  3.999265
+  5/5,  3.985696
+}
+{ Jacobi Iterative - Reduce - score_mcache_3 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.670752
+  2/5,  3.6688
+  3/5,  3.67642
+  4/5,  3.679861
+  5/5,  3.681945
+}
+{ Jacobi Iterative - Reduce - score_mcache_4 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.667908
+  2/5,  3.67975
+  3/5,  3.669592
+  4/5,  3.671581
+  5/5,  3.694385
+}
+{ Jacobi Iterative - Reduce - score_mcache_5 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.677106
+  2/5,  3.671926
+  3/5,  3.689264
+  4/5,  3.677101
+  5/5,  3.674288
+}
+{ Jacobi Iterative - Reduce - score_mcache_6 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.683527
+  2/5,  3.681752
+  3/5,  3.670745
+  4/5,  3.676196
+  5/5,  3.730045
+}
+{ Jacobi Iterative - Reduce - score_mcache_7 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.174808
+  2/5,  3.745634
+  3/5,  3.900681
+  4/5,  3.683774
+  5/5,  3.811568
+}
+{ Jacobi Iterative - Reduce - score_mcache_8 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.760738
+  2/5,  3.737407
+  3/5,  3.851079
+  4/5,  3.718811
+  5/5,  3.723998
+}
+{ Jacobi Iterative - Reduce - score_mcache_9 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.72519
+  2/5,  3.822623
+  3/5,  3.765954
+  4/5,  3.824463
+  5/5,  3.757894
+}
+{ Jacobi Iterative - Reduce - score_mcache_10 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.760378
+  2/5,  3.881128
+  3/5,  3.742757
+  4/5,  3.851666
+  5/5,  3.812656
+}
+{ Jacobi Iterative - Reduce - simple_mcache_1 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.847302
+  2/5,  5.96646
+  3/5,  5.820015
+  4/5,  5.75905
+  5/5,  5.896902
+}
+{ Jacobi Iterative - Reduce - simple_mcache_2 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.434638
+  2/5,  5.494389
+  3/5,  5.510846
+  4/5,  5.51596
+  5/5,  5.475354
+}
+{ Jacobi Iterative - Reduce - simple_mcache_3 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.306483
+  2/5,  5.254251
+  3/5,  5.324455
+  4/5,  5.280271
+  5/5,  5.22559
+}
+{ Jacobi Iterative - Reduce - simple_mcache_4 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.549229
+  2/5,  5.404338
+  3/5,  5.258089
+  4/5,  5.339866
+  5/5,  5.243762
+}
+{ Jacobi Iterative - Reduce - simple_mcache_5 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.295795
+  2/5,  5.309301
+  3/5,  5.298533
+  4/5,  5.259612
+  5/5,  5.320414
+}
+{ Jacobi Iterative - Reduce - simple_mcache_6 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.337999
+  2/5,  5.300363
+  3/5,  5.319938
+  4/5,  5.199496
+  5/5,  5.211183
+}
+{ Jacobi Iterative - Reduce - simple_mcache_7 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.191045
+  2/5,  5.210908
+  3/5,  5.487332
+  4/5,  5.223295
+  5/5,  5.197767
+}
+{ Jacobi Iterative - Reduce - simple_mcache_8 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.203124
+  2/5,  5.188229
+  3/5,  5.180207
+  4/5,  5.339269
+  5/5,  5.394347
+}
+{ Jacobi Iterative - Reduce - simple_mcache_9 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.245227
+  2/5,  5.270624
+  3/5,  5.313175
+  4/5,  5.249143
+  5/5,  5.222471
+}
+{ Jacobi Iterative - Reduce - simple_mcache_10 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.209426
+  2/5,  5.291104
+  3/5,  5.302116
+  4/5,  5.2131
+  5/5,  5.204818
 }
 { kNN - numpy ( None ),
   taskset -c 1 python knn.py --size=10000*120 --cphvb=False
-  1/5,  5.020947
-  2/5,  5.076954
-  3/5,  5.01679
-  4/5,  4.985597
-  5/5,  4.964661
+  1/5,  5.014659
+  2/5,  4.839136
+  3/5,  4.914014
+  4/5,  4.814949
+  5/5,  4.946445
 }
 { kNN - simple ( simple ),
   taskset -c 1 python knn.py --size=10000*120 --cphvb=True
-  1/5,  1.52059
-  2/5,  1.474868
-  3/5,  1.473585
-  4/5,  1.478545
-  5/5,  1.485553
+  1/5,  1.508602
+  2/5,  1.507434
+  3/5,  1.447106
+  4/5,  1.447623
+  5/5,  1.44753
 }
 { kNN - score ( score ),
   taskset -c 1 python knn.py --size=10000*120 --cphvb=True
-  1/5,  1.444463
-  2/5,  1.446019
-  3/5,  1.450069
-  4/5,  1.453637
-  5/5,  1.444978
+  1/5,  1.420136
+  2/5,  1.428979
+  3/5,  1.423205
+  4/5,  1.43066
+  5/5,  1.424467
+}
+{ kNN - score_mcache_1 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.582354
+  2/5,  1.570815
+  3/5,  1.579238
+  4/5,  1.570226
+  5/5,  1.576323
+}
+{ kNN - score_mcache_2 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.568086
+  2/5,  1.575437
+  3/5,  1.568889
+  4/5,  1.581788
+  5/5,  1.56836
+}
+{ kNN - score_mcache_3 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.501642
+  2/5,  1.502956
+  3/5,  1.518604
+  4/5,  1.510369
+  5/5,  1.524085
+}
+{ kNN - score_mcache_4 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.438484
+  2/5,  1.44131
+  3/5,  1.477283
+  4/5,  1.46008
+  5/5,  1.452392
+}
+{ kNN - score_mcache_5 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.451255
+  2/5,  1.419547
+  3/5,  1.428072
+  4/5,  1.498073
+  5/5,  1.454412
+}
+{ kNN - score_mcache_6 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.428504
+  2/5,  1.430956
+  3/5,  1.419747
+  4/5,  1.437774
+  5/5,  1.427593
+}
+{ kNN - score_mcache_7 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.421408
+  2/5,  1.43411
+  3/5,  1.42123
+  4/5,  1.418457
+  5/5,  1.456967
+}
+{ kNN - score_mcache_8 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.443482
+  2/5,  1.439015
+  3/5,  1.431725
+  4/5,  1.443536
+  5/5,  1.423342
+}
+{ kNN - score_mcache_9 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.420545
+  2/5,  1.431971
+  3/5,  1.434973
+  4/5,  1.420513
+  5/5,  1.430422
+}
+{ kNN - score_mcache_10 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.424262
+  2/5,  1.425404
+  3/5,  1.419364
+  4/5,  1.421018
+  5/5,  1.41762
+}
+{ kNN - simple_mcache_1 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.573647
+  2/5,  1.573981
+  3/5,  1.572576
+  4/5,  1.582087
+  5/5,  1.587592
+}
+{ kNN - simple_mcache_2 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.58305
+  2/5,  1.581125
+  3/5,  1.572384
+  4/5,  1.573448
+  5/5,  1.568559
+}
+{ kNN - simple_mcache_3 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.527599
+  2/5,  1.530152
+  3/5,  1.514196
+  4/5,  1.515096
+  5/5,  1.521281
+}
+{ kNN - simple_mcache_4 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.436202
+  2/5,  1.442701
+  3/5,  1.495441
+  4/5,  1.510354
+  5/5,  1.453018
+}
+{ kNN - simple_mcache_5 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.471972
+  2/5,  1.466774
+  3/5,  1.493578
+  4/5,  1.468179
+  5/5,  1.452213
+}
+{ kNN - simple_mcache_6 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.443435
+  2/5,  1.453972
+  3/5,  1.445023
+  4/5,  1.445143
+  5/5,  1.456871
+}
+{ kNN - simple_mcache_7 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.451968
+  2/5,  1.449696
+  3/5,  1.440862
+  4/5,  1.45487
+  5/5,  1.443589
+}
+{ kNN - simple_mcache_8 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.452427
+  2/5,  1.44683
+  3/5,  1.438292
+  4/5,  1.444245
+  5/5,  1.446082
+}
+{ kNN - simple_mcache_9 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.460921
+  2/5,  1.454853
+  3/5,  1.460895
+  4/5,  1.455572
+  5/5,  1.451178
+}
+{ kNN - simple_mcache_10 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.439903
+  2/5,  1.443702
+  3/5,  1.440249
+  4/5,  1.44397
+  5/5,  1.456221
 }
 { Lattice Boltzmann 2D - numpy ( None ),
   taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=False
-  1/5,  6.699139
-  2/5,  6.715315
-  3/5,  6.694071
-  4/5,  6.729356
-  5/5,  6.690413
+  1/5,  6.68004
+  2/5,  6.671685
+  3/5,  6.714146
+  4/5,  6.759152
+  5/5,  6.715817
 }
 { Lattice Boltzmann 2D - simple ( simple ),
   taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
-  1/5,  5.721115
-  2/5,  5.684093
-  3/5,  5.729815
-  4/5,  5.705031
-  5/5,  5.73869
+  1/5,  5.378994
+  2/5,  5.439293
+  3/5,  5.427552
+  4/5,  5.538534
+  5/5,  5.66578
 }
 { Lattice Boltzmann 2D - score ( score ),
   taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
-  1/5,  5.284519
-  2/5,  5.302115
-  3/5,  5.279592
-  4/5,  5.303195
-  5/5,  5.29537
+  1/5,  5.231164
+  2/5,  5.134731
+  3/5,  5.117
+  4/5,  5.192493
+  5/5,  5.167987
+}
+{ Lattice Boltzmann 2D - score_mcache_1 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  6.514634
+  2/5,  6.429651
+  3/5,  6.496695
+  4/5,  6.473484
+  5/5,  6.49887
+}
+{ Lattice Boltzmann 2D - score_mcache_2 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  6.083097
+  2/5,  6.117636
+  3/5,  6.077911
+  4/5,  6.094808
+  5/5,  6.122919
+}
+{ Lattice Boltzmann 2D - score_mcache_3 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.69418
+  2/5,  5.670535
+  3/5,  5.692774
+  4/5,  5.671075
+  5/5,  5.869198
+}
+{ Lattice Boltzmann 2D - score_mcache_4 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.70465
+  2/5,  5.708886
+  3/5,  5.553939
+  4/5,  5.685947
+  5/5,  5.699402
+}
+{ Lattice Boltzmann 2D - score_mcache_5 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.441646
+  2/5,  5.77405
+  3/5,  5.768397
+  4/5,  5.612974
+  5/5,  5.637302
+}
+{ Lattice Boltzmann 2D - score_mcache_6 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.506086
+  2/5,  5.721483
+  3/5,  5.560454
+  4/5,  5.520462
+  5/5,  5.513205
+}
+{ Lattice Boltzmann 2D - score_mcache_7 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.393521
+  2/5,  5.294225
+  3/5,  5.338928
+  4/5,  5.492086
+  5/5,  5.390678
+}
+{ Lattice Boltzmann 2D - score_mcache_8 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.355602
+  2/5,  5.389073
+  3/5,  5.356443
+  4/5,  5.483236
+  5/5,  5.30103
+}
+{ Lattice Boltzmann 2D - score_mcache_9 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.169106
+  2/5,  5.321169
+  3/5,  5.221308
+  4/5,  5.362137
+  5/5,  5.189364
+}
+{ Lattice Boltzmann 2D - score_mcache_10 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.151689
+  2/5,  5.173253
+  3/5,  5.285763
+  4/5,  5.392187
+  5/5,  5.239416
+}
+{ Lattice Boltzmann 2D - simple_mcache_1 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  6.435718
+  2/5,  6.273053
+  3/5,  6.253402
+  4/5,  6.303742
+  5/5,  6.272571
+}
+{ Lattice Boltzmann 2D - simple_mcache_2 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.78591
+  2/5,  5.803642
+  3/5,  5.955851
+  4/5,  5.805512
+  5/5,  5.826413
+}
+{ Lattice Boltzmann 2D - simple_mcache_3 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.731625
+  2/5,  5.771889
+  3/5,  5.903518
+  4/5,  5.806705
+  5/5,  5.970363
+}
+{ Lattice Boltzmann 2D - simple_mcache_4 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.743442
+  2/5,  5.816319
+  3/5,  5.681875
+  4/5,  5.813815
+  5/5,  5.702878
+}
+{ Lattice Boltzmann 2D - simple_mcache_5 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.592655
+  2/5,  5.550934
+  3/5,  5.759711
+  4/5,  5.793292
+  5/5,  5.561458
+}
+{ Lattice Boltzmann 2D - simple_mcache_6 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.556362
+  2/5,  5.761274
+  3/5,  5.895381
+  4/5,  5.572981
+  5/5,  5.631509
+}
+{ Lattice Boltzmann 2D - simple_mcache_7 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.651769
+  2/5,  5.551282
+  3/5,  5.672551
+  4/5,  5.661268
+  5/5,  5.534195
+}
+{ Lattice Boltzmann 2D - simple_mcache_8 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.678953
+  2/5,  5.561154
+  3/5,  6.245693
+  4/5,  5.584005
+  5/5,  5.528807
+}
+{ Lattice Boltzmann 2D - simple_mcache_9 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.50058
+  2/5,  5.537458
+  3/5,  5.654975
+  4/5,  5.676908
+  5/5,  5.480622
+}
+{ Lattice Boltzmann 2D - simple_mcache_10 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.801249
+  2/5,  5.629266
+  3/5,  5.486575
+  4/5,  5.535672
+  5/5,  5.475908
 }
 { Lattice Boltzmann 3D - numpy ( None ),
   taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=False
-  1/5,  2.793126
-  2/5,  2.799323
-  3/5,  2.80699
-  4/5,  2.807983
-  5/5,  2.813472
+  1/5,  2.868547
+  2/5,  2.849014
+  3/5,  2.8503
+  4/5,  2.945254
+  5/5,  2.888603
 }
 { Lattice Boltzmann 3D - simple ( simple ),
   taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
-  1/5,  2.609029
-  2/5,  2.630885
-  3/5,  2.614344
-  4/5,  2.637997
-  5/5,  2.621983
+  1/5,  2.712419
+  2/5,  2.723323
+  3/5,  2.658964
+  4/5,  2.622168
+  5/5,  2.577621
 }
 { Lattice Boltzmann 3D - score ( score ),
   taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
-  1/5,  2.352183
-  2/5,  2.341637
-  3/5,  2.33895
-  4/5,  2.358326
-  5/5,  2.339971
+  1/5,  2.229042
+  2/5,  2.322114
+  3/5,  2.26404
+  4/5,  2.248025
+  5/5,  2.225555
+}
+{ Lattice Boltzmann 3D - score_mcache_1 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.786713
+  2/5,  2.834541
+  3/5,  2.770949
+  4/5,  2.761189
+  5/5,  2.758427
+}
+{ Lattice Boltzmann 3D - score_mcache_2 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.581489
+  2/5,  2.563045
+  3/5,  2.5766
+  4/5,  2.557805
+  5/5,  2.5825
+}
+{ Lattice Boltzmann 3D - score_mcache_3 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.493847
+  2/5,  2.518348
+  3/5,  2.487367
+  4/5,  2.475709
+  5/5,  2.448178
+}
+{ Lattice Boltzmann 3D - score_mcache_4 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.338038
+  2/5,  2.39195
+  3/5,  2.433617
+  4/5,  2.383011
+  5/5,  2.335372
+}
+{ Lattice Boltzmann 3D - score_mcache_5 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.296717
+  2/5,  2.283098
+  3/5,  2.365097
+  4/5,  2.277202
+  5/5,  2.283841
+}
+{ Lattice Boltzmann 3D - score_mcache_6 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.2825
+  2/5,  2.348141
+  3/5,  2.332438
+  4/5,  2.436652
+  5/5,  2.444301
+}
+{ Lattice Boltzmann 3D - score_mcache_7 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.567936
+  2/5,  2.341971
+  3/5,  2.367129
+  4/5,  2.433614
+  5/5,  2.279443
+}
+{ Lattice Boltzmann 3D - score_mcache_8 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.281555
+  2/5,  2.34325
+  3/5,  2.236114
+  4/5,  2.260042
+  5/5,  2.316213
+}
+{ Lattice Boltzmann 3D - score_mcache_9 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.252934
+  2/5,  2.2446
+  3/5,  2.281421
+  4/5,  2.23503
+  5/5,  2.247364
+}
+{ Lattice Boltzmann 3D - score_mcache_10 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.276104
+  2/5,  2.260888
+  3/5,  2.245144
+  4/5,  2.290076
+  5/5,  2.23753
+}
+{ Lattice Boltzmann 3D - simple_mcache_1 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.657351
+  2/5,  2.70172
+  3/5,  2.650078
+  4/5,  2.699446
+  5/5,  2.644502
+}
+{ Lattice Boltzmann 3D - simple_mcache_2 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.556293
+  2/5,  2.626242
+  3/5,  2.548966
+  4/5,  2.576161
+  5/5,  2.574786
+}
+{ Lattice Boltzmann 3D - simple_mcache_3 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.550968
+  2/5,  2.632978
+  3/5,  2.56701
+  4/5,  2.619251
+  5/5,  2.664042
+}
+{ Lattice Boltzmann 3D - simple_mcache_4 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.760413
+  2/5,  2.560573
+  3/5,  2.528488
+  4/5,  2.563677
+  5/5,  2.57626
+}
+{ Lattice Boltzmann 3D - simple_mcache_5 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.537861
+  2/5,  2.518887
+  3/5,  2.566199
+  4/5,  2.521856
+  5/5,  2.523082
+}
+{ Lattice Boltzmann 3D - simple_mcache_6 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.535375
+  2/5,  2.534416
+  3/5,  2.648967
+  4/5,  2.647253
+  5/5,  2.53827
+}
+{ Lattice Boltzmann 3D - simple_mcache_7 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.628967
+  2/5,  2.684077
+  3/5,  2.684491
+  4/5,  2.65226
+  5/5,  2.544837
+}
+{ Lattice Boltzmann 3D - simple_mcache_8 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.570086
+  2/5,  2.54118
+  3/5,  2.508166
+  4/5,  2.503285
+  5/5,  2.493402
+}
+{ Lattice Boltzmann 3D - simple_mcache_9 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.492394
+  2/5,  2.515382
+  3/5,  2.496672
+  4/5,  2.524232
+  5/5,  2.528205
+}
+{ Lattice Boltzmann 3D - simple_mcache_10 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.5335
+  2/5,  2.512835
+  3/5,  2.600465
+  4/5,  2.584333
+  5/5,  2.557564
 }
 { Monte Carlo PI - RIL - numpy ( None ),
   taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=False
-  1/5,  5.364721
-  2/5,  5.368701
-  3/5,  5.292678
-  4/5,  5.262393
-  5/5,  5.257555
+  1/5,  5.509883
+  2/5,  5.411114
+  3/5,  5.413222
+  4/5,  5.40176
+  5/5,  5.451502
 }
 { Monte Carlo PI - RIL - simple ( simple ),
   taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
-  1/5,  5.211066
-  2/5,  5.209492
-  3/5,  5.228992
-  4/5,  5.261093
-  5/5,  5.221487
+  1/5,  5.490182
+  2/5,  5.447158
+  3/5,  5.359233
+  4/5,  5.568024
+  5/5,  5.524073
 }
 { Monte Carlo PI - RIL - score ( score ),
   taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
-  1/5,  5.093225
-  2/5,  5.104601
-  3/5,  5.082138
-  4/5,  5.113687
-  5/5,  5.093339
+  1/5,  5.501547
+  2/5,  5.299454
+  3/5,  5.292818
+  4/5,  5.30415
+  5/5,  5.316806
+}
+{ Monte Carlo PI - RIL - score_mcache_1 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.372024
+  2/5,  5.432029
+  3/5,  5.47081
+  4/5,  5.516217
+  5/5,  5.43755
+}
+{ Monte Carlo PI - RIL - score_mcache_2 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.432658
+  2/5,  5.497349
+  3/5,  5.286859
+  4/5,  5.406622
+  5/5,  5.362662
+}
+{ Monte Carlo PI - RIL - score_mcache_3 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.296586
+  2/5,  5.314169
+  3/5,  5.303575
+  4/5,  5.422338
+  5/5,  5.355173
+}
+{ Monte Carlo PI - RIL - score_mcache_4 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.336439
+  2/5,  5.401929
+  3/5,  5.375057
+  4/5,  5.216745
+  5/5,  5.284157
+}
+{ Monte Carlo PI - RIL - score_mcache_5 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.24372
+  2/5,  5.236766
+  3/5,  5.240091
+  4/5,  5.331118
+  5/5,  5.249745
+}
+{ Monte Carlo PI - RIL - score_mcache_6 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.272094
+  2/5,  5.231101
+  3/5,  5.211964
+  4/5,  5.249992
+  5/5,  5.271574
+}
+{ Monte Carlo PI - RIL - score_mcache_7 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.259675
+  2/5,  5.234407
+  3/5,  5.233294
+  4/5,  5.208637
+  5/5,  5.202284
+}
+{ Monte Carlo PI - RIL - score_mcache_8 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.199485
+  2/5,  5.20701
+  3/5,  5.203661
+  4/5,  5.216939
+  5/5,  5.21866
+}
+{ Monte Carlo PI - RIL - score_mcache_9 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.217382
+  2/5,  5.223155
+  3/5,  5.211026
+  4/5,  5.214937
+  5/5,  5.21006
+}
+{ Monte Carlo PI - RIL - score_mcache_10 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.22496
+  2/5,  5.24852
+  3/5,  5.224777
+  4/5,  5.206556
+  5/5,  5.198058
+}
+{ Monte Carlo PI - RIL - simple_mcache_1 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.710791
+  2/5,  5.721131
+  3/5,  5.741406
+  4/5,  5.714737
+  5/5,  5.746909
+}
+{ Monte Carlo PI - RIL - simple_mcache_2 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.416215
+  2/5,  5.429184
+  3/5,  5.433135
+  4/5,  5.525059
+  5/5,  5.426039
+}
+{ Monte Carlo PI - RIL - simple_mcache_3 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.410282
+  2/5,  5.411809
+  3/5,  5.418518
+  4/5,  5.417039
+  5/5,  5.417263
+}
+{ Monte Carlo PI - RIL - simple_mcache_4 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.427155
+  2/5,  5.42611
+  3/5,  5.359356
+  4/5,  5.408459
+  5/5,  5.399306
+}
+{ Monte Carlo PI - RIL - simple_mcache_5 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.385938
+  2/5,  5.388316
+  3/5,  5.369447
+  4/5,  5.345364
+  5/5,  5.384772
+}
+{ Monte Carlo PI - RIL - simple_mcache_6 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.467259
+  2/5,  5.405541
+  3/5,  5.359707
+  4/5,  5.375015
+  5/5,  5.404468
+}
+{ Monte Carlo PI - RIL - simple_mcache_7 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.374544
+  2/5,  5.440745
+  3/5,  5.50449
+  4/5,  5.468481
+  5/5,  5.457263
+}
+{ Monte Carlo PI - RIL - simple_mcache_8 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.589902
+  2/5,  5.478629
+  3/5,  5.41865
+  4/5,  5.405555
+  5/5,  5.56169
+}
+{ Monte Carlo PI - RIL - simple_mcache_9 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.489584
+  2/5,  5.397593
+  3/5,  5.425755
+  4/5,  5.416998
+  5/5,  5.404743
+}
+{ Monte Carlo PI - RIL - simple_mcache_10 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.429775
+  2/5,  5.395169
+  3/5,  5.418848
+  4/5,  5.378423
+  5/5,  5.364505
 }
 { Monte Carlo PI - 2xN - numpy ( None ),
   taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=False
-  1/5,  0.261644
-  2/5,  0.262106
-  3/5,  0.26287
-  4/5,  0.261696
-  5/5,  0.262591
+  1/5,  0.274916
+  2/5,  0.272451
+  3/5,  0.272358
+  4/5,  0.277404
+  5/5,  0.27184
 }
 { Monte Carlo PI - 2xN - simple ( simple ),
   taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.259587
-  2/5,  0.258765
-  3/5,  0.258791
-  4/5,  0.256468
-  5/5,  0.259276
+  1/5,  0.260512
+  2/5,  0.261067
+  3/5,  0.260881
+  4/5,  0.269225
+  5/5,  0.262055
 }
 { Monte Carlo PI - 2xN - score ( score ),
   taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.24627
-  2/5,  0.249387
-  3/5,  0.246279
-  4/5,  0.247273
-  5/5,  0.247485
+  1/5,  0.250371
+  2/5,  0.250273
+  3/5,  0.251349
+  4/5,  0.256424
+  5/5,  0.250228
+}
+{ Monte Carlo PI - 2xN - score_mcache_1 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.348898
+  2/5,  0.356734
+  3/5,  0.350669
+  4/5,  0.349012
+  5/5,  0.353538
+}
+{ Monte Carlo PI - 2xN - score_mcache_2 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.349429
+  2/5,  0.345373
+  3/5,  0.349351
+  4/5,  0.344887
+  5/5,  0.343028
+}
+{ Monte Carlo PI - 2xN - score_mcache_3 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.327481
+  2/5,  0.326615
+  3/5,  0.32783
+  4/5,  0.326966
+  5/5,  0.328314
+}
+{ Monte Carlo PI - 2xN - score_mcache_4 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.303871
+  2/5,  0.30335
+  3/5,  0.303047
+  4/5,  0.302611
+  5/5,  0.301945
+}
+{ Monte Carlo PI - 2xN - score_mcache_5 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.274389
+  2/5,  0.274414
+  3/5,  0.274714
+  4/5,  0.274872
+  5/5,  0.274137
+}
+{ Monte Carlo PI - 2xN - score_mcache_6 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.256219
+  2/5,  0.249199
+  3/5,  0.250528
+  4/5,  0.252456
+  5/5,  0.249593
+}
+{ Monte Carlo PI - 2xN - score_mcache_7 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.251021
+  2/5,  0.249258
+  3/5,  0.249691
+  4/5,  0.250533
+  5/5,  0.25038
+}
+{ Monte Carlo PI - 2xN - score_mcache_8 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.254697
+  2/5,  0.249482
+  3/5,  0.250084
+  4/5,  0.248879
+  5/5,  0.251201
+}
+{ Monte Carlo PI - 2xN - score_mcache_9 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.249205
+  2/5,  0.253967
+  3/5,  0.251912
+  4/5,  0.249968
+  5/5,  0.250223
+}
+{ Monte Carlo PI - 2xN - score_mcache_10 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.250715
+  2/5,  0.250774
+  3/5,  0.254035
+  4/5,  0.251027
+  5/5,  0.251389
+}
+{ Monte Carlo PI - 2xN - simple_mcache_1 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.324345
+  2/5,  0.322833
+  3/5,  0.324934
+  4/5,  0.322971
+  5/5,  0.322698
+}
+{ Monte Carlo PI - 2xN - simple_mcache_2 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.296499
+  2/5,  0.29797
+  3/5,  0.298813
+  4/5,  0.29817
+  5/5,  0.297441
+}
+{ Monte Carlo PI - 2xN - simple_mcache_3 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.280082
+  2/5,  0.280278
+  3/5,  0.280602
+  4/5,  0.281683
+  5/5,  0.283966
+}
+{ Monte Carlo PI - 2xN - simple_mcache_4 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.278308
+  2/5,  0.278399
+  3/5,  0.280958
+  4/5,  0.277811
+  5/5,  0.283994
+}
+{ Monte Carlo PI - 2xN - simple_mcache_5 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.263611
+  2/5,  0.263279
+  3/5,  0.263783
+  4/5,  0.262435
+  5/5,  0.273294
+}
+{ Monte Carlo PI - 2xN - simple_mcache_6 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.270111
+  2/5,  0.261924
+  3/5,  0.26144
+  4/5,  0.259563
+  5/5,  0.260821
+}
+{ Monte Carlo PI - 2xN - simple_mcache_7 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.26219
+  2/5,  0.270843
+  3/5,  0.262776
+  4/5,  0.261794
+  5/5,  0.260119
+}
+{ Monte Carlo PI - 2xN - simple_mcache_8 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.260859
+  2/5,  0.261736
+  3/5,  0.260719
+  4/5,  0.261605
+  5/5,  0.262248
+}
+{ Monte Carlo PI - 2xN - simple_mcache_9 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.264783
+  2/5,  0.260764
+  3/5,  0.261933
+  4/5,  0.262197
+  5/5,  0.261978
+}
+{ Monte Carlo PI - 2xN - simple_mcache_10 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.261001
+  2/5,  0.263983
+  3/5,  0.260204
+  4/5,  0.26049
+  5/5,  0.263245
 }
 { Monte Carlo PI - Nx2 - numpy ( None ),
   taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=False
-  1/5,  0.280508
-  2/5,  0.280847
-  3/5,  0.280298
-  4/5,  0.280197
-  5/5,  0.28121
+  1/5,  0.291514
+  2/5,  0.290144
+  3/5,  0.289836
+  4/5,  0.291602
+  5/5,  0.290821
 }
 { Monte Carlo PI - Nx2 - simple ( simple ),
   taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.271552
-  2/5,  0.271386
-  3/5,  0.277152
-  4/5,  0.274009
-  5/5,  0.272355
+  1/5,  0.276463
+  2/5,  0.277678
+  3/5,  0.275067
+  4/5,  0.27636
+  5/5,  0.276374
 }
 { Monte Carlo PI - Nx2 - score ( score ),
   taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.248869
-  2/5,  0.247826
-  3/5,  0.250194
-  4/5,  0.248282
-  5/5,  0.247897
+  1/5,  0.252243
+  2/5,  0.251058
+  3/5,  0.252443
+  4/5,  0.25314
+  5/5,  0.259419
+}
+{ Monte Carlo PI - Nx2 - score_mcache_1 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.359068
+  2/5,  0.36147
+  3/5,  0.359075
+  4/5,  0.361036
+  5/5,  0.358377
+}
+{ Monte Carlo PI - Nx2 - score_mcache_2 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.353901
+  2/5,  0.358713
+  3/5,  0.354342
+  4/5,  0.353998
+  5/5,  0.355595
+}
+{ Monte Carlo PI - Nx2 - score_mcache_3 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.329245
+  2/5,  0.329828
+  3/5,  0.331628
+  4/5,  0.329445
+  5/5,  0.328685
+}
+{ Monte Carlo PI - Nx2 - score_mcache_4 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.305067
+  2/5,  0.305497
+  3/5,  0.304756
+  4/5,  0.30722
+  5/5,  0.304941
+}
+{ Monte Carlo PI - Nx2 - score_mcache_5 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.275448
+  2/5,  0.278135
+  3/5,  0.277093
+  4/5,  0.2785
+  5/5,  0.283454
+}
+{ Monte Carlo PI - Nx2 - score_mcache_6 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.251685
+  2/5,  0.251567
+  3/5,  0.25127
+  4/5,  0.25145
+  5/5,  0.251252
+}
+{ Monte Carlo PI - Nx2 - score_mcache_7 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.251284
+  2/5,  0.255141
+  3/5,  0.251457
+  4/5,  0.25174
+  5/5,  0.254407
+}
+{ Monte Carlo PI - Nx2 - score_mcache_8 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.252081
+  2/5,  0.252399
+  3/5,  0.250417
+  4/5,  0.252862
+  5/5,  0.253208
+}
+{ Monte Carlo PI - Nx2 - score_mcache_9 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.25081
+  2/5,  0.252151
+  3/5,  0.25232
+  4/5,  0.250632
+  5/5,  0.253273
+}
+{ Monte Carlo PI - Nx2 - score_mcache_10 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.250993
+  2/5,  0.251424
+  3/5,  0.25218
+  4/5,  0.251481
+  5/5,  0.251487
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_1 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.338196
+  2/5,  0.339443
+  3/5,  0.339088
+  4/5,  0.337015
+  5/5,  0.33913
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_2 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.311224
+  2/5,  0.310794
+  3/5,  0.312773
+  4/5,  0.312783
+  5/5,  0.310427
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_3 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.296331
+  2/5,  0.295885
+  3/5,  0.297412
+  4/5,  0.297779
+  5/5,  0.296753
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_4 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.294873
+  2/5,  0.295278
+  3/5,  0.296609
+  4/5,  0.296448
+  5/5,  0.296468
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_5 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.282316
+  2/5,  0.278238
+  3/5,  0.279888
+  4/5,  0.277623
+  5/5,  0.277853
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_6 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.279248
+  2/5,  0.2768
+  3/5,  0.278957
+  4/5,  0.277827
+  5/5,  0.276247
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_7 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.276047
+  2/5,  0.277999
+  3/5,  0.276303
+  4/5,  0.27607
+  5/5,  0.276192
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_8 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.278592
+  2/5,  0.27537
+  3/5,  0.277911
+  4/5,  0.278192
+  5/5,  0.277473
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_9 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.276779
+  2/5,  0.27873
+  3/5,  0.276248
+  4/5,  0.275567
+  5/5,  0.280312
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_10 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284523
+  2/5,  0.275774
+  3/5,  0.27826
+  4/5,  0.278516
+  5/5,  0.276926
 }
 { Stencil - 1D 4way - numpy ( None ),
   taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=False
-  1/5,  2.377674
-  2/5,  2.374844
-  3/5,  2.373876
-  4/5,  2.3931
-  5/5,  2.38193
+  1/5,  2.397742
+  2/5,  2.397587
+  3/5,  2.396789
+  4/5,  2.398453
+  5/5,  2.39796
 }
 { Stencil - 1D 4way - simple ( simple ),
   taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.470205
-  2/5,  2.432841
-  3/5,  2.448691
-  4/5,  2.473077
-  5/5,  2.466212
+  1/5,  2.479446
+  2/5,  2.517504
+  3/5,  2.512792
+  4/5,  2.514799
+  5/5,  2.494759
 }
 { Stencil - 1D 4way - score ( score ),
   taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  1.940132
-  2/5,  1.944145
-  3/5,  1.937614
-  4/5,  1.949197
-  5/5,  1.940338
+  1/5,  1.959681
+  2/5,  1.965514
+  3/5,  1.963312
+  4/5,  1.958739
+  5/5,  1.962635
+}
+{ Stencil - 1D 4way - score_mcache_1 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.959517
+  2/5,  1.957205
+  3/5,  1.961701
+  4/5,  1.96208
+  5/5,  1.958771
+}
+{ Stencil - 1D 4way - score_mcache_2 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.966563
+  2/5,  1.961723
+  3/5,  1.96251
+  4/5,  1.96528
+  5/5,  1.976507
+}
+{ Stencil - 1D 4way - score_mcache_3 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.960588
+  2/5,  1.962072
+  3/5,  1.965449
+  4/5,  1.962705
+  5/5,  1.966779
+}
+{ Stencil - 1D 4way - score_mcache_4 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.96199
+  2/5,  1.962347
+  3/5,  1.957964
+  4/5,  1.960874
+  5/5,  2.003865
+}
+{ Stencil - 1D 4way - score_mcache_5 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.96289
+  2/5,  1.962725
+  3/5,  1.964009
+  4/5,  1.966973
+  5/5,  1.961611
+}
+{ Stencil - 1D 4way - score_mcache_6 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.960121
+  2/5,  1.961419
+  3/5,  1.960334
+  4/5,  1.957996
+  5/5,  1.964909
+}
+{ Stencil - 1D 4way - score_mcache_7 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.962199
+  2/5,  1.963179
+  3/5,  1.96352
+  4/5,  1.961402
+  5/5,  1.95736
+}
+{ Stencil - 1D 4way - score_mcache_8 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.959043
+  2/5,  1.96582
+  3/5,  1.959879
+  4/5,  1.960636
+  5/5,  1.959235
+}
+{ Stencil - 1D 4way - score_mcache_9 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.960997
+  2/5,  1.961017
+  3/5,  1.963237
+  4/5,  1.957048
+  5/5,  1.963403
+}
+{ Stencil - 1D 4way - score_mcache_10 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  1.963141
+  2/5,  1.965533
+  3/5,  1.962803
+  4/5,  1.958933
+  5/5,  1.95909
+}
+{ Stencil - 1D 4way - simple_mcache_1 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.510304
+  2/5,  2.487766
+  3/5,  2.47928
+  4/5,  2.516619
+  5/5,  2.498981
+}
+{ Stencil - 1D 4way - simple_mcache_2 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.514769
+  2/5,  2.513929
+  3/5,  2.480545
+  4/5,  2.472562
+  5/5,  2.517297
+}
+{ Stencil - 1D 4way - simple_mcache_3 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.478163
+  2/5,  2.516634
+  3/5,  2.479034
+  4/5,  2.511968
+  5/5,  2.518671
+}
+{ Stencil - 1D 4way - simple_mcache_4 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.514392
+  2/5,  2.474657
+  3/5,  2.486761
+  4/5,  2.483793
+  5/5,  2.483735
+}
+{ Stencil - 1D 4way - simple_mcache_5 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.509069
+  2/5,  2.473673
+  3/5,  2.471507
+  4/5,  2.470052
+  5/5,  2.50913
+}
+{ Stencil - 1D 4way - simple_mcache_6 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.510997
+  2/5,  2.48082
+  3/5,  2.470789
+  4/5,  2.478024
+  5/5,  2.473059
+}
+{ Stencil - 1D 4way - simple_mcache_7 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.515365
+  2/5,  2.509037
+  3/5,  2.493189
+  4/5,  2.516842
+  5/5,  2.469226
+}
+{ Stencil - 1D 4way - simple_mcache_8 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.511719
+  2/5,  2.475214
+  3/5,  2.477929
+  4/5,  2.506008
+  5/5,  2.51466
+}
+{ Stencil - 1D 4way - simple_mcache_9 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.500098
+  2/5,  2.510414
+  3/5,  2.511765
+  4/5,  2.480463
+  5/5,  2.474432
+}
+{ Stencil - 1D 4way - simple_mcache_10 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.486858
+  2/5,  2.509176
+  3/5,  2.507958
+  4/5,  2.479972
+  5/5,  2.473934
 }
 { Stencil - 2D - numpy ( None ),
   taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=False
-  1/5,  5.461441
-  2/5,  5.452426
-  3/5,  5.449277
-  4/5,  5.468762
-  5/5,  5.458763
+  1/5,  5.808376
+  2/5,  5.83075
+  3/5,  5.837243
+  4/5,  5.831786
+  5/5,  5.827731
 }
 { Stencil - 2D - simple ( simple ),
   taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
-  1/5,  3.71127
-  2/5,  3.716902
-  3/5,  3.710605
-  4/5,  3.708662
-  5/5,  3.744188
+  1/5,  3.78816
+  2/5,  3.788351
+  3/5,  3.790202
+  4/5,  3.799097
+  5/5,  3.813494
 }
 { Stencil - 2D - score ( score ),
   taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
-  1/5,  2.931262
-  2/5,  2.933979
-  3/5,  2.948978
-  4/5,  2.931653
-  5/5,  2.933677
+  1/5,  2.991497
+  2/5,  2.991912
+  3/5,  3.002894
+  4/5,  2.989287
+  5/5,  3.004912
+}
+{ Stencil - 2D - score_mcache_1 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  4.674723
+  2/5,  4.650178
+  3/5,  4.648046
+  4/5,  4.683144
+  5/5,  4.652175
+}
+{ Stencil - 2D - score_mcache_2 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  4.212583
+  2/5,  4.205321
+  3/5,  4.204384
+  4/5,  4.203352
+  5/5,  4.213126
+}
+{ Stencil - 2D - score_mcache_3 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.808261
+  2/5,  3.809601
+  3/5,  3.807566
+  4/5,  3.830056
+  5/5,  3.798525
+}
+{ Stencil - 2D - score_mcache_4 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.27864
+  2/5,  3.259536
+  3/5,  3.256395
+  4/5,  3.252775
+  5/5,  3.25649
+}
+{ Stencil - 2D - score_mcache_5 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.013384
+  2/5,  3.018002
+  3/5,  3.009654
+  4/5,  3.03619
+  5/5,  3.030644
+}
+{ Stencil - 2D - score_mcache_6 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.008018
+  2/5,  3.030653
+  3/5,  3.003678
+  4/5,  3.008015
+  5/5,  3.004745
+}
+{ Stencil - 2D - score_mcache_7 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.013641
+  2/5,  3.012094
+  3/5,  3.001725
+  4/5,  3.010224
+  5/5,  3.015479
+}
+{ Stencil - 2D - score_mcache_8 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  2.999838
+  2/5,  2.998123
+  3/5,  2.997515
+  4/5,  3.022479
+  5/5,  3.021039
+}
+{ Stencil - 2D - score_mcache_9 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  2.995004
+  2/5,  3.000626
+  3/5,  2.993348
+  4/5,  2.996402
+  5/5,  3.009573
+}
+{ Stencil - 2D - score_mcache_10 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  2.992603
+  2/5,  2.994453
+  3/5,  2.992031
+  4/5,  3.012971
+  5/5,  3.006306
+}
+{ Stencil - 2D - simple_mcache_1 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.968758
+  2/5,  3.977238
+  3/5,  3.992536
+  4/5,  3.977272
+  5/5,  3.9698
+}
+{ Stencil - 2D - simple_mcache_2 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.789479
+  2/5,  3.78871
+  3/5,  3.792559
+  4/5,  3.813713
+  5/5,  3.784777
+}
+{ Stencil - 2D - simple_mcache_3 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.789744
+  2/5,  3.795679
+  3/5,  3.791031
+  4/5,  3.785907
+  5/5,  3.798788
+}
+{ Stencil - 2D - simple_mcache_4 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.786946
+  2/5,  3.813918
+  3/5,  3.787471
+  4/5,  3.805725
+  5/5,  3.78674
+}
+{ Stencil - 2D - simple_mcache_5 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.80581
+  2/5,  3.80086
+  3/5,  3.818988
+  4/5,  3.789279
+  5/5,  3.790398
+}
+{ Stencil - 2D - simple_mcache_6 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.823445
+  2/5,  3.787206
+  3/5,  3.789916
+  4/5,  3.788036
+  5/5,  3.813479
+}
+{ Stencil - 2D - simple_mcache_7 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.785438
+  2/5,  3.79056
+  3/5,  3.786395
+  4/5,  3.78915
+  5/5,  3.787635
+}
+{ Stencil - 2D - simple_mcache_8 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.78763
+  2/5,  3.811029
+  3/5,  3.785285
+  4/5,  3.792106
+  5/5,  3.788108
+}
+{ Stencil - 2D - simple_mcache_9 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.796372
+  2/5,  3.794727
+  3/5,  3.794145
+  4/5,  3.803235
+  5/5,  3.789683
+}
+{ Stencil - 2D - simple_mcache_10 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.786479
+  2/5,  3.79047
+  3/5,  3.795849
+  4/5,  3.786063
+  5/5,  3.764943
 }
 { Shallow Water - numpy ( None ),
   taskset -c 1 python swater.py --size=2200*1 --cphvb=False
-  1/5,  2.804143
-  2/5,  2.804687
-  3/5,  2.80972
-  4/5,  2.801924
-  5/5,  2.803129
+  1/5,  2.957164
+  2/5,  2.961348
+  3/5,  2.953012
+  4/5,  2.946542
+  5/5,  2.952851
 }
 { Shallow Water - simple ( simple ),
   taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  1.836599
-  2/5,  1.847067
-  3/5,  1.827837
-  4/5,  1.835643
-  5/5,  1.831336
+  1/5,  1.851017
+  2/5,  1.841786
+  3/5,  1.843678
+  4/5,  1.845899
+  5/5,  1.84434
 }
 { Shallow Water - score ( score ),
   taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  1.762545
-  2/5,  1.769498
-  3/5,  1.758365
-  4/5,  1.758143
-  5/5,  1.777062
+  1/5,  1.771252
+  2/5,  1.778123
+  3/5,  1.783976
+  4/5,  1.768416
+  5/5,  1.778399
+}
+{ Shallow Water - score_mcache_1 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.402893
+  2/5,  2.418968
+  3/5,  2.402668
+  4/5,  2.429215
+  5/5,  2.414068
+}
+{ Shallow Water - score_mcache_2 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.140788
+  2/5,  2.144069
+  3/5,  2.160892
+  4/5,  2.14109
+  5/5,  2.118774
+}
+{ Shallow Water - score_mcache_3 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.947693
+  2/5,  1.94243
+  3/5,  1.942949
+  4/5,  1.956617
+  5/5,  1.946267
+}
+{ Shallow Water - score_mcache_4 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.847768
+  2/5,  1.856177
+  3/5,  1.847683
+  4/5,  1.842753
+  5/5,  1.844328
+}
+{ Shallow Water - score_mcache_5 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.825772
+  2/5,  1.81974
+  3/5,  1.824155
+  4/5,  1.824515
+  5/5,  1.825261
+}
+{ Shallow Water - score_mcache_6 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.793443
+  2/5,  1.786909
+  3/5,  1.787871
+  4/5,  1.795528
+  5/5,  1.798793
+}
+{ Shallow Water - score_mcache_7 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.775207
+  2/5,  1.78098
+  3/5,  1.783152
+  4/5,  1.778841
+  5/5,  1.779958
+}
+{ Shallow Water - score_mcache_8 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.785418
+  2/5,  1.780085
+  3/5,  1.795837
+  4/5,  1.777403
+  5/5,  1.78404
+}
+{ Shallow Water - score_mcache_9 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.76521
+  2/5,  1.776058
+  3/5,  1.763871
+  4/5,  1.762037
+  5/5,  1.764859
+}
+{ Shallow Water - score_mcache_10 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.770126
+  2/5,  1.779315
+  3/5,  1.78093
+  4/5,  1.769147
+  5/5,  1.773868
+}
+{ Shallow Water - simple_mcache_1 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.176311
+  2/5,  2.170097
+  3/5,  2.191197
+  4/5,  2.191396
+  5/5,  2.182579
+}
+{ Shallow Water - simple_mcache_2 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.022736
+  2/5,  2.02149
+  3/5,  2.020784
+  4/5,  2.026168
+  5/5,  2.021655
+}
+{ Shallow Water - simple_mcache_3 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.946335
+  2/5,  1.948621
+  3/5,  1.934968
+  4/5,  1.935838
+  5/5,  1.948323
+}
+{ Shallow Water - simple_mcache_4 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.912906
+  2/5,  1.92289
+  3/5,  1.910774
+  4/5,  1.920701
+  5/5,  1.912231
+}
+{ Shallow Water - simple_mcache_5 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.912697
+  2/5,  1.903906
+  3/5,  1.901262
+  4/5,  1.896293
+  5/5,  1.898873
+}
+{ Shallow Water - simple_mcache_6 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.888045
+  2/5,  1.883709
+  3/5,  1.89975
+  4/5,  1.896612
+  5/5,  1.883646
+}
+{ Shallow Water - simple_mcache_7 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.87218
+  2/5,  1.868531
+  3/5,  1.869961
+  4/5,  1.882071
+  5/5,  1.870524
+}
+{ Shallow Water - simple_mcache_8 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.871682
+  2/5,  1.866239
+  3/5,  1.877007
+  4/5,  1.871679
+  5/5,  1.864405
+}
+{ Shallow Water - simple_mcache_9 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.861265
+  2/5,  1.855207
+  3/5,  1.857093
+  4/5,  1.864469
+  5/5,  1.864464
+}
+{ Shallow Water - simple_mcache_10 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.850717
+  2/5,  1.85249
+  3/5,  1.84291
+  4/5,  1.851994
+  5/5,  1.842785
 }
