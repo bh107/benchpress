@@ -163,11 +163,17 @@ mcache = {
     'engines':  [0,1,2] + [c for c, x in enumerate(engines) if 'mcache' in x[0] ]
 }
 
+prefetch = {
+	'scripts': [0,2],
+	'engines': [0,1,2]
+}
+
 suites = {
     'default':      default,
     'test':         test,
     'test_all':     test_all,
     'score_test':     score_test,
+    'prefetch':		prefetch,
     'tiling':       tiling,
     'most':         most,
     'monte':        montecarlo,
@@ -286,7 +292,7 @@ def main(config, src_root, output, suite, runs=5, use_perf=True):
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
             
-    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-', suffix='.json') as fd:
+    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in (scripts[snr] for snr in benchmark['scripts']):
             for alias, engine, env in (engines[enr] for enr in benchmark['engines']):
