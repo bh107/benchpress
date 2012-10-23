@@ -163,11 +163,17 @@ mcache = {
     'engines':  [0,1,2] + [c for c, x in enumerate(engines) if 'mcache' in x[0] ]
 }
 
+prefetch = {
+	'scripts': [0,2],
+	'engines': [0,1,2]
+}
+
 suites = {
     'default':      default,
     'test':         test,
     'test_all':     test_all,
     'score_test':     score_test,
+    'prefetch':		prefetch,
     'tiling':       tiling,
     'most':         most,
     'monte':        montecarlo,
