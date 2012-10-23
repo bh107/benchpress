@@ -286,7 +286,7 @@ def main(config, src_root, output, suite, runs=5, use_perf=True):
                     )
                     out, err = p.communicate()              # Grab the output
                     elapsed = 0.0
-                    if err:
+                    if err or not out:
                         print "ERR: Something went wrong %s" % err
                     else:
                         elapsed = float(out.split(' ')[-1] .rstrip())
