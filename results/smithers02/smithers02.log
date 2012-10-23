@@ -1,3073 +1,2393 @@
-Running benchmark suite 'cache_tiling'; results are written to: /home/safl/buildbot/benchpress/results/smithers02/3191cc618ba3a9f1455652a38267f355c0dfb0fb/benchmark-MTMHyy.json.
+Running benchmark suite 'mcache'; results are written to: /home/safl/buildbot/benchpress/results/smithers02/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-MY0OXo.json.
 { Black Scholes - numpy ( None ),
   taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  6.108499
-  2/5,  6.090876
-  3/5,  6.077814
-  4/5,  6.120745
-  5/5,  6.088787
+  1/5,  6.098769
+  2/5,  6.099639
+  3/5,  6.133389
+  4/5,  6.09202
+  5/5,  6.109051
 }
 { Black Scholes - simple ( simple ),
   taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.628261
-  2/5,  5.659631
-  3/5,  5.642676
-  4/5,  5.621986
-  5/5,  5.644346
-}
-{ Black Scholes - score_blksize112_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.697714
-  2/5,  5.681349
-  3/5,  5.672431
-  4/5,  5.709864
-  5/5,  5.689811
-}
-{ Black Scholes - score_blksize224_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.647713
-  2/5,  5.669344
-  3/5,  5.671914
-  4/5,  5.656652
-  5/5,  5.663162
-}
-{ Black Scholes - score_blksize448_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.695708
-  2/5,  5.642074
-  3/5,  5.642024
-  4/5,  5.662225
-  5/5,  5.652653
-}
-{ Black Scholes - score_blksize896_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.645448
-  2/5,  5.646704
-  3/5,  5.752812
-  4/5,  5.651157
-  5/5,  5.647482
-}
-{ Black Scholes - score_blksize1792_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.668541
-  2/5,  5.714411
-  3/5,  5.645628
-  4/5,  5.6879
-  5/5,  5.68073
-}
-{ Black Scholes - score_blksize3584_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.654706
-  2/5,  5.646265
-  3/5,  5.671727
-  4/5,  5.651932
-  5/5,  5.652812
-}
-{ Black Scholes - score_blksize7168_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.667751
-  2/5,  5.669166
-  3/5,  5.657655
-  4/5,  5.66333
-  5/5,  5.677151
-}
-{ Black Scholes - score_blksize14336_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.654323
-  2/5,  5.654519
-  3/5,  5.673113
-  4/5,  5.656085
-  5/5,  5.655372
-}
-{ Black Scholes - score_blksize28672_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.655516
-  2/5,  5.672064
-  3/5,  5.682366
-  4/5,  5.65371
-  5/5,  5.675344
-}
-{ Black Scholes - score_blksize57344_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.649368
-  2/5,  5.644334
-  3/5,  5.659031
-  4/5,  5.677532
-  5/5,  5.654507
-}
-{ Black Scholes - score_blksize114688_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.655603
-  2/5,  5.685153
-  3/5,  5.655271
-  4/5,  5.647029
-  5/5,  5.665415
-}
-{ Black Scholes - score_blksize229376_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.676907
-  2/5,  5.652157
-  3/5,  5.762883
-  4/5,  5.67534
-  5/5,  5.651179
-}
-{ Black Scholes - score_blksize458752_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.653103
-  2/5,  5.675034
-  3/5,  5.670743
-  4/5,  5.657521
-  5/5,  5.667896
-}
-{ Black Scholes - score_blksize917504_basemax1 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.692433
-  2/5,  5.66669
-  3/5,  5.67808
-  4/5,  5.682052
-  5/5,  5.746853
-}
-{ Black Scholes - score_blksize112_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.716815
-  2/5,  5.708
-  3/5,  5.748174
-  4/5,  5.722854
-  5/5,  5.702853
-}
-{ Black Scholes - score_blksize224_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.705391
-  2/5,  5.683137
-  3/5,  5.674018
-  4/5,  5.703464
-  5/5,  5.727008
-}
-{ Black Scholes - score_blksize448_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.661104
-  2/5,  5.663047
-  3/5,  5.68744
-  4/5,  5.667818
-  5/5,  5.662087
-}
-{ Black Scholes - score_blksize896_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.682379
-  2/5,  5.709508
-  3/5,  5.660135
-  4/5,  5.672935
-  5/5,  5.682026
-}
-{ Black Scholes - score_blksize1792_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.672177
-  2/5,  5.664508
-  3/5,  5.694409
-  4/5,  5.666409
-  5/5,  5.663693
-}
-{ Black Scholes - score_blksize3584_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.669313
-  2/5,  5.672789
-  3/5,  5.720347
-  4/5,  5.650729
-  5/5,  5.6859
-}
-{ Black Scholes - score_blksize7168_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.649642
-  2/5,  5.652016
-  3/5,  5.67006
-  4/5,  5.666609
-  5/5,  5.652044
-}
-{ Black Scholes - score_blksize14336_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.656127
-  2/5,  5.668287
-  3/5,  5.664757
-  4/5,  5.653399
-  5/5,  5.680904
-}
-{ Black Scholes - score_blksize28672_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.725922
-  2/5,  5.64793
-  3/5,  5.661597
-  4/5,  5.665144
-  5/5,  5.65066
-}
-{ Black Scholes - score_blksize57344_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.646941
-  2/5,  5.682503
-  3/5,  5.65948
-  4/5,  5.654477
-  5/5,  5.665568
-}
-{ Black Scholes - score_blksize114688_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.724397
-  2/5,  5.652299
-  3/5,  5.645366
-  4/5,  5.766967
-  5/5,  5.686854
-}
-{ Black Scholes - score_blksize229376_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.651833
-  2/5,  5.663167
-  3/5,  5.665714
-  4/5,  5.641141
-  5/5,  5.648697
-}
-{ Black Scholes - score_blksize458752_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.68876
-  2/5,  5.661114
-  3/5,  5.667512
-  4/5,  5.688272
-  5/5,  5.730185
-}
-{ Black Scholes - score_blksize917504_basemax2 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.66609
-  2/5,  5.692037
-  3/5,  5.685578
-  4/5,  5.677111
-  5/5,  5.683318
-}
-{ Black Scholes - score_blksize112_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.770825
-  2/5,  5.738623
-  3/5,  5.759778
-  4/5,  5.760258
-  5/5,  5.764392
-}
-{ Black Scholes - score_blksize224_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.685747
-  2/5,  5.709175
-  3/5,  5.707131
-  4/5,  5.68311
-  5/5,  5.715916
-}
-{ Black Scholes - score_blksize448_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.676399
-  2/5,  5.670032
-  3/5,  5.66079
-  4/5,  5.668747
-  5/5,  5.664651
-}
-{ Black Scholes - score_blksize896_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.652008
-  2/5,  5.641162
-  3/5,  5.676334
-  4/5,  5.642301
-  5/5,  5.649805
-}
-{ Black Scholes - score_blksize1792_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.653148
-  2/5,  5.630066
-  3/5,  5.637756
-  4/5,  5.632574
-  5/5,  5.661456
-}
-{ Black Scholes - score_blksize3584_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.631263
-  2/5,  5.628227
-  3/5,  5.645933
-  4/5,  5.64572
-  5/5,  5.629565
-}
-{ Black Scholes - score_blksize7168_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.639205
-  2/5,  5.705418
-  3/5,  5.656559
-  4/5,  5.627384
-  5/5,  5.651973
-}
-{ Black Scholes - score_blksize14336_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.671492
-  2/5,  5.635579
-  3/5,  5.638006
-  4/5,  5.643035
-  5/5,  5.621291
-}
-{ Black Scholes - score_blksize28672_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.626013
-  2/5,  5.641763
-  3/5,  5.623673
-  4/5,  5.619933
-  5/5,  5.627596
-}
-{ Black Scholes - score_blksize57344_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.635386
-  2/5,  5.617925
-  3/5,  5.616144
-  4/5,  5.645113
-  5/5,  5.624384
-}
-{ Black Scholes - score_blksize114688_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.626275
-  2/5,  5.639027
-  3/5,  5.618998
-  4/5,  5.616802
-  5/5,  5.620259
-}
-{ Black Scholes - score_blksize229376_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.644254
-  2/5,  5.621673
-  3/5,  5.61848
-  4/5,  5.626846
-  5/5,  5.627007
-}
-{ Black Scholes - score_blksize458752_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.651548
-  2/5,  5.655205
-  3/5,  5.666531
-  4/5,  5.647735
-  5/5,  5.649775
-}
-{ Black Scholes - score_blksize917504_basemax3 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.692563
-  2/5,  5.681768
-  3/5,  5.671393
-  4/5,  5.678165
-  5/5,  5.698236
-}
-{ Black Scholes - score_blksize112_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.768326
-  2/5,  5.75319
-  3/5,  5.783882
-  4/5,  5.760496
-  5/5,  5.996655
-}
-{ Black Scholes - score_blksize224_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.735601
-  2/5,  5.721863
-  3/5,  5.720398
-  4/5,  5.725156
-  5/5,  5.763744
-}
-{ Black Scholes - score_blksize448_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.710492
-  2/5,  5.694744
-  3/5,  5.811087
-  4/5,  5.720597
-  5/5,  5.690336
-}
-{ Black Scholes - score_blksize896_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.686706
-  2/5,  5.725038
-  3/5,  5.695461
-  4/5,  5.707917
-  5/5,  5.700048
-}
-{ Black Scholes - score_blksize1792_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.668513
-  2/5,  5.666264
-  3/5,  5.678707
-  4/5,  5.661239
-  5/5,  5.662764
-}
-{ Black Scholes - score_blksize3584_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.666815
-  2/5,  5.685821
-  3/5,  5.646986
-  4/5,  5.661941
-  5/5,  5.676764
-}
-{ Black Scholes - score_blksize7168_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.666217
-  2/5,  5.654559
-  3/5,  5.664953
-  4/5,  5.668771
-  5/5,  5.660162
-}
-{ Black Scholes - score_blksize14336_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.656725
-  2/5,  5.678088
-  3/5,  5.654466
-  4/5,  5.643002
-  5/5,  5.663539
-}
-{ Black Scholes - score_blksize28672_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.653473
-  2/5,  5.658621
-  3/5,  5.666291
-  4/5,  5.669991
-  5/5,  5.635537
-}
-{ Black Scholes - score_blksize57344_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.63812
-  2/5,  5.665038
-  3/5,  5.648931
-  4/5,  5.633682
-  5/5,  5.651507
-}
-{ Black Scholes - score_blksize114688_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.654922
-  2/5,  5.629999
-  3/5,  5.648468
-  4/5,  5.659427
-  5/5,  5.651417
-}
-{ Black Scholes - score_blksize229376_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.882103
-  2/5,  5.653618
-  3/5,  5.659245
-  4/5,  5.646046
-  5/5,  5.645038
-}
-{ Black Scholes - score_blksize458752_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.705813
-  2/5,  5.670298
-  3/5,  5.681172
-  4/5,  5.698226
-  5/5,  5.782598
-}
-{ Black Scholes - score_blksize917504_basemax4 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.68981
-  2/5,  5.691292
-  3/5,  5.712877
-  4/5,  5.746563
-  5/5,  5.691184
-}
-{ Black Scholes - score_blksize112_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.795932
-  2/5,  5.784401
-  3/5,  5.776805
-  4/5,  5.781351
-  5/5,  5.77906
-}
-{ Black Scholes - score_blksize224_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.729379
-  2/5,  5.718687
-  3/5,  5.755902
-  4/5,  5.726864
-  5/5,  5.971343
-}
-{ Black Scholes - score_blksize448_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.739985
-  2/5,  5.717471
-  3/5,  5.7013
-  4/5,  5.707815
-  5/5,  5.716508
-}
-{ Black Scholes - score_blksize896_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.686686
-  2/5,  5.679816
-  3/5,  5.706505
-  4/5,  5.682289
-  5/5,  5.687169
-}
-{ Black Scholes - score_blksize1792_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.698399
-  2/5,  5.684711
-  3/5,  5.671682
-  4/5,  5.6761
-  5/5,  5.694297
-}
-{ Black Scholes - score_blksize3584_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.667068
-  2/5,  5.66185
-  3/5,  5.678759
-  4/5,  5.671654
-  5/5,  5.661827
-}
-{ Black Scholes - score_blksize7168_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.659683
-  2/5,  5.684478
-  3/5,  5.664847
-  4/5,  5.653434
-  5/5,  5.681239
-}
-{ Black Scholes - score_blksize14336_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.654882
-  2/5,  5.652635
-  3/5,  5.692914
-  4/5,  5.680402
-  5/5,  5.653109
-}
-{ Black Scholes - score_blksize28672_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.649713
-  2/5,  5.68673
-  3/5,  5.714561
-  4/5,  5.659161
-  5/5,  5.670611
-}
-{ Black Scholes - score_blksize57344_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.760992
-  2/5,  5.646322
-  3/5,  5.658107
-  4/5,  5.672109
-  5/5,  5.704446
-}
-{ Black Scholes - score_blksize114688_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.646183
-  2/5,  5.676262
-  3/5,  5.671241
-  4/5,  5.66164
-  5/5,  5.656284
-}
-{ Black Scholes - score_blksize229376_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.669824
-  2/5,  5.649231
-  3/5,  5.66652
-  4/5,  5.683776
-  5/5,  5.652318
-}
-{ Black Scholes - score_blksize458752_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.675126
-  2/5,  5.70484
-  3/5,  5.689605
-  4/5,  5.673843
-  5/5,  5.684763
-}
-{ Black Scholes - score_blksize917504_basemax5 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.726863
-  2/5,  5.704758
-  3/5,  5.697644
-  4/5,  5.727774
-  5/5,  5.76502
-}
-{ Black Scholes - score_blksize112_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.806022
-  2/5,  5.815035
-  3/5,  5.819848
-  4/5,  5.808773
-  5/5,  5.802967
-}
-{ Black Scholes - score_blksize224_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.766038
-  2/5,  5.749889
-  3/5,  5.747173
-  4/5,  5.76885
-  5/5,  5.751906
-}
-{ Black Scholes - score_blksize448_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.720023
-  2/5,  5.732207
-  3/5,  5.743269
-  4/5,  5.719732
-  5/5,  5.722689
-}
-{ Black Scholes - score_blksize896_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.724698
-  2/5,  5.70082
-  3/5,  5.691786
-  4/5,  5.716725
-  5/5,  5.711761
-}
-{ Black Scholes - score_blksize1792_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.683678
-  2/5,  5.680124
-  3/5,  5.705478
-  4/5,  5.679042
-  5/5,  5.678114
-}
-{ Black Scholes - score_blksize3584_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.72586
-  2/5,  5.735926
-  3/5,  5.66182
-  4/5,  5.669079
-  5/5,  5.717934
-}
-{ Black Scholes - score_blksize7168_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.673245
-  2/5,  5.655649
-  3/5,  5.677589
-  4/5,  5.660111
-  5/5,  5.653921
-}
-{ Black Scholes - score_blksize14336_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.65747
-  2/5,  5.657319
-  3/5,  5.646814
-  4/5,  5.645347
-  5/5,  5.670967
-}
-{ Black Scholes - score_blksize28672_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.635937
-  2/5,  5.643701
-  3/5,  5.643616
-  4/5,  5.651833
-  5/5,  5.658965
-}
-{ Black Scholes - score_blksize57344_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.641167
-  2/5,  5.656682
-  3/5,  5.639559
-  4/5,  5.641448
-  5/5,  5.657887
-}
-{ Black Scholes - score_blksize114688_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.639343
-  2/5,  5.635626
-  3/5,  5.646883
-  4/5,  5.675907
-  5/5,  5.639818
-}
-{ Black Scholes - score_blksize229376_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.65046
-  2/5,  5.679297
-  3/5,  5.652685
-  4/5,  5.650996
-  5/5,  5.656696
-}
-{ Black Scholes - score_blksize458752_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.706422
-  2/5,  5.685491
-  3/5,  5.683781
-  4/5,  5.712418
-  5/5,  5.694656
-}
-{ Black Scholes - score_blksize917504_basemax6 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.716113
-  2/5,  5.730792
-  3/5,  5.723618
-  4/5,  5.708108
-  5/5,  5.727694
-}
-{ Black Scholes - score_blksize112_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.828834
-  2/5,  5.808222
-  3/5,  5.806339
-  4/5,  5.846522
-  5/5,  5.808373
-}
-{ Black Scholes - score_blksize224_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.763868
-  2/5,  5.786225
-  3/5,  5.863188
-  4/5,  5.769269
-  5/5,  5.775584
-}
-{ Black Scholes - score_blksize448_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.754283
-  2/5,  5.76992
-  3/5,  5.731322
-  4/5,  5.755207
-  5/5,  5.966466
-}
-{ Black Scholes - score_blksize896_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.713663
-  2/5,  5.71674
-  3/5,  5.715618
-  4/5,  5.743494
-  5/5,  5.701199
-}
-{ Black Scholes - score_blksize1792_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.706495
-  2/5,  5.691111
-  3/5,  5.68777
-  4/5,  5.715272
-  5/5,  5.696315
-}
-{ Black Scholes - score_blksize3584_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.689276
-  2/5,  5.695281
-  3/5,  5.693258
-  4/5,  5.675994
-  5/5,  5.676587
-}
-{ Black Scholes - score_blksize7168_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.69898
-  2/5,  5.670187
-  3/5,  5.669509
-  4/5,  5.676914
-  5/5,  5.681857
-}
-{ Black Scholes - score_blksize14336_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.651536
-  2/5,  5.642843
-  3/5,  5.684589
-  4/5,  5.648405
-  5/5,  5.659937
-}
-{ Black Scholes - score_blksize28672_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.67445
-  2/5,  5.655626
-  3/5,  5.641838
-  4/5,  5.655992
-  5/5,  5.659894
-}
-{ Black Scholes - score_blksize57344_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.644984
-  2/5,  5.63567
-  3/5,  5.667341
-  4/5,  5.647419
-  5/5,  5.643199
-}
-{ Black Scholes - score_blksize114688_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.649121
-  2/5,  5.660594
-  3/5,  5.639103
-  4/5,  5.632049
-  5/5,  5.671571
-}
-{ Black Scholes - score_blksize229376_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.656786
-  2/5,  5.654645
-  3/5,  5.67334
-  4/5,  5.762736
-  5/5,  5.65166
-}
-{ Black Scholes - score_blksize458752_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.696289
-  2/5,  5.717432
-  3/5,  5.742323
-  4/5,  5.73184
-  5/5,  5.697751
-}
-{ Black Scholes - score_blksize917504_basemax7 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.731029
-  2/5,  5.711713
-  3/5,  5.720677
-  4/5,  5.731955
-  5/5,  5.711948
-}
-{ Black Scholes - score_blksize112_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.789765
-  2/5,  5.812072
-  3/5,  5.792645
-  4/5,  5.780734
-  5/5,  5.800825
-}
-{ Black Scholes - score_blksize224_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.744232
-  2/5,  5.735271
-  3/5,  5.74473
-  4/5,  5.752924
-  5/5,  5.763973
-}
-{ Black Scholes - score_blksize448_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.699197
-  2/5,  5.713068
-  3/5,  5.697078
-  4/5,  5.68248
-  5/5,  5.706959
-}
-{ Black Scholes - score_blksize896_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.66791
-  2/5,  5.661704
-  3/5,  5.662178
-  4/5,  5.698799
-  5/5,  5.654076
-}
-{ Black Scholes - score_blksize1792_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.640928
-  2/5,  5.676375
-  3/5,  5.656733
-  4/5,  5.650619
-  5/5,  5.652259
-}
-{ Black Scholes - score_blksize3584_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.677715
-  2/5,  5.625547
-  3/5,  5.630321
-  4/5,  5.650782
-  5/5,  5.637183
-}
-{ Black Scholes - score_blksize7168_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.624212
-  2/5,  5.639229
-  3/5,  5.636436
-  4/5,  5.615043
-  5/5,  5.62347
-}
-{ Black Scholes - score_blksize14336_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.639128
-  2/5,  5.614029
-  3/5,  5.613299
-  4/5,  5.642915
-  5/5,  5.70584
-}
-{ Black Scholes - score_blksize28672_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.601401
-  2/5,  5.604606
-  3/5,  5.638029
-  4/5,  5.67218
-  5/5,  5.606117
-}
-{ Black Scholes - score_blksize57344_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.609319
-  2/5,  5.622355
-  3/5,  5.595503
-  4/5,  5.59744
-  5/5,  5.620009
-}
-{ Black Scholes - score_blksize114688_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.610494
-  2/5,  5.606098
-  3/5,  5.624388
-  4/5,  5.614908
-  5/5,  5.605604
-}
-{ Black Scholes - score_blksize229376_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.631521
-  2/5,  5.652553
-  3/5,  5.655191
-  4/5,  5.6185
-  5/5,  5.655125
-}
-{ Black Scholes - score_blksize458752_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.653708
-  2/5,  5.657999
-  3/5,  5.665722
-  4/5,  5.662774
-  5/5,  5.650435
-}
-{ Black Scholes - score_blksize917504_basemax8 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.88174
-  2/5,  5.708406
-  3/5,  5.695982
-  4/5,  5.682409
-  5/5,  5.696674
-}
-{ Black Scholes - score_blksize112_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.828843
-  2/5,  5.818114
-  3/5,  5.825744
-  4/5,  5.838646
-  5/5,  5.824138
-}
-{ Black Scholes - score_blksize224_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.771297
-  2/5,  5.803829
-  3/5,  5.787581
-  4/5,  5.771801
-  5/5,  5.798639
-}
-{ Black Scholes - score_blksize448_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.742597
-  2/5,  5.721648
-  3/5,  5.741365
-  4/5,  5.750885
-  5/5,  5.728072
-}
-{ Black Scholes - score_blksize896_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.69475
-  2/5,  5.731762
-  3/5,  5.699708
-  4/5,  5.694883
-  5/5,  5.720375
-}
-{ Black Scholes - score_blksize1792_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.726466
-  2/5,  5.752668
-  3/5,  5.679418
-  4/5,  5.736225
-  5/5,  5.694837
-}
-{ Black Scholes - score_blksize3584_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.66928
-  2/5,  5.676057
-  3/5,  5.655763
-  4/5,  5.660282
-  5/5,  5.677854
-}
-{ Black Scholes - score_blksize7168_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.683876
-  2/5,  5.657995
-  3/5,  5.66594
-  4/5,  5.674022
-  5/5,  5.656657
-}
-{ Black Scholes - score_blksize14336_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.642053
-  2/5,  5.646416
-  3/5,  5.659657
-  4/5,  5.637059
-  5/5,  5.635473
-}
-{ Black Scholes - score_blksize28672_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.660417
-  2/5,  5.634192
-  3/5,  5.635155
-  4/5,  5.648755
-  5/5,  5.675959
-}
-{ Black Scholes - score_blksize57344_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.635034
-  2/5,  5.631382
-  3/5,  5.655536
-  4/5,  5.634829
-  5/5,  5.631345
-}
-{ Black Scholes - score_blksize114688_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.662973
-  2/5,  5.643473
-  3/5,  5.636614
-  4/5,  5.640621
-  5/5,  5.661939
-}
-{ Black Scholes - score_blksize229376_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.648797
-  2/5,  5.643596
-  3/5,  5.682292
-  4/5,  5.651897
-  5/5,  5.64718
-}
-{ Black Scholes - score_blksize458752_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.691411
-  2/5,  5.738738
-  3/5,  5.681851
-  4/5,  5.694793
-  5/5,  5.743938
-}
-{ Black Scholes - score_blksize917504_basemax9 ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  5.720466
-  2/5,  5.719335
-  3/5,  5.734525
-  4/5,  5.736289
-  5/5,  5.711592
+  1/5,  5.66955
+  2/5,  5.647643
+  3/5,  5.627958
+  4/5,  5.64998
+  5/5,  5.654345
+}
+{ Black Scholes - score ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.676119
+  2/5,  5.672734
+  3/5,  5.700228
+  4/5,  5.672396
+  5/5,  5.673975
+}
+{ Black Scholes - score_mcache_1 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.563539
+  2/5,  6.60789
+  3/5,  6.556153
+  4/5,  6.593321
+  5/5,  6.56277
+}
+{ Black Scholes - score_mcache_2 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.19691
+  2/5,  6.217416
+  3/5,  6.284782
+  4/5,  6.197385
+  5/5,  6.203521
+}
+{ Black Scholes - score_mcache_3 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.039844
+  2/5,  5.978662
+  3/5,  5.980928
+  4/5,  6.039564
+  5/5,  5.985293
+}
+{ Black Scholes - score_mcache_4 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.847035
+  2/5,  5.855009
+  3/5,  5.846007
+  4/5,  5.834969
+  5/5,  5.863181
+}
+{ Black Scholes - score_mcache_5 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.811266
+  2/5,  5.795581
+  3/5,  5.813183
+  4/5,  5.822586
+  5/5,  5.809321
+}
+{ Black Scholes - score_mcache_6 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.772861
+  2/5,  5.793241
+  3/5,  5.810466
+  4/5,  5.774358
+  5/5,  5.78714
+}
+{ Black Scholes - score_mcache_7 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.764232
+  2/5,  5.765653
+  3/5,  5.73549
+  4/5,  5.764784
+  5/5,  5.746051
+}
+{ Black Scholes - score_mcache_8 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.709459
+  2/5,  5.736446
+  3/5,  5.713506
+  4/5,  5.71262
+  5/5,  5.717419
+}
+{ Black Scholes - score_mcache_9 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.723591
+  2/5,  5.698263
+  3/5,  5.695751
+  4/5,  5.726743
+  5/5,  5.703221
+}
+{ Black Scholes - score_mcache_10 ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.672846
+  2/5,  5.694606
+  3/5,  5.682124
+  4/5,  5.677543
+  5/5,  5.675615
+}
+{ Black Scholes - simple_mcache_1 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.024735
+  2/5,  6.022899
+  3/5,  6.013373
+  4/5,  6.044102
+  5/5,  6.026325
+}
+{ Black Scholes - simple_mcache_2 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.78072
+  2/5,  5.897418
+  3/5,  5.840098
+  4/5,  5.781948
+  5/5,  5.786134
+}
+{ Black Scholes - simple_mcache_3 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.797093
+  2/5,  5.779669
+  3/5,  5.754773
+  4/5,  5.795643
+  5/5,  5.760676
+}
+{ Black Scholes - simple_mcache_4 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.745859
+  2/5,  5.753878
+  3/5,  5.756991
+  4/5,  5.737949
+  5/5,  5.739143
+}
+{ Black Scholes - simple_mcache_5 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.743075
+  2/5,  5.716986
+  3/5,  5.707915
+  4/5,  5.740505
+  5/5,  5.717316
+}
+{ Black Scholes - simple_mcache_6 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.677388
+  2/5,  5.689916
+  3/5,  5.730731
+  4/5,  5.682897
+  5/5,  5.681045
+}
+{ Black Scholes - simple_mcache_7 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.695441
+  2/5,  5.67334
+  3/5,  5.66968
+  4/5,  5.668681
+  5/5,  5.674212
+}
+{ Black Scholes - simple_mcache_8 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.655316
+  2/5,  5.67943
+  3/5,  5.682855
+  4/5,  5.66283
+  5/5,  5.657382
+}
+{ Black Scholes - simple_mcache_9 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.642527
+  2/5,  5.646632
+  3/5,  5.618142
+  4/5,  5.63724
+  5/5,  5.64819
+}
+{ Black Scholes - simple_mcache_10 ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  5.63745
+  2/5,  5.631631
+  3/5,  5.66097
+  4/5,  5.635978
+  5/5,  5.643265
 }
 { Cache Synth - numpy ( None ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
-  1/5,  16.795068
-  2/5,  16.724228
-  3/5,  16.66721
-  4/5,  16.648344
-  5/5,  16.64883
+  1/5,  16.672369
+  2/5,  16.727936
+  3/5,  16.695081
+  4/5,  16.661303
+  5/5,  16.662504
 }
 { Cache Synth - simple ( simple ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.753813
-  2/5,  16.552016
-  3/5,  16.546604
-  4/5,  16.559419
-  5/5,  16.544816
-}
-{ Cache Synth - score_blksize112_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.635884
-  2/5,  16.653354
-  3/5,  16.652855
-  4/5,  16.655479
-  5/5,  16.659134
-}
-{ Cache Synth - score_blksize224_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.658483
-  2/5,  16.642835
-  3/5,  16.709874
-  4/5,  16.754459
-  5/5,  16.701272
-}
-{ Cache Synth - score_blksize448_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.656649
-  2/5,  16.666635
-  3/5,  16.660473
-  4/5,  16.634044
-  5/5,  16.651612
-}
-{ Cache Synth - score_blksize896_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.655819
-  2/5,  16.667262
-  3/5,  16.657147
-  4/5,  16.654698
-  5/5,  16.648482
-}
-{ Cache Synth - score_blksize1792_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.641257
-  2/5,  16.661217
-  3/5,  16.660573
-  4/5,  16.661448
-  5/5,  16.671183
-}
-{ Cache Synth - score_blksize3584_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.687103
-  2/5,  16.687867
-  3/5,  16.701481
-  4/5,  16.658717
-  5/5,  16.658363
-}
-{ Cache Synth - score_blksize7168_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.658275
-  2/5,  16.656988
-  3/5,  16.647848
-  4/5,  16.638749
-  5/5,  16.646532
-}
-{ Cache Synth - score_blksize14336_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.658059
-  2/5,  16.655806
-  3/5,  16.686411
-  4/5,  16.651586
-  5/5,  16.987586
-}
-{ Cache Synth - score_blksize28672_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.638754
-  2/5,  16.718496
-  3/5,  16.658661
-  4/5,  16.77379
-  5/5,  16.71485
-}
-{ Cache Synth - score_blksize57344_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.649825
-  2/5,  16.642031
-  3/5,  16.649619
-  4/5,  16.654544
-  5/5,  16.666975
-}
-{ Cache Synth - score_blksize114688_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.65183
-  2/5,  16.66735
-  3/5,  16.654241
-  4/5,  16.638484
-  5/5,  16.656681
-}
-{ Cache Synth - score_blksize229376_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.656329
-  2/5,  16.663164
-  3/5,  16.661585
-  4/5,  16.649294
-  5/5,  16.638757
-}
-{ Cache Synth - score_blksize458752_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.653365
-  2/5,  16.755115
-  3/5,  16.706927
-  4/5,  16.668587
-  5/5,  16.664451
-}
-{ Cache Synth - score_blksize917504_basemax1 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.663858
-  2/5,  16.639187
-  3/5,  16.652996
-  4/5,  16.659695
-  5/5,  16.655386
-}
-{ Cache Synth - score_blksize112_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.689827
-  2/5,  16.695206
-  3/5,  16.675599
-  4/5,  16.68744
-  5/5,  16.689834
-}
-{ Cache Synth - score_blksize224_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.679443
-  2/5,  16.674854
-  3/5,  16.685168
-  4/5,  16.669177
-  5/5,  16.750867
-}
-{ Cache Synth - score_blksize448_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.715111
-  2/5,  16.683385
-  3/5,  16.66656
-  4/5,  16.668473
-  5/5,  16.714714
-}
-{ Cache Synth - score_blksize896_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.657562
-  2/5,  16.640699
-  3/5,  16.658919
-  4/5,  16.660487
-  5/5,  16.66875
-}
-{ Cache Synth - score_blksize1792_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.659841
-  2/5,  16.650086
-  3/5,  16.642496
-  4/5,  16.647329
-  5/5,  16.650035
-}
-{ Cache Synth - score_blksize3584_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.653241
-  2/5,  16.750918
-  3/5,  16.662402
-  4/5,  16.72319
-  5/5,  16.642956
-}
-{ Cache Synth - score_blksize7168_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.65437
-  2/5,  16.658987
-  3/5,  16.656888
-  4/5,  16.665604
-  5/5,  16.65377
-}
-{ Cache Synth - score_blksize14336_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643308
-  2/5,  16.635288
-  3/5,  16.653809
-  4/5,  16.649642
-  5/5,  16.655391
-}
-{ Cache Synth - score_blksize28672_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.648465
-  2/5,  16.671713
-  3/5,  16.635967
-  4/5,  16.654276
-  5/5,  16.759149
-}
-{ Cache Synth - score_blksize57344_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.712624
-  2/5,  16.646422
-  3/5,  16.648412
-  4/5,  16.635197
-  5/5,  16.627871
-}
-{ Cache Synth - score_blksize114688_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.651587
-  2/5,  16.641035
-  3/5,  16.651796
-  4/5,  16.649007
-  5/5,  17.250294
-}
-{ Cache Synth - score_blksize229376_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.633594
-  2/5,  16.635551
-  3/5,  16.65119
-  4/5,  16.696248
-  5/5,  16.651585
-}
-{ Cache Synth - score_blksize458752_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.658015
-  2/5,  16.653027
-  3/5,  16.728787
-  4/5,  16.698916
-  5/5,  16.67034
-}
-{ Cache Synth - score_blksize917504_basemax2 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.815141
-  2/5,  16.653261
-  3/5,  16.657165
-  4/5,  16.645777
-  5/5,  16.642761
-}
-{ Cache Synth - score_blksize112_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.703742
-  2/5,  16.697799
-  3/5,  16.712754
-  4/5,  16.705221
-  5/5,  16.694963
-}
-{ Cache Synth - score_blksize224_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.672921
-  2/5,  16.66853
-  3/5,  16.675246
-  4/5,  16.683022
-  5/5,  16.780191
-}
-{ Cache Synth - score_blksize448_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.679061
-  2/5,  16.712954
-  3/5,  16.651269
-  4/5,  16.670489
-  5/5,  16.729423
-}
-{ Cache Synth - score_blksize896_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.659081
-  2/5,  16.650165
-  3/5,  16.655804
-  4/5,  16.63938
-  5/5,  16.649762
-}
-{ Cache Synth - score_blksize1792_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.646075
-  2/5,  16.647632
-  3/5,  16.648173
-  4/5,  16.655447
-  5/5,  16.661644
-}
-{ Cache Synth - score_blksize3584_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.624917
-  2/5,  16.648376
-  3/5,  16.729659
-  4/5,  16.703913
-  5/5,  16.639921
-}
-{ Cache Synth - score_blksize7168_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.661659
-  2/5,  16.621736
-  3/5,  16.629506
-  4/5,  16.640188
-  5/5,  16.648528
-}
-{ Cache Synth - score_blksize14336_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.634845
-  2/5,  16.646976
-  3/5,  16.645318
-  4/5,  16.668841
-  5/5,  16.634652
-}
-{ Cache Synth - score_blksize28672_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.651541
-  2/5,  16.651578
-  3/5,  16.649026
-  4/5,  16.642701
-  5/5,  16.644676
-}
-{ Cache Synth - score_blksize57344_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.705641
-  2/5,  16.681652
-  3/5,  16.648865
-  4/5,  16.639153
-  5/5,  16.64103
-}
-{ Cache Synth - score_blksize114688_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.663178
-  2/5,  16.626549
-  3/5,  16.644808
-  4/5,  16.650148
-  5/5,  16.648292
-}
-{ Cache Synth - score_blksize229376_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.647665
-  2/5,  16.642206
-  3/5,  16.624052
-  4/5,  16.632964
-  5/5,  16.685832
-}
-{ Cache Synth - score_blksize458752_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.672545
-  2/5,  16.689378
-  3/5,  16.739516
-  4/5,  16.681524
-  5/5,  16.639277
-}
-{ Cache Synth - score_blksize917504_basemax3 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.652935
-  2/5,  16.653521
-  3/5,  16.664995
-  4/5,  16.655083
-  5/5,  16.655722
-}
-{ Cache Synth - score_blksize112_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.702721
-  2/5,  16.702034
-  3/5,  16.709833
-  4/5,  16.706498
-  5/5,  16.716311
-}
-{ Cache Synth - score_blksize224_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.688968
-  2/5,  16.685771
-  3/5,  17.283152
-  4/5,  16.683741
-  5/5,  16.803001
-}
-{ Cache Synth - score_blksize448_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.670159
-  2/5,  16.667493
-  3/5,  16.672532
-  4/5,  16.673672
-  5/5,  16.657157
-}
-{ Cache Synth - score_blksize896_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.656505
-  2/5,  16.657769
-  3/5,  16.667608
-  4/5,  16.670991
-  5/5,  16.664789
-}
-{ Cache Synth - score_blksize1792_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.647833
-  2/5,  16.627901
-  3/5,  16.65881
-  4/5,  16.661159
-  5/5,  16.66368
-}
-{ Cache Synth - score_blksize3584_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.736849
-  2/5,  16.646643
-  3/5,  16.682226
-  4/5,  16.64019
-  5/5,  16.647078
-}
-{ Cache Synth - score_blksize7168_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.650682
-  2/5,  16.646982
-  3/5,  16.644878
-  4/5,  16.627436
-  5/5,  16.620758
-}
-{ Cache Synth - score_blksize14336_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.66397
-  2/5,  16.636817
-  3/5,  16.640113
-  4/5,  16.648713
-  5/5,  16.64111
-}
-{ Cache Synth - score_blksize28672_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.629716
-  2/5,  16.634893
-  3/5,  16.64659
-  4/5,  16.735947
-  5/5,  16.674261
-}
-{ Cache Synth - score_blksize57344_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.666036
-  2/5,  16.623215
-  3/5,  16.621692
-  4/5,  16.63865
-  5/5,  16.634584
-}
-{ Cache Synth - score_blksize114688_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.647916
-  2/5,  16.978282
-  3/5,  16.63924
-  4/5,  16.62994
-  5/5,  16.634224
-}
-{ Cache Synth - score_blksize229376_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643124
-  2/5,  16.641945
-  3/5,  16.692362
-  4/5,  16.653575
-  5/5,  16.64255
-}
-{ Cache Synth - score_blksize458752_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.630095
-  2/5,  16.749521
-  3/5,  16.707538
-  4/5,  16.638596
-  5/5,  16.645595
-}
-{ Cache Synth - score_blksize917504_basemax4 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.646266
-  2/5,  16.655567
-  3/5,  16.636475
-  4/5,  16.662154
-  5/5,  16.655743
-}
-{ Cache Synth - score_blksize112_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.706616
-  2/5,  16.719759
-  3/5,  16.707616
-  4/5,  16.69807
-  5/5,  16.696364
-}
-{ Cache Synth - score_blksize224_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.686496
-  2/5,  16.686321
-  3/5,  16.684788
-  4/5,  16.759522
-  5/5,  16.692268
-}
-{ Cache Synth - score_blksize448_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.710852
-  2/5,  16.665863
-  3/5,  16.676926
-  4/5,  16.673942
-  5/5,  16.669622
-}
-{ Cache Synth - score_blksize896_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.655665
-  2/5,  16.640812
-  3/5,  16.642733
-  4/5,  16.656743
-  5/5,  16.671719
-}
-{ Cache Synth - score_blksize1792_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.654916
-  2/5,  16.660509
-  3/5,  16.63778
-  4/5,  16.640171
-  5/5,  16.641941
-}
-{ Cache Synth - score_blksize3584_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643385
-  2/5,  16.764659
-  3/5,  16.693543
-  4/5,  16.642708
-  5/5,  16.637142
-}
-{ Cache Synth - score_blksize7168_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.626071
-  2/5,  16.643425
-  3/5,  16.638731
-  4/5,  16.647611
-  5/5,  16.646325
-}
-{ Cache Synth - score_blksize14336_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.646378
-  2/5,  16.631705
-  3/5,  16.644538
-  4/5,  16.638585
-  5/5,  16.637192
-}
-{ Cache Synth - score_blksize28672_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.647068
-  2/5,  16.645844
-  3/5,  16.632044
-  4/5,  16.621845
-  5/5,  16.752719
-}
-{ Cache Synth - score_blksize57344_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.68954
-  2/5,  16.640775
-  3/5,  16.637812
-  4/5,  16.636627
-  5/5,  16.665837
-}
-{ Cache Synth - score_blksize114688_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.621111
-  2/5,  16.648955
-  3/5,  16.629957
-  4/5,  16.634096
-  5/5,  16.65073
-}
-{ Cache Synth - score_blksize229376_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.635265
-  2/5,  16.614341
-  3/5,  16.628895
-  4/5,  16.647448
-  5/5,  16.649942
-}
-{ Cache Synth - score_blksize458752_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.654439
-  2/5,  16.713864
-  3/5,  16.649453
-  4/5,  16.699211
-  5/5,  16.646329
-}
-{ Cache Synth - score_blksize917504_basemax5 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.662697
-  2/5,  16.650025
-  3/5,  16.65428
-  4/5,  16.653778
-  5/5,  16.644891
-}
-{ Cache Synth - score_blksize112_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.692865
-  2/5,  16.701864
-  3/5,  16.713992
-  4/5,  16.706501
-  5/5,  17.04678
-}
-{ Cache Synth - score_blksize224_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.674371
-  2/5,  16.665017
-  3/5,  16.674354
-  4/5,  16.69016
-  5/5,  16.782889
-}
-{ Cache Synth - score_blksize448_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.715582
-  2/5,  16.68228
-  3/5,  16.642019
-  4/5,  16.654014
-  5/5,  16.662859
-}
-{ Cache Synth - score_blksize896_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.656983
-  2/5,  16.65487
-  3/5,  16.657951
-  4/5,  16.650097
-  5/5,  16.635733
-}
-{ Cache Synth - score_blksize1792_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643343
-  2/5,  16.652278
-  3/5,  16.654857
-  4/5,  16.661612
-  5/5,  16.655164
-}
-{ Cache Synth - score_blksize3584_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.641523
-  2/5,  16.631832
-  3/5,  16.756233
-  4/5,  16.696774
-  5/5,  16.641666
-}
-{ Cache Synth - score_blksize7168_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.633659
-  2/5,  16.630963
-  3/5,  16.627567
-  4/5,  16.62259
-  5/5,  16.65226
-}
-{ Cache Synth - score_blksize14336_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.635276
-  2/5,  16.640817
-  3/5,  16.636566
-  4/5,  16.636118
-  5/5,  16.622383
-}
-{ Cache Synth - score_blksize28672_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.637709
-  2/5,  16.652425
-  3/5,  16.638991
-  4/5,  16.653103
-  5/5,  16.691883
-}
-{ Cache Synth - score_blksize57344_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.645862
-  2/5,  16.684967
-  3/5,  16.634233
-  4/5,  16.638098
-  5/5,  16.629251
-}
-{ Cache Synth - score_blksize114688_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.644944
-  2/5,  16.624427
-  3/5,  16.615462
-  4/5,  16.627707
-  5/5,  16.641109
-}
-{ Cache Synth - score_blksize229376_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643917
-  2/5,  16.638022
-  3/5,  16.654746
-  4/5,  16.628294
-  5/5,  16.634047
-}
-{ Cache Synth - score_blksize458752_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.653502
-  2/5,  16.650975
-  3/5,  16.80768
-  4/5,  16.673579
-  5/5,  16.655782
-}
-{ Cache Synth - score_blksize917504_basemax6 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643104
-  2/5,  16.653617
-  3/5,  16.661329
-  4/5,  16.871769
-  5/5,  16.659508
-}
-{ Cache Synth - score_blksize112_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.709426
-  2/5,  16.718038
-  3/5,  16.686517
-  4/5,  16.706966
-  5/5,  16.705708
-}
-{ Cache Synth - score_blksize224_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.686816
-  2/5,  16.694359
-  3/5,  16.680869
-  4/5,  16.683726
-  5/5,  16.669079
-}
-{ Cache Synth - score_blksize448_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.805212
-  2/5,  16.716663
-  3/5,  16.668619
-  4/5,  16.660786
-  5/5,  16.663004
-}
-{ Cache Synth - score_blksize896_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.640819
-  2/5,  16.640872
-  3/5,  16.659106
-  4/5,  16.650017
-  5/5,  16.65304
-}
-{ Cache Synth - score_blksize1792_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.649557
-  2/5,  16.644801
-  3/5,  16.631891
-  4/5,  16.662086
-  5/5,  16.669782
-}
-{ Cache Synth - score_blksize3584_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.649208
-  2/5,  16.645611
-  3/5,  16.662454
-  4/5,  16.724901
-  5/5,  16.685336
-}
-{ Cache Synth - score_blksize7168_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.635598
-  2/5,  16.644614
-  3/5,  16.637479
-  4/5,  16.636224
-  5/5,  16.637072
-}
-{ Cache Synth - score_blksize14336_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.664944
-  2/5,  16.660786
-  3/5,  16.706472
-  4/5,  16.654949
-  5/5,  16.627171
-}
-{ Cache Synth - score_blksize28672_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.628135
-  2/5,  16.633774
-  3/5,  16.62808
-  4/5,  16.638004
-  5/5,  16.64776
-}
-{ Cache Synth - score_blksize57344_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.753799
-  2/5,  16.639517
-  3/5,  16.881083
-  4/5,  16.618699
-  5/5,  16.641799
-}
-{ Cache Synth - score_blksize114688_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.632137
-  2/5,  16.637166
-  3/5,  16.635722
-  4/5,  16.629855
-  5/5,  16.625229
-}
-{ Cache Synth - score_blksize229376_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.620872
-  2/5,  16.638373
-  3/5,  16.634747
-  4/5,  16.628067
-  5/5,  16.7865
-}
-{ Cache Synth - score_blksize458752_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.645548
-  2/5,  16.627941
-  3/5,  16.649322
-  4/5,  16.772744
-  5/5,  16.696041
-}
-{ Cache Synth - score_blksize917504_basemax7 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.658407
-  2/5,  16.658941
-  3/5,  16.642778
-  4/5,  16.640919
-  5/5,  16.664908
-}
-{ Cache Synth - score_blksize112_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.716099
-  2/5,  16.71065
-  3/5,  16.71334
-  4/5,  16.707429
-  5/5,  16.682133
-}
-{ Cache Synth - score_blksize224_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.681336
-  2/5,  16.689206
-  3/5,  16.702629
-  4/5,  16.699658
-  5/5,  16.685261
-}
-{ Cache Synth - score_blksize448_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.660139
-  2/5,  16.754495
-  3/5,  16.726493
-  4/5,  16.670518
-  5/5,  16.676033
-}
-{ Cache Synth - score_blksize896_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.662117
-  2/5,  16.661697
-  3/5,  16.648007
-  4/5,  16.642655
-  5/5,  16.709231
-}
-{ Cache Synth - score_blksize1792_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.656615
-  2/5,  16.645359
-  3/5,  16.651182
-  4/5,  16.634918
-  5/5,  16.627812
-}
-{ Cache Synth - score_blksize3584_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.641579
-  2/5,  16.647977
-  3/5,  16.658445
-  4/5,  16.74056
-  5/5,  16.645503
-}
-{ Cache Synth - score_blksize7168_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.704106
-  2/5,  16.622848
-  3/5,  16.64393
-  4/5,  16.63902
-  5/5,  16.630392
-}
-{ Cache Synth - score_blksize14336_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.674603
-  2/5,  16.634621
-  3/5,  16.614176
-  4/5,  16.62799
-  5/5,  16.639545
-}
-{ Cache Synth - score_blksize28672_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.635374
-  2/5,  16.646139
-  3/5,  16.640358
-  4/5,  16.629707
-  5/5,  16.6193
-}
-{ Cache Synth - score_blksize57344_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.646077
-  2/5,  16.742544
-  3/5,  16.680715
-  4/5,  16.635054
-  5/5,  16.637917
-}
-{ Cache Synth - score_blksize114688_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.634799
-  2/5,  16.622716
-  3/5,  17.242052
-  4/5,  16.683158
-  5/5,  16.628009
-}
-{ Cache Synth - score_blksize229376_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.628632
-  2/5,  16.628163
-  3/5,  16.632603
-  4/5,  16.625341
-  5/5,  16.637509
-}
-{ Cache Synth - score_blksize458752_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.648456
-  2/5,  16.649717
-  3/5,  16.669015
-  4/5,  16.643187
-  5/5,  16.73924
-}
-{ Cache Synth - score_blksize917504_basemax8 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.710858
-  2/5,  16.651839
-  3/5,  16.663033
-  4/5,  16.654259
-  5/5,  16.65098
-}
-{ Cache Synth - score_blksize112_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.68407
-  2/5,  16.698921
-  3/5,  16.715067
-  4/5,  16.702324
-  5/5,  16.705764
-}
-{ Cache Synth - score_blksize224_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.681292
-  2/5,  16.669567
-  3/5,  16.664373
-  4/5,  16.675484
-  5/5,  16.689798
-}
-{ Cache Synth - score_blksize448_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.663896
-  2/5,  16.766475
-  3/5,  16.679202
-  4/5,  17.277189
-  5/5,  16.654249
-}
-{ Cache Synth - score_blksize896_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.655572
-  2/5,  16.651085
-  3/5,  16.65376
-  4/5,  16.661019
-  5/5,  16.67058
-}
-{ Cache Synth - score_blksize1792_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.661508
-  2/5,  16.637441
-  3/5,  16.655165
-  4/5,  16.648396
-  5/5,  16.690322
-}
-{ Cache Synth - score_blksize3584_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.642556
-  2/5,  16.843226
-  3/5,  16.630173
-  4/5,  16.637699
-  5/5,  16.774664
-}
-{ Cache Synth - score_blksize7168_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.689344
-  2/5,  16.633185
-  3/5,  16.633285
-  4/5,  16.621647
-  5/5,  16.612132
-}
-{ Cache Synth - score_blksize14336_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.643559
-  2/5,  16.645683
-  3/5,  16.631094
-  4/5,  16.641247
-  5/5,  16.635772
-}
-{ Cache Synth - score_blksize28672_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.627263
-  2/5,  16.631286
-  3/5,  16.649112
-  4/5,  16.634237
-  5/5,  16.640797
-}
-{ Cache Synth - score_blksize57344_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.637795
-  2/5,  16.649038
-  3/5,  16.664964
-  4/5,  16.670563
-  5/5,  16.64163
-}
-{ Cache Synth - score_blksize114688_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.63841
-  2/5,  16.670388
-  3/5,  16.625055
-  4/5,  16.615779
-  5/5,  16.620407
-}
-{ Cache Synth - score_blksize229376_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.634729
-  2/5,  16.630976
-  3/5,  16.634454
-  4/5,  16.640353
-  5/5,  16.631413
-}
-{ Cache Synth - score_blksize458752_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.632479
-  2/5,  16.653882
-  3/5,  16.646219
-  4/5,  16.659316
-  5/5,  16.742709
-}
-{ Cache Synth - score_blksize917504_basemax9 ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  16.664476
-  2/5,  16.642116
-  3/5,  16.644773
-  4/5,  16.656025
-  5/5,  16.663406
+  1/5,  16.547379
+  2/5,  16.560725
+  3/5,  16.552705
+  4/5,  16.549887
+  5/5,  16.549777
+}
+{ Cache Synth - score ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.634588
+  2/5,  16.647708
+  3/5,  16.657211
+  4/5,  16.653672
+  5/5,  16.661643
+}
+{ Cache Synth - score_mcache_1 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.754995
+  2/5,  16.747581
+  3/5,  16.742164
+  4/5,  16.775562
+  5/5,  16.829078
+}
+{ Cache Synth - score_mcache_2 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.769652
+  2/5,  16.752014
+  3/5,  16.72798
+  4/5,  16.723705
+  5/5,  16.711582
+}
+{ Cache Synth - score_mcache_3 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.705057
+  2/5,  16.693222
+  3/5,  16.690215
+  4/5,  16.702144
+  5/5,  16.696206
+}
+{ Cache Synth - score_mcache_4 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.65559
+  2/5,  16.653005
+  3/5,  16.66528
+  4/5,  16.665427
+  5/5,  16.673515
+}
+{ Cache Synth - score_mcache_5 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.710129
+  2/5,  16.652637
+  3/5,  16.715808
+  4/5,  16.698892
+  5/5,  16.664425
+}
+{ Cache Synth - score_mcache_6 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.651004
+  2/5,  16.657235
+  3/5,  16.641822
+  4/5,  16.643905
+  5/5,  16.655119
+}
+{ Cache Synth - score_mcache_7 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.65063
+  2/5,  16.660034
+  3/5,  16.657068
+  4/5,  16.662109
+  5/5,  16.63508
+}
+{ Cache Synth - score_mcache_8 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.640646
+  2/5,  16.657056
+  3/5,  16.659261
+  4/5,  16.673987
+  5/5,  16.734169
+}
+{ Cache Synth - score_mcache_9 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.646866
+  2/5,  16.664275
+  3/5,  16.685519
+  4/5,  16.657146
+  5/5,  16.653711
+}
+{ Cache Synth - score_mcache_10 ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.66089
+  2/5,  16.65742
+  3/5,  16.649437
+  4/5,  16.63546
+  5/5,  16.712494
+}
+{ Cache Synth - simple_mcache_1 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.56236
+  2/5,  16.561972
+  3/5,  16.557581
+  4/5,  16.548973
+  5/5,  16.538501
+}
+{ Cache Synth - simple_mcache_2 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.549164
+  2/5,  16.56952
+  3/5,  16.623359
+  4/5,  16.584665
+  5/5,  16.570379
+}
+{ Cache Synth - simple_mcache_3 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.549621
+  2/5,  16.546418
+  3/5,  16.582186
+  4/5,  16.563656
+  5/5,  16.556282
+}
+{ Cache Synth - simple_mcache_4 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.552879
+  2/5,  16.592627
+  3/5,  16.544095
+  4/5,  16.558182
+  5/5,  16.558652
+}
+{ Cache Synth - simple_mcache_5 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.903808
+  2/5,  16.558591
+  3/5,  16.553887
+  4/5,  16.537809
+  5/5,  16.563929
+}
+{ Cache Synth - simple_mcache_6 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.623823
+  2/5,  16.592001
+  3/5,  16.560717
+  4/5,  16.564761
+  5/5,  16.539481
+}
+{ Cache Synth - simple_mcache_7 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.546993
+  2/5,  16.581556
+  3/5,  16.579775
+  4/5,  16.56609
+  5/5,  16.564958
+}
+{ Cache Synth - simple_mcache_8 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.546088
+  2/5,  16.54177
+  3/5,  16.723078
+  4/5,  16.765234
+  5/5,  16.559534
+}
+{ Cache Synth - simple_mcache_9 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.571066
+  2/5,  16.557749
+  3/5,  16.543527
+  4/5,  16.613492
+  5/5,  16.587539
+}
+{ Cache Synth - simple_mcache_10 ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  16.558647
+  2/5,  16.564307
+  3/5,  16.549496
+  4/5,  16.552975
+  5/5,  16.54675
 }
 { Jacobi Iterative - numpy ( None ),
   taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=False
-  1/5,  2.618207
-  2/5,  2.627562
-  3/5,  2.634451
-  4/5,  2.643606
-  5/5,  2.628536
+  1/5,  2.636634
+  2/5,  2.644409
+  3/5,  2.62559
+  4/5,  2.626659
+  5/5,  2.634625
 }
 { Jacobi Iterative - simple ( simple ),
   taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.359524
-  2/5,  3.365839
-  3/5,  3.360648
-  4/5,  3.372743
-  5/5,  3.374639
-}
-{ Jacobi Iterative - score_blksize112_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.382879
-  2/5,  3.380466
-  3/5,  3.38467
-  4/5,  3.390704
-  5/5,  3.395973
-}
-{ Jacobi Iterative - score_blksize224_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.350349
-  2/5,  3.343166
-  3/5,  3.347027
-  4/5,  3.342075
-  5/5,  3.366915
-}
-{ Jacobi Iterative - score_blksize448_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.343548
-  2/5,  3.330616
-  3/5,  3.330492
-  4/5,  3.33185
-  5/5,  3.338991
-}
-{ Jacobi Iterative - score_blksize896_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.347062
-  2/5,  3.329498
-  3/5,  3.324232
-  4/5,  3.320614
-  5/5,  3.320085
-}
-{ Jacobi Iterative - score_blksize1792_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.328082
-  2/5,  3.305906
-  3/5,  3.305982
-  4/5,  3.299184
-  5/5,  3.301438
-}
-{ Jacobi Iterative - score_blksize3584_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.321536
-  2/5,  3.335777
-  3/5,  3.328335
-  4/5,  3.321504
-  5/5,  3.319706
-}
-{ Jacobi Iterative - score_blksize7168_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.307324
-  2/5,  3.314672
-  3/5,  3.310915
-  4/5,  3.300381
-  5/5,  3.294901
-}
-{ Jacobi Iterative - score_blksize14336_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.280994
-  2/5,  3.290369
-  3/5,  3.306468
-  4/5,  3.28401
-  5/5,  3.281828
-}
-{ Jacobi Iterative - score_blksize28672_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.28295
-  2/5,  3.284739
-  3/5,  3.310004
-  4/5,  3.381337
-  5/5,  3.28647
-}
-{ Jacobi Iterative - score_blksize57344_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.281444
-  2/5,  3.282812
-  3/5,  3.288787
-  4/5,  3.297845
-  5/5,  3.320004
-}
-{ Jacobi Iterative - score_blksize114688_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.274168
-  2/5,  3.276703
-  3/5,  3.276714
-  4/5,  3.287012
-  5/5,  3.296307
-}
-{ Jacobi Iterative - score_blksize229376_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.274405
-  2/5,  3.271229
-  3/5,  3.273265
-  4/5,  3.284911
-  5/5,  3.288042
-}
-{ Jacobi Iterative - score_blksize458752_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.284475
-  2/5,  3.280274
-  3/5,  3.28007
-  4/5,  3.286005
-  5/5,  3.300264
-}
-{ Jacobi Iterative - score_blksize917504_basemax1 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.379274
-  2/5,  3.370569
-  3/5,  3.370883
-  4/5,  3.370283
-  5/5,  3.381614
-}
-{ Jacobi Iterative - score_blksize112_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.485703
-  2/5,  3.433598
-  3/5,  3.466148
-  4/5,  3.470081
-  5/5,  3.465437
-}
-{ Jacobi Iterative - score_blksize224_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.361236
-  2/5,  3.31626
-  3/5,  3.315036
-  4/5,  3.312827
-  5/5,  3.340891
-}
-{ Jacobi Iterative - score_blksize448_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.273497
-  2/5,  3.307446
-  3/5,  3.263407
-  4/5,  3.291132
-  5/5,  3.29612
-}
-{ Jacobi Iterative - score_blksize896_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.190396
-  2/5,  3.221219
-  3/5,  3.216004
-  4/5,  3.207065
-  5/5,  3.20848
-}
-{ Jacobi Iterative - score_blksize1792_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.153131
-  2/5,  3.178703
-  3/5,  3.17505
-  4/5,  3.163346
-  5/5,  3.14784
-}
-{ Jacobi Iterative - score_blksize3584_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.12941
-  2/5,  3.126757
-  3/5,  3.141358
-  4/5,  3.13655
-  5/5,  3.13227
-}
-{ Jacobi Iterative - score_blksize7168_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.135782
-  2/5,  3.142709
-  3/5,  3.133099
-  4/5,  3.157955
-  5/5,  3.147182
-}
-{ Jacobi Iterative - score_blksize14336_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.121367
-  2/5,  3.119278
-  3/5,  3.127007
-  4/5,  3.124865
-  5/5,  3.103977
-}
-{ Jacobi Iterative - score_blksize28672_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.130896
-  2/5,  3.136054
-  3/5,  3.130811
-  4/5,  3.123718
-  5/5,  3.125669
-}
-{ Jacobi Iterative - score_blksize57344_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.1371
-  2/5,  3.131973
-  3/5,  3.123011
-  4/5,  3.123782
-  5/5,  3.124588
-}
-{ Jacobi Iterative - score_blksize114688_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.133769
-  2/5,  3.144733
-  3/5,  3.122271
-  4/5,  3.120581
-  5/5,  3.11809
-}
-{ Jacobi Iterative - score_blksize229376_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.116682
-  2/5,  3.146583
-  3/5,  3.207368
-  4/5,  3.125695
-  5/5,  3.119697
-}
-{ Jacobi Iterative - score_blksize458752_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.187318
-  2/5,  3.188398
-  3/5,  3.196916
-  4/5,  3.254046
-  5/5,  3.191019
-}
-{ Jacobi Iterative - score_blksize917504_basemax2 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.341701
-  2/5,  3.337794
-  3/5,  3.342926
-  4/5,  3.358134
-  5/5,  3.333145
-}
-{ Jacobi Iterative - score_blksize112_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.468477
-  2/5,  3.466536
-  3/5,  3.464402
-  4/5,  3.482457
-  5/5,  3.477447
-}
-{ Jacobi Iterative - score_blksize224_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.320707
-  2/5,  3.311224
-  3/5,  3.351833
-  4/5,  3.359271
-  5/5,  3.320314
-}
-{ Jacobi Iterative - score_blksize448_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.296959
-  2/5,  3.291798
-  3/5,  3.28743
-  4/5,  3.29813
-  5/5,  3.306834
-}
-{ Jacobi Iterative - score_blksize896_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.21485
-  2/5,  3.203384
-  3/5,  3.212489
-  4/5,  3.204112
-  5/5,  3.226722
-}
-{ Jacobi Iterative - score_blksize1792_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.174904
-  2/5,  3.158169
-  3/5,  3.163378
-  4/5,  3.16599
-  5/5,  3.15755
-}
-{ Jacobi Iterative - score_blksize3584_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.148107
-  2/5,  3.14452
-  3/5,  3.130116
-  4/5,  3.131015
-  5/5,  3.129432
-}
-{ Jacobi Iterative - score_blksize7168_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.141696
-  2/5,  3.157381
-  3/5,  3.141212
-  4/5,  3.126405
-  5/5,  3.132377
-}
-{ Jacobi Iterative - score_blksize14336_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.125705
-  2/5,  3.14539
-  3/5,  3.141576
-  4/5,  3.130779
-  5/5,  3.121107
-}
-{ Jacobi Iterative - score_blksize28672_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.1309
-  2/5,  3.131957
-  3/5,  3.145337
-  4/5,  3.138479
-  5/5,  3.127752
-}
-{ Jacobi Iterative - score_blksize57344_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.121656
-  2/5,  3.125112
-  3/5,  3.127897
-  4/5,  3.148462
-  5/5,  3.13764
-}
-{ Jacobi Iterative - score_blksize114688_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.12852
-  2/5,  3.121788
-  3/5,  3.119021
-  4/5,  3.115039
-  5/5,  3.145373
-}
-{ Jacobi Iterative - score_blksize229376_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.128088
-  2/5,  3.122962
-  3/5,  3.126678
-  4/5,  3.124508
-  5/5,  3.128788
-}
-{ Jacobi Iterative - score_blksize458752_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.200296
-  2/5,  3.193709
-  3/5,  3.185887
-  4/5,  3.194219
-  5/5,  3.187685
-}
-{ Jacobi Iterative - score_blksize917504_basemax3 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.344413
-  2/5,  3.354091
-  3/5,  3.343197
-  4/5,  3.336198
-  5/5,  3.336584
-}
-{ Jacobi Iterative - score_blksize112_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.479605
-  2/5,  3.450829
-  3/5,  3.53368
-  4/5,  3.464114
-  5/5,  3.433535
-}
-{ Jacobi Iterative - score_blksize224_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.342607
-  2/5,  3.359349
-  3/5,  3.36144
-  4/5,  3.34359
-  5/5,  3.30837
-}
-{ Jacobi Iterative - score_blksize448_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.297386
-  2/5,  3.273812
-  3/5,  3.312556
-  4/5,  3.264399
-  5/5,  3.25664
-}
-{ Jacobi Iterative - score_blksize896_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.207369
-  2/5,  3.211812
-  3/5,  3.204896
-  4/5,  3.230056
-  5/5,  3.212581
-}
-{ Jacobi Iterative - score_blksize1792_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.173091
-  2/5,  3.164155
-  3/5,  3.165376
-  4/5,  3.179442
-  5/5,  3.171234
-}
-{ Jacobi Iterative - score_blksize3584_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.128724
-  2/5,  3.129133
-  3/5,  3.132972
-  4/5,  3.136662
-  5/5,  3.146597
-}
-{ Jacobi Iterative - score_blksize7168_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.137402
-  2/5,  3.139899
-  3/5,  3.133396
-  4/5,  3.138621
-  5/5,  3.151315
-}
-{ Jacobi Iterative - score_blksize14336_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.134083
-  2/5,  3.107609
-  3/5,  3.096282
-  4/5,  3.117197
-  5/5,  3.119871
-}
-{ Jacobi Iterative - score_blksize28672_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.144958
-  2/5,  3.138042
-  3/5,  3.130562
-  4/5,  3.128758
-  5/5,  3.131921
-}
-{ Jacobi Iterative - score_blksize57344_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.119923
-  2/5,  3.138586
-  3/5,  3.131632
-  4/5,  3.122362
-  5/5,  3.123461
-}
-{ Jacobi Iterative - score_blksize114688_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.118679
-  2/5,  3.134922
-  3/5,  3.134066
-  4/5,  3.125254
-  5/5,  3.122082
-}
-{ Jacobi Iterative - score_blksize229376_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.119545
-  2/5,  3.120711
-  3/5,  3.131869
-  4/5,  3.13499
-  5/5,  3.120321
-}
-{ Jacobi Iterative - score_blksize458752_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.190073
-  2/5,  3.189204
-  3/5,  3.192996
-  4/5,  3.215295
-  5/5,  3.194655
-}
-{ Jacobi Iterative - score_blksize917504_basemax4 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.334795
-  2/5,  3.33266
-  3/5,  3.33493
-  4/5,  3.344617
-  5/5,  3.350151
-}
-{ Jacobi Iterative - score_blksize112_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.438225
-  2/5,  3.459227
-  3/5,  3.457118
-  4/5,  3.461369
-  5/5,  3.486314
-}
-{ Jacobi Iterative - score_blksize224_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.318446
-  2/5,  3.340252
-  3/5,  3.355048
-  4/5,  3.316515
-  5/5,  3.32434
-}
-{ Jacobi Iterative - score_blksize448_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.316146
-  2/5,  3.290618
-  3/5,  3.292434
-  4/5,  3.260209
-  5/5,  3.291325
-}
-{ Jacobi Iterative - score_blksize896_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.21276
-  2/5,  3.289248
-  3/5,  3.210328
-  4/5,  3.20888
-  5/5,  3.207577
-}
-{ Jacobi Iterative - score_blksize1792_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.171361
-  2/5,  3.174413
-  3/5,  3.198734
-  4/5,  3.167109
-  5/5,  3.163325
-}
-{ Jacobi Iterative - score_blksize3584_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.124278
-  2/5,  3.133894
-  3/5,  3.144764
-  4/5,  3.124561
-  5/5,  3.12995
-}
-{ Jacobi Iterative - score_blksize7168_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.135585
-  2/5,  3.142459
-  3/5,  3.161911
-  4/5,  3.14995
-  5/5,  3.134408
-}
-{ Jacobi Iterative - score_blksize14336_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.097413
-  2/5,  3.12283
-  3/5,  3.131637
-  4/5,  3.11099
-  5/5,  3.098821
-}
-{ Jacobi Iterative - score_blksize28672_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.12018
-  2/5,  3.126827
-  3/5,  3.123365
-  4/5,  3.141827
-  5/5,  3.141745
-}
-{ Jacobi Iterative - score_blksize57344_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.128053
-  2/5,  3.121056
-  3/5,  3.127016
-  4/5,  3.125241
-  5/5,  3.134273
-}
-{ Jacobi Iterative - score_blksize114688_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.133181
-  2/5,  3.115919
-  3/5,  3.121617
-  4/5,  3.128102
-  5/5,  3.118912
-}
-{ Jacobi Iterative - score_blksize229376_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.138625
-  2/5,  3.126917
-  3/5,  3.119218
-  4/5,  3.116073
-  5/5,  3.123389
-}
-{ Jacobi Iterative - score_blksize458752_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.187028
-  2/5,  3.199759
-  3/5,  3.195001
-  4/5,  3.186657
-  5/5,  3.191012
-}
-{ Jacobi Iterative - score_blksize917504_basemax5 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.334108
-  2/5,  3.349454
-  3/5,  3.347223
-  4/5,  3.334247
-  5/5,  3.334491
-}
-{ Jacobi Iterative - score_blksize112_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.462595
-  2/5,  3.433761
-  3/5,  3.489964
-  4/5,  3.470462
-  5/5,  3.46311
-}
-{ Jacobi Iterative - score_blksize224_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.309717
-  2/5,  3.340981
-  3/5,  3.332814
-  4/5,  3.364643
-  5/5,  3.305032
-}
-{ Jacobi Iterative - score_blksize448_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.286434
-  2/5,  3.289631
-  3/5,  3.304435
-  4/5,  3.309968
-  5/5,  3.293129
-}
-{ Jacobi Iterative - score_blksize896_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.20612
-  2/5,  3.192543
-  3/5,  3.190765
-  4/5,  3.194838
-  5/5,  3.219595
-}
-{ Jacobi Iterative - score_blksize1792_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.154696
-  2/5,  3.174021
-  3/5,  3.159111
-  4/5,  3.169475
-  5/5,  3.186535
-}
-{ Jacobi Iterative - score_blksize3584_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.131046
-  2/5,  3.124399
-  3/5,  3.12538
-  4/5,  3.126837
-  5/5,  3.147156
-}
-{ Jacobi Iterative - score_blksize7168_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.231302
-  2/5,  3.143606
-  3/5,  3.16786
-  4/5,  3.124826
-  5/5,  3.134426
-}
-{ Jacobi Iterative - score_blksize14336_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.129926
-  2/5,  3.118556
-  3/5,  3.089539
-  4/5,  3.094079
-  5/5,  3.120378
-}
-{ Jacobi Iterative - score_blksize28672_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.132676
-  2/5,  3.139025
-  3/5,  3.128581
-  4/5,  3.128928
-  5/5,  3.11988
-}
-{ Jacobi Iterative - score_blksize57344_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.124936
-  2/5,  3.127105
-  3/5,  3.148404
-  4/5,  3.129353
-  5/5,  3.12809
-}
-{ Jacobi Iterative - score_blksize114688_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.117299
-  2/5,  3.121595
-  3/5,  3.125025
-  4/5,  3.13436
-  5/5,  3.130006
-}
-{ Jacobi Iterative - score_blksize229376_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.123719
-  2/5,  3.122071
-  3/5,  3.118839
-  4/5,  3.124826
-  5/5,  3.136923
-}
-{ Jacobi Iterative - score_blksize458752_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.197223
-  2/5,  3.187244
-  3/5,  3.193316
-  4/5,  3.187516
-  5/5,  3.20576
-}
-{ Jacobi Iterative - score_blksize917504_basemax6 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.349255
-  2/5,  3.333535
-  3/5,  3.333671
-  4/5,  3.333729
-  5/5,  3.332869
-}
-{ Jacobi Iterative - score_blksize112_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.485553
-  2/5,  3.433905
-  3/5,  3.471905
-  4/5,  3.468929
-  5/5,  3.476207
-}
-{ Jacobi Iterative - score_blksize224_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.359501
-  2/5,  3.347547
-  3/5,  3.349031
-  4/5,  3.346808
-  5/5,  3.316344
-}
-{ Jacobi Iterative - score_blksize448_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.30579
-  2/5,  3.299223
-  3/5,  3.26552
-  4/5,  3.297627
-  5/5,  3.293107
-}
-{ Jacobi Iterative - score_blksize896_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.210068
-  2/5,  3.225593
-  3/5,  3.200768
-  4/5,  3.211303
-  5/5,  3.202788
-}
-{ Jacobi Iterative - score_blksize1792_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.158449
-  2/5,  3.166418
-  3/5,  3.176035
-  4/5,  3.159319
-  5/5,  3.160298
-}
-{ Jacobi Iterative - score_blksize3584_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.124138
-  2/5,  3.136089
-  3/5,  3.135176
-  4/5,  3.134193
-  5/5,  3.130384
-}
-{ Jacobi Iterative - score_blksize7168_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.136051
-  2/5,  3.136423
-  3/5,  3.141772
-  4/5,  3.145738
-  5/5,  3.154175
-}
-{ Jacobi Iterative - score_blksize14336_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.10376
-  2/5,  3.091176
-  3/5,  3.121191
-  4/5,  3.108413
-  5/5,  3.146795
-}
-{ Jacobi Iterative - score_blksize28672_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.217782
-  2/5,  3.125422
-  3/5,  3.126325
-  4/5,  3.131877
-  5/5,  3.13416
-}
-{ Jacobi Iterative - score_blksize57344_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.140461
-  2/5,  3.160773
-  3/5,  3.134913
-  4/5,  3.122355
-  5/5,  3.123514
-}
-{ Jacobi Iterative - score_blksize114688_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.126562
-  2/5,  3.143734
-  3/5,  3.122642
-  4/5,  3.12531
-  5/5,  3.122526
-}
-{ Jacobi Iterative - score_blksize229376_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.125298
-  2/5,  3.132006
-  3/5,  3.128063
-  4/5,  3.116928
-  5/5,  3.117888
-}
-{ Jacobi Iterative - score_blksize458752_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.183489
-  2/5,  3.193557
-  3/5,  3.211119
-  4/5,  3.195924
-  5/5,  3.188782
-}
-{ Jacobi Iterative - score_blksize917504_basemax7 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.33897
-  2/5,  3.338472
-  3/5,  3.344755
-  4/5,  3.35238
-  5/5,  3.333898
-}
-{ Jacobi Iterative - score_blksize112_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.43065
-  2/5,  3.465021
-  3/5,  3.469564
-  4/5,  3.479504
-  5/5,  3.446174
-}
-{ Jacobi Iterative - score_blksize224_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.3103
-  2/5,  3.343868
-  3/5,  3.344057
-  4/5,  3.362067
-  5/5,  3.35456
-}
-{ Jacobi Iterative - score_blksize448_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.298422
-  2/5,  3.294238
-  3/5,  3.259998
-  4/5,  3.300085
-  5/5,  3.311598
-}
-{ Jacobi Iterative - score_blksize896_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.205531
-  2/5,  3.210612
-  3/5,  3.209031
-  4/5,  3.107883
-  5/5,  3.221643
-}
-{ Jacobi Iterative - score_blksize1792_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.179829
-  2/5,  3.156312
-  3/5,  3.146997
-  4/5,  3.161244
-  5/5,  3.167099
-}
-{ Jacobi Iterative - score_blksize3584_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.150775
-  2/5,  3.132766
-  3/5,  3.133447
-  4/5,  3.129639
-  5/5,  3.129829
-}
-{ Jacobi Iterative - score_blksize7168_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.118343
-  2/5,  3.156594
-  3/5,  3.139314
-  4/5,  3.14454
-  5/5,  3.142048
-}
-{ Jacobi Iterative - score_blksize14336_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.126185
-  2/5,  3.086972
-  3/5,  3.13527
-  4/5,  3.129339
-  5/5,  3.120856
-}
-{ Jacobi Iterative - score_blksize28672_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.13517
-  2/5,  3.127415
-  3/5,  3.147024
-  4/5,  3.14182
-  5/5,  3.130333
-}
-{ Jacobi Iterative - score_blksize57344_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.123854
-  2/5,  3.121751
-  3/5,  3.124511
-  4/5,  3.150806
-  5/5,  3.140674
-}
-{ Jacobi Iterative - score_blksize114688_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.127025
-  2/5,  3.128897
-  3/5,  3.122326
-  4/5,  3.124277
-  5/5,  3.135313
-}
-{ Jacobi Iterative - score_blksize229376_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.190118
-  2/5,  3.15027
-  3/5,  3.127933
-  4/5,  3.122678
-  5/5,  3.127385
-}
-{ Jacobi Iterative - score_blksize458752_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.216305
-  2/5,  3.23836
-  3/5,  3.18961
-  4/5,  3.185626
-  5/5,  3.189717
-}
-{ Jacobi Iterative - score_blksize917504_basemax8 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.34531
-  2/5,  3.359998
-  3/5,  3.338645
-  4/5,  3.337397
-  5/5,  3.338681
-}
-{ Jacobi Iterative - score_blksize112_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.478787
-  2/5,  3.477514
-  3/5,  3.463461
-  4/5,  3.459514
-  5/5,  3.470738
-}
-{ Jacobi Iterative - score_blksize224_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.351434
-  2/5,  3.367625
-  3/5,  3.353685
-  4/5,  3.341947
-  5/5,  3.341335
-}
-{ Jacobi Iterative - score_blksize448_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.292783
-  2/5,  3.27825
-  3/5,  3.305845
-  4/5,  3.265439
-  5/5,  3.292059
-}
-{ Jacobi Iterative - score_blksize896_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.211207
-  2/5,  3.216396
-  3/5,  3.215355
-  4/5,  3.209245
-  5/5,  3.192217
-}
-{ Jacobi Iterative - score_blksize1792_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.169209
-  2/5,  3.171364
-  3/5,  3.16554
-  4/5,  3.16511
-  5/5,  3.162903
-}
-{ Jacobi Iterative - score_blksize3584_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.12818
-  2/5,  3.137396
-  3/5,  3.131346
-  4/5,  3.143036
-  5/5,  3.15137
-}
-{ Jacobi Iterative - score_blksize7168_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.132341
-  2/5,  3.140738
-  3/5,  3.138855
-  4/5,  3.136956
-  5/5,  3.154622
-}
-{ Jacobi Iterative - score_blksize14336_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.132243
-  2/5,  3.128295
-  3/5,  3.100084
-  4/5,  3.095505
-  5/5,  3.121495
-}
-{ Jacobi Iterative - score_blksize28672_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.144923
-  2/5,  3.128163
-  3/5,  3.130664
-  4/5,  3.121804
-  5/5,  3.121301
-}
-{ Jacobi Iterative - score_blksize57344_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.136216
-  2/5,  3.142018
-  3/5,  3.129147
-  4/5,  3.135993
-  5/5,  3.12464
-}
-{ Jacobi Iterative - score_blksize114688_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.120769
-  2/5,  3.12877
-  3/5,  3.132862
-  4/5,  3.126314
-  5/5,  3.12498
-}
-{ Jacobi Iterative - score_blksize229376_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.131039
-  2/5,  3.119229
-  3/5,  3.143893
-  4/5,  3.122937
-  5/5,  3.121289
-}
-{ Jacobi Iterative - score_blksize458752_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.188731
-  2/5,  3.190884
-  3/5,  3.189738
-  4/5,  3.208949
-  5/5,  3.202818
-}
-{ Jacobi Iterative - score_blksize917504_basemax9 ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.33263
-  2/5,  3.335303
-  3/5,  3.337572
-  4/5,  3.358953
-  5/5,  3.446584
+  1/5,  3.359113
+  2/5,  3.365726
+  3/5,  3.372884
+  4/5,  3.363747
+  5/5,  3.356926
+}
+{ Jacobi Iterative - score ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.111883
+  2/5,  3.119464
+  3/5,  3.128434
+  4/5,  3.131445
+  5/5,  3.115943
+}
+{ Jacobi Iterative - score_mcache_1 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.11468
+  2/5,  3.113477
+  3/5,  3.111745
+  4/5,  3.126168
+  5/5,  3.128365
+}
+{ Jacobi Iterative - score_mcache_2 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.109554
+  2/5,  3.113921
+  3/5,  3.121876
+  4/5,  3.11883
+  5/5,  3.137382
+}
+{ Jacobi Iterative - score_mcache_3 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.126567
+  2/5,  3.108334
+  3/5,  3.11172
+  4/5,  3.118184
+  5/5,  3.115416
+}
+{ Jacobi Iterative - score_mcache_4 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.13622
+  2/5,  3.117443
+  3/5,  3.109522
+  4/5,  3.106359
+  5/5,  3.111981
+}
+{ Jacobi Iterative - score_mcache_5 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.124972
+  2/5,  3.128578
+  3/5,  3.121065
+  4/5,  3.100203
+  5/5,  3.118958
+}
+{ Jacobi Iterative - score_mcache_6 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.109996
+  2/5,  3.126146
+  3/5,  3.132722
+  4/5,  3.121397
+  5/5,  3.112015
+}
+{ Jacobi Iterative - score_mcache_7 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.112308
+  2/5,  3.116612
+  3/5,  3.126445
+  4/5,  3.148779
+  5/5,  3.118848
+}
+{ Jacobi Iterative - score_mcache_8 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.115147
+  2/5,  3.113679
+  3/5,  3.121019
+  4/5,  3.140547
+  5/5,  3.207474
+}
+{ Jacobi Iterative - score_mcache_9 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.115333
+  2/5,  3.118846
+  3/5,  3.117645
+  4/5,  3.108606
+  5/5,  3.129656
+}
+{ Jacobi Iterative - score_mcache_10 ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.170489
+  2/5,  3.11931
+  3/5,  3.118878
+  4/5,  3.118292
+  5/5,  3.116972
+}
+{ Jacobi Iterative - simple_mcache_1 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.383467
+  2/5,  3.376849
+  3/5,  3.359806
+  4/5,  3.357868
+  5/5,  3.360411
+}
+{ Jacobi Iterative - simple_mcache_2 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.368823
+  2/5,  3.381198
+  3/5,  3.353826
+  4/5,  3.360185
+  5/5,  3.358005
+}
+{ Jacobi Iterative - simple_mcache_3 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.360801
+  2/5,  3.374677
+  3/5,  3.365889
+  4/5,  3.357116
+  5/5,  3.356428
+}
+{ Jacobi Iterative - simple_mcache_4 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.360021
+  2/5,  3.371792
+  3/5,  3.375657
+  4/5,  3.355533
+  5/5,  3.359755
+}
+{ Jacobi Iterative - simple_mcache_5 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.355852
+  2/5,  3.363547
+  3/5,  3.371593
+  4/5,  3.365691
+  5/5,  3.357132
+}
+{ Jacobi Iterative - simple_mcache_6 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.357293
+  2/5,  3.37029
+  3/5,  3.376371
+  4/5,  3.368473
+  5/5,  3.360801
+}
+{ Jacobi Iterative - simple_mcache_7 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.360245
+  2/5,  3.359836
+  3/5,  3.360212
+  4/5,  3.370067
+  5/5,  3.3635
+}
+{ Jacobi Iterative - simple_mcache_8 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.35975
+  2/5,  3.358166
+  3/5,  3.357909
+  4/5,  3.399475
+  5/5,  3.366941
+}
+{ Jacobi Iterative - simple_mcache_9 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.357242
+  2/5,  3.357348
+  3/5,  3.361059
+  4/5,  3.371485
+  5/5,  3.373924
+}
+{ Jacobi Iterative - simple_mcache_10 ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.359987
+  2/5,  3.362261
+  3/5,  3.360366
+  4/5,  3.359145
+  5/5,  3.379794
+}
+{ Jacobi Iterative - Reduce - numpy ( None ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
+  1/5,  6.947855
+  2/5,  6.942431
+  3/5,  6.967469
+  4/5,  6.948091
+  5/5,  6.949001
+}
+{ Jacobi Iterative - Reduce - simple ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.148937
+  2/5,  5.123726
+  3/5,  5.121186
+  4/5,  5.132346
+  5/5,  5.153831
+}
+{ Jacobi Iterative - Reduce - score ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.795155
+  2/5,  4.783651
+  3/5,  4.797531
+  4/5,  4.866133
+  5/5,  4.785726
+}
+{ Jacobi Iterative - Reduce - score_mcache_1 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.495299
+  2/5,  5.506544
+  3/5,  5.521851
+  4/5,  5.490624
+  5/5,  5.502857
+}
+{ Jacobi Iterative - Reduce - score_mcache_2 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.076294
+  2/5,  5.077733
+  3/5,  5.082669
+  4/5,  5.101606
+  5/5,  5.06927
+}
+{ Jacobi Iterative - Reduce - score_mcache_3 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.804995
+  2/5,  4.809811
+  3/5,  4.825426
+  4/5,  4.79006
+  5/5,  4.803761
+}
+{ Jacobi Iterative - Reduce - score_mcache_4 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.801531
+  2/5,  4.831539
+  3/5,  4.780969
+  4/5,  4.799972
+  5/5,  4.815331
+}
+{ Jacobi Iterative - Reduce - score_mcache_5 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.807131
+  2/5,  4.801557
+  3/5,  4.787906
+  4/5,  4.798518
+  5/5,  4.817291
+}
+{ Jacobi Iterative - Reduce - score_mcache_6 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.795092
+  2/5,  4.79023
+  3/5,  4.817447
+  4/5,  4.811949
+  5/5,  4.799922
+}
+{ Jacobi Iterative - Reduce - score_mcache_7 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.795819
+  2/5,  4.809047
+  3/5,  4.815333
+  4/5,  4.803979
+  5/5,  4.83075
+}
+{ Jacobi Iterative - Reduce - score_mcache_8 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.802794
+  2/5,  4.806284
+  3/5,  4.803453
+  4/5,  4.817319
+  5/5,  4.817562
+}
+{ Jacobi Iterative - Reduce - score_mcache_9 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.803418
+  2/5,  4.800846
+  3/5,  4.808512
+  4/5,  4.828995
+  5/5,  4.81686
+}
+{ Jacobi Iterative - Reduce - score_mcache_10 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  4.794429
+  2/5,  4.794878
+  3/5,  4.806428
+  4/5,  4.795026
+  5/5,  4.794531
+}
+{ Jacobi Iterative - Reduce - simple_mcache_1 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.710011
+  2/5,  5.715354
+  3/5,  5.697403
+  4/5,  5.693209
+  5/5,  5.827844
+}
+{ Jacobi Iterative - Reduce - simple_mcache_2 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.413829
+  2/5,  5.362506
+  3/5,  5.371317
+  4/5,  5.374438
+  5/5,  5.360218
+}
+{ Jacobi Iterative - Reduce - simple_mcache_3 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.123511
+  2/5,  5.151815
+  3/5,  5.1249
+  4/5,  5.124559
+  5/5,  5.139481
+}
+{ Jacobi Iterative - Reduce - simple_mcache_4 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.150018
+  2/5,  5.120797
+  3/5,  5.117937
+  4/5,  5.145075
+  5/5,  5.126673
+}
+{ Jacobi Iterative - Reduce - simple_mcache_5 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.125934
+  2/5,  5.118727
+  3/5,  5.153235
+  4/5,  5.125238
+  5/5,  5.120686
+}
+{ Jacobi Iterative - Reduce - simple_mcache_6 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.133859
+  2/5,  5.139453
+  3/5,  5.122813
+  4/5,  5.125108
+  5/5,  5.138731
+}
+{ Jacobi Iterative - Reduce - simple_mcache_7 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.127633
+  2/5,  5.121498
+  3/5,  5.122574
+  4/5,  5.136824
+  5/5,  5.123109
+}
+{ Jacobi Iterative - Reduce - simple_mcache_8 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.118594
+  2/5,  5.133469
+  3/5,  5.127318
+  4/5,  5.119225
+  5/5,  5.120367
+}
+{ Jacobi Iterative - Reduce - simple_mcache_9 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.144915
+  2/5,  5.125559
+  3/5,  5.122006
+  4/5,  5.137285
+  5/5,  5.146958
+}
+{ Jacobi Iterative - Reduce - simple_mcache_10 ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  5.124271
+  2/5,  5.120924
+  3/5,  5.133452
+  4/5,  5.129113
+  5/5,  5.118865
+}
+{ kNN - numpy ( None ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=False
+  1/5,  3.813986
+  2/5,  3.827217
+  3/5,  3.83633
+  4/5,  3.828762
+  5/5,  3.81227
+}
+{ kNN - simple ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.788551
+  2/5,  1.779377
+  3/5,  1.783403
+  4/5,  1.793163
+  5/5,  1.86101
+}
+{ kNN - score ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.78014
+  2/5,  1.79335
+  3/5,  1.774758
+  4/5,  1.767748
+  5/5,  1.772984
+}
+{ kNN - score_mcache_1 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.881638
+  2/5,  1.881293
+  3/5,  1.885539
+  4/5,  1.885502
+  5/5,  1.887819
+}
+{ kNN - score_mcache_2 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.893473
+  2/5,  1.881287
+  3/5,  1.882207
+  4/5,  1.885834
+  5/5,  1.881261
+}
+{ kNN - score_mcache_3 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.826926
+  2/5,  1.8226
+  3/5,  1.831197
+  4/5,  1.827796
+  5/5,  1.829921
+}
+{ kNN - score_mcache_4 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.774487
+  2/5,  1.771391
+  3/5,  1.76939
+  4/5,  1.785296
+  5/5,  1.766471
+}
+{ kNN - score_mcache_5 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.771337
+  2/5,  1.769457
+  3/5,  1.786443
+  4/5,  1.776874
+  5/5,  1.796494
+}
+{ kNN - score_mcache_6 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.773612
+  2/5,  1.772758
+  3/5,  1.772452
+  4/5,  1.773248
+  5/5,  1.768492
+}
+{ kNN - score_mcache_7 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.775824
+  2/5,  1.770163
+  3/5,  1.781977
+  4/5,  1.777653
+  5/5,  1.784281
+}
+{ kNN - score_mcache_8 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.774344
+  2/5,  1.770703
+  3/5,  1.77214
+  4/5,  1.771761
+  5/5,  1.772173
+}
+{ kNN - score_mcache_9 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.76911
+  2/5,  1.772552
+  3/5,  1.781807
+  4/5,  1.781069
+  5/5,  1.77639
+}
+{ kNN - score_mcache_10 ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.772501
+  2/5,  1.766563
+  3/5,  1.769789
+  4/5,  1.770384
+  5/5,  1.77154
+}
+{ kNN - simple_mcache_1 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.881288
+  2/5,  1.893206
+  3/5,  1.885288
+  4/5,  1.888952
+  5/5,  1.883624
+}
+{ kNN - simple_mcache_2 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.898779
+  2/5,  1.8861
+  3/5,  1.891907
+  4/5,  1.878051
+  5/5,  1.88476
+}
+{ kNN - simple_mcache_3 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.843798
+  2/5,  1.845762
+  3/5,  1.84148
+  4/5,  1.84589
+  5/5,  1.845462
+}
+{ kNN - simple_mcache_4 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.787311
+  2/5,  1.782475
+  3/5,  1.790028
+  4/5,  1.779131
+  5/5,  1.782831
+}
+{ kNN - simple_mcache_5 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.782088
+  2/5,  1.800626
+  3/5,  1.792687
+  4/5,  1.786374
+  5/5,  1.784527
+}
+{ kNN - simple_mcache_6 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.782526
+  2/5,  1.786454
+  3/5,  1.794079
+  4/5,  1.785007
+  5/5,  1.785695
+}
+{ kNN - simple_mcache_7 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.791149
+  2/5,  1.791949
+  3/5,  1.794305
+  4/5,  1.785287
+  5/5,  1.788606
+}
+{ kNN - simple_mcache_8 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.785671
+  2/5,  1.784386
+  3/5,  1.785912
+  4/5,  1.789339
+  5/5,  1.784283
+}
+{ kNN - simple_mcache_9 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.794019
+  2/5,  1.791882
+  3/5,  1.786521
+  4/5,  1.801805
+  5/5,  1.787095
+}
+{ kNN - simple_mcache_10 ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+  1/5,  1.785932
+  2/5,  1.790839
+  3/5,  1.78149
+  4/5,  1.788228
+  5/5,  1.780403
+}
+{ Lattice Boltzmann 2D - numpy ( None ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=False
+  1/5,  5.554038
+  2/5,  5.535653
+  3/5,  5.521839
+  4/5,  5.546152
+  5/5,  5.539264
+}
+{ Lattice Boltzmann 2D - simple ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.615824
+  2/5,  4.611511
+  3/5,  4.65027
+  4/5,  4.623569
+  5/5,  4.622616
+}
+{ Lattice Boltzmann 2D - score ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.607537
+  2/5,  4.727512
+  3/5,  4.605203
+  4/5,  4.607303
+  5/5,  4.609276
+}
+{ Lattice Boltzmann 2D - score_mcache_1 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  6.362474
+  2/5,  6.276402
+  3/5,  6.290341
+  4/5,  6.307513
+  5/5,  6.307804
+}
+{ Lattice Boltzmann 2D - score_mcache_2 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.827262
+  2/5,  5.841311
+  3/5,  5.810045
+  4/5,  5.806543
+  5/5,  5.837321
+}
+{ Lattice Boltzmann 2D - score_mcache_3 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.24985
+  2/5,  5.267629
+  3/5,  5.276892
+  4/5,  5.275635
+  5/5,  5.266984
+}
+{ Lattice Boltzmann 2D - score_mcache_4 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.090505
+  2/5,  5.117293
+  3/5,  5.097742
+  4/5,  5.080211
+  5/5,  5.088819
+}
+{ Lattice Boltzmann 2D - score_mcache_5 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.059692
+  2/5,  5.047842
+  3/5,  5.03694
+  4/5,  5.053915
+  5/5,  5.047042
+}
+{ Lattice Boltzmann 2D - score_mcache_6 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.023114
+  2/5,  5.042544
+  3/5,  5.054152
+  4/5,  5.046789
+  5/5,  5.042247
+}
+{ Lattice Boltzmann 2D - score_mcache_7 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.904808
+  2/5,  4.897508
+  3/5,  4.883973
+  4/5,  4.891014
+  5/5,  4.904349
+}
+{ Lattice Boltzmann 2D - score_mcache_8 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.857189
+  2/5,  4.852828
+  3/5,  4.844848
+  4/5,  4.864485
+  5/5,  4.854672
+}
+{ Lattice Boltzmann 2D - score_mcache_9 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.748183
+  2/5,  4.75014
+  3/5,  4.761209
+  4/5,  4.752057
+  5/5,  4.743076
+}
+{ Lattice Boltzmann 2D - score_mcache_10 ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.613274
+  2/5,  4.637359
+  3/5,  4.605355
+  4/5,  4.606402
+  5/5,  4.61959
+}
+{ Lattice Boltzmann 2D - simple_mcache_1 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.631778
+  2/5,  5.518345
+  3/5,  5.52977
+  4/5,  5.555512
+  5/5,  5.563311
+}
+{ Lattice Boltzmann 2D - simple_mcache_2 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  5.043219
+  2/5,  5.042826
+  3/5,  5.056013
+  4/5,  5.052151
+  5/5,  5.044012
+}
+{ Lattice Boltzmann 2D - simple_mcache_3 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.923494
+  2/5,  4.916339
+  3/5,  4.91259
+  4/5,  4.911172
+  5/5,  4.927575
+}
+{ Lattice Boltzmann 2D - simple_mcache_4 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.78129
+  2/5,  4.780507
+  3/5,  4.796859
+  4/5,  4.805926
+  5/5,  4.782137
+}
+{ Lattice Boltzmann 2D - simple_mcache_5 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.743976
+  2/5,  4.755548
+  3/5,  4.753256
+  4/5,  4.741872
+  5/5,  4.741543
+}
+{ Lattice Boltzmann 2D - simple_mcache_6 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.740682
+  2/5,  4.740242
+  3/5,  4.729865
+  4/5,  4.734625
+  5/5,  4.744202
+}
+{ Lattice Boltzmann 2D - simple_mcache_7 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.717299
+  2/5,  4.705355
+  3/5,  4.709869
+  4/5,  4.724598
+  5/5,  4.713748
+}
+{ Lattice Boltzmann 2D - simple_mcache_8 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.685363
+  2/5,  4.682823
+  3/5,  4.708895
+  4/5,  4.689454
+  5/5,  4.682745
+}
+{ Lattice Boltzmann 2D - simple_mcache_9 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.686377
+  2/5,  4.70801
+  3/5,  4.684087
+  4/5,  4.686705
+  5/5,  4.696841
+}
+{ Lattice Boltzmann 2D - simple_mcache_10 ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+  1/5,  4.632096
+  2/5,  4.619364
+  3/5,  4.62179
+  4/5,  4.627902
+  5/5,  4.644063
+}
+{ Lattice Boltzmann 3D - numpy ( None ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=False
+  1/5,  2.066443
+  2/5,  2.066649
+  3/5,  2.06516
+  4/5,  2.062034
+  5/5,  2.066206
+}
+{ Lattice Boltzmann 3D - simple ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.221431
+  2/5,  2.219213
+  3/5,  2.221166
+  4/5,  2.21254
+  5/5,  2.208983
+}
+{ Lattice Boltzmann 3D - score ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.182871
+  2/5,  2.182475
+  3/5,  2.18113
+  4/5,  2.19348
+  5/5,  2.200535
+}
+{ Lattice Boltzmann 3D - score_mcache_1 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.775828
+  2/5,  2.6935
+  3/5,  2.692644
+  4/5,  2.689412
+  5/5,  2.688767
+}
+{ Lattice Boltzmann 3D - score_mcache_2 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.51217
+  2/5,  2.532067
+  3/5,  2.537826
+  4/5,  2.52821
+  5/5,  2.507091
+}
+{ Lattice Boltzmann 3D - score_mcache_3 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.395691
+  2/5,  2.386675
+  3/5,  2.396985
+  4/5,  2.40115
+  5/5,  2.395294
+}
+{ Lattice Boltzmann 3D - score_mcache_4 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.289797
+  2/5,  2.28985
+  3/5,  2.286611
+  4/5,  2.291348
+  5/5,  2.289303
+}
+{ Lattice Boltzmann 3D - score_mcache_5 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.229022
+  2/5,  2.224528
+  3/5,  2.21913
+  4/5,  2.219539
+  5/5,  2.222891
+}
+{ Lattice Boltzmann 3D - score_mcache_6 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.211388
+  2/5,  2.214209
+  3/5,  2.225485
+  4/5,  2.225122
+  5/5,  2.221364
+}
+{ Lattice Boltzmann 3D - score_mcache_7 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.197826
+  2/5,  2.192178
+  3/5,  2.196599
+  4/5,  2.197226
+  5/5,  2.197533
+}
+{ Lattice Boltzmann 3D - score_mcache_8 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.204608
+  2/5,  2.204539
+  3/5,  2.195753
+  4/5,  2.19222
+  5/5,  2.188678
+}
+{ Lattice Boltzmann 3D - score_mcache_9 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.183623
+  2/5,  2.185326
+  3/5,  2.183273
+  4/5,  2.199798
+  5/5,  2.195613
+}
+{ Lattice Boltzmann 3D - score_mcache_10 ( score ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.182098
+  2/5,  2.183348
+  3/5,  2.182733
+  4/5,  2.181592
+  5/5,  2.183963
+}
+{ Lattice Boltzmann 3D - simple_mcache_1 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.383701
+  2/5,  2.399834
+  3/5,  2.388025
+  4/5,  2.383601
+  5/5,  2.381914
+}
+{ Lattice Boltzmann 3D - simple_mcache_2 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.307549
+  2/5,  2.307207
+  3/5,  2.304894
+  4/5,  2.31786
+  5/5,  2.318749
+}
+{ Lattice Boltzmann 3D - simple_mcache_3 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.289732
+  2/5,  2.290435
+  3/5,  2.287909
+  4/5,  2.285881
+  5/5,  2.290864
+}
+{ Lattice Boltzmann 3D - simple_mcache_4 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.251717
+  2/5,  2.267786
+  3/5,  2.265024
+  4/5,  2.253558
+  5/5,  2.251997
+}
+{ Lattice Boltzmann 3D - simple_mcache_5 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.229968
+  2/5,  2.228015
+  3/5,  2.227557
+  4/5,  2.243389
+  5/5,  2.23521
+}
+{ Lattice Boltzmann 3D - simple_mcache_6 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.217167
+  2/5,  2.215741
+  3/5,  2.211394
+  4/5,  2.214587
+  5/5,  2.214822
+}
+{ Lattice Boltzmann 3D - simple_mcache_7 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.210717
+  2/5,  2.222793
+  3/5,  2.222729
+  4/5,  2.214428
+  5/5,  2.215222
+}
+{ Lattice Boltzmann 3D - simple_mcache_8 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.212148
+  2/5,  2.206123
+  3/5,  2.209521
+  4/5,  2.20763
+  5/5,  2.220322
+}
+{ Lattice Boltzmann 3D - simple_mcache_9 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.22031
+  2/5,  2.209124
+  3/5,  2.209224
+  4/5,  2.215258
+  5/5,  2.208597
+}
+{ Lattice Boltzmann 3D - simple_mcache_10 ( simple ),
+  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
+  1/5,  2.216689
+  2/5,  2.213291
+  3/5,  2.220053
+  4/5,  2.21336
+  5/5,  2.21187
+}
+{ Monte Carlo PI - RIL - numpy ( None ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=False
+  1/5,  4.888341
+  2/5,  4.865648
+  3/5,  4.880845
+  4/5,  4.882164
+  5/5,  4.88844
+}
+{ Monte Carlo PI - RIL - simple ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.350333
+  2/5,  5.429262
+  3/5,  5.377167
+  4/5,  5.350163
+  5/5,  5.340611
+}
+{ Monte Carlo PI - RIL - score ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.391432
+  2/5,  5.332364
+  3/5,  5.323086
+  4/5,  5.342207
+  5/5,  5.353901
+}
+{ Monte Carlo PI - RIL - score_mcache_1 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.393738
+  2/5,  5.393514
+  3/5,  5.413903
+  4/5,  5.401482
+  5/5,  5.392057
+}
+{ Monte Carlo PI - RIL - score_mcache_2 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.409128
+  2/5,  5.418932
+  3/5,  5.398348
+  4/5,  5.39922
+  5/5,  5.414725
+}
+{ Monte Carlo PI - RIL - score_mcache_3 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.370859
+  2/5,  5.359954
+  3/5,  5.351812
+  4/5,  5.379675
+  5/5,  5.352592
+}
+{ Monte Carlo PI - RIL - score_mcache_4 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.350337
+  2/5,  5.358363
+  3/5,  5.36747
+  4/5,  5.34616
+  5/5,  5.394321
+}
+{ Monte Carlo PI - RIL - score_mcache_5 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.363144
+  2/5,  5.350357
+  3/5,  5.391659
+  4/5,  5.341076
+  5/5,  5.361202
+}
+{ Monte Carlo PI - RIL - score_mcache_6 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.348087
+  2/5,  5.391473
+  3/5,  5.358413
+  4/5,  5.352637
+  5/5,  5.347407
+}
+{ Monte Carlo PI - RIL - score_mcache_7 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.342391
+  2/5,  5.361652
+  3/5,  5.350664
+  4/5,  5.341068
+  5/5,  5.345845
+}
+{ Monte Carlo PI - RIL - score_mcache_8 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.361934
+  2/5,  5.341184
+  3/5,  5.349235
+  4/5,  5.374327
+  5/5,  5.346938
+}
+{ Monte Carlo PI - RIL - score_mcache_9 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.338762
+  2/5,  5.334816
+  3/5,  5.36764
+  4/5,  5.33648
+  5/5,  5.333203
+}
+{ Monte Carlo PI - RIL - score_mcache_10 ( score ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.345455
+  2/5,  5.412039
+  3/5,  5.329866
+  4/5,  5.331397
+  5/5,  5.337618
+}
+{ Monte Carlo PI - RIL - simple_mcache_1 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.667238
+  2/5,  5.617236
+  3/5,  5.618827
+  4/5,  5.644981
+  5/5,  5.613363
+}
+{ Monte Carlo PI - RIL - simple_mcache_2 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.399891
+  2/5,  5.41585
+  3/5,  5.401514
+  4/5,  5.395346
+  5/5,  5.400519
+}
+{ Monte Carlo PI - RIL - simple_mcache_3 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.401074
+  2/5,  5.366233
+  3/5,  5.365744
+  4/5,  5.381601
+  5/5,  5.390417
+}
+{ Monte Carlo PI - RIL - simple_mcache_4 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.389428
+  2/5,  5.359538
+  3/5,  5.382386
+  4/5,  5.374158
+  5/5,  5.361159
+}
+{ Monte Carlo PI - RIL - simple_mcache_5 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.366312
+  2/5,  5.381057
+  3/5,  5.360609
+  4/5,  5.361533
+  5/5,  5.372145
+}
+{ Monte Carlo PI - RIL - simple_mcache_6 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.373247
+  2/5,  5.364447
+  3/5,  5.35814
+  4/5,  5.388842
+  5/5,  5.368758
+}
+{ Monte Carlo PI - RIL - simple_mcache_7 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.364524
+  2/5,  5.362737
+  3/5,  5.377947
+  4/5,  5.354068
+  5/5,  5.361154
+}
+{ Monte Carlo PI - RIL - simple_mcache_8 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.418063
+  2/5,  5.369025
+  3/5,  5.358542
+  4/5,  5.354338
+  5/5,  5.390851
+}
+{ Monte Carlo PI - RIL - simple_mcache_9 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.355165
+  2/5,  5.357076
+  3/5,  5.365719
+  4/5,  5.365593
+  5/5,  5.358582
+}
+{ Monte Carlo PI - RIL - simple_mcache_10 ( simple ),
+  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
+  1/5,  5.350927
+  2/5,  5.364946
+  3/5,  5.358068
+  4/5,  5.345586
+  5/5,  5.359082
+}
+{ Monte Carlo PI - 2xN - numpy ( None ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=False
+  1/5,  0.260678
+  2/5,  0.267869
+  3/5,  0.260376
+  4/5,  0.258612
+  5/5,  0.259861
+}
+{ Monte Carlo PI - 2xN - simple ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.283984
+  2/5,  0.284616
+  3/5,  0.281642
+  4/5,  0.293719
+  5/5,  0.304155
+}
+{ Monte Carlo PI - 2xN - score ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.288748
+  2/5,  0.282846
+  3/5,  0.283686
+  4/5,  0.282015
+  5/5,  0.28381
+}
+{ Monte Carlo PI - 2xN - score_mcache_1 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.376281
+  2/5,  0.375184
+  3/5,  0.376226
+  4/5,  0.377934
+  5/5,  0.375712
+}
+{ Monte Carlo PI - 2xN - score_mcache_2 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.372764
+  2/5,  0.373155
+  3/5,  0.37302
+  4/5,  0.371421
+  5/5,  0.372389
+}
+{ Monte Carlo PI - 2xN - score_mcache_3 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.356067
+  2/5,  0.354199
+  3/5,  0.351414
+  4/5,  0.353299
+  5/5,  0.35112
+}
+{ Monte Carlo PI - 2xN - score_mcache_4 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.329428
+  2/5,  0.329139
+  3/5,  0.32797
+  4/5,  0.32923
+  5/5,  0.329088
+}
+{ Monte Carlo PI - 2xN - score_mcache_5 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.304736
+  2/5,  0.303916
+  3/5,  0.303862
+  4/5,  0.304843
+  5/5,  0.303049
+}
+{ Monte Carlo PI - 2xN - score_mcache_6 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284683
+  2/5,  0.284388
+  3/5,  0.283344
+  4/5,  0.284956
+  5/5,  0.283944
+}
+{ Monte Carlo PI - 2xN - score_mcache_7 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.286861
+  2/5,  0.283191
+  3/5,  0.28922
+  4/5,  0.283661
+  5/5,  0.287749
+}
+{ Monte Carlo PI - 2xN - score_mcache_8 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.28462
+  2/5,  0.283087
+  3/5,  0.297335
+  4/5,  0.282621
+  5/5,  0.281981
+}
+{ Monte Carlo PI - 2xN - score_mcache_9 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284897
+  2/5,  0.29021
+  3/5,  0.282545
+  4/5,  0.283411
+  5/5,  0.282904
+}
+{ Monte Carlo PI - 2xN - score_mcache_10 ( score ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.285455
+  2/5,  0.283361
+  3/5,  0.283454
+  4/5,  0.282847
+  5/5,  0.283296
+}
+{ Monte Carlo PI - 2xN - simple_mcache_1 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.352314
+  2/5,  0.35042
+  3/5,  0.349634
+  4/5,  0.350613
+  5/5,  0.350341
+}
+{ Monte Carlo PI - 2xN - simple_mcache_2 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.326966
+  2/5,  0.325864
+  3/5,  0.329063
+  4/5,  0.327793
+  5/5,  0.32582
+}
+{ Monte Carlo PI - 2xN - simple_mcache_3 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.309261
+  2/5,  0.306144
+  3/5,  0.306682
+  4/5,  0.30918
+  5/5,  0.307583
+}
+{ Monte Carlo PI - 2xN - simple_mcache_4 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.307979
+  2/5,  0.303027
+  3/5,  0.305562
+  4/5,  0.305133
+  5/5,  0.307826
+}
+{ Monte Carlo PI - 2xN - simple_mcache_5 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.286074
+  2/5,  0.28703
+  3/5,  0.28523
+  4/5,  0.295457
+  5/5,  0.283945
+}
+{ Monte Carlo PI - 2xN - simple_mcache_6 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284668
+  2/5,  0.28163
+  3/5,  0.282164
+  4/5,  0.284105
+  5/5,  0.281424
+}
+{ Monte Carlo PI - 2xN - simple_mcache_7 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.282967
+  2/5,  0.283362
+  3/5,  0.285709
+  4/5,  0.282933
+  5/5,  0.282678
+}
+{ Monte Carlo PI - 2xN - simple_mcache_8 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284151
+  2/5,  0.28169
+  3/5,  0.282299
+  4/5,  0.282178
+  5/5,  0.282485
+}
+{ Monte Carlo PI - 2xN - simple_mcache_9 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284957
+  2/5,  0.282758
+  3/5,  0.281534
+  4/5,  0.28307
+  5/5,  0.283137
+}
+{ Monte Carlo PI - 2xN - simple_mcache_10 ( simple ),
+  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.284074
+  2/5,  0.283481
+  3/5,  0.281339
+  4/5,  0.282912
+  5/5,  0.285639
+}
+{ Monte Carlo PI - Nx2 - numpy ( None ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=False
+  1/5,  0.26814
+  2/5,  0.267258
+  3/5,  0.265089
+  4/5,  0.267634
+  5/5,  0.26739
+}
+{ Monte Carlo PI - Nx2 - simple ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.288733
+  2/5,  0.286997
+  3/5,  0.294036
+  4/5,  0.286413
+  5/5,  0.289256
+}
+{ Monte Carlo PI - Nx2 - score ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.287395
+  2/5,  0.291205
+  3/5,  0.28566
+  4/5,  0.287708
+  5/5,  0.286345
+}
+{ Monte Carlo PI - Nx2 - score_mcache_1 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.38234
+  2/5,  0.379178
+  3/5,  0.380282
+  4/5,  0.377502
+  5/5,  0.376527
+}
+{ Monte Carlo PI - Nx2 - score_mcache_2 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.376027
+  2/5,  0.374443
+  3/5,  0.374244
+  4/5,  0.375595
+  5/5,  0.374983
+}
+{ Monte Carlo PI - Nx2 - score_mcache_3 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.355537
+  2/5,  0.354572
+  3/5,  0.355251
+  4/5,  0.351813
+  5/5,  0.354133
+}
+{ Monte Carlo PI - Nx2 - score_mcache_4 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.33967
+  2/5,  0.330898
+  3/5,  0.331038
+  4/5,  0.330383
+  5/5,  0.332358
+}
+{ Monte Carlo PI - Nx2 - score_mcache_5 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.307716
+  2/5,  0.307032
+  3/5,  0.305232
+  4/5,  0.307517
+  5/5,  0.305241
+}
+{ Monte Carlo PI - Nx2 - score_mcache_6 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.287308
+  2/5,  0.287076
+  3/5,  0.285612
+  4/5,  0.284865
+  5/5,  0.285481
+}
+{ Monte Carlo PI - Nx2 - score_mcache_7 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.287039
+  2/5,  0.290447
+  3/5,  0.286463
+  4/5,  0.290005
+  5/5,  0.286095
+}
+{ Monte Carlo PI - Nx2 - score_mcache_8 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.29227
+  2/5,  0.290506
+  3/5,  0.287938
+  4/5,  0.284359
+  5/5,  0.286054
+}
+{ Monte Carlo PI - Nx2 - score_mcache_9 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.288218
+  2/5,  0.292343
+  3/5,  0.285734
+  4/5,  0.28462
+  5/5,  0.285731
+}
+{ Monte Carlo PI - Nx2 - score_mcache_10 ( score ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.287788
+  2/5,  0.285874
+  3/5,  0.286246
+  4/5,  0.288203
+  5/5,  0.286199
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_1 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.353506
+  2/5,  0.353097
+  3/5,  0.35277
+  4/5,  0.35249
+  5/5,  0.353876
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_2 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.332924
+  2/5,  0.330932
+  3/5,  0.32902
+  4/5,  0.331372
+  5/5,  0.330474
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_3 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.323779
+  2/5,  0.311928
+  3/5,  0.311211
+  4/5,  0.312909
+  5/5,  0.313525
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_4 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.310565
+  2/5,  0.308968
+  3/5,  0.307729
+  4/5,  0.309904
+  5/5,  0.309459
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_5 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.290507
+  2/5,  0.297548
+  3/5,  0.291279
+  4/5,  0.288995
+  5/5,  0.289923
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_6 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.293168
+  2/5,  0.287404
+  3/5,  0.287309
+  4/5,  0.288371
+  5/5,  0.286574
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_7 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.289385
+  2/5,  0.287721
+  3/5,  0.289719
+  4/5,  0.286959
+  5/5,  0.28682
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_8 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.288752
+  2/5,  0.287307
+  3/5,  0.286891
+  4/5,  0.287813
+  5/5,  0.287528
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_9 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.288367
+  2/5,  0.287896
+  3/5,  0.285956
+  4/5,  0.285939
+  5/5,  0.287097
+}
+{ Monte Carlo PI - Nx2 - simple_mcache_10 ( simple ),
+  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
+  1/5,  0.288574
+  2/5,  0.302155
+  3/5,  0.307389
+  4/5,  0.287725
+  5/5,  0.288145
+}
+{ Stencil - 1D 4way - numpy ( None ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=False
+  1/5,  1.916046
+  2/5,  1.909066
+  3/5,  1.922944
+  4/5,  1.924466
+  5/5,  1.809891
+}
+{ Stencil - 1D 4way - simple ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.332388
+  2/5,  2.328214
+  3/5,  2.325074
+  4/5,  2.320387
+  5/5,  2.340539
+}
+{ Stencil - 1D 4way - score ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.250886
+  2/5,  2.235706
+  3/5,  2.23884
+  4/5,  2.241557
+  5/5,  2.234324
+}
+{ Stencil - 1D 4way - score_mcache_1 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.234054
+  2/5,  2.24664
+  3/5,  2.247717
+  4/5,  2.235583
+  5/5,  2.232015
+}
+{ Stencil - 1D 4way - score_mcache_2 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.240309
+  2/5,  2.234995
+  3/5,  2.236485
+  4/5,  2.25226
+  5/5,  2.247017
+}
+{ Stencil - 1D 4way - score_mcache_3 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.240251
+  2/5,  2.233978
+  3/5,  2.241316
+  4/5,  2.241233
+  5/5,  2.238046
+}
+{ Stencil - 1D 4way - score_mcache_4 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.251229
+  2/5,  2.246405
+  3/5,  2.247669
+  4/5,  2.232756
+  5/5,  2.236138
+}
+{ Stencil - 1D 4way - score_mcache_5 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.242178
+  2/5,  2.249418
+  3/5,  2.246026
+  4/5,  2.242291
+  5/5,  2.238848
+}
+{ Stencil - 1D 4way - score_mcache_6 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.24033
+  2/5,  2.234424
+  3/5,  2.234737
+  4/5,  2.249106
+  5/5,  2.257169
+}
+{ Stencil - 1D 4way - score_mcache_7 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.236487
+  2/5,  2.234738
+  3/5,  2.241179
+  4/5,  2.243813
+  5/5,  2.234161
+}
+{ Stencil - 1D 4way - score_mcache_8 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.25547
+  2/5,  2.248463
+  3/5,  2.234693
+  4/5,  2.233798
+  5/5,  2.237189
+}
+{ Stencil - 1D 4way - score_mcache_9 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.236038
+  2/5,  2.234685
+  3/5,  2.24888
+  4/5,  2.256243
+  5/5,  2.241145
+}
+{ Stencil - 1D 4way - score_mcache_10 ( score ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.235698
+  2/5,  2.232563
+  3/5,  2.239072
+  4/5,  2.239949
+  5/5,  2.242381
+}
+{ Stencil - 1D 4way - simple_mcache_1 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.386591
+  2/5,  2.328226
+  3/5,  2.320467
+  4/5,  2.308101
+  5/5,  2.33433
+}
+{ Stencil - 1D 4way - simple_mcache_2 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.337753
+  2/5,  2.341043
+  3/5,  2.343126
+  4/5,  2.324806
+  5/5,  2.321451
+}
+{ Stencil - 1D 4way - simple_mcache_3 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.317924
+  2/5,  2.329193
+  3/5,  2.335427
+  4/5,  2.339045
+  5/5,  2.319018
+}
+{ Stencil - 1D 4way - simple_mcache_4 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.328123
+  2/5,  2.328698
+  3/5,  2.32291
+  4/5,  2.354567
+  5/5,  2.336615
+}
+{ Stencil - 1D 4way - simple_mcache_5 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.336068
+  2/5,  2.32543
+  3/5,  2.325825
+  4/5,  2.320618
+  5/5,  2.327993
+}
+{ Stencil - 1D 4way - simple_mcache_6 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.337941
+  2/5,  2.33016
+  3/5,  2.300937
+  4/5,  2.325414
+  5/5,  2.296264
+}
+{ Stencil - 1D 4way - simple_mcache_7 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.32197
+  2/5,  2.323889
+  3/5,  2.341563
+  4/5,  2.337066
+  5/5,  2.324772
+}
+{ Stencil - 1D 4way - simple_mcache_8 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.319813
+  2/5,  2.324223
+  3/5,  2.324636
+  4/5,  2.328875
+  5/5,  2.349338
+}
+{ Stencil - 1D 4way - simple_mcache_9 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.301703
+  2/5,  2.324846
+  3/5,  2.326409
+  4/5,  2.323025
+  5/5,  2.325204
+}
+{ Stencil - 1D 4way - simple_mcache_10 ( simple ),
+  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
+  1/5,  2.31542
+  2/5,  2.329554
+  3/5,  2.321197
+  4/5,  2.323136
+  5/5,  2.333966
+}
+{ Stencil - 2D - numpy ( None ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=False
+  1/5,  4.644684
+  2/5,  4.668665
+  3/5,  4.650488
+  4/5,  4.64872
+  5/5,  4.640596
+}
+{ Stencil - 2D - simple ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.223721
+  2/5,  3.230346
+  3/5,  3.226738
+  4/5,  3.220628
+  5/5,  3.221047
+}
+{ Stencil - 2D - score ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.189365
+  2/5,  3.211531
+  3/5,  3.195865
+  4/5,  3.185033
+  5/5,  3.190327
+}
+{ Stencil - 2D - score_mcache_1 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  4.798407
+  2/5,  4.809203
+  3/5,  4.789418
+  4/5,  4.783288
+  5/5,  4.762812
+}
+{ Stencil - 2D - score_mcache_2 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  4.372754
+  2/5,  4.375111
+  3/5,  4.375328
+  4/5,  4.359414
+  5/5,  4.367385
+}
+{ Stencil - 2D - score_mcache_3 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.9457
+  2/5,  3.921704
+  3/5,  3.916559
+  4/5,  3.915594
+  5/5,  3.933293
+}
+{ Stencil - 2D - score_mcache_4 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.443159
+  2/5,  3.428279
+  3/5,  3.423157
+  4/5,  3.430019
+  5/5,  3.426489
+}
+{ Stencil - 2D - score_mcache_5 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.242192
+  2/5,  3.252694
+  3/5,  3.226093
+  4/5,  3.208676
+  5/5,  3.196788
+}
+{ Stencil - 2D - score_mcache_6 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.199186
+  2/5,  3.200253
+  3/5,  3.209983
+  4/5,  3.196255
+  5/5,  3.193103
+}
+{ Stencil - 2D - score_mcache_7 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.195501
+  2/5,  3.19211
+  3/5,  3.204266
+  4/5,  3.202258
+  5/5,  3.191954
+}
+{ Stencil - 2D - score_mcache_8 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.192955
+  2/5,  3.190435
+  3/5,  3.185985
+  4/5,  3.204835
+  5/5,  3.19643
+}
+{ Stencil - 2D - score_mcache_9 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.18692
+  2/5,  3.186528
+  3/5,  3.185777
+  4/5,  3.189332
+  5/5,  3.203246
+}
+{ Stencil - 2D - score_mcache_10 ( score ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.202048
+  2/5,  3.189232
+  3/5,  3.18387
+  4/5,  3.186508
+  5/5,  3.188166
+}
+{ Stencil - 2D - simple_mcache_1 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.435744
+  2/5,  3.411418
+  3/5,  3.410928
+  4/5,  3.40668
+  5/5,  3.405718
+}
+{ Stencil - 2D - simple_mcache_2 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.227743
+  2/5,  3.229134
+  3/5,  3.217857
+  4/5,  3.219421
+  5/5,  3.220124
+}
+{ Stencil - 2D - simple_mcache_3 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.222345
+  2/5,  3.229443
+  3/5,  3.238357
+  4/5,  3.220173
+  5/5,  3.221882
+}
+{ Stencil - 2D - simple_mcache_4 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.223976
+  2/5,  3.214847
+  3/5,  3.233823
+  4/5,  3.237946
+  5/5,  3.215397
+}
+{ Stencil - 2D - simple_mcache_5 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.230454
+  2/5,  3.220589
+  3/5,  3.224704
+  4/5,  3.238491
+  5/5,  3.227525
+}
+{ Stencil - 2D - simple_mcache_6 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.216615
+  2/5,  3.215956
+  3/5,  3.228197
+  4/5,  3.221894
+  5/5,  3.234604
+}
+{ Stencil - 2D - simple_mcache_7 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.232355
+  2/5,  3.219449
+  3/5,  3.221115
+  4/5,  3.216738
+  5/5,  3.224765
+}
+{ Stencil - 2D - simple_mcache_8 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.238879
+  2/5,  3.22717
+  3/5,  3.242715
+  4/5,  3.216431
+  5/5,  3.218582
+}
+{ Stencil - 2D - simple_mcache_9 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.224504
+  2/5,  3.243209
+  3/5,  3.230447
+  4/5,  3.221128
+  5/5,  3.220975
+}
+{ Stencil - 2D - simple_mcache_10 ( simple ),
+  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
+  1/5,  3.22123
+  2/5,  3.21849
+  3/5,  3.238334
+  4/5,  3.227328
+  5/5,  3.21725
+}
+{ Shallow Water - numpy ( None ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=False
+  1/5,  2.293403
+  2/5,  2.300713
+  3/5,  2.292907
+  4/5,  2.292003
+  5/5,  2.313905
+}
+{ Shallow Water - simple ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.54306
+  2/5,  1.654127
+  3/5,  1.534379
+  4/5,  1.535374
+  5/5,  1.534791
+}
+{ Shallow Water - score ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.610768
+  2/5,  1.612989
+  3/5,  1.609964
+  4/5,  1.606281
+  5/5,  1.6132
+}
+{ Shallow Water - score_mcache_1 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.317657
+  2/5,  2.340875
+  3/5,  2.287562
+  4/5,  2.312712
+  5/5,  2.304559
+}
+{ Shallow Water - score_mcache_2 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.980556
+  2/5,  2.01809
+  3/5,  2.003824
+  4/5,  2.009997
+  5/5,  2.017786
+}
+{ Shallow Water - score_mcache_3 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.79552
+  2/5,  1.791096
+  3/5,  1.796153
+  4/5,  1.788243
+  5/5,  1.793557
+}
+{ Shallow Water - score_mcache_4 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.688283
+  2/5,  1.694367
+  3/5,  1.699347
+  4/5,  1.6926
+  5/5,  1.69561
+}
+{ Shallow Water - score_mcache_5 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.656725
+  2/5,  1.65798
+  3/5,  1.66382
+  4/5,  1.664743
+  5/5,  1.666533
+}
+{ Shallow Water - score_mcache_6 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.623242
+  2/5,  1.627049
+  3/5,  1.632245
+  4/5,  1.627732
+  5/5,  1.625143
+}
+{ Shallow Water - score_mcache_7 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.620318
+  2/5,  1.617027
+  3/5,  1.619852
+  4/5,  1.616535
+  5/5,  1.619349
+}
+{ Shallow Water - score_mcache_8 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.615543
+  2/5,  1.616636
+  3/5,  1.621188
+  4/5,  1.625326
+  5/5,  1.61906
+}
+{ Shallow Water - score_mcache_9 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.603761
+  2/5,  1.599403
+  3/5,  1.605291
+  4/5,  1.596766
+  5/5,  1.60265
+}
+{ Shallow Water - score_mcache_10 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.605583
+  2/5,  1.609163
+  3/5,  1.617749
+  4/5,  1.619994
+  5/5,  1.61275
+}
+{ Shallow Water - simple_mcache_1 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.812455
+  2/5,  1.813967
+  3/5,  1.811737
+  4/5,  1.817611
+  5/5,  1.815841
+}
+{ Shallow Water - simple_mcache_2 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.698456
+  2/5,  1.700991
+  3/5,  1.701431
+  4/5,  1.710398
+  5/5,  1.699972
+}
+{ Shallow Water - simple_mcache_3 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.614051
+  2/5,  1.614856
+  3/5,  1.620425
+  4/5,  1.617207
+  5/5,  1.618895
+}
+{ Shallow Water - simple_mcache_4 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.59549
+  2/5,  1.596382
+  3/5,  1.603355
+  4/5,  1.606663
+  5/5,  1.596454
+}
+{ Shallow Water - simple_mcache_5 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.584082
+  2/5,  1.580459
+  3/5,  1.583524
+  4/5,  1.583665
+  5/5,  1.580379
+}
+{ Shallow Water - simple_mcache_6 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.576671
+  2/5,  1.574391
+  3/5,  1.579181
+  4/5,  1.586077
+  5/5,  1.586216
+}
+{ Shallow Water - simple_mcache_7 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.566175
+  2/5,  1.561149
+  3/5,  1.559292
+  4/5,  1.562192
+  5/5,  1.558604
+}
+{ Shallow Water - simple_mcache_8 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.555828
+  2/5,  1.553659
+  3/5,  1.555605
+  4/5,  1.563205
+  5/5,  1.563611
+}
+{ Shallow Water - simple_mcache_9 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.550539
+  2/5,  1.547343
+  3/5,  1.548096
+  4/5,  1.544037
+  5/5,  1.549994
+}
+{ Shallow Water - simple_mcache_10 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  1.53557
+  2/5,  1.536384
+  3/5,  1.537036
+  4/5,  1.535949
+  5/5,  1.549259
 }

@@ -105,7 +105,7 @@ default = {                     # Define a benchmark "suite" which runs:
 
 waters = {
     'scripts':  [2],
-    'engines':  [0, 1,2]
+    'engines':  [0,1,2]
 }
 
 swaters = {
@@ -113,7 +113,7 @@ swaters = {
     'engines':  [0,1]+[c for c, x in enumerate(engines) if 'score_b' in x[0]] 
 }
 
-cache_tiling = {
+tiling = {
     'scripts': [0,1,2],
     'engines': [0,1]+[c for c, x in enumerate(engines) if 'score_blks' in x[0]]
 }
@@ -135,7 +135,7 @@ score_test = {
 
 montecarlo = {
     'scripts': [1,9,10],
-    'engines':  [0,1,2,3]
+    'engines': [0,1,2,3]
 }
 
 most = {
@@ -143,16 +143,37 @@ most = {
     'engines': [0,1,2,3]
 }
 
+engines += [
+    ('score_mcache_%s' % (mcache_size),
+    'score',
+    {
+        "CPHVB_CORE_MCACHE_SIZE":   str(mcache_size),
+    }) for mcache_size in range(1, 11)
+]
+engines += [
+    ('simple_mcache_%s' % (mcache_size),
+    'simple',
+    {
+        "CPHVB_CORE_MCACHE_SIZE":   str(mcache_size),
+    }) for mcache_size in range(1, 11)
+]
+
+mcache = {
+    'scripts':  range(0,len(scripts)),
+    'engines':  [0,1,2] + [c for c, x in enumerate(engines) if 'mcache' in x[0] ]
+}
+
 suites = {
     'default':      default,
     'test':         test,
     'test_all':     test_all,
     'score_test':     score_test,
-    'cache_tiling': cache_tiling,
+    'tiling':       tiling,
     'most':         most,
     'monte':        montecarlo,
     'waters':       waters,
     'swaters':      swaters,
+    'mcache':       mcache
 }
 
 def meta(src_dir, suite):

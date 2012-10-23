@@ -36,7 +36,7 @@ def main():
     set04 = ['results/akira/misc/benchmark-577e5F.json']    # knn par-search
 
     results = {}
-    for fn in set04:
+    for fn in set01:
         with open(fn) as fd:
             for bm, alias, eng, param, cmd, times in json.load(fd)["runs"]:
                 run = (bm, alias, eng, param, cmd, times)
@@ -54,8 +54,8 @@ def main():
         ax  = fig.add_subplot(111, projection='3d')
 
         score   = (r for r in runs if r[2] == "score")
-        #score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BINMAX"]) for (bm, alias, _, p, _, times) in score)
-        score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BASEMAX"]) for (bm, alias, _, p, _, times) in score)
+        score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BINMAX"]) for (bm, alias, _, p, _, times) in score)
+        #score_t = ((bm, alias, avg(times),  p["CPHVB_VE_SCORE_BLOCKSIZE"], p["CPHVB_VE_SCORE_BASEMAX"]) for (bm, alias, _, p, _, times) in score)
         score_r = [(bm, alias, avg_time, int(blocksize), int(binmax) ) for (bm, alias, avg_time, blocksize, binmax) in score_t]
 
         scatter = [(bs, bm, at) for _,_, at, bs, bm in score_r]
