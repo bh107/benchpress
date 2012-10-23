@@ -1,84 +1,84 @@
 ERR: perf installation broken, disabling perf (None): 
-Running benchmark suite 'default'; results are written to: /home/kenneth/buildbot/benchpress/results/marge-fruitloops/e67a58de2a12e3b6523066944207f29c6cd412dd/benchmark-kKbCl2.json.
+Running benchmark suite 'default'; results are written to: /home/kenneth/buildbot/benchpress/results/marge-fruitloops/e67a58de2a12e3b6523066944207f29c6cd412dd/benchmark-lYvw2v.json.
 { Black Scholes - numpy ( None ),
   taskset -c 1 python BlackSholes.py --size=2000000*4 --cphvb=False
-  1/5,  8.509394
-  2/5,  8.207039
-  3/5,  8.203987
-  4/5,  8.200964
-  5/5,  8.201237
+  1/5,  8.191932
+  2/5,  8.19809
+  3/5,  8.200682
+  4/5,  8.193682
+  5/5,  8.186988
 }
 { Black Scholes - simple ( simple ),
   taskset -c 1 python BlackSholes.py --size=2000000*4 --cphvb=True
-  1/5,  6.9406
-  2/5,  6.873496
-  3/5,  6.872703
-  4/5,  6.871637
-  5/5,  6.875365
+  1/5,  6.875566
+  2/5,  6.873891
+  3/5,  6.873917
+  4/5,  6.875147
+  5/5,  6.93646
 }
 { Cache Synth - numpy ( None ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
-  1/5,  21.084278
-  2/5,  21.082084
-  3/5,  21.085908
-  4/5,  21.081618
-  5/5,  21.083928
+  1/5,  21.06851
+  2/5,  21.080857
+  3/5,  21.535839
+  4/5,  21.083838
+  5/5,  21.072831
 }
 { Cache Synth - simple ( simple ),
   taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  20.735183
-  2/5,  20.734236
-  3/5,  20.741141
-  4/5,  20.737498
-  5/5,  20.737532
+  1/5,  20.873338
+  2/5,  20.735372
+  3/5,  20.727278
+  4/5,  20.736446
+  5/5,  20.739141
 }
 { Jacobi Iterative - numpy ( None ),
   taskset -c 1 python jacobi_iterative.py --size=7000*7000*4 --cphvb=False
-  1/5,  8.136619
-  2/5,  8.1331
-  3/5,  8.136801
-  4/5,  8.141062
-  5/5,  8.14318
+  1/5,  8.148645
+  2/5,  8.129285
+  3/5,  8.137393
+  4/5,  8.133428
+  5/5,  8.140441
 }
 { Jacobi Iterative - simple ( simple ),
   taskset -c 1 python jacobi_iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.943494
-  2/5,  3.940349
-  3/5,  3.940768
-  4/5,  3.941196
-  5/5,  3.946345
+  1/5,  3.942365
+  2/5,  3.944518
+  3/5,  3.940767
+  4/5,  3.943063
+  5/5,  3.944045
 }
 { Jacobi Fixed - numpy ( None ),
   taskset -c 1 python jacobi_fixed.py --size=7000*7000*4 --cphvb=False
-  1/5,  2.909777
-  2/5,  2.909941
-  3/5,  2.907
-  4/5,  2.910588
-  5/5,  2.908624
+  1/5,  2.924968
+  2/5,  2.909367
+  3/5,  2.905226
+  4/5,  2.90456
+  5/5,  2.906937
 }
 { Jacobi Fixed - simple ( simple ),
   taskset -c 1 python jacobi_fixed.py --size=7000*7000*4 --cphvb=True
-  1/5,  2.453698
-  2/5,  2.447574
-  3/5,  2.452665
-  4/5,  2.447411
-  5/5,  2.453599
+  1/5,  2.458448
+  2/5,  2.452114
+  3/5,  2.45062
+  4/5,  2.454101
+  5/5,  2.450056
 }
 { kNN - numpy ( None ),
   taskset -c 1 python kNN.py --size=10000*120 --cphvb=False
-  1/5,  5.019748
-  2/5,  5.021925
-  3/5,  5.017036
-  4/5,  5.021137
-  5/5,  5.020234
+  1/5,  5.020536
+  2/5,  5.023331
+  3/5,  5.022257
+  4/5,  5.021235
+  5/5,  5.021202
 }
 { kNN - simple ( simple ),
   taskset -c 1 python kNN.py --size=10000*120 --cphvb=True
-  1/5,  1.358357
-  2/5,  1.357966
-  3/5,  1.358569
-  4/5,  1.358613
-  5/5,  1.358111
+  1/5,  1.357954
+  2/5,  1.358071
+  3/5,  1.358006
+  4/5,  1.357561
+  5/5,  1.357631
 }
 { Lattice Boltzmann 2D - numpy ( None ),
   taskset -c 1 python lbm2d.py --size=15*200000*2 --cphvb=False
