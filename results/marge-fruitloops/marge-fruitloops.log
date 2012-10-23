@@ -1,0 +1,108 @@
+ERR: perf installation broken, disabling perf (None): 
+Running benchmark suite 'default'; results are written to: /home/kenneth/buildbot/benchpress/results/marge-fruitloops/e67a58de2a12e3b6523066944207f29c6cd412dd/benchmark-kKbCl2.json.
+{ Black Scholes - numpy ( None ),
+  taskset -c 1 python BlackSholes.py --size=2000000*4 --cphvb=False
+  1/5,  8.509394
+  2/5,  8.207039
+  3/5,  8.203987
+  4/5,  8.200964
+  5/5,  8.201237
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 1 python BlackSholes.py --size=2000000*4 --cphvb=True
+  1/5,  6.9406
+  2/5,  6.873496
+  3/5,  6.872703
+  4/5,  6.871637
+  5/5,  6.875365
+}
+{ Cache Synth - numpy ( None ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
+  1/5,  21.084278
+  2/5,  21.082084
+  3/5,  21.085908
+  4/5,  21.081618
+  5/5,  21.083928
+}
+{ Cache Synth - simple ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  20.735183
+  2/5,  20.734236
+  3/5,  20.741141
+  4/5,  20.737498
+  5/5,  20.737532
+}
+{ Jacobi Iterative - numpy ( None ),
+  taskset -c 1 python jacobi_iterative.py --size=7000*7000*4 --cphvb=False
+  1/5,  8.136619
+  2/5,  8.1331
+  3/5,  8.136801
+  4/5,  8.141062
+  5/5,  8.14318
+}
+{ Jacobi Iterative - simple ( simple ),
+  taskset -c 1 python jacobi_iterative.py --size=7000*7000*4 --cphvb=True
+  1/5,  3.943494
+  2/5,  3.940349
+  3/5,  3.940768
+  4/5,  3.941196
+  5/5,  3.946345
+}
+{ Jacobi Fixed - numpy ( None ),
+  taskset -c 1 python jacobi_fixed.py --size=7000*7000*4 --cphvb=False
+  1/5,  2.909777
+  2/5,  2.909941
+  3/5,  2.907
+  4/5,  2.910588
+  5/5,  2.908624
+}
+{ Jacobi Fixed - simple ( simple ),
+  taskset -c 1 python jacobi_fixed.py --size=7000*7000*4 --cphvb=True
+  1/5,  2.453698
+  2/5,  2.447574
+  3/5,  2.452665
+  4/5,  2.447411
+  5/5,  2.453599
+}
+{ kNN - numpy ( None ),
+  taskset -c 1 python kNN.py --size=10000*120 --cphvb=False
+  1/5,  5.019748
+  2/5,  5.021925
+  3/5,  5.017036
+  4/5,  5.021137
+  5/5,  5.020234
+}
+{ kNN - simple ( simple ),
+  taskset -c 1 python kNN.py --size=10000*120 --cphvb=True
+  1/5,  1.358357
+  2/5,  1.357966
+  3/5,  1.358569
+  4/5,  1.358613
+  5/5,  1.358111
+}
+{ Lattice Boltzmann 2D - numpy ( None ),
+  taskset -c 1 python lbm2d.py --size=15*200000*2 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Lattice Boltzmann 2D - simple ( simple ),
+  taskset -c 1 python lbm2d.py --size=15*200000*2 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
