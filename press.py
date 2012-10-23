@@ -266,7 +266,26 @@ def main(config, src_root, output, suite, runs=5, use_perf=True):
         'meta': meta(src_root, suite),
         'runs': []
     }
+    
+    if use_perf:
+        out, err = Popen(
+            ['which', 'perf'],
+            stdout=PIPE
+        ).communicate()
 
+        # Some distros have a wrapper script :(
+        if not err and out:
+            out, err = Popen(
+                ['perf', 'list'],
+                stdin=PIPE,
+                stdout=PIPE,
+                cwd=script_path
+            ).communicate()
+
+        if err or not out:
+            print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
+            use_perf = False
+            
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-', suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in (scripts[snr] for snr in benchmark['scripts']):
@@ -352,6 +371,11 @@ if __name__ == "__main__":
         default=5,
         help="How many times should each benchmark run"
     )
+    parser.add_argument(
+        '--useperf',
+        default=True,
+        help="True to use perf for measuring, false otherwise"
+    )
     args = parser.parse_args()
 
     main(
@@ -359,6 +383,7 @@ if __name__ == "__main__":
         args.src,
         args.output,
         args.suite,
-        int(args.runs)
+        int(args.runs),
+        bool(args.useperf)
     )
 
