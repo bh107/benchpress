@@ -1,0 +1,231 @@
+ERR: perf installation broken, disabling perf (None): 
+Running benchmark suite 'default'; results are written to: /home/kenneth/buildbot/benchpress/results/marge-fruitloops/e67a58de2a12e3b6523066944207f29c6cd412dd/benchmark-xRMcbi.json.
+{ Black Scholes - numpy ( None ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Black Scholes - score ( score ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Cache Synth - numpy ( None ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Cache Synth - simple ( simple ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+  1/5,  20.73351
+  2/5,  20.734937
+  3/5,  20.731691
+  4/5,  20.760821
+  5/5,  20.73085
+}
+{ Cache Synth - score ( score ),
+  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Jacobi Iterative - numpy ( None ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Jacobi Iterative - simple ( simple ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Jacobi Iterative - score ( score ),
+  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Jacobi Iterative - Reduce - numpy ( None ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Jacobi Iterative - Reduce - simple ( simple ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Jacobi Iterative - Reduce - score ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ kNN - numpy ( None ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ kNN - simple ( simple ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ kNN - score ( score ),
+  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Lattice Boltzmann 2D - numpy ( None ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=False
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Lattice Boltzmann 2D - simple ( simple ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
+{ Lattice Boltzmann 2D - score ( score ),
+  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
+ERR: Something went wrong None
+  1/5,  0.0
+ERR: Something went wrong None
+  2/5,  0.0
+ERR: Something went wrong None
+  3/5,  0.0
+ERR: Something went wrong None
+  4/5,  0.0
+ERR: Something went wrong None
+  5/5,  0.0
+}
