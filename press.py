@@ -148,14 +148,14 @@ engines += [
     'score',
     {
         "CPHVB_CORE_MCACHE_SIZE":   str(mcache_size),
-    }) for mcache_size in range(1, 11)
+    }) for mcache_size in range(1, 20)
 ]
 engines += [
     ('simple_mcache_%s' % (mcache_size),
     'simple',
     {
         "CPHVB_CORE_MCACHE_SIZE":   str(mcache_size),
-    }) for mcache_size in range(1, 11)
+    }) for mcache_size in range(1, 20)
 ]
 
 mcache = {
@@ -168,6 +168,11 @@ prefetch = {
 	'engines': [0,1,2]
 }
 
+shallow_mcache = {
+    'scripts':  [c for c,(b, _, _) in enumerate(scripts) if 'Shallow' in b],
+    'engines':  [0,1,2] + [c for c, x in enumerate(engines) if 'mcache' in x[0] ]
+}
+print shallow_mcache
 suites = {
     'default':      default,
     'test':         test,
@@ -179,7 +184,8 @@ suites = {
     'monte':        montecarlo,
     'waters':       waters,
     'swaters':      swaters,
-    'mcache':       mcache
+    'mcache':       mcache,
+    'mcache_shallow': shallow_mcache
 }
 
 def meta(src_dir, suite):
