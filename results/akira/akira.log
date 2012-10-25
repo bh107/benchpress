@@ -1,11 +1,11 @@
-Running benchmark suite 'tiling_jacobi'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_jacobi-9en1Gh.json.
+Running benchmark suite 'tiling_jacobi'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_jacobi-qqZzJu.json.
 { Jacobi Iterative - Reduce - numpy ( None ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
-  1/5,  14.008709
-  2/5,  13.928002
-  3/5,  13.928641
-  4/5,  13.939533
-  5/5,  13.955731
+  1/5,  13.949517
+  2/5,  14.02273
+  3/5,  13.973693
+  4/5,  13.970646
+  5/5,  13.931293
 }
 { Jacobi Iterative - Reduce - score_blksize112 ( score ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
