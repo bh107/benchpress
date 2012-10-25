@@ -1,11 +1,100 @@
-Running benchmark suite 'tiling_jacobi'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_jacobi-qqZzJu.json.
+Running benchmark suite 'tiling_jacobi'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_jacobi-FhVeSP.json.
 { Jacobi Iterative - Reduce - numpy ( None ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
-  1/5,  13.949517
-  2/5,  14.02273
-  3/5,  13.973693
-  4/5,  13.970646
-  5/5,  13.931293
+  1/5,  13.986255
+  2/5,  13.997879
+  3/5,  14.00774
+  4/5,  13.974191
+  5/5,  14.02155
 }
 { Jacobi Iterative - Reduce - score_blksize112 ( score ),
   taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.832721
+  2/5,  7.857415
+  3/5,  7.825388
+  4/5,  7.830534
+  5/5,  7.827779
+}
+{ Jacobi Iterative - Reduce - score_blksize224 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.545394
+  2/5,  7.540225
+  3/5,  7.531974
+  4/5,  7.520545
+  5/5,  7.551756
+}
+{ Jacobi Iterative - Reduce - score_blksize448 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.378953
+  2/5,  7.373949
+  3/5,  7.376661
+  4/5,  7.387583
+  5/5,  7.379711
+}
+{ Jacobi Iterative - Reduce - score_blksize896 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.208564
+  2/5,  7.224371
+  3/5,  7.231082
+  4/5,  7.228739
+  5/5,  7.197054
+}
+{ Jacobi Iterative - Reduce - score_blksize1792 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.073716
+  2/5,  7.14772
+  3/5,  7.117533
+  4/5,  7.047232
+  5/5,  7.109523
+}
+{ Jacobi Iterative - Reduce - score_blksize3584 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  6.967148
+  2/5,  6.974759
+  3/5,  6.981769
+  4/5,  6.98004
+  5/5,  7.000045
+}
+{ Jacobi Iterative - Reduce - score_blksize7168 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.012185
+  2/5,  6.973727
+  3/5,  7.030926
+  4/5,  6.986787
+  5/5,  6.963284
+}
+{ Jacobi Iterative - Reduce - score_blksize14336 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.012542
+  2/5,  7.021536
+  3/5,  7.039092
+  4/5,  7.010307
+  5/5,  7.030362
+}
+{ Jacobi Iterative - Reduce - score_blksize28672 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.017264
+  2/5,  7.040405
+  3/5,  7.016888
+  4/5,  7.037246
+  5/5,  7.006889
+}
+{ Jacobi Iterative - Reduce - score_blksize57344 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.215974
+  2/5,  7.219788
+  3/5,  7.274813
+  4/5,  7.236171
+  5/5,  7.256836
+}
+{ Jacobi Iterative - Reduce - score_blksize114688 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.48382
+  2/5,  7.449628
+  3/5,  7.408182
+  4/5,  7.462428
+  5/5,  7.458153
+}
+{ Jacobi Iterative - Reduce - score_blksize229376 ( score ),
+  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
+  1/5,  7.800514
