@@ -85,7 +85,7 @@ def perf_counters():
     out, err = p.communicate()
 
     events = []
-    for m in re.finditer('  (\w+-[\w-]+) ', out):
+    for m in re.finditer('  ([\w-]+) [\w -]+\[.+\]', out):
         events.append( m.group(1) )
 
     return ','.join(events)
