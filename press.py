@@ -90,12 +90,110 @@ def perf_counters():
 
     return ','.join(events)
 
-def main(config, src_root, output, suite, benchmark, runs=5, use_perf=True):
+def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity=1 ):
+
+    confparser = SafeConfigParser()     # Parser to modify the cphvb configuration file.
+    confparser.read(config)             # Read current configuration
+
+    cphvb = False
+    if engine:                                  # Enable cphvb with the given engine.
+        cphvb = True
+        confparser.set("node", "children", engine)  
+        confparser.write(open(config, 'wb'))
+
+    envs = None                                 # Populate environment variables
+    if env:
+        envs = os.environ.copy()
+        envs.update(env)
+                                                # Setup process + arguments
+    args        = []
+    args        += ['taskset', '-c', str(affinity), 'python', script, arg, '--cphvb=%s' % cphvb ]
+    args_str    = ' '.join(args)
+    print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
+
+    times = []
+    perfs = []
+    for i in xrange(1, runs+1):
+
+        if use_perf:
+            pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
+            cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
+        else:
+            cmd = args
+
+        p = Popen(                              # Run the command
+            cmd,
+            stdin=PIPE,
+            stdout=PIPE,
+            env=envs,
+            cwd=script_path
+        )
+        out, err = p.communicate()              # Grab the output
+        elapsed = 0.0
+        if err or not out:
+            print "ERR: Something went wrong %s" % err
+        else:
+            elapsed = float(out.split(' ')[-1] .rstrip())
+
+        print "  %d/%d, " % (i, runs), elapsed
+        
+        times.append( elapsed )
+        if use_perf:
+            perfs.append( open(pfd.name).read() )
+
+    print "}"
+
+    return (times, perfs, args_str)
+
+def run_ccode( suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path ):
+
+    envs = None                                 # Populate environment variables
+    if env:
+        envs = os.environ.copy()
+        envs.update(env)
+                                                # Setup process + arguments
+    args        = []
+    args        += ['taskset', '-c', '1', script ] + arg
+    args_str    = ' '.join(args)
+    print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
+
+    times = []
+    perfs = []
+    for i in xrange(1, runs+1):
+
+        if use_perf:
+            pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
+            cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
+        else:
+            cmd = args
+
+        p = Popen(                              # Run the command
+            cmd,
+            stdin=PIPE,
+            stdout=PIPE,
+            env=envs,
+            cwd=script_path
+        )
+        out, err = p.communicate()              # Grab the output
+        elapsed = 0.0
+        if err or not out:
+            print "ERR: Something went wrong %s" % err
+        else:
+            elapsed = float(out.split(' ')[-1] .rstrip())
+
+        print "  %d/%d, " % (i, runs), elapsed
+        
+        times.append( elapsed )
+        if use_perf:
+            perfs.append( open(pfd.name).read() )
+
+    print "}"
+
+    return (times, perfs, args_str)
+
+def main(config, src_root, output, suite, benchmark, runs, use_perf, affinity):
 
     script_path = src_root +os.sep+ 'benchmark' +os.sep+ 'Python' +os.sep
-    
-    parser = SafeConfigParser()     # Parser to modify the cphvb configuration file.
-    parser.read(config)             # Read current configuration
 
     results = {
         'meta': meta(src_root, suite),
@@ -126,53 +224,11 @@ def main(config, src_root, output, suite, benchmark, runs=5, use_perf=True):
         for mark, script, arg in benchmark['scripts']:
             for alias, engine, env in benchmark['engines']:
 
-                cphvb = False
-                if engine:                                  # Enable cphvb with the given engine.
-                    cphvb = True
-                    parser.set("node", "children", engine)  
-                    parser.write(open(config, 'wb'))
-
-                envs = None                                 # Populate environment variables
-                if env:
-                    envs = os.environ.copy()
-                    envs.update(env)
-                                                            # Setup process + arguments
-                args        = []
-                args        += ['taskset', '-c', '1', 'python', script, arg, '--cphvb=%s' % cphvb ]
-                args_str    = ' '.join(args)
-                print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
-
-                times = []
-                perfs = []
-                for i in xrange(1, runs+1):
-
-                    if use_perf:
-                        pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-                        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
-                    else:
-                        cmd = args
-
-                    p = Popen(                              # Run the command
-                        cmd,
-                        stdin=PIPE,
-                        stdout=PIPE,
-                        env=envs,
-                        cwd=script_path
-                    )
-                    out, err = p.communicate()              # Grab the output
-                    elapsed = 0.0
-                    if err or not out:
-                        print "ERR: Something went wrong %s" % err
-                    else:
-                        elapsed = float(out.split(' ')[-1] .rstrip())
-
-                    print "  %d/%d, " % (i, runs), elapsed
-                    
-                    times.append( elapsed )
-                    if use_perf:
-                        perfs.append( open(pfd.name).read() )
-
-                print "}"
+                accum = []
+                if '.py' in script:
+                    (times, perfs, args_str) = run_cphvbnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity)
+                else:
+                    (times, perfs, args_str) = run_ccode()
                                                             # Accumulate results
                 results['runs'].append(( mark, alias, engine, env, args_str, times, perfs ))
                 results['meta']['ended'] = str(datetime.now())
@@ -215,6 +271,11 @@ if __name__ == "__main__":
         default=True,
         help="True to use perf for measuring, false otherwise"
     )
+    parser.add_argument(
+        '--affinity',
+        default=1,
+        help="Assigns affinity for the benchmark."
+    )
     args = parser.parse_args()
 
     main(
@@ -224,6 +285,7 @@ if __name__ == "__main__":
         args.suite,
         bsuites[args.suite],
         int(args.runs),
-        bool(args.useperf)
+        bool(args.useperf),
+        int(args.affinity)
     )
 
