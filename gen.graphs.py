@@ -161,10 +161,6 @@ def render_grp_graph(mark, graphs, baseline, output, file_formats=['pdf']):
     ind2    = [i+width*3    for i in ind]
     indt    = [i+width*2.5  for i in ind]
    
-    el = [10]*3
-    l1 = range(10, 13)
-    ll = range(100, 130,10)
-    
     el = [t for e,t in data['Runtime']]
     l1 = [t/10 for e,t in data['L1-miss']]
     ll = [t/10 for e,t in data['LL-miss']]
