@@ -16,5 +16,5 @@ subset = [
 
 suite = {
     'scripts': [script for script in scripts if 'Jacobi Iterative - Reduce' in script[0]],
-    'engines': [engines[0]] + subset
+    'engines': [engines[0:2]] + subset
 }

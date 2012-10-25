@@ -12,8 +12,6 @@ import sys
 import os
 import re
 
-
-
 def stats( samples ):
     """Returns: (avg, lowest, highest, deviation)"""
 
@@ -260,19 +258,25 @@ graphs = {
     '3d':       render_rel_graph
 }
 
+def filter_score(runs):
+    return [run for run in runs if run[2] == 'score']
+
+def filter_default( runs ):
+    return [r for r in normalize(runs)]
+
 def gen( benchmark, output, graph_name, graph, baseline, file_formats ):
 
     try:
         raw     = json.load(open(benchmark))
         meta    = raw['meta']
-        runs    = raw['runs']
+        runs    = filter_default(raw['runs'])
     except:
         return [1, "Failed loading benchmark %s." % benchmark]
 
     scale = 1000000.0
 
     bench   = {}
-    for mark, engine_lbl, engine, engine_args, cmd, times, perf_tl in normalize( runs ):
+    for mark, engine_lbl, engine, engine_args, cmd, times, perf_tl in filter_score(runs):
 
         t_avg, t_max, t_min, t_dev = stats(times)
 
