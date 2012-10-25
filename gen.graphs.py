@@ -37,13 +37,6 @@ def lintify( text ):
 
     return ints
 
-def normalize( runs ):
-
-    for r in runs:
-        if len(r) == 6:
-            yield r + [[]]
-        elif len(r) == 7:
-            yield r
 
 def parse_perf( perf_tl ):
     """Parses a list of 'perf' output into list of dicts with counter as key."""
@@ -158,8 +151,8 @@ def render_grpmark(mark, data, baseline, comp, output, file_formats=['pdf']):
     clf()
     data = dict(data)
 
-    benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water', ]
-    engines     = ['NumPy', 'Simple', 'Score']
+    benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water']
+    engines     = [engine for engine in ['NumPy', 'Simple', 'Score'] if engine != baseline]
 
     rotation = 'horizontal'
     width    = 0.25
@@ -171,26 +164,52 @@ def render_grpmark(mark, data, baseline, comp, output, file_formats=['pdf']):
     ind1    = [i+width*2    for i in ind]
     ind2    = [i+width*3    for i in ind]
     ind3    = [i+width*4    for i in ind]
-    indt    = [i+width*2.5  for i in ind]
+
+    if baseline:
+        indt    = [i+0.1+width*2.5  for i in ind]
+    else:
+        indt    = [i+width*2.5  for i in ind]
      
     np = [v['elapsed'] for benchmark in benchmarks for e,v in data[benchmark] if e == 'numpy' ]
-    si = [v['elapsed'] for benchmark in benchmarks for e,v in data[benchmark] if e == 'simple']
-    sc = [v['elapsed'] for benchmark in benchmarks for e,v in data[benchmark] if e == 'score']
+    si = [v['elapsed'] for benchmark in benchmarks for c, (e,v) in enumerate(data[benchmark]) if e == 'simple']
+    sc = [v['elapsed'] for benchmark in benchmarks for c, (e,v) in enumerate(data[benchmark]) if e == 'score']
 
-    #ylabel('Speedup')
-    ylabel('Runtime')
-    #xlabel('Benchmark')
-    #title('Benchmark Suite')
+    if baseline:
+        for i in xrange(0, len(np)):
+            si[i] = np[i]/si[i]
+            sc[i] = np[i]/sc[i]
+
+    if baseline:
+        ylabel('Speedup in relation to %s' % baseline)
+    else:
+        ylabel('Runtime in seconds')
 
     gca().yaxis.grid(True)
     gca().xaxis.grid(False)
     gca().set_axisbelow(True)
 
-    rect0 = bar(ind0, np, width, color="#1B9E77", hatch="*")
-    rect1 = bar(ind1, sc, width, color="#D95F02", hatch="/")
-    rect2 = bar(ind2, si, width, color="#7570B3", hatch=".")
-    
-    legend( (rect0[0], rect1[0], rect2[0]), engines)
+    if baseline:
+        rect1 = bar(ind1, si, width, color="#D95F02", hatch="/")
+        rect2 = bar(ind2, sc, width, color="#7570B3", hatch=".")
+
+        legend(
+            (rect1[0], rect2[0]),
+            engines, 
+            loc='upper center',
+            bbox_to_anchor=(0.5,1.05), fancybox=True, shadow=True, ncol=len(engines)
+        )
+    else:
+        rect0 = bar(ind0, np, width, color="#1B9E77", hatch="*")
+        rect1 = bar(ind1, si, width, color="#D95F02", hatch="/")
+        rect2 = bar(ind2, sc, width, color="#7570B3", hatch=".")
+
+        legend(
+            (rect0[0], rect1[0], rect2[0]),
+            engines,
+            loc='upper center',
+            bbox_to_anchor=(0.5,1.05), fancybox=True, shadow=True, ncol=len(engines)
+        )
+
     xticks(indt, [x if 'Jacobi' not in x else 'Jacobi' for x in benchmarks])
 
     fn = output +os.sep+ mark.lower()       # Output them
@@ -258,8 +277,19 @@ graphs = {
     '3d':       render_rel_graph
 }
 
+def normalize( runs ):
+
+    for r in runs:
+        if len(r) == 6:
+            yield r + [[]]
+        elif len(r) == 7:
+            yield r
+
 def filter_score(runs):
-    return [run for run in runs if run[2] == 'score']
+    return [run for run in runs if 'score' in run[1]]
+
+def filter_simple_mcache(runs):
+    return [run for run in runs if 'simple_mcache' in run[1]]
 
 def filter_default( runs ):
     return [r for r in normalize(runs)]
@@ -276,7 +306,9 @@ def gen( benchmark, output, graph_name, graph, baseline, file_formats ):
     scale = 1000000.0
 
     bench   = {}
-    for mark, engine_lbl, engine, engine_args, cmd, times, perf_tl in filter_score(runs):
+    #for mark, engine_lbl, engine, engine_args, cmd, times, perf_tl in filter_score(runs):
+    #for mark, engine_lbl, engine, engine_args, cmd, times, perf_tl in filter_simple_mcache(runs):
+    for mark, engine_lbl, engine, engine_args, cmd, times, perf_tl in runs:
 
         t_avg, t_max, t_min, t_dev = stats(times)
 
@@ -377,7 +409,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--baseline',
         dest='bl',
-        default='NumPy'
+        default=None
     )
     args = parser.parse_args()
     res = [msg for r, msg in main( args.results, args.output, args.m, args.l, args.g, [args.f], args.bl ) if msg]
