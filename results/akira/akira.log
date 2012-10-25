@@ -1,121 +1,329 @@
-Running benchmark suite 'tiling_jacobi'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_jacobi-VulOyx.json.
-{ Jacobi Iterative - Reduce - numpy ( None ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
-  1/5,  13.973402
-  2/5,  13.985414
-  3/5,  13.959067
-  4/5,  13.95938
-  5/5,  13.98666
+Running benchmark suite 'mcache_shallow'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-mcache_shallow-1uUB9t.json.
+{ Shallow Water - numpy ( None ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=False
+  1/5,  6.003085
+  2/5,  6.005418
+  3/5,  5.989389
+  4/5,  5.969442
+  5/5,  6.01421
 }
-{ Jacobi Iterative - Reduce - score_blksize112 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.811154
-  2/5,  7.852335
-  3/5,  7.808877
-  4/5,  7.808326
-  5/5,  7.828199
+{ Shallow Water - simple ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.81707
+  2/5,  2.75624
+  3/5,  2.790426
+  4/5,  2.82719
+  5/5,  2.762197
 }
-{ Jacobi Iterative - Reduce - score_blksize224 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.539926
-  2/5,  7.548329
-  3/5,  7.543368
-  4/5,  7.53393
-  5/5,  7.566737
+{ Shallow Water - score ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.140831
+  2/5,  3.132829
+  3/5,  3.031543
+  4/5,  3.164075
+  5/5,  3.071056
 }
-{ Jacobi Iterative - Reduce - score_blksize448 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.361718
-  2/5,  7.339751
-  3/5,  7.369665
-  4/5,  7.343202
-  5/5,  7.373674
+{ Shallow Water - score_mcache_1 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  5.030858
+  2/5,  5.077097
+  3/5,  5.033075
+  4/5,  5.051538
+  5/5,  5.082659
 }
-{ Jacobi Iterative - Reduce - score_blksize896 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.258138
-  2/5,  7.238325
-  3/5,  7.257345
-  4/5,  7.234579
-  5/5,  7.24481
+{ Shallow Water - score_mcache_2 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  4.177212
+  2/5,  4.174832
+  3/5,  4.21753
+  4/5,  4.084171
+  5/5,  4.206055
 }
-{ Jacobi Iterative - Reduce - score_blksize1792 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.08453
-  2/5,  7.072876
-  3/5,  7.111248
-  4/5,  7.065242
-  5/5,  7.066081
+{ Shallow Water - score_mcache_3 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.605349
+  2/5,  3.518322
+  3/5,  3.611819
+  4/5,  3.543479
+  5/5,  3.570245
 }
-{ Jacobi Iterative - Reduce - score_blksize3584 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  6.975337
-  2/5,  6.948566
-  3/5,  6.981495
-  4/5,  6.973909
-  5/5,  6.980948
+{ Shallow Water - score_mcache_4 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.340179
+  2/5,  3.219916
+  3/5,  3.326658
+  4/5,  3.277596
+  5/5,  3.291128
 }
-{ Jacobi Iterative - Reduce - score_blksize7168 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  6.950537
-  2/5,  7.005372
-  3/5,  6.951334
-  4/5,  6.990462
-  5/5,  6.965963
+{ Shallow Water - score_mcache_5 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.213191
+  2/5,  3.27725
+  3/5,  3.210767
+  4/5,  3.294767
+  5/5,  3.195583
 }
-{ Jacobi Iterative - Reduce - score_blksize14336 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.002939
-  2/5,  7.008916
-  3/5,  7.048289
-  4/5,  7.01371
-  5/5,  6.984154
+{ Shallow Water - score_mcache_6 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.135439
+  2/5,  3.019015
+  3/5,  3.138408
+  4/5,  3.047759
+  5/5,  3.147782
 }
-{ Jacobi Iterative - Reduce - score_blksize28672 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.059663
-  2/5,  7.037963
-  3/5,  7.005052
-  4/5,  7.025759
-  5/5,  7.030203
+{ Shallow Water - score_mcache_7 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.076248
+  2/5,  3.066104
+  3/5,  3.11388
+  4/5,  3.0459
+  5/5,  3.121416
 }
-{ Jacobi Iterative - Reduce - score_blksize57344 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.205199
-  2/5,  7.193824
-  3/5,  7.252724
-  4/5,  7.228278
-  5/5,  7.255569
+{ Shallow Water - score_mcache_8 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.015723
+  2/5,  3.14057
+  3/5,  3.095033
+  4/5,  3.081892
+  5/5,  3.101762
 }
-{ Jacobi Iterative - Reduce - score_blksize114688 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.451776
-  2/5,  7.425376
-  3/5,  7.395508
-  4/5,  7.429446
-  5/5,  7.424335
+{ Shallow Water - score_mcache_9 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.048198
+  2/5,  3.101909
+  3/5,  2.997585
+  4/5,  3.120269
+  5/5,  3.010882
 }
-{ Jacobi Iterative - Reduce - score_blksize229376 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  7.760731
-  2/5,  7.819083
-  3/5,  7.710884
-  4/5,  7.806437
-  5/5,  7.819892
+{ Shallow Water - score_mcache_10 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.140036
+  2/5,  3.115528
+  3/5,  3.078242
+  4/5,  3.128001
+  5/5,  3.055622
 }
-{ Jacobi Iterative - Reduce - score_blksize458752 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  8.121982
-  2/5,  8.101733
-  3/5,  8.167322
-  4/5,  8.023863
-  5/5,  8.11649
+{ Shallow Water - score_mcache_11 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.051246
+  2/5,  3.01608
+  3/5,  3.070193
+  4/5,  2.956503
+  5/5,  3.083591
 }
-{ Jacobi Iterative - Reduce - score_blksize917504 ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  8.508268
-  2/5,  8.471031
-  3/5,  8.584049
-  4/5,  8.45061
-  5/5,  8.477093
+{ Shallow Water - score_mcache_12 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.984846
+  2/5,  3.056943
+  3/5,  2.992268
+  4/5,  3.063934
+  5/5,  3.034594
+}
+{ Shallow Water - score_mcache_13 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.014696
+  2/5,  2.980654
+  3/5,  3.013865
+  4/5,  2.929337
+  5/5,  3.020122
+}
+{ Shallow Water - score_mcache_14 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.047578
+  2/5,  2.993099
+  3/5,  3.091519
+  4/5,  2.953639
+  5/5,  3.081368
+}
+{ Shallow Water - score_mcache_15 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.015719
+  2/5,  2.961906
+  3/5,  3.022977
+  4/5,  2.974321
+  5/5,  3.03804
+}
+{ Shallow Water - score_mcache_16 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.948599
+  2/5,  3.088435
+  3/5,  2.999369
+  4/5,  3.088516
+  5/5,  3.00945
+}
+{ Shallow Water - score_mcache_17 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.006887
+  2/5,  2.989427
+  3/5,  2.994904
+  4/5,  3.053219
+  5/5,  2.935551
+}
+{ Shallow Water - score_mcache_18 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.993708
+  2/5,  2.998983
+  3/5,  2.909027
+  4/5,  3.005726
+  5/5,  2.897845
+}
+{ Shallow Water - score_mcache_19 ( score ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.041142
+  2/5,  3.030157
+  3/5,  2.971196
+  4/5,  3.05192
+  5/5,  2.913143
+}
+{ Shallow Water - simple_mcache_1 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.738428
+  2/5,  3.639206
+  3/5,  3.695655
+  4/5,  3.711359
+  5/5,  3.621957
+}
+{ Shallow Water - simple_mcache_2 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.439917
+  2/5,  3.335942
+  3/5,  3.441143
+  4/5,  3.377233
+  5/5,  3.380245
+}
+{ Shallow Water - simple_mcache_3 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.076463
+  2/5,  2.992776
+  3/5,  3.076702
+  4/5,  2.971053
+  5/5,  3.111302
+}
+{ Shallow Water - simple_mcache_4 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.942188
+  2/5,  3.139716
+  3/5,  2.877532
+  4/5,  2.938394
+  5/5,  2.996106
+}
+{ Shallow Water - simple_mcache_5 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.929032
+  2/5,  3.039617
+  3/5,  2.964283
+  4/5,  2.96342
+  5/5,  2.882951
+}
+{ Shallow Water - simple_mcache_6 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  3.016389
+  2/5,  3.01303
+  3/5,  2.968351
+  4/5,  2.91606
+  5/5,  2.987341
+}
+{ Shallow Water - simple_mcache_7 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.870383
+  2/5,  2.86068
+  3/5,  2.865266
+  4/5,  2.874473
+  5/5,  2.919489
+}
+{ Shallow Water - simple_mcache_8 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.833943
+  2/5,  2.862337
+  3/5,  2.932816
+  4/5,  2.854479
+  5/5,  2.88907
+}
+{ Shallow Water - simple_mcache_9 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.904657
+  2/5,  2.812753
+  3/5,  2.813435
+  4/5,  2.878597
+  5/5,  2.781055
+}
+{ Shallow Water - simple_mcache_10 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.750285
+  2/5,  2.869715
+  3/5,  2.752194
+  4/5,  2.777085
+  5/5,  2.80951
+}
+{ Shallow Water - simple_mcache_11 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.833647
+  2/5,  2.850508
+  3/5,  2.931869
+  4/5,  2.882319
+  5/5,  2.876413
+}
+{ Shallow Water - simple_mcache_12 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.772073
+  2/5,  2.730188
+  3/5,  2.829112
+  4/5,  2.71735
+  5/5,  2.740811
+}
+{ Shallow Water - simple_mcache_13 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.817637
+  2/5,  2.726229
+  3/5,  2.764778
+  4/5,  2.826939
+  5/5,  2.701613
+}
+{ Shallow Water - simple_mcache_14 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.760006
+  2/5,  2.787436
+  3/5,  2.810462
+  4/5,  2.788536
+  5/5,  2.739182
+}
+{ Shallow Water - simple_mcache_15 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.764884
+  2/5,  2.764241
+  3/5,  2.785599
+  4/5,  2.740516
+  5/5,  2.717521
+}
+{ Shallow Water - simple_mcache_16 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.777383
+  2/5,  2.769929
+  3/5,  2.788486
+  4/5,  2.732538
+  5/5,  2.7747
+}
+{ Shallow Water - simple_mcache_17 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.763699
+  2/5,  2.811533
+  3/5,  2.780958
+  4/5,  2.71735
+  5/5,  2.794705
+}
+{ Shallow Water - simple_mcache_18 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.797121
+  2/5,  2.696073
+  3/5,  2.829507
+  4/5,  2.734607
+  5/5,  2.801511
+}
+{ Shallow Water - simple_mcache_19 ( simple ),
+  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
+  1/5,  2.782842
+  2/5,  2.687773
+  3/5,  2.835773
+  4/5,  2.691885
+  5/5,  2.822175
 }
