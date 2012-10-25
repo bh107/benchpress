@@ -11,10 +11,10 @@ subset = [
         "CPHVB_VE_SCORE_BINMAX":    str(20),
         "CPHVB_VE_SCORE_BASEMAX":   5,
         "CPHVB_CORE_MCACHE_SIZE":   10
-    }) blksize in block_sizes
+    }) for blksize in block_sizes
 ]
 
 suite = {
     'scripts': [script for script in scripts if 'Jacobi Iterative - Reduce' in script[0]],
-    'engines': engines[0] + subset
+    'engines': [engines[0]] + subset
 }
