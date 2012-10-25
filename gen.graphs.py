@@ -12,6 +12,8 @@ import sys
 import os
 import re
 
+
+
 def stats( samples ):
     """Returns: (avg, lowest, highest, deviation)"""
 
@@ -68,7 +70,7 @@ def render_abs_graph(mark, results, baseline, comp=None, output="/tmp", file_for
 
     clf()                       # Essential! Without clearing the plots will be messed up!
     figure(1)
-    bar(pos, val, align='center')
+    bar(pos, val, align='center', color="#1B9E77")
 
     ylabel('Time in seconds')
 
@@ -79,7 +81,11 @@ def render_abs_graph(mark, results, baseline, comp=None, output="/tmp", file_for
     xticks(pos, lbl, rotation=rotation)
     xlabel('Vector Engine')
     title(mark)
-    grid(True)
+
+    gca().yaxis.grid(True)
+    gca().xaxis.grid(False)
+    gca().set_axisbelow(True)
+
                                 # Output them
     fn = output +os.sep+ mark.lower() +'_runtime'
     dname = os.path.dirname(fn)
@@ -112,7 +118,7 @@ def render_rel_graph(mark, results, bl_eng, comp, output, file_formats=['pdf']):
 
     clf()                       # Essential! Without clearing the plots will be messed up!
     figure(1)
-    bar(pos, val, align='center')
+    bar(pos, val, align='center', color="#1B9E77")
 
     ylabel('Speedup in relation to %s' % bl_eng)
 
@@ -123,7 +129,11 @@ def render_rel_graph(mark, results, bl_eng, comp, output, file_formats=['pdf']):
     xticks(pos, lbl, rotation=rotation)
     xlabel('Vector Engine')
     title(mark)
-    grid(True)
+
+    gca().yaxis.grid(True)
+    gca().xaxis.grid(False)
+    gca().set_axisbelow(True)
+
                                 # Output them
     fn = output +os.sep+ mark.lower() +'_speedup'
     dname = os.path.dirname(fn)
@@ -140,7 +150,7 @@ def render_rel_graph(mark, results, bl_eng, comp, output, file_formats=['pdf']):
 
     show()
 
-def render_grp_graph(mark, graphs, baseline, output, file_formats=['pdf']):
+def render_grpmark(mark, data, baseline, comp, output, file_formats=['pdf']):
 
     try:
         os.makedirs(output)
@@ -148,8 +158,61 @@ def render_grp_graph(mark, graphs, baseline, output, file_formats=['pdf']):
         pass
 
     clf()
-    data = dict(graphs)
+    data = dict(data)
 
+    benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water', ]
+    engines     = ['NumPy', 'Simple', 'Score']
+
+    rotation = 'horizontal'
+    width    = 0.25
+
+    measure  = 'elapsed'
+
+    ind     = range(0, len(benchmarks))
+    ind0    = [i+width      for i in ind]
+    ind1    = [i+width*2    for i in ind]
+    ind2    = [i+width*3    for i in ind]
+    ind3    = [i+width*4    for i in ind]
+    indt    = [i+width*2.5  for i in ind]
+     
+    np = [v['elapsed'] for benchmark in benchmarks for e,v in data[benchmark] if e == 'numpy' ]
+    si = [v['elapsed'] for benchmark in benchmarks for e,v in data[benchmark] if e == 'simple']
+    sc = [v['elapsed'] for benchmark in benchmarks for e,v in data[benchmark] if e == 'score']
+
+    #ylabel('Speedup')
+    ylabel('Runtime')
+    #xlabel('Benchmark')
+    #title('Benchmark Suite')
+
+    gca().yaxis.grid(True)
+    gca().xaxis.grid(False)
+    gca().set_axisbelow(True)
+
+    rect0 = bar(ind0, np, width, color="#1B9E77", hatch="*")
+    rect1 = bar(ind1, sc, width, color="#D95F02", hatch="/")
+    rect2 = bar(ind2, si, width, color="#7570B3", hatch=".")
+    
+    legend( (rect0[0], rect1[0], rect2[0]), engines)
+    xticks(indt, [x if 'Jacobi' not in x else 'Jacobi' for x in benchmarks])
+
+    fn = output +os.sep+ mark.lower()       # Output them
+    dname = os.path.dirname(fn)
+    bname = re.sub('\W', '_', os.path.basename(fn))
+    fn = dname +os.sep+ bname
+
+    for ff in file_formats:
+        savefig("%s.%s" % ( fn, ff ))
+
+    show()
+
+def render_grp_graph(mark, data, baseline, comp, output, file_formats=['pdf']):
+
+    try:
+        os.makedirs(output)
+    except:
+        pass
+
+    clf()
     rotation = 'horizontal'     # Assume that there is not enough room vertically
 
     groups  = ('NumPy', 'Score', 'Simple')
@@ -161,17 +224,20 @@ def render_grp_graph(mark, graphs, baseline, output, file_formats=['pdf']):
     ind2    = [i+width*3    for i in ind]
     indt    = [i+width*2.5  for i in ind]
    
-    el = [t for e,t in data['Runtime']]
-    l1 = [t/10 for e,t in data['L1-miss']]
-    ll = [t/10 for e,t in data['LL-miss']]
+    el = [t['elapsed'] for e,t in data]
+    l1 = [t['l1_miss']/10 for e,t in data]
+    ll = [t['ll_miss']/10 for e,t in data]
 
-    xlabel('Measurement')
+    #xlabel('Measurement')
     title(mark)
-    grid(True)
 
-    rect0 = bar(ind0, el, width, color='r')
-    rect1 = bar(ind1, l1, width, color='g')
-    rect2 = bar(ind2, ll, width, color='b')
+    gca().yaxis.grid(True)
+    gca().xaxis.grid(False)
+    gca().set_axisbelow(True)
+
+    rect0 = bar(ind0, el, width, color="#1B9E77", hatch="*")
+    rect1 = bar(ind1, l1, width, color="#D95F02", hatch="/")
+    rect2 = bar(ind2, ll, width, color="#7570B3", hatch=".")
     
     legend( (rect0[0], rect1[0], rect2[0]), ('WC', 'L1-miss', 'LL-miss'))
     xticks(indt, groups)
@@ -186,7 +252,15 @@ def render_grp_graph(mark, graphs, baseline, output, file_formats=['pdf']):
 
     show()
 
-def gen( benchmark, output, graph, baseline, file_formats ):
+graphs = {
+    'multiple': render_grpmark,
+    'speedup':  render_rel_graph,
+    'runtime':  render_abs_graph,
+    'grouped':  render_grp_graph,
+    '3d':       render_rel_graph
+}
+
+def gen( benchmark, output, graph_name, graph, baseline, file_formats ):
 
     try:
         raw     = json.load(open(benchmark))
@@ -221,12 +295,17 @@ def gen( benchmark, output, graph, baseline, file_formats ):
             'll_miss': ll_miss
         }))
 
-    for mark in bench:
-        graph( mark, bench[mark], baseline, None, output, file_formats )
+    if graph_name == 'multiple':
+        graph( 'performance', bench, baseline, None, output, file_formats )
+    else:
+        for mark in bench:
+            graph( mark, bench[mark], baseline, None, output, file_formats )
     
     return (0, None)
 
-def main( results, output, multi, only_latest, graph, file_formats, baseline ):
+def main( results, output, multi, only_latest, graph_name, file_formats, baseline ):
+
+    graph = graphs[graph_name]
 
     if multi:
 
@@ -243,21 +322,15 @@ def main( results, output, multi, only_latest, graph, file_formats, baseline ):
                 r_output    = root.replace('results', 'graphs') +os.sep
                 if "latest" in fn:
                     r_output = r_output +os.sep+ 'latest'
-                res.append( gen( r_input, r_output, graph, baseline, file_formats ) )
+                res.append( gen( r_input, r_output, graph_name, graph, baseline, file_formats ) )
         
         return res
 
     else:
-        return [gen( results, output, graph, baseline, file_formats )]
+        return [gen( results, output, graph_name, graph, baseline, file_formats )]
 
 if __name__ == "__main__":
 
-    graphs = {
-        'speedup':  render_rel_graph,
-        'runtime':  render_abs_graph,
-        'grouped':  render_grp_graph,
-        '3d':       render_rel_graph
-    }
     formats = ['png', 'pdf', 'eps']
 
     parser = argparse.ArgumentParser(description='Generate graphs / diagrams from benchmarks.')
@@ -303,5 +376,5 @@ if __name__ == "__main__":
         default='NumPy'
     )
     args = parser.parse_args()
-    res = [msg for r, msg in main( args.results, args.output, args.m, args.l, graphs[args.g], [args.f], args.bl ) if msg]
+    res = [msg for r, msg in main( args.results, args.output, args.m, args.l, args.g, [args.f], args.bl ) if msg]
     print ''.join( res )
