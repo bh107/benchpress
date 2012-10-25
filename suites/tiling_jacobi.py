@@ -7,10 +7,10 @@ subset = [
     ('score_blksize%s' % (blksize),
     'score',
     {
-        "CPHVB_VE_SCORE_BLOCKSIZE": blksize,
+        "CPHVB_VE_SCORE_BLOCKSIZE": str(blksize),
         "CPHVB_VE_SCORE_BINMAX":    str(20),
-        "CPHVB_VE_SCORE_BASEMAX":   5,
-        "CPHVB_CORE_MCACHE_SIZE":   10
+        "CPHVB_VE_SCORE_BASEMAX":   str(5),
+        "CPHVB_CORE_MCACHE_SIZE":   str(10)
     }) for blksize in block_sizes
 ]
 
