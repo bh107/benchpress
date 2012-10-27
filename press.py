@@ -124,6 +124,7 @@ def execute_numpy( param_set ):
     if use_perf:
         perfs = open(pfd.name).read()
 
+    print affinity, elapsed
     return (elapsed, perfs, args_str)
 
 def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
@@ -146,67 +147,79 @@ def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, 
     perfs = []
 
     pool = Pool(processes=parallel)
-
+    
+    print "Running %s" % mark
     for i in xrange(1, runs+1):
 
         param_set = [[script, cphvb, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
 
-        #(elapsed, perfs, args_str) = execute_numpy(script, cphvb, envs, script_path, parallel, arg, use_perf)
         res = pool.map( execute_numpy, param_set, 1 )
 
         for elapsed, perf, args_str in res:
             times.append( elapsed )
             perfs.append( perf )
 
-            print "  %d/%d, " % (i, runs), elapsed
-
-    print "}"
-
     return (times, perfs, args_str)
 
-def run_ccode( suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path ):
+
+def execute_ccode( param_set ):
+
+    script, cphvb, envs, script_path, arg, use_perf, affinity = param_set
+
+    args        = []
+    args        += ['taskset', '-c', str(affinity), script] + arg.split(' ')
+    args_str    = ' '.join(args)
+
+    if use_perf:
+        pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
+        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
+    else:
+        cmd = args
+
+    p = Popen(                              # Run the command
+        cmd,
+        stdin=PIPE,
+        stdout=PIPE,
+        env=envs,
+        cwd=script_path
+    )
+    out, err = p.communicate()              # Grab the output
+    elapsed = 0.0
+    if err or not out:
+        print "ERR: Something went wrong %s" % err
+    else:
+        elapsed = float(out.split(' ')[5].rstrip())
+
+    perfs = None
+    if use_perf:
+        perfs = open(pfd.name).read()
+
+    print affinity, elapsed
+
+    return (elapsed, perfs, args_str)
+
+def run_ccode( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
 
     envs = None                                 # Populate environment variables
     if env:
         envs = os.environ.copy()
         envs.update(env)
                                                 # Setup process + arguments
-    args        = []
-    args        += ['taskset', '-c', '1', script ] + arg
-    args_str    = ' '.join(args)
-    print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
-
     times = []
     perfs = []
+
+    pool = Pool(processes=parallel)
+
+    print "Running %s" % mark
     for i in xrange(1, runs+1):
 
-        if use_perf:
-            pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-            cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
-        else:
-            cmd = args
+        param_set = [[script, False, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
 
-        p = Popen(                              # Run the command
-            cmd,
-            stdin=PIPE,
-            stdout=PIPE,
-            env=envs,
-            cwd=script_path
-        )
-        out, err = p.communicate()              # Grab the output
-        elapsed = 0.0
-        if err or not out:
-            print "ERR: Something went wrong %s" % err
-        else:
-            elapsed = float(out.split(' ')[-1] .rstrip())
+        res = pool.map( execute_ccode, param_set, 1 )
 
-        print "  %d/%d, " % (i, runs), elapsed
-        
-        times.append( elapsed )
-        if use_perf:
-            perfs.append( open(pfd.name).read() )
-
-    print "}"
+        for elapsed, perf, args_str in res:
+            times.append( elapsed )
+            perfs.append( perf )
 
     return (times, perfs, args_str)
 
@@ -247,15 +260,9 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                 if '.py' in script:
 
                     (times, perfs, args_str) = run_cphvbnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
-
-                    #print res
-
-                    #times = []
-                    #perfs = []
-
                         
                 else:
-                    (times, perfs, args_str) = run_ccode()
+                    (times, perfs, args_str) = run_ccode(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
                                                             # Accumulate results
                 results['runs'].append(( mark, alias, engine, env, args_str, times, perfs ))
                 results['meta']['ended'] = str(datetime.now())
