@@ -2,6 +2,8 @@
 from ConfigParser import SafeConfigParser
 from subprocess import Popen, PIPE, STDOUT
 from datetime import datetime
+
+from multiprocessing import Pool
 import tempfile
 import argparse
 import pkgutil
@@ -191,7 +193,7 @@ def run_ccode( suite, mark, script, arg, alias, engine, env, runs, use_perf, scr
 
     return (times, perfs, args_str)
 
-def main(config, src_root, output, suite, benchmark, runs, use_perf, affinity):
+def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
 
     script_path = src_root +os.sep+ 'benchmark' +os.sep+ 'Python' +os.sep
 
@@ -226,7 +228,19 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, affinity):
 
                 accum = []
                 if '.py' in script:
-                    (times, perfs, args_str) = run_cphvbnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity)
+
+                    pool = Pool(processes=parallel)
+                    res = [[]]*parallel
+                    for affinity in xrange(0, parallel):
+                        res[affinity] = pool.apply_async(run_cphvbnumpy, [config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity])
+
+                    times = []
+                    perfs = []
+                    for affinity in xrange(0, parallel):
+                        (t, p, args_str) = res[affinity].get()
+                        times.append(t)
+                        perfs.append(p)
+                        
                 else:
                     (times, perfs, args_str) = run_ccode()
                                                             # Accumulate results
@@ -272,9 +286,9 @@ if __name__ == "__main__":
         help="True to use perf for measuring, false otherwise"
     )
     parser.add_argument(
-        '--affinity',
+        '--parallel',
         default=1,
-        help="Assigns affinity for the benchmark."
+        help="Performs runs * parallel jobs on different processors."
     )
     args = parser.parse_args()
 
@@ -286,6 +300,6 @@ if __name__ == "__main__":
         bsuites[args.suite],
         int(args.runs),
         bool(args.useperf),
-        int(args.affinity)
+        int(args.parallel)
     )
 
