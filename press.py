@@ -221,6 +221,7 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
             
+    pool = Pool(processes=parallel)
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in benchmark['scripts']:
@@ -229,7 +230,6 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                 accum = []
                 if '.py' in script:
 
-                    pool = Pool(processes=parallel)
                     res = [[]]*parallel
                     for affinity in xrange(0, parallel):
                         res[affinity] = pool.apply_async(run_cphvbnumpy, [config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity])
