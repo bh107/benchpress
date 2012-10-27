@@ -145,14 +145,14 @@ def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, 
     times = []
     perfs = []
 
-    pool = Pool(processes=4)
+    pool = Pool(processes=parallel)
 
     for i in xrange(1, runs+1):
 
         param_set = [[script, cphvb, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
 
         #(elapsed, perfs, args_str) = execute_numpy(script, cphvb, envs, script_path, parallel, arg, use_perf)
-        res = pool.map( execute_numpy, param_set )
+        res = pool.map( execute_numpy, param_set, 1 )
 
         for elapsed, perf, args_str in res:
             times.append( elapsed )
