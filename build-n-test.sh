@@ -48,6 +48,10 @@ if [ -z "$RUNS" ]; then
     RUNS="5"
 fi
 
+if [ -z "$PARALLEL" ]; then
+    PARALLEL="1"
+fi
+
 #
 #   GRAB THE LATEST AND GREATEST
 #
@@ -105,7 +109,7 @@ cd $BENCH_SRC
 
 echo "** Running benchmarks"
 mkdir -p "$BENCH_SRC/results/$MACHINE/$REV"
-python press.py "$CPHVB_SRC" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" > "$BENCH_SRC/results/$MACHINE/$MACHINE.log"
+python press.py "$CPHVB_SRC" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" --parallel "$PARALLEL" > "$BENCH_SRC/results/$MACHINE/$MACHINE.log"
 cd "$BENCH_SRC/results/$MACHINE/$REV"
 BENCHFILE=`ls -t1 benchmark-* | head -n1`
 

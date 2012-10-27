@@ -93,6 +93,8 @@ def render_abs_graph(mark, results, baseline, comp=None, output="/tmp", file_for
 
     show()
 
+
+
 def render_rel_graph(mark, results, bl_eng, comp, output, file_formats=['pdf']):
 
     if comp:
@@ -268,6 +270,54 @@ def render_grp_graph(mark, data, baseline, comp, output, file_formats=['pdf']):
         savefig("%s.%s" % ( fn, ff ))
 
     show()
+
+def render_by_hand(mark, data, baseline, comp, output, file_formats=['pdf']):
+
+    try:
+        os.makedirs(output)
+    except:
+        pass
+
+    clf()
+    rotation = 'horizontal'     # Assume that there is not enough room vertically
+
+    groups  = ('NumPy', 'Score', 'Simple')
+    width   = 0.25
+
+    ind     = range(0, len(groups))
+    ind0    = [i+width      for i in ind]
+    ind1    = [i+width*2    for i in ind]
+    ind2    = [i+width*3    for i in ind]
+    indt    = [i+width*2.5  for i in ind]
+   
+    el = [t['elapsed'] for e,t in data]
+    l1 = [t['l1_miss']/10 for e,t in data]
+    ll = [t['ll_miss']/10 for e,t in data]
+
+    #xlabel('Measurement')
+    title(mark)
+
+    gca().yaxis.grid(True)
+    gca().xaxis.grid(False)
+    gca().set_axisbelow(True)
+
+    rect0 = bar(ind0, el, width, color="#1B9E77", hatch="*")
+    rect1 = bar(ind1, l1, width, color="#D95F02", hatch="/")
+    rect2 = bar(ind2, ll, width, color="#7570B3", hatch=".")
+    
+    legend( (rect0[0], rect1[0], rect2[0]), ('WC', 'L1-miss', 'LL-miss'))
+    xticks(indt, groups)
+
+    fn = output +os.sep+ mark.lower()       # Output them
+    dname = os.path.dirname(fn)
+    bname = re.sub('\W', '_', os.path.basename(fn))
+    fn = dname +os.sep+ bname
+
+    for ff in file_formats:
+        savefig("%s.%s" % ( fn, ff ))
+
+    show()
+
 
 graphs = {
     'multiple': render_grpmark,
