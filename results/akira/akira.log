@@ -1,201 +1,97 @@
-Running benchmark suite 'tiling_base'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_base-MP_Tr5.json.
+Running benchmark suite 'tiling_base'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_base-poyJkW.json.
 { Black Scholes - simple ( simple ),
   taskset -c 13 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  12.706551
-  2/5,  12.631381
-  3/5,  12.641602
-  4/5,  12.885664
-  5/5,  13.025922
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 14 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  14.00413
-  2/5,  13.838755
-  3/5,  13.905366
-  4/5,  13.628765
-  5/5,  13.566843
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 15 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  13.998375
-  2/5,  13.776318
-  3/5,  13.922851
-  4/5,  13.574023
-  5/5,  13.643467
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 5 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  14.659794
-  2/5,  14.495506
-  3/5,  14.266862
-  4/5,  14.397864
-  5/5,  13.841288
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 4 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  14.651811
-  2/5,  14.584581
-  3/5,  14.312293
-  4/5,  14.643069
-  5/5,  13.907557
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  15.524181
-  2/5,  14.730602
-  3/5,  14.087387
-  4/5,  14.165303
-  5/5,  14.341098
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 0 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  15.507488
-  2/5,  14.777079
-  3/5,  14.03826
-  4/5,  14.213238
-  5/5,  14.3729
+  1/1,  12.925092
 }
 { Black Scholes - simple ( simple ),
   taskset -c 2 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  15.881518
-  2/5,  14.910821
-  3/5,  14.427812
-  4/5,  14.414943
-  5/5,  14.273629
+  1/1,  13.903006
 }
 { Black Scholes - simple ( simple ),
-  taskset -c 3 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  15.872519
-  2/5,  14.892433
-  3/5,  14.484728
-  4/5,  14.470627
-  5/5,  14.163214
+  taskset -c 11 python bscholes.py --size=2000000*4 --cphvb=True
+  1/1,  14.080675
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 10 python bscholes.py --size=2000000*4 --cphvb=True
+  1/1,  14.299648
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 15 python bscholes.py --size=2000000*4 --cphvb=True
+  1/1,  14.855882
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 14 python bscholes.py --size=2000000*4 --cphvb=True
+  1/1,  14.87226
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 0 python bscholes.py --size=2000000*4 --cphvb=True
+  1/1,  15.975978
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/1,  15.966052
 }
 { Black Scholes - numpy ( None ),
   taskset -c 7 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  18.652964
-  2/5,  18.216686
-  3/5,  17.967572
-  4/5,  18.465345
-  5/5,  18.377913
+  1/1,  18.446318
 }
 { Black Scholes - numpy ( None ),
   taskset -c 6 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  19.101363
-  2/5,  18.471435
-  3/5,  18.171647
-  4/5,  18.154364
-  5/5,  18.432071
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  19.309428
-  2/5,  18.317986
-  3/5,  18.6006
-  4/5,  17.964418
-  5/5,  18.34767
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 0 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  19.52043
-  2/5,  18.311511
-  3/5,  18.712114
-  4/5,  18.313137
-  5/5,  17.969516
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 5 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.144621
-  2/5,  18.102101
-  3/5,  18.667096
-  4/5,  18.439929
-  5/5,  18.049756
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 4 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.2418
-  2/5,  18.19432
-  3/5,  18.699739
-  4/5,  18.573243
-  5/5,  18.334039
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 13 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.001242
-  2/5,  18.854192
-  3/5,  18.227024
-  4/5,  18.656123
-  5/5,  19.856463
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 12 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  19.974653
-  2/5,  18.744271
-  3/5,  18.241716
-  4/5,  18.73919
-  5/5,  19.897539
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 11 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  19.320742
-  2/5,  18.758095
-  3/5,  18.919964
-  4/5,  19.09062
-  5/5,  19.619477
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 10 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  19.312151
-  2/5,  18.78245
-  3/5,  18.935243
-  4/5,  19.094674
-  5/5,  19.603826
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 3 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.402988
-  2/5,  19.285733
-  3/5,  19.469416
-  4/5,  19.119653
-  5/5,  18.483884
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 2 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.402807
-  2/5,  19.292116
-  3/5,  19.509531
-  4/5,  19.102838
-  5/5,  18.471266
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 9 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.337935
-  2/5,  19.152093
-  3/5,  18.875728
-  4/5,  19.274972
-  5/5,  19.285905
-}
-{ Black Scholes - numpy ( None ),
-  taskset -c 8 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.342993
-  2/5,  19.161196
-  3/5,  18.882741
-  4/5,  19.245702
-  5/5,  19.420809
+  1/1,  18.736661
 }
 { Black Scholes - numpy ( None ),
   taskset -c 15 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.042359
-  2/5,  19.171721
-  3/5,  18.943483
-  4/5,  19.44684
-  5/5,  19.947011
+  1/1,  19.13267
 }
 { Black Scholes - numpy ( None ),
   taskset -c 14 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  20.120378
-  2/5,  19.119373
-  3/5,  18.912438
-  4/5,  19.452966
-  5/5,  19.94587
+  1/1,  19.333046
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 3 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  19.573136
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 2 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  19.701009
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 5 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  19.8921
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 4 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.106708
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.25038
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 0 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.269555
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 11 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.31713
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 10 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.474374
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 9 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.687146
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 8 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.689839
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 13 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.704092
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 12 python bscholes.py --size=2000000*4 --cphvb=False
+  1/1,  20.706863
 }
