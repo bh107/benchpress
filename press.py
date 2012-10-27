@@ -238,8 +238,8 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                     perfs = []
                     for affinity in xrange(0, parallel):
                         (t, p, args_str) = res[affinity].get()
-                        times.append(t)
-                        perfs.append(p)
+                        times += t
+                        perfs += p
                         
                 else:
                     (times, perfs, args_str) = run_ccode()
