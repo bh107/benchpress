@@ -31,8 +31,13 @@ OLDLD=$LD_LIBRARY_PATH
 PYTHONVER=`python -c 'import sys; (major,minor, _,_,_) = sys.version_info; print "%d.%d" % (major, minor)'`
 START=`date`
 
-SKIP_PURGE="0" 
-SKIP_UPDATE="0"
+if [ -z "$SKIP_PURGE" ]; then
+    SKIP_PURGE="0" 
+fi
+
+if [ -z "$SKIP_PURGE" ]; then
+    SKIP_UPDATE="0"
+fi
 
 source $BENCH_SRC/envs/$MACHINE.sh
 
