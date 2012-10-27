@@ -1,1033 +1,201 @@
-Running benchmark suite 'tiling_swater'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_swater-Os7o6I.json.
-{ Shallow Water - numpy ( None ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=False
-  1/5,  6.003035
-  2/5,  5.978095
-  3/5,  6.027735
-  4/5,  6.001834
-  5/5,  6.01502
-}
-{ Shallow Water - simple ( simple ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.858886
-  2/5,  2.765848
-  3/5,  2.77503
-  4/5,  2.782363
-  5/5,  2.83807
-}
-{ Shallow Water - score ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.032232
-  2/5,  3.139346
-  3/5,  3.133165
-  4/5,  3.080212
-  5/5,  3.138465
-}
-{ Shallow Water - score_blksize112_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.187844
-  2/5,  3.300973
-  3/5,  3.24115
-  4/5,  3.259468
-  5/5,  3.237589
-}
-{ Shallow Water - score_blksize224_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.253115
-  2/5,  3.199256
-  3/5,  3.273024
-  4/5,  3.198138
-  5/5,  3.255866
-}
-{ Shallow Water - score_blksize448_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.180025
-  2/5,  3.205212
-  3/5,  3.183109
-  4/5,  3.259599
-  5/5,  3.174222
-}
-{ Shallow Water - score_blksize896_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.223312
-  2/5,  3.218545
-  3/5,  3.122081
-  4/5,  3.245225
-  5/5,  3.160649
-}
-{ Shallow Water - score_blksize1792_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.190664
-  2/5,  3.169872
-  3/5,  3.150403
-  4/5,  3.174753
-  5/5,  3.161779
-}
-{ Shallow Water - score_blksize3584_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.151319
-  2/5,  3.207302
-  3/5,  3.12766
-  4/5,  3.209847
-  5/5,  3.140572
-}
-{ Shallow Water - score_blksize7168_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.211415
-  2/5,  3.082026
-  3/5,  3.216445
-  4/5,  3.090901
-  5/5,  3.232175
-}
-{ Shallow Water - score_blksize14336_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.099538
-  2/5,  3.230807
-  3/5,  3.172798
-  4/5,  3.189596
-  5/5,  3.139283
-}
-{ Shallow Water - score_blksize28672_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.222879
-  2/5,  3.137393
-  3/5,  3.252255
-  4/5,  3.093682
-  5/5,  3.232251
-}
-{ Shallow Water - score_blksize57344_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.146841
-  2/5,  3.191413
-  3/5,  3.204671
-  4/5,  3.177031
-  5/5,  3.137874
-}
-{ Shallow Water - score_blksize114688_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.23178
-  2/5,  3.155834
-  3/5,  3.198648
-  4/5,  3.189037
-  5/5,  3.22206
-}
-{ Shallow Water - score_blksize229376_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.208224
-  2/5,  3.274744
-  3/5,  3.150931
-  4/5,  3.267035
-  5/5,  3.168183
-}
-{ Shallow Water - score_blksize458752_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.274461
-  2/5,  3.210162
-  3/5,  3.294464
-  4/5,  3.1654
-  5/5,  3.24411
-}
-{ Shallow Water - score_blksize917504_basemax1 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.249798
-  2/5,  3.175451
-  3/5,  3.279699
-  4/5,  3.169608
-  5/5,  3.298759
-}
-{ Shallow Water - score_blksize112_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.237273
-  2/5,  3.290079
-  3/5,  3.199771
-  4/5,  3.285446
-  5/5,  3.187632
-}
-{ Shallow Water - score_blksize224_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.242243
-  2/5,  3.225719
-  3/5,  3.19782
-  4/5,  3.224747
-  5/5,  3.194415
-}
-{ Shallow Water - score_blksize448_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.160462
-  2/5,  3.175694
-  3/5,  3.090817
-  4/5,  3.211593
-  5/5,  3.11106
-}
-{ Shallow Water - score_blksize896_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.168203
-  2/5,  3.079794
-  3/5,  3.159022
-  4/5,  3.122819
-  5/5,  3.125879
-}
-{ Shallow Water - score_blksize1792_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.119128
-  2/5,  3.036873
-  3/5,  3.173819
-  4/5,  3.057805
-  5/5,  3.103379
-}
-{ Shallow Water - score_blksize3584_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.119967
-  2/5,  3.023288
-  3/5,  3.156825
-  4/5,  2.99911
-  5/5,  3.127863
-}
-{ Shallow Water - score_blksize7168_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.079207
-  2/5,  3.112146
-  3/5,  3.138628
-  4/5,  3.047452
-  5/5,  3.12273
-}
-{ Shallow Water - score_blksize14336_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.105294
-  2/5,  3.045377
-  3/5,  3.124334
-  4/5,  3.018363
-  5/5,  3.064625
-}
-{ Shallow Water - score_blksize28672_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.152519
-  2/5,  3.022975
-  3/5,  3.1133
-  4/5,  3.135145
-  5/5,  3.0254
-}
-{ Shallow Water - score_blksize57344_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.143634
-  2/5,  3.06731
-  3/5,  3.078691
-  4/5,  3.139844
-  5/5,  2.998233
-}
-{ Shallow Water - score_blksize114688_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.147627
-  2/5,  3.137904
-  3/5,  3.027518
-  4/5,  3.160236
-  5/5,  3.047922
-}
-{ Shallow Water - score_blksize229376_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.158982
-  2/5,  3.072595
-  3/5,  3.130816
-  4/5,  3.109727
-  5/5,  3.090271
-}
-{ Shallow Water - score_blksize458752_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.148374
-  2/5,  3.098943
-  3/5,  3.189374
-  4/5,  3.078427
-  5/5,  3.142175
-}
-{ Shallow Water - score_blksize917504_basemax2 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.091963
-  2/5,  3.173856
-  3/5,  3.061653
-  4/5,  3.1876
-  5/5,  3.135916
-}
-{ Shallow Water - score_blksize112_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.450151
-  2/5,  3.451369
-  3/5,  3.42961
-  4/5,  3.474163
-  5/5,  3.446155
-}
-{ Shallow Water - score_blksize224_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.340143
-  2/5,  3.376876
-  3/5,  3.291995
-  4/5,  3.367708
-  5/5,  3.338483
-}
-{ Shallow Water - score_blksize448_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.286184
-  2/5,  3.31922
-  3/5,  3.252977
-  4/5,  3.335767
-  5/5,  3.237782
-}
-{ Shallow Water - score_blksize896_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.253502
-  2/5,  3.269005
-  3/5,  3.164929
-  4/5,  3.291663
-  5/5,  3.198248
-}
-{ Shallow Water - score_blksize1792_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.172333
-  2/5,  3.239935
-  3/5,  3.175155
-  4/5,  3.230855
-  5/5,  3.127262
-}
-{ Shallow Water - score_blksize3584_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.184545
-  2/5,  3.06868
-  3/5,  3.201067
-  4/5,  3.12905
-  5/5,  3.171278
-}
-{ Shallow Water - score_blksize7168_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.161174
-  2/5,  3.163967
-  3/5,  3.210373
-  4/5,  3.163165
-  5/5,  3.149103
-}
-{ Shallow Water - score_blksize14336_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.205528
-  2/5,  3.163178
-  3/5,  3.152093
-  4/5,  3.190462
-  5/5,  3.059686
-}
-{ Shallow Water - score_blksize28672_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.209118
-  2/5,  3.111189
-  3/5,  3.165168
-  4/5,  3.20747
-  5/5,  3.155774
-}
-{ Shallow Water - score_blksize57344_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.220255
-  2/5,  3.097914
-  3/5,  3.222452
-  4/5,  3.186224
-  5/5,  3.171222
-}
-{ Shallow Water - score_blksize114688_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.280622
-  2/5,  3.165896
-  3/5,  3.249141
-  4/5,  3.281307
-  5/5,  3.183377
-}
-{ Shallow Water - score_blksize229376_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.327217
-  2/5,  3.227573
-  3/5,  3.316571
-  4/5,  3.215418
-  5/5,  3.316258
-}
-{ Shallow Water - score_blksize458752_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.306559
-  2/5,  3.315993
-  3/5,  3.375105
-  4/5,  3.237284
-  5/5,  3.374877
-}
-{ Shallow Water - score_blksize917504_basemax3 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.290258
-  2/5,  3.290592
-  3/5,  3.348598
-  4/5,  3.237159
-  5/5,  3.371897
-}
-{ Shallow Water - score_blksize112_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.325755
-  2/5,  3.334912
-  3/5,  3.389431
-  4/5,  3.362304
-  5/5,  3.290121
-}
-{ Shallow Water - score_blksize224_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.285661
-  2/5,  3.217315
-  3/5,  3.270668
-  4/5,  3.234375
-  5/5,  3.250867
-}
-{ Shallow Water - score_blksize448_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.193148
-  2/5,  3.155039
-  3/5,  3.229967
-  4/5,  3.148155
-  5/5,  3.222993
-}
-{ Shallow Water - score_blksize896_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.118466
-  2/5,  3.159615
-  3/5,  3.101544
-  4/5,  3.130311
-  5/5,  3.187893
-}
-{ Shallow Water - score_blksize1792_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.023619
-  2/5,  3.138382
-  3/5,  3.059352
-  4/5,  3.093391
-  5/5,  3.115795
-}
-{ Shallow Water - score_blksize3584_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.95725
-  2/5,  3.090084
-  3/5,  3.006544
-  4/5,  3.076733
-  5/5,  2.99159
-}
-{ Shallow Water - score_blksize7168_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.087943
-  2/5,  2.999171
-  3/5,  3.024034
-  4/5,  3.086849
-  5/5,  2.986549
-}
-{ Shallow Water - score_blksize14336_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.041385
-  2/5,  3.072097
-  3/5,  2.968832
-  4/5,  3.088279
-  5/5,  3.055835
-}
-{ Shallow Water - score_blksize28672_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.018647
-  2/5,  3.119903
-  3/5,  3.000415
-  4/5,  3.089509
-  5/5,  3.079152
-}
-{ Shallow Water - score_blksize57344_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.020726
-  2/5,  3.137462
-  3/5,  3.084053
-  4/5,  3.116105
-  5/5,  3.147844
-}
-{ Shallow Water - score_blksize114688_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.160536
-  2/5,  3.161053
-  3/5,  3.228333
-  4/5,  3.108895
-  5/5,  3.219713
-}
-{ Shallow Water - score_blksize229376_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.201199
-  2/5,  3.20389
-  3/5,  3.265256
-  4/5,  3.179659
-  5/5,  3.252225
-}
-{ Shallow Water - score_blksize458752_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.339221
-  2/5,  3.212135
-  3/5,  3.301781
-  4/5,  3.323445
-  5/5,  3.190301
-}
-{ Shallow Water - score_blksize917504_basemax4 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.337792
-  2/5,  3.260717
-  3/5,  3.25008
-  4/5,  3.333372
-  5/5,  3.272568
-}
-{ Shallow Water - score_blksize112_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.359937
-  2/5,  3.3899
-  3/5,  3.366416
-  4/5,  3.398917
-  5/5,  3.360282
-}
-{ Shallow Water - score_blksize224_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.28643
-  2/5,  3.255313
-  3/5,  3.292257
-  4/5,  3.259735
-  5/5,  3.242425
-}
-{ Shallow Water - score_blksize448_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.220445
-  2/5,  3.233759
-  3/5,  3.183113
-  4/5,  3.231964
-  5/5,  3.210872
-}
-{ Shallow Water - score_blksize896_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.178991
-  2/5,  3.14065
-  3/5,  3.138314
-  4/5,  3.187738
-  5/5,  3.109641
-}
-{ Shallow Water - score_blksize1792_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.136616
-  2/5,  3.036544
-  3/5,  3.090315
-  4/5,  3.065787
-  5/5,  3.080856
-}
-{ Shallow Water - score_blksize3584_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.104155
-  2/5,  2.964971
-  3/5,  3.105241
-  4/5,  3.019207
-  5/5,  3.080844
-}
-{ Shallow Water - score_blksize7168_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.080639
-  2/5,  2.970843
-  3/5,  3.056067
-  4/5,  3.061323
-  5/5,  2.994788
-}
-{ Shallow Water - score_blksize14336_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.064702
-  2/5,  2.945632
-  3/5,  3.065714
-  4/5,  3.071757
-  5/5,  2.945408
-}
-{ Shallow Water - score_blksize28672_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.115807
-  2/5,  3.054197
-  3/5,  3.055296
-  4/5,  3.091806
-  5/5,  3.029998
-}
-{ Shallow Water - score_blksize57344_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.209696
-  2/5,  3.122369
-  3/5,  3.154044
-  4/5,  3.180957
-  5/5,  3.089664
-}
-{ Shallow Water - score_blksize114688_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.27986
-  2/5,  3.226477
-  3/5,  3.188965
-  4/5,  3.270848
-  5/5,  3.168168
-}
-{ Shallow Water - score_blksize229376_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.3131
-  2/5,  3.250435
-  3/5,  3.206277
-  4/5,  3.328449
-  5/5,  3.221276
-}
-{ Shallow Water - score_blksize458752_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.30775
-  2/5,  3.379074
-  3/5,  3.297225
-  4/5,  3.285344
-  5/5,  3.357205
-}
-{ Shallow Water - score_blksize917504_basemax5 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.229572
-  2/5,  3.319155
-  3/5,  3.366147
-  4/5,  3.260091
-  5/5,  3.342318
-}
-{ Shallow Water - score_blksize112_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.400712
-  2/5,  3.359616
-  3/5,  3.409195
-  4/5,  3.357007
-  5/5,  3.396881
-}
-{ Shallow Water - score_blksize224_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.29373
-  2/5,  3.228037
-  3/5,  3.296232
-  4/5,  3.246415
-  5/5,  3.260736
-}
-{ Shallow Water - score_blksize448_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.206321
-  2/5,  3.233009
-  3/5,  3.197524
-  4/5,  3.211776
-  5/5,  3.215646
-}
-{ Shallow Water - score_blksize896_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.1466
-  2/5,  3.159957
-  3/5,  3.146241
-  4/5,  3.174091
-  5/5,  3.088562
-}
-{ Shallow Water - score_blksize1792_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.119085
-  2/5,  3.051145
-  3/5,  3.117932
-  4/5,  3.046075
-  5/5,  3.093838
-}
-{ Shallow Water - score_blksize3584_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.035576
-  2/5,  3.040417
-  3/5,  3.062264
-  4/5,  3.042886
-  5/5,  3.07701
-}
-{ Shallow Water - score_blksize7168_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.949305
-  2/5,  3.0657
-  3/5,  3.012146
-  4/5,  3.019804
-  5/5,  3.050986
-}
-{ Shallow Water - score_blksize14336_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.984873
-  2/5,  3.049208
-  3/5,  2.937987
-  4/5,  3.064832
-  5/5,  2.98774
-}
-{ Shallow Water - score_blksize28672_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.008115
-  2/5,  3.056139
-  3/5,  3.031518
-  4/5,  3.090155
-  5/5,  3.018235
-}
-{ Shallow Water - score_blksize57344_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.201013
-  2/5,  3.096976
-  3/5,  3.110851
-  4/5,  3.169295
-  5/5,  3.076735
-}
-{ Shallow Water - score_blksize114688_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.259835
-  2/5,  3.18522
-  3/5,  3.216105
-  4/5,  3.205621
-  5/5,  3.189014
-}
-{ Shallow Water - score_blksize229376_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.330306
-  2/5,  3.27785
-  3/5,  3.283177
-  4/5,  3.320172
-  5/5,  3.241193
-}
-{ Shallow Water - score_blksize458752_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.294202
-  2/5,  3.392662
-  3/5,  3.311173
-  4/5,  3.287409
-  5/5,  3.480843
-}
-{ Shallow Water - score_blksize917504_basemax6 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.332355
-  2/5,  3.347669
-  3/5,  3.389032
-  4/5,  3.353417
-  5/5,  3.376454
-}
-{ Shallow Water - score_blksize112_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.445008
-  2/5,  3.431104
-  3/5,  3.409931
-  4/5,  3.449154
-  5/5,  3.427583
-}
-{ Shallow Water - score_blksize224_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.228011
-  2/5,  3.303703
-  3/5,  3.301421
-  4/5,  3.253735
-  5/5,  3.300822
-}
-{ Shallow Water - score_blksize448_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.230793
-  2/5,  3.148166
-  3/5,  3.241031
-  4/5,  3.19156
-  5/5,  3.221167
-}
-{ Shallow Water - score_blksize896_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.149385
-  2/5,  3.145506
-  3/5,  3.179871
-  4/5,  3.11286
-  5/5,  3.1955
-}
-{ Shallow Water - score_blksize1792_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.059653
-  2/5,  3.040178
-  3/5,  3.114486
-  4/5,  3.01869
-  5/5,  3.120648
-}
-{ Shallow Water - score_blksize3584_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.039569
-  2/5,  2.996149
-  3/5,  3.076374
-  4/5,  2.932686
-  5/5,  3.07598
-}
-{ Shallow Water - score_blksize7168_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.971985
-  2/5,  3.075391
-  3/5,  3.062361
-  4/5,  3.002423
-  5/5,  3.087959
-}
-{ Shallow Water - score_blksize14336_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.947562
-  2/5,  3.062394
-  3/5,  2.991043
-  4/5,  3.048887
-  5/5,  3.056251
-}
-{ Shallow Water - score_blksize28672_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.091166
-  2/5,  3.100838
-  3/5,  3.041034
-  4/5,  3.126938
-  5/5,  3.082269
-}
-{ Shallow Water - score_blksize57344_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.130208
-  2/5,  3.205557
-  3/5,  3.190807
-  4/5,  3.100017
-  5/5,  3.199668
-}
-{ Shallow Water - score_blksize114688_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.259315
-  2/5,  3.218888
-  3/5,  3.288281
-  4/5,  3.268775
-  5/5,  3.197877
-}
-{ Shallow Water - score_blksize229376_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.357823
-  2/5,  3.260174
-  3/5,  3.341509
-  4/5,  3.373193
-  5/5,  3.320134
-}
-{ Shallow Water - score_blksize458752_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.347239
-  2/5,  3.423465
-  3/5,  3.30291
-  4/5,  3.418281
-  5/5,  3.40313
-}
-{ Shallow Water - score_blksize917504_basemax7 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.325859
-  2/5,  3.40441
-  3/5,  3.289939
-  4/5,  3.381958
-  5/5,  3.428439
-}
-{ Shallow Water - score_blksize112_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.270863
-  2/5,  3.285395
-  3/5,  3.311293
-  4/5,  3.305342
-  5/5,  3.259243
-}
-{ Shallow Water - score_blksize224_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.157577
-  2/5,  3.142744
-  3/5,  3.107218
-  4/5,  3.167837
-  5/5,  3.151692
-}
-{ Shallow Water - score_blksize448_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.992797
-  2/5,  3.081871
-  3/5,  3.016754
-  4/5,  3.072669
-  5/5,  3.074028
-}
-{ Shallow Water - score_blksize896_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.962596
-  2/5,  3.014436
-  3/5,  2.956484
-  4/5,  3.014635
-  5/5,  2.920322
-}
-{ Shallow Water - score_blksize1792_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.966713
-  2/5,  2.872104
-  3/5,  2.945729
-  4/5,  2.894011
-  5/5,  2.932692
-}
-{ Shallow Water - score_blksize3584_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.894837
-  2/5,  2.788887
-  3/5,  2.905815
-  4/5,  2.829071
-  5/5,  2.850703
-}
-{ Shallow Water - score_blksize7168_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.891458
-  2/5,  2.80227
-  3/5,  2.880963
-  4/5,  2.835716
-  5/5,  2.852541
-}
-{ Shallow Water - score_blksize14336_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.895929
-  2/5,  2.822425
-  3/5,  2.900604
-  4/5,  2.83083
-  5/5,  2.903583
-}
-{ Shallow Water - score_blksize28672_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.92851
-  2/5,  2.895464
-  3/5,  2.953484
-  4/5,  2.860479
-  5/5,  2.91456
-}
-{ Shallow Water - score_blksize57344_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.094149
-  2/5,  2.99291
-  3/5,  3.060113
-  4/5,  3.102594
-  5/5,  3.030752
-}
-{ Shallow Water - score_blksize114688_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.184154
-  2/5,  3.240412
-  3/5,  3.218946
-  4/5,  3.165474
-  5/5,  3.218267
-}
-{ Shallow Water - score_blksize229376_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.34214
-  2/5,  3.256317
-  3/5,  3.336295
-  4/5,  3.333993
-  5/5,  3.275503
-}
-{ Shallow Water - score_blksize458752_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.399207
-  2/5,  3.423948
-  3/5,  3.369742
-  4/5,  3.319419
-  5/5,  3.419337
-}
-{ Shallow Water - score_blksize917504_basemax8 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.416797
-  2/5,  3.323571
-  3/5,  3.420535
-  4/5,  3.443723
-  5/5,  3.365265
-}
-{ Shallow Water - score_blksize112_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.213475
-  2/5,  3.24664
-  3/5,  3.242842
-  4/5,  3.194622
-  5/5,  3.239988
-}
-{ Shallow Water - score_blksize224_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.098829
-  2/5,  3.056178
-  3/5,  3.109459
-  4/5,  3.075967
-  5/5,  3.063331
-}
-{ Shallow Water - score_blksize448_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.976681
-  2/5,  3.039781
-  3/5,  2.945249
-  4/5,  3.028884
-  5/5,  3.013664
-}
-{ Shallow Water - score_blksize896_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.903971
-  2/5,  2.988139
-  3/5,  2.868238
-  4/5,  2.971918
-  5/5,  2.949569
-}
-{ Shallow Water - score_blksize1792_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.855116
-  2/5,  2.934985
-  3/5,  2.873946
-  4/5,  2.876063
-  5/5,  2.909361
-}
-{ Shallow Water - score_blksize3584_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.741691
-  2/5,  2.865242
-  3/5,  2.797536
-  4/5,  2.818937
-  5/5,  2.879274
-}
-{ Shallow Water - score_blksize7168_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.762029
-  2/5,  2.87118
-  3/5,  2.840438
-  4/5,  2.79262
-  5/5,  2.874995
-}
-{ Shallow Water - score_blksize14336_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.778815
-  2/5,  2.903684
-  3/5,  2.879863
-  4/5,  2.750255
-  5/5,  2.878509
-}
-{ Shallow Water - score_blksize28672_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.878348
-  2/5,  2.938431
-  3/5,  2.949341
-  4/5,  2.880265
-  5/5,  2.942191
-}
-{ Shallow Water - score_blksize57344_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.031426
-  2/5,  3.046716
-  3/5,  3.081453
-  4/5,  3.019911
-  5/5,  3.050625
-}
-{ Shallow Water - score_blksize114688_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.217166
-  2/5,  3.150219
-  3/5,  3.235695
-  4/5,  3.199847
-  5/5,  3.173342
-}
-{ Shallow Water - score_blksize229376_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.301328
-  2/5,  3.286102
-  3/5,  3.322161
-  4/5,  3.300959
-  5/5,  3.262055
-}
-{ Shallow Water - score_blksize458752_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.402786
-  2/5,  3.330956
-  3/5,  3.350729
-  4/5,  3.394987
-  5/5,  3.299562
-}
-{ Shallow Water - score_blksize917504_basemax9 ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  3.399045
-  2/5,  3.427909
-  3/5,  3.32671
-  4/5,  3.380602
-  5/5,  3.429654
+Running benchmark suite 'tiling_base'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_base-MP_Tr5.json.
+{ Black Scholes - simple ( simple ),
+  taskset -c 13 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  12.706551
+  2/5,  12.631381
+  3/5,  12.641602
+  4/5,  12.885664
+  5/5,  13.025922
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 14 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  14.00413
+  2/5,  13.838755
+  3/5,  13.905366
+  4/5,  13.628765
+  5/5,  13.566843
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 15 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  13.998375
+  2/5,  13.776318
+  3/5,  13.922851
+  4/5,  13.574023
+  5/5,  13.643467
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 5 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  14.659794
+  2/5,  14.495506
+  3/5,  14.266862
+  4/5,  14.397864
+  5/5,  13.841288
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 4 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  14.651811
+  2/5,  14.584581
+  3/5,  14.312293
+  4/5,  14.643069
+  5/5,  13.907557
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  15.524181
+  2/5,  14.730602
+  3/5,  14.087387
+  4/5,  14.165303
+  5/5,  14.341098
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 0 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  15.507488
+  2/5,  14.777079
+  3/5,  14.03826
+  4/5,  14.213238
+  5/5,  14.3729
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 2 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  15.881518
+  2/5,  14.910821
+  3/5,  14.427812
+  4/5,  14.414943
+  5/5,  14.273629
+}
+{ Black Scholes - simple ( simple ),
+  taskset -c 3 python bscholes.py --size=2000000*4 --cphvb=True
+  1/5,  15.872519
+  2/5,  14.892433
+  3/5,  14.484728
+  4/5,  14.470627
+  5/5,  14.163214
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 7 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  18.652964
+  2/5,  18.216686
+  3/5,  17.967572
+  4/5,  18.465345
+  5/5,  18.377913
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 6 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  19.101363
+  2/5,  18.471435
+  3/5,  18.171647
+  4/5,  18.154364
+  5/5,  18.432071
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  19.309428
+  2/5,  18.317986
+  3/5,  18.6006
+  4/5,  17.964418
+  5/5,  18.34767
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 0 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  19.52043
+  2/5,  18.311511
+  3/5,  18.712114
+  4/5,  18.313137
+  5/5,  17.969516
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 5 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.144621
+  2/5,  18.102101
+  3/5,  18.667096
+  4/5,  18.439929
+  5/5,  18.049756
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 4 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.2418
+  2/5,  18.19432
+  3/5,  18.699739
+  4/5,  18.573243
+  5/5,  18.334039
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 13 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.001242
+  2/5,  18.854192
+  3/5,  18.227024
+  4/5,  18.656123
+  5/5,  19.856463
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 12 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  19.974653
+  2/5,  18.744271
+  3/5,  18.241716
+  4/5,  18.73919
+  5/5,  19.897539
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 11 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  19.320742
+  2/5,  18.758095
+  3/5,  18.919964
+  4/5,  19.09062
+  5/5,  19.619477
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 10 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  19.312151
+  2/5,  18.78245
+  3/5,  18.935243
+  4/5,  19.094674
+  5/5,  19.603826
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 3 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.402988
+  2/5,  19.285733
+  3/5,  19.469416
+  4/5,  19.119653
+  5/5,  18.483884
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 2 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.402807
+  2/5,  19.292116
+  3/5,  19.509531
+  4/5,  19.102838
+  5/5,  18.471266
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 9 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.337935
+  2/5,  19.152093
+  3/5,  18.875728
+  4/5,  19.274972
+  5/5,  19.285905
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 8 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.342993
+  2/5,  19.161196
+  3/5,  18.882741
+  4/5,  19.245702
+  5/5,  19.420809
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 15 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.042359
+  2/5,  19.171721
+  3/5,  18.943483
+  4/5,  19.44684
+  5/5,  19.947011
+}
+{ Black Scholes - numpy ( None ),
+  taskset -c 14 python bscholes.py --size=2000000*4 --cphvb=False
+  1/5,  20.120378
+  2/5,  19.119373
+  3/5,  18.912438
+  4/5,  19.452966
+  5/5,  19.94587
 }
