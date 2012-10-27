@@ -1,35 +1,25 @@
-Running benchmark suite 'tiling_comp'; results are written to: /home/safl/buildbot/benchpress/results/akira/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_comp-mgZ0Og.json.
+Running benchmark suite 'tiling_comp'; results are written to: /home/safl/buildbot/benchpress/results/akira/9da6f23c85e290410e99d300ee483ea3f5443d4d/benchmark-tiling_comp-_Xim3b.json.
 Running BlackScholes-c
 Running Black Scholes
 Running Jacobi-c
-0 6.990704
-0 6.998486
-0 6.999318
-0 7.02058
-0 6.978891
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 11.920343
-0 11.909193
-0 11.902691
-0 11.922255
-0 11.873104
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
+0 6.992726
+0 7.012904
+0 6.974476
+0 6.993329
+0 7.005689
+0 0.816714
+0 0.767565
+0 0.802732
+0 0.813121
+0 0.755883
+0 11.909356
+0 11.907212
+0 11.893786
+0 11.914787
+0 11.88674
+0 9.431205
+0 9.418787
+0 10.577351
+0 9.651442
+0 9.479686
 Running Jacobi Iterative - Reduce
