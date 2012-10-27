@@ -92,7 +92,41 @@ def perf_counters():
 
     return ','.join(events)
 
-def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity=1 ):
+def execute_numpy( param_set ):
+
+    script, cphvb, envs, script_path, parallel, arg, use_perf, affinity = param_set
+
+    args        = []
+    args        += ['taskset', '-c', str(affinity), 'python', script, arg, '--cphvb=%s' % cphvb ]
+    args_str    = ' '.join(args)
+
+    if use_perf:
+        pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
+        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
+    else:
+        cmd = args
+
+    p = Popen(                              # Run the command
+        cmd,
+        stdin=PIPE,
+        stdout=PIPE,
+        env=envs,
+        cwd=script_path
+    )
+    out, err = p.communicate()              # Grab the output
+    elapsed = 0.0
+    if err or not out:
+        print "ERR: Something went wrong %s" % err
+    else:
+        elapsed = float(out.split(' ')[-1] .rstrip())
+
+    perfs = None
+    if use_perf:
+        perfs = open(pfd.name).read()
+
+    return (elapsed, perfs, args_str)
+
+def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel=1 ):
 
     confparser = SafeConfigParser()     # Parser to modify the cphvb configuration file.
     confparser.read(config)             # Read current configuration
@@ -108,40 +142,23 @@ def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, 
         envs = os.environ.copy()
         envs.update(env)
                                                 # Setup process + arguments
-    args        = []
-    args        += ['taskset', '-c', str(affinity), 'python', script, arg, '--cphvb=%s' % cphvb ]
-    args_str    = ' '.join(args)
-    print "{ %s - %s ( %s ),\n  %s" % ( mark, alias, engine, args_str )
-
     times = []
     perfs = []
+
+    pool = Pool(processes=4)
+
     for i in xrange(1, runs+1):
 
-        if use_perf:
-            pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-            cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
-        else:
-            cmd = args
+        param_set = [[script, cphvb, envs, script_path, parallel, arg, use_perf, j] for j in xrange(0, parallel)]
 
-        p = Popen(                              # Run the command
-            cmd,
-            stdin=PIPE,
-            stdout=PIPE,
-            env=envs,
-            cwd=script_path
-        )
-        out, err = p.communicate()              # Grab the output
-        elapsed = 0.0
-        if err or not out:
-            print "ERR: Something went wrong %s" % err
-        else:
-            elapsed = float(out.split(' ')[-1] .rstrip())
+        #(elapsed, perfs, args_str) = execute_numpy(script, cphvb, envs, script_path, parallel, arg, use_perf)
+        res = pool.map( execute_numpy, param_set )
 
-        print "  %d/%d, " % (i, runs), elapsed
-        
-        times.append( elapsed )
-        if use_perf:
-            perfs.append( open(pfd.name).read() )
+        for elapsed, perf, args_str in res:
+            times.append( elapsed )
+            perfs.append( perf )
+
+            print "  %d/%d, " % (i, runs), elapsed
 
     print "}"
 
@@ -221,7 +238,6 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
             
-    pool = Pool(processes=parallel)
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in benchmark['scripts']:
@@ -230,16 +246,13 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                 accum = []
                 if '.py' in script:
 
-                    res = [[]]*parallel
-                    for affinity in xrange(0, parallel):
-                        res[affinity] = pool.apply_async(run_cphvbnumpy, [config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, affinity])
+                    (times, perfs, args_str) = run_cphvbnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
 
-                    times = []
-                    perfs = []
-                    for affinity in xrange(0, parallel):
-                        (t, p, args_str) = res[affinity].get()
-                        times += t
-                        perfs += p
+                    #print res
+
+                    #times = []
+                    #perfs = []
+
                         
                 else:
                     (times, perfs, args_str) = run_ccode()
