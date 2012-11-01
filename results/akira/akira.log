@@ -1,49 +1,55 @@
-Running benchmark suite 'tiling_comp'; results are written to: /home/safl/buildbot/benchpress/results/akira/9da6f23c85e290410e99d300ee483ea3f5443d4d/benchmark-tiling_comp-B7rzc5.json.
-Running BlackScholes-c
-Running BlackScholes-c
+Running benchmark suite 'daily'; results are written to: /home/safl/buildbot/benchpress/results/akira/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-daily-YYzl53.json.
 Running Black Scholes
 Running Black Scholes
-Running Jacobi-c
-Running Jacobi-c
-Running Jacobi Iterative - Reduce
-0 7.043818
-0 6.980261
-0 6.982452
-0 6.974527
-0 6.958431
-0 14.113039
-0 14.064958
-0 14.092785
-0 14.07002
-0 14.020184
-0 0.815842
-0 0.786063
-0 0.773495
-0 0.81741
-0 0.777776
-0 0.765471
-0 0.768495
-0 0.817129
-0 0.80067
-0 0.766968
-0 11.922122
-0 11.880102
-0 11.943523
-0 11.848339
-0 12.003588
-0 14.494917
-0 14.475593
-0 14.480072
-0 14.463572
-0 14.488782
-0 9.613335
-0 9.645782
-0 10.034789
-0 9.495181
-0 9.375629
-0 9.673469
-0 9.463613
-0 9.49743
-0 9.355868
-0 9.936485
-Running Jacobi Iterative - Reduce
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+0 20.029704
+0 19.630471
+0 19.575162
+0 12.329742
+0 12.427557
+0 12.410204
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 14.50046
+0 14.462586
+0 14.474483
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 10.95243
+0 11.083737
+0 11.075521
+0 20.349292
+0 20.369702
+0 20.368199
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 19.970616
+0 19.963081
+0 19.955634
+Running Cache Synth
