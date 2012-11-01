@@ -1,0 +1,332 @@
+Running benchmark suite 'single_core'; results are written to: /home/safl/buildbot/benchpress/results/smithers02/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-single_core-SGENJm.json.
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 1.286281
+0 1.281136
+0 1.285161
+0 1.636647
+0 1.635845
+0 1.643175
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 2.710619
+0 2.75885
+0 2.731237
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 1.915708
+0 1.985086
+0 1.876712
+0 2.26268
+0 2.266274
+0 2.279903
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 0.289482
+0 0.289236
+0 0.28902
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 0.200777
+0 0.199348
+0 0.200782
+0 0.286402
+0 0.28849
+0 0.286745
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 4.203754
+0 4.199529
+0 4.219662
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 1.678984
+0 1.679715
+0 1.668569
+0 2.193506
+0 2.208784
+0 2.206816
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 4.640432
+0 4.657306
+0 4.673448
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 1.012867
+0 1.021188
+0 1.024245
+0 1.807616
+0 1.804312
+0 1.804763
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 3.561456
+0 3.564082
+0 3.566823
+0 4.752244
+0 4.748184
+0 4.755482
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 2.120585
+0 2.000013
+0 2.035529
+0 2.631451
+0 2.614413
+0 2.631661
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 2.363785
+0 2.379632
+0 2.357435
+0 3.076218
+0 3.062003
+0 3.064536
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 16.390459
+0 16.428346
+0 16.40953
+0 16.678106
+0 16.667085
+0 16.655323
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 6.124453
+0 6.109027
+0 6.114037
+Running Shallow Water
