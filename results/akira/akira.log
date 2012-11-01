@@ -1,4 +1,4 @@
-Running benchmark suite 'daily'; results are written to: /home/safl/buildbot/benchpress/results/akira/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-daily-6FuIcL.json.
+Running benchmark suite 'daily'; results are written to: /home/safl/buildbot/benchpress/results/akira/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-daily-pT_Ytw.json.
 Running Black Scholes
 Running Black Scholes
 Running Black Scholes
@@ -16,60 +16,9 @@ Running Jacobi Iterative
 Running Jacobi Iterative
 Running Jacobi Iterative
 Running Jacobi Iterative
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 11.777077
-0 11.747976
-0 11.728234
-0 11.113578
-0 11.032667
-0 10.981848
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 14.511141
-0 14.494324
-0 14.477452
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 19.998728
-0 19.952508
-0 19.955398
-0 12.439688
-0 12.343407
-0 12.397726
-0 4.514004
-0 4.521728
-0 4.539169
-0 19.570053
-0 19.579116
-0 19.571027
-0 5.215155
-0 5.226669
-0 5.21548
-0 4.691909
-0 4.821186
 Running Jacobi Iterative
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
