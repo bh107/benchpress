@@ -1,4 +1,4 @@
-Running benchmark suite 'daily'; results are written to: /home/safl/buildbot/benchpress/results/akira/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-daily-YYzl53.json.
+Running benchmark suite 'daily'; results are written to: /home/safl/buildbot/benchpress/results/akira/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-daily-6FuIcL.json.
 Running Black Scholes
 Running Black Scholes
 Running Black Scholes
@@ -10,46 +10,66 @@ Running Cache Synth
 Running Cache Synth
 Running Cache Synth
 Running Cache Synth
-0 20.029704
-0 19.630471
-0 19.575162
-0 12.329742
-0 12.427557
-0 12.410204
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 14.50046
-0 14.462586
-0 14.474483
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 10.95243
-0 11.083737
-0 11.075521
-0 20.349292
-0 20.369702
-0 20.368199
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 19.970616
-0 19.963081
-0 19.955634
 Running Cache Synth
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 11.777077
+0 11.747976
+0 11.728234
+0 11.113578
+0 11.032667
+0 10.981848
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 14.511141
+0 14.494324
+0 14.477452
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 19.998728
+0 19.952508
+0 19.955398
+0 12.439688
+0 12.343407
+0 12.397726
+0 4.514004
+0 4.521728
+0 4.539169
+0 19.570053
+0 19.579116
+0 19.571027
+0 5.215155
+0 5.226669
+0 5.21548
+0 4.691909
+0 4.821186
+Running Jacobi Iterative
