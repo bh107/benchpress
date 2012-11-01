@@ -1,313 +1,182 @@
-Running benchmark suite 'tiling_base'; results are written to: /home/safl/buildbot/benchpress/results/p31sd/9458afc548a682bda289f5ea704cdc4ef34e1527/benchmark-tiling_base-_8Ps80.json.
-{ Black Scholes - numpy ( None ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=False
-  1/5,  7.215137
-  2/5,  7.204886
-  3/5,  7.212303
-  4/5,  7.20132
-  5/5,  7.20635
-}
-{ Black Scholes - simple ( simple ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  6.71675
-  2/5,  6.715366
-  3/5,  6.700236
-  4/5,  6.72257
-  5/5,  6.739605
-}
-{ Black Scholes - score ( score ),
-  taskset -c 1 python bscholes.py --size=2000000*4 --cphvb=True
-  1/5,  6.597594
-  2/5,  6.609771
-  3/5,  6.592854
-  4/5,  6.618779
-  5/5,  6.588894
-}
-{ Cache Synth - numpy ( None ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=False
-  1/5,  18.481099
-  2/5,  18.48793
-  3/5,  18.49333
-  4/5,  18.464793
-  5/5,  18.481626
-}
-{ Cache Synth - simple ( simple ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  18.304821
-  2/5,  18.32444
-  3/5,  19.185767
-  4/5,  18.795141
-  5/5,  18.698797
-}
-{ Cache Synth - score ( score ),
-  taskset -c 1 python cache.py --size=10500000*10*1 --cphvb=True
-  1/5,  18.716932
-  2/5,  18.443087
-  3/5,  18.431421
-  4/5,  18.267287
-  5/5,  18.254247
-}
-{ Jacobi Iterative - numpy ( None ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=False
-  1/5,  3.788539
-  2/5,  3.782067
-  3/5,  3.788734
-  4/5,  3.774976
-  5/5,  3.789925
-}
-{ Jacobi Iterative - simple ( simple ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.740847
-  2/5,  3.762092
-  3/5,  3.752924
-  4/5,  3.735536
-  5/5,  3.762682
-}
-{ Jacobi Iterative - score ( score ),
-  taskset -c 1 python jacobi.iterative.py --size=7000*7000*4 --cphvb=True
-  1/5,  2.459406
-  2/5,  2.452496
-  3/5,  2.463678
-  4/5,  2.564784
-  5/5,  2.453655
-}
-{ Jacobi Iterative - Reduce - numpy ( None ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=False
-  1/5,  8.879327
-  2/5,  8.685183
-  3/5,  8.663426
-  4/5,  8.66712
-  5/5,  8.641139
-}
-{ Jacobi Iterative - Reduce - simple ( simple ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  5.57508
-  2/5,  5.567121
-  3/5,  5.554045
-  4/5,  5.585984
-  5/5,  5.600376
-}
-{ Jacobi Iterative - Reduce - score ( score ),
-  taskset -c 1 python jacobi.iterative.reduc.py --size=7000*7000*4 --cphvb=True
-  1/5,  3.849766
-  2/5,  3.853557
-  3/5,  3.845407
-  4/5,  3.859721
-  5/5,  3.870428
-}
-{ kNN - numpy ( None ),
-  taskset -c 1 python knn.py --size=10000*120 --cphvb=False
-  1/5,  5.571345
-  2/5,  5.389273
-  3/5,  5.352098
-  4/5,  5.418537
-  5/5,  5.356255
-}
-{ kNN - simple ( simple ),
-  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
-  1/5,  1.515423
-  2/5,  1.510565
-  3/5,  1.511844
-  4/5,  1.527484
-  5/5,  1.511137
-}
-{ kNN - score ( score ),
-  taskset -c 1 python knn.py --size=10000*120 --cphvb=True
-  1/5,  1.48569
-  2/5,  1.482989
-  3/5,  1.4802
-  4/5,  1.480484
-  5/5,  1.474187
-}
-{ Lattice Boltzmann 2D - numpy ( None ),
-  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=False
-  1/5,  6.973102
-  2/5,  6.986309
-  3/5,  7.004148
-  4/5,  7.156801
-  5/5,  7.004995
-}
-{ Lattice Boltzmann 2D - simple ( simple ),
-  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
-  1/5,  5.820158
-  2/5,  5.847919
-  3/5,  5.835612
-  4/5,  5.787709
-  5/5,  6.461284
-}
-{ Lattice Boltzmann 2D - score ( score ),
-  taskset -c 1 python lbm.2d.py --size=15*200000*2 --cphvb=True
-  1/5,  5.752236
-  2/5,  5.723975
-  3/5,  5.591573
-  4/5,  5.526418
-  5/5,  5.605253
-}
-{ Lattice Boltzmann 3D - numpy ( None ),
-  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=False
-  1/5,  3.097325
-  2/5,  3.041776
-  3/5,  3.016379
-  4/5,  3.008423
-  5/5,  3.006671
-}
-{ Lattice Boltzmann 3D - simple ( simple ),
-  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
-  1/5,  2.699504
-  2/5,  2.656137
-  3/5,  2.654251
-  4/5,  2.689083
-  5/5,  2.69602
-}
-{ Lattice Boltzmann 3D - score ( score ),
-  taskset -c 1 python lbm.3d.py --size=100*100*100*2 --cphvb=True
-  1/5,  2.41509
-  2/5,  2.433284
-  3/5,  2.542633
-  4/5,  2.39604
-  5/5,  2.396487
-}
-{ Monte Carlo PI - RIL - numpy ( None ),
-  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=False
-  1/5,  5.430417
-  2/5,  5.421184
-  3/5,  5.407501
-  4/5,  5.41806
-  5/5,  5.439347
-}
-{ Monte Carlo PI - RIL - simple ( simple ),
-  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
-  1/5,  5.459358
-  2/5,  5.488557
-  3/5,  5.433117
-  4/5,  5.487785
-  5/5,  5.463094
-}
-{ Monte Carlo PI - RIL - score ( score ),
-  taskset -c 1 python mc.py --size=10*1000000*10 --cphvb=True
-  1/5,  6.190816
-  2/5,  5.579826
-  3/5,  5.318716
-  4/5,  5.297045
-  5/5,  5.771517
-}
-{ Monte Carlo PI - 2xN - numpy ( None ),
-  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=False
-  1/5,  0.319275
-  2/5,  0.347058
-  3/5,  0.316762
-  4/5,  0.326208
-  5/5,  0.285131
-}
-{ Monte Carlo PI - 2xN - simple ( simple ),
-  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.277927
-  2/5,  0.299889
-  3/5,  0.278301
-  4/5,  0.285059
-  5/5,  0.277151
-}
-{ Monte Carlo PI - 2xN - score ( score ),
-  taskset -c 1 python mc.2byN.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.260287
-  2/5,  0.258736
-  3/5,  0.263476
-  4/5,  0.259557
-  5/5,  0.266622
-}
-{ Monte Carlo PI - Nx2 - numpy ( None ),
-  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=False
-  1/5,  0.340186
-  2/5,  0.342891
-  3/5,  0.315364
-  4/5,  0.301082
-  5/5,  0.303679
-}
-{ Monte Carlo PI - Nx2 - simple ( simple ),
-  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.29455
-  2/5,  0.300203
-  3/5,  0.293049
-  4/5,  0.296086
-  5/5,  0.293051
-}
-{ Monte Carlo PI - Nx2 - score ( score ),
-  taskset -c 1 python mc.Nby2.py --size=10*1000000*10 --cphvb=True
-  1/5,  0.261093
-  2/5,  0.262039
-  3/5,  0.26178
-  4/5,  0.262125
-  5/5,  0.261289
-}
-{ Stencil - 1D 4way - numpy ( None ),
-  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=False
-  1/5,  2.534055
-  2/5,  2.541782
-  3/5,  2.544563
-  4/5,  2.55923
-  5/5,  2.551083
-}
-{ Stencil - 1D 4way - simple ( simple ),
-  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.654106
-  2/5,  2.667983
-  3/5,  2.814703
-  4/5,  2.752204
-  5/5,  2.701156
-}
-{ Stencil - 1D 4way - score ( score ),
-  taskset -c 1 python stencil.simplest.py --size=100000000*1 --cphvb=True
-  1/5,  2.03036
-  2/5,  2.069905
-  3/5,  2.100933
-  4/5,  2.238113
-  5/5,  2.051929
-}
-{ Stencil - 2D - numpy ( None ),
-  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=False
-  1/5,  6.057961
-  2/5,  5.956787
-  3/5,  5.926181
-  4/5,  6.009621
-  5/5,  6.026637
-}
-{ Stencil - 2D - simple ( simple ),
-  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
-  1/5,  4.036905
-  2/5,  4.058923
-  3/5,  4.047418
-  4/5,  4.034876
-  5/5,  4.01839
-}
-{ Stencil - 2D - score ( score ),
-  taskset -c 1 python stencil.2d.py --size=10000*1000*10 --cphvb=True
-  1/5,  3.147421
-  2/5,  3.146212
-  3/5,  3.161456
-  4/5,  3.147883
-  5/5,  3.150661
-}
-{ Shallow Water - numpy ( None ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=False
-  1/5,  2.984965
-  2/5,  3.002085
-  3/5,  2.986915
-  4/5,  2.991808
-  5/5,  2.989463
-}
-{ Shallow Water - simple ( simple ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  2.016466
-  2/5,  2.031575
-  3/5,  2.014341
-  4/5,  2.027996
-  5/5,  2.024689
-}
-{ Shallow Water - score ( score ),
-  taskset -c 1 python swater.py --size=2200*1 --cphvb=True
-  1/5,  1.946274
-  2/5,  1.951034
-  3/5,  1.946022
-  4/5,  1.945418
-  5/5,  1.951848
-}
+Running benchmark suite 'single_core'; results are written to: /home/safl/buildbot/benchpress/results/p31sd/5b5dd781be71ec5234962363056d6e13c525b21d/benchmark-single_core-bNaSNU.json.
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+0 2.598637
+0 2.605808
+0 2.625996
+0 2.718435
+0 2.743014
+0 2.767897
+0 2.671335
+0 2.711424
+0 2.65687
+0 2.847772
+0 2.816485
+0 2.810655
+0 4.227566
+0 4.19771
+0 4.223239
+0 5.451208
+0 5.452388
+0 5.414429
+0 4.233888
+0 4.265012
+0 4.23946
+0 5.563592
+0 5.574258
+0 5.541369
+0 8.580332
+0 8.696197
+0 8.638415
+0 3.349758
+0 3.356234
+0 3.375218
+0 0.338977
+0 0.332753
+0 0.329008
+0 0.337917
+0 0.333546
+0 0.337261
+0 0.391768
+0 0.398936
+0 0.405295
+0 0.368953
+0 0.355349
+0 0.362674
+0 0.36629
+0 0.362108
+0 0.373797
+0 6.618704
+0 6.788005
+0 6.767877
+0 6.480571
+0 6.462422
+0 6.438372
+0 6.973168
+0 6.940176
+0 7.077681
+0 3.451565
+0 3.447339
+0 3.453195
+0 3.82828
+0 3.873911
+0 3.878618
+0 4.139034
+0 4.127604
+0 4.291789
+0 7.458122
+0 7.552967
+0 7.517785
+0 7.72718
+0 7.722947
+0 7.697721
+0 10.174881
+0 10.152382
+0 10.239142
+0 1.936862
+0 2.035827
+0 1.987906
+0 8.000455
+0 7.866394
+0 7.932806
+0 7.54985
+0 7.517977
+0 7.612365
+0 5.243616
+0 5.270618
+0 5.273528
+0 7.995397
+0 7.999345
+0 7.98108
+0 12.084584
+0 11.918845
+0 11.844294
+0 2.192445
+0 2.265776
+0 2.162397
+0 2.311417
+0 2.273957
+0 2.254121
+0 3.312401
+0 3.273572
+0 3.349503
+0 5.484619
+0 5.591888
+0 5.52029
+0 18.538203
+0 18.542544
+0 19.634911
+0 6.661337
+0 6.722662
+0 6.653971
+0 6.901408
+0 6.814253
+0 6.810492
+Running Shallow Water
