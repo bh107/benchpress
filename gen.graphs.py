@@ -69,14 +69,20 @@ def render_abs_graph(mark, results, baseline, comp=None, output="/tmp", file_for
     if len(val)> 4:
         rotation = 'vertical'
 
+    def hahaha( text ):
+        return re.search('\d+$', text).group(0)
+
+    lbl = [hahaha(l) for l in lbl if '_' in l]
+
     xticks(pos, lbl, rotation=rotation)
-    xlabel('Vector Engine')
+    #xlabel('Vector Engine')
+    #xlabel('TILE_SIZE')
+    xlabel('VCACHE_SIZE')
     title(mark)
 
     gca().yaxis.grid(True)
     gca().xaxis.grid(False)
     gca().set_axisbelow(True)
-
                                 # Output them
     fn = output +os.sep+ mark.lower() +'_runtime'
     dname = os.path.dirname(fn)
@@ -92,8 +98,6 @@ def render_abs_graph(mark, results, baseline, comp=None, output="/tmp", file_for
         savefig("%s.%s" % ( fn, ff ))
 
     show()
-
-
 
 def render_rel_graph(mark, results, bl_eng, comp, output, file_formats=['pdf']):
 
@@ -153,6 +157,7 @@ def render_grpmark(mark, data, baseline, comp, output, file_formats=['pdf']):
     clf()
     data = dict(data)
 
+    #benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water']
     benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water']
     engines     = [engine for engine in ['NumPy', 'Simple', 'Score'] if engine != baseline]
 
@@ -190,13 +195,21 @@ def render_grpmark(mark, data, baseline, comp, output, file_formats=['pdf']):
     gca().xaxis.grid(False)
     gca().set_axisbelow(True)
 
+    def rename_engine( text ):
+        if text.lower() == 'score':
+            return 'tiling'
+        elif text.lower() == 'simple':
+            return 'vcache'
+        else:
+            return text
+
     if baseline:
         rect1 = bar(ind1, si, width, color="#D95F02", hatch="/")
         rect2 = bar(ind2, sc, width, color="#7570B3", hatch=".")
 
         legend(
             (rect1[0], rect2[0]),
-            engines, 
+            [rename_engine(e) for e in engines], 
             loc='upper center',
             bbox_to_anchor=(0.5,1.05), fancybox=True, shadow=True, ncol=len(engines)
         )
@@ -207,7 +220,7 @@ def render_grpmark(mark, data, baseline, comp, output, file_formats=['pdf']):
 
         legend(
             (rect0[0], rect1[0], rect2[0]),
-            engines,
+            [rename_engine(e) for e in engines], 
             loc='upper center',
             bbox_to_anchor=(0.5,1.05), fancybox=True, shadow=True, ncol=len(engines)
         )
@@ -271,7 +284,8 @@ def render_grp_graph(mark, data, baseline, comp, output, file_formats=['pdf']):
 
     show()
 
-def render_by_hand(mark, data, baseline, comp, output, file_formats=['pdf']):
+
+def render_runtime(mark, data, baseline, comp, output, file_formats=['pdf']):
 
     try:
         os.makedirs(output)
@@ -279,34 +293,59 @@ def render_by_hand(mark, data, baseline, comp, output, file_formats=['pdf']):
         pass
 
     clf()
-    rotation = 'horizontal'     # Assume that there is not enough room vertically
+    data = dict(data)
 
-    groups  = ('NumPy', 'Score', 'Simple')
-    width   = 0.25
+    #benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water']
+    benchmarks  = ['Black Scholes - Python', 'Black Scholes - cphVB', 'Black Scholes - C',  'Jacobi - Python', 'Jacobi - cphVB' , 'Jacobi - C']
 
-    ind     = range(0, len(groups))
+    rotation = 'horizontal'
+    width    = 0.50
+
+    measure  = 'elapsed'
+
+    ind     = range(0, len(benchmarks))
     ind0    = [i+width      for i in ind]
     ind1    = [i+width*2    for i in ind]
     ind2    = [i+width*3    for i in ind]
-    indt    = [i+width*2.5  for i in ind]
-   
-    el = [t['elapsed'] for e,t in data]
-    l1 = [t['l1_miss']/10 for e,t in data]
-    ll = [t['ll_miss']/10 for e,t in data]
+    ind3    = [i+width*4    for i in ind]
+    ind4    = [i+width*5    for i in ind]
+    ind5    = [i+width*6    for i in ind]
 
-    #xlabel('Measurement')
-    title(mark)
+
+    indt    = [i+width*2.5  for i in xrange(0, 6)]
+
+    pprint.pprint(data)
+    print data
+    s0 = [v['elapsed'] for e, v in data['Black Scholes'] if e == 'numpy']
+    s1 = [v['elapsed'] for e, v in data['Black Scholes'] if e == 'score']
+    s2 = [v['elapsed'] for e, v in data['BlackScholes-c'] if e == 'numpy']
+
+    s3 = [v['elapsed'] for e, v in data['Jacobi Iterative - Reduce'] if e == 'numpy']
+    s4 = [v['elapsed'] for e, v in data['Jacobi Iterative - Reduce'] if e == 'score']
+    s5 = [v['elapsed'] for e, v in data['Jacobi-c'] if e == 'numpy']
+
+    ylabel('Runtime in seconds')
 
     gca().yaxis.grid(True)
     gca().xaxis.grid(False)
     gca().set_axisbelow(True)
 
-    rect0 = bar(ind0, el, width, color="#1B9E77", hatch="*")
-    rect1 = bar(ind1, l1, width, color="#D95F02", hatch="/")
-    rect2 = bar(ind2, ll, width, color="#7570B3", hatch=".")
-    
-    legend( (rect0[0], rect1[0], rect2[0]), ('WC', 'L1-miss', 'LL-miss'))
-    xticks(indt, groups)
+    rect0 = bar(ind0[0], s0, width, color="#1B9E77", hatch="\\")
+    rect1 = bar(ind1[0], s1, width, color="#1B9E77", hatch="+")
+    rect2 = bar(ind2[0], s2, width, color="#1B9E77", hatch="o")
+    rect3 = bar(ind3[0], s3, width, color="#D95F02", hatch="/")
+    rect4 = bar(ind4[0], s4, width, color="#D95F02", hatch="-")
+    rect5 = bar(ind5[0], s5, width, color="#D95F02", hatch="O")
+
+    legend(
+        benchmarks,
+        loc='upper right',
+        #bbox_to_anchor=(0.5,1.05), 
+        fancybox=True, shadow=True
+    )
+
+    #xticks(indt, ['' if 'Jacobi ' not in x else 'Jacobi' for x in benchmarks])
+    xticks(indt, ['']*6)
 
     fn = output +os.sep+ mark.lower()       # Output them
     dname = os.path.dirname(fn)
@@ -318,13 +357,13 @@ def render_by_hand(mark, data, baseline, comp, output, file_formats=['pdf']):
 
     show()
 
-
 graphs = {
     'multiple': render_grpmark,
     'speedup':  render_rel_graph,
     'runtime':  render_abs_graph,
     'grouped':  render_grp_graph,
-    '3d':       render_rel_graph
+    '3d':       render_rel_graph,
+    'muntime':  render_runtime
 }
 
 def normalize( runs ):
@@ -383,6 +422,8 @@ def gen( benchmark, output, graph_name, graph, baseline, file_formats ):
 
     if graph_name == 'multiple':
         graph( 'performance', bench, baseline, None, output, file_formats )
+    elif graph_name == 'muntime':
+        graph( 'muntime', bench, baseline, None, output, file_formats )
     else:
         for mark in bench:
             graph( mark, bench[mark], baseline, None, output, file_formats )

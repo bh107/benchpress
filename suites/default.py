@@ -3,11 +3,13 @@
 
 engines = [
     ('numpy',   None,       None),
-    ('simple',  'simple',   None),
+    ('naive',   'naive',    None),
     ('score',   'score',    None),
+    ('simple',  'simple',   None),
+    ('tile',    'tile',     None),
     ('mcore',   'mcore',    None),
-    ('gpu',     'gpu',    None),
-    ('jit',     'jit',    None),
+    ('jit',     'jit',      None),
+    ('gpu',     'gpu',      None),
 ]
 
 # Scripts and their arguments
@@ -17,6 +19,7 @@ scripts   = [
     ('Cache Synth',     'cache.py',     '--size=10500000*10*1'),
 
     ('Jacobi Iterative',            'jacobi.iterative.py',          '--size=7000*7000*4'),
+    ('Jacobi Iterative - PS',       'jacobi.iterative.ps.py',       '--size=7000*7000*4'),
     # This one seems to be broken.
     #('Jacobi Iterative - No Views', 'jacobi.iterative.noviews.py',  '--size=7000*7000*4'),
     ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py',    '--size=7000*7000*4'),
