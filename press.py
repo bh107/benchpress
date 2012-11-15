@@ -56,6 +56,15 @@ def meta(src_dir, suite):
     gcc_ver, err = p.communicate()
     gcc_ver += err
 
+    p = Popen(              # Try grabbing python version
+        ["clang", "-v"],
+        stdin   = PIPE,
+        stdout  = PIPE,
+        stderr  = PIPE
+    )
+    clang_ver, err = p.communicate()
+    clang_ver += err
+
     info = {
         'suite':    suite,
         'rev':      rev if rev else 'Unknown',
@@ -70,6 +79,7 @@ def meta(src_dir, suite):
             'os':       open('/proc/version','r').read(),
             'python':   python_ver if python_ver else 'Unknown',
             'gcc':      gcc_ver if gcc_ver else 'Unknown',
+            'clang':    clang_ver if clang_ver else 'Unknown',
             'env':      os.environ.copy(),
         },
     }
