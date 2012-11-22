@@ -1,4 +1,4 @@
-Running benchmark suite 'jit_mark'; results are written to: /home/safl/buildbot/benchpress/results/akira/282cd58eb0743a1e0afed8099c5e975bee49ae0f/benchmark-jit_mark-v5NeIY.json.
+Running benchmark suite 'jit_mark'; results are written to: /home/safl/buildbot/benchpress/results/akira/f810aacbe44d0bd7a155182c353092d38880af49/benchmark-jit_mark-bt2Dbv.json.
 Running Black Scholes
 Running Black Scholes
 Running Black Scholes
@@ -74,44 +74,17 @@ ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-0 2.505775
-0 2.572479
-0 2.585004
-0 3.124273
-0 3.13695
-0 3.138015
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-0 4.46025
-0 4.644854
-0 4.645863
-0 4.661656
-0 4.697103
-0 4.688237
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
+0 2.609392
+0 2.514109
+0 2.617426
+0 3.150686
+0 3.088696
+0 3.121299
+0 2.78649
+0 2.885202
+0 2.892394
 0 0.0
-0 2.890382
-0 2.887278
-0 2.899491
-ERR: Something went wrong None
-0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
@@ -119,125 +92,101 @@ ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-0 0.31322
-0 0.315705
-0 0.313542
-0 0.412608
-0 0.41334
-0 0.415234
-0 0.413898
-0 0.412717
-0 0.421088
-0 0.405839
-0 0.405722
-0 0.405124
-0 0.3991
-0 0.399673
-0 0.399216
-ERR: Something went wrong None
+0 4.323786
+0 4.644675
+0 4.533813
+0 4.691993
+0 4.712644
+0 4.674375
+0 4.916485
+0 4.952439
+0 4.964957
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
+0 3.0
+0 3.0
+0 3.0
+0 3.097427
+0 2.922606
+0 3.090643
+0 2.895696
+0 2.882856
+0 2.879558
+0 3.341634
+0 3.340363
+0 3.213721
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-0 9.412777
-0 9.426135
-0 9.367209
-0 10.656761
-0 10.644475
-0 10.53892
-0 10.659916
-0 10.731889
-0 10.766692
 ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
+0 0.304637
+0 0.302833
+0 0.300526
+0 0.407634
+0 0.411208
+0 0.406428
+0 0.423206
+0 0.43431
+0 0.42194
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-0 3.519736
-0 3.341023
-0 3.545369
-0 4.05648
-0 4.074775
-0 4.017568
-0 3.988884
-0 4.098165
-0 4.05288
-ERR: Something went wrong None
+0 0.291037
+0 0.291259
+0 0.291078
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
+0 4.0
+0 4.0
+0 4.0
+0 9.418834
+0 9.232881
+0 9.423902
+0 10.602845
+0 10.583098
+0 10.748014
+0 10.884582
+0 10.757089
+0 10.818272
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-0 7.556105
-0 7.661417
-0 7.601986
-0 8.916075
-0 8.853781
-0 8.89533
-0 8.56477
-0 8.586722
-0 8.616018
 ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
+0 3.538889
+0 3.438362
+0 3.38521
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-0 2.698997
-0 2.697245
-0 2.70652
-0 3.326123
-0 3.325699
-0 3.308254
-0 3.309917
-0 3.299477
-0 3.315364
 ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-0 7.201662
-0 7.249272
-0 7.164993
-0 7.258405
-0 7.224149
-0 7.259776
-0 8.390804
-0 8.427169
-0 8.403467
-ERR: Something went wrong None
+0 7.519677
+0 7.93413
+0 7.421553
+0 8.854996
+0 8.868503
+0 8.784588
+0 8.484713
+0 8.885469
+0 8.669843
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
@@ -245,20 +194,14 @@ ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-0 3.719844
-0 3.695589
-0 3.643796
-0 3.357381
-0 3.360946
-0 3.350406
-0 4.180576
-0 4.137897
-0 4.165194
-ERR: Something went wrong None
+0 2.690293
+0 2.691874
+0 2.699912
+0 3.300627
+0 3.303335
+0 3.290656
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
@@ -266,49 +209,55 @@ ERR: Something went wrong None
 0 0.0
 ERR: Something went wrong None
 0 0.0
-0 4.511936
-0 4.523843
-0 4.502933
-0 4.337638
-0 4.318169
-0 4.345812
-ERR: Something went wrong None
+0 7.226559
+0 7.268316
+0 7.245399
+0 8.38448
+0 8.424295
+0 8.400087
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
+0 3.691332
+0 3.697921
+0 3.663493
+0 3.361431
+0 3.356752
+0 3.352182
+0 4.108707
+0 4.147886
+0 4.037445
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-0 19.730457
-0 19.541057
-0 19.529576
-0 20.080993
-0 20.053125
-0 20.390245
-0 19.6477
-0 19.62829
-0 19.647574
-ERR: Something went wrong None
+0 3.0
+0 3.0
+0 3.0
+0 4.460095
+0 4.516925
+0 4.515506
+0 5.275457
+0 5.209261
+0 5.221089
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
+0 19.564126
+0 19.562085
+0 19.550511
+0 20.010403
+0 20.004555
+0 20.095606
+0 19.637425
+0 19.672901
+0 19.663292
 0 0.0
-ERR: Something went wrong None
 0 0.0
-ERR: Something went wrong None
 0 0.0
-0 11.756053
-0 11.728494
-0 11.655951
-0 14.534009
-0 14.471857
-0 14.456169
+ERR: Something went wrong0 11.043863
+0 10.983813
+0 11.095166
+0 11.940923
+0 11.860503
+0 11.950023
 Running Shallow Water
