@@ -1,0 +1,376 @@
+Running benchmark suite 'single_core'; results are written to: /home/kenneth/buildbot/benchpress/results/akira-no2d-reduceopt/50214da0ec40471c65063f5b3504c992df8e989e/benchmark-single_core-L7fRMN.json.
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+0 3.087074
+0 3.110917
+0 3.000723
+0 3.117196
+0 3.017103
+0 2.546166
+0 2.604816
+0 2.533054
+0 2.635752
+0 2.441339
+0 3.041428
+0 3.08457
+0 3.091074
+0 3.056278
+0 3.080661
+0 2.860377
+0 2.787072
+0 2.811843
+0 2.886975
+0 2.827957
+0 6.032291
+0 6.056173
+0 6.050662
+0 6.007514
+0 6.013488
+0 4.585047
+0 4.625579
+0 4.606494
+0 4.612179
+0 4.62156
+0 4.588472
+0 4.332585
+0 4.639164
+0 4.540102
+0 4.463982
+0 4.647317
+0 4.60431
+0 4.596684
+0 4.615473
+0 4.619979
+0 5.031319
+0 4.920085
+0 5.00426
+0 5.020958
+0 4.931439
+0 2.873715
+0 2.874686
+0 2.894519
+0 2.872632
+0 2.884534
+0 3.04401
+0 3.086748
+0 2.933051
+0 3.093982
+0 2.954397
+0 3.317813
+0 3.24481
+0 3.289492
+0 3.299165
+0 3.267095
+0 4.017447
+0 4.06386
+0 4.086139
+0 4.108993
+0 4.158377
+0 0.415451
+0 0.414711
+0 0.420333
+0 0.417681
+0 0.418456
+0 0.309204
+0 0.307045
+0 0.302443
+0 0.301794
+0 0.30208
+0 0.42197
+0 0.421216
+0 0.420968
+0 0.409375
+0 0.420015
+0 0.425071
+0 0.424583
+0 0.425899
+0 0.42469
+0 0.426533
+0 0.651238
+0 0.652133
+0 0.650336
+0 0.645255
+0 0.652492
+0 0.395248
+0 0.40042
+0 0.402517
+0 0.402614
+0 0.401785
+0 0.279018
+0 0.279607
+0 0.28016
+0 0.279163
+0 0.280174
+0 0.399808
+0 0.396339
+0 0.395951
+0 0.393796
+0 0.39318
+0 0.404257
+0 0.398408
+0 0.398911
+0 0.419075
+0 0.400116
+0 0.619354
+0 0.62452
+0 0.625872
+0 0.625398
+0 0.628463
+0 10.611153
+0 10.48624
+0 10.495211
+0 10.448723
+0 10.703223
+0 9.387137
+0 9.387834
+0 9.368349
+0 9.473211
+0 9.28724
+0 11.127888
+0 10.781963
+0 10.811282
+0 10.798156
+0 10.641931
+0 10.724018
+0 10.730946
+0 11.211426
+0 10.720872
+0 10.668382
+0 4.009153
+0 4.056983
+0 4.090002
+0 3.994633
+0 4.078596
+0 3.433794
+0 3.404047
+0 3.411504
+0 3.517553
+0 3.462238
+0 3.987413
+0 4.077979
+0 4.009872
+0 4.082564
+0 4.003129
+0 5.370983
+0 5.488619
+0 5.406964
+0 5.44516
+0 5.470719
+0 8.869705
+0 8.797732
+0 8.823636
+0 8.723358
+0 8.82072
+0 7.616576
+0 7.872251
+0 7.817986
+0 7.70101
+0 7.658082
+0 8.751574
+0 8.707235
+0 8.781834
+0 8.820065
+0 8.892271
+0 16.045024
+0 16.130275
+0 16.088404
+0 16.078395
+0 16.128019
+0 3.330104
+0 3.304181
+0 3.283262
+0 3.315545
+0 3.281969
+0 2.694352
+0 2.692544
+0 2.690068
+0 2.683935
+0 2.686021
+0 3.310611
+0 3.31411
+0 3.305138
+0 3.28402
+0 3.270804
+0 3.285799
+0 3.31072
+0 3.29879
+0 3.29893
+0 3.342396
+0 6.894398
+0 6.89237
+0 6.964399
+0 6.905733
+0 6.928752
+0 7.205683
+0 7.225153
+0 7.208903
+0 7.207018
+0 7.199286
+0 7.24743
+0 7.237631
+0 7.287995
+0 7.32628
+0 7.198692
+0 7.199587
+0 7.215267
+0 7.212138
+0 7.192133
+0 7.221995
+0 8.420083
+0 8.356263
+0 8.395161
+0 8.342224
+0 8.430798
+0 14.058273
+0 14.020481
+0 14.070464
+0 14.002678
+0 14.070115
+0 3.354219
+0 3.343022
+0 3.341901
+0 3.35456
+0 3.357292
+0 3.667623
+0 3.673258
+0 3.654128
+0 3.66886
+0 3.707693
+0 3.342643
+0 3.346582
+0 3.342776
+0 3.339001
+0 3.345611
+0 4.177365
+0 4.196895
+0 4.140749
+0 4.189126
+0 4.160162
+0 9.468465
+0 9.471376
+0 9.44283
+0 9.445842
+0 9.448736
+0 4.344807
+0 4.312035
+0 4.324202
+0 4.346189
+0 4.327346
+0 4.523505
+0 4.500699
+0 4.526788
+0 4.542735
+0 4.505224
+0 5.276106
+0 5.206891
+0 5.249642
+0 5.171172
+0 5.228176
+0 5.219282
+0 5.211108
+0 5.206527
+0 5.216925
+0 5.287044
+0 19.974431
+0 20.003175
+0 19.969502
+0 19.976691
+0 19.991766
+0 20.699657
+0 19.670142
+0 19.664501
+0 20.132239
+0 19.632549
+0 20.362999
+0 20.338738
+0 20.373822
+0 20.342228
+0 21.144448
+0 11.101878
+0 10.964388
+0 11.056487
+0 11.11574
+0 11.062449
+0 11.856378
+0 11.880849
+0 11.902017
+0 11.846947
+0 11.88691
+0 11.691928
+0 11.741866
+0 11.747196
+0 11.701956
+0 11.824149
+0 14.455128
+0 14.445494
+0 14.495469
+0 14.459551
+0 14.49006
+Running Shallow Water
