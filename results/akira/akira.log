@@ -1,1 +1,314 @@
-Running benchmark suite 'jit_mark'; results are written to: /home/safl/buildbot/benchpress/results/akira/fc31890fbb9e1523d8eabb6e59b9e77da7bc0040/benchmark-jit_mark-zMqsyT.json.
+Running benchmark suite 'jit_mark'; results are written to: /home/safl/buildbot/benchpress/results/akira/282cd58eb0743a1e0afed8099c5e975bee49ae0f/benchmark-jit_mark-v5NeIY.json.
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 2.505775
+0 2.572479
+0 2.585004
+0 3.124273
+0 3.13695
+0 3.138015
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 4.46025
+0 4.644854
+0 4.645863
+0 4.661656
+0 4.697103
+0 4.688237
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 2.890382
+0 2.887278
+0 2.899491
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 0.31322
+0 0.315705
+0 0.313542
+0 0.412608
+0 0.41334
+0 0.415234
+0 0.413898
+0 0.412717
+0 0.421088
+0 0.405839
+0 0.405722
+0 0.405124
+0 0.3991
+0 0.399673
+0 0.399216
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 9.412777
+0 9.426135
+0 9.367209
+0 10.656761
+0 10.644475
+0 10.53892
+0 10.659916
+0 10.731889
+0 10.766692
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 3.519736
+0 3.341023
+0 3.545369
+0 4.05648
+0 4.074775
+0 4.017568
+0 3.988884
+0 4.098165
+0 4.05288
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 7.556105
+0 7.661417
+0 7.601986
+0 8.916075
+0 8.853781
+0 8.89533
+0 8.56477
+0 8.586722
+0 8.616018
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 2.698997
+0 2.697245
+0 2.70652
+0 3.326123
+0 3.325699
+0 3.308254
+0 3.309917
+0 3.299477
+0 3.315364
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 7.201662
+0 7.249272
+0 7.164993
+0 7.258405
+0 7.224149
+0 7.259776
+0 8.390804
+0 8.427169
+0 8.403467
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 3.719844
+0 3.695589
+0 3.643796
+0 3.357381
+0 3.360946
+0 3.350406
+0 4.180576
+0 4.137897
+0 4.165194
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 4.511936
+0 4.523843
+0 4.502933
+0 4.337638
+0 4.318169
+0 4.345812
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 19.730457
+0 19.541057
+0 19.529576
+0 20.080993
+0 20.053125
+0 20.390245
+0 19.6477
+0 19.62829
+0 19.647574
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+ERR: Something went wrong None
+0 0.0
+0 11.756053
+0 11.728494
+0 11.655951
+0 14.534009
+0 14.471857
+0 14.456169
+Running Shallow Water
