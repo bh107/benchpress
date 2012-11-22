@@ -2,5 +2,5 @@ from default import scripts, engines
 
 suite = {
     'scripts':  scripts,
-    'engines':  [0, 1, 2, 3, 6]
+    'engines':  engines[0:4] + [engines[6]]
 }
