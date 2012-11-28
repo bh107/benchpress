@@ -1,1 +1,381 @@
-Running benchmark suite 'default'; results are written to: /home/jolu/buildbot/benchpress/results/akira/86d7ab24feea9fe72ec30f737d1975eb3459673f/benchmark-default-_avCTX.json.
+Running benchmark suite 'single_core'; results are written to: /home/kenneth/buildbot/benchpress/results/akira/5c27b8fd85a4f6345684b912b413f77bec31cde8/benchmark-single_core-3JT21d.json.
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Black Scholes
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Cache Synth
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - PS
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running Jacobi Iterative - Reduce
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running kNN
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 2D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Lattice Boltzmann 3D
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - RIL
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - 2xN
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Monte Carlo PI - Nx2
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 1D 4way
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Stencil - 2D
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+Running Shallow Water
+0 2.999521
+0 3.085673
+0 3.100523
+0 2.969377
+0 3.095557
+0 2.613651
+0 2.614163
+0 2.58466
+0 2.478621
+0 2.398718
+0 3.143848
+0 3.166132
+0 3.154678
+0 3.051031
+0 3.107453
+0 2.733694
+0 2.860111
+0 2.862239
+0 2.817698
+0 2.659735
+0 6.005364
+0 5.997622
+0 6.010299
+0 5.991013
+0 5.989501
+0 4.606283
+0 4.605388
+0 4.552665
+0 4.575917
+0 4.648808
+0 4.634776
+0 4.59703
+0 4.326569
+0 4.64357
+0 4.646962
+0 4.657585
+0 4.733367
+0 4.657948
+0 4.71638
+0 4.608517
+0 5.054796
+0 5.005217
+0 4.761013
+0 5.058611
+0 5.023958
+0 11.488382
+0 11.461886
+0 11.510382
+0 11.457739
+0 11.471649
+0 3.086703
+0 2.978272
+0 2.926789
+0 3.090649
+0 3.088897
+0 2.880708
+0 2.85846
+0 2.888933
+0 2.892687
+0 2.893744
+0 3.32809
+0 3.358464
+0 3.198429
+0 3.335702
+0 3.353382
+0 3.962623
+0 3.980842
+0 3.931171
+0 4.114044
+0 4.024581
+0 0.422742
+0 0.422744
+0 0.422403
+0 0.423324
+0 0.422899
+0 0.313965
+0 0.314668
+0 0.313754
+0 0.313903
+0 0.314572
+0 0.413331
+0 0.415312
+0 0.418676
+0 0.419694
+0 0.423082
+0 0.41952
+0 0.417877
+0 0.416639
+0 0.413337
+0 0.43001
+0 0.640274
+0 0.636469
+0 0.63469
+0 0.646427
+0 0.645559
+0 0.29174
+0 0.293911
+0 0.292364
+0 0.293626
+0 0.291383
+0 0.390457
+0 0.394759
+0 0.401044
+0 0.397593
+0 0.397951
+0 0.390215
+0 0.388598
+0 0.386541
+0 0.387525
+0 0.388281
+0 0.617934
+0 0.620575
+0 0.621371
+0 0.6207
+0 0.615858
+0 10.50111
+0 10.676618
+0 10.543968
+0 10.706518
+0 10.330481
+0 9.314073
+0 9.388206
+0 9.172587
+0 9.284602
+0 9.148099
+0 10.577823
+0 10.376754
+0 10.576161
+0 10.438699
+0 10.687401
+0 13.240126
+0 10.863949
+0 10.769785
+0 10.801978
+0 10.70119
+0 10.803558
+0 10.735133
+0 10.680994
+0 10.786523
+0 10.689652
+0 3.550766
+0 3.51535
+0 3.278755
+0 3.53089
+0 3.54167
+0 3.925001
+0 4.036152
+0 4.038628
+0 3.897177
+0 4.003228
+0 4.11309
+0 4.042891
+0 3.941618
+0 4.138209
+0 4.11803
+0 5.44632
+0 5.455684
+0 5.470564
+0 5.380473
+0 5.34984
+0 8.903887
+0 8.861483
+0 8.688256
+0 8.707682
+0 8.784043
+0 7.783507
+0 7.623965
+0 7.550592
+0 7.863387
+0 7.482942
+0 8.890542
+0 8.967757
+0 8.787231
+0 8.668798
+0 8.799847
+0 8.819316
+0 8.568388
+0 8.601067
+0 8.698628
+0 8.490742
+0 16.036462
+0 16.035328
+0 16.048888
+0 16.028592
+0 16.024417
+0 2.691048
+0 2.689749
+0 2.685984
+0 2.69061
+0 2.684603
+0 3.317476
+0 3.289115
+0 3.305517
+0 3.292051
+0 3.293586
+0 3.299106
+0 3.320377
+0 3.265854
+0 3.291618
+0 3.332871
+0 6.884952
+0 6.895902
+0 6.91279
+0 6.911873
+0 6.89932
+0 7.244636
+0 7.197097
+0 7.227168
+0 7.178073
+0 7.22386
+0 7.326746
+0 7.045882
+0 7.238117
+0 7.158805
+0 7.081603
+0 7.207859
+0 7.230223
+0 7.215523
+0 7.277268
+0 7.192154
+0 13.975769
+0 13.962566
+0 13.99625
+0 14.00315
+0 14.041456
+0 3.346423
+0 3.346088
+0 3.326781
+0 3.363584
+0 3.27456
+0 3.588135
+0 3.797253
+0 3.532958
+0 3.754746
+0 3.52153
+0 3.360869
+0 3.359064
+0 3.34441
+0 3.358264
+0 3.351946
+0 4.070852
+0 4.087451
+0 4.088258
+0 4.107596
+0 4.138664
+0 9.439899
+0 9.5037
+0 9.454631
+0 9.480644
+0 9.507285
+0 4.295285
+0 4.338849
+0 4.301515
+0 4.303591
+0 4.321718
+0 4.414016
+0 4.618819
+0 4.449682
+0 4.457073
+0 4.500039
+0 4.296857
+0 4.33498
+0 4.338362
+0 4.295503
+0 4.346276
+0 5.191916
+0 5.20605
+0 5.095523
+0 5.290423
+0 5.192842
+0 19.960113
+0 19.967288
+0 19.974472
+0 20.054064
+0 19.970477
+0 20.066739
+0 20.062801
+0 19.995577
+0 20.064096
+0 19.998619
+0 19.67428
+0 19.641756
+0 20.389902
+0 19.642031
+0 19.728868
+0 21.293606
+0 20.404492
+0 20.740739
+0 20.383129
+0 20.345117
+0 11.080489
+0 10.960215
+0 11.013777
+0 11.130041
+0 11.112849
+0 11.936547
+0 11.837462
+0 11.936756
+0 11.889039
+0 11.915064
+0 11.801332
+0 11.769715
+0 11.698932
+0 11.684575
+0 11.798157
+0 14.411962
+0 14.389183
+0 14.4268
+0 14.393288
+0 14.408536
+Running Shallow Water
