@@ -65,7 +65,8 @@ scripts   = [
     ('N-Body',  'nbody.py', '--size=2500*10'),
     ('Stencil - 1D 4way',       'stencil.simplest.py',  '--size=100*1'),
     ('Stencil - 2D',            'stencil.2d.py',        '--size=100*100*10'),
-    ('Shallow Water',           'swater.py',            '--size=100*1'),
+    ('Shallow Water',           'swater.py',            '--size=100*1')
+    ('Shallow Water with flush()',           'swater.flushing.py',            '--size=100*1')
 
 ]
 
