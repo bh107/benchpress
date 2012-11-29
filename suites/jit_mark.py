@@ -18,18 +18,18 @@ engines = [
 x=4000
 y=4000
 jacobi_iterative_script = []
-for i in xrange(10):
-    jacobi_iterative_script.append( ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py','--size={0}*{1}*{2}'.format(x,y,i) ))
+for i in xrange(1,10):
+    jacobi_iterative_script.append( ('Jacobi Iterative - Reduce {0}'.format(i),   'jacobi.iterative.reduc.py','--size={0}*{1}*{2}'.format(x,y,i) ))
 for i in xrange(1,11):
-    jacobi_iterative_script.append( ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-jacobi_iterative_script.append( ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py','--size={0}*{0}*{1}*{2}'.format(x,y,200) ))
+    jacobi_iterative_script.append( ('Jacobi Iterative - Reduce {0}'.format(i),   'jacobi.iterative.reduc.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+jacobi_iterative_script.append( ('Jacobi Iterative - Reduce {0}'.format(200),   'jacobi.iterative.reduc.py','--size={0}*{1}*{2}'.format(x,y,200) ))
 
 jacobi_iterative_script_naive = []
-for i in xrange(10):
-    jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive',   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i) ))
+for i in xrange(1,10):
+    jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i) ))
 for i in xrange(1,11):
-    jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive',   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive',   'jacobi.iterative.reduce.oneline.py','--size={0}*{0}*{1}*{2}'.format(x,y,200) ))
+    jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(200),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,200) ))
 
 
 # Scripts and their arguments
