@@ -31,11 +31,12 @@ for i in xrange(1,11):
     jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(200),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,200) ))
 
-
+x=1
+y=1
 jacobi_fixed = []
-jacobi_fixed.append( ('Jacobi Iterative - Reduce {0}'.format(1),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,1) ))
+jacobi_fixed.append( ('Jacobi Iterative - {0}'.format(1),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,1) ))
 for i in xrange(1,11):
-    jacobi_fixed.append( ('Jacobi Iterative - Reduce {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+    jacobi_fixed.append( ('Jacobi Iterative - {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 
 
 # Scripts and their arguments
@@ -93,7 +94,14 @@ scripts   = [
 ]
 
 suite = {
-    'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
+
+    'scripts':  jacobi_fixed,
     'engines':  engines[0:2] + [engines[6]] + [engines[8]]
-    #'engines':  engines[0:4] + engines[6:10]
+    
+    # big speedup test
+    #'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
+    #'engines':  engines[0:4] + [engines[6]] + [engines[8]]
+
 }
+
+#print suite
