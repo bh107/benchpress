@@ -52,12 +52,15 @@ for i in xrange(1,11):
 
 #shallow water tests
 sw_data_range = []
-for i in xrange(1,6):
+for i in xrange(1,7):
     sw_data_range.append( ('Shallow water.flush - {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(1000*i,1) ))
 
 sw_iterate = []
-for i in xrange(1,6):
+for i in xrange(1,11):
     sw_iterate.append( ('Shallow water.flush iter- {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(2000,i*10) ))
+
+
+
 
     
 # Scripts and their arguments
@@ -111,21 +114,21 @@ scripts   = [
     #~ ('Stencil - 2D',            'stencil.2d.py',        '--size=100*100*10'),
     #~ ('Shallow Water',           'swater.py',            '--size=100*1'),
     #~ ('Shallow Water with flush',           'swater.flushing.py',            '--size=100*1'),
-
 ]
 
 suite = {
 
     # SW data test
-    
+    'scripts': sw_data_range + sw_iterate,
+    'engines': engines[0:2] + [engines[6]] + [engines[8]]
 
     # temp removal testing
     #'scripts':  temp_remove_effect,
     #'engines':  [engines[1]] + [engines[8]]
     
     # big speedup test
-    'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
-    'engines':  engines[0:4] + [engines[6]] + [engines[8]]
+    #'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
+    #'engines':  engines[0:4] + [engines[6]] + [engines[8]]
 
 }
 
