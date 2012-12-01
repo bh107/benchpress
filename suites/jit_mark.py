@@ -50,6 +50,13 @@ for i in xrange(1,11):
 
 
 
+#shallow water tests
+sw_data_range = []
+for i in xrange(1,6):
+    sw_data_range.append( ('Shallow water.flush - {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(2000,i*10) ))
+
+sw_iterate
+for i in xrange(1,6):
 
 # Scripts and their arguments
 # (alias, script, parameters)
@@ -107,14 +114,16 @@ scripts   = [
 
 suite = {
 
-
+    # SW data test
     
-    'scripts':  temp_remove_effect,
-    'engines':  [engines[1]] + [engines[8]]
+
+    # temp removal testing
+    #'scripts':  temp_remove_effect,
+    #'engines':  [engines[1]] + [engines[8]]
     
     # big speedup test
-    #'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
-    #'engines':  engines[0:4] + [engines[6]] + [engines[8]]
+    'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
+    'engines':  engines[0:4] + [engines[6]] + [engines[8]]
 
 }
 
