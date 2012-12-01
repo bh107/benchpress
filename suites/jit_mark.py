@@ -41,9 +41,10 @@ for i in xrange(1,11):
 
 
 temp_remove_effect = []
+#~ temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,10) ))
 for i in xrange(1,11):
     temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-
+#~ temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(10),   'jacobi.iterative.oneline.py','--size={0}*{1}*{2}'.format(x,y,10) ))
 for i in xrange(1,11):
     temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'jacobi.iterative.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 
