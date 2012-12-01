@@ -1,4 +1,7 @@
 from default import scripts, engines
+import pprint
+
+pp = pprint.PrettyPrinter()
 
 engines = [
     ('numpy',   None,       None),
@@ -31,12 +34,20 @@ for i in xrange(1,11):
     jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(200),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,200) ))
 
-x=1
-y=1
 jacobi_fixed = []
 jacobi_fixed.append( ('Jacobi Iterative - {0}'.format(1),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,1) ))
 for i in xrange(1,11):
     jacobi_fixed.append( ('Jacobi Iterative - {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+
+
+temp_remove_effect = []
+for i in xrange(1,11):
+    temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+
+for i in xrange(1,11):
+    temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'jacobi.iterative.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+
+
 
 
 # Scripts and their arguments
@@ -95,8 +106,10 @@ scripts   = [
 
 suite = {
 
-    'scripts':  jacobi_fixed,
-    'engines':  engines[0:2] + [engines[6]] + [engines[8]]
+
+    
+    'scripts':  temp_remove_effect,
+    'engines':  [engines[1]] + [engines[8]]
     
     # big speedup test
     #'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
@@ -104,4 +117,4 @@ suite = {
 
 }
 
-#print suite
+pp.pprint(suite)
