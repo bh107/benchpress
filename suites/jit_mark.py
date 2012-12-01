@@ -53,11 +53,13 @@ for i in xrange(1,11):
 #shallow water tests
 sw_data_range = []
 for i in xrange(1,6):
-    sw_data_range.append( ('Shallow water.flush - {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(2000,i*10) ))
+    sw_data_range.append( ('Shallow water.flush - {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(1000*i,1) ))
 
-sw_iterate
+sw_iterate = []
 for i in xrange(1,6):
+    sw_iterate.append( ('Shallow water.flush iter- {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(2000,i*10) ))
 
+    
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
