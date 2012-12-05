@@ -10,10 +10,10 @@ engines = [
     ('simple',  'simple',   None),
     ('tile',    'tile',     None),
     ('mcore',   'mcore',    None),
-    ('jitbatchcacheon',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"True"}),
-    ('jitbatchcacheoff', 'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"False"}),
-    ('jitexprcacheon',   'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"True"}),
-    ('jitexprcacheoff',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"False"}),    
+    ('jit-batch_on',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"True"}),
+    ('jit-batch_off', 'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"False"}),
+    ('jit-expr_on',   'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"True"}),
+    ('jit-expr_off',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"False"}),    
     ('gpu',     'gpu',      None),
 ]
 
@@ -34,20 +34,31 @@ for i in xrange(1,11):
     jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(200),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,200) ))
 
-jacobi_fixed = []
-jacobi_fixed.append( ('Jacobi Iterative - {0}'.format(1),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,1) ))
+
+
+
+jacobi_data_range = []
+#jacobi_data_range.append( ('Jacobi Iterative - {0}'.format(1),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,1) ))
 for i in xrange(1,11):
-    jacobi_fixed.append( ('Jacobi Iterative - {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+    x = i*1000
+    y = i*1000
+    jacobi_data_range.append( ('Jacobi Iterative - {0}'.format(x),   'jacobi.iterative.reduce.oneline.py', '--size={0}*{1}*{2}'.format(x,y,1) ))
 
 
+
+
+
+
+# temporary array removal effect.
 temp_remove_effect = []
-#~ temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,10) ))
 for i in xrange(1,11):
-    temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-#~ temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(10),   'jacobi.iterative.oneline.py','--size={0}*{1}*{2}'.format(x,y,10) ))
+    temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'temp_rem_test_opt.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 for i in xrange(1,11):
-    temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'jacobi.iterative.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-
+    temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'temp_rem_test_reg.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+for i in xrange(1,11):
+    temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'temp_rem_test_opt.flush.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
+for i in xrange(1,11):
+    temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'temp_rem_test_reg.flush.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 
 
 #shallow water tests
@@ -57,6 +68,8 @@ for i in xrange(1,7):
 
 sw_iterate = []
 for i in xrange(1,11):
+    sw_iterate.append( ('Shallow water.flush iter- {0}'.format(i),   'swater.flushing.py','--size={0}*{1}'.format(2000,i) ))
+for i in xrange(1,6):
     sw_iterate.append( ('Shallow water.flush iter- {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(2000,i*10) ))
 
 
@@ -119,13 +132,17 @@ scripts   = [
 suite = {
 
     # SW data test
-    'scripts': sw_data_range + sw_iterate,
-    'engines': engines[0:2] + [engines[6]] + [engines[8]]
+    #'scripts': sw_data_range + sw_iterate,
+    #'engines': engines[0:2] + [engines[6]] + [engines[8]]
 
     # temp removal testing
     #'scripts':  temp_remove_effect,
-    #'engines':  [engines[1]] + [engines[8]]
-    
+    #'engines':  [engines[0:2]] + [engines[6]] + [engines[8]]
+
+    # jacobi_data_range    
+    'scripts':  jacobi_data_range,
+    'engines':  engines[0:2] + [engines[6]] + [engines[8]]
+     
     # big speedup test
     #'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
     #'engines':  engines[0:4] + [engines[6]] + [engines[8]]
