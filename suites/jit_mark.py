@@ -36,16 +36,12 @@ jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.for
 
 
 
-
 jacobi_data_range = []
 #jacobi_data_range.append( ('Jacobi Iterative - {0}'.format(1),   'jacobi.iterative.py','--size={0}*{1}*{2}'.format(x,y,1) ))
 for i in xrange(1,11):
     x = i*1000
     y = i*1000
     jacobi_data_range.append( ('Jacobi Iterative - {0}'.format(x),   'jacobi.iterative.reduce.oneline.py', '--size={0}*{1}*{2}'.format(x,y,1) ))
-
-
-
 
 
 
@@ -61,8 +57,11 @@ for i in xrange(1,11):
     temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'temp_rem_test_reg.flush.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 
 
+
+
 #shallow water tests
 sw_data_range = []
+sw_data_range.append( ('Shallow water.flush - {0}'.format(500),   'swater.flushing.py','--size={0}*{1}'.format(500,1) ))
 for i in xrange(1,7):
     sw_data_range.append( ('Shallow water.flush - {0}'.format(i*10),   'swater.flushing.py','--size={0}*{1}'.format(1000*i,1) ))
 
@@ -131,17 +130,22 @@ scripts   = [
 
 suite = {
 
-    # SW data test
-    #'scripts': sw_data_range + sw_iterate,
+
+    # Shallow Water iterations 2k by 2k.
+    #'scripts': sw_iterate,
+    #'engines': engines[0:2] + [engines[6]] + [engines[8]]
+    
+    # Shallow Water data range
+    #'scripts': sw_data_range,
     #'engines': engines[0:2] + [engines[6]] + [engines[8]]
 
     # temp removal testing
-    #'scripts':  temp_remove_effect,
-    #'engines':  [engines[0:2]] + [engines[6]] + [engines[8]]
+    'scripts':  temp_remove_effect,
+    'engines':  engines[0:2] + [engines[6]] + [engines[8]]
 
     # jacobi_data_range    
-    'scripts':  jacobi_data_range,
-    'engines':  engines[0:2] + [engines[6]] + [engines[8]]
+    #'scripts':  jacobi_data_range,
+    #'engines':  engines[0:2] + [engines[6]] + [engines[8]]
      
     # big speedup test
     #'scripts':  jacobi_iterative_script + jacobi_iterative_script_naive,
