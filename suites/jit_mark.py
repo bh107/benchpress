@@ -58,13 +58,14 @@ x=4000
 y=4000
 # temporary array removal effect.
 temp_remove_effect = []
-for i in xrange(1,11):
+iter = 1
+for i in xrange(1,iter):
     temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'temp_rem_test_opt.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-for i in xrange(1,11):
+for i in xrange(1,iter):
     temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'temp_rem_test_reg.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-for i in xrange(1,11):
+for i in xrange(1,iter):
     temp_remove_effect.append( ('Jacobi Iterative optimized- {0}'.format(i*10),   'temp_rem_test_opt.flush.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
-for i in xrange(1,11):
+for i in xrange(1,iter):
     temp_remove_effect.append( ('Jacobi Iterative regular - {0}'.format(i*10),   'temp_rem_test_reg.flush.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 
 
