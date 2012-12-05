@@ -10,10 +10,10 @@ engines = [
     ('simple',  'simple',   None),
     ('tile',    'tile',     None),
     ('mcore',   'mcore',    None),
-    ('jit-batch_on',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"True"}),
-    ('jit-batch_off', 'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"False"}),
-    ('jit-expr_on',   'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"True"}),
-    ('jit-expr_off',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"False"}),    
+    ('jit-batch-on',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"True"}),
+    ('jit-batch-off', 'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"False","CPHVB_JIT_CACHE_ENABLED":"False"}),
+    ('jit-expr-on',   'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"True"}),
+    ('jit-expr-off',  'jit',      {"CPHVB_JIT_DIRECTEXECUTE":"True","CPHVB_JIT_CACHE_ENABLED":"False"}),    
     ('gpu',     'gpu',      None),
 ]
 
@@ -33,6 +33,16 @@ for i in xrange(1,10):
 for i in xrange(1,11):
     jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 jacobi_iterative_script_naive.append( ('Jacobi Iterative - Reduce Naive {0}'.format(200),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,200) ))
+
+
+x=4000
+y=4000
+jacobi_no_cache = []
+jacobi_no_cache.append( ('Jacobi Iterative - Reduce Naive {0}'.format(1),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,1) ))
+for i in xrange(2,10,2):
+    jacobi_no_cache.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i) ))
+for i in xrange(1,5):
+    jacobi_no_cache.append( ('Jacobi Iterative - Reduce Naive {0}'.format(i*10),   'jacobi.iterative.reduce.oneline.py','--size={0}*{1}*{2}'.format(x,y,i*10) ))
 
 
 
@@ -130,8 +140,6 @@ scripts   = [
 ]
 
 suite = {
-
-
     # Shallow Water iterations 2k by 2k.
     #'scripts': sw_iterate,
     #'engines': engines[0:2] + [engines[6]] + [engines[8]]
@@ -143,6 +151,10 @@ suite = {
     # temp removal testing
     'scripts':  temp_remove_effect,
     'engines':  engines[0:2] + [engines[6]] + [engines[8]]
+
+    # jacobi_no_cache
+    
+    # swater_no_cache
 
     # jacobi_data_range    
     #'scripts':  jacobi_data_range,
