@@ -44,7 +44,8 @@ for i in xrange(1,11):
     jacobi_data_range.append( ('Jacobi Iterative - {0}'.format(x),   'jacobi.iterative.reduce.oneline.py', '--size={0}*{1}*{2}'.format(x,y,1) ))
 
 
-
+x=4000
+y=4000
 # temporary array removal effect.
 temp_remove_effect = []
 for i in xrange(1,11):
