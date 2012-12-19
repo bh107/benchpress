@@ -40,7 +40,7 @@ if [ "$MACHINE" == "unknown" ]; then
 fi
 
 if [ ! -d "$BENCH_SRC" ]; then
-    git clone git@bitbucket.org:cphvb/benchpress.git $BENCH_SRC
+    git clone git@bitbucket.org:bohrium/benchpress.git $BENCH_SRC
 fi
 
 cd $BENCH_SRC

@@ -68,7 +68,7 @@ then
   rm -rf $CPHVB_SRC
 
   mkdir $CPHVB_LIB
-  git clone git@bitbucket.org:cphvb/cphvb.git $CPHVB_SRC
+  git clone git@bitbucket.org:bohrium/bohrium.git $CPHVB_SRC
   cd $CPHVB_SRC
   git checkout $CPHVB_BRANCH
   git submodule init
