@@ -99,6 +99,11 @@ echo "** Testing cphVB installation."
 
 export PYTHONPATH="$PYTHONPATH:$CPHVB_LIB/lib/python$PYTHONVER/site-packages"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CPHVB_LIB"
+
+# Make sure we test with simple, as the others may be broken or
+# or not 
+python $BENCH_SRC/select_ve.py simple
+
 python $CPHVB_SRC/test/numpy/numpytest.py
 
 RETURN=$?
