@@ -1,25 +1,25 @@
 #
-# This file is part of cphVB and copyright (c) 2012 the cphVB team:
-# http://cphvb.bitbucket.org
+# This file is part of Bohrium and copyright (c) 2012 the Bohrium team:
+# http://bohrium.bitbucket.org
 #
-# cphVB is free software: you can redistribute it and/or modify
+# Bohrium is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as 
 # published by the Free Software Foundation, either version 3 
 # of the License, or (at your option) any later version.
 # 
-# cphVB is distributed in the hope that it will be useful,
+# Bohrium is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the 
-# GNU Lesser General Public License along with cphVB. 
+# GNU Lesser General Public License along with Bohrium. 
 #
 # If not, see <http://www.gnu.org/licenses/>.
 #
 
 #
-#   This script clones, compiles, installs, tests and benchmarks cphvb.
+#   This script clones, compiles, installs, tests and benchmarks Bohrium.
 #   Another script produces graphs based on the results produced in this script.
 #
 [[ $BUILD_ROOT ]] && echo "** Benchmarking" || (echo "Exiting, you must run via bootstrap.sh"; exit)
@@ -28,6 +28,8 @@ cd $BUILD_ROOT
 
 OLDPP=$PYTHONPATH
 OLDLD=$LD_LIBRARY_PATH
+OLDDYLD=$DYLD_LIBRARY_PATH
+
 PYTHONVER=`python -c 'import sys; (major,minor, _,_,_) = sys.version_info; print "%d.%d" % (major, minor)'`
 START=`date`
 
@@ -41,8 +43,8 @@ fi
 
 source $BENCH_SRC/envs/$MACHINE.sh
 
-if [ -z "$CPHVB_BRANCH" ]; then
-    CPHVB_BRANCH="master"
+if [ -z "$BOHRIUM_BRANCH" ]; then
+    BOHRIUM_BRANCH="master"
 fi
 
 if [ -z "$SUITE" ]; then
@@ -62,22 +64,22 @@ fi
 #
 if [ "$SKIP_PURGE" != "1" ]
 then
-  echo "Grabbing repos $1 on branch '$CPHVB_BRANCH'."
+  echo "Grabbing repos $1 on branch '$BOHRIUM_BRANCH'."
   cd $BUILD_ROOT
-  rm -rf $CPHVB_LIB
-  rm -rf $CPHVB_SRC
+  rm -rf $BOHRIUM_LIB
+  rm -rf $BOHRIUM_SRC
 
-  mkdir $CPHVB_LIB
-  git clone git@bitbucket.org:bohrium/bohrium.git $CPHVB_SRC
-  cd $CPHVB_SRC
-  git checkout $CPHVB_BRANCH
+  mkdir $BOHRIUM_LIB
+  git clone git@bitbucket.org:bohrium/bohrium.git $BOHRIUM_SRC
+  cd $BOHRIUM_SRC
+  git checkout $BOHRIUM_BRANCH
   git submodule init
 fi
 
 if [ "$SKIP_UPDATE" != "1" ]
 then
-  cd $CPHVB_SRC
-  git checkout $CPHVB_BRANCH
+  cd $BOHRIUM_SRC
+  git checkout $BOHRIUM_BRANCH
   echo "Updating repos."
   git submodule update
   git pull
@@ -86,25 +88,26 @@ fi
 #
 #   BUILD AND INSTALL
 #
-cd $CPHVB_SRC
+cd $BOHRIUM_SRC
 REV=`git log --format=%H -n 1`
 
-echo "** Rebuilding cphVB"
+echo "** Rebuilding Bohrium"
 python build.py rebuild
 
-echo "** Installing cphVB"
-python build.py install --prefix="$CPHVB_LIB"
+echo "** Installing Bohrium"
+python build.py install --prefix="$BOHRIUM_LIB"
 
-echo "** Testing cphVB installation."
+echo "** Testing Bohrium installation."
 
-export PYTHONPATH="$PYTHONPATH:$CPHVB_LIB/lib/python$PYTHONVER/site-packages"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CPHVB_LIB"
+export PYTHONPATH="$PYTHONPATH:$BOHRIUM_LIB/lib/python$PYTHONVER/site-packages"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BOHRIUM_LIB"
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$BOHRIUM_LIB"
 
-# Make sure we test with simple, as the others may be broken or
-# or not 
+# Make sure we test with simple, as the others may be broken
+# or missing
 python $BENCH_SRC/select_ve.py simple
 
-python $CPHVB_SRC/test/numpy/numpytest.py
+python $BOHRIUM_SRC/test/numpy/numpytest.py
 
 RETURN=$?
 if [ $RETURN -ne 0 ]; then
@@ -119,7 +122,7 @@ cd $BENCH_SRC
 
 echo "** Running benchmarks"
 mkdir -p "$BENCH_SRC/results/$MACHINE/$REV"
-python press.py "$CPHVB_SRC" --runs "$RUNS" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" --parallel "$PARALLEL" > "$BENCH_SRC/results/$MACHINE/$MACHINE.log"
+python press.py "$BOHRIUM_SRC" --runs "$RUNS" --output "$BENCH_SRC/results/$MACHINE/$REV" --suite "$SUITE" --parallel "$PARALLEL" > "$BENCH_SRC/results/$MACHINE/$MACHINE.log"
 cd "$BENCH_SRC/results/$MACHINE/$REV"
 BENCHFILE=`ls -t1 benchmark-* | head -n1`
 
@@ -134,6 +137,7 @@ fi
 
 export PYTHONPATH=$OLDPP
 export LD_LIBRARY_PATH=$OLDLD
+export DYLD_LIBRARY_PATH=$OLDDYLD
 
 #
 #   Commit & Push benchmark results
@@ -143,6 +147,6 @@ git pull
 git add results/$MACHINE/$MACHINE.log
 git add results/$MACHINE/$REV/$BENCHFILE
 git add results/$MACHINE/benchmark-latest.json
-git commit -m "Results from running '$SUITE' of cphvb rev '$REV' on branch '$CPHVB_BRANCH' on '$MACHINE'."
+git commit -m "Results from running '$SUITE' of Bohrium rev '$REV' on branch '$BOHRIUM_BRANCH' on '$MACHINE'."
 git push -u origin master
 

@@ -296,7 +296,7 @@ def render_runtime(mark, data, baseline, comp, output, file_formats=['pdf']):
     data = dict(data)
 
     #benchmarks  = ['Black Scholes',  'Jacobi Iterative - Reduce', 'kNN', 'Shallow Water']
-    benchmarks  = ['Black Scholes - Python', 'Black Scholes - cphVB', 'Black Scholes - C',  'Jacobi - Python', 'Jacobi - cphVB' , 'Jacobi - C']
+    benchmarks  = ['Black Scholes - Python', 'Black Scholes - Bohrium', 'Black Scholes - C',  'Jacobi - Python', 'Jacobi - Bohrium' , 'Jacobi - C']
 
     rotation = 'horizontal'
     width    = 0.50

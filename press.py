@@ -104,10 +104,10 @@ def perf_counters():
 
 def execute_numpy( param_set ):
 
-    script, cphvb, envs, script_path, arg, use_perf, affinity = param_set
+    script, bohrium, envs, script_path, arg, use_perf, affinity = param_set
 
     args        = []
-    args        += ['taskset', '-c', str(affinity), 'python', script, arg, '--cphvb=%s' % cphvb ]
+    args        += ['taskset', '-c', str(affinity), 'python', script, arg, '--bohrium=%s' % bohrium ]
     args_str    = ' '.join(args)
 
     if use_perf:
@@ -137,14 +137,14 @@ def execute_numpy( param_set ):
     print affinity, elapsed
     return (elapsed, perfs, args_str)
 
-def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
+def run_bohriumnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
 
-    confparser = SafeConfigParser()     # Parser to modify the cphvb configuration file.
+    confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
     confparser.read(config)             # Read current configuration
 
-    cphvb = False
-    if engine:                                  # Enable cphvb with the given engine.
-        cphvb = True
+    bohrium = False
+    if engine:                                  # Enable Bohrium with the given engine.
+        bohrium = True
         confparser.set("node", "children", engine)  
         confparser.write(open(config, 'wb'))
 
@@ -161,7 +161,7 @@ def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, 
     print "Running %s" % mark
     for i in xrange(1, runs+1):
 
-        param_set = [[script, cphvb, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
+        param_set = [[script, bohrium, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
 
         res = pool.map( execute_numpy, param_set, 1 )
 
@@ -174,7 +174,7 @@ def run_cphvbnumpy( config, suite, mark, script, arg, alias, engine, env, runs, 
 
 def execute_ccode( param_set ):
 
-    script, cphvb, envs, script_path, arg, use_perf, affinity = param_set
+    script, bohrium, envs, script_path, arg, use_perf, affinity = param_set
 
     args        = []
     args        += ['taskset', '-c', str(affinity), script] + arg.split(' ')
@@ -269,7 +269,7 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                 accum = []
                 if '.py' in script:
 
-                    (times, perfs, args_str) = run_cphvbnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
+                    (times, perfs, args_str) = run_bohriumnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
                         
                 else:
                     (times, perfs, args_str) = run_ccode(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
@@ -292,7 +292,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
     parser.add_argument(
         'src',
-        help='Path to the cphvb source-code.'
+        help='Path to the Bohrium source-code.'
     )
     parser.add_argument(
         '--suite',
@@ -323,7 +323,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(
-        os.getenv('HOME')+os.sep+'.cphvb'+os.sep+'config.ini',
+        os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
         args.src,
         args.output,
         args.suite,

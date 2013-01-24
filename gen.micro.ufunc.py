@@ -50,9 +50,9 @@ def gen( baseline, alternative, output ):
     val = []
     pos = []
 
-    for opcode, typesig, times, value, err, cphvb in (res for res in bl if res[0] == "CPHVB_POWER") and not cphvb:
+    for opcode, typesig, times, value, err, bohrium in (res for res in bl if res[0] == "BH_POWER") and not bohrium:
         avg_t = avg( times )
-        text = ','.join([t.lower().replace('cphvb_', '').replace('float', 'f').replace('uint','u').replace('int','i').replace('complex','c') for t in typesig])
+        text = ','.join([t.lower().replace('bh_', '').replace('float', 'f').replace('uint','u').replace('int','i').replace('complex','c') for t in typesig])
 
         for a_avg in (avg(result[2]) for result in alt if result[0] == opcode and result[1] == typesig):
             diff = avg_t-a_avg
