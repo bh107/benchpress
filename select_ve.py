@@ -1,4 +1,5 @@
 from ConfigParser import SafeConfigParser
+import os
 
 if __name__ == "__main__":
 	conffile = os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini'
