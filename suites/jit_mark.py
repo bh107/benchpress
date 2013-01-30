@@ -166,5 +166,3 @@ suite = {
     #'engines':  engines[0:4] + [engines[6]] + [engines[8]]
 
 }
-
-pp.pprint(suite)

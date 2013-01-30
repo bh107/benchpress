@@ -50,5 +50,5 @@ scripts   = [
 
 suite = {
     'scripts':  scripts,
-    'engine':   engines
+    'engines':   engines
 }
