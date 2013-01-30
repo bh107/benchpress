@@ -105,9 +105,10 @@ def perf_counters():
 def execute_numpy( param_set ):
 
     script, bohrium, envs, script_path, arg, use_perf, affinity = param_set
+    script_args = arg.split(' ')
 
     args        = []
-    args        += ['taskset', '-c', str(affinity), 'python', script, arg, '--bohrium=%s' % bohrium ]
+    args        += ['taskset', '-c', str(affinity), 'python', script] + script_args +[ '--bohrium=%s' % bohrium ]
     args_str    = ' '.join(args)
 
     if use_perf:
