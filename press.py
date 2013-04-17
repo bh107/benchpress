@@ -15,55 +15,72 @@ import suites
 
 
 def meta(src_dir, suite):
+    try:
+        p = Popen(              # Try grabbing the repos-revision
+            ["git", "log", "--pretty=format:%H", "-n", "1"],
+            stdin   = PIPE,
+            stdout  = PIPE,
+            cwd     = src_dir
+        )
+        rev, err = p.communicate()
+    except OSError:
+        rev = "Unknown"    
 
-    p = Popen(              # Try grabbing the repos-revision
-        ["git", "log", "--pretty=format:%H", "-n", "1"],
-        stdin   = PIPE,
-        stdout  = PIPE,
-        cwd     = src_dir
-    )
-    rev, err = p.communicate()
+    try:
+        p = Popen(              # Try grabbing hw-info
+            ["lshw", "-quiet", "-numeric"],
+            stdin   = PIPE,
+            stdout  = PIPE,
+        )
+        hw, err = p.communicate()
+    except OSError:
+        hw = "Unknown"    
 
-    p = Popen(              # Try grabbing hw-info
-        ["lshw", "-quiet", "-numeric"],
-        stdin   = PIPE,
-        stdout  = PIPE,
-    )
-    hw, err = p.communicate()
+    try:
+        p = Popen(              # Try grabbing hw-info
+            ["hostname"],
+            stdin   = PIPE,
+            stdout  = PIPE,
+        )
+        hostname, err = p.communicate()
+    except OSError:
+        hostname = "Unknown"
 
-    p = Popen(              # Try grabbing hw-info
-        ["hostname"],
-        stdin   = PIPE,
-        stdout  = PIPE,
-    )
-    hostname, err = p.communicate()
+    try:
+        p = Popen(              # Try grabbing python version
+            ["python", "-V"],
+            stdin   = PIPE,
+            stdout  = PIPE,
+            stderr  = PIPE
+        )
+        python_ver, err = p.communicate()
+        python_ver  += err
+    except OSError:
+        python_ver = "Unknown"
 
-    p = Popen(              # Try grabbing python version
-        ["python", "-V"],
-        stdin   = PIPE,
-        stdout  = PIPE,
-        stderr  = PIPE
-    )
-    python_ver, err = p.communicate()
-    python_ver  += err
+    try:
+        p = Popen(              # Try grabbing gcc version
+            ["gcc", "-v"],
+            stdin   = PIPE,
+            stdout  = PIPE,
+            stderr  = PIPE
+        )
+        gcc_ver, err = p.communicate()
+        gcc_ver += err
+    except OSError:
+        gcc_ver = "Unknown"
 
-    p = Popen(              # Try grabbing python version
-        ["gcc", "-v"],
-        stdin   = PIPE,
-        stdout  = PIPE,
-        stderr  = PIPE
-    )
-    gcc_ver, err = p.communicate()
-    gcc_ver += err
-
-    p = Popen(              # Try grabbing python version
-        ["clang", "-v"],
-        stdin   = PIPE,
-        stdout  = PIPE,
-        stderr  = PIPE
-    )
-    clang_ver, err = p.communicate()
-    clang_ver += err
+    try:
+        p = Popen(              # Try grabbing clang version
+            ["clang", "-v"],
+            stdin   = PIPE,
+            stdout  = PIPE,
+            stderr  = PIPE
+        )
+        clang_ver, err = p.communicate()
+        clang_ver += err
+    except OSError:
+        clang_ver = "Unknown"
 
     info = {
         'suite':    suite,
