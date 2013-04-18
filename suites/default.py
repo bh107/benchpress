@@ -1,54 +1,24 @@
 # Engines with various parameter setups
-# (alias, runs, engine, env-vars)
+# (alias, engine, env-vars)
 
 engines = [
     ('numpy',   None,       None),
     ('naive',   'naive',    None),
-    ('score',   'score',    None),
     ('simple',  'simple',   None),
-    ('tile',    'tile',     None),
-    ('mcore',   'mcore',    None),
-    ('jit',     'jit',      None),
     ('gpu',     'gpu',      None),
 ]
 
 # Scripts and their arguments
 # (alias, script, parameters)
 scripts   = [
-    ('Black Scholes',   'bscholes.py',  '--size=2000000*4'),
-    ('Cache Synth',     'cache.py',     '--size=10500000*10*1'),
-
-    ('Jacobi Iterative',            'jacobi.iterative.py',          '--size=7000*7000*4'),
-    ('Jacobi Iterative - PS',       'jacobi.iterative.ps.py',       '--size=7000*7000*4'),
-    # This one seems to be broken.
-    #('Jacobi Iterative - No Views', 'jacobi.iterative.noviews.py',  '--size=7000*7000*4'),
-    ('Jacobi Iterative - Reduce',   'jacobi.iterative.reduc.py',    '--size=7000*7000*4'),
-
-    ('kNN',             'knn.py',       '--size=10000*120'),
-    # This is fall back to the bridge
-    #('kNN - Naive',     'knn.naive.py', '--size=10000*120*10'),
-
-    ('Lattice Boltzmann 2D', 'lbm.2d.py', '--size=15*200000*2'),
-    ('Lattice Boltzmann 3D', 'lbm.3d.py', '--size=100*100*100*2'),
-
-    # This one seems to be broken
-    #('LU Factorization', 'lu.py', '--size=5000*10'),   
-
-    ('Monte Carlo PI - RIL',    'mc.py',        '--size=10*1000000*10'),
-    ('Monte Carlo PI - 2xN',    'mc.2byN.py',   '--size=10*1000000*10'),
-    ('Monte Carlo PI - Nx2',    'mc.Nby2.py',   '--size=10*1000000*10'),
-
-    # This one seems to be broken
-    #('N-Body',  'nbody.py', '--size=2500*10'),
-
-    ('Stencil - 1D 4way',       'stencil.simplest.py',  '--size=100000000*1'),
-    ('Stencil - 2D',            'stencil.2d.py',        '--size=10000*1000*10'),
-
-    ('Shallow Water',           'swater.py',            '--size=2200*1'),
-
+    ('Black Scholes',        'black_scholes.py',  '--size=1000000*10'),
+    ('Monte Carlo PI',       'mc.py',             '--size=1000000*100'),
+    ('Jacobi Stencil',       'jacobi_stencil.py', '--size=5000*5000*10'),
+    ('Shallow Water',        'shallow_water.py',  '--size=1000*1000*10'),
+    ('Lattice Boltzmann 2D', 'lattice_boltzmann_D2Q9.py', '--size=100*4000*10'),
 ]
 
 suite = {
     'scripts':  scripts,
-    'engines':   engines
+    'engines':  engines
 }
