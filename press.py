@@ -24,7 +24,7 @@ def meta(src_dir, suite):
         )
         rev, err = p.communicate()
     except OSError:
-        rev = "Unknown"    
+        rev = "Unknown"
 
     try:
         p = Popen(              # Try grabbing hw-info
@@ -34,7 +34,7 @@ def meta(src_dir, suite):
         )
         hw, err = p.communicate()
     except OSError:
-        hw = "Unknown"    
+        hw = "Unknown"
 
     try:
         p = Popen(              # Try grabbing hw-info
@@ -163,20 +163,19 @@ def run_bohriumnumpy( config, suite, mark, script, arg, alias, engine, env, runs
     bohrium = False
     if engine:                                  # Enable Bohrium with the given engine.
         bohrium = True
-        confparser.set("node", "children", engine)  
+        confparser.set("node", "children", engine)
         confparser.write(open(config, 'wb'))
 
-    envs = None                                 # Populate environment variables
-    if env:
-        envs = os.environ.copy()
+    envs = os.environ.copy()                    # Populate environment variables
+    if env is not None:
         envs.update(env)
                                                 # Setup process + arguments
     times = []
     perfs = []
 
     pool = Pool(processes=parallel)
-    
-    print "Running %s" % mark
+
+    print "Running %s on %s" %(mark,engine)
     for i in xrange(1, runs+1):
 
         param_set = [[script, bohrium, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
@@ -228,10 +227,8 @@ def execute_ccode( param_set ):
 
 def run_ccode( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
 
-    envs = None                                 # Populate environment variables
-    if env:
-        envs = os.environ.copy()
-        envs.update(env)
+    envs = os.environ.copy()                    # Populate environment variables
+    envs.update(env)
                                                 # Setup process + arguments
     times = []
     perfs = []
@@ -259,7 +256,7 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
         'meta': meta(src_root, suite),
         'runs': []
     }
-    
+
     if use_perf:
         out, err = Popen(
             ['which', 'perf'],
@@ -278,7 +275,7 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
         if err or not out:
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
-            
+
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for mark, script, arg in benchmark['scripts']:
@@ -288,7 +285,7 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                 if '.py' in script:
 
                     (times, perfs, args_str) = run_bohriumnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
-                        
+
                 else:
                     (times, perfs, args_str) = run_ccode(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
                                                             # Accumulate results
