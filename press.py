@@ -120,10 +120,9 @@ def perf_counters():
     return ','.join(events)
 
 def execute( param_set):
+    command, envs, src_root, use_perf, affinity = param_set
 
-    command, envs, script_path, arg, use_perf, affinity = param_set
-
-    args        = ['taskset', '-c', str(affinity)] + command.split(' ') + arg.split(' ')
+    args        = ['taskset', '-c', str(affinity)] + command.split(' ')
     args_str    = ' '.join(args)
 
     if use_perf:
@@ -137,7 +136,7 @@ def execute( param_set):
         stdin=PIPE,
         stdout=PIPE,
         env=envs,
-        cwd=script_path
+        cwd=src_root
     )
     out, err = p.communicate()              # Grab the output
     elapsed = 0.0
@@ -179,8 +178,8 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd,\
          tempfile.NamedTemporaryFile(delete=True, prefix='bohrium-config-', suffix='.ini') as conf:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
-        for script_alias, script, script_param in benchmark['scripts']:
-            for bridge_alias, bridge_cmd, bridge_path, bridge_env in benchmark['bridges']:
+        for script_alias, script, script_args in benchmark['scripts']:
+            for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
                 for engine_alias, engine, engine_env in benchmark['engines']:
 
                     accum = []
@@ -202,17 +201,15 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                     if bridge_env is not None:
                         envs.update(bridge_env)
 
+                    cmd = bridge_cmd.replace("{script}", script)
+                    cmd = cmd.replace("{args}", script_args);
+
                     pool = Pool(processes=parallel)     # Setup process + arguments
-                    print "Running %s/%s on %s" %(bridge_path,script,engine_alias)
+                    print "Running %s/%s on %s" %(bridge_alias,script,engine_alias)
                     final_args_str = ""
                     for i in xrange(1, runs+1):
 
-                        param_set = [["%s %s"%(bridge_cmd, script),
-                                     envs,
-                                     src_root + os.sep + bridge_path,
-                                     script_param,
-                                     use_perf,
-                                     j] for j in xrange(0, parallel)]
+                        param_set = [[cmd,envs,src_root,use_perf,j] for j in xrange(0, parallel)]
 
                         res = pool.map( execute, param_set, 1 )
 
