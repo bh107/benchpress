@@ -119,13 +119,11 @@ def perf_counters():
 
     return ','.join(events)
 
-def execute_numpy( param_set ):
+def execute( param_set):
 
-    script, bohrium, envs, script_path, arg, use_perf, affinity = param_set
-    script_args = arg.split(' ')
+    command, envs, script_path, arg, use_perf, affinity = param_set
 
-    args        = []
-    args        += ['taskset', '-c', str(affinity), 'python', script] + script_args +[ '--bohrium=%s' % bohrium ]
+    args        = ['taskset', '-c', str(affinity)] + command.split(' ') + arg.split(' ')
     args_str    = ' '.join(args)
 
     if use_perf:
@@ -133,7 +131,7 @@ def execute_numpy( param_set ):
         cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
     else:
         cmd = args
-
+    print args_str
     p = Popen(                              # Run the command
         cmd,
         stdin=PIPE,
@@ -145,15 +143,12 @@ def execute_numpy( param_set ):
     elapsed = 0.0
     if err or not out:
         print "ERR: Something went wrong %s" % err
-    else:
-        elapsed = float(out.split(' ')[-1] .rstrip())
 
     perfs = None
     if use_perf:
         perfs = open(pfd.name).read()
 
-    print affinity, elapsed
-    return (elapsed, perfs, args_str)
+    return (out, perfs, args_str)
 
 def run_bohriumnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
 
@@ -178,57 +173,23 @@ def run_bohriumnumpy( config, suite, mark, script, arg, alias, engine, env, runs
     print "Running %s on %s" %(mark,engine)
     for i in xrange(1, runs+1):
 
-        param_set = [[script, bohrium, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
+        param_set = [["python %s"%script, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
 
-        res = pool.map( execute_numpy, param_set, 1 )
+        res = pool.map( execute, param_set, 1 )
 
-        for elapsed, perf, args_str in res:
+        for out, perf, args_str in res:
+            elapsed = float(out.split(' ')[-1] .rstrip())
+            print "elapsed time: ", elapsed
             times.append( elapsed )
             perfs.append( perf )
 
     return (times, perfs, args_str)
 
-
-def execute_ccode( param_set ):
-
-    script, bohrium, envs, script_path, arg, use_perf, affinity = param_set
-
-    args        = []
-    args        += ['taskset', '-c', str(affinity), script] + arg.split(' ')
-    args_str    = ' '.join(args)
-
-    if use_perf:
-        pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
-    else:
-        cmd = args
-
-    p = Popen(                              # Run the command
-        cmd,
-        stdin=PIPE,
-        stdout=PIPE,
-        env=envs,
-        cwd=script_path
-    )
-    out, err = p.communicate()              # Grab the output
-    elapsed = 0.0
-    if err or not out:
-        print "ERR: Something went wrong %s" % err
-    else:
-        elapsed = float(out.split(' ')[5].rstrip())
-
-    perfs = None
-    if use_perf:
-        perfs = open(pfd.name).read()
-
-    print affinity, elapsed
-
-    return (elapsed, perfs, args_str)
-
 def run_ccode( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
 
     envs = os.environ.copy()                    # Populate environment variables
-    envs.update(env)
+    if env:
+        envs.update(env)
                                                 # Setup process + arguments
     times = []
     perfs = []
@@ -238,11 +199,13 @@ def run_ccode( config, suite, mark, script, arg, alias, engine, env, runs, use_p
     print "Running %s" % mark
     for i in xrange(1, runs+1):
 
-        param_set = [[script, False, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
+        param_set = [["./%s"%script, envs, "%s/../c/"%script_path, arg, use_perf, j] for j in xrange(0, parallel)]
 
-        res = pool.map( execute_ccode, param_set, 1 )
+        res = pool.map( execute, param_set, 1 )
 
-        for elapsed, perf, args_str in res:
+        for out, perf, args_str in res:
+            elapsed = float(out.split(' ')[5].rstrip())
+            print "elapsed time: ", elapsed
             times.append( elapsed )
             perfs.append( perf )
 
