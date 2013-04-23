@@ -150,66 +150,6 @@ def execute( param_set):
 
     return (out, perfs, args_str)
 
-def run_bohriumnumpy( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
-
-    confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
-    confparser.read(config)             # Read current configuration
-
-    bohrium = False
-    if engine:                                  # Enable Bohrium with the given engine.
-        bohrium = True
-        confparser.set("node", "children", engine)
-        confparser.write(open(config, 'wb'))
-
-    envs = os.environ.copy()                    # Populate environment variables
-    if env is not None:
-        envs.update(env)
-                                                # Setup process + arguments
-    times = []
-    perfs = []
-
-    pool = Pool(processes=parallel)
-
-    print "Running %s on %s" %(mark,engine)
-    for i in xrange(1, runs+1):
-
-        param_set = [["python %s"%script, envs, script_path, arg, use_perf, j] for j in xrange(0, parallel)]
-
-        res = pool.map( execute, param_set, 1 )
-
-        for out, perf, args_str in res:
-            elapsed = float(out.split(' ')[-1] .rstrip())
-            print "elapsed time: ", elapsed
-            times.append( elapsed )
-            perfs.append( perf )
-
-    return (times, perfs, args_str)
-
-def run_ccode( config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel ):
-
-    envs = os.environ.copy()                    # Populate environment variables
-    if env:
-        envs.update(env)
-                                                # Setup process + arguments
-    times = []
-    perfs = []
-
-    pool = Pool(processes=parallel)
-
-    print "Running %s" % mark
-    for i in xrange(1, runs+1):
-
-        param_set = [["./%s"%script, envs, "%s/../c/"%script_path, arg, use_perf, j] for j in xrange(0, parallel)]
-
-        res = pool.map( execute, param_set, 1 )
-
-        for out, perf, args_str in res:
-            elapsed = float(out.split(' ')[5].rstrip())
-            print "elapsed time: ", elapsed
-            times.append( elapsed )
-            perfs.append( perf )
-
-    return (times, perfs, args_str)
 
 def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
 
@@ -241,25 +181,59 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
 
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
-        for mark, script, arg in benchmark['scripts']:
-            for alias, engine, env in benchmark['engines']:
+        for script_alias, script, script_param in benchmark['scripts']:
+            for bridge_alias, bridge_cmd, bridge_path, bridge_env in benchmark['bridges']:
+                for engine_alias, engine, engine_env in benchmark['engines']:
 
-                accum = []
-                if '.py' in script:
+                    accum = []
+                    times = []
+                    perfs = []
 
-                    (times, perfs, args_str) = run_bohriumnumpy(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
+                    confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
+                    confparser.read(config)             # Read current configuration
+                    confparser.set("node", "children", engine_alias)
+                    confparser.write(open(config, 'wb'))
 
-                else:
-                    (times, perfs, args_str) = run_ccode(config, suite, mark, script, arg, alias, engine, env, runs, use_perf, script_path, parallel)
-                                                            # Accumulate results
-                results['runs'].append(( mark, alias, engine, env, args_str, times, perfs ))
-                results['meta']['ended'] = str(datetime.now())
+                    envs = os.environ.copy()            # Populate environment variables
+                    if engine_env is not None:
+                        envs.update(engine_env)
+                    if bridge_env is not None:
+                        envs.update(bridge_env)
 
-                fd.truncate(0)                              # Store the results in a file...
-                fd.seek(0)
-                fd.write(json.dumps(results, indent=4))
-                fd.flush()
-                os.fsync(fd)
+                                                        # Setup process + arguments
+                    pool = Pool(processes=parallel)
+                    print "Running %s/%s on %s" %(bridge_path,script,engine_alias)
+                    final_args_str = ""
+                    for i in xrange(1, runs+1):
+
+                        param_set = [["%s %s"%(bridge_cmd, script),
+                                     envs,
+                                     src_root + os.sep + bridge_path,
+                                     script_param,
+                                     use_perf,
+                                     j] for j in xrange(0, parallel)]
+
+                        res = pool.map( execute, param_set, 1 )
+
+                        for out, perf, args_str in res:
+                            try:
+                                elapsed = float(out.split(' ')[-1] .rstrip())
+                                print "elapsed time: ", elapsed
+                                times.append( elapsed )
+                                perfs.append( perf )
+                                final_args_str = args_str
+                            except ValueError:
+                                print "Could not parse the output"
+
+                                                         # Accumulate results
+                    results['runs'].append(( script_alias, engine_alias, engine, envs, final_args_str, times, perfs ))
+                    results['meta']['ended'] = str(datetime.now())
+
+                    fd.truncate(0)                       # Store the results in a file...
+                    fd.seek(0)
+                    fd.write(json.dumps(results, indent=4))
+                    fd.flush()
+                    os.fsync(fd)
 
 if __name__ == "__main__":
 
