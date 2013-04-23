@@ -153,8 +153,6 @@ def execute( param_set):
 
 def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
 
-    script_path = src_root +os.sep+ 'benchmark' +os.sep+ 'Python' +os.sep
-
     results = {
         'meta': meta(src_root, suite),
         'runs': []
@@ -172,14 +170,14 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                 ['perf', 'list'],
                 stdin=PIPE,
                 stdout=PIPE,
-                cwd=script_path
             ).communicate()
 
         if err or not out:
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
 
-    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd:
+    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd,\
+         tempfile.NamedTemporaryFile(delete=True, prefix='bohrium-config-', suffix='.ini') as conf:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
         for script_alias, script, script_param in benchmark['scripts']:
             for bridge_alias, bridge_cmd, bridge_path, bridge_env in benchmark['bridges']:
@@ -188,20 +186,23 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                     accum = []
                     times = []
                     perfs = []
-
                     confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
                     confparser.read(config)             # Read current configuration
                     confparser.set("node", "children", engine_alias)
-                    confparser.write(open(config, 'wb'))
+                    conf.truncate(0)                    # And write it to a temp file
+                    conf.seek(0)
+                    confparser.write(conf)
+                    conf.flush()
+                    os.fsync(conf)
 
                     envs = os.environ.copy()            # Populate environment variables
+                    envs['BH_CONFIG'] = conf.name
                     if engine_env is not None:
                         envs.update(engine_env)
                     if bridge_env is not None:
                         envs.update(bridge_env)
 
-                                                        # Setup process + arguments
-                    pool = Pool(processes=parallel)
+                    pool = Pool(processes=parallel)     # Setup process + arguments
                     print "Running %s/%s on %s" %(bridge_path,script,engine_alias)
                     final_args_str = ""
                     for i in xrange(1, runs+1):
@@ -270,7 +271,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--parallel',
         default=1,
-        help="Performs runs * parallel jobs on different processors."
+        help="Performs * parallel jobs on different processors."
     )
     args = parser.parse_args()
 
