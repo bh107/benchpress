@@ -147,7 +147,7 @@ def execute( cmd,envs,src_root,use_perf ):
     return (out, perfs, cmd_str)
 
 
-def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
+def main(config, src_root, output, suite, benchmarks, runs, use_perf, parallel):
 
     results = {
         'meta': meta(src_root, suite),
@@ -175,67 +175,69 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
     with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd,\
          tempfile.NamedTemporaryFile(delete=True, prefix='bohrium-config-', suffix='.ini') as conf:
         print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
-        for script_alias, script, script_args in benchmark['scripts']:
-            for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
-                for engine_alias, engine, engine_env in benchmark['engines']:
+        for benchmark in benchmarks:
+            for script_alias, script, script_args in benchmark['scripts']:
+                for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
+                    for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
 
-                    confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
-                    confparser.read(config)             # Read current configuration
-                    confparser.set("node", "children", engine_alias)
-                    conf.truncate(0)                    # And write it to a temp file
-                    conf.seek(0)
-                    confparser.write(conf)
-                    conf.flush()
-                    os.fsync(conf)
+                        if engine:
+                            confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
+                            confparser.read(config)             # Read current configuration
+                            confparser.set("node", "children", engine)
+                            conf.truncate(0)                    # And write it to a temp file
+                            conf.seek(0)
+                            confparser.write(conf)
+                            conf.flush()
+                            os.fsync(conf)
 
-                    envs = os.environ.copy()            # Populate environment variables
-                    envs['BH_CONFIG'] = conf.name
-                    if engine_env is not None:
-                        envs.update(engine_env)
-                    if bridge_env is not None:
-                        envs.update(bridge_env)
+                        envs = os.environ.copy()                # Populate environment variables
+                        envs['BH_CONFIG'] = conf.name
+                        if engine_env is not None:
+                            envs.update(engine_env)
+                        if bridge_env is not None:
+                            envs.update(bridge_env)
 
-                    cmd = bridge_cmd.replace("{script}", script)
-                    cmd = cmd.replace("{args}", script_args);
+                        cmd = bridge_cmd.replace("{script}", script)
+                        cmd = cmd.replace("{args}", script_args);
 
-                    print "Running %s/%s on %s" %(bridge_alias,script,engine_alias)
-                    times = []
-                    perfs = []
-                    try:
-                        for i in xrange(1, runs+1):
+                        print "Running %s/%s on %s" %(bridge_alias,script,engine_alias)
+                        times = []
+                        perfs = []
+                        try:
+                            for i in xrange(1, runs+1):
 
-                            out, perf, cmd_str = execute( cmd,envs,src_root,use_perf )
+                                out, perf, cmd_str = execute( cmd,envs,src_root,use_perf )
 
-                            elapsed = float(out.split(' ')[-1] .rstrip())
-                            print "elapsed time: ", elapsed
-                            times.append( elapsed )
-                            perfs.append( perf )
-                    except ValueError:
-                        print "Could not parse the output"
-                    except CalledProcessError:
-                        print "Error in the execution -- skipping to the next benchmark"
+                                elapsed = float(out.split(' ')[-1] .rstrip())
+                                print "elapsed time: ", elapsed
+                                times.append( elapsed )
+                                perfs.append( perf )
+                        except ValueError:
+                            print "Could not parse the output"
+                        except CalledProcessError:
+                            print "Error in the execution -- skipping to the next benchmark"
 
-                                                         # Accumulate results
-                    results['runs'].append({'script':script_alias,
-                                            'bridge':bridge_alias,
-                                            'engine':engine_alias,
-                                            'envs':envs,
-                                            'cmd':cmd_str,
-                                            'times':times,
-                                            'perfs':perfs})
-                    results['meta']['ended'] = str(datetime.now())
+                                                               # Accumulate results
+                        results['runs'].append({'script':script_alias,
+                                                'bridge':bridge_alias,
+                                                'engine':engine_alias,
+                                                'envs':envs,
+                                                'cmd':cmd_str,
+                                                'times':times,
+                                                'perfs':perfs})
+                        results['meta']['ended'] = str(datetime.now())
 
-                    fd.truncate(0)                       # Store the results in a file...
-                    fd.seek(0)
-                    fd.write(json.dumps(results, indent=4))
-                    fd.flush()
-                    os.fsync(fd)
+                        fd.truncate(0)                       # Store the results in a file...
+                        fd.seek(0)
+                        fd.write(json.dumps(results, indent=4))
+                        fd.flush()
+                        os.fsync(fd)
 
 if __name__ == "__main__":
 
     bsuites = {}        # Load benchmark-suites from 'suites'
     for name, m in ((module, __import__("suites.%s" % module)) for importer, module, _ in pkgutil.iter_modules(['suites'])):
-        bsuites[name] = m.__dict__[name].suite
+        bsuites[name] = m.__dict__[name].suites
 
     parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
     parser.add_argument(

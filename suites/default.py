@@ -29,3 +29,7 @@ suite = {
     'engines':  engines,
     'scripts':  scripts
 }
+
+suites = [suite]
+
+
