@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 from ConfigParser import SafeConfigParser
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import Popen, PIPE, CalledProcessError
 from datetime import datetime
 
-from multiprocessing import Pool
 import tempfile
 import argparse
 import pkgutil
@@ -119,18 +118,16 @@ def perf_counters():
 
     return ','.join(events)
 
-def execute( param_set):
-    command, envs, src_root, use_perf, affinity = param_set
+def execute( cmd,envs,src_root,use_perf ):
 
-    args        = ['taskset', '-c', str(affinity)] + command.split(' ')
-    args_str    = ' '.join(args)
+    cmd = ['taskset', '-c', '0'] + cmd.split(' ')
 
     if use_perf:
         pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + args
-    else:
-        cmd = args
-    print args_str
+        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + cmd
+
+    cmd_str = ' '.join(cmd)
+    print cmd_str
     p = Popen(                              # Run the command
         cmd,
         stdin=PIPE,
@@ -141,13 +138,13 @@ def execute( param_set):
     out, err = p.communicate()              # Grab the output
     elapsed = 0.0
     if err or not out:
-        print "ERR: Something went wrong %s" % err
+        raise CalledProcessError(returncode=p.returncode, cmd=cmd, output=err)
 
     perfs = None
     if use_perf:
         perfs = open(pfd.name).read()
 
-    return (out, perfs, args_str)
+    return (out, perfs, cmd_str)
 
 
 def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
@@ -182,9 +179,6 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
             for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
                 for engine_alias, engine, engine_env in benchmark['engines']:
 
-                    accum = []
-                    times = []
-                    perfs = []
                     confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
                     confparser.read(config)             # Read current configuration
                     confparser.set("node", "children", engine_alias)
@@ -204,27 +198,31 @@ def main(config, src_root, output, suite, benchmark, runs, use_perf, parallel):
                     cmd = bridge_cmd.replace("{script}", script)
                     cmd = cmd.replace("{args}", script_args);
 
-                    pool = Pool(processes=parallel)     # Setup process + arguments
                     print "Running %s/%s on %s" %(bridge_alias,script,engine_alias)
-                    final_args_str = ""
-                    for i in xrange(1, runs+1):
+                    times = []
+                    perfs = []
+                    try:
+                        for i in xrange(1, runs+1):
 
-                        param_set = [[cmd,envs,src_root,use_perf,j] for j in xrange(0, parallel)]
+                            out, perf, cmd_str = execute( cmd,envs,src_root,use_perf )
 
-                        res = pool.map( execute, param_set, 1 )
-
-                        for out, perf, args_str in res:
-                            try:
-                                elapsed = float(out.split(' ')[-1] .rstrip())
-                                print "elapsed time: ", elapsed
-                                times.append( elapsed )
-                                perfs.append( perf )
-                                final_args_str = args_str
-                            except ValueError:
-                                print "Could not parse the output"
+                            elapsed = float(out.split(' ')[-1] .rstrip())
+                            print "elapsed time: ", elapsed
+                            times.append( elapsed )
+                            perfs.append( perf )
+                    except ValueError:
+                        print "Could not parse the output"
+                    except CalledProcessError:
+                        print "Error in the execution -- skipping to the next benchmark"
 
                                                          # Accumulate results
-                    results['runs'].append(( script_alias, engine_alias, engine, envs, final_args_str, times, perfs ))
+                    results['runs'].append({'script':script_alias,
+                                            'bridge':bridge_alias,
+                                            'engine':engine_alias,
+                                            'envs':envs,
+                                            'cmd':cmd_str,
+                                            'times':times,
+                                            'perfs':perfs})
                     results['meta']['ended'] = str(datetime.now())
 
                     fd.truncate(0)                       # Store the results in a file...
