@@ -8,6 +8,7 @@ import argparse
 import pkgutil
 import json
 import os
+import sys
 import re
 import StringIO
 
@@ -119,49 +120,58 @@ def perf_counters():
 
     return ','.join(events)
 
-def execute( result_file ):
+
+def write2json(json_file, obj):
+    json_file.truncate(0)
+    json_file.seek(0)
+    json_file.write(json.dumps(obj, indent=4))
+    json_file.flush()
+    os.fsync(json_file)
+
+
+def execute( result_file, runs ):
     result_file.seek(0)
     res = json.load(result_file)
 
-    for run in res['runs']:
-        try:
-            while not run['done'] and len(run['times']) < 2:
-                with tempfile.NamedTemporaryFile(prefix='bohrium-config-', suffix='.ini') as conf:
+    try:
+        for run in res['runs']:
+            try:
+                while not run['done'] and len(run['times']) < runs:
+                    with tempfile.NamedTemporaryFile(prefix='bohrium-config-', suffix='.ini') as conf:
 
-                    print "Executing %s/%s on %s" %(run['bridge_alias'],run['script'],run['engine_alias'])
-                    run['envs']['BH_CONFIG'] = conf.name
-                    conf.write(run['bh_config'])            # And write it to a temp file
-                    conf.flush()
-                    os.fsync(conf)
+                        print "Executing %s/%s on %s" %(run['bridge_alias'],run['script'],run['engine_alias'])
+                        run['envs']['BH_CONFIG'] = conf.name
+                        conf.write(run['bh_config'])            # And write it to a temp file
+                        conf.flush()
+                        os.fsync(conf)
 
-                    p = Popen(                              # Run the command
-                        run['cmd'],
-                        stdin=PIPE,
-                        stdout=PIPE,
-                        env=run['envs'],
-                        cwd=run['cwd']
-                    )
-                    out, err = p.communicate()              # Grab the output
+                        p = Popen(                              # Run the command
+                            run['cmd'],
+                            stdin=PIPE,
+                            stdout=PIPE,
+                            env=run['envs'],
+                            cwd=run['cwd']
+                        )
+                        out, err = p.communicate()              # Grab the output
 
-                    if err or not out:
-                        raise CalledProcessError(returncode=p.returncode, cmd=run['cmd'], output=err)
-                    elapsed = float(out.split(' ')[-1] .rstrip())
-                    run['times'].append(elapsed)
-                    print "elapsed time: ", elapsed
+                        if err or not out:
+                            raise CalledProcessError(returncode=p.returncode, cmd=run['cmd'], output=err)
+                        elapsed = float(out.split(' ')[-1] .rstrip())
+                        run['times'].append(elapsed)
+                        write2json(result_file, res)
+                        print "elapsed time: ", elapsed
 
-        except CalledProcessError, ValueError:
-            print "Error in the execution -- skipping to the next benchmark"
+            except CalledProcessError, ValueError:
+                print "Error in the execution -- skipping to the next benchmark"
 
-        run['done'] = True
+            run['done'] = True
+            write2json(result_file, res)
+        print "All finished and saved in %s"%result_file.name
 
-        result_file.truncate(0)                       # Store the results in a file...
-        result_file.seek(0)
-        result_file.write(json.dumps(res, indent=4))
-        result_file.flush()
-        os.fsync(result_file)
+    except KeyboardInterrupt:
+        print "Suspending the benchmark execution, use resume on %s"%result_file.name
 
-
-def gen_jobs(result_file, config, src_root, output, suite, benchmarks, runs, use_perf):
+def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
@@ -230,11 +240,8 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, runs, use
                     results['meta']['ended'] = str(datetime.now())
 
                     bh_config.close()
-                    result_file.truncate(0)                       # Store the results in a file...
-                    result_file.seek(0)
-                    result_file.write(json.dumps(results, indent=4))
-                    result_file.flush()
-                    os.fsync(result_file)
+                    write2json(result_file, results)
+
 
 if __name__ == "__main__":
 
@@ -264,24 +271,32 @@ if __name__ == "__main__":
         help="How many times should each benchmark run"
     )
     parser.add_argument(
+        '--resume',
+        help='Path to the stored benchmark results.'
+    )
+    parser.add_argument(
         '--useperf',
         default=True,
         help="True to use perf for measuring, false otherwise"
     )
+
     args = parser.parse_args()
+    runs = int(args.runs)
 
-    with tempfile.NamedTemporaryFile(delete=False, dir=args.output,
-                                     prefix='benchmark-%s-' % args.suite,
-                                     suffix='.json') as res:
-
-        gen_jobs(res,
-            os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
-            args.src,
-            args.output,
-            args.suite,
-            bsuites[args.suite],
-            int(args.runs),
-            bool(args.useperf),
-        )
-        execute(res)
+    if args.resume:
+        with open(args.resume, 'r+') as res:
+            execute(res, runs)
+    else:
+        with tempfile.NamedTemporaryFile(delete=False, dir=args.output,
+                                         prefix='benchmark-%s-' % args.suite,
+                                         suffix='.json') as res:
+                gen_jobs(res,
+                    os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
+                    args.src,
+                    args.output,
+                    args.suite,
+                    bsuites[args.suite],
+                    bool(args.useperf),
+                )
+                execute(res, runs)
 
