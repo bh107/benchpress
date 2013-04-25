@@ -171,6 +171,97 @@ def execute( result_file, runs ):
     except KeyboardInterrupt:
         print "Suspending the benchmark execution, use resume on %s"%result_file.name
 
+def slurm_dispatch( result_file, runs):
+
+    result_file.seek(0)
+    res = json.load(result_file)
+
+    for run in res['runs']:
+        if run['done']:
+            continue
+        run.setdefault('slurm', {'pending_jobs':[]})
+
+        for _ in xrange(runs - len(run['times'])):
+            with tempfile.NamedTemporaryFile(delete=False, prefix='bh-', suffix='.slurm') as job_file:
+
+                job = "#!/bin/bash\n"
+                for env_key, env_value in run['envs'].iteritems():      #Write environment variables
+                    job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
+
+                job += "\n#SBATCH -J %s\n"%run['script']                #Write Slurm parameters
+                cwd = os.path.abspath(os.getcwd())
+                job += "#SBATCH -o %s/bh-slurm-%%j.out\n"%cwd
+                job += "#SBATCH -e %s/bh-slurm-%%j.err\n"%cwd
+
+                #We need to write the bohrium config file to an unique path
+                tmp_config_name = "%s.config.ini"%job_file.name
+                job += 'echo "%s" > %s'%(run['bh_config'], tmp_config_name)
+
+                job += "\ncd %s\n"%run['cwd']                           #Change dir and execute cmd
+                job += "%s\n"%(' '.join(run['cmd']))
+
+                job += "\nrm %s\n"%tmp_config_name
+
+                job_file.write(job)
+                job_file.flush()
+                os.fsync(job_file)
+                print "Submitting %s"%job_file.name,
+
+                out = "Submitted batch job 3227"
+                """
+                p = Popen(
+                    ['sbatch','-N', '1', job_file.name],
+                    stdin=PIPE,
+                    stdout=PIPE
+                )
+                out, err = p.communicate()
+                if err or not out:
+                    print "ERR: submitting SLURM job: %s"%err
+                    return
+                """
+                job_id = int(out.split(' ')[-1] .rstrip())
+                print "with SLURM ID %d"%job_id
+
+                run['slurm']['pending_jobs'].append((job_id, "%s/bh-slurm-%s.out"%(cwd,job_id),
+                                                             "%s/bh-slurm-%s.errt"%(cwd,job_id)))
+                write2json(result_file, res)
+
+
+def slurm_gather( result_file ):
+
+    result_file.seek(0)
+    res = json.load(result_file)
+
+    for run in res['runs']:
+        if run['done'] or 'slurm' not in run:
+            continue
+
+        still_pending_jobs = []
+        for job_id, out_file, err_file in run['slurm']['pending_jobs']:
+            p = Popen(
+                ['squeue','-j', '%d'%job_id],
+                stdin=PIPE,
+                stdout=PIPE
+            )
+            out, err = p.communicate()
+            if not err.find("Invalid job id specified") == -1:
+                still_pending_jobs.append((job_id,out_file,err_file))
+            else:
+                print "Slurm job %d finished"%job_id
+                try:
+                    with open(out_file, "r") as fd:
+                        out = fd.read()
+                        elapsed = float(out.split(' ')[-1] .rstrip())
+                        run['times'].append(elapsed)
+                        write2json(result_file, res)
+                        print "elapsed time: ", elapsed
+                except ValueError:
+                    with open(err_file, "r") as fd:
+                        print "ERR job %d: %s"%(job_id, fd.read())
+
+        run['slurm']['pending_jobs'] = still_pending_jobs
+
+
 def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
     """Generates benchmark jobs based on the benchmark suites"""
 
@@ -304,4 +395,8 @@ if __name__ == "__main__":
                     bsuites[args.suite],
                     args.no_perf,
                 )
-                execute(res, runs)
+                if args.slurm:
+                    slurm_dispatch( res, runs)
+                    slurm_gather( res )
+                else:
+                    execute(res, runs)
