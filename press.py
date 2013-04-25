@@ -268,6 +268,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--runs',
         default=5,
+        type=int,
         help="How many times should each benchmark run"
     )
     parser.add_argument(
@@ -275,9 +276,14 @@ if __name__ == "__main__":
         help='Path to the stored benchmark results.'
     )
     parser.add_argument(
-        '--useperf',
-        default=True,
-        help="True to use perf for measuring, false otherwise"
+        '--no-perf',
+        action="store_false",
+        help="Disable the use of the perf measuring tool"
+    )
+    parser.add_argument(
+        '--slurm',
+        action="store_true",
+        help="Use the SLURM queuing system"
     )
 
     args = parser.parse_args()
@@ -296,7 +302,6 @@ if __name__ == "__main__":
                     args.output,
                     args.suite,
                     bsuites[args.suite],
-                    bool(args.useperf),
+                    args.no_perf,
                 )
                 execute(res, runs)
-
