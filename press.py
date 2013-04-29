@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from ConfigParser import SafeConfigParser
+import subprocess
 from subprocess import Popen, PIPE, CalledProcessError
 from datetime import datetime
 
@@ -19,7 +20,7 @@ def meta(src_dir, suite):
     try:
         p = Popen(              # Try grabbing the repos-revision
             ["git", "log", "--pretty=format:%H", "-n", "1"],
-            stdin   = PIPE,
+            stderr  = PIPE,
             stdout  = PIPE,
             cwd     = src_dir
         )
@@ -30,7 +31,7 @@ def meta(src_dir, suite):
     try:
         p = Popen(              # Try grabbing hw-info
             ["lshw", "-quiet", "-numeric"],
-            stdin   = PIPE,
+            stderr  = PIPE,
             stdout  = PIPE,
         )
         hw, err = p.communicate()
@@ -40,7 +41,7 @@ def meta(src_dir, suite):
     try:
         p = Popen(              # Try grabbing hw-info
             ["hostname"],
-            stdin   = PIPE,
+            stderr  = PIPE,
             stdout  = PIPE,
         )
         hostname, err = p.communicate()
@@ -50,9 +51,8 @@ def meta(src_dir, suite):
     try:
         p = Popen(              # Try grabbing python version
             ["python", "-V"],
-            stdin   = PIPE,
+            stderr  = PIPE,
             stdout  = PIPE,
-            stderr  = PIPE
         )
         python_ver, err = p.communicate()
         python_ver  += err
@@ -62,9 +62,8 @@ def meta(src_dir, suite):
     try:
         p = Popen(              # Try grabbing gcc version
             ["gcc", "-v"],
-            stdin   = PIPE,
+            stderr  = PIPE,
             stdout  = PIPE,
-            stderr  = PIPE
         )
         gcc_ver, err = p.communicate()
         gcc_ver += err
@@ -74,9 +73,8 @@ def meta(src_dir, suite):
     try:
         p = Popen(              # Try grabbing clang version
             ["clang", "-v"],
-            stdin   = PIPE,
+            stderr  = PIPE,
             stdout  = PIPE,
-            stderr  = PIPE
         )
         clang_ver, err = p.communicate()
         clang_ver += err
@@ -109,7 +107,7 @@ def perf_counters():
 
     p = Popen(              # Try grabbing the repos-revision
         ["perf", "list"],
-        stdin   = PIPE,
+        stderr  = PIPE,
         stdout  = PIPE
     )
     out, err = p.communicate()
@@ -147,7 +145,7 @@ def execute( result_file, runs ):
 
                         p = Popen(                              # Run the command
                             run['cmd'],
-                            stdin=PIPE,
+                            stderr=PIPE,
                             stdout=PIPE,
                             env=run['envs'],
                             cwd=run['cwd']
@@ -207,23 +205,21 @@ def slurm_dispatch( result_file, runs):
                 os.fsync(job_file)
                 print "Submitting %s"%job_file.name,
 
-                out = "Submitted batch job 3227"
-                """
                 p = Popen(
                     ['sbatch','-N', '1', job_file.name],
-                    stdin=PIPE,
+                    stderr=PIPE,
                     stdout=PIPE
                 )
                 out, err = p.communicate()
                 if err or not out:
                     print "ERR: submitting SLURM job: %s"%err
                     return
-                """
+
                 job_id = int(out.split(' ')[-1] .rstrip())
                 print "with SLURM ID %d"%job_id
 
                 run['slurm']['pending_jobs'].append((job_id, "%s/bh-slurm-%s.out"%(cwd,job_id),
-                                                             "%s/bh-slurm-%s.errt"%(cwd,job_id)))
+                                                             "%s/bh-slurm-%s.err"%(cwd,job_id)))
                 write2json(result_file, res)
 
 
@@ -236,30 +232,27 @@ def slurm_gather( result_file ):
         if run['done'] or 'slurm' not in run:
             continue
 
-        still_pending_jobs = []
-        for job_id, out_file, err_file in run['slurm']['pending_jobs']:
-            p = Popen(
-                ['squeue','-j', '%d'%job_id],
-                stdin=PIPE,
-                stdout=PIPE
-            )
-            out, err = p.communicate()
-            if not err.find("Invalid job id specified") == -1:
-                still_pending_jobs.append((job_id,out_file,err_file))
-            else:
-                print "Slurm job %d finished"%job_id
-                try:
-                    with open(out_file, "r") as fd:
-                        out = fd.read()
-                        elapsed = float(out.split(' ')[-1] .rstrip())
-                        run['times'].append(elapsed)
-                        write2json(result_file, res)
-                        print "elapsed time: ", elapsed
-                except ValueError:
-                    with open(err_file, "r") as fd:
-                        print "ERR job %d: %s"%(job_id, fd.read())
+        while len(run['slurm']['pending_jobs']) > 0:
+            job_id, out_file, err_file = run['slurm']['pending_jobs'].pop()
+            print "Checking job %d"%job_id
 
-        run['slurm']['pending_jobs'] = still_pending_jobs
+            out = subprocess.check_output(['squeue'])
+            if out.find(" %d "%job_id) != -1:
+                continue # The job is still in the SLURM queue
+
+            print "Slurm job %d finished -- parsing %s"%(job_id, out_file)
+            try:
+                with open(out_file, "r") as fd:
+                    out = fd.read()
+                    elapsed = float(out.split(' ')[-1] .rstrip())
+                    run['times'].append(elapsed)
+                    write2json(result_file, res) #Note that we also save the updated pending_job list here
+                    print "elapsed time: ", elapsed
+                    os.remove(out_file)
+                    os.remove(err_file)
+            except ValueError:
+                with open(err_file, "r") as fd:
+                    print "ERR job %d: %s"%(job_id, fd.read())
 
 
 def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
@@ -273,14 +266,15 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
     if use_perf:
         out, err = Popen(
             ['which', 'perf'],
-            stdout=PIPE
+            stdout=PIPE,
+            stderr=PIPE
         ).communicate()
 
         # Some distros have a wrapper script :(
         if not err and out:
             out, err = Popen(
                 ['perf', 'list'],
-                stdin=PIPE,
+                stderr=PIPE,
                 stdout=PIPE,
             ).communicate()
 
@@ -382,7 +376,10 @@ if __name__ == "__main__":
 
     if args.resume:
         with open(args.resume, 'r+') as res:
-            execute(res, runs)
+            if args.slurm:
+                slurm_gather( res )
+            else:
+                execute(res, runs)
     else:
         with tempfile.NamedTemporaryFile(delete=False, dir=args.output,
                                          prefix='benchmark-%s-' % args.suite,
@@ -396,7 +393,7 @@ if __name__ == "__main__":
                     args.no_perf,
                 )
                 if args.slurm:
-                    slurm_dispatch( res, runs)
+                    slurm_dispatch( res, runs )
                     slurm_gather( res )
                 else:
-                    execute(res, runs)
+                    execute( res, runs )
