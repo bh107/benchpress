@@ -8,7 +8,9 @@ import argparse
 import pkgutil
 import json
 import os
+import sys
 import re
+import StringIO
 
 import suites
 
@@ -118,36 +120,150 @@ def perf_counters():
 
     return ','.join(events)
 
-def execute( cmd,envs,src_root,use_perf ):
 
-    cmd = ['taskset', '-c', '0'] + cmd.split(' ')
-
-    if use_perf:
-        pfd = tempfile.NamedTemporaryFile(delete=True, prefix='perf-', suffix='.txt')
-        cmd = ['perf', 'stat', '-e', perf_counters(), '-B', '-o', str(pfd.name)] + cmd
-
-    cmd_str = ' '.join(cmd)
-    print cmd_str
-    p = Popen(                              # Run the command
-        cmd,
-        stdin=PIPE,
-        stdout=PIPE,
-        env=envs,
-        cwd=src_root
-    )
-    out, err = p.communicate()              # Grab the output
-    elapsed = 0.0
-    if err or not out:
-        raise CalledProcessError(returncode=p.returncode, cmd=cmd, output=err)
-
-    perfs = None
-    if use_perf:
-        perfs = open(pfd.name).read()
-
-    return (out, perfs, cmd_str)
+def write2json(json_file, obj):
+    json_file.truncate(0)
+    json_file.seek(0)
+    json_file.write(json.dumps(obj, indent=4))
+    json_file.flush()
+    os.fsync(json_file)
 
 
-def main(config, src_root, output, suite, benchmarks, runs, use_perf, parallel):
+def execute( result_file, runs ):
+    result_file.seek(0)
+    res = json.load(result_file)
+
+    try:
+        for run in res['runs']:
+            try:
+                while not run['done'] and len(run['times']) < runs:
+                    with tempfile.NamedTemporaryFile(prefix='bohrium-config-', suffix='.ini') as conf:
+
+                        print "Executing %s/%s on %s" %(run['bridge_alias'],run['script'],run['engine_alias'])
+                        run['envs']['BH_CONFIG'] = conf.name
+                        conf.write(run['bh_config'])            # And write it to a temp file
+                        conf.flush()
+                        os.fsync(conf)
+
+                        p = Popen(                              # Run the command
+                            run['cmd'],
+                            stdin=PIPE,
+                            stdout=PIPE,
+                            env=run['envs'],
+                            cwd=run['cwd']
+                        )
+                        out, err = p.communicate()              # Grab the output
+
+                        if err or not out:
+                            raise CalledProcessError(returncode=p.returncode, cmd=run['cmd'], output=err)
+                        elapsed = float(out.split(' ')[-1] .rstrip())
+                        run['times'].append(elapsed)
+                        write2json(result_file, res)
+                        print "elapsed time: ", elapsed
+
+            except CalledProcessError, ValueError:
+                print "Error in the execution -- skipping to the next benchmark"
+
+            run['done'] = True
+            write2json(result_file, res)
+        print "All finished and saved in %s"%result_file.name
+
+    except KeyboardInterrupt:
+        print "Suspending the benchmark execution, use resume on %s"%result_file.name
+
+def slurm_dispatch( result_file, runs):
+
+    result_file.seek(0)
+    res = json.load(result_file)
+
+    for run in res['runs']:
+        if run['done']:
+            continue
+        run.setdefault('slurm', {'pending_jobs':[]})
+
+        for _ in xrange(runs - len(run['times'])):
+            with tempfile.NamedTemporaryFile(delete=False, prefix='bh-', suffix='.slurm') as job_file:
+
+                job = "#!/bin/bash\n"
+                for env_key, env_value in run['envs'].iteritems():      #Write environment variables
+                    job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
+
+                job += "\n#SBATCH -J %s\n"%run['script']                #Write Slurm parameters
+                cwd = os.path.abspath(os.getcwd())
+                job += "#SBATCH -o %s/bh-slurm-%%j.out\n"%cwd
+                job += "#SBATCH -e %s/bh-slurm-%%j.err\n"%cwd
+
+                #We need to write the bohrium config file to an unique path
+                tmp_config_name = "%s.config.ini"%job_file.name
+                job += 'echo "%s" > %s'%(run['bh_config'], tmp_config_name)
+
+                job += "\ncd %s\n"%run['cwd']                           #Change dir and execute cmd
+                job += "%s\n"%(' '.join(run['cmd']))
+
+                job += "\nrm %s\n"%tmp_config_name
+
+                job_file.write(job)
+                job_file.flush()
+                os.fsync(job_file)
+                print "Submitting %s"%job_file.name,
+
+                out = "Submitted batch job 3227"
+                """
+                p = Popen(
+                    ['sbatch','-N', '1', job_file.name],
+                    stdin=PIPE,
+                    stdout=PIPE
+                )
+                out, err = p.communicate()
+                if err or not out:
+                    print "ERR: submitting SLURM job: %s"%err
+                    return
+                """
+                job_id = int(out.split(' ')[-1] .rstrip())
+                print "with SLURM ID %d"%job_id
+
+                run['slurm']['pending_jobs'].append((job_id, "%s/bh-slurm-%s.out"%(cwd,job_id),
+                                                             "%s/bh-slurm-%s.errt"%(cwd,job_id)))
+                write2json(result_file, res)
+
+
+def slurm_gather( result_file ):
+
+    result_file.seek(0)
+    res = json.load(result_file)
+
+    for run in res['runs']:
+        if run['done'] or 'slurm' not in run:
+            continue
+
+        still_pending_jobs = []
+        for job_id, out_file, err_file in run['slurm']['pending_jobs']:
+            p = Popen(
+                ['squeue','-j', '%d'%job_id],
+                stdin=PIPE,
+                stdout=PIPE
+            )
+            out, err = p.communicate()
+            if not err.find("Invalid job id specified") == -1:
+                still_pending_jobs.append((job_id,out_file,err_file))
+            else:
+                print "Slurm job %d finished"%job_id
+                try:
+                    with open(out_file, "r") as fd:
+                        out = fd.read()
+                        elapsed = float(out.split(' ')[-1] .rstrip())
+                        run['times'].append(elapsed)
+                        write2json(result_file, res)
+                        print "elapsed time: ", elapsed
+                except ValueError:
+                    with open(err_file, "r") as fd:
+                        print "ERR job %d: %s"%(job_id, fd.read())
+
+        run['slurm']['pending_jobs'] = still_pending_jobs
+
+
+def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
+    """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
         'meta': meta(src_root, suite),
@@ -172,66 +288,51 @@ def main(config, src_root, output, suite, benchmarks, runs, use_perf, parallel):
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
 
-    with tempfile.NamedTemporaryFile(delete=False, dir=output, prefix='benchmark-%s-' % suite, suffix='.json') as fd,\
-         tempfile.NamedTemporaryFile(delete=True, prefix='bohrium-config-', suffix='.ini') as conf:
-        print "Running benchmark suite '%s'; results are written to: %s." % (suite, fd.name)
-        for benchmark in benchmarks:
-            for script_alias, script, script_args in benchmark['scripts']:
-                for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
-                    for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
+    print "Benchmark suite '%s'; results are written to: %s" % (suite, result_file.name)
+    for benchmark in benchmarks:
+        for script_alias, script, script_args in benchmark['scripts']:
+            for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
+                for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
 
-                        if engine:
-                            confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
-                            confparser.read(config)             # Read current configuration
-                            confparser.set("node", "children", engine)
-                            conf.truncate(0)                    # And write it to a temp file
-                            conf.seek(0)
-                            confparser.write(conf)
-                            conf.flush()
-                            os.fsync(conf)
+                    bh_config = StringIO.StringIO()
+                    confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
+                    confparser.read(config)             # Read current configuration
+                    if engine:                          # Set the current engine
+                        confparser.set("node", "children", engine)
 
-                        envs = os.environ.copy()                # Populate environment variables
-                        envs['BH_CONFIG'] = conf.name
-                        if engine_env is not None:
-                            envs.update(engine_env)
-                        if bridge_env is not None:
-                            envs.update(bridge_env)
+                    confparser.write(bh_config)         # And write it to a string buffer
 
-                        cmd = bridge_cmd.replace("{script}", script)
-                        cmd = cmd.replace("{args}", script_args);
+                    envs = os.environ.copy()                # Populate environment variables
+                    if engine_env is not None:
+                        envs.update(engine_env)
+                    if bridge_env is not None:
+                        envs.update(bridge_env)
 
-                        print "Running %s/%s on %s" %(bridge_alias,script,engine_alias)
-                        times = []
-                        perfs = []
-                        try:
-                            for i in xrange(1, runs+1):
+                    cmd = bridge_cmd.replace("{script}", script)
+                    cmd = cmd.replace("{args}", script_args)
 
-                                out, perf, cmd_str = execute( cmd,envs,src_root,use_perf )
+                    print "Scheduling %s/%s on %s" %(bridge_alias,script,engine_alias)
 
-                                elapsed = float(out.split(' ')[-1] .rstrip())
-                                print "elapsed time: ", elapsed
-                                times.append( elapsed )
-                                perfs.append( perf )
-                        except ValueError:
-                            print "Could not parse the output"
-                        except CalledProcessError:
-                            print "Error in the execution -- skipping to the next benchmark"
+                    cmd = ['taskset', '-c', '0'] + cmd.split(' ')
 
-                                                               # Accumulate results
-                        results['runs'].append({'script':script_alias,
-                                                'bridge':bridge_alias,
-                                                'engine':engine_alias,
-                                                'envs':envs,
-                                                'cmd':cmd_str,
-                                                'times':times,
-                                                'perfs':perfs})
-                        results['meta']['ended'] = str(datetime.now())
+                    results['runs'].append({'script_alias':script_alias,
+                                            'bridge_alias':bridge_alias,
+                                            'engine_alias':engine_alias,
+                                            'script':script,
+                                            'engine':engine,
+                                            'envs':envs,
+                                            'cwd':src_root,
+                                            'cmd':cmd,
+                                            'bh_config':bh_config.getvalue(),
+                                            'use_perf':use_perf,
+                                            'times':[],
+                                            'perfs':[],
+                                            'done':False})
+                    results['meta']['ended'] = str(datetime.now())
 
-                        fd.truncate(0)                       # Store the results in a file...
-                        fd.seek(0)
-                        fd.write(json.dumps(results, indent=4))
-                        fd.flush()
-                        os.fsync(fd)
+                    bh_config.close()
+                    write2json(result_file, results)
+
 
 if __name__ == "__main__":
 
@@ -258,28 +359,44 @@ if __name__ == "__main__":
     parser.add_argument(
         '--runs',
         default=5,
+        type=int,
         help="How many times should each benchmark run"
     )
     parser.add_argument(
-        '--useperf',
-        default=True,
-        help="True to use perf for measuring, false otherwise"
+        '--resume',
+        help='Path to the stored benchmark results.'
     )
     parser.add_argument(
-        '--parallel',
-        default=1,
-        help="Performs * parallel jobs on different processors."
+        '--no-perf',
+        action="store_false",
+        help="Disable the use of the perf measuring tool"
     )
+    parser.add_argument(
+        '--slurm',
+        action="store_true",
+        help="Use the SLURM queuing system"
+    )
+
     args = parser.parse_args()
+    runs = int(args.runs)
 
-    main(
-        os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
-        args.src,
-        args.output,
-        args.suite,
-        bsuites[args.suite],
-        int(args.runs),
-        bool(args.useperf),
-        int(args.parallel)
-    )
-
+    if args.resume:
+        with open(args.resume, 'r+') as res:
+            execute(res, runs)
+    else:
+        with tempfile.NamedTemporaryFile(delete=False, dir=args.output,
+                                         prefix='benchmark-%s-' % args.suite,
+                                         suffix='.json') as res:
+                gen_jobs(res,
+                    os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
+                    args.src,
+                    args.output,
+                    args.suite,
+                    bsuites[args.suite],
+                    args.no_perf,
+                )
+                if args.slurm:
+                    slurm_dispatch( res, runs)
+                    slurm_gather( res )
+                else:
+                    execute(res, runs)
