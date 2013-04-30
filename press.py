@@ -180,11 +180,16 @@ def slurm_dispatch( result_file, runs):
         run.setdefault('slurm', {'pending_jobs':[]})
 
         for _ in xrange(runs - len(run['times'])):
-            with tempfile.NamedTemporaryFile(delete=False, prefix='bh-', suffix='.slurm') as job_file:
+            with tempfile.NamedTemporaryFile(delete=True, prefix='bh-', suffix='.slurm') as job_file:
 
                 job = "#!/bin/bash\n"
+
+                tmp_config_name = "%s.config.ini"%job_file.name
                 for env_key, env_value in run['envs'].iteritems():      #Write environment variables
                     job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
+
+                job += 'export BH_CONFIG=%s\n'%tmp_config_name		#Always setting BH_CONFIG
+                run['envs']['BH_CONFIG'] = tmp_config_name
 
                 job += "\n#SBATCH -J %s\n"%run['script']                #Write Slurm parameters
                 cwd = os.path.abspath(os.getcwd())
@@ -192,7 +197,6 @@ def slurm_dispatch( result_file, runs):
                 job += "#SBATCH -e %s/bh-slurm-%%j.err\n"%cwd
 
                 #We need to write the bohrium config file to an unique path
-                tmp_config_name = "%s.config.ini"%job_file.name
                 job += 'echo "%s" > %s'%(run['bh_config'], tmp_config_name)
 
                 job += "\ncd %s\n"%run['cwd']                           #Change dir and execute cmd
@@ -296,7 +300,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
 
                     confparser.write(bh_config)         # And write it to a string buffer
 
-                    envs = os.environ.copy()                # Populate environment variables
+                    envs = os.environ.copy()            # Populate environment variables
                     if engine_env is not None:
                         envs.update(engine_env)
                     if bridge_env is not None:
