@@ -127,14 +127,27 @@ def write2json(json_file, obj):
     os.fsync(json_file)
 
 
+def parse_elapsed_times( output ):
+    """Return list of elapsed times from the output"""
+
+    times = []
+    for t in re.finditer("elapsed-time:\s*(\d*\.?\d*)", output):
+        times.append(float(t.group(1)))
+    return times
+
+
 def execute( result_file, runs ):
     result_file.seek(0)
     res = json.load(result_file)
 
     try:
         for run in res['runs']:
+            if 'slurm' in run:
+                print "Skipping, will not resume SLURM jobs without the --slurm flag"
+                continue
+
             try:
-                while not run['done'] and len(run['times']) < runs:
+                while len(run['times']) < runs:
                     with tempfile.NamedTemporaryFile(prefix='bohrium-config-', suffix='.ini') as conf:
 
                         print "Executing %s/%s on %s" %(run['bridge_alias'],run['script'],run['engine_alias'])
@@ -154,7 +167,8 @@ def execute( result_file, runs ):
 
                         if err or not out:
                             raise CalledProcessError(returncode=p.returncode, cmd=run['cmd'], output=err)
-                        elapsed = float(out.split(' ')[-1] .rstrip())
+
+                        elapsed = parse_elapsed_times(out)[0]
                         run['times'].append(elapsed)
                         write2json(result_file, res)
                         print "elapsed time: ", elapsed
@@ -162,47 +176,48 @@ def execute( result_file, runs ):
             except CalledProcessError, ValueError:
                 print "Error in the execution -- skipping to the next benchmark"
 
-            run['done'] = True
             write2json(result_file, res)
         print "All finished and saved in %s"%result_file.name
 
     except KeyboardInterrupt:
         print "Suspending the benchmark execution, use resume on %s"%result_file.name
 
-def slurm_dispatch( result_file, runs):
+
+def slurm_dispatch( result_file, runs, one_job ):
 
     result_file.seek(0)
     res = json.load(result_file)
 
     for run in res['runs']:
-        if run['done']:
-            continue
+        runs -= len(run['times']) #Some runs may be done
         run.setdefault('slurm', {'pending_jobs':[]})
 
-        for _ in xrange(runs - len(run['times'])):
-            with tempfile.NamedTemporaryFile(delete=True, prefix='bh-', suffix='.slurm') as job_file:
+        for _ in xrange(runs if not one_job else 1):
+            with tempfile.NamedTemporaryFile(delete=False, prefix='bh-', suffix='.slurm') as job_file:
 
                 job = "#!/bin/bash\n"
 
-                tmp_config_name = "%s.config.ini"%job_file.name
-                for env_key, env_value in run['envs'].iteritems():      #Write environment variables
-                    job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
+                for i in xrange(runs if one_job else 1):
 
-                job += 'export BH_CONFIG=%s\n'%tmp_config_name		#Always setting BH_CONFIG
-                run['envs']['BH_CONFIG'] = tmp_config_name
+                    tmp_config_name = "%s_%d.config.ini"%(job_file.name, i)
+                    for env_key, env_value in run['envs'].iteritems():      #Write environment variables
+                        job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
 
-                job += "\n#SBATCH -J %s\n"%run['script']                #Write Slurm parameters
-                cwd = os.path.abspath(os.getcwd())
-                job += "#SBATCH -o %s/bh-slurm-%%j.out\n"%cwd
-                job += "#SBATCH -e %s/bh-slurm-%%j.err\n"%cwd
+                    job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
+                    run['envs']['BH_CONFIG'] = tmp_config_name
 
-                #We need to write the bohrium config file to an unique path
-                job += 'echo "%s" > %s'%(run['bh_config'], tmp_config_name)
+                    job += "\n#SBATCH -J %s\n"%run['script']                #Write Slurm parameters
+                    cwd = os.path.abspath(os.getcwd())
+                    job += "#SBATCH -o %s/bh-slurm-%%j.out\n"%cwd
+                    job += "#SBATCH -e %s/bh-slurm-%%j.err\n"%cwd
 
-                job += "\ncd %s\n"%run['cwd']                           #Change dir and execute cmd
-                job += "%s\n"%(' '.join(run['cmd']))
+                    #We need to write the bohrium config file to an unique path
+                    job += 'echo "%s" > %s'%(run['bh_config'], tmp_config_name)
 
-                job += "\nrm %s\n"%tmp_config_name
+                    job += "\ncd %s\n"%run['cwd']                           #Change dir and execute cmd
+                    job += "%s\n"%(' '.join(run['cmd']))
+
+                    job += "\nrm %s\n\n\n"%tmp_config_name
 
                 job_file.write(job)
                 job_file.flush()
@@ -233,7 +248,7 @@ def slurm_gather( result_file ):
     res = json.load(result_file)
 
     for run in res['runs']:
-        if run['done'] or 'slurm' not in run:
+        if 'slurm' not in run:
             continue
 
         while len(run['slurm']['pending_jobs']) > 0:
@@ -248,10 +263,10 @@ def slurm_gather( result_file ):
             try:
                 with open(out_file, "r") as fd:
                     out = fd.read()
-                    elapsed = float(out.split(' ')[-1] .rstrip())
-                    run['times'].append(elapsed)
-                    write2json(result_file, res) #Note that we also save the updated pending_job list here
-                    print "elapsed time: ", elapsed
+                    for elapsed in parse_elapsed_times(out):
+                        run['times'].append(elapsed)
+                        write2json(result_file, res) #Note that we also save the updated pending_job list here
+                        print "elapsed time: ", elapsed
                     os.remove(out_file)
                     os.remove(err_file)
             except ValueError:
@@ -324,8 +339,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
                                             'bh_config':bh_config.getvalue(),
                                             'use_perf':use_perf,
                                             'times':[],
-                                            'perfs':[],
-                                            'done':False})
+                                            'perfs':[]})
                     results['meta']['ended'] = str(datetime.now())
 
                     bh_config.close()
@@ -374,6 +388,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Use the SLURM queuing system"
     )
+    parser.add_argument(
+        '--one-job',
+        action="store_true",
+        help="Submit all runs of a benchmark as one SLURM job"
+    )
 
     args = parser.parse_args()
     runs = int(args.runs)
@@ -397,7 +416,7 @@ if __name__ == "__main__":
                     args.no_perf,
                 )
                 if args.slurm:
-                    slurm_dispatch( res, runs )
+                    slurm_dispatch( res, runs, args.one_job )
                     slurm_gather( res )
                 else:
                     execute( res, runs )
