@@ -10,7 +10,7 @@ def main():
     args = parser.parse_args()
     data = json.load(open(args.results))
     for run in data["runs"]:
-        print run["script"],"[", run["bridge"],", ", run["engine"],"]:",  run["times"], np.average( run["times"])
+        print run["script_alias"],"[", run["bridge_alias"],", ", run["engine"],"]:",  run["times"], np.average( run["times"])
     
 
 if __name__ == "__main__":
