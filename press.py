@@ -263,15 +263,20 @@ def slurm_gather( result_file ):
             try:
                 with open(out_file, "r") as fd:
                     out = fd.read()
-                    for elapsed in parse_elapsed_times(out):
-                        run['times'].append(elapsed)
+                    times = parse_elapsed_times(out)
+                    if len(times) == 0:
+                        raise ValueError
+                    for t in times:
+                        run['times'].append(t)
                         write2json(result_file, res) #Note that we also save the updated pending_job list here
-                        print "elapsed time: ", elapsed
-                    os.remove(out_file)
-                    os.remove(err_file)
+                        print "elapsed time: ", t
+                    #os.remove(out_file)
+                    #os.remove(err_file)
             except ValueError:
                 with open(err_file, "r") as fd:
                     print "ERR job %d: %s"%(job_id, fd.read())
+            except IOError:
+                print "WARNING: couldn't find job file '%s'"%out_file
 
 
 def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
