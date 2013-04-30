@@ -183,7 +183,7 @@ def execute( result_file, runs ):
         print "Suspending the benchmark execution, use resume on %s"%result_file.name
 
 
-def slurm_dispatch( result_file, runs, one_job ):
+def slurm_dispatch( result_file, runs, one_job, warm_ups ):
 
     result_file.seek(0)
     res = json.load(result_file)
@@ -197,7 +197,7 @@ def slurm_dispatch( result_file, runs, one_job ):
 
                 job = "#!/bin/bash\n"
 
-                for i in xrange(runs if one_job else 1):
+                for i in xrange((runs if one_job else 1) + warm_ups):
 
                     tmp_config_name = "%s_%d.config.ini"%(job_file.name, i)
                     for env_key, env_value in run['envs'].iteritems():      #Write environment variables
@@ -237,8 +237,10 @@ def slurm_dispatch( result_file, runs, one_job ):
                 job_id = int(out.split(' ')[-1] .rstrip())
                 print "with SLURM ID %d"%job_id
 
-                run['slurm']['pending_jobs'].append((job_id, "%s/bh-slurm-%s.out"%(cwd,job_id),
-                                                             "%s/bh-slurm-%s.err"%(cwd,job_id)))
+                run['slurm']['pending_jobs'].append({'id':job_id,
+                                                     'out':"%s/bh-slurm-%s.out"%(cwd,job_id),
+                                                     'err':"%s/bh-slurm-%s.err"%(cwd,job_id),
+                                                     'warm_ups':warm_ups})
                 write2json(result_file, res)
 
 
@@ -252,31 +254,32 @@ def slurm_gather( result_file ):
             continue
 
         while len(run['slurm']['pending_jobs']) > 0:
-            job_id, out_file, err_file = run['slurm']['pending_jobs'].pop()
-            print "Checking job %d"%job_id
+            job = run['slurm']['pending_jobs'].pop()
+            print "Checking job %d"%job['id']
 
             out = subprocess.check_output(['squeue'])
-            if out.find(" %d "%job_id) != -1:
+            if out.find(" %d "%job['id']) != -1:
                 continue # The job is still in the SLURM queue
 
-            print "Slurm job %d finished -- parsing %s"%(job_id, out_file)
+            print "Slurm job %d finished -- parsing %s"%(job['id'], job['out'])
             try:
-                with open(out_file, "r") as fd:
+                with open(job['out'], "r") as fd:
                     out = fd.read()
                     times = parse_elapsed_times(out)
                     if len(times) == 0:
                         raise ValueError
+                    times = times[job['warm_ups']:]         #Remove the warm-up runs
                     for t in times:
                         run['times'].append(t)
                         write2json(result_file, res) #Note that we also save the updated pending_job list here
                         print "elapsed time: ", t
-                    #os.remove(out_file)
-                    #os.remove(err_file)
+                    #os.remove(job['out'])
+                    #os.remove(job['err'])
             except ValueError:
-                with open(err_file, "r") as fd:
-                    print "ERR job %d: %s"%(job_id, fd.read())
+                with open(job['err'], "r") as fd:
+                    print "ERR job %d: %s"%(job['id'], fd.read())
             except IOError:
-                print "WARNING: couldn't find job file '%s'"%out_file
+                print "WARNING: couldn't find job file '%s'"%job['out']
 
 
 def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
@@ -377,7 +380,7 @@ if __name__ == "__main__":
         '--runs',
         default=5,
         type=int,
-        help="How many times should each benchmark run"
+        help="How many times should each benchmark run."
     )
     parser.add_argument(
         '--resume',
@@ -386,17 +389,25 @@ if __name__ == "__main__":
     parser.add_argument(
         '--no-perf',
         action="store_false",
-        help="Disable the use of the perf measuring tool"
+        help="Disable the use of the perf measuring tool."
     )
-    parser.add_argument(
+
+    slurm_grp = parser.add_argument_group('SLURM Queuing System')
+    slurm_grp.add_argument(
         '--slurm',
         action="store_true",
-        help="Use the SLURM queuing system"
+        help="Use the SLURM queuing system."
     )
-    parser.add_argument(
+    slurm_grp.add_argument(
         '--one-job',
         action="store_true",
-        help="Submit all runs of a benchmark as one SLURM job"
+        help="Submit all runs of a benchmark as one SLURM job. Use this option together with --slurm."
+    )
+    slurm_grp.add_argument(
+        '--warm-ups',
+        type=int,
+        default=0,
+        help='Submits a number of "warm-up" jobs before the real job. Use this option together with --slurm.'
     )
 
     args = parser.parse_args()
@@ -421,7 +432,7 @@ if __name__ == "__main__":
                     args.no_perf,
                 )
                 if args.slurm:
-                    slurm_dispatch( res, runs, args.one_job )
+                    slurm_dispatch( res, runs, args.one_job, args.warm_ups )
                     slurm_gather( res )
                 else:
                     execute( res, runs )
