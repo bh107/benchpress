@@ -150,12 +150,15 @@ def execute( result_file, runs ):
                 while len(run['times']) < runs:
                     with tempfile.NamedTemporaryFile(prefix='bohrium-config-', suffix='.ini') as conf:
 
-                        print "Executing %s/%s on %s" %(run['bridge_alias'],run['script'],run['engine_alias'])
+                        p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
+                        if run['manager'] and run['manager'] != "node":
+                            p += "%s/"%run['manager_alias']
+                        print "%snode/%s"%(p,run['engine_alias'])
+
                         run['envs']['BH_CONFIG'] = conf.name
                         conf.write(run['bh_config'])            # And write it to a temp file
                         conf.flush()
                         os.fsync(conf)
-
                         p = Popen(                              # Run the command
                             run['cmd'],
                             stderr=PIPE,
@@ -313,45 +316,59 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
     for benchmark in benchmarks:
         for script_alias, script, script_args in benchmark['scripts']:
             for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
-                for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
+                for manager_alias, manager, manager_cmd, manager_env in benchmark.get('managers', [('N/A',None,None)]):
+                    for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
 
-                    bh_config = StringIO.StringIO()
-                    confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
-                    confparser.read(config)             # Read current configuration
-                    if engine:                          # Set the current engine
-                        confparser.set("node", "children", engine)
+                        bh_config = StringIO.StringIO()
+                        confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
+                        confparser.read(config)             # Read current configuration
+                                                            # Set the current manager
+                        confparser.set("bridge", "children", manager if manager else "node")
+                        if manager and manager != "node":
+                            confparser.set(manager, "children", "node")
+                        if engine:                          # Set the current engine
+                            confparser.set("node", "children", engine)
 
-                    confparser.write(bh_config)         # And write it to a string buffer
+                        confparser.write(bh_config)         # And write it to a string buffer
 
-                    envs = os.environ.copy()            # Populate environment variables
-                    if engine_env is not None:
-                        envs.update(engine_env)
-                    if bridge_env is not None:
-                        envs.update(bridge_env)
+                        envs = os.environ.copy()            # Populate environment variables
+                        if engine_env is not None:
+                            envs.update(engine_env)
+                        if manager_env is not None:
+                            envs.update(manager_env)
+                        if bridge_env is not None:
+                            envs.update(bridge_env)
 
-                    cmd = bridge_cmd.replace("{script}", script)
-                    cmd = cmd.replace("{args}", script_args)
+                        cmd = bridge_cmd.replace("{script}", script)
+                        cmd = cmd.replace("{args}", script_args)
+                        if manager and manager != "node":
+                            cmd = manager_cmd.replace("{bridge}", cmd)
 
-                    print "Scheduling %s/%s on %s" %(bridge_alias,script,engine_alias)
+                        p = "Scheduling %s/%s on "%(bridge_alias,script)
+                        if manager and manager != "node":
+                            p += "%s/"%manager_alias
+                        print "%snode/%s"%(p,engine_alias)
 
-                    cmd = ['taskset', '-c', '0'] + cmd.split(' ')
+                        cmd = ['taskset', '-c', '0'] + cmd.split(' ')
 
-                    results['runs'].append({'script_alias':script_alias,
-                                            'bridge_alias':bridge_alias,
-                                            'engine_alias':engine_alias,
-                                            'script':script,
-                                            'engine':engine,
-                                            'envs':envs,
-                                            'cwd':src_root,
-                                            'cmd':cmd,
-                                            'bh_config':bh_config.getvalue(),
-                                            'use_perf':use_perf,
-                                            'times':[],
-                                            'perfs':[]})
-                    results['meta']['ended'] = str(datetime.now())
+                        results['runs'].append({'script_alias':script_alias,
+                                                'bridge_alias':bridge_alias,
+                                                'engine_alias':engine_alias,
+                                                'manager_alias':manager_alias,
+                                                'script':script,
+                                                'manager':manager,
+                                                'engine':engine,
+                                                'envs':envs,
+                                                'cwd':src_root,
+                                                'cmd':cmd,
+                                                'bh_config':bh_config.getvalue(),
+                                                'use_perf':use_perf,
+                                                'times':[],
+                                                'perfs':[]})
+                        results['meta']['ended'] = str(datetime.now())
 
-                    bh_config.close()
-                    write2json(result_file, results)
+                        bh_config.close()
+                        write2json(result_file, results)
 
 
 if __name__ == "__main__":
