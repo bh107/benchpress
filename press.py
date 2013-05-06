@@ -341,6 +341,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
 
                         cmd = bridge_cmd.replace("{script}", script)
                         cmd = cmd.replace("{args}", script_args)
+                        cmd = 'taskset -c 0 ' + cmd
                         if manager and manager != "node":
                             cmd = manager_cmd.replace("{bridge}", cmd)
 
@@ -348,8 +349,6 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
                         if manager and manager != "node":
                             p += "%s/"%manager_alias
                         print "%snode/%s"%(p,engine_alias)
-
-                        cmd = ['taskset', '-c', '0'] + cmd.split(' ')
 
                         results['runs'].append({'script_alias':script_alias,
                                                 'bridge_alias':bridge_alias,
@@ -360,7 +359,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
                                                 'engine':engine,
                                                 'envs':envs,
                                                 'cwd':src_root,
-                                                'cmd':cmd,
+                                                'cmd':cmd.split(' '),
                                                 'bh_config':bh_config.getvalue(),
                                                 'use_perf':use_perf,
                                                 'times':[],
