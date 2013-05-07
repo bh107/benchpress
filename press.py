@@ -193,7 +193,7 @@ def slurm_dispatch( result_file, runs, one_job, warm_ups ):
 
     for run in res['runs']:
         runs -= len(run['times']) #Some runs may be done
-        run.setdefault('slurm', {'pending_jobs':[]})
+        run.setdefault('slurm', {'pending_jobs':[],'finished_jobs':[]})
 
         for _ in xrange(runs if not one_job else 1):
             with tempfile.NamedTemporaryFile(delete=False, prefix='bh-', suffix='.slurm') as job_file:
@@ -225,10 +225,14 @@ def slurm_dispatch( result_file, runs, one_job, warm_ups ):
                 job_file.write(job)
                 job_file.flush()
                 os.fsync(job_file)
-                print "Submitting %s"%job_file.name,
 
+                nnodes = 1
+                if 'BH_SLURM_NNODES' in run['envs']:
+                    nnodes = run['envs']['BH_SLURM_NNODES']
+
+                print "Submitting %s on %d nodes"%(job_file.name, nnodes),
                 p = Popen(
-                    ['sbatch','-N', '1', job_file.name],
+                    ['sbatch', '-N', '%d'%nnodes, job_file.name],
                     stderr=PIPE,
                     stdout=PIPE
                 )
@@ -256,8 +260,10 @@ def slurm_gather( result_file ):
         if 'slurm' not in run:
             continue
 
-        while len(run['slurm']['pending_jobs']) > 0:
-            job = run['slurm']['pending_jobs'].pop()
+        for i in xrange(len(run['slurm']['pending_jobs'])):
+            job = run['slurm']['pending_jobs'][i]
+            if not job:
+                continue
             print "Checking job %d"%job['id']
 
             out = subprocess.check_output(['squeue'])
@@ -274,8 +280,10 @@ def slurm_gather( result_file ):
                     times = times[job['warm_ups']:]         #Remove the warm-up runs
                     for t in times:
                         run['times'].append(t)
-                        write2json(result_file, res) #Note that we also save the updated pending_job list here
                         print "elapsed time: ", t
+                    run['slurm']['finished_jobs'].append(job)
+                    run['slurm']['pending_jobs'][i] = None  #Update the pending job list
+                    write2json(result_file, res)            #and save to disk
                     #os.remove(job['out'])
                     #os.remove(job['err'])
             except ValueError:
