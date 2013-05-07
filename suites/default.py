@@ -3,6 +3,7 @@
 bridges = [
     ('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
     ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args}', None),
+    ('cpp', 'benchmark/cpp/bin/{script} {args}', None)
 ]
 
 
@@ -12,7 +13,7 @@ bridges = [
 # (alias, manager, cmd (relative to the root of bohrium), env-vars)
 managers = [
     ('node',  'node', '',  None),
-    ('cluster',  'cluster', 'mpiexec -ppn 1 -np 1 {bridge} : -np 0 taskset -c 0 ./vem/cluster/bh_vem_cluster_slave',  None),
+    ('cluster',  'cluster', 'mpiexec -ppn 1 -np 1 {bridge} : -np 1 taskset -c 0 ./vem/cluster/bh_vem_cluster_slave',  None),
 ]
 
 # Engines with various parameter setups
@@ -42,6 +43,11 @@ suite = {
     'scripts':   scripts,
 }
 
-suites = [suite]
 
+native = {
+        'bridges': [('native-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+        'scripts': scripts
+}
+
+suites = [suite, native]
 

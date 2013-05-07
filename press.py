@@ -324,7 +324,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
     for benchmark in benchmarks:
         for script_alias, script, script_args in benchmark['scripts']:
             for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
-                for manager_alias, manager, manager_cmd, manager_env in benchmark.get('managers', [('N/A',None,None)]):
+                for manager_alias, manager, manager_cmd, manager_env in benchmark.get('managers', [('N/A',None,None,None)]):
                     for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
 
                         bh_config = StringIO.StringIO()
