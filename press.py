@@ -186,7 +186,7 @@ def execute( result_file, runs ):
         print "Suspending the benchmark execution, use resume on %s"%result_file.name
 
 
-def slurm_dispatch( result_file, runs, one_job, warm_ups ):
+def slurm_dispatch( result_file, runs, one_job, warm_ups, queue ):
 
     result_file.seek(0)
     res = json.load(result_file)
@@ -231,8 +231,12 @@ def slurm_dispatch( result_file, runs, one_job, warm_ups ):
                     nnodes = run['envs']['BH_SLURM_NNODES']
 
                 print "Submitting %s on %d nodes"%(job_file.name, nnodes),
+                cmd = ['sbatch']
+                if queue:
+                    cmd += ['-p', queue]
+                cmd += ['-N', '%d'%nnodes, job_file.name]
                 p = Popen(
-                    ['sbatch', '-N', '%d'%nnodes, job_file.name],
+                    cmd,
                     stderr=PIPE,
                     stdout=PIPE
                 )
@@ -423,15 +427,20 @@ if __name__ == "__main__":
         help="Use the SLURM queuing system."
     )
     slurm_grp.add_argument(
+        '--partition',
+        type=str,
+        help="Submit to a specific SLURM partition."
+    )
+    slurm_grp.add_argument(
         '--one-job',
         action="store_true",
-        help="Submit all runs of a benchmark as one SLURM job. Use this option together with --slurm."
+        help="Submit all runs of a benchmark as one SLURM job."
     )
     slurm_grp.add_argument(
         '--warm-ups',
         type=int,
         default=0,
-        help='Submits a number of "warm-up" jobs before the real job. Use this option together with --slurm.'
+        help='Submits a number of "warm-up" jobs before the real job.'
     )
 
     args = parser.parse_args()
@@ -456,7 +465,7 @@ if __name__ == "__main__":
                     args.no_perf,
                 )
                 if args.slurm:
-                    slurm_dispatch( res, runs, args.one_job, args.warm_ups )
+                    slurm_dispatch( res, runs, args.one_job, args.warm_ups, args.partition )
                     slurm_gather( res )
                 else:
                     execute( res, runs )
