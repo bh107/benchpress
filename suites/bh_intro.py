@@ -8,7 +8,8 @@ managers = [
 
 engines = [('simple',  'simple',   None)]
 
-python_script = [('Shallow Water','shallow_water','--size=10000*10000*10')]
+python_script = [('Shallow Water 20k','shallow_water','--size=20000*20000*10'),
+                 ('Shallow Water 25k','shallow_water','--size=25000*25000*10')]
 python = {
     'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'engines': engines,
@@ -20,30 +21,32 @@ python_native = {
     'scripts': python_script
 }
 
-cil_script = [('N-body','nbody','--size=5000*10 --no-temp-arrays=True')]
+cil_script = [('N-body 5k','nbody','--size=5000*10 --no-temp-arrays=True'),
+              ('N-body 10k','nbody','--size=10000*10 --no-temp-arrays=True'),
+              ('N-body 15k','nbody','--size=15000*10 --no-temp-arrays=True')]
 cil = {
-    'bridges': [('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args}', None)],
+    'bridges': [('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args} --bohrium=True', None)],
     'engines': engines,
     'managers': managers,
     'scripts': cil_script
 }
 cil_native = {
-    'bridges': [('CIL-native', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args}', None)],
+    'bridges': [('CIL-native', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args} --bohrium=False', None)],
     'scripts': cil_script
 }
 
-cpp_script = [('Black Scholes','black_scholes','--size=10000000*10')]
+cpp_script = [('Black Scholes 10m','black_scholes','--size=10000000*10'),
+              ('Black Scholes 100m','black_scholes','--size=100000000*10')]
 cpp = {
     'bridges': [('CPP', 'benchmark/cpp/bin/{script} {args}', None)],
     'engines': engines,
     'managers': managers,
     'scripts': cpp_script
 }
-cpp_native = {
-    'bridges': [('CPP-native', 'benchmark/cpp/bin/{script} {args}', None)],
+blitz = {
+    'bridges': [('blitz++', 'benchmark/blitz/bin/{script} {args}', None)],
     'scripts': cpp_script
 }
 
-suites = [python_native, python, cil, cpp]
-
+suites = [python_native, python, cil_native, cil, cpp, blitz]
 
