@@ -133,6 +133,10 @@ def parse_elapsed_times( output ):
     times = []
     for t in re.finditer("elapsed-time:\s*(\d*\.?\d*)", output):
         times.append(float(t.group(1)))
+
+    if len(times) == 0:
+        print "Could not find elapsed-time in the output"
+        raise ValueError
     return times
 
 
@@ -279,8 +283,6 @@ def slurm_gather( result_file ):
                 with open(job['out'], "r") as fd:
                     out = fd.read()
                     times = parse_elapsed_times(out)
-                    if len(times) == 0:
-                        raise ValueError
                     times = times[job['warm_ups']:]         #Remove the warm-up runs
                     for t in times:
                         run['times'].append(t)
