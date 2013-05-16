@@ -173,6 +173,7 @@ def execute( result_file, runs ):
                         out, err = p.communicate()              # Grab the output
 
                         if err or not out:
+                            print "The command '%s' failed:\n%s"%(' '.join(run['cmd']), err)
                             raise CalledProcessError(returncode=p.returncode, cmd=run['cmd'], output=err)
 
                         elapsed = parse_elapsed_times(out)[0]
