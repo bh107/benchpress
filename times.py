@@ -14,7 +14,8 @@ def main():
         if len(run["times"]) < 1:
             print "N/A"
         else:
-            print run["times"], np.average( run["times"])
+            print run["times"],
+            print "%f (%f)"%(np.mean(run["times"]), np.var(run["times"]))
 
 if __name__ == "__main__":
     main()
