@@ -1,9 +1,12 @@
 from default import *
 
+py_bridge = [
+    ('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None),
+]
+
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bridges = [
-    ('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None),
     ('bohrium-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
 ]
 
@@ -47,5 +50,12 @@ suite = {
     'scripts':   scripts,
 }
 
-suites = [suite]
+py_only = {
+    'bridges':   py_bridge,
+    'managers':  [],
+    'engines':   [],
+    'scripts':   scripts,
+}
+
+suites = [py_only, suite]
 
