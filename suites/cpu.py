@@ -3,6 +3,7 @@ from default import *
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bridges = [
+    ('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None),
     ('bohrium-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
 ]
 
