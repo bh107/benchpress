@@ -12,7 +12,9 @@ import sys
 import os
 import re
 
-colors = [
+formats = ['png', 'pdf', 'eps']
+
+colors  = [
     "#B3E2CD", "#FDCDAC", "#CBD5E8",
     "#F4CAE4", "#E6F5C9", "#FFF2AE",
     "#F1E2CC", "#CCCCCC",
@@ -224,9 +226,10 @@ def main(results, baseline, output, file_formats):
 
 if __name__ == "__main__":
 
-    formats = ['png', 'pdf', 'eps']
-
-    parser = argparse.ArgumentParser(description='Generate graphs / diagrams from benchmarks.')
+    parser = argparse.ArgumentParser(
+        description = 'Generate graphs showing "bridge_alias/engine_alias"\n'+\
+        " along the x-axis and elapsed time / speedup on the y-axis."
+    )
     parser.add_argument(
         'results',
         help='Path to benchmark results.'
