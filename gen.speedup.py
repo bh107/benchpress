@@ -203,31 +203,24 @@ class Speedup(Absolute):
 
         Absolute.render(self, script, labels, values)
 
-def main(results, output, file_formats):
+def main(results, baseline, output, file_formats):
 
-    labels, values = parse_results(results)
+    labels, values = parse_results(results) # Get the results from json-file
 
-    for script in labels:
-        #Absolute(output, file_formats).render(
-        #    script,
-        #    labels[script],
-        #    values[script]
-        #)
-        bl_label = "bh/dyn_01"
-        bl_label = "py/numpy"
-        Speedup(
-            output,
-            file_formats,
-            script,
-            yaxis_label='Speedup in relation to "%s"' % bl_label
-        ).render(
-            bl_label,
-            script,
-            labels[script],
-            values[script]
-        )
-
-    return [(True, "")]
+    for script in labels:                   # Render them
+        if baseline:
+            Speedup(
+                output,
+                file_formats,
+                script,
+                yaxis_label='Speedup in relation to "%s"' % baseline
+            ).render(
+                baseline, script, labels[script], values[script]
+            )
+        else:
+            Absolute(output, file_formats, script).render(
+                script, labels[script], values[script]
+            )
 
 if __name__ == "__main__":
 
@@ -250,8 +243,12 @@ if __name__ == "__main__":
         default='pdf',
         choices=[ff for ff in formats]
     )
+    parser.add_argument(
+        '--baseline',
+        dest='baseline',
+        default=None,
+        help='Baseline on the form: "bridge_alias/engine_alias"'
+    )
     args = parser.parse_args()
-    res = [msg for r, msg in main(
-        args.results, args.output, [args.f]) if msg
-    ]
-    print ''.join( res )
+
+    main(args.results, args.baseline, args.output, [args.f])
