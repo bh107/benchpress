@@ -21,9 +21,8 @@ python_native = {
     'scripts': python_script
 }
 
-cil_script = [('N-body 5k','nbody','--size=5000*10 --no-temp-arrays=True'),
-              ('N-body 10k','nbody','--size=10000*10 --no-temp-arrays=True'),
-              ('N-body 15k','nbody','--size=15000*10 --no-temp-arrays=True')]
+cil_script = [('N-body 15k','nbody','--size=15000*10 --dtype=double  --no-temp-arrays=True'),
+              ('N-body 20k','nbody','--size=20000*10 --dtype=double  --no-temp-arrays=True')]
 cil = {
     'bridges': [('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args} --bohrium=True', None)],
     'engines': engines,
