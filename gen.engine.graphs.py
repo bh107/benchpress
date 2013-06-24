@@ -67,19 +67,15 @@ def parse_results(results_fn):
     res = []
     with(open(results_fn)) as fd:
         for run in json.load(fd)['runs']:
-            if (run['bridge_alias'] == "bohrium-numpy"):
-                tmp = (run['script_alias'], 
-                       'bh', 
-                       run['engine_alias'],
-                       stats(run['times'])[0]
-                )
-            else:
-                tmp = (run['script_alias'], 
-                       'py', 
-                       'numpy',
-                       stats(run['times'])[0]
-                )
-            res.append(tmp)
+            # Compress bridge-alias
+            bridge_alias = ''.join([x[0] for x in run['bridge_alias'].split('-')])
+            engine_alias = 'native' if 'N/A' == run['engine_alias'] else run['engine_alias']
+            res.append((
+                run['script_alias'],
+                bridge_alias,
+                engine_alias,
+                stats(run['times'])[0]
+            ))
 
     res = sorted(res)
 
