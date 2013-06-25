@@ -105,6 +105,7 @@ class Graph:
         self,
         output="/tmp",
         file_formats=["pdf"],
+        file_postfix='runtime',
         graph_title="Unknown Graph",
         xaxis_label="Bridge/Engine",
         yaxis_label="Time in Seconds"
@@ -114,6 +115,7 @@ class Graph:
         self.yaxis_label    = yaxis_label
         self.output         = output
         self.file_formats   = file_formats
+        self.file_postfix   = file_postfix
 
     def prep(self):
         clf()                       # Essential! Othervise the plots will be f**d up!
@@ -131,7 +133,7 @@ class Graph:
         raise Exception('YOU ARE DOING IT WRONG!')
 
     def to_file(self, text):
-        fn = self.output +os.sep+ text.lower() +'_runtime'
+        fn = self.output +os.sep+ text.lower() +'_'+self.file_postfix
         dname = os.path.dirname(fn)
         bname = re.sub('\W', '_', os.path.basename(fn))
         fn = dname +os.sep+ bname
@@ -218,13 +220,15 @@ def main(results, baseline, order, output, file_formats):
             Speedup(
                 output,
                 file_formats,
+                'speedup',
                 script,
-                yaxis_label='Speedup in relation to "%s"' % baseline
+                yaxis_label='Speedup in relation to "%s"' % baseline,
+
             ).render(
                 baseline, script, labels[script], values[script], order
             )
         else:
-            Absolute(output, file_formats, script).render(
+            Absolute(output, file_formats, 'runtime', script).render(
                 script, labels[script], values[script]
             )
 
