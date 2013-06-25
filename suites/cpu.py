@@ -1,21 +1,5 @@
 from default import *
 
-# Bridges  with various parameter setups
-# (alias, cmd (relative to the root of bohrium), env-vars)
-bridges = [
-    ('bohrium-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
-]
-
-# Managers above the node-vem with various parameter setups.
-# NB: the node-vem is hardcoded, the managers here will have the
-#     node-vem as child unless it is the node-vem itself
-# (alias, manager, cmd (relative to the root of bohrium), env-vars)
-managers = [
-    ('node',  'node', '',  None),
-]
-
-# Scripts and their arguments
-# (alias, script, arguments)
 scripts   = [
     ('Black Scholes',        'black_scholes',  '--size=1000000*10'),
     ('Jacobi Stencil',       'jacobi_stencil', '--size=20000*1000*10'),
@@ -29,36 +13,44 @@ scripts   = [
 #    ('SoR',                  'sor',             '--size=5000*5000*10'),
 ]
 
-# Engines with various parameter setups
-# (alias, engine, env-vars)
-engines = [
-    ('naive',       'cpu', {'BH_CORE_VCACHE_SIZE': '0',
-                            'BH_VE_CPU_TRAVERSAL': 'naive'}),
-    ('naive+vc',    'cpu', {'BH_CORE_VCACHE_SIZE': '10',
-                            'BH_VE_CPU_TRAVERSAL': 'naive'}),
-    ('fl',          'cpu', {'BH_CORE_VCACHE_SIZE' : '0',
-                            'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
-    ('fl+vc',       'cpu', {'BH_CORE_VCACHE_SIZE' : '10',
-                            'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
-    ('tiling',      'tiling',   {'BH_CORE_VCACHE_SIZE': '0'}),
-    ('tiling+vc',   'tiling',   {'BH_CORE_VCACHE_SIZE': '10'}),
-    ('mcore',       'mcore',    {'BH_CORE_VCACHE_SIZE': '0'}),
-    ('mcore+vc',    'mcore',    {'BH_CORE_VCACHE_SIZE': '10'})
-]
-
-# A suite example
-# Note that 'engines' and 'managers' may be undefined, in which case they are ignored
-suite = {
-    'bridges':   bridges,
-    'managers':  managers,
-    'engines':   engines,
-    'scripts':   scripts,
-}
-
-py_only = {
+python = {
     'bridges':  [('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts,
 }
 
-suites = [py_only, suite]
+score = {
+    'bridges':  [
+        ('bohrium-numpy', 'taskset -c 1 python benchmark/Python/{script}.py {args} --bohrium=True', None),
+    ],
+    'managers': [
+        ('node',  'node', '',  None),
+    ],
+    'engines':   [
+        ('naive',    'cpu', {'BH_CORE_VCACHE_SIZE': '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('naive+vc', 'cpu', {'BH_CORE_VCACHE_SIZE': '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('fl',       'cpu', {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
+        ('fl+vc',    'cpu', {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
+        ('tiling',   'tiling',   {'BH_CORE_VCACHE_SIZE': '0'}),
+        ('tiling+vc','tiling',   {'BH_CORE_VCACHE_SIZE': '10'}),   
+    ],
+    'scripts':   scripts
+}
+
+mcore = {
+    'bridges':  [('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'managers': [
+        ('node',  'node', '',  None),
+    ],
+    'engines': [
+        ('mcore',       'mcore',    {'BH_CORE_VCACHE_SIZE': '0'}),
+        ('mcore+vc',    'mcore',    {'BH_CORE_VCACHE_SIZE': '10'})
+    ],
+    'scripts':  scripts
+}
+
+suites = [
+    python,
+    mcore,
+    score
+]
 
