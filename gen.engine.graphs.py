@@ -152,9 +152,17 @@ class Absolute(Graph):
     along the x-axis using "bridge_alias/engine_alias" as labels.
     """
 
-    def render(self, script, labels, values):
+    def render(self, script, labels, values, order):
 
         self.prep()                         # Prep it / clear the drawing board
+
+        if order:                           # Order and limit the labels
+            data = dict(zip(labels, values))
+            labels = []
+            values = []
+            for label in order:
+                labels.append(label)
+                values.append(data[label])
 
         rotation = 'horizontal'             # Assume that there is not enough room vertically
         if len(values)> 4:                  # so change orientation of labels
@@ -181,7 +189,7 @@ class Speedup(Absolute):
     "Baseline" is a string on the form: "bridge_alias/engine_alias".
     """
 
-    def render(self, baseline, script, labels, values):
+    def render(self, baseline, script, labels, values, order):
 
                                             # Get index of baseline label
         bl_index = [c for c, lable in enumerate(labels) if lable == baseline]
@@ -199,9 +207,9 @@ class Speedup(Absolute):
         values.insert(0, 1.0)               # Prepend baseline "value"
         labels.insert(0, bl_label)          # Prepend baseline label
 
-        Absolute.render(self, script, labels, values)
+        Absolute.render(self, script, labels, values, order)
 
-def main(results, baseline, output, file_formats):
+def main(results, baseline, order, output, file_formats):
 
     labels, values = parse_results(results) # Get the results from json-file
 
@@ -213,7 +221,7 @@ def main(results, baseline, output, file_formats):
                 script,
                 yaxis_label='Speedup in relation to "%s"' % baseline
             ).render(
-                baseline, script, labels[script], values[script]
+                baseline, script, labels[script], values[script], order
             )
         else:
             Absolute(output, file_formats, script).render(
@@ -223,8 +231,8 @@ def main(results, baseline, output, file_formats):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-        description = 'Generate graphs showing "bridge_alias/engine_alias"\n'+\
-        " along the x-axis and elapsed time / speedup on the y-axis."
+        description = 'Generate graphs showing "bridge_alias/engine_alias" \n'+\
+                      'along the x-axis and elapsed time/speedup on the y-axis.'
     )
     parser.add_argument(
         'results',
@@ -232,22 +240,27 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--output',
-        dest='output',
         default="graphs",
         help='Where to store generated graphs.'
     )
     parser.add_argument(
-        '--format',
-        dest='f',
-        default='pdf',
+        '--formats',
+        default=['pdf'],
+        nargs='+',
         choices=[ff for ff in formats]
     )
     parser.add_argument(
         '--baseline',
-        dest='baseline',
         default=None,
         help='Baseline on the form: "bridge_alias/engine_alias"'
     )
+    parser.add_argument(
+        '--order',
+        default=None,
+        nargs='+',
+        help='Ordering of the ticks.'
+    )
     args = parser.parse_args()
 
-    main(args.results, args.baseline, args.output, [args.f])
+    main(args.results, args.baseline, args.order, args.output, args.formats)
+
