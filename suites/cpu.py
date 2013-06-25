@@ -37,7 +37,7 @@ score = {
 }
 
 mcore = {
-    'bridges':  [('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('python-numpy-mcore', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': [
         ('node',  'node', '',  None),
     ],
