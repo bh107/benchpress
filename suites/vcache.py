@@ -32,7 +32,7 @@ scripts   = [
 # Engines with various parameter setups
 # (alias, engine, env-vars)
 engines = [
-    ('naive',       'cpy', {'BH_CORE_VCACHE_SIZE': '0',
+    ('naive',       'cpu', {'BH_CORE_VCACHE_SIZE': '0',
                             'BH_VE_CPU_TRAVERSAL': 'naive'}),
     ('naive+vc',    'cpu', {'BH_CORE_VCACHE_SIZE': '10',
                             'BH_VE_CPU_TRAVERSAL': 'naive'}),
