@@ -31,7 +31,9 @@ score = {
         ('fl',       'cpu', {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
         ('fl+vc',    'cpu', {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
         ('tiling',   'tiling',   {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('tiling+vc','tiling',   {'BH_CORE_VCACHE_SIZE': '10'}),   
+        ('tiling+vc','tiling',   {'BH_CORE_VCACHE_SIZE': '10'}),
+        ('dynamite',   'dynamite',   {'BH_CORE_VCACHE_SIZE': '0'}),
+        ('dynamite+vc','dynamite',   {'BH_CORE_VCACHE_SIZE': '10'}),
     ],
     'scripts':   scripts
 }
