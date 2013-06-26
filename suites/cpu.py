@@ -18,41 +18,41 @@ python = {
     'scripts':  scripts,
 }
 
-score = {
+bohrium_taskset = {
     'bridges':  [
-        ('bohrium-numpy', 'taskset -c 1 python benchmark/Python/{script}.py {args} --bohrium=True', None),
+        ('bh-numpy', 'taskset -c 1 python benchmark/Python/{script}.py {args} --bohrium=True', None),
     ],
     'managers': [
         ('node',  'node', '',  None),
     ],
     'engines':   [
-        ('naive',    'cpu', {'BH_CORE_VCACHE_SIZE': '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('naive+vc', 'cpu', {'BH_CORE_VCACHE_SIZE': '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('fl',       'cpu', {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
-        ('fl+vc',    'cpu', {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
-        ('tiling',   'tiling',   {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('tiling+vc','tiling',   {'BH_CORE_VCACHE_SIZE': '10'}),
-        ('dynamite',   'dynamite',   {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('dynamite+vc','dynamite',   {'BH_CORE_VCACHE_SIZE': '10'}),
+        ('naive',    'cpu',     {'BH_CORE_VCACHE_SIZE': '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('naive+vc', 'cpu',     {'BH_CORE_VCACHE_SIZE': '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('tiling',   'tiling',  {'BH_CORE_VCACHE_SIZE': '0'}),
+        ('tiling+vc','tiling',  {'BH_CORE_VCACHE_SIZE': '10'}),
+        ('fl',       'cpu',     {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
+        ('fl+vc',    'cpu',     {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
     ],
     'scripts':   scripts
 }
 
-mcore = {
-    'bridges':  [('bohrium-numpy-mcore', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+bohrium = {
+    'bridges':  [('bh-numpy-notaskset', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': [
         ('node',  'node', '',  None),
     ],
     'engines': [
         ('mcore',       'mcore',    {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('mcore+vc',    'mcore',    {'BH_CORE_VCACHE_SIZE': '10'})
+        ('mcore+vc',    'mcore',    {'BH_CORE_VCACHE_SIZE': '10'}),
+        ('dynamite',    'dynamite', {'BH_CORE_VCACHE_SIZE': '0'}),
+        ('dynamite+vc', 'dynamite', {'BH_CORE_VCACHE_SIZE': '10'}),
     ],
     'scripts':  scripts
 }
 
 suites = [
     python,
-    mcore,
-    score
+    bohrium,
+    bohrium_taskset
 ]
 
