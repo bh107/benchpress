@@ -70,12 +70,12 @@ scripts   = [
     ('N-body f32 6400',           'nbody',          '--size=6400*50 --dtype=float32'),
     ('N-body f64 3200',           'nbody',          '--size=3200*50 --dtype=float64'),
     
-#    ('Black Scholes f32 128M',    'black_scholes',  '--size=128000000*50 --dtype=float32'),
-#    ('Black Scholes f64  64M',    'black_scholes',  '--size=64000000*50 --dtype=float64'),
-#    ('SOR f32 16k x 16k',         'sor',            '--size=16000*16000*50 --dtype=float32'),
-#    ('SOR f64  8k x 16k',         'sor',            '--size=8000*16000*50 --dtype=float64'),
-#    ('Shallow Water f32 4k x 8k', 'shallow_water',  '--size=4000*8000*50 --dtype=float32'),
-#    ('Shallow Water f64 4k x 4k', 'shallow_water',  '--size=4000*4000*50 --dtype=float64'),
+    ('Black Scholes f32 128M',    'black_scholes',  '--size=128000000*50 --dtype=float32'),
+    ('Black Scholes f64  64M',    'black_scholes',  '--size=64000000*50 --dtype=float64'),
+    ('SOR f32 16k x 16k',         'sor',            '--size=16000*16000*100 --dtype=float32'),
+    ('SOR f64  8k x 16k',         'sor',            '--size=8000*16000*100 --dtype=float64'),
+    ('Shallow Water f32 4k x 8k', 'shallow_water',  '--size=4000*8000*100 --dtype=float32'),
+    ('Shallow Water f64 4k x 4k', 'shallow_water',  '--size=4000*4000*100 --dtype=float64'),
 
 ]
 
