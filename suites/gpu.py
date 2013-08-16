@@ -22,8 +22,8 @@ scripts   = [
     ('SOR f64  1k x  2k',         'sor',            '--size=1000*2000*100 --dtype=float64'),
     ('Shallow Water f32 .5k x 1k', 'shallow_water',  '--size=500*1000*100 --dtype=float32'),
     ('Shallow Water f64 .5k x .5k', 'shallow_water',  '--size=500*500*100 --dtype=float64'),
-    ('N-body f32 200',             'nbody',          '--size=200*50 --dtype=float32'),
-    ('N-body f64 100',             'nbody',          '--size=100*50 --dtype=float64'),
+    ('N-body f32  200',            'nbody',          '--size=200*50 --dtype=float32'),
+    ('N-body f64  100',            'nbody',          '--size=100*50 --dtype=float64'),
     
     ('Black Scholes f32   4M',    'black_scholes',  '--size=4000000*50 --dtype=float32'),
     ('Black Scholes f64   2M',    'black_scholes',  '--size=2000000*50 --dtype=float64'),
@@ -31,8 +31,8 @@ scripts   = [
     ('SOR f64  2k x  2k',         'sor',            '--size=2000*2000*100 --dtype=float64'),
     ('Shallow Water f32 1k x 1k', 'shallow_water',  '--size=1000*1000*100 --dtype=float32'),
     ('Shallow Water f64 .5k x 1k', 'shallow_water',  '--size=500*1000*100 --dtype=float64'),
-    ('N-body f32 400',           'nbody',          '--size=400*50 --dtype=float32'),
-    ('N-body f64 200',           'nbody',          '--size=200*50 --dtype=float64'),
+    ('N-body f32  400',          'nbody',          '--size=400*50 --dtype=float32'),
+    ('N-body f64  200',          'nbody',          '--size=200*50 --dtype=float64'),
     
     ('Black Scholes f32   8M',    'black_scholes',  '--size=8000000*50 --dtype=float32'),
     ('Black Scholes f64   4M',    'black_scholes',  '--size=4000000*50 --dtype=float64'),
@@ -40,8 +40,8 @@ scripts   = [
     ('SOR f64  2k x  4k',         'sor',            '--size=2000*4000*100 --dtype=float64'),
     ('Shallow Water f32 1k x 2k', 'shallow_water',  '--size=1000*2000*100 --dtype=float32'),
     ('Shallow Water f64 1k x 1k', 'shallow_water',  '--size=1000*1000*100 --dtype=float64'),
-    ('N-body f32 800',            'nbody',          '--size=800*50 --dtype=float32'),
-    ('N-body f64 400',            'nbody',          '--size=400*50 --dtype=float64'),
+    ('N-body f32  800',           'nbody',          '--size=800*50 --dtype=float32'),
+    ('N-body f64  400',           'nbody',          '--size=400*50 --dtype=float64'),
     
     ('Black Scholes f32  16M',    'black_scholes',  '--size=16000000*50 --dtype=float32'),
     ('Black Scholes f64   8M',    'black_scholes',  '--size=8000000*50 --dtype=float64'),
@@ -50,7 +50,7 @@ scripts   = [
     ('Shallow Water f32 2k x 2k', 'shallow_water',  '--size=2000*2000*100 --dtype=float32'),
     ('Shallow Water f64 1k x 2k', 'shallow_water',  '--size=1000*2000*100 --dtype=float64'),
     ('N-body f32 1600',           'nbody',          '--size=1600*50 --dtype=float32'),
-    ('N-body f64 800',            'nbody',          '--size=800*50 --dtype=float64'),
+    ('N-body f64  800',           'nbody',          '--size=800*50 --dtype=float64'),
     
     ('Black Scholes f32  32M',    'black_scholes',  '--size=32000000*50 --dtype=float32'),
     ('Black Scholes f64  16M',    'black_scholes',  '--size=16000000*50 --dtype=float64'),
@@ -83,6 +83,6 @@ suites = [
     { 'bridges': bohrium
       ,'engines':  engines
       ,'scripts':  scripts},
-    { 'bridges': numpy
-      ,'scripts':  scripts}
+#    { 'bridges': numpy
+#      ,'scripts':  scripts}
     ]

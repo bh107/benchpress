@@ -356,7 +356,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
 
                         cmd = bridge_cmd.replace("{script}", script)
                         cmd = cmd.replace("{args}", script_args)
-                        cmd = 'taskset -c 0 ' + cmd
+#                        cmd = 'taskset -c 0 ' + cmd
                         if manager and manager != "node":
                             cmd = manager_cmd.replace("{bridge}", cmd)
 
