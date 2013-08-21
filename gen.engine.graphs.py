@@ -229,7 +229,7 @@ def main(results, baseline, order, output, file_formats):
             )
         else:
             Absolute(output, file_formats, 'runtime', script).render(
-                script, labels[script], values[script]
+                script, labels[script], values[script], order
             )
 
 if __name__ == "__main__":

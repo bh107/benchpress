@@ -3,6 +3,7 @@ from ConfigParser import SafeConfigParser
 import subprocess
 from subprocess import Popen, PIPE, CalledProcessError
 from datetime import datetime
+from multiprocessing import Pool
 
 import tempfile
 import argparse
@@ -127,7 +128,7 @@ def write2json(json_file, obj):
     os.fsync(json_file)
 
 
-def parse_elapsed_times( output ):
+def parse_elapsed_times(output):
     """Return list of elapsed times from the output"""
 
     times = []
@@ -139,8 +140,24 @@ def parse_elapsed_times( output ):
         raise ValueError
     return times
 
+def wrap_popen(task):
 
-def execute( result_file, runs ):
+    p = Popen(                              # Run the command
+        task['cmd'],
+        stderr=PIPE,
+        stdout=PIPE,
+        env=task['run']['envs'],
+        cwd=task['run']['cwd']
+    )
+    out, err = p.communicate()              # Grab the output
+
+    if err or not out:
+        print "The command '%s' failed:\n%s"%(' '.join(task['cmd']), err)
+        raise CalledProcessError(returncode=p.returncode, cmd=task['cmd'], output=err)
+
+    return parse_elapsed_times(out)[0]      # Return the elapsed time
+
+def execute(result_file, runs, args):
     result_file.seek(0)
     res = json.load(result_file)
 
@@ -163,21 +180,18 @@ def execute( result_file, runs ):
                         conf.write(run['bh_config'])            # And write it to a temp file
                         conf.flush()
                         os.fsync(conf)
-                        p = Popen(                              # Run the command
-                            run['cmd'],
-                            stderr=PIPE,
-                            stdout=PIPE,
-                            env=run['envs'],
-                            cwd=run['cwd']
-                        )
-                        out, err = p.communicate()              # Grab the output
+                        
+                        nworkers = len(args.cores)
+                        if not nworkers:
+                            nworkers = 1
+                            tasks = [{'cmd': run['cmd'], 'run': run}]
+                        else:
+                            tasks = [{'cmd': ['taskset', '-c', core] + run['cmd'], 'run': run} for core in args.cores]
 
-                        if err or not out:
-                            print "The command '%s' failed:\n%s"%(' '.join(run['cmd']), err)
-                            raise CalledProcessError(returncode=p.returncode, cmd=run['cmd'], output=err)
-
-                        elapsed = parse_elapsed_times(out)[0]
-                        run['times'].append(elapsed)
+                        workers = Pool(nworkers, None, None, 1)
+                        elapsed = workers.map(wrap_popen, tasks)
+                        run['times'] += elapsed
+                        print run['times']
                         write2json(result_file, res)
                         print "elapsed time: ", elapsed
 
@@ -356,7 +370,6 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
 
                         cmd = bridge_cmd.replace("{script}", script)
                         cmd = cmd.replace("{args}", script_args)
-                        cmd = 'taskset -c 0 ' + cmd
                         if manager and manager != "node":
                             cmd = manager_cmd.replace("{bridge}", cmd)
 
@@ -422,6 +435,14 @@ if __name__ == "__main__":
         action="store_false",
         help="Disable the use of the perf measuring tool."
     )
+    
+    affinity_grp = parser.add_argument_group('Saturated Execution')
+    affinity_grp.add_argument(
+        '--cores',
+        nargs='+',
+        default=[],
+        help="Launch each benchmark concurrently on each provided CPU core."
+    )
 
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
@@ -454,21 +475,23 @@ if __name__ == "__main__":
             if args.slurm:
                 slurm_gather( res )
             else:
-                execute(res, runs)
+                execute(res, runs, args)
     else:
         with tempfile.NamedTemporaryFile(delete=False, dir=args.output,
                                          prefix='benchmark-%s-' % args.suite,
                                          suffix='.json') as res:
-                gen_jobs(res,
-                    os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
-                    args.src,
-                    args.output,
-                    args.suite,
-                    bsuites[args.suite],
-                    args.no_perf,
-                )
-                if args.slurm:
-                    slurm_dispatch( res, runs, args.one_job, args.warm_ups, args.partition )
-                    slurm_gather( res )
-                else:
-                    execute( res, runs )
+            gen_jobs(res,
+                os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
+                args.src,
+                args.output,
+                args.suite,
+                bsuites[args.suite],
+                args.no_perf,
+            )
+
+            if args.slurm:
+                slurm_dispatch(res, runs, args.one_job, args.warm_ups, args.partition)
+                slurm_gather(res)
+            else:
+                execute(res, runs, args)
+
