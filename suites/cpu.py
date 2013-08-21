@@ -30,8 +30,8 @@ bohrium_taskset = {
         ('naive+vc', 'cpu',     {'BH_CORE_VCACHE_SIZE': '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
         ('tiling',   'tiling',  {'BH_CORE_VCACHE_SIZE': '0'}),
         ('tiling+vc','tiling',  {'BH_CORE_VCACHE_SIZE': '10'}),
-        ('fl',       'cpu',     {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
-        ('fl+vc',    'cpu',     {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPUT_TRAVERSAL': 'fruit_loops'}),
+        ('fl',       'cpu',     {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPU_TRAVERSAL': 'fruit_loops'}),
+        ('fl+vc',    'cpu',     {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPU_TRAVERSAL': 'fruit_loops'}),
     ],
     'scripts':   scripts
 }
