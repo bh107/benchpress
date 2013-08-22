@@ -70,8 +70,8 @@ bohrium = {
     'bridges':  [('NumPy/Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',  'node', '',  None) ],
     'engines':  [
-        ('cpu', 'cpu', {'BH_CORE_VCACHE_SIZE':  '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('cpu', 'cpu', {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('cpu', 'cpu',    {'BH_CORE_VCACHE_SIZE':  '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('cpu', 'cpu_vc', {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
     ],
     'scripts':  scripts
 }
