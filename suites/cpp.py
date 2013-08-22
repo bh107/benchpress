@@ -1,6 +1,6 @@
 from default import *
 
-strong = [
+scholes = [
     ('Black Scholes',        'black_scholes',   '--size=125000*10'),
     ('Black Scholes',        'black_scholes',   '--size=250000*10'),
     ('Black Scholes',        'black_scholes',   '--size=500000*10'),
@@ -9,7 +9,7 @@ strong = [
     ('Black Scholes',        'black_scholes',   '--size=4000000*10'),
 ]
 
-scripts = strong
+scripts = scholes
 
 engines = [
     ('cpu',     'cpu',          {'BH_CORE_VCACHE_SIZE':  '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
