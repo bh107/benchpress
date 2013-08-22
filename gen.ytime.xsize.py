@@ -174,8 +174,8 @@ class Absolute(Graph):
 
         labels = []
         for label, numbers in data:
-            sizes   = [size/100000 for size in numbers['size']]
-            #sizes   = numbers['size']
+            #sizes   = [size/100000 for size in numbers['size']] # for cpp-bridge graph
+            sizes   = numbers['size']
             if baseline:
                 times = [bsl[c]/number for c, number in enumerate(numbers['times'])]
             else:
@@ -186,7 +186,8 @@ class Absolute(Graph):
         if baseline:
             #ylim([0.5,1.4]) # cpp + naive/vcache
             #ylim([0.5,1.6]) # naive
-            ylim([0.5,3.0]) # naive + vcache
+            #ylim([0.5,3.0]) # naive + vcache
+            ylim([0.5,4.0]) # naive + vcache
         legend(labels, bbox_to_anchor=(0.5, -0.15), loc='upper center', ncol=4, borderaxespad=0., fancybox=True, shadow=True)
 
         suffix = '_rel' if baseline else '_abs'

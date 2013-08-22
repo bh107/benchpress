@@ -141,7 +141,6 @@ def parse_elapsed_times(output):
     return times
 
 def wrap_popen(task):
-
     p = Popen(                              # Run the command
         task['cmd'],
         stderr=PIPE,
@@ -190,10 +189,10 @@ def execute(result_file, runs, args):
 
                         workers = Pool(nworkers, None, None, 1)
                         elapsed = workers.map(wrap_popen, tasks)
-                        run['times'] += elapsed
-                        print run['times']
+                        run['times'] += [sum(elapsed)/float(len(elapsed))]
+                        #run['times'] += sum(elapsed)
                         write2json(result_file, res)
-                        print "elapsed time: ", elapsed
+                        print "elapsed time: ", elapsed, run['times']
 
             except CalledProcessError, ValueError:
                 print "Error in the execution -- skipping to the next benchmark"
