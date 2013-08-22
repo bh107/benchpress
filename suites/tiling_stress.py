@@ -59,9 +59,6 @@ scripts += shallow
 
 scripts = scholes + jacobi + knn + mc + nbody + shallow
 
-scripts = mc
-scripts = [('Monte Carlo PI', 'mc', '--size=6250*10')]
-
 managers= [('node', 'node', '', None)]
 
 numpy = {
