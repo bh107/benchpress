@@ -10,12 +10,12 @@ scholes = [
 ]
 
 jacobi = [
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=313*10000*5'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=625*10000*5'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=1250*10000*5'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=2500*10000*5'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=5000*10000*5'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=10000*10000*5'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=313*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=625*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=1250*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=2500*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=5000*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=10000*4000*10'),
 ]
 
 knn = [
@@ -72,7 +72,7 @@ bohrium = {
     'engines':  [
         ('cpu',     'cpu',      {'BH_CORE_VCACHE_SIZE':  '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
         ('cpu_vc',  'cpu',      {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('tiling',  'tiling',   {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('tiling',  'tiling',   {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
         ('mcore',   'mcore',    {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
     ],
     'scripts':  scripts
