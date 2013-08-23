@@ -115,7 +115,7 @@ class Graph:
         file_formats=["pdf"],
         file_postfix='runtime',
         graph_title="Unknown Graph",
-        xaxis_label="Problemsize * 10^5",
+        xaxis_label="Problemsize",
         yaxis_label="Time in Seconds"
     ):
         self.graph_title    = graph_title
@@ -173,21 +173,40 @@ class Absolute(Graph):
         bsl  = bsl[0] if bsl else bsl
 
         labels = []
+        xlow  = None
+        xhigh = None
         for label, numbers in data:
             #sizes   = [size/100000 for size in numbers['size']] # for cpp-bridge graph
             sizes   = numbers['size']
+
+            if not xlow:            # Axis scaling
+                xlow = min(sizes)
+            if not xhigh:
+                xhigh = max(sizes)
+
+            if min(sizes) < xlow:
+                xlow = min(sizes)
+            if max(sizes) > xhigh:
+                xhigh = max(sizes)
+
             if baseline:
                 times = [bsl[c]/number for c, number in enumerate(numbers['times'])]
             else:
                 times = numbers['times']
-            p = plot(sizes, times, label=label)
+            p = plot(sizes, times, label=label, marker='*')
             labels.append(label)
 
         if baseline:
             #ylim([0.5,1.4]) # cpp + naive/vcache
             #ylim([0.5,1.6]) # naive
             #ylim([0.5,3.0]) # naive + vcache
-            ylim([0.5,4.0]) # naive + vcache
+            #ylim([0.5, 3.4]) # tiling
+            ylim([0.5, 6.5]) # mcore
+            #ylim([0.5, yhigh]) # generic
+        #autoscale(axis='x', tight=False)
+        xscale("log")
+        xlim([xlow-(xlow/2), xhigh+(xhigh/2)])
+        #autoscale(axis='x', tight=True)
         legend(labels, bbox_to_anchor=(0.5, -0.15), loc='upper center', ncol=4, borderaxespad=0., fancybox=True, shadow=True)
 
         suffix = '_rel' if baseline else '_abs'
