@@ -162,7 +162,7 @@ class Absolute(Graph):
     along the x-axis using "bridge_alias/engine_alias" as labels.
     """
 
-    def render(self, script, results, order=None, baseline=None):
+    def render(self, script, results, order=None, baseline=None, highest=None):
 
         if baseline:
             self.yaxis_label='Speedup in relation to "%s"' % baseline
@@ -176,7 +176,6 @@ class Absolute(Graph):
         xlow  = None
         xhigh = None
         for label, numbers in data:
-            #sizes   = [size/100000 for size in numbers['size']] # for cpp-bridge graph
             sizes   = numbers['size']
 
             if not xlow:            # Axis scaling
@@ -193,20 +192,14 @@ class Absolute(Graph):
                 times = [bsl[c]/number for c, number in enumerate(numbers['times'])]
             else:
                 times = numbers['times']
-            p = plot(sizes, times, label=label, marker='*')
+            p = plot(sizes, times, label=label, marker='.')
             labels.append(label)
 
         if baseline:
-            #ylim([0.5,1.4]) # cpp + naive/vcache
-            #ylim([0.5,1.6]) # naive
-            #ylim([0.5,3.0]) # naive + vcache
-            #ylim([0.5, 3.4]) # tiling
-            ylim([0.5, 6.5]) # mcore
-            #ylim([0.5, yhigh]) # generic
-        #autoscale(axis='x', tight=False)
+            ylim([0.5, highest+0.1])
+
         xscale("log")
-        xlim([xlow-(xlow/2), xhigh+(xhigh/2)])
-        #autoscale(axis='x', tight=True)
+        xlim([xlow-(xlow/8), xhigh+(xhigh/8)])
         legend(labels, bbox_to_anchor=(0.5, -0.15), loc='upper center', ncol=4, borderaxespad=0., fancybox=True, shadow=True)
 
         suffix = '_rel' if baseline else '_abs'
@@ -214,11 +207,26 @@ class Absolute(Graph):
 
 def main(results, baseline, order, output, file_formats):
 
-    results = parse_results(results) # Get the results from json-file
+    data = parse_results(results) # Get the results from json-file
 
-    for script in results:                   # Render them
+    highest   = 1.0
+    if baseline:            # Determine the y-limit
+        baselines = {}
+        for script in data:
+            baselines[script] = data[script][baseline]['times']
+
+        for script in data:
+            for lbl in data[script]:
+                if order and lbl not in order:
+                    continue
+                for c, t in enumerate(data[script][lbl]['times']):
+                    k = baselines[script][c]/t
+                    if k > highest:
+                        highest = k
+
+    for script in data:                   # Render them
         Absolute(output, file_formats, 'runtime', script).render(
-            script, results[script], order, baseline
+            script, data[script], order, baseline, highest
         )
 
 if __name__ == "__main__":
