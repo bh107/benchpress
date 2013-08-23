@@ -1,7 +1,7 @@
 from default import *
 
 scholes = [
-    ('Black Scholes',        'black_scholes',   '--size=250000*5'),
+    ('Black Scholes',        'black_scholes',   '--size=2500000*5'),
     ('Black Scholes',        'black_scholes',   '--size=5000000*5'),
     ('Black Scholes',        'black_scholes',   '--size=1000000*5'),
     ('Black Scholes',        'black_scholes',   '--size=2000000*5'),
