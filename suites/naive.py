@@ -28,9 +28,9 @@ knn = [
 ]
 
 mc = [
-    ('Monte Carlo PI', 'mc', '--size=6250*10'),
-    ('Monte Carlo PI', 'mc', '--size=12500*10'),
-    ('Monte Carlo PI', 'mc', '--size=250000*10'),
+    ('Monte Carlo PI', 'mc', '--size=62500*10'),
+    ('Monte Carlo PI', 'mc', '--size=125000*10'),
+    ('Monte Carlo PI', 'mc', '--size=2500000*10'),
     ('Monte Carlo PI', 'mc', '--size=5000000*10'),
     ('Monte Carlo PI', 'mc', '--size=10000000*10'),
     ('Monte Carlo PI', 'mc', '--size=20000000*10'),
