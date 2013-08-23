@@ -168,7 +168,14 @@ class Absolute(Graph):
             self.yaxis_label='Speedup in relation to "%s"' % baseline
 
         self.prep()                         # Prep it / clear the drawing board
-        data = [(label, results[label]) for label in results if label in order or not order]
+
+        data = []       # Restructe the results
+        if order:
+            for label in order:
+                data.append((label, results[label]))
+        else:
+            data = [(label, results[label]) for label in results]
+
         bsl  = [res['times'] for lbl, res in data if baseline and lbl == baseline]
         bsl  = bsl[0] if bsl else bsl
 
