@@ -202,8 +202,11 @@ class Absolute(Graph):
             p = plot(sizes, times, label=label, marker='.')
             labels.append(label)
 
-        if baseline:
+        if baseline and highest != float(0):
             ylim([0.5, highest+0.1])
+        if baseline and highest == float(0):
+            ymin, ymax = ylim()
+            ylim(ymin=0.9)
 
         xscale("log")
         xlim([xlow-(xlow/8), xhigh+(xhigh/8)])

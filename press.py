@@ -311,7 +311,7 @@ def slurm_gather( result_file ):
                     print "ERR job %d: %s"%(job['id'], fd.read())
             except IOError:
                 print "WARNING: couldn't find job file '%s'"%job['out']
-
+    print "Result-file: %s" % result_file
 
 def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
     """Generates benchmark jobs based on the benchmark suites"""
