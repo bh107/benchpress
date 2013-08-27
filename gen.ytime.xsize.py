@@ -212,28 +212,30 @@ class Absolute(Graph):
         suffix = '_rel' if baseline else '_abs'
         self.to_file(script+suffix)                # Spit them out to file
 
-def main(results, baseline, order, output, file_formats):
+def main(args):
 
-    data = parse_results(results) # Get the results from json-file
+    data = parse_results(args.results) # Get the results from json-file
 
     highest   = 1.0
-    if baseline:            # Determine the y-limit
+    if args.baseline:            # Determine the y-limit
         baselines = {}
         for script in data:
-            baselines[script] = data[script][baseline]['times']
+            baselines[script] = data[script][args.baseline]['times']
 
         for script in data:
             for lbl in data[script]:
-                if order and lbl not in order:
+                if args.order and lbl not in args.order:
                     continue
                 for c, t in enumerate(data[script][lbl]['times']):
                     k = baselines[script][c]/t
                     if k > highest:
                         highest = k
+    if args.ylimit:
+        highest = float(args.ylimit)
 
     for script in data:                   # Render them
-        Absolute(output, file_formats, 'runtime', script).render(
-            script, data[script], order, baseline, highest
+        Absolute(args.output, args.formats, 'runtime', script).render(
+            script, data[script], args.order, args.baseline, highest
         )
 
 if __name__ == "__main__":
@@ -268,7 +270,12 @@ if __name__ == "__main__":
         nargs='+',
         help='Ordering of the ticks.'
     )
+    parser.add_argument(
+        '--ylimit',
+        default=None,
+        help="Max value of the y-axis"
+    )
     args = parser.parse_args()
 
-    main(args.results, args.baseline, args.order, args.output, args.formats)
+    main(args)
 

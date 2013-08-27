@@ -1,21 +1,21 @@
 from default import *
 
 scholes = [
-    ('Black Scholes',        'black_scholes',   '--size=125000*10'),
-    ('Black Scholes',        'black_scholes',   '--size=250000*10'),
-    ('Black Scholes',        'black_scholes',   '--size=500000*10'),
-    ('Black Scholes',        'black_scholes',   '--size=1000000*10'),
-    ('Black Scholes',        'black_scholes',   '--size=2000000*10'),
-    ('Black Scholes',        'black_scholes',   '--size=4000000*10'),
+    ('Black Scholes',        'black_scholes',   '--size=2500000*5'),
+    ('Black Scholes',        'black_scholes',   '--size=5000000*5'),
+    ('Black Scholes',        'black_scholes',   '--size=1000000*5'),
+    ('Black Scholes',        'black_scholes',   '--size=2000000*5'),
+    ('Black Scholes',        'black_scholes',   '--size=4000000*5'),
+    ('Black Scholes',        'black_scholes',   '--size=8000000*5'),
 ]
 
 jacobi = [
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=250*1000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=500*1000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=1000*1000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=2000*1000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=4000*1000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=8000*1000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=313*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=625*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=1250*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=2500*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=5000*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=10000*4000*10'),
 ]
 
 knn = [
@@ -28,30 +28,30 @@ knn = [
 ]
 
 mc = [
-    ('Monte Carlo PI', 'mc', '--size=6250*10'),
-    ('Monte Carlo PI', 'mc', '--size=12500*10'),
-    ('Monte Carlo PI', 'mc', '--size=250000*10'),
+    ('Monte Carlo PI', 'mc', '--size=625000*10'),
+    ('Monte Carlo PI', 'mc', '--size=1250000*10'),
+    ('Monte Carlo PI', 'mc', '--size=2500000*10'),
     ('Monte Carlo PI', 'mc', '--size=5000000*10'),
     ('Monte Carlo PI', 'mc', '--size=10000000*10'),
     ('Monte Carlo PI', 'mc', '--size=20000000*10'),
 ]
 
 nbody = [
-    ('NBody', 'nbody', '--size=50*10'),
-    ('NBody', 'nbody', '--size=100*10'),
-    ('NBody', 'nbody', '--size=200*10'),
-    ('NBody', 'nbody', '--size=400*10'),
-    ('NBody', 'nbody', '--size=800*10'),
-    ('NBody', 'nbody', '--size=1600*10')
+    ('NBody', 'nbody', '--size=125*10'),
+    ('NBody', 'nbody', '--size=250*10'),
+    ('NBody', 'nbody', '--size=500*10'),
+    ('NBody', 'nbody', '--size=1000*10'),
+    ('NBody', 'nbody', '--size=2000*10'),
+    ('NBody', 'nbody', '--size=4000*5')
 ]
 
 shallow = [
-    ('Shallow Water',        'shallow_water',   '--size=50*50*10'),
-    ('Shallow Water',        'shallow_water',   '--size=100*100*10'),
-    ('Shallow Water',        'shallow_water',   '--size=200*200*10'),
-    ('Shallow Water',        'shallow_water',   '--size=400*400*10'),
-    ('Shallow Water',        'shallow_water',   '--size=800*800*10'),
-    ('Shallow Water',        'shallow_water',   '--size=1600*1600*10'),
+    ('Shallow Water',        'shallow_water',   '--size=94*94*5'),
+    ('Shallow Water',        'shallow_water',   '--size=188*188*5'),
+    ('Shallow Water',        'shallow_water',   '--size=375*375*5'),
+    ('Shallow Water',        'shallow_water',   '--size=750*750*5'),
+    ('Shallow Water',        'shallow_water',   '--size=1500*1500*5'),
+    ('Shallow Water',        'shallow_water',   '--size=3000*3000*5'),
 ]
 
 scripts = []
@@ -70,11 +70,11 @@ bohrium = {
     'bridges':  [('NumPy/Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',  'node', '',  None) ],
     'engines':  [
-        ('cpu',     'cpu',      {'BH_CORE_VCACHE_SIZE':  '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('cpu_vc',  'cpu',      {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('tiling',  'tiling',   {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('mcore',  'mcore',   {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('dynamite',  'dynamite',   {'BH_CORE_VCACHE_SIZE':  '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('cpu',      'cpu',      {'BH_CORE_VCACHE_SIZE':  '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('cpu_vc',   'cpu',      {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('tiling',   'tiling',   {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('mcore',    'mcore',    {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('dynamite', 'dynamite', {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
     ],
     'scripts':  scripts
 }
