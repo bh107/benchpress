@@ -54,10 +54,16 @@ shallow = [
     ('Shallow Water',        'shallow_water',   '--size=3000*3000*5'),
 ]
 
-scripts = []
-scripts += shallow
+swaption = [
+    ('Swaption', 'LMM_swaption_vec', '--size=1250'),
+    ('Swaption', 'LMM_swaption_vec', '--size=2500'),
+    ('Swaption', 'LMM_swaption_vec', '--size=5000'),
+    ('Swaption', 'LMM_swaption_vec', '--size=10000'),
+    ('Swaption', 'LMM_swaption_vec', '--size=20000'),
+    ('Swaption', 'LMM_swaption_vec', '--size=40000'),
+]
 
-scripts = scholes + jacobi + knn + mc + nbody + shallow
+scripts = scholes + jacobi + knn + mc + nbody + shallow + swaption
 
 managers= [('node', 'node', '', None)]
 
