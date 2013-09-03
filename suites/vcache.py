@@ -60,7 +60,7 @@ swaption = [
 #    ('Swaption', 'LMM_swaption_vec', '--size=5000'),
 #    ('Swaption', 'LMM_swaption_vec', '--size=10000'),
 #    ('Swaption', 'LMM_swaption_vec', '--size=20000'),
-    ('Swaption', 'LMM_swaption_vec', '--size=10000'),
+    ('Swaption', 'LMM_swaption_vec', '--size=1000'),
 ]
 
 bolz = [
@@ -69,7 +69,7 @@ bolz = [
 #    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=375*375*5'),
 #    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=750*750*5'),
 #    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=1500*1500*5'),
-    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=1000*1000*5'),
+    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=800*800*5'),
 ]
 
 bolz3d = [
@@ -85,7 +85,7 @@ sor = [
 ]
 
 wworld = [
-    ('Wire World', 'wireworldnumpy', '--size=7000*7000*5')
+    ('Wire World', 'wireworldnumpy', '--size=5000*5000*5')
 ]
 
 
@@ -93,15 +93,26 @@ fft = [
     ('FFT', 'fftex', '--size=18')
 ]
 
-scripts = scholes + jacobi + knn + mc + nbody + shallow + swaption + bolz + bolz3d + mxmul + sor + wworld
+lu = [
+    ('LU Factor.', 'lu', '--size=10000*10')
+]
+
+scripts = scholes + jacobi + knn + mc + nbody + shallow + swaption + bolz + bolz3d + mxmul + sor + wworld + lu +fft
 #scripts = scholes + jacobi + knn + mc + nbody + shallow + bolz3d + mxmul + sor + wworld
 
 numpy = {
     'bridges':  [
-        ('NumPy/Native', 'python benchmark/Python/{script}.py {args}', {'VCACHE_LINES': "0", 'VCACHE_BYTES': "0"}),
-        ('NumPy/VCache_100M', 'python benchmark/Python/{script}.py {args}', {'VCACHE_LINES': "50",'VCACHE_BYTES': "104857600"} ),
-        ('NumPy/VCache_1G', 'python benchmark/Python/{script}.py {args}', {'VCACHE_LINES': "50",'VCACHE_BYTES': "1048576000"} ),
-        ('NumPy/VCache_10G', 'python benchmark/Python/{script}.py {args}', {'VCACHE_LINES': "50",'VCACHE_BYTES': "3048576000"} ),
+        ('NumPy/Native', 'python benchmark/Python/{script}.py {args}',
+            {'VCACHE_LINES': "0", 'VCACHE_BYTES': "0"}),
+        ('NumPy/VCache1_100M', 'python benchmark/Python/{script}.py {args}',
+            {'VCACHE_LINES': "10",'VCACHE_BYTES': "104857600"} ),
+        ('NumPy/VCache2_512M', 'python benchmark/Python/{script}.py {args}',
+            {'VCACHE_LINES': "10",'VCACHE_BYTES': "536870912"} ),
+        ('NumPy/VCache3_1024M', 'python benchmark/Python/{script}.py {args}',
+            {'VCACHE_LINES': "10",'VCACHE_BYTES': "1048576000"} ),
+#        ('NumPy/VCache_2G', 'python benchmark/Python/{script}.py {args}',
+#            {'VCACHE_LINES': "20",'VCACHE_BYTES': "2147483648"} ),
+
     ],
     'scripts':  scripts,
 }
