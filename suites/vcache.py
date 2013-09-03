@@ -97,18 +97,21 @@ lu = [
     ('LU Factor.', 'lu', '--size=10000*10')
 ]
 
-scripts = scholes + jacobi + knn + mc + nbody + shallow + swaption + bolz + bolz3d + mxmul + sor + wworld + lu +fft
-#scripts = scholes + jacobi + knn + mc + nbody + shallow + bolz3d + mxmul + sor + wworld
+cloth = [
+    ('Cloth.', 'cloth', '--size=3000*3000*1')
+]
+
+scripts = scholes + jacobi + knn + mc + nbody + shallow + swaption + bolz + bolz3d + mxmul + sor + wworld + lu +fft + cloth
 
 numpy = {
     'bridges':  [
         ('NumPy/Native', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "0", 'VCACHE_BYTES': "0"}),
-        ('NumPy/VCache1_100M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/VCache_100M', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "10",'VCACHE_BYTES': "104857600"} ),
-        ('NumPy/VCache2_512M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/VCache_512M', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "10",'VCACHE_BYTES': "536870912"} ),
-        ('NumPy/VCache3_1024M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/VCache_1G', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "10",'VCACHE_BYTES': "1048576000"} ),
 #        ('NumPy/VCache_2G', 'python benchmark/Python/{script}.py {args}',
 #            {'VCACHE_LINES': "20",'VCACHE_BYTES': "2147483648"} ),
