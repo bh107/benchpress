@@ -68,8 +68,9 @@ def parse_results(results_fn):
     with(open(results_fn)) as fd:
         for run in json.load(fd)['runs']:
             # Compress bridge-alias
-            bridge_alias = ''.join([x[0] for x in run['bridge_alias'].split('-')])
-            engine_alias = 'native' if 'N/A' == run['engine_alias'] else run['engine_alias']
+            #bridge_alias = ''.join([x[0] for x in run['bridge_alias'].split('-')])
+            #engine_alias = 'native' if 'N/A' == run['engine_alias'] else run['engine_alias']
+            bridge_alias, engine_alias = run['bridge_alias'].split('/')
             res.append((
                 run['script_alias'],
                 bridge_alias,
@@ -167,7 +168,7 @@ class Absolute(Graph):
                 values.append(data[label])
 
         rotation = 'horizontal'             # Assume that there is not enough room vertically
-        if len(values)> 4:                  # so change orientation of labels
+        if len(values)>= 4:                  # so change orientation of labels
             rotation = 'vertical'
 
         pos = arange(len(values))           # Output values as bars
@@ -181,6 +182,8 @@ class Absolute(Graph):
             )
 
         xticks(pos, labels, rotation=rotation)  # Output labels
+        #ymin, ymax = ylim()
+        ylim(ymin=0.9, ymax=2.4)
 
         self.to_file(script)                # Spit them out to file
 
@@ -208,6 +211,8 @@ class Speedup(Absolute):
 
         values.insert(0, 1.0)               # Prepend baseline "value"
         labels.insert(0, bl_label)          # Prepend baseline label
+
+
 
         Absolute.render(self, script, labels, values, order)
 

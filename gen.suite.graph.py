@@ -60,7 +60,7 @@ def lintify(text):
 
     return ints
 
-def parse_results(results_fn):
+def parse_grouped(results_fn):
     """Parses a list of 'perf' output into list of dicts with counter as key."""
 
     # Parse results file into something for the render
@@ -89,19 +89,8 @@ def parse_results(results_fn):
             ))
     res = sorted(res)
 
-    results = {}    # Create a dict...
-    for script, backend, engine, seconds, size in res:
-        label   = "%s/%s" % (backend, engine)
-        if not script in results:
-            results[script] = {}
+    return res
 
-        if not label in results[script]:
-            results[script][label] = {'times': [], 'size': []}
-
-        results[script][label]['times'].append(seconds)
-        results[script][label]['size'].append(size)
-
-    return results
 
 class Graph:
     """
@@ -153,7 +142,7 @@ class Graph:
             pass
 
         for ff in self.file_formats:    # Create the physical files
-            savefig("%s.%s" % (fn, ff))
+            savefig("%s.%s" % (fn, ff), bbox_inches='tight')
 
         show()
 
@@ -165,81 +154,77 @@ class Absolute(Graph):
 
     def render(self, script, results, order=None, baseline=None, highest=None):
 
-        if baseline:
-            self.yaxis_label='Speedup in relation to "%s"' % baseline
+        self.graph_title    = "Benchmark Suite"
+        self.graph_title    = ""
+        self.xaxis_label    = "Benchmark"
+        self.xaxis_label    = ""
+        self.yaxis_label    = "Speedup in relation to Python/NumPy"
 
-        self.prep()                         # Prep it / clear the drawing board
-
-        data = []       # Restructe the results
-        if order:
-            for label in order:
-                data.append((label, results[label]))
-        else:
-            data = [(label, results[label]) for label in results]
-
-        bsl  = [res['times'] for lbl, res in data if baseline and lbl == baseline]
-        bsl  = bsl[0] if bsl else bsl
-
-        labels = []
-        xlow  = None
-        xhigh = None
-        for label, numbers in data:
-            sizes   = numbers['size']
-
-            if not xlow:            # Axis scaling
-                xlow = min(sizes)
-            if not xhigh:
-                xhigh = max(sizes)
-
-            if min(sizes) < xlow:
-                xlow = min(sizes)
-            if max(sizes) > xhigh:
-                xhigh = max(sizes)
-
-            if baseline:
-                times = [bsl[c]/number for c, number in enumerate(numbers['times'])]
-            else:
-                times = numbers['times']
-            p = plot(sizes, times, label=label, marker='.')
+        self.prep()
+        scripts, data = results
+       
+        labels          = []
+        times_ordered   = []
+        for label in order:
+            times_ordered.append((label, data[label]))
             labels.append(label)
 
-        if baseline and highest != float(0):
-            ylim([0.5, highest+0.1])
-        if baseline and highest == float(0):
-            ymin, ymax = ylim()
-            ylim(ymin=0.9)
+        rects = []
+        plots = []
+        for c, (label, times) in enumerate(times_ordered):
+            width = 0.25
+            ind   = [x+width*c+0.6 for x in range(len(times))]
+            rect = bar(ind, times, width, color=colors[c])
+            rects.append(rect)
 
-        xscale("log")
-        xlim([xlow-(xlow/8), xhigh+(xhigh/8)])
-        legend(labels, bbox_to_anchor=(0.5, -0.15), loc='upper center', ncol=4, borderaxespad=0., fancybox=True, shadow=True)
+        rs = [r[0] for r in rects]
 
-        suffix = '_rel' if baseline else '_abs'
-        self.to_file(script+suffix)                # Spit them out to file
+        rotation = "vertical"
+        legend(rs, labels,bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=3,
+               mode="expand", borderaxespad=0., fancybox=True, shadow=True)
+
+        xticks(ind, rotation=rotation)
+        gca().set_xticklabels(scripts)
+
+        self.to_file(script)                # Spit them out to file
+
+def filter_data(data, exclude=[]):
+    scripts = []
+    times  = {}
+
+    prev = None
+    baseline = 1.0
+    for script, backend, engine, seconds, problem in data:
+        if script in exclude:
+            continue
+
+        if script != prev:
+            scripts.append(script)
+            baseline = seconds
+        else:
+            if engine not in times:
+                times[engine] = [baseline/seconds]
+            else:
+                times[engine].append(baseline/seconds)
+
+        prev = script
+
+    return (scripts, times)
 
 def main(args):
+    scripts, times = data = filter_data(parse_grouped(args.results), args.exclude) # Get the results from json-file
 
-    data = parse_results(args.results) # Get the results from json-file
+    highest = 1.0
+    for label in times:
+        if times[label] > highest:
+            highest = times[label]
 
-    highest   = 1.0
-    if args.baseline:            # Determine the y-limit
-        baselines = {}
-        for script in data:
-            baselines[script] = data[script][args.baseline]['times']
-
-        for script in data:
-            for lbl in data[script]:
-                if args.order and lbl not in args.order:
-                    continue
-                for c, t in enumerate(data[script][lbl]['times']):
-                    k = baselines[script][c]/t
-                    if k > highest:
-                        highest = k
     if args.ylimit:
         highest = float(args.ylimit)
 
     for script in data:                   # Render them
         Absolute(args.output, args.formats, 'runtime', script).render(
-            script, data[script], args.order, args.baseline, highest
+            args.postfix, data, args.order, args.baseline, highest
         )
 
 if __name__ == "__main__":
@@ -274,6 +259,18 @@ if __name__ == "__main__":
         nargs='+',
         help='Ordering of the ticks.'
     )
+    parser.add_argument(
+        '--exclude',
+        default=[],
+        nargs='+',
+        help='Exclude these benchmarks.'
+    )
+    parser.add_argument(
+        '--postfix',
+        default='runtime',
+        help="Bla bla"
+    )
+
     parser.add_argument(
         '--ylimit',
         default=None,
