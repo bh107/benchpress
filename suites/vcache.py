@@ -98,7 +98,7 @@ lu = [
 ]
 
 cloth = [
-    ('Cloth.', 'cloth', '--size=3000*3000*1')
+    ('Cloth', 'cloth', '--size=3000*3000*1')
 ]
 
 scripts = scholes + jacobi + knn + mc + nbody + shallow + swaption + bolz + bolz3d + mxmul + sor + wworld + lu +fft + cloth
