@@ -10,11 +10,11 @@ scripts = [
     ('Swaption',        'LMM_swaption_vec', '--size=5000'),
     ('Bolzmann D2Q9',   'lattice_boltzmann_D2Q9', '--size=1400*1400*2'),
     ('Bolzmann 3D',     'lbm.3d',           '--size=120*100*100*5'),
-    ('Matrix Mul',      'mxmul',            '--size=800')        
-    ('SOR',             'sor',              '--size=4000*4000*5')
-    ('Wire World',      'wireworldnumpy',   '--size=5000*5000*5')
-    ('FFT',             'fftex',            '--size=18')
-    ('LU Factor.',      'lu',               '--size=6000*1')
+    ('Matrix Mul',      'mxmul',            '--size=800'),
+    ('SOR',             'sor',              '--size=4000*4000*5'),
+    ('Wire World',      'wireworldnumpy',   '--size=5000*5000*5'),
+    ('FFT',             'fftex',            '--size=18'),
+    ('LU Factor.',      'lu',               '--size=6000*1'),
     ('Cloth',           'cloth',            '--size=3000*3000*1')
 ]
 
