@@ -30,38 +30,37 @@ tokens = [
     ('time',    'resident_kb', "Maximum\sresident\sset\ssize\s\(kbytes\):\s(\d+)", int),
 ]
 
+def from_str(results):
+    results = json.loads(results)['runs']
+    res = []
+    for run in results:
+        data = {}                   # Grab the tokens
+        for source, token, regex, conv in tokens:
+            if source not in run:   # Source is not available
+                continue
+            if token not in data:   # First entry for this token
+                data[token] = []
+
+            topic = ''.join(run[source])
+            matches = re.finditer(regex, topic)
+            for m in matches:       # Remaining entries
+                data[token].append(conv(m.group(1)))
+
+                                    # Legacy mode...
+        if 'elapsed' not in data and 'times' in run:
+            data['elapsed'] = run['times']
+        
+        res.append((
+            run['script_alias'],
+            run['bridge_alias'],
+            run['manager_alias'],
+            run['engine_alias'],
+            data
+        ))
+    return sorted(res)
+
 def from_file(results_fn):
     """Parses a result-file into something slightly more useful."""
 
-    res = []
-    with(open(results_fn)) as fd:
-        results = json.load(fd)['runs']
-        for run in results:
-
-            data = {}                   # Grab the tokens
-            for source, token, regex, conv in tokens:
-                if source not in run:   # Source is not available
-                    continue
-                if token not in data:   # First entry for this token
-                    data[token] = []
-
-                topic = ''.join(run[source])
-                matches = re.finditer(regex, topic)
-                for m in matches:       # Remaining entries
-                    data[token].append(conv(m.group(1)))
-
-                                        # Legacy mode...
-            if 'elapsed' not in data and 'times' in run:
-                data['elapsed'] = run['times']
-            
-            res.append((
-                run['script_alias'],
-                run['bridge_alias'],
-                run['manager_alias'],
-                run['engine_alias'],
-                data
-            ))
-    res = sorted(res)
-
-    return res
+    return from_str(open(results_fn).read())
 
