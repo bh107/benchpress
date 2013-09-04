@@ -151,9 +151,9 @@ def wrap_popen(task):
     )
     out, err = p.communicate()              # Grab the output
 
-    if err or not out:
-        print "The command '%s' failed:\n%s"%(' '.join(task['cmd']), err)
-        raise CalledProcessError(returncode=p.returncode, cmd=task['cmd'], output=err)
+    #if err or not out:
+    #    print "The command '%s' failed:\n%s"%(' '.join(task['cmd']), err)
+    #    raise CalledProcessError(returncode=p.returncode, cmd=task['cmd'], output=err)
 
     res_elapsed = parse_elapsed_times(out)[0]
     res_perf    = ""
@@ -164,6 +164,7 @@ def wrap_popen(task):
         res_time = open(task['run']['use_time']).read()
 
     result = (res_elapsed, res_perf, res_time, out)
+
     return result
 
 def execute(result_file, runs, args):
