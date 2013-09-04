@@ -80,6 +80,7 @@ bohrium = {
         ('cpu_vc',  'cpu',      {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
         ('tiling',  'tiling',   {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
         ('mcore',   'mcore',    {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
+        ('dynamite', 'dynamite', {'BH_CORE_VCACHE_SIZE':  '30', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
     ],
     'scripts':  scripts
 }

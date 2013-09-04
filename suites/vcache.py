@@ -15,7 +15,7 @@ jacobi = [
 #    ('Jacobi Stencil',       'jacobi_stencil', '--size=1250*4000*10'),
 #    ('Jacobi Stencil',       'jacobi_stencil', '--size=2500*4000*10'),
 #    ('Jacobi Stencil',       'jacobi_stencil', '--size=5000*4000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=10000*4000*10'),
+    ('Jacobi Stencil',       'jacobi_stencil', '--size=8000*8000*3'),
 ]
 
 knn = [
@@ -41,8 +41,8 @@ nbody = [
 #    ('NBody', 'nbody', '--size=250*10'),
 #    ('NBody', 'nbody', '--size=500*10'),
 #    ('NBody', 'nbody', '--size=1000*10'),
-#    ('NBody', 'nbody', '--size=2000*10'),
-    ('NBody', 'nbody', '--size=4000*10')
+    ('NBody', 'nbody', '--size=3000*1'),
+#    ('NBody', 'nbody', '--size=4000*10')
 ]
 
 shallow = [
@@ -60,7 +60,7 @@ swaption = [
 #    ('Swaption', 'LMM_swaption_vec', '--size=5000'),
 #    ('Swaption', 'LMM_swaption_vec', '--size=10000'),
 #    ('Swaption', 'LMM_swaption_vec', '--size=20000'),
-    ('Swaption', 'LMM_swaption_vec', '--size=1000'),
+    ('Swaption', 'LMM_swaption_vec', '--size=5000'),
 ]
 
 bolz = [
@@ -69,7 +69,7 @@ bolz = [
 #    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=375*375*5'),
 #    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=750*750*5'),
 #    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=1500*1500*5'),
-    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=800*800*5'),
+    ('Bolzmann D2Q9', 'lattice_boltzmann_D2Q9', '--size=1400*1400*2'),
 ]
 
 bolz3d = [
@@ -94,7 +94,7 @@ fft = [
 ]
 
 lu = [
-    ('LU Factor.', 'lu', '--size=10000*10')
+    ('LU Factor.', 'lu', '--size=6000*1')
 ]
 
 cloth = [
