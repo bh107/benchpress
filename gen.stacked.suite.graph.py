@@ -11,8 +11,21 @@ import math
 import sys
 import os
 import re
+import numpy as np
+from matplotlib.ticker import FuncFormatter
 
 from parser import from_file as rparse
+
+def to_percent(y, position):
+    # Ignore the passed in position. This has the effect of scaling the default
+    # tick locations.
+    s = str("%d" % (100 * y))
+
+    # The percent symbol needs escaping in latex
+    if matplotlib.rcParams['text.usetex'] == True:
+        return s + r'$\%$'
+    else:
+        return s + '%'
 
 formats = ['png', 'pdf', 'eps']
 
@@ -128,7 +141,7 @@ class Absolute(Graph):
         self.graph_title    = ""
         self.xaxis_label    = "Benchmark"
         self.xaxis_label    = ""
-        self.yaxis_label    = "Speedup in relation to Python/NumPy"
+        self.yaxis_label    = 'Time spent in "system" in percent.'
 
         self.prep()
         scripts, data = results
@@ -143,7 +156,7 @@ class Absolute(Graph):
         rects = []
         plots = []
         for c, (label, times) in enumerate(times_ordered):
-            width = 0.25
+            width = 0.20
             ind   = [x+width*c+0.6 for x in range(len(times))]
             rect = bar(ind, times, width, color=colors[c])
             rects.append(rect)
@@ -151,14 +164,21 @@ class Absolute(Graph):
         rs = [r[0] for r in rects]
 
         rotation = "vertical"
-        legend(rs, labels,bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=3,
+        legend(rs, labels, bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=2,
                mode="expand", borderaxespad=0., fancybox=True, shadow=True)
 
-        ylim(ymin=0.9)
+        #ylim(ymin=0.9)
         xticks(ind, rotation=rotation)
         gca().set_xticklabels(scripts)
 
+        formatter = FuncFormatter(to_percent)
+
+        # Set the formatter
+        gca().yaxis.set_major_formatter(formatter)
+
+
         self.to_file(script)                # Spit them out to file
+
 
 def filter_data(data, exclude=[]):
     scripts = []
@@ -168,7 +188,14 @@ def filter_data(data, exclude=[]):
     baseline = 1.0
 
     for script, bridge, manager, engine, res in data:
-        seconds = sum(res['elapsed'])/float(len(res['elapsed']))
+        stime = np.mean(res['stime'])
+        utime = np.mean(res['utime'])
+        wtime = stime + utime
+
+        sperc = stime/wtime
+        uperc = utime/wtime
+        seconds = sperc
+
         label   = "%s" % (bridge.split("/")[1])
 
         if script in exclude:
@@ -176,12 +203,11 @@ def filter_data(data, exclude=[]):
 
         if script != prev:
             scripts.append(script)
-            baseline = seconds
+        
+        if label not in times:
+            times[label] = [seconds]
         else:
-            if label not in times:
-                times[label] = [baseline/seconds]
-            else:
-                times[label].append(baseline/seconds)
+            times[label].append(seconds)
 
         prev = script
 
