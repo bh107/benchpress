@@ -183,6 +183,7 @@ class Absolute(Graph):
         legend(rs, labels,bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=3,
                mode="expand", borderaxespad=0., fancybox=True, shadow=True)
 
+        ylim(ymin=0.9)
         xticks(ind, rotation=rotation)
         gca().set_xticklabels(scripts)
 

@@ -114,7 +114,8 @@ def perf_counters():
     out, err = p.communicate()
 
     events = []
-    for m in re.finditer('  ([\w-]+) [\w -]+\[.+\]', out):
+    #for m in re.finditer('  ([\w-]+) [\w -]+\[.+\]', out):
+    for m in re.finditer('  ([\w-]+) [\w -]+\[(?:Hardware|Software).+\]', out):
         events.append( m.group(1) )
 
     return ','.join(events)
@@ -154,7 +155,16 @@ def wrap_popen(task):
         print "The command '%s' failed:\n%s"%(' '.join(task['cmd']), err)
         raise CalledProcessError(returncode=p.returncode, cmd=task['cmd'], output=err)
 
-    return parse_elapsed_times(out)[0]      # Return the elapsed time
+    res_elapsed = parse_elapsed_times(out)[0]
+    res_perf    = ""
+    res_time    = ""
+    if task['run']['use_perf']:
+        res_perf = open(task['run']['use_perf']).read()
+    if task['run']['use_time']:
+        res_time = open(task['run']['use_time']).read()
+
+    result = (res_elapsed, res_perf, res_time)
+    return result
 
 def execute(result_file, runs, args):
     result_file.seek(0)
@@ -188,9 +198,11 @@ def execute(result_file, runs, args):
                             tasks = [{'cmd': ['taskset', '-c', core] + run['cmd'], 'run': run} for core in args.cores]
 
                         workers = Pool(nworkers, None, None, 1)
-                        elapsed = workers.map(wrap_popen, tasks)
+                        results = workers.map(wrap_popen, tasks)
+                        elapsed = [e for e, _, _ in results]
                         run['times'] += [sum(elapsed)/float(len(elapsed))]
-                        #run['times'] += sum(elapsed)
+                        run['perfs'] += [results[0][1]]
+                        run['time'] += [results[0][2]]
                         write2json(result_file, res)
                         print "elapsed time: ", elapsed, run['times']
 
@@ -304,8 +316,6 @@ def slurm_gather( result_file ):
                     run['slurm']['finished_jobs'].append(job)
                     run['slurm']['pending_jobs'][i] = None  #Update the pending job list
                     write2json(result_file, res)            #and save to disk
-                    #os.remove(job['out'])
-                    #os.remove(job['err'])
             except ValueError:
                 with open(job['err'], "r") as fd:
                     print "ERR job %d: %s"%(job['id'], fd.read())
@@ -314,7 +324,7 @@ def slurm_gather( result_file ):
 
     print "Result-file: %s" % result_file.name
 
-def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf):
+def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf, use_time):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
@@ -322,6 +332,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
         'runs': []
     }
 
+    perf_cmd = []
     if use_perf:
         out, err = Popen(
             ['which', 'perf'],
@@ -331,6 +342,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
 
         # Some distros have a wrapper script :(
         if not err and out:
+            perf_cmd = [out.strip()]
             out, err = Popen(
                 ['perf', 'list'],
                 stderr=PIPE,
@@ -340,6 +352,37 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
         if err or not out:
             print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
             use_perf = False
+            perf_cmd = []
+        else:
+            pcounters = perf_counters()
+
+            perf_tmp = tempfile.NamedTemporaryFile(
+                prefix='perf-',
+                suffix='.data',
+                delete=False
+            )
+            use_perf = perf_tmp.name
+            perf_cmd += ['stat', '-x', ',', '-e', pcounters, '-o', perf_tmp.name]
+
+    time_cmd = []
+    if use_time:
+        out, err = Popen(
+            ['which', 'time'],
+            stdout=PIPE,
+            stderr=PIPE
+        ).communicate()
+        time_tmp = tempfile.NamedTemporaryFile(
+            prefix='time-',
+            suffix='.data',
+            delete=False
+        )
+        use_time = time_tmp.name
+        time_cmd = [out.strip(), '-v', '-o', time_tmp.name]
+
+        if err or not out:
+            print "ERR: time installation broken, disabling time (%s): %s" % (err, out)
+            use_time = False
+            time_cmd = []
 
     print "Benchmark suite '%s'; results are written to: %s" % (suite, result_file.name)
     for benchmark in benchmarks:
@@ -378,6 +421,14 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
                             p += "%s/"%manager_alias
                         print "%snode/%s"%(p,engine_alias)
 
+                        command = cmd.split(' ')
+
+                        if use_time:
+                            command = time_cmd + command
+
+                        if use_perf:
+                            command = perf_cmd + command
+
                         results['runs'].append({'script_alias':script_alias,
                                                 'bridge_alias':bridge_alias,
                                                 'engine_alias':engine_alias,
@@ -387,10 +438,12 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf)
                                                 'engine':engine,
                                                 'envs':envs,
                                                 'cwd':src_root,
-                                                'cmd':cmd.split(' '),
+                                                'cmd':command,
                                                 'bh_config':bh_config.getvalue(),
                                                 'use_perf':use_perf,
+                                                'use_time':use_time,
                                                 'times':[],
+                                                'time': [],
                                                 'perfs':[]})
                         results['meta']['ended'] = str(datetime.now())
 
@@ -434,6 +487,11 @@ if __name__ == "__main__":
         '--no-perf',
         action="store_false",
         help="Disable the use of the perf measuring tool."
+    )
+    parser.add_argument(
+        '--no-time',
+        action="store_false",
+        help="Disable the use of the '/usr/bin/time -v' measuring tool."
     )
     
     affinity_grp = parser.add_argument_group('Saturated Execution')
@@ -487,6 +545,7 @@ if __name__ == "__main__":
                 args.suite,
                 bsuites[args.suite],
                 args.no_perf,
+                args.no_time
             )
 
             if args.slurm:
