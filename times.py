@@ -3,19 +3,19 @@
 import json
 import argparse
 import numpy as np
+from parser import from_file as rparse
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("results", help="JSON file containing results")
     args = parser.parse_args()
-    data = json.load(open(args.results))
-    for run in data["runs"]:
-        print "%s [%s, %s, %s]:"%(run["script_alias"], run["bridge_alias"],run["manager_alias"], run["engine"]),
-        if len(run["times"]) < 1:
+
+    for script, bridge, manager, engine, res in rparse(args.results):
+        print "%s [%s, %s, %s]:" % (script, bridge, manager, engine),
+        if 'elapsed' not in res or len(res['elapsed']) < 1:
             print "N/A"
         else:
-            print run["times"],
-            print "%f (%f)"%(np.mean(run["times"]), np.var(run["times"]))
+            print "%f (%f)"%(np.mean(res["elapsed"]), np.var(res["elapsed"]))
 
 if __name__ == "__main__":
     main()

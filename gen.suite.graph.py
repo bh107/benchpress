@@ -12,6 +12,8 @@ import sys
 import os
 import re
 
+from parser import from_file as rparse
+
 formats = ['png', 'pdf', 'eps']
 
 colors  = [
@@ -37,7 +39,7 @@ hatches = [
 def stats(samples):
     """Returns: (avg, lowest, highest, deviation)"""
 
-    mean = sum(samples)/len(samples)
+    mean = sum(samples)/float(len(samples))
     return (mean, max(samples), min(samples), 0)
 
 def lintify(text):
@@ -59,38 +61,6 @@ def lintify(text):
         print "error in lintification!"
 
     return ints
-
-def parse_grouped(results_fn):
-    """Parses a list of 'perf' output into list of dicts with counter as key."""
-
-    # Parse results file into something for the render
-    res = []
-    with(open(results_fn)) as fd:
-        for run in json.load(fd)['runs']:
-            # Grab the --size=... parameter
-            regex = '--size=(\d+)(?:\*(\d+))?(?:\*(\d+))?(?:\*(\d+))?(?:\*(\d+))?(?:\*(\d+))?'
-            sizes = []
-            for cmd in run['cmd']:
-                m = re.match(regex, cmd)
-                if m:
-                    sizes = [int(size) for size in m.groups() if size]
-                    break
-            
-            # Compress bridge-alias
-            #bridge_alias = ''.join([x[0]+x[1] for x in run['bridge_alias'].split('-')])
-            #engine_alias = 'native' if 'N/A' == run['engine_alias'] else run['engine_alias']
-            bridge_alias, engine_alias = run['bridge_alias'].split('/')
-            res.append((
-                run['script_alias'],
-                bridge_alias,
-                engine_alias,
-                float(stats(run['times'])[0]),
-                int(sizes[0])
-            ))
-    res = sorted(res)
-
-    return res
-
 
 class Graph:
     """
@@ -165,6 +135,7 @@ class Absolute(Graph):
        
         labels          = []
         times_ordered   = []
+
         for label in order:
             times_ordered.append((label, data[label]))
             labels.append(label)
@@ -195,7 +166,11 @@ def filter_data(data, exclude=[]):
 
     prev = None
     baseline = 1.0
-    for script, backend, engine, seconds, problem in data:
+
+    for script, bridge, manager, engine, res in data:
+        seconds = sum(res['elapsed'])/float(len(res['elapsed']))
+        label   = "%s" % (bridge.split("/")[1])
+
         if script in exclude:
             continue
 
@@ -203,17 +178,18 @@ def filter_data(data, exclude=[]):
             scripts.append(script)
             baseline = seconds
         else:
-            if engine not in times:
-                times[engine] = [baseline/seconds]
+            if label not in times:
+                times[label] = [baseline/seconds]
             else:
-                times[engine].append(baseline/seconds)
+                times[label].append(baseline/seconds)
 
         prev = script
 
-    return (scripts, times)
+    ret = (scripts, times)
+    return ret
 
 def main(args):
-    scripts, times = data = filter_data(parse_grouped(args.results), args.exclude) # Get the results from json-file
+    scripts, times = data = filter_data(rparse(args.results), args.exclude) # Get the results from json-file
 
     highest = 1.0
     for label in times:
@@ -223,10 +199,9 @@ def main(args):
     if args.ylimit:
         highest = float(args.ylimit)
 
-    for script in data:                   # Render them
-        Absolute(args.output, args.formats, 'runtime', script).render(
-            args.postfix, data, args.order, args.baseline, highest
-        )
+    Absolute(args.output, args.formats, 'runtime', 'benchmarks').render(
+        args.postfix, data, args.order, args.baseline, highest
+    )
 
 if __name__ == "__main__":
 
