@@ -163,7 +163,7 @@ def wrap_popen(task):
     if task['run']['use_time']:
         res_time = open(task['run']['use_time']).read()
 
-    result = (res_elapsed, res_perf, res_time)
+    result = (res_elapsed, res_perf, res_time, out)
     return result
 
 def execute(result_file, runs, args):
@@ -199,10 +199,11 @@ def execute(result_file, runs, args):
 
                         workers = Pool(nworkers, None, None, 1)
                         results = workers.map(wrap_popen, tasks)
-                        elapsed = [e for e, _, _ in results]
-                        run['times'] += [sum(elapsed)/float(len(elapsed))]
-                        run['perfs'] += [results[0][1]]
-                        run['time'] += [results[0][2]]
+                        elapsed = [e for e, _,_,_ in results]
+                        run['times']  += [sum(elapsed)/float(len(elapsed))]
+                        run['perfs']  += [results[0][1]]
+                        run['time']   += [results[0][2]]
+                        run['output'] += [results[0][3]]
                         write2json(result_file, res)
                         print "elapsed time: ", elapsed, run['times']
 
@@ -444,6 +445,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf,
                                                 'use_time':use_time,
                                                 'times':[],
                                                 'time': [],
+                                                'output': [],
                                                 'perfs':[]})
                         results['meta']['ended'] = str(datetime.now())
 
