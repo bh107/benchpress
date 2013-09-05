@@ -22,11 +22,11 @@ numpy = {
     'bridges':  [
         ('NumPy/Native', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "0"}),
-        ('NumPy/VCache_100M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/MMAP_100M', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "0",'MMAP_THRESHOLD': "104857600"} ),
-        ('NumPy/VCache_512M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/MMAP_512M', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "0",'MMAP_THRESHOLD': "536870912"} ),
-        ('NumPy/VCache_1G', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/MMAP_1G', 'python benchmark/Python/{script}.py {args}',
             {'VCACHE_LINES': "0",'MMAP_THRESHOLD': "1048576000"} ),
 
     ],
