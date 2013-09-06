@@ -160,36 +160,43 @@ class Absolute(Graph):
 
         self.to_file(script)                # Spit them out to file
 
-def filter_data(data, exclude=[]):
+def filter_data(data, baseline, exclude=[]):
     scripts = []
     times  = {}
 
     prev = None
     baseline = 1.0
-
     for script, bridge, manager, engine, res in data:
-        seconds = sum(res['elapsed'])/float(len(res['elapsed']))
-        label   = "%s" % (bridge.split("/")[1])
 
         if script in exclude:
             continue
 
+        seconds = sum(res['elapsed'])/float(len(res['elapsed']))
+        label   = "%s" % (bridge.split("/")[1])
+
         if script != prev:
             scripts.append(script)
-            baseline = seconds
+        
+        if label not in times:
+            times[label] = [seconds]
         else:
-            if label not in times:
-                times[label] = [baseline/seconds]
-            else:
-                times[label].append(baseline/seconds)
+            times[label].append(seconds)
 
         prev = script
 
     ret = (scripts, times)
+
     return ret
 
 def main(args):
-    scripts, times = data = filter_data(rparse(args.results), args.exclude) # Get the results from json-file
+    scripts, times = data = filter_data(rparse(args.results), args.baseline, args.exclude) # Get the results from json-file
+    
+    if args.baseline and args.baseline in times:    # Normalize
+        baseline = times[args.baseline]
+        del times[args.baseline]
+        for label in times:
+            for c, elapsed in enumerate(times[label]):
+                times[label][c] = baseline[c] / times[label][c]
 
     highest = 1.0
     for label in times:
