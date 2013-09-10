@@ -28,6 +28,8 @@ colors  = [
     "#F1E2CC", "#CCCCCC",
 ]
 
+colors = ["#eeeeee", "#cccccc", "#969696", "#525252"]
+
 hatches = [
     "\\", "+", "o", "/", "-", "O",
     "\\", "+", "o", "/", "-", "O",
@@ -145,7 +147,9 @@ class Absolute(Graph):
         for c, (label, times) in enumerate(times_ordered):
             width = 0.25
             ind   = [x+width*c+0.6 for x in range(len(times))]
+            #rect = bar(ind, times, width, color=colors[c], hatch=hatches[c])
             rect = bar(ind, times, width, color=colors[c])
+            #rect = bar(ind, times, width, color='white', hatch=hatches[c])
             rects.append(rect)
 
         rs = [r[0] for r in rects]
