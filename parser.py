@@ -30,7 +30,7 @@ tokens = [
     ('time',    'resident_kb', "Maximum\sresident\sset\ssize\s\(kbytes\):\s(\d+)", int),
 ]
 
-def from_str(results):
+def from_str(results, wc=False):
     results = json.loads(results)['runs']
     res = []
     for run in results:
@@ -50,6 +50,11 @@ def from_str(results):
         if 'elapsed' not in data and 'times' in run:
             data['elapsed'] = run['times']
         
+        data['sizes'] = []          # Parse the --size parameter
+        sizes = [cmd for cmd in run['cmd'] if '--size=' in cmd]
+        if sizes:
+            data['sizes'] =[int(size) for size in sizes[0][len('--size='):].split('*')]
+
         res.append((
             run['script_alias'],
             run['bridge_alias'],
@@ -58,6 +63,7 @@ def from_str(results):
             data
         ))
     return sorted(res)
+
 
 def from_file(results_fn):
     """Parses a result-file into something slightly more useful."""
