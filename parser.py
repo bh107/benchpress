@@ -63,7 +63,8 @@ def from_str(results, wc=False):
                 data[token].append(conv(m.group(1)))
 
                                     # Legacy mode...
-        if 'elapsed' not in data and 'times' in run:
+        #if 'elapsed' not in data and 'times' in run:
+        if "times" in run:
             data['elapsed'] = run['times']
         
         data['sizes'] = []          # Parse the --size parameter
