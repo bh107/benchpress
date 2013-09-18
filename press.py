@@ -16,6 +16,14 @@ import StringIO
 
 import suites
 
+class _C:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+
 
 def meta(src_dir, suite):
     try:
@@ -137,8 +145,7 @@ def parse_elapsed_times(output):
         times.append(float(t.group(1)))
 
     if len(times) == 0:
-        print "Could not find elapsed-time in the output"
-        raise ValueError
+        times = [None]
     return times
 
 def wrap_popen(task):
@@ -167,124 +174,109 @@ def wrap_popen(task):
 
     return result
 
-def execute(result_file, runs, args):
-    result_file.seek(0)
-    res = json.load(result_file)
 
-    try:
-        for run in res['runs']:
-            if 'slurm' in run:
-                print "Skipping, will not resume SLURM jobs without the --slurm flag"
-                continue
+def execute_run(run):
+    """Execute the run locally"""
 
-            try:
-                while len(run['times']) < runs:
-                    with tempfile.NamedTemporaryFile(prefix='bohrium-config-', suffix='.ini') as conf:
+    with open(run['pending_job']['filename'], 'w') as f:
+        #First we have to write the batch script to a file
+        f.write(run['pending_job']['script'])
+        f.flush()
+        os.fsync(f)
+        try:# Then we execute the batch script
+            p = Popen(['bash', f.name])
+            p.wait()
+        except KeyboardInterrupt:
+            p.kill()
+            raise
 
-                        p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
-                        if run['manager'] and run['manager'] != "node":
-                            p += "%s/"%run['manager_alias']
-                        print "%snode/%s"%(p,run['engine_alias'])
+def submit_run(run, nnodes=1, queue=None):
+    """Submit the run to SLURM using 'nnodes' number of nodes"""
 
-                        run['envs']['BH_CONFIG'] = conf.name
-                        conf.write(run['bh_config'])            # And write it to a temp file
-                        conf.flush()
-                        os.fsync(conf)
-                        
-                        nworkers = len(args.cores)
-                        if not nworkers:
-                            nworkers = 1
-                            tasks = [{'cmd': run['cmd'], 'run': run}]
-                        else:
-                            tasks = [{'cmd': ['taskset', '-c', core] + run['cmd'], 'run': run} for core in args.cores]
+    with open(run['pending_job']['filename'], 'w') as f:
+        f.write(run['pending_job']['script'])
+        f.flush()
+        os.fsync(f)
+        print "Submitting %s on %d nodes"%(f.name, nnodes),
+        cmd = ['sbatch']
+        if queue:
+            cmd += ['-p', queue]
+        cmd += ['-N', '%d'%nnodes, f.name]
+        try:
+            subprocess.check_call(cmd)
+        except CalledProcessError:
+            print "ERR: submitting SLURM job: "
+            raise
 
-                        workers = Pool(nworkers, None, None, 1)
-                        results = workers.map(wrap_popen, tasks)
-                        elapsed = [e for e, _,_,_ in results]
-                        run['times']  += [sum(elapsed)/float(len(elapsed))]
-                        run['perfs']  += [results[0][1]]
-                        run['time']   += [results[0][2]]
-                        run['output'] += [results[0][3]]
-                        write2json(result_file, res)
-                        print "elapsed time: ", elapsed, run['times']
-
-            except CalledProcessError, ValueError:
-                print "Error in the execution -- skipping to the next benchmark"
-
-            write2json(result_file, res)
-        print "All finished and saved in %s"%result_file.name
-
-    except KeyboardInterrupt:
-        print "Suspending the benchmark execution, use resume on %s"%result_file.name
+        job_id = int(out.split(' ')[-1] .rstrip())
+        print "with SLURM ID %d"%job_id
+        return job_id
 
 
-def slurm_dispatch( result_file, runs, one_job, warm_ups, queue ):
+def parse_run(run):
+    """Parsing the pending run. NB: the run must be finished!"""
+    job = run['pending_job']
 
-    result_file.seek(0)
-    res = json.load(result_file)
+    for i in xrange(job['nrun']):
+        base = "%s-%d"%(job['filename'], i)
+        stdout = "%s.out"%base
+        stderr = "%s.err"%base
+        #print "Parsing result file: %s"%stdout
+        with open(stdout, 'r') as out:
+            with open(stderr, 'r') as err:
+                out = out.read()
+                err = err.read()
+                run['stdout'].append(out)
+                run['stderr'].append(err)
+                elapsed = parse_elapsed_times(out)[0]
+                print elapsed
+                run['elapsed'].append(elapsed)
+                if elapsed is None:
+                    print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
+                    print _C.WARNING,"STDOUT: ",_C.ENDC
+                    print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
+                else:
+                    #We got the result, now the job is finished
+                    run['pending_job'] = None
+                if len(err) > 0:
+                    print _C.WARNING,"STDERR: ",_C.ENDC
+                    print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
+        os.remove(stdout)
+        os.remove(stderr)
+    os.remove(job['filename'])
 
-    for run in res['runs']:
-        runs -= len(run['times']) #Some runs may be done
-        run.setdefault('slurm', {'pending_jobs':[],'finished_jobs':[]})
 
-        for _ in xrange(runs if not one_job else 1):
-            with tempfile.NamedTemporaryFile(delete=False, prefix='bh-', suffix='.slurm') as job_file:
 
-                job = "#!/bin/bash\n"
+def add_pending_job(setup, nrun, uid):
 
-                for i in xrange((runs if one_job else 1) + warm_ups):
+    cwd = os.path.abspath(os.getcwd())
+    filename = os.path.join(cwd,"bh-job-%s.sh"%uid)
 
-                    tmp_config_name = "%s_%d.config.ini"%(job_file.name, i)
-                    for env_key, env_value in run['envs'].iteritems():      #Write environment variables
-                        job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
+    job = "#!/bin/bash\n"
+    for i in xrange(nrun):
+        tmp_config_name = "%s_%d.config.ini"%(filename, i)
+        for env_key, env_value in setup['envs'].iteritems():      #Write environment variables
+            job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
 
-                    job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
-                    run['envs']['BH_CONFIG'] = tmp_config_name
+        job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
 
-                    job += "\n#SBATCH -J %s\n"%run['script']                #Write Slurm parameters
-                    cwd = os.path.abspath(os.getcwd())
-                    job += "#SBATCH -o %s/bh-slurm-%%j.out\n"%cwd
-                    job += "#SBATCH -e %s/bh-slurm-%%j.err\n"%cwd
+        job += "\n#SBATCH -J %s\n"%setup['script']                #Write Slurm parameters
+        job += "#SBATCH -o %s/bh-job-%%j.out\n"%cwd
+        job += "#SBATCH -e %s/bh-job-%%j.err\n"%cwd
 
-                    #We need to write the bohrium config file to an unique path
-                    job += 'echo "%s" > %s'%(run['bh_config'], tmp_config_name)
+        #We need to write the bohrium config file to an unique path
+        job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
 
-                    job += "\ncd %s\n"%run['cwd']                           #Change dir and execute cmd
-                    job += "%s\n"%(' '.join(run['cmd']))
+        job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
+        job += "%s "%(' '.join(setup['cmd']))                     #The command to execute
 
-                    job += "\nrm %s\n\n\n"%tmp_config_name
+        #Pipe the output to files
+        job += '1> %s-%d.out 2> %s-%d.err\n'%(filename,i,filename,i)
 
-                job_file.write(job)
-                job_file.flush()
-                os.fsync(job_file)
+        #Cleanup the config file
+        job += "\nrm %s\n\n\n"%tmp_config_name
 
-                nnodes = 1
-                if 'BH_SLURM_NNODES' in run['envs']:
-                    nnodes = run['envs']['BH_SLURM_NNODES']
-
-                print "Submitting %s on %d nodes"%(job_file.name, nnodes),
-                cmd = ['sbatch']
-                if queue:
-                    cmd += ['-p', queue]
-                cmd += ['-N', '%d'%nnodes, job_file.name]
-                p = Popen(
-                    cmd,
-                    stderr=PIPE,
-                    stdout=PIPE
-                )
-                out, err = p.communicate()
-                if err or not out:
-                    print "ERR: submitting SLURM job: %s"%err
-                    return
-
-                job_id = int(out.split(' ')[-1] .rstrip())
-                print "with SLURM ID %d"%job_id
-
-                run['slurm']['pending_jobs'].append({'id':job_id,
-                                                     'out':"%s/bh-slurm-%s.out"%(cwd,job_id),
-                                                     'err':"%s/bh-slurm-%s.err"%(cwd,job_id),
-                                                     'warm_ups':warm_ups})
-                write2json(result_file, res)
+    setup['pending_job'] = {'filename': filename, 'nrun': nrun, 'script': job}
 
 
 def slurm_gather( result_file ):
@@ -326,7 +318,9 @@ def slurm_gather( result_file ):
 
     print "Result-file: %s" % result_file.name
 
-def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf, use_time):
+
+def gen_jobs(uid, result_file, config, src_root, output, suite,
+             benchmarks, nrun, use_perf, use_time):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
@@ -432,7 +426,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf,
                         if use_perf:
                             command = perf_cmd + command
 
-                        results['runs'].append({'script_alias':script_alias,
+                        run = {'script_alias':script_alias,
                                                 'bridge_alias':bridge_alias,
                                                 'engine_alias':engine_alias,
                                                 'manager_alias':manager_alias,
@@ -445,10 +439,14 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf,
                                                 'bh_config':bh_config.getvalue(),
                                                 'use_perf':use_perf,
                                                 'use_time':use_time,
-                                                'times':[],
+                                                'elapsed': [],
                                                 'time': [],
-                                                'output': [],
-                                                'perfs':[]})
+                                                'stdout': [],
+                                                'stderr': [],
+                                                'perf':[]}
+                        add_pending_job(run, nrun, uid)
+                        results['runs'].append(run)
+
                         results['meta']['ended'] = str(datetime.now())
 
                         bh_config.close()
@@ -479,7 +477,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--runs',
-        default=5,
+        default=3,
         type=int,
         help="How many times should each benchmark run."
     )
@@ -497,7 +495,7 @@ if __name__ == "__main__":
         action="store_false",
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
     )
-    
+    """
     affinity_grp = parser.add_argument_group('Saturated Execution')
     affinity_grp.add_argument(
         '--cores',
@@ -528,33 +526,49 @@ if __name__ == "__main__":
         default=0,
         help='Submits a number of "warm-up" jobs before the real job.'
     )
+    """
 
     args = parser.parse_args()
     runs = int(args.runs)
 
     if args.resume:
-        with open(args.resume, 'r+') as res:
-            if args.slurm:
-                slurm_gather( res )
-            else:
-                execute(res, runs, args)
+        result_file = open(args.resume, 'r+')
     else:
-        with tempfile.NamedTemporaryFile(delete=False, dir=args.output,
-                                         prefix='benchmark-%s-' % args.suite,
-                                         suffix='.json') as res:
-            gen_jobs(res,
+        result_file = tempfile.NamedTemporaryFile(delete=False,
+                                     dir=args.output,
+                                     prefix='benchmark-%s-'%args.suite,
+                                     suffix='.json')
+    try:
+        if not args.resume:
+            uid = os.path.basename(result_file.name)[len('benchmark-%s-'%args.suite):-5]
+            gen_jobs(uid,
+                result_file,
                 os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
                 args.src,
                 args.output,
                 args.suite,
                 bsuites[args.suite],
+                runs,
                 args.no_perf,
                 args.no_time
             )
 
-            if args.slurm:
-                slurm_dispatch(res, runs, args.one_job, args.warm_ups, args.partition)
-                slurm_gather(res)
-            else:
-                execute(res, runs, args)
+        result_file.seek(0)
+        res = json.load(result_file)
+        for run in res['runs']:
+            if run['pending_job'] is None:
+                continue
+            p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
+            if run['manager'] and run['manager'] != "node":
+                p += "%s/"%run['manager_alias']
+            print "%snode/%s"%(p,run['engine_alias'])
+            execute_run(run)
+            parse_run(run)
+            write2json(result_file, res)
+        print "Results saved in %s"%result_file.name
 
+    except KeyboardInterrupt:
+        print _C.WARNING,"Suspending the benchmark execution,",
+        print "use resume on",result_file.name,_C.ENDC
+    finally:
+        result_file.close()

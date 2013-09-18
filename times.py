@@ -18,7 +18,7 @@ def times(results):
         if 'elapsed' not in res or len(res['elapsed']) < 1:
             print "N/A"
         else:
-            print "%f (%f)"%(np.mean(res["elapsed"]), np.var(res["elapsed"]))
+            print res["elapsed"], "%f (%f)"%(np.mean(res["elapsed"]), np.var(res["elapsed"]))
 
 def main():
     printers = {'raw':raw, 'times':times, 'parsed': parsed}
