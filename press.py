@@ -415,6 +415,7 @@ def gen_jobs(result_file, config, src_root, output, suite, benchmarks, use_perf,
 
                         cmd = bridge_cmd.replace("{script}", script)
                         cmd = cmd.replace("{args}", script_args)
+
                         if manager and manager != "node":
                             cmd = manager_cmd.replace("{bridge}", cmd)
 
