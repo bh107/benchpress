@@ -197,19 +197,19 @@ def submit_run(run, nnodes=1, queue=None):
         f.write(run['pending_job']['script'])
         f.flush()
         os.fsync(f)
-        print "Submitting %s on %d nodes"%(f.name, nnodes),
+        print "Submitting %s on %d nodes"%(f.name, nnodes)
         cmd = ['sbatch']
         if queue:
             cmd += ['-p', queue]
         cmd += ['-N', '%d'%nnodes, f.name]
         try:
-            subprocess.check_call(cmd)
-        except CalledProcessError:
-            print "ERR: submitting SLURM job: "
+            p = Popen(cmd, stderr=PIPE, stdout=PIPE)
+            out, err = p.communicate()
+            job_id = int(out.split(' ')[-1] .rstrip())
+            print "with SLURM ID %d"%job_id
+        except:
+            print "ERR: submitting SLURM job!"
             raise
-
-        job_id = int(out.split(' ')[-1] .rstrip())
-        print "with SLURM ID %d"%job_id
         return job_id
 
 
@@ -244,40 +244,6 @@ def parse_run(run):
         os.remove(stdout)
         os.remove(stderr)
     os.remove(job['filename'])
-
-
-
-def add_pending_job(setup, nrun, uid):
-
-    cwd = os.path.abspath(os.getcwd())
-    filename = os.path.join(cwd,"bh-job-%s.sh"%uid)
-
-    job = "#!/bin/bash\n"
-    for i in xrange(nrun):
-        tmp_config_name = "%s_%d.config.ini"%(filename, i)
-        for env_key, env_value in setup['envs'].iteritems():      #Write environment variables
-            job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
-
-        job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
-
-        job += "\n#SBATCH -J %s\n"%setup['script']                #Write Slurm parameters
-        job += "#SBATCH -o %s/bh-job-%%j.out\n"%cwd
-        job += "#SBATCH -e %s/bh-job-%%j.err\n"%cwd
-
-        #We need to write the bohrium config file to an unique path
-        job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
-
-        job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
-        job += "%s "%(' '.join(setup['cmd']))                     #The command to execute
-
-        #Pipe the output to files
-        job += '1> %s-%d.out 2> %s-%d.err\n'%(filename,i,filename,i)
-
-        #Cleanup the config file
-        job += "\nrm %s\n\n\n"%tmp_config_name
-
-    setup['pending_job'] = {'filename': filename, 'nrun': nrun, 'script': job}
-
 
 def slurm_gather( result_file ):
 
@@ -317,6 +283,39 @@ def slurm_gather( result_file ):
                 print "WARNING: couldn't find job file '%s'"%job['out']
 
     print "Result-file: %s" % result_file.name
+
+
+def add_pending_job(setup, nrun, uid):
+
+    cwd = os.path.abspath(os.getcwd())
+    basename = "bh-job-%s.sh"%uid
+    filename = os.path.join(cwd,basename)
+
+    job = "#!/bin/bash\n"
+    for i in xrange(nrun):
+        tmp_config_name = "/tmp/%s_%d.config.ini"%(basename, i)
+        for env_key, env_value in setup['envs'].iteritems():      #Write environment variables
+            job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
+
+        job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
+
+        job += "\n#SBATCH -J %s\n"%setup['script']                #Write Slurm parameters
+        job += "#SBATCH -o /tmp/bh-slurm-%%j.out\n"
+        job += "#SBATCH -e /tmp/bh-slurm-%%j.err\n"
+
+        #We need to write the bohrium config file to an unique path
+        job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
+
+        job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
+        job += "%s "%(' '.join(setup['cmd']))                     #The command to execute
+
+        #Pipe the output to files
+        job += '1> %s-%d.out 2> %s-%d.err\n'%(filename,i,filename,i)
+
+        #Cleanup the config file
+        job += "\nrm %s\n\n\n"%tmp_config_name
+
+    setup['pending_job'] = {'filename': filename, 'nrun': nrun, 'script': job}
 
 
 def gen_jobs(uid, result_file, config, src_root, output, suite,
@@ -503,7 +502,7 @@ if __name__ == "__main__":
         default=[],
         help="Launch each benchmark concurrently on each provided CPU core."
     )
-
+    """
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
         '--slurm',
@@ -515,18 +514,6 @@ if __name__ == "__main__":
         type=str,
         help="Submit to a specific SLURM partition."
     )
-    slurm_grp.add_argument(
-        '--one-job',
-        action="store_true",
-        help="Submit all runs of a benchmark as one SLURM job."
-    )
-    slurm_grp.add_argument(
-        '--warm-ups',
-        type=int,
-        default=0,
-        help='Submits a number of "warm-up" jobs before the real job.'
-    )
-    """
 
     args = parser.parse_args()
     runs = int(args.runs)
@@ -553,18 +540,35 @@ if __name__ == "__main__":
                 args.no_time
             )
 
+            result_file.seek(0)
+            res = json.load(result_file)
+
+            #Lets check if we need to submit any jobs
+            if args.slurm:
+                for run in res['runs']:
+                    if run['pending_job'] is None:
+                        continue
+                    slurm_id = run.get('slurm_id', 0)
+                    if not slurm_id:
+                        submit_run(run, nnodes=1, queue=None)
+
+
         result_file.seek(0)
         res = json.load(result_file)
-        for run in res['runs']:
-            if run['pending_job'] is None:
-                continue
-            p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
-            if run['manager'] and run['manager'] != "node":
-                p += "%s/"%run['manager_alias']
-            print "%snode/%s"%(p,run['engine_alias'])
-            execute_run(run)
-            parse_run(run)
-            write2json(result_file, res)
+
+        if not args.slurm:
+            for run in res['runs']:
+                if run['pending_job'] is None:
+                    continue
+                p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
+                if run['manager'] and run['manager'] != "node":
+                    p += "%s/"%run['manager_alias']
+                print "%snode/%s"%(p,run['engine_alias'])
+                execute_run(run)
+                parse_run(run)
+                write2json(result_file, res)
+
+
         print "Results saved in %s"%result_file.name
 
     except KeyboardInterrupt:
