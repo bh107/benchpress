@@ -57,7 +57,7 @@ shallow = [
 scripts = []
 scripts += shallow
 
-scripts = jacobi + knn + nbody + + shallow + scholes + mc 
+scripts = jacobi + knn + nbody + shallow + scholes + mc
 
 managers= [('node', 'node', '', None)]
 

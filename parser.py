@@ -12,7 +12,7 @@
 #
 # The regex in the expression that will search through the source.
 #
-# Converter is any function x -> x. Useful for converting to 
+# Converter is any function x -> x. Useful for converting to
 # floats etc.
 #
 import pprint
@@ -22,9 +22,9 @@ import os
 import re
 
 tokens = [
-    ('output',  'elapsed', 'elapsed-time: ([\d.]+)', float),
-    ('output',  'bytes_missed', "bytes_missed:.?'(\d+)'", int),
-    ('output',  'bytes_reused', "bytes_reused:.?'(\d+)'", int),
+    ('stdout',  'elapsed', 'elapsed-time: ([\d.]+)', float),
+    ('stdout',  'bytes_missed', "bytes_missed:.?'(\d+)'", int),
+    ('stdout',  'bytes_reused', "bytes_reused:.?'(\d+)'", int),
     ('time',    'utime', "User\stime\s\(seconds\):\s([\d.]+)", float),
     ('time',    'stime', "System\stime\s\(seconds\):\s([\d.]+)", float),
     ('time',    'resident_kb', "Maximum\sresident\sset\ssize\s\(kbytes\):\s(\d+)", int),
@@ -63,10 +63,9 @@ def from_str(results, wc=False):
                 data[token].append(conv(m.group(1)))
 
                                     # Legacy mode...
-        #if 'elapsed' not in data and 'times' in run:
-        if "times" in run:
-            data['elapsed'] = run['times']
-        
+        if 'elapsed' not in data and 'elapsed' in run:
+            data['elapsed'] = run['elapsed']
+
         data['sizes'] = []          # Parse the --size parameter
         sizes = [cmd for cmd in run['cmd'] if '--size=' in cmd]
         if sizes:
