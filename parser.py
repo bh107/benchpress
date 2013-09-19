@@ -30,6 +30,22 @@ tokens = [
     ('time',    'resident_kb', "Maximum\sresident\sset\ssize\s\(kbytes\):\s(\d+)", int),
 ]
 
+def avg(elapsed):
+    return sum(elapsed)/float(len(elapsed))
+
+def variance(elapsed):
+    count = len(elapsed)
+    if (count<2):
+        return 0.0
+
+    acc     = sum(elapsed)
+    acc_2   = acc*acc
+    acc_2d  = acc_2/count
+    acc_s   = sum([x*x for x in elapsed])
+    diff    = (acc_s - acc_2d)/(count-1)
+
+    return diff
+
 def from_str(results, wc=False):
     results = json.loads(results)['runs']
     res = []
@@ -47,7 +63,8 @@ def from_str(results, wc=False):
                 data[token].append(conv(m.group(1)))
 
                                     # Legacy mode...
-        if 'elapsed' not in data and 'times' in run:
+        #if 'elapsed' not in data and 'times' in run:
+        if "times" in run:
             data['elapsed'] = run['times']
         
         data['sizes'] = []          # Parse the --size parameter
