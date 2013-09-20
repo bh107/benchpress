@@ -3,7 +3,6 @@ import argparse
 import pprint
 import json
 
-import numpy as np
 from parser import from_file, from_str, avg, variance
 
 def raw(results):
