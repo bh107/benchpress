@@ -190,14 +190,15 @@ def execute_run(run):
             p.kill()
             raise
 
-def submit_run(run, nnodes=1, queue=None):
+def slurm_run(run, nnodes=1, queue=None):
     """Submit the run to SLURM using 'nnodes' number of nodes"""
+    job = run['pending_job']
 
-    with open(run['pending_job']['filename'], 'w') as f:
-        f.write(run['pending_job']['script'])
+    with open(job['filename'], 'w') as f:
+        f.write(job['script'])
         f.flush()
         os.fsync(f)
-        print "Submitting %s on %d nodes"%(f.name, nnodes)
+        print "Submitting %s on %d nodes"%(f.name, nnodes),
         cmd = ['sbatch']
         if queue:
             cmd += ['-p', queue]
@@ -208,10 +209,18 @@ def submit_run(run, nnodes=1, queue=None):
             job_id = int(out.split(' ')[-1] .rstrip())
             print "with SLURM ID %d"%job_id
         except:
-            print "ERR: submitting SLURM job!"
+            print _C.FAIL,"ERR: submitting SLURM job!",_C.ENDC
             raise
-        return job_id
+        job['slurm_id'] = job_id
 
+def slurm_run_finished(run):
+    job = run['pending_job']
+    print "Checking job %d"%job['slurm_id']
+    out = subprocess.check_output(['squeue'])
+    if out.find(" %d "%job['slurm_id']) != -1:
+        return False
+    else:
+        return True
 
 def parse_run(run):
     """Parsing the pending run. NB: the run must be finished!"""
@@ -244,46 +253,6 @@ def parse_run(run):
         os.remove(stdout)
         os.remove(stderr)
     os.remove(job['filename'])
-
-def slurm_gather( result_file ):
-
-    result_file.seek(0)
-    res = json.load(result_file)
-
-    for run in res['runs']:
-        if 'slurm' not in run:
-            continue
-
-        for i in xrange(len(run['slurm']['pending_jobs'])):
-            job = run['slurm']['pending_jobs'][i]
-            if not job:
-                continue
-            print "Checking job %d"%job['id']
-
-            out = subprocess.check_output(['squeue'])
-            if out.find(" %d "%job['id']) != -1:
-                continue # The job is still in the SLURM queue
-
-            print "Slurm job %d finished -- parsing %s"%(job['id'], job['out'])
-            try:
-                with open(job['out'], "r") as fd:
-                    out = fd.read()
-                    times = parse_elapsed_times(out)
-                    times = times[job['warm_ups']:]         #Remove the warm-up runs
-                    for t in times:
-                        run['times'].append(t)
-                        print "elapsed time: ", t
-                    run['slurm']['finished_jobs'].append(job)
-                    run['slurm']['pending_jobs'][i] = None  #Update the pending job list
-                    write2json(result_file, res)            #and save to disk
-            except ValueError:
-                with open(job['err'], "r") as fd:
-                    print "ERR job %d: %s"%(job['id'], fd.read())
-            except IOError:
-                print "WARNING: couldn't find job file '%s'"%job['out']
-
-    print "Result-file: %s" % result_file.name
-
 
 def add_pending_job(setup, nrun, uid):
 
@@ -380,6 +349,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
             time_cmd = []
 
     print "Benchmark suite '%s'; results are written to: %s" % (suite, result_file.name)
+    i=0
     for benchmark in benchmarks:
         for script_alias, script, script_args in benchmark['scripts']:
             for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
@@ -443,7 +413,8 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                                 'stdout': [],
                                                 'stderr': [],
                                                 'perf':[]}
-                        add_pending_job(run, nrun, uid)
+                        i += 1
+                        add_pending_job(run, nrun, "%s-%03d"%(uid,i))
                         results['runs'].append(run)
 
                         results['meta']['ended'] = str(datetime.now())
@@ -540,36 +511,32 @@ if __name__ == "__main__":
                 args.no_time
             )
 
-            result_file.seek(0)
-            res = json.load(result_file)
-
-            #Lets check if we need to submit any jobs
-            if args.slurm:
-                for run in res['runs']:
-                    if run['pending_job'] is None:
-                        continue
-                    slurm_id = run.get('slurm_id', 0)
-                    if not slurm_id:
-                        submit_run(run, nnodes=1, queue=None)
-
-
         result_file.seek(0)
         res = json.load(result_file)
 
-        if not args.slurm:
-            for run in res['runs']:
-                if run['pending_job'] is None:
-                    continue
-                p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
-                if run['manager'] and run['manager'] != "node":
-                    p += "%s/"%run['manager_alias']
-                print "%snode/%s"%(p,run['engine_alias'])
-                execute_run(run)
-                parse_run(run)
-                write2json(result_file, res)
+        for run in res['runs']:
+            if run['pending_job'] is None:
+                continue
 
+            slurm_id = run['pending_job'].get('slurm_id', None)
+            if slurm_id is None:
+                if args.slurm:#The user wants to use SLURM
+                    nnodes = run['envs'].get('BH_SLURM_NNODES', 1)
+                    slurm_run(run, nnodes, queue=None)
+                else:
+                    #The user wants local execution
+                    p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
+                    if run['manager'] and run['manager'] != "node":
+                        p += "%s/"%run['manager_alias']
+                    print "%snode/%s"%(p,run['engine_alias'])
+                    execute_run(run)
+                    parse_run(run)
+            else:#The job has been submitted to SLURM
+                if slurm_run_finished(run):#And it is finished
+                    parse_run(run)
+            write2json(result_file, res)
 
-        print "Results saved in %s"%result_file.name
+        print _C.WARNING,"Benchmark saved in",result_file.name,_C.ENDC
 
     except KeyboardInterrupt:
         print _C.WARNING,"Suspending the benchmark execution,",
