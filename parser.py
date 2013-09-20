@@ -62,9 +62,9 @@ def from_str(results, wc=False):
             for m in matches:       # Remaining entries
                 data[token].append(conv(m.group(1)))
 
-                                    # Legacy mode...
-        if 'elapsed' not in data and 'elapsed' in run:
-            data['elapsed'] = run['elapsed']
+                                    # Legacy mode... for data-sets with 'times'
+        if 'elapsed' not in data and 'times' in run:
+            data['elapsed'] = run['times']
 
         data['sizes'] = []          # Parse the --size parameter
         sizes = [cmd for cmd in run['cmd'] if '--size=' in cmd]
