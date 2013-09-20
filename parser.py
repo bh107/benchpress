@@ -31,9 +31,11 @@ tokens = [
 ]
 
 def avg(elapsed):
+    """Compute the mean."""
     return sum(elapsed)/float(len(elapsed))
 
 def variance(elapsed):
+    """Compute the variance within the samples."""
     count = len(elapsed)
     if (count<2):
         return 0.0

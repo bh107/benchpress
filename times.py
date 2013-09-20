@@ -3,7 +3,6 @@ import argparse
 import pprint
 import json
 
-import numpy as np
 from parser import from_file, from_str, avg, variance
 
 def raw(results):
@@ -18,7 +17,6 @@ def times(results):
         if 'elapsed' not in res or len(res['elapsed']) < 1:
             print "N/A"
         else:
-            print np.var(res["elapsed"]), variance(res["elapsed"])
             print res["elapsed"],"%f (%f) %d"%(avg(res["elapsed"]), variance(res["elapsed"]), len(res['elapsed']))
 
 def main():
