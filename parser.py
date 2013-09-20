@@ -38,13 +38,9 @@ def variance(elapsed):
     if (count<2):
         return 0.0
 
-    acc     = sum(elapsed)
-    acc_2   = acc*acc
-    acc_2d  = acc_2/count
-    acc_s   = sum([x*x for x in elapsed])
-    diff    = (acc_s - acc_2d)/(count-1)
+    x_avg = avg(elapsed)
 
-    return diff
+    return avg([abs(x - x_avg)**2 for x in elapsed])
 
 def from_str(results, wc=False):
     results = json.loads(results)['runs']
