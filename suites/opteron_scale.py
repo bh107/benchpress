@@ -9,8 +9,6 @@ scripts = [
     ('Shallow Water',   'shallow_water',    '--size=1500*1500*5'),
 ]
 
-scripts = []
-
 managers= [('node', 'node', '', None)]
 
 numpy = {
