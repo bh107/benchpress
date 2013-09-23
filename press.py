@@ -148,33 +148,6 @@ def parse_elapsed_times(output):
         times = [None]
     return times
 
-def wrap_popen(task):
-    p = Popen(                              # Run the command
-        task['cmd'],
-        stderr=PIPE,
-        stdout=PIPE,
-        env=task['run']['envs'],
-        cwd=task['run']['cwd']
-    )
-    out, err = p.communicate()              # Grab the output
-
-    #if err or not out:
-    #    print "The command '%s' failed:\n%s"%(' '.join(task['cmd']), err)
-    #    raise CalledProcessError(returncode=p.returncode, cmd=task['cmd'], output=err)
-
-    res_elapsed = parse_elapsed_times(out)[0]
-    res_perf    = ""
-    res_time    = ""
-    if task['run']['use_perf']:
-        res_perf = open(task['run']['use_perf']).read()
-    if task['run']['use_time']:
-        res_time = open(task['run']['use_time']).read()
-
-    result = (res_elapsed, res_perf, res_time, out)
-
-    return result
-
-
 def execute_run(run):
     """Execute the run locally"""
 
@@ -252,13 +225,63 @@ def parse_run(run):
                     print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
         os.remove(stdout)
         os.remove(stderr)
+        if run['use_perf']:
+            with open("%s.perf"%base, 'r') as perf:
+                run['perf'].append(perf.read())
+            os.remove("%s.perf"%base)
+        if run['use_time']:
+            with open("%s.time"%base, 'r') as time:
+                run['time'].append(time.read())
+            os.remove("%s.time"%base)
     os.remove(job['filename'])
+
+
+def get_perf(filename):
+    """Return the perf command"""
+    out, err = Popen(
+        ['which', 'perf'],
+        stdout=PIPE,
+        stderr=PIPE
+    ).communicate()
+
+    # Some distros have a wrapper script :(
+    if not err and out:
+        perf_cmd = out.strip()
+        out, err = Popen(
+            ['perf', 'list'],
+            stderr=PIPE,
+            stdout=PIPE,
+        ).communicate()
+
+    if err or not out:
+        print _C.WARNING,"ERR: perf installation broken, disabling perf (%s): %s"%(err,out),_C.ENDC
+        perf_cmd = ""
+    else:
+        perf_cmd += ' stat -x , -e %s -o %s '%(perf_counters(), filename)
+    return perf_cmd
+
+
+def get_time(filename):
+    """Return the time command"""
+    out, err = Popen(
+        ['which', 'time'],
+        stdout=PIPE,
+        stderr=PIPE
+    ).communicate()
+    if err or not out:
+        print _C.WARNING,"ERR: time installation broken, disabling time (%s): %s"%(err,out),_C.ENDC
+        time_cmd = ""
+    else:
+        time_cmd = " %s -v -o %s "%(out.strip(),filename)
+    return time_cmd
+
 
 def add_pending_job(setup, nrun, uid):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uid
     filename = os.path.join(cwd,basename)
+    cmd = ' '.join(setup['cmd'])
 
     job = "#!/bin/bash\n"
     for i in xrange(nrun):
@@ -276,10 +299,18 @@ def add_pending_job(setup, nrun, uid):
         job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
 
         job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
+
+        outfile = "%s-%d"%(filename,i)
+
+        if setup['use_time']:
+            job += get_time("%s.time"%outfile)
+        if setup['use_perf']:
+            job += get_perf("%s.perf"%outfile)
+
         job += "%s "%(' '.join(setup['cmd']))                     #The command to execute
 
         #Pipe the output to files
-        job += '1> %s-%d.out 2> %s-%d.err\n'%(filename,i,filename,i)
+        job += '1> %s.out 2> %s.err\n'%(outfile,outfile)
 
         #Cleanup the config file
         job += "\nrm %s\n\n\n"%tmp_config_name
@@ -296,57 +327,6 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
         'runs': []
     }
 
-    perf_cmd = []
-    if use_perf:
-        out, err = Popen(
-            ['which', 'perf'],
-            stdout=PIPE,
-            stderr=PIPE
-        ).communicate()
-
-        # Some distros have a wrapper script :(
-        if not err and out:
-            perf_cmd = [out.strip()]
-            out, err = Popen(
-                ['perf', 'list'],
-                stderr=PIPE,
-                stdout=PIPE,
-            ).communicate()
-
-        if err or not out:
-            print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
-            use_perf = False
-            perf_cmd = []
-        else:
-            pcounters = perf_counters()
-
-            perf_tmp = tempfile.NamedTemporaryFile(
-                prefix='perf-',
-                suffix='.data',
-                delete=False
-            )
-            use_perf = perf_tmp.name
-            perf_cmd += ['stat', '-x', ',', '-e', pcounters, '-o', perf_tmp.name]
-
-    time_cmd = []
-    if use_time:
-        out, err = Popen(
-            ['which', 'time'],
-            stdout=PIPE,
-            stderr=PIPE
-        ).communicate()
-        time_tmp = tempfile.NamedTemporaryFile(
-            prefix='time-',
-            suffix='.data',
-            delete=False
-        )
-        use_time = time_tmp.name
-        time_cmd = [out.strip(), '-v', '-o', time_tmp.name]
-
-        if err or not out:
-            print "ERR: time installation broken, disabling time (%s): %s" % (err, out)
-            use_time = False
-            time_cmd = []
 
     print "Benchmark suite '%s'; results are written to: %s" % (suite, result_file.name)
     i=0
@@ -389,30 +369,24 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
 
                         command = cmd.split(' ')
 
-                        if use_time:
-                            command = time_cmd + command
-
-                        if use_perf:
-                            command = perf_cmd + command
-
                         run = {'script_alias':script_alias,
-                                                'bridge_alias':bridge_alias,
-                                                'engine_alias':engine_alias,
-                                                'manager_alias':manager_alias,
-                                                'script':script,
-                                                'manager':manager,
-                                                'engine':engine,
-                                                'envs':envs,
-                                                'cwd':src_root,
-                                                'cmd':command,
-                                                'bh_config':bh_config.getvalue(),
-                                                'use_perf':use_perf,
-                                                'use_time':use_time,
-                                                'elapsed': [],
-                                                'time': [],
-                                                'stdout': [],
-                                                'stderr': [],
-                                                'perf':[]}
+                               'bridge_alias':bridge_alias,
+                               'engine_alias':engine_alias,
+                               'manager_alias':manager_alias,
+                               'script':script,
+                               'manager':manager,
+                               'engine':engine,
+                               'envs':envs,
+                               'cwd':src_root,
+                               'cmd':command,
+                               'bh_config':bh_config.getvalue(),
+                               'use_perf':use_perf,
+                               'use_time':use_time,
+                               'elapsed': [],
+                               'time': [],
+                               'stdout': [],
+                               'stderr': [],
+                               'perf':[]}
                         i += 1
                         add_pending_job(run, nrun, "%s-%03d"%(uid,i))
                         results['runs'].append(run)
