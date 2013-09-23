@@ -3,6 +3,7 @@ import matplotlib
 matplotlib.use('Agg')       # Essential for generating graphs "headless".
 
 from pylab import *
+from copy import copy, deepcopy
 import argparse
 import pprint
 import glob
@@ -91,66 +92,29 @@ class Graph:
 
         show()
 
-class Absolute(Graph):
-    """
-    Create a graph that shows elapsed time on the y-axis and engines on 
-    along the x-axis using "bridge_alias/engine_alias" as labels.
-    """
+class Scale(Graph):
+    """Create a graph that illustrates scalabiltity."""
 
-    def render(self, script, results, order=None, baseline=None, highest=None):
+    def render(self, script, data, order=None, baseline=None, highest=None):
 
         if baseline:
             self.yaxis_label='In relation to "%s"' % baseline
 
         self.prep()                         # Prep it / clear the drawing board
 
-        data = []       # Restructe the results
-        if order:
-            for label in order:
-                data.append((label, results[label]))
-        else:
-            data = [(label, results[label]) for label in results]
 
-        bsl  = [res['times'] for lbl, res in data if baseline and lbl == baseline]
-        bsl  = bsl[0] if bsl else bsl
+        values = []
+        for label, samples in data:
+            if not 'omp' in label:
+                continue
 
-        labels = []
-        xlow  = None
-        xhigh = None
-        for label, numbers in data:
-            sizes   = numbers['size']
+            lbl, threads = label.split('omp')
+            values.append((int(threads), samples['elapsed']['avg']))
+        values.sort()
 
-            if not xlow:            # Axis scaling
-                xlow = min(sizes)
-            if not xhigh:
-                xhigh = max(sizes)
+        
 
-            if min(sizes) < xlow:
-                xlow = min(sizes)
-            if max(sizes) > xhigh:
-                xhigh = max(sizes)
-
-            if baseline:
-                times = [bsl[c]/number for c, number in enumerate(numbers['times'])]
-            else:
-                times = numbers['times']
-            p = plot(sizes, times, label=label, marker='.')
-            labels.append(label)
-
-        if baseline and highest != float(0):
-            ylim([0.5, highest+1])
-        if baseline and highest == float(0):
-            ymin, ymax = ylim()
-            ylim(ymin=0.9)
-
-        xscale("log")
-        xlim([xlow-(xlow/8), xhigh+(xhigh/8)])
-        legend(labels, bbox_to_anchor=(0.5, -0.15), loc='upper center', ncol=4, borderaxespad=0., fancybox=True, shadow=True)
-        ymin, ymax = ylim()
-        yticks([x for x in xrange(int(ymin+1), int(ymax)+3, 3)])
-
-        suffix = '_rel' if baseline else '_abs'
-        self.to_file(script+suffix)                # Spit them out to file
+        self.to_file(script)                # Spit them out to file
 
 def group(data, key, warmups):
     """
@@ -175,14 +139,16 @@ def group(data, key, warmups):
             manager,
             engine,
             sample['sizes'].pop(0),
-            avg(sample[key][:warmups]),
-            avg(sample[key][warmups:]),
-            variance(sample[key][warmups:])
+            {
+            'wup':  avg(sample[key][:warmups]),
+            'avg':  avg(sample[key][warmups:]),
+            'var':  variance(sample[key][warmups:])
+            }
         ))
     res = sorted(res)
 
     results = {}    # This is what will be graphed...
-    for script, backend, manager, engine, size, sample_wup, sample_avg, sample_var in res:
+    for script, backend, manager, engine, sizes, sample in res:
         label   = "%s/%s" % (backend, engine)
         if not script in results:
             results[script] = {}
@@ -190,10 +156,10 @@ def group(data, key, warmups):
         if not label in results[script]:
             results[script][label] = {key: {'avg': [], 'var': [], 'wup': []}, 'size': []}
 
-        results[script][label]['size'].append(size)
-        results[script][label][key]['wup'].append(sample_wup)
-        results[script][label][key]['avg'].append(sample_avg)
-        results[script][label][key]['var'].append(sample_var)
+        results[script][label]['size'].append(sizes)
+        results[script][label][key]['wup'].append(sample['wup'])
+        results[script][label][key]['avg'].append(sample['avg'])
+        results[script][label][key]['var'].append(sample['var'])
 
     return results
 
@@ -202,15 +168,22 @@ def normalize(data, key, baseline):
 
     baselines = {}
     for script in data:
-        pprint.pprint(data[script][baseline])
-        baselines[script] = data[script][baseline][key]
+        baselines[script] = deepcopy(data[script][baseline][key])
+
+    speedup = {}
 
     for script in data:
+        if script not in speedup:
+            speedup[script] = {}
         for label in data[script]:
-            val_avg = []
+            if label not in speedup[script]:
+                speedup[script][label] = []
             for c, t in enumerate(data[script][label][key]['avg']):
-                val_avg.append(baselines[script]['avg'][c]/t)
-            data[script][label][key]['avg'] = val_avg
+                speedup[script][label].append(baselines[script]['avg'][c]/t)
+    
+    for script in data:
+        for label in data[script]:
+            data[script][label][key]['avg'] = speedup[script][label]
 
     return data
 
@@ -223,6 +196,7 @@ def ordering(data, order=None):
     for script in data:
         for label in data[script]:
             default_order.append(label)
+        break
 
     order = order if order else default_order
 
@@ -238,10 +212,18 @@ def main(args):
 
     data        = from_file(args.results)                       # Get data from json-file
     grouped     = group(data, 'elapsed', args.warmups)          # Group by benchmark and "label"
+
+
     normalized  = normalize(grouped, 'elapsed', args.baseline)  # Normalize by "baseline"
+
     ordered     = ordering(normalized, args.order)              # And order / filter
 
-    pprint.pprint(ordered)
+    for script in ordered:
+        graph = Scale(args.output, args.formats, args.postfix, script,
+                      'Threads', 'Speedup')
+
+        graph.render(script, ordered[script], args.order, args.baseline)
+
 
 if __name__ == "__main__":
 
