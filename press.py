@@ -227,7 +227,6 @@ def parse_run(run):
             os.remove(stderr)
         except IOError:
             print _C.WARNING,"Could not find the stdout and/or the stderr file",_C.ENDC
-            pass
         try:
             with open("%s.perf"%base, 'r') as perf:
                 run['perf'].append(perf.read())
@@ -235,7 +234,6 @@ def parse_run(run):
         except IOError:
             if run['use_perf']:
                 print _C.WARNING,"Could not find the perf output file",_C.ENDC
-            pass
         try:
             with open("%s.time"%base, 'r') as time:
                 run['time'].append(time.read())
@@ -243,8 +241,10 @@ def parse_run(run):
         except IOError:
             if run['use_time']:
                 print _C.WARNING,"Could not find the time output file",_C.ENDC
-            pass
-    os.remove(job['filename'])
+    try:
+        os.remove(job['filename'])
+    except OSError:
+        print _C.WARNING,"Could not find the batch script: ",job['filename'],_C.ENDC
 
 
 def get_perf(filename):
