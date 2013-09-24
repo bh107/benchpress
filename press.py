@@ -276,12 +276,11 @@ def get_time(filename):
     return time_cmd
 
 
-def add_pending_job(setup, nrun, uid):
+def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uid
     filename = os.path.join(cwd,basename)
-    cmd = ' '.join(setup['cmd'])
 
     job = "#!/bin/bash\n"
     for i in xrange(nrun):
@@ -302,12 +301,15 @@ def add_pending_job(setup, nrun, uid):
 
         outfile = "%s-%d"%(filename,i)
 
+        cmd = ""
         if setup['use_time']:
-            job += get_time("%s.time"%outfile)
+            cmd += get_time("%s.time"%outfile)
         if setup['use_perf']:
-            job += get_perf("%s.perf"%outfile)
-
-        job += "%s "%(' '.join(setup['cmd']))                     #The command to execute
+            cmd += get_perf("%s.perf"%outfile)
+        cmd += bridge_cmd
+        if manager_cmd is not None and len(manager_cmd) > 0:
+            cmd = manager_cmd.replace("{bridge}", cmd)
+        job += "%s "%cmd
 
         #Pipe the output to files
         job += '1> %s.out 2> %s.err\n'%(outfile,outfile)
@@ -356,18 +358,13 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                         if bridge_env is not None:
                             envs.update(bridge_env)
 
-                        cmd = bridge_cmd.replace("{script}", script)
-                        cmd = cmd.replace("{args}", script_args)
-
-                        if manager and manager != "node":
-                            cmd = manager_cmd.replace("{bridge}", cmd)
+                        bridge_cmd = bridge_cmd.replace("{script}", script)
+                        bridge_cmd = bridge_cmd.replace("{args}", script_args)
 
                         p = "Scheduling %s/%s on "%(bridge_alias,script)
                         if manager and manager != "node":
                             p += "%s/"%manager_alias
                         print "%snode/%s"%(p,engine_alias)
-
-                        command = cmd.split(' ')
 
                         run = {'script_alias':script_alias,
                                'bridge_alias':bridge_alias,
@@ -378,7 +375,6 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'engine':engine,
                                'envs':envs,
                                'cwd':src_root,
-                               'cmd':command,
                                'bh_config':bh_config.getvalue(),
                                'use_perf':use_perf,
                                'use_time':use_time,
@@ -388,7 +384,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'stderr': [],
                                'perf':[]}
                         i += 1
-                        add_pending_job(run, nrun, "%s-%03d"%(uid,i))
+                        add_pending_job(run, nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd)
                         results['runs'].append(run)
 
                         results['meta']['ended'] = str(datetime.now())
