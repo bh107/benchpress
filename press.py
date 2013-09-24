@@ -287,7 +287,7 @@ def get_time(filename):
     return time_cmd
 
 
-def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd):
+def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uid
@@ -304,6 +304,8 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd):
         job += "\n#SBATCH -J %s\n"%setup['script']                #Write Slurm parameters
         job += "#SBATCH -o /tmp/bh-slurm-%%j.out\n"
         job += "#SBATCH -e /tmp/bh-slurm-%%j.err\n"
+        if partition is not None:
+            job += "#SBATCH -p %s\n"%partition
 
         #We need to write the bohrium config file to an unique path
         job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
@@ -332,7 +334,7 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd):
 
 
 def gen_jobs(uid, result_file, config, src_root, output, suite,
-             benchmarks, nrun, use_perf, use_time):
+             benchmarks, nrun, use_perf, use_time, partition):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
@@ -396,7 +398,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'stderr': [],
                                'perf':[]}
                         i += 1
-                        add_pending_job(run, nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd)
+                        add_pending_job(run, nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd, partition)
                         results['runs'].append(run)
 
                         results['meta']['ended'] = str(datetime.now())
@@ -490,7 +492,8 @@ if __name__ == "__main__":
                 bsuites[args.suite],
                 runs,
                 args.no_perf,
-                args.no_time
+                args.no_time,
+                args.partition
             )
 
         result_file.seek(0)
