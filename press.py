@@ -203,36 +203,47 @@ def parse_run(run):
         base = "%s-%d"%(job['filename'], i)
         stdout = "%s.out"%base
         stderr = "%s.err"%base
-        #print "Parsing result file: %s"%stdout
-        with open(stdout, 'r') as out:
-            with open(stderr, 'r') as err:
-                out = out.read()
-                err = err.read()
-                run['stdout'].append(out)
-                run['stderr'].append(err)
-                elapsed = parse_elapsed_times(out)[0]
-                print elapsed
-                run['elapsed'].append(elapsed)
-                if elapsed is None:
-                    print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
-                    print _C.WARNING,"STDOUT: ",_C.ENDC
-                    print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
-                else:
-                    #We got the result, now the job is finished
-                    run['pending_job'] = None
-                if len(err) > 0:
-                    print _C.WARNING,"STDERR: ",_C.ENDC
-                    print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
-        os.remove(stdout)
-        os.remove(stderr)
-        if run['use_perf']:
+        try:
+            with open(stdout, 'r') as out:
+                with open(stderr, 'r') as err:
+                    out = out.read()
+                    err = err.read()
+                    run['stdout'].append(out)
+                    run['stderr'].append(err)
+                    elapsed = parse_elapsed_times(out)[0]
+                    print elapsed
+                    run['elapsed'].append(elapsed)
+                    if elapsed is None:
+                        print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
+                        print _C.WARNING,"STDOUT: ",_C.ENDC
+                        print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
+                    else:
+                        #We got the result, now the job is finished
+                        run['pending_job'] = None
+                    if len(err) > 0:
+                        print _C.WARNING,"STDERR: ",_C.ENDC
+                        print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
+            os.remove(stdout)
+            os.remove(stderr)
+        except IOError:
+            print _C.WARNING,"Could not find the stdout and/or the stderr file",_C.ENDC
+            pass
+        try:
             with open("%s.perf"%base, 'r') as perf:
                 run['perf'].append(perf.read())
             os.remove("%s.perf"%base)
-        if run['use_time']:
+        except IOError:
+            if run['use_perf']:
+                print _C.WARNING,"Could not find the perf output file",_C.ENDC
+            pass
+        try:
             with open("%s.time"%base, 'r') as time:
                 run['time'].append(time.read())
             os.remove("%s.time"%base)
+        except IOError:
+            if run['use_time']:
+                print _C.WARNING,"Could not find the time output file",_C.ENDC
+            pass
     os.remove(job['filename'])
 
 
