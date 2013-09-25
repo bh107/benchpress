@@ -1,18 +1,10 @@
 #!/usr/bin/env python
-import matplotlib
-matplotlib.use('Agg')       # Essential for generating graphs "headless".
-
-from pylab import *
 from copy import copy, deepcopy
 import argparse
 import pprint
-import glob
-import json
-import math
-import sys
-import os
-import re
 
+from grapher.graph import *
+from grapher.scale import *
 from parser import from_file, avg, variance
 
 formats = ['png', 'pdf', 'eps']
@@ -36,99 +28,6 @@ hatches = [
     "\\", "+", "o", "/", "-", "O",
     "\\", "+", "o", "/", "-", "O",
 ]
-
-class Graph:
-    """
-    Baseclass for rendering Matplotlib graphs.
-    Does alot of the annoying work, just override the render(...) method,
-    and you are good to go!
-    """
-
-    def __init__(
-        self,
-        output="/tmp",
-        file_formats=["pdf"],
-        file_postfix='runtime',
-        graph_title="Unknown Graph",
-        xaxis_label="Problemsize",
-        yaxis_label="Time in Seconds"
-    ):
-        self.graph_title    = graph_title
-        self.xaxis_label    = xaxis_label
-        self.yaxis_label    = yaxis_label
-        self.output         = output
-        self.file_formats   = file_formats
-        self.file_postfix   = file_postfix
-
-    def prep(self):
-        clf()                       # Essential! Othervise the plots will be f**d up!
-        figure(1)
-
-        gca().yaxis.grid(True)      # Makes it easier to compare bars
-        gca().xaxis.grid(False)
-        gca().set_axisbelow(True)
-
-        title(self.graph_title)     # Title and axis labels
-        ylabel(self.yaxis_label)    # Label on the y-axis
-        xlabel(self.xaxis_label)    # Label on the x-axis
-
-    def render(self):
-        raise Exception('YOU ARE DOING IT WRONG!')
-
-    def to_file(self, text):        # Creates the output-file.
-
-        fn = self.output +os.sep+ text.lower() +'_'+self.file_postfix
-        dname = os.path.dirname(fn)
-        bname = re.sub('\W', '_', os.path.basename(fn))
-        fn = dname +os.sep+ bname
-
-        try:                            # Create output directory
-            os.makedirs(self.output)
-        except:
-            pass
-
-        for ff in self.file_formats:    # Create the physical files
-            savefig("%s.%s" % (fn, ff))
-
-        show()
-
-class Scale(Graph):
-    """Create a graph that illustrates scalabiltity."""
-
-    def render(self, script, data, order=None, baseline=None, highest=None):
-
-        if baseline:
-            self.yaxis_label='In relation to "%s"' % baseline
-
-        self.prep()                         # Prep it / clear the drawing board
-
-        values = []
-        for label, samples in data:
-            if not 'omp' in label:
-                continue
-
-            lbl, threads = label.split('omp')
-            values.append((int(threads), samples['elapsed']['avg'].pop()))
-        values.sort()
-
-        sizes   = []
-        speedup = []
-        for nthreads, times in values:
-            sizes.append(nthreads)
-            speedup.append(times)
-
-        linear = [2**x for x in range(0, len(sizes))]
-        xscale("log")   # Scale with a neat border
-        yscale("log")
-        xticks(linear, linear)
-        xlim(xmin=min(linear)*0.85, xmax=max(linear)*1.25)
-        yticks(linear, linear)
-        ylim(ymin=min(linear)*0.85, ymax=max(linear)*1.25)
-
-        plot(linear, linear)
-        plot(linear, speedup)
-
-        self.to_file(script)                # Spit them out to file
 
 def group(data, key, warmups):
     """
