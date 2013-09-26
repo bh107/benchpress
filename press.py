@@ -506,7 +506,7 @@ if __name__ == "__main__":
             slurm_id = run['pending_job'].get('slurm_id', None)
             if slurm_id is None:
                 if args.slurm:#The user wants to use SLURM
-                    nnodes = run['envs'].get('BH_SLURM_NNODES', 1)
+                    nnodes = run['envs'].get('BH_CLUSTER_NNODES', 1)
                     slurm_run(run, nnodes, queue=None)
                 else:
                     #The user wants local execution
