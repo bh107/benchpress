@@ -148,33 +148,6 @@ def parse_elapsed_times(output):
         times = [None]
     return times
 
-def wrap_popen(task):
-    p = Popen(                              # Run the command
-        task['cmd'],
-        stderr=PIPE,
-        stdout=PIPE,
-        env=task['run']['envs'],
-        cwd=task['run']['cwd']
-    )
-    out, err = p.communicate()              # Grab the output
-
-    #if err or not out:
-    #    print "The command '%s' failed:\n%s"%(' '.join(task['cmd']), err)
-    #    raise CalledProcessError(returncode=p.returncode, cmd=task['cmd'], output=err)
-
-    res_elapsed = parse_elapsed_times(out)[0]
-    res_perf    = ""
-    res_time    = ""
-    if task['run']['use_perf']:
-        res_perf = open(task['run']['use_perf']).read()
-    if task['run']['use_time']:
-        res_time = open(task['run']['use_time']).read()
-
-    result = (res_elapsed, res_perf, res_time, out)
-
-    return result
-
-
 def execute_run(run):
     """Execute the run locally"""
 
@@ -230,31 +203,91 @@ def parse_run(run):
         base = "%s-%d"%(job['filename'], i)
         stdout = "%s.out"%base
         stderr = "%s.err"%base
-        #print "Parsing result file: %s"%stdout
-        with open(stdout, 'r') as out:
-            with open(stderr, 'r') as err:
-                out = out.read()
-                err = err.read()
-                run['stdout'].append(out)
-                run['stderr'].append(err)
-                elapsed = parse_elapsed_times(out)[0]
-                print elapsed
-                run['elapsed'].append(elapsed)
-                if elapsed is None:
-                    print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
-                    print _C.WARNING,"STDOUT: ",_C.ENDC
-                    print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
-                else:
-                    #We got the result, now the job is finished
-                    run['pending_job'] = None
-                if len(err) > 0:
-                    print _C.WARNING,"STDERR: ",_C.ENDC
-                    print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
-        os.remove(stdout)
-        os.remove(stderr)
-    os.remove(job['filename'])
+        try:
+            with open(stdout, 'r') as out:
+                with open(stderr, 'r') as err:
+                    out = out.read()
+                    err = err.read()
+                    run['stdout'].append(out)
+                    run['stderr'].append(err)
+                    elapsed = parse_elapsed_times(out)[0]
+                    print elapsed
+                    run['elapsed'].append(elapsed)
+                    if elapsed is None:
+                        print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
+                        print _C.WARNING,"STDOUT: ",_C.ENDC
+                        print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
+                    else:
+                        #We got the result, now the job is finished
+                        run['pending_job'] = None
+                    if len(err) > 0:
+                        print _C.WARNING,"STDERR: ",_C.ENDC
+                        print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
+            os.remove(stdout)
+            os.remove(stderr)
+        except IOError:
+            print _C.WARNING,"Could not find the stdout and/or the stderr file",_C.ENDC
+        try:
+            with open("%s.perf"%base, 'r') as perf:
+                run['perf'].append(perf.read())
+            os.remove("%s.perf"%base)
+        except IOError:
+            if run['use_perf']:
+                print _C.WARNING,"Could not find the perf output file",_C.ENDC
+        try:
+            with open("%s.time"%base, 'r') as time:
+                run['time'].append(time.read())
+            os.remove("%s.time"%base)
+        except IOError:
+            if run['use_time']:
+                print _C.WARNING,"Could not find the time output file",_C.ENDC
+    try:
+        os.remove(job['filename'])
+    except OSError:
+        print _C.WARNING,"Could not find the batch script: ",job['filename'],_C.ENDC
 
-def add_pending_job(setup, nrun, uid):
+
+def get_perf(filename):
+    """Return the perf command"""
+    out, err = Popen(
+        ['which', 'perf'],
+        stdout=PIPE,
+        stderr=PIPE
+    ).communicate()
+
+    # Some distros have a wrapper script :(
+    if not err and out:
+        perf_cmd = out.strip()
+        out, err = Popen(
+            ['perf', 'list'],
+            stderr=PIPE,
+            stdout=PIPE,
+        ).communicate()
+
+    if err or not out:
+        print _C.WARNING,"ERR: perf installation broken, disabling perf (%s): %s"%(err,out),_C.ENDC
+        perf_cmd = ""
+    else:
+        perf_cmd += ' stat -x , -e %s -o %s '%(perf_counters(), filename)
+    return perf_cmd
+
+
+def get_time(filename):
+    """Return the time command"""
+    out, err = Popen(
+        ['which', 'time'],
+        stdout=PIPE,
+        stderr=PIPE
+    ).communicate()
+    if err or not out:
+        print _C.WARNING,"ERR: time installation broken, disabling time (%s): %s"%(err,out),_C.ENDC
+        time_cmd = ""
+    else:
+        time_cmd = " %s -v -o %s "%(out.strip(),filename)
+    return time_cmd
+
+
+def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uid
@@ -271,15 +304,28 @@ def add_pending_job(setup, nrun, uid):
         job += "\n#SBATCH -J %s\n"%setup['script']                #Write Slurm parameters
         job += "#SBATCH -o /tmp/bh-slurm-%%j.out\n"
         job += "#SBATCH -e /tmp/bh-slurm-%%j.err\n"
+        if partition is not None:
+            job += "#SBATCH -p %s\n"%partition
 
         #We need to write the bohrium config file to an unique path
         job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
 
         job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
-        job += "%s "%(' '.join(setup['cmd']))                     #The command to execute
+
+        outfile = "%s-%d"%(filename,i)
+
+        cmd = ""
+        if setup['use_time']:
+            cmd += get_time("%s.time"%outfile)
+        if setup['use_perf']:
+            cmd += get_perf("%s.perf"%outfile)
+        cmd += bridge_cmd
+        if manager_cmd is not None and len(manager_cmd) > 0:
+            cmd = manager_cmd.replace("{bridge}", cmd)
+        job += "%s "%cmd
 
         #Pipe the output to files
-        job += '1> %s-%d.out 2> %s-%d.err\n'%(filename,i,filename,i)
+        job += '1> %s.out 2> %s.err\n'%(outfile,outfile)
 
         #Cleanup the config file
         job += "\nrm %s\n\n\n"%tmp_config_name
@@ -288,7 +334,7 @@ def add_pending_job(setup, nrun, uid):
 
 
 def gen_jobs(uid, result_file, config, src_root, output, suite,
-             benchmarks, nrun, use_perf, use_time):
+             benchmarks, nrun, use_perf, use_time, partition):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
@@ -296,57 +342,6 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
         'runs': []
     }
 
-    perf_cmd = []
-    if use_perf:
-        out, err = Popen(
-            ['which', 'perf'],
-            stdout=PIPE,
-            stderr=PIPE
-        ).communicate()
-
-        # Some distros have a wrapper script :(
-        if not err and out:
-            perf_cmd = [out.strip()]
-            out, err = Popen(
-                ['perf', 'list'],
-                stderr=PIPE,
-                stdout=PIPE,
-            ).communicate()
-
-        if err or not out:
-            print "ERR: perf installation broken, disabling perf (%s): %s" % (err, out)
-            use_perf = False
-            perf_cmd = []
-        else:
-            pcounters = perf_counters()
-
-            perf_tmp = tempfile.NamedTemporaryFile(
-                prefix='perf-',
-                suffix='.data',
-                delete=False
-            )
-            use_perf = perf_tmp.name
-            perf_cmd += ['stat', '-x', ',', '-e', pcounters, '-o', perf_tmp.name]
-
-    time_cmd = []
-    if use_time:
-        out, err = Popen(
-            ['which', 'time'],
-            stdout=PIPE,
-            stderr=PIPE
-        ).communicate()
-        time_tmp = tempfile.NamedTemporaryFile(
-            prefix='time-',
-            suffix='.data',
-            delete=False
-        )
-        use_time = time_tmp.name
-        time_cmd = [out.strip(), '-v', '-o', time_tmp.name]
-
-        if err or not out:
-            print "ERR: time installation broken, disabling time (%s): %s" % (err, out)
-            use_time = False
-            time_cmd = []
 
     print "Benchmark suite '%s'; results are written to: %s" % (suite, result_file.name)
     i=0
@@ -376,45 +371,34 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                         if bridge_env is not None:
                             envs.update(bridge_env)
 
-                        cmd = bridge_cmd.replace("{script}", script)
-                        cmd = cmd.replace("{args}", script_args)
-
-                        if manager and manager != "node":
-                            cmd = manager_cmd.replace("{bridge}", cmd)
+                        bridge_cmd = bridge_cmd.replace("{script}", script)
+                        bridge_cmd = bridge_cmd.replace("{args}", script_args)
 
                         p = "Scheduling %s/%s on "%(bridge_alias,script)
                         if manager and manager != "node":
                             p += "%s/"%manager_alias
                         print "%snode/%s"%(p,engine_alias)
 
-                        command = cmd.split(' ')
-
-                        if use_time:
-                            command = time_cmd + command
-
-                        if use_perf:
-                            command = perf_cmd + command
-
                         run = {'script_alias':script_alias,
-                                                'bridge_alias':bridge_alias,
-                                                'engine_alias':engine_alias,
-                                                'manager_alias':manager_alias,
-                                                'script':script,
-                                                'manager':manager,
-                                                'engine':engine,
-                                                'envs':envs,
-                                                'cwd':src_root,
-                                                'cmd':command,
-                                                'bh_config':bh_config.getvalue(),
-                                                'use_perf':use_perf,
-                                                'use_time':use_time,
-                                                'elapsed': [],
-                                                'time': [],
-                                                'stdout': [],
-                                                'stderr': [],
-                                                'perf':[]}
+                               'bridge_alias':bridge_alias,
+                               'engine_alias':engine_alias,
+                               'manager_alias':manager_alias,
+                               'script':script,
+                               'manager':manager,
+                               'engine':engine,
+                               'envs':envs,
+                               'cmd': bridge_cmd,
+                               'cwd':src_root,
+                               'bh_config':bh_config.getvalue(),
+                               'use_perf':use_perf,
+                               'use_time':use_time,
+                               'elapsed': [],
+                               'time': [],
+                               'stdout': [],
+                               'stderr': [],
+                               'perf':[]}
                         i += 1
-                        add_pending_job(run, nrun, "%s-%03d"%(uid,i))
+                        add_pending_job(run, nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd, partition)
                         results['runs'].append(run)
 
                         results['meta']['ended'] = str(datetime.now())
@@ -508,7 +492,8 @@ if __name__ == "__main__":
                 bsuites[args.suite],
                 runs,
                 args.no_perf,
-                args.no_time
+                args.no_time,
+                args.partition
             )
 
         result_file.seek(0)
