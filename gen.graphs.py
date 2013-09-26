@@ -123,20 +123,19 @@ def ordering(data, order=None):
 
 def main(args):
 
-    data        = from_file(args.results)                       # Get data from json-file
-    grouped     = group(data, 'elapsed', args.warmups)          # Group by benchmark and "label"
+    data    = from_file(args.results)               # Get data from json-file
+    grouped = group(data, 'elapsed', args.warmups)  # Group by benchmark and "label"
 
+    if args.baseline:                               # Normalize by "baseline"
+        normalized = normalize(grouped, 'elapsed', args.baseline)  
+    else:
+        normalized = grouped
 
-    normalized  = normalize(grouped, 'elapsed', args.baseline)  # Normalize by "baseline"
-
-    ordered     = ordering(normalized, args.order)              # And order / filter
+    ordered = ordering(normalized, args.order)      # And order / filter
 
     for script in ordered:
-        graph = Scale(args.output, args.formats, args.postfix, script,
-                      'Threads', 'Speedup')
-
+        graph = Scale(args.output, args.formats, args.postfix, script, 'Threads', 'Speedup')
         graph.render(script, ordered[script], args.order, args.baseline)
-
 
 if __name__ == "__main__":
 
