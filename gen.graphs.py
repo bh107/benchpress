@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 from copy import copy, deepcopy
 import argparse
+import pkgutil
 import pprint
 
-from grapher.graph import *
-from grapher.scale import *
+#from grapher.graph import *
+#from grapher.scale import *
 from parser import from_file, avg, variance
-
-graph_types = {'scale': Scale}
 
 formats = ['png', 'pdf', 'eps']
 
@@ -125,7 +124,6 @@ def ordering(data, order=None):
 
 def main(args):
 
-
     data    = from_file(args.results)               # Get data from json-file
     grouped = group(data, 'elapsed', args.warmups)  # Group by benchmark and "label"
 
@@ -136,10 +134,22 @@ def main(args):
 
     ordered = ordering(normalized, args.order)      # And order / filter
 
-    graph = Scale(args.output, args.formats, args.postfix, 'Blabla', 'Threads', 'Speedup')
+    graph = args.graph_module(args.output, args.formats, args.postfix, 'Blabla', 'Threads', 'Speedup')
     graph.render(ordered, args.order, args.baseline)
 
 if __name__ == "__main__":
+
+    graph_types = {}    # Auto-load all graph-modules from grapher/*
+                        # The graph-class must be a capilized version of the
+                        # filename
+    for _, module, _ in pkgutil.iter_modules(['grapher']):
+        if module == 'graph':
+            continue
+
+        module_caps = module.capitalize()
+        m = __import__("grapher.%s" % module, globals(), locals(), [module_caps], -1)
+
+        graph_types[module] = m.__dict__[module_caps]
 
     parser = argparse.ArgumentParser(
         description = 'Generate different types of graphs.'
@@ -196,7 +206,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
+    args.graph_module = graph_types[args.type]
 
     main(args)
 
