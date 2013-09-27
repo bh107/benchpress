@@ -7,6 +7,8 @@ from grapher.graph import *
 from grapher.scale import *
 from parser import from_file, avg, variance
 
+graph_types = {'scale': Scale}
+
 formats = ['png', 'pdf', 'eps']
 
 colors  = [
@@ -123,6 +125,7 @@ def ordering(data, order=None):
 
 def main(args):
 
+
     data    = from_file(args.results)               # Get data from json-file
     grouped = group(data, 'elapsed', args.warmups)  # Group by benchmark and "label"
 
@@ -133,9 +136,8 @@ def main(args):
 
     ordered = ordering(normalized, args.order)      # And order / filter
 
-    for script in ordered:
-        graph = Scale(args.output, args.formats, args.postfix, script, 'Threads', 'Speedup')
-        graph.render(script, ordered[script], args.order, args.baseline)
+    graph = Scale(args.output, args.formats, args.postfix, 'Blabla', 'Threads', 'Speedup')
+    graph.render(ordered, args.order, args.baseline)
 
 if __name__ == "__main__":
 
@@ -165,9 +167,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--type',
-        default='scale',
+        default=[gt for gt in graph_types][0],
         nargs=1,
-        choices=['scale', 'problemsize', 'benchmark'],
+        choices=[gt for gt in graph_types],
         help="The type of graph to generate"
     )
     parser.add_argument(
