@@ -177,7 +177,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--type',
-        default=[gt for gt in graph_types][0],
+        default=[gt for gt in graph_types],
         nargs=1,
         choices=[gt for gt in graph_types],
         help="The type of graph to generate"
@@ -206,6 +206,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+    args.type = args.type.pop()
     args.graph_module = graph_types[args.type]
 
     main(args)
