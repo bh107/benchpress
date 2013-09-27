@@ -32,7 +32,7 @@ tokens = [
 
 def avg(elapsed):
     """Compute the mean."""
-    return sum(elapsed)/float(len(elapsed))
+    return sum(elapsed)/float(len(elapsed)) if len(elapsed)>0 else 0.0
 
 def variance(elapsed):
     """Compute the variance within the samples."""
