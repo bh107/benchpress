@@ -177,7 +177,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--type',
-        default=[gt for gt in graph_types],
+        default=[[gt for gt in graph_types][0]],
         nargs=1,
         choices=[gt for gt in graph_types],
         help="The type of graph to generate"
