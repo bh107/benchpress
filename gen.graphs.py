@@ -34,7 +34,7 @@ def group(data, key, warmups):
     """
     Group the dataset by benchmark and 'label'::
         results[script][label] = {
-            'avg': [], 
+            'avg': [],
             'var': [],
             'wup': [],
             'size': []
@@ -63,7 +63,7 @@ def group(data, key, warmups):
 
     results = {}    # This is what will be graphed...
     for script, backend, manager, engine, sizes, sample in res:
-        label   = "%s/%s" % (backend, engine)
+        label   = "%s/%s/%s" % (backend, manager, engine)
         if not script in results:
             results[script] = {}
 
@@ -94,7 +94,7 @@ def normalize(data, key, baseline):
                 speedup[script][label] = []
             for c, t in enumerate(data[script][label][key]['avg']):
                 speedup[script][label].append(baselines[script]['avg'][c]/t)
-    
+
     for script in data:
         for label in data[script]:
             data[script][label][key]['avg'] = speedup[script][label]
@@ -128,7 +128,7 @@ def main(args):
     grouped = group(data, 'elapsed', args.warmups)  # Group by benchmark and "label"
 
     if args.baseline:                               # Normalize by "baseline"
-        normalized = normalize(grouped, 'elapsed', args.baseline)  
+        normalized = normalize(grouped, 'elapsed', args.baseline)
     else:
         normalized = grouped
 
