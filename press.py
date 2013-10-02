@@ -185,6 +185,7 @@ def slurm_run(run, nnodes=1, queue=None):
             print _C.FAIL,"ERR: submitting SLURM job!",_C.ENDC
             raise
         job['slurm_id'] = job_id
+        job['failed'] = False
 
 def slurm_run_finished(run):
     job = run['pending_job']
@@ -217,6 +218,7 @@ def parse_run(run):
                         print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
                         print _C.WARNING,"STDOUT: ",_C.ENDC
                         print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
+                        job['failed'] = True
                     else:
                         #We got the result, now the job is finished
                         run['pending_job'] = None
@@ -469,7 +471,11 @@ if __name__ == "__main__":
         type=str,
         help="Submit to a specific SLURM partition."
     )
-
+    slurm_grp.add_argument(
+        '--resubmit',
+        action="store_true",
+        help="Resubmit failed jobs."
+    )
     args = parser.parse_args()
     runs = int(args.runs)
 
@@ -503,8 +509,9 @@ if __name__ == "__main__":
             if run['pending_job'] is None:
                 continue
 
+            failed = run['pending_job'].get('failed', False)
             slurm_id = run['pending_job'].get('slurm_id', None)
-            if slurm_id is None:
+            if slurm_id is None or (failed and args.resubmit):
                 if args.slurm:#The user wants to use SLURM
                     nnodes = run['envs'].get('BH_CLUSTER_NNODES', 1)
                     slurm_run(run, nnodes, queue=None)
