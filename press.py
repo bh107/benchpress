@@ -148,12 +148,12 @@ def parse_elapsed_times(output):
         times = [None]
     return times
 
-def execute_run(run):
+def execute_run(job):
     """Execute the run locally"""
 
-    with open(run['pending_job']['filename'], 'w') as f:
+    with open(job['filename'], 'w') as f:
         #First we have to write the batch script to a file
-        f.write(run['pending_job']['script'])
+        f.write(job['script'])
         f.flush()
         os.fsync(f)
         try:# Then we execute the batch script
@@ -163,10 +163,8 @@ def execute_run(run):
             p.kill()
             raise
 
-def slurm_run(run, nnodes=1, queue=None):
+def slurm_run(job, nnodes=1, queue=None):
     """Submit the run to SLURM using 'nnodes' number of nodes"""
-    job = run['pending_job']
-
     with open(job['filename'], 'w') as f:
         f.write(job['script'])
         f.flush()
@@ -185,10 +183,9 @@ def slurm_run(run, nnodes=1, queue=None):
             print _C.FAIL,"ERR: submitting SLURM job!",_C.ENDC
             raise
         job['slurm_id'] = job_id
-        job['failed'] = False
+        job['status'] = 'failed'
 
-def slurm_run_finished(run):
-    job = run['pending_job']
+def slurm_run_finished(job):
     print "Checking job %d"%job['slurm_id']
     out = subprocess.check_output(['squeue'])
     if out.find(" %d "%job['slurm_id']) != -1:
@@ -196,10 +193,8 @@ def slurm_run_finished(run):
     else:
         return True
 
-def parse_run(run):
+def parse_run(run, job):
     """Parsing the pending run. NB: the run must be finished!"""
-    job = run['pending_job']
-
     for i in xrange(job['nrun']):
         base = "%s-%d"%(job['filename'], i)
         stdout = "%s.out"%base
@@ -221,7 +216,7 @@ def parse_run(run):
                         job['failed'] = True
                     else:
                         #We got the result, now the job is finished
-                        run['pending_job'] = None
+                        job['status'] = "finished"
                     if len(err) > 0:
                         print _C.WARNING,"STDERR: ",_C.ENDC
                         print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
@@ -332,11 +327,14 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
         #Cleanup the config file
         job += "\nrm %s\n\n\n"%tmp_config_name
 
-    setup['pending_job'] = {'filename': filename, 'nrun': nrun, 'script': job}
+    setup['jobs'].append({'status': 'pending',
+                          'filename': filename,
+                          'nrun': nrun,
+                          'script': job})
 
 
 def gen_jobs(uid, result_file, config, src_root, output, suite,
-             benchmarks, nrun, use_perf, use_time, partition):
+             benchmarks, nrun, use_perf, use_time, partition, multi_jobs):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
@@ -391,6 +389,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'envs':envs,
                                'cmd': bridge_cmd.split(" "),
                                'cwd':src_root,
+                               'jobs':[],
                                'bh_config':bh_config.getvalue(),
                                'use_perf':use_perf,
                                'use_time':use_time,
@@ -399,10 +398,15 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'stdout': [],
                                'stderr': [],
                                'perf':[]}
-                        i += 1
-                        add_pending_job(run, nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd, partition)
+                        njobs = 1
+                        job_nrun = nrun
+                        if multi_jobs:
+                            njobs = nrun
+                            job_nrun = 1
+                        for _ in xrange(njobs):
+                            i += 1
+                            add_pending_job(run, job_nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd, partition)
                         results['runs'].append(run)
-
                         results['meta']['ended'] = str(datetime.now())
 
                         bh_config.close()
@@ -451,6 +455,11 @@ if __name__ == "__main__":
         action="store_false",
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
     )
+    parser.add_argument(
+        '--restart',
+        action="store_true",
+        help="Restart execution or submission of failed jobs."
+    )
     """
     affinity_grp = parser.add_argument_group('Saturated Execution')
     affinity_grp.add_argument(
@@ -472,9 +481,9 @@ if __name__ == "__main__":
         help="Submit to a specific SLURM partition."
     )
     slurm_grp.add_argument(
-        '--resubmit',
+        '--multi-jobs',
         action="store_true",
-        help="Resubmit failed jobs."
+        help="Submit 'runs' SLURM jobs instead of one job with 'runs' number of runs."
     )
     args = parser.parse_args()
     runs = int(args.runs)
@@ -499,34 +508,34 @@ if __name__ == "__main__":
                 runs,
                 args.no_perf,
                 args.no_time,
-                args.partition
+                args.partition,
+                args.multi_jobs
             )
 
         result_file.seek(0)
         res = json.load(result_file)
 
         for run in res['runs']:
-            if run['pending_job'] is None:
-                continue
-
-            failed = run['pending_job'].get('failed', False)
-            slurm_id = run['pending_job'].get('slurm_id', None)
-            if slurm_id is None or (failed and args.resubmit):
-                if args.slurm:#The user wants to use SLURM
-                    nnodes = run['envs'].get('BH_CLUSTER_NNODES', 1)
-                    slurm_run(run, nnodes, queue=None)
-                else:
-                    #The user wants local execution
-                    p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
-                    if run['manager'] and run['manager'] != "node":
-                        p += "%s/"%run['manager_alias']
-                    print "%snode/%s"%(p,run['engine_alias'])
-                    execute_run(run)
-                    parse_run(run)
-            else:#The job has been submitted to SLURM
-                if slurm_run_finished(run):#And it is finished
-                    parse_run(run)
-            write2json(result_file, res)
+            for job in run['jobs']:
+                if job['status'] == 'finished':
+                    continue
+                slurm_id = job.get('slurm_id', None)
+                if slurm_id is None or (job['status'] == 'failed' and args.restart):
+                    if args.slurm:#The user wants to use SLURM
+                        nnodes = run['envs'].get('BH_CLUSTER_NNODES', 1)
+                        slurm_run(job, nnodes, queue=None)
+                    else:
+                        #The user wants local execution
+                        p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
+                        if run['manager'] and run['manager'] != "node":
+                            p += "%s/"%run['manager_alias']
+                        print "%snode/%s"%(p,run['engine_alias'])
+                        execute_run(job)
+                        parse_run(run, job)
+                else:#The job has been submitted to SLURM
+                    if slurm_run_finished(job):#And it is finished
+                        parse_run(run, job)
+                write2json(result_file, res)
 
         print _C.WARNING,"Benchmark saved in",result_file.name,_C.ENDC
 
