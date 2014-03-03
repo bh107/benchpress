@@ -356,8 +356,8 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                         confparser.read(config)             # Read current configuration
                                                             # Set the current manager
                         confparser.set("bridge", "children", manager if manager else "node")
-                        if manager and manager != "node":
-                            confparser.set(manager, "children", "node")
+                        #if manager and manager != "node":
+                        #    confparser.set(manager, "children", "node")
                         if engine:                          # Set the current engine
                             confparser.set("node", "children", engine)
 
