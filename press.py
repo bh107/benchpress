@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from ConfigParser import SafeConfigParser
 import subprocess
-from subprocess import Popen, PIPE, CalledProcessError
+from subprocess import Popen, PIPE, CalledProcessError,check_call
 from datetime import datetime
 from multiprocessing import Pool
 
@@ -456,6 +456,11 @@ if __name__ == "__main__":
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
     )
     parser.add_argument(
+        '--pre-hook',
+        type=str,
+        help="Command to execute before each local job execution"
+    )
+    parser.add_argument(
         '--restart',
         action="store_true",
         help="Restart execution or submission of failed jobs."
@@ -530,6 +535,9 @@ if __name__ == "__main__":
                         if run['manager'] and run['manager'] != "node":
                             p += "%s/"%run['manager_alias']
                         print "%snode/%s"%(p,run['engine_alias'])
+                        if args.pre_hook:
+                            print "pre-hook cmd: \"%s\""%args.pre_hook
+                            check_call(args.pre_hook, shell=True)
                         execute_run(job)
                         parse_run(run, job)
                 else:#The job has been submitted to SLURM
