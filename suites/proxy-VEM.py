@@ -25,16 +25,17 @@ python_script = [\
                  ('Shallow Water 20k', 'shallow_water',  '--size=20000*20000*10'),
                  ('Shallow Water 25k', 'shallow_water',  '--size=25000*25000*10'),
                  ('Shallow Water 30k', 'shallow_water',  '--size=30000*30000*10'),
+                 ('Black Scholes   1m', 'black_scholes',  '--size=1000000*10'),
                  ('Black Scholes  10m', 'black_scholes',  '--size=10000000*10'),
                  ('Black Scholes 100m', 'black_scholes',  '--size=100000000*10'),
-                 ('Black Scholes1000m', 'black_scholes',  '--size=1000000000*10'),
 ]
 
 python = {
     'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': managers,
     'engines': engines,
-    'scripts': python_script
+    'scripts': python_script,
+    'pre-hook': 'sbatch -p octuplets --nodes 8 hooks/proxy-VEM-pre-hook.sh'
 }
 
 python_no_proxy = {
@@ -44,5 +45,5 @@ python_no_proxy = {
     'scripts':  python_script
 }
 
-suites = [python] #,python_no_proxy]
+suites = [python,python_no_proxy]
 

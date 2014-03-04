@@ -389,6 +389,8 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'envs':envs,
                                'cmd': bridge_cmd.split(" "),
                                'cwd':src_root,
+                               'pre-hook': benchmark.get('pre-hook', None),
+                               'post-hook': benchmark.get('post-hook', None),
                                'jobs':[],
                                'bh_config':bh_config.getvalue(),
                                'use_perf':use_perf,
@@ -454,11 +456,6 @@ if __name__ == "__main__":
         '--no-time',
         action="store_false",
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
-    )
-    parser.add_argument(
-        '--pre-hook',
-        type=str,
-        help="Command to execute before each local job execution"
     )
     parser.add_argument(
         '--restart',
@@ -535,9 +532,9 @@ if __name__ == "__main__":
                         if run['manager'] and run['manager'] != "node":
                             p += "%s/"%run['manager_alias']
                         print "%snode/%s"%(p,run['engine_alias'])
-                        if args.pre_hook:
-                            print "pre-hook cmd: \"%s\""%args.pre_hook
-                            check_call(args.pre_hook, shell=True)
+                        if run['pre-hook'] is not None:
+                            print "pre-hook cmd: \"%s\""%run['pre-hook']
+                            check_call(run['pre-hook'], shell=True)
                         execute_run(job)
                         parse_run(run, job)
                 else:#The job has been submitted to SLURM
