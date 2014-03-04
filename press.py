@@ -395,6 +395,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'bh_config':bh_config.getvalue(),
                                'use_perf':use_perf,
                                'use_time':use_time,
+                               'use_slurm_default':benchmark.get('use_slurm_default', False),
                                'elapsed': [],
                                'time': [],
                                'stdout': [],
@@ -462,20 +463,18 @@ if __name__ == "__main__":
         action="store_true",
         help="Restart execution or submission of failed jobs."
     )
-    """
-    affinity_grp = parser.add_argument_group('Saturated Execution')
-    affinity_grp.add_argument(
-        '--cores',
-        nargs='+',
-        default=[],
-        help="Launch each benchmark concurrently on each provided CPU core."
-    )
-    """
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
         '--slurm',
         action="store_true",
-        help="Use the SLURM queuing system."
+        help="Use the SLURM queuing system. This overwrite the default value "\
+	     "specified in the suite ('use_slurm_default')"
+    )
+    slurm_grp.add_argument(
+        '--no-slurm',
+        action="store_true",
+        help="Do not use the SLURM queuing system. This overwrite the default value "\
+	     "specified in the suite ('use_slurm_default')"
     )
     slurm_grp.add_argument(
         '--partition',
@@ -523,7 +522,8 @@ if __name__ == "__main__":
                     continue
                 slurm_id = job.get('slurm_id', None)
                 if slurm_id is None or (job['status'] == 'failed' and args.restart):
-                    if args.slurm:#The user wants to use SLURM
+                    #The user wants to use SLURM
+                    if not args.no_slurm and (args.slurm or run.get('use_slurm_default',False)):
                         nnodes = run['envs'].get('BH_SLURM_NNODES', 1)
                         slurm_run(job, nnodes, queue=None)
                     else:

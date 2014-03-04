@@ -40,10 +40,10 @@ python = {
 
 python_no_proxy = {
     'bridges':  [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
-    'managers': [('cluster8',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
+    'managers': [('cluster',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
     'engines':  [('cpu', 'cpu', None)],
-    'scripts':  python_script
+    'scripts':  python_script,
+    'use_slurm_default': True,
 }
 
 suites = [python,python_no_proxy]
-
