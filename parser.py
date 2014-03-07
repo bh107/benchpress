@@ -19,6 +19,7 @@ import pprint
 import json
 import sys
 import os
+import math
 import re
 
 tokens = [
@@ -43,6 +44,16 @@ def variance(elapsed):
     x_avg = avg(elapsed)
 
     return avg([abs(x - x_avg)**2 for x in elapsed])
+    
+def standard_deviation(elapsed):
+    """Compute the standard deviation within the samples."""
+    count = len(elapsed)
+    if (count<2):
+        return 0.0
+
+    x_avg = avg(elapsed)
+
+    return math.sqrt(avg([abs(x - x_avg)**2 for x in elapsed]))
 
 def from_str(results, wc=False):
     results = json.loads(results)['runs']

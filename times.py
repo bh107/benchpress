@@ -3,7 +3,8 @@ import argparse
 import pprint
 import json
 
-from parser import from_file, from_str, avg, variance
+from parser import from_file, from_str, avg
+from parser import standard_deviation as std
 
 def raw(results):
     pprint.pprint(results)
@@ -17,7 +18,7 @@ def times(results):
         if 'elapsed' not in res or len(res['elapsed']) < 1:
             print "N/A"
         else:
-            print res["elapsed"],"%f (%f) %d"%(avg(res["elapsed"]), variance(res["elapsed"]), len(res['elapsed']))
+            print res["elapsed"],"%f (%f) %d"%(avg(res["elapsed"]), std(res["elapsed"]), len(res['elapsed']))
 
 def main():
     printers = {'raw':raw, 'times':times, 'parsed': parsed}
