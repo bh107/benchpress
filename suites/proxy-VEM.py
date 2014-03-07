@@ -1,4 +1,6 @@
-managers = [('proxy', 'proxy', '{bridge}', None)]
+managers = [\
+           ('proxy', 'proxy', '{bridge}', None),
+]
 
 engines = [\
            ('sleep    0ms', 'cpu',  {'BH_VEM_PROXY_SLEEP':0}),
@@ -30,6 +32,12 @@ python_script = [\
                  ('Black Scholes 100m', 'black_scholes',  '--size=100000000*10'),
 ]
 
+python_script = [\
+    		 ('N-body  5k',        'nbody',          '--size=5000*10'),
+    		 ('Heat Equation  5k', 'heat_equation',  '--size=5000*5000*10'),
+                 ('Black Scholes   1m', 'black_scholes',  '--size=1000000*10'),
+]
+
 python = {
     'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': managers,
@@ -40,10 +48,29 @@ python = {
 
 python_no_proxy = {
     'bridges':  [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
-    'managers': [('cluster8',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
+    'managers': [('cluster',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
     'engines':  [('cpu', 'cpu', None)],
-    'scripts':  python_script
+    'scripts':  python_script,
+    'use_slurm_default': True,
+}
+
+python_viz = {
+    'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'managers':[('proxyViz', 'proxy', '{bridge} --visualize', None)],
+    'engines': engines,
+    'scripts': python_script,
+    'pre-hook': 'sbatch -p octuplets --nodes 8 hooks/proxy-VEM-pre-hook.sh'
+}
+python_viz_no_proxy = {
+    'bridges':  [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'managers': [('clusterViz',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} --visualize : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
+    'engines':  [('cpu', 'cpu', None)],
+    'scripts':  python_script,
+    'use_slurm_default': True,
 }
 
 suites = [python,python_no_proxy]
+#suites = [python_viz,python_viz_no_proxy]
+
+
 
