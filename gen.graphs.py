@@ -31,18 +31,13 @@ hatches = [
 ]
 
 def group(data, key, warmups):
-    """
-    Group the dataset by benchmark and 'label'::
-        results[script][label] = {
-            'avg': [],
-            'var': [],
-            'wup': [],
-            'size': []
-        }
-    """
 
     res = []
     for script, backend, manager, engine, sample in data:
+
+        if len(sample[key]) == 0:
+            print "Ignoring: %s (%s, %s, %s)" % (script, backend, manager, engine)
+            continue
 
         if warmups >= len(sample[key]):
             raise Exception("You have indicated more warmups than samples+1: "
@@ -105,7 +100,6 @@ def ordering(data, order=None):
     """Order a data-set, switch from dict to list."""
 
     ordered_data = {}
-
     default_order = []      # Default order
     for script in data:
         for label in data[script]:
@@ -132,10 +126,23 @@ def main(args):
     else:
         normalized = grouped
 
-    ordered = ordering(normalized, args.order)      # And order / filter
+    #
+    #   This is bypass stuff
+    #
 
-    graph = args.graph_module(args.output, args.formats, args.postfix, 'Blabla', 'Threads', 'Speedup')
-    graph.render(ordered, args.order, args.baseline)
+    for format in args.formats:
+        if args.type == 'bypass_overhead':
+            graph = args.graph_module(
+                args.output, args.formats, args.postfix,
+                "overhead", 'Application', 'Slowdown'
+            )
+            graph.render(data, args.order, args.baseline)
+        else:
+            graph = args.graph_module(
+                args.output, [format], args.postfix,
+                'latency', 'Injected Latency (in ms)', 'Speeddown'
+            )
+            graph.render(grouped, args.order, args.baseline)
 
 if __name__ == "__main__":
 
@@ -172,8 +179,7 @@ if __name__ == "__main__":
         '--formats',
         default=['png'],
         nargs='+',
-        help="Output file-format(s) of the generated graph(s).",
-        choices=[ff for ff in formats]
+        help="Output file-format(s) of the generated graph(s)."
     )
     parser.add_argument(
         '--type',

@@ -16,8 +16,6 @@ class Cluster(Graph):
             self.graph_title = script
             self.prep()                         # Prep it / clear the drawing board
 
-            pprint.pprint(data)
-
             values = []
             for label, samples in data[script]:
                 N, P, T = re.search("N(\d+)P(\d+)T(\d+)", label).groups()
