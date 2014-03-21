@@ -131,7 +131,7 @@ def main(args):
     #
 
     for format in args.formats:
-        if args.type == 'bypass_overhead':
+        if args.type in ['bypass_overhead', 'bypass_bwo', 'bypass_bwd']:
             graph = args.graph_module(
                 args.output, args.formats, args.postfix,
                 "overhead", 'Application', 'Slowdown'

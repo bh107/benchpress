@@ -4,7 +4,7 @@ from parser import standard_deviation, avg
 def max_deviation(samples):
     return max(samples)-min(samples)
 
-class Bypass_overhead(Graph):
+class Bypass_bwo(Graph):
     """Basic plot of x,y values with lgnd and stuff."""
 
     def render(self, data, order=None, baseline=None, highest=None):
@@ -20,22 +20,22 @@ class Bypass_overhead(Graph):
         ]
 
         app_map = {
-            "Black Scholes 100m":   "Black Scholes",
-            "Heat Equation 25k":    "Heat Equation",
-            "N-body 25k":           "N-body",
-            "Shallow Water 25k":    "Shallow Water"
+            "Black Scholes  10m":   "Black Scholes",
+            "Heat Equation  5k":    "Heat Equation",
+            "N-body  5k":           "N-body",
+            "Shallow Water  5k":    "Shallow Water"
         }
 
         # In these setups
         setups = [
-            "With Proxy",
-            "Without Proxy"
+            "With Visualization",
+            "Without Visualization"
         ]
 
         # Map the key to a more understandable name
         setup_mapping = {
-            "numpy/cluster/cpu":        "Without Proxy",
-            "numpy/proxy/sleep    0ms": "With Proxy"
+            "numpy/proxyViz/sleep    0ms":  "With Visualization",
+            "numpy/proxy/sleep    0ms":     "Without Visualization",
         }
         
         # Now grab the above from data and create the data-set
@@ -49,6 +49,9 @@ class Bypass_overhead(Graph):
             app_m = app_map[app]
             datasets[app_m][setup]['elapsed'] = avg(sample['elapsed']) 
             datasets[app_m][setup]['std']     = standard_deviation(sample['elapsed']) * 2
+            #datasets[app_m][setup]['std']     = max_deviation(sample['elapsed']) 
+
+        # Dataset needed
 
         
         # Now this what we need to create the graph.
@@ -56,11 +59,11 @@ class Bypass_overhead(Graph):
         ind     = np.arange(N)  # the x locations for the groups
         width   = 0.35          # the width of the bars
 
-        with_proxy_means  = [datasets[app]['With Proxy']['elapsed'] for app in applications]
-        with_proxy_std    = [datasets[app]['With Proxy']['std'] for app in applications]
+        with_proxy_means  = [datasets[app]['With Visualization']['elapsed'] for app in applications]
+        with_proxy_std    = [datasets[app]['With Visualization']['std'] for app in applications]
 
-        without_proxy_means = [datasets[app]['Without Proxy']['elapsed'] for app in applications]
-        without_proxy_std = [datasets[app]['Without Proxy']['std'] for app in applications]
+        without_proxy_means = [datasets[app]['Without Visualization']['elapsed'] for app in applications]
+        without_proxy_std = [datasets[app]['Without Visualization']['std'] for app in applications]
 
         fig, ax = plt.subplots()
 
@@ -98,5 +101,5 @@ class Bypass_overhead(Graph):
         autolabel(rects1)
         autolabel(rects2)
         #plt.tight_layout()
-        self.to_file(self.graph_title)                # Spit them out to file
+        self.to_file('bandwidth_octuplets')                # Spit them out to file
 
