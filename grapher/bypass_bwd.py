@@ -35,7 +35,7 @@ class Bypass_bwd(Graph):
         # Map the key to a more understandable name
         setup_mapping = {
             "numpy/proxyVizDCSC/sleep    0ms":  "With Visualization",
-            "numpy/proxy/sleep    0ms":     "Without Visualization",
+            "numpy/proxyDCSC/sleep    0ms":     "Without Visualization",
         }
         
         # Now grab the above from data and create the data-set
@@ -50,9 +50,6 @@ class Bypass_bwd(Graph):
             datasets[app_m][setup]['elapsed'] = avg(sample['elapsed']) 
             datasets[app_m][setup]['std']     = standard_deviation(sample['elapsed']) * 2
 
-        # Dataset needed
-
-        
         # Now this what we need to create the graph.
         N       = len(datasets.keys())
         ind     = np.arange(N)  # the x locations for the groups

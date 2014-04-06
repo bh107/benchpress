@@ -136,16 +136,16 @@ class Bypass_latency(Graph):
         exp_labels = {
             'overhead':             'Proxy Overhead',
             'octuplets_absolute':   'Elapsed wall-clock as a function of latency - Octuplets',
-            'octuplets_relative':   'Speeddown as a function network latency - Octuplets',
+            'octuplets_relative':   'Slowdown as a function network latency - Octuplets',
             'dcsc_absolute':        'Elapsed wall-clock as a function of latency - DCSC',
-            'dcsc_relative':        'Speeddown as a function network latency - DCSC'
+            'dcsc_relative':        'Slowdown as a function network latency - DCSC'
         }
         y_labels = {
             'overhead':             'Elapsed wall-clock time in seconds.',
             'octuplets_absolute':   'Elapsed wall-clock time in seconds.',
-            'octuplets_relative':   'Speeddown',
+            'octuplets_relative':   'Slowdown',
             'dcsc_absolute':        'Elapsed wall-clock time in seconds.',
-            'dcsc_relative':        'Speeddown'
+            'dcsc_relative':        'Slowdown'
         }
         app_map = {
             "Black Scholes 100m":   "Black Scholes",
