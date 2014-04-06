@@ -14,9 +14,9 @@ numpy = {
 }
 
 bohrium = {
-    'bridges':  [('Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
-    'managers': [('node',   'node', '',  None) ],
-    'engines':  [('static', 'cpu',  None)],
+    'bridges':  [('Bohrium',    'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'managers': [('node',       'node', '',  None)],
+    'engines':  [('cpu',        'cpu',  None)],
     'scripts':  scripts
 }
 
