@@ -16,7 +16,10 @@ numpy = {
 bohrium = {
     'bridges':  [('Bohrium',    'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',       'node', '',  None)],
-    'engines':  [('cpu',        'cpu',  None)],
+    'engines':  [
+        ('cpu_fused',   'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "1"}),
+        ('cpu_sij',     'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "0"}),
+    ],
     'scripts':  scripts
 }
 
