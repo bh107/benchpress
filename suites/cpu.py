@@ -1,54 +1,37 @@
 from default import *
 
-scripts   = [
-    ('Black Scholes',        'black_scholes',  '--size=1000000*10'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=20000*1000*10'),
-    ('KNN',                  'knn',            '--size=2000000*10*3'),
-    ('Monte Carlo PI',       'mc',              '--size=1000000*100'),
-    ('NBody',                'nbody',           '--size=300*300'),
-    ('Shallow Water',        'shallow_water',   '--size=1000*1000*10'),
+scripts = [
+    ('Jacobi Stencil',  'jacobi_stencil',   '--size=8000*8000*10'),
+    ('Black Scholes',   'black_scholes',    '--size=4000000*5'),
+    ('KNN',             'knn',              '--size=15000000*10*3'),
+    ('Monte Carlo PI',  'mc',               '--size=10000000*10'),
+    ('NBody',           'nbody',            '--size=4000*5'),
+    ('Shallow Water',   'shallow_water',    '--size=1500*1500*5'),
 ]
 
-python = {
-    'bridges':  [('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+managers= [('node', 'node', '', None)]
+
+numpy = {
+    'bridges':  [('NumPy/Native', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts,
 }
 
-bohrium_taskset = {
-    'bridges':  [
-        ('bh-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
-    ],
-    'managers': [
-        ('node',  'node', '',  None),
-    ],
-    'engines':   [
-        ('naive',    'cpu',     {'BH_CORE_VCACHE_SIZE': '0', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('naive+vc', 'cpu',     {'BH_CORE_VCACHE_SIZE': '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),
-        ('tiling',   'tiling',  {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('tiling+vc','tiling',  {'BH_CORE_VCACHE_SIZE': '10'}),
-        ('fl',       'cpu',     {'BH_CORE_VCACHE_SIZE' : '0', 'BH_VE_CPU_TRAVERSAL': 'fruit_loops'}),
-        ('fl+vc',    'cpu',     {'BH_CORE_VCACHE_SIZE' : '10', 'BH_VE_CPU_TRAVERSAL': 'fruit_loops'}),
-    ],
-    'scripts':   scripts
-}
-
 bohrium = {
-    'bridges':  [('bh-numpy-notaskset', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
-    'managers': [
-        ('node',  'node', '',  None),
-    ],
-    'engines': [
-        ('mcore',       'mcore',    {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('mcore+vc',    'mcore',    {'BH_CORE_VCACHE_SIZE': '10'}),
-        ('dynamite',    'dynamite', {'BH_CORE_VCACHE_SIZE': '0'}),
-        ('dynamite+vc', 'dynamite', {'BH_CORE_VCACHE_SIZE': '10'}),
+    'bridges':  [('NumPy/Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'managers': [('node',  'node', '',  None) ],
+    'engines':  [
+        ('omp1',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '1'}),
+        ('omp2',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '2'}),
+        ('omp4',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '4'}),
+        ('omp8',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '8'}),
+        ('omp16',   'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '16'}),
+        ('omp32',   'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '32'}),
     ],
     'scripts':  scripts
 }
 
 suites = [
-    python,
     bohrium,
-    bohrium_taskset
+    numpy
 ]
 
