@@ -298,7 +298,7 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
 
         job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
 
-        job += "\n#SBATCH -J %s\n"%setup['script']                #Write Slurm parameters
+        job += "\n#SBATCH -J '%s'\n"%setup['script_alias']      #Write Slurm parameters
         job += "#SBATCH -o /tmp/bh-slurm-%%j.out\n"
         job += "#SBATCH -e /tmp/bh-slurm-%%j.err\n"
         if partition is not None:
