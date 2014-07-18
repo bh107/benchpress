@@ -1,12 +1,34 @@
 from default import *
 
 scripts = [
-    ('Jacobi Stencil',  'jacobi_stencil',   '--size=8000*8000*10'),
-    ('Black Scholes',   'black_scholes',    '--size=4000000*5'),
-    ('KNN',             'knn',              '--size=15000000*10*3'),
-    ('Monte Carlo PI',  'mc',               '--size=10000000*10'),
-    ('NBody',           'nbody',            '--size=4000*5'),
-    ('Shallow Water',   'shallow_water',    '--size=1500*1500*5'),
+    #('LMM Swaption',            'LMM_swaption_vec',         '--size=1000*1000'),
+    ('Black Scholes',           'black_scholes',            '--size=2000000*5'),
+    #('Convolution',             'convolve',                 '--size=10'),
+    #('Convolution 2D',          'convolve_2d',              '--size=10'),
+    #('Convolution 3D',          'convolve_3d',              '--size=10'),
+    ('Convolution Sep',         'convolve_seperate_std',    '--size=11*11'),
+    ('Game of Life',            'gameoflife',               '--size=501*500*5'),
+    ('Gauss Elimination',       'gauss',                    '--size=100'),
+    ('Heat Equation',           'heat_equation',            '--size=100*100*2'),
+    #('Jacobi',                  'jacobi',                   '--size=2'),
+    ('Jacobi Fixed I',          'jacobi_fixed',             '--size=10*10'),
+    ('Jacobi Stencil',          'jacobi_stencil',           '--size=8000*8000*10'),
+    #('kNN',                     'k_nearest_neighbor',       '--size=100'),
+    ('kNN Naive 1',             'knn.naive',                '--size=100*10*2'),
+    #('kNN Naive 2',             'knn',                      '--size=100*10*2'),
+    #('Lattice Boltzmann D2Q9',  'lattice_boltzmann_D2Q9',   '--size=100*100*10'),
+    ('Lattice Boltzmann 3D',    'lbm.3d',                   '--size=10*10*10*2'),
+    ('LU Factorization',        'lu',                       '--size=10'),
+    ('Monte Carlo PI',          'mc',                       '--size=10000000*10'),
+    ('Matrix Multiplication',   'mxmul',                    '--size=10'),
+    #('nbody',                   'nbody',                    '--size=10*10'),
+    ('ND Stencil',              'ndstencil',                '--size=10*10*3'),
+    ('27 Point Stencil',        'point27',                  '--size=10*10'),
+    ('Pricing American',        'pricing',                  '--size=100'),
+    ('Shallow Water',           'shallow_water',            '--size=1500*1500*5'),
+    ('SOR',                     'sor',                      '--size=10*10*2'),
+    ('Synthetic',               'synth',                    '--size=10*10'),
+    #('Wireworld',               'wireworld',                '--size=10*10')
 ]
 
 managers= [('node', 'node', '', None)]
