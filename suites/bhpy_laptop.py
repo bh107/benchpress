@@ -42,7 +42,7 @@ python = {
 }
 
 suites = [
-    #python
+    python,
     python_bh
 ]
 
