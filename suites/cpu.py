@@ -7,19 +7,19 @@ scripts = [
     #('Convolution 2D',          'convolve_2d',              '--size=10'),
     #('Convolution 3D',          'convolve_3d',              '--size=10'),
     #('Convolution Sep',         'convolve_seperate_std',    '--size=11*11'),
-    ('Game of Life',            'gameoflife',               '--size=5000*5000*5'),
-    ('Gauss Elimination',       'gauss',                    '--size=1000'),
-    ('Heat Equation',           'heat_equation',            '--size=5000*5000*5'),
+    ('Game of Life',            'gameoflife',               '--size=10000*10000*10'),
+    ('Gauss Elimination',       'gauss',                    '--size=2000'),
+    ('Heat Equation',           'heat_equation',            '--size=10000*10000*10'),
     #('Jacobi',                  'jacobi',                   '--size=2'),
-    ('Jacobi Fixed I',          'jacobi_fixed',             '--size=5000*5'),
-    ('Jacobi Stencil',          'jacobi_stencil',           '--size=8000*8000*10'),
+    ('Jacobi Fixed I',          'jacobi_fixed',             '--size=10000*10'),
+    ('Jacobi Stencil',          'jacobi_stencil',           '--size=10000*10000*10'),
     #('kNN',                     'k_nearest_neighbor',       '--size=100'),
-    ('kNN Naive 1',             'knn.naive',                '--size=3000000*20*5'),
+    ('kNN Naive 1',             'knn.naive',                '--size=20000000*20*10'),
     #('kNN Naive 2',             'knn',                      '--size=100*10*2'),
     #('Lattice Boltzmann D2Q9',  'lattice_boltzmann_D2Q9',   '--size=100*100*10'),
     ('Lattice Boltzmann 3D',    'lbm.3d',                   '--size=150*150*150*10'),
     ('LU Factorization',        'lu',                       '--size=2000'),
-    ('Monte Carlo PI',          'mc',                       '--size=20000000*10'),
+    ('Monte Carlo PI',          'mc',                       '--size=50000000*10'),
     ('Matrix Multiplication',   'mxmul',                    '--size=2000'),
     #('nbody',                   'nbody',                    '--size=10*10'),
     ('1D Stencil',              'ndstencil',                '--size=27*10*1'),
@@ -44,18 +44,25 @@ bohrium = {
     'bridges':  [('NumPy/Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',  'node', '',  None) ],
     'engines':  [
-        ('omp1',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '1'}),
-        ('omp2',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '2'}),
-        ('omp4',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '4'}),
-        ('omp8',    'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '8'}),
-        ('omp16',   'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '16'}),
-        ('omp32',   'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '32'}),
+        ('fusion_01',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1', 'OMP_NUM_THREADS': '1'}),
+        ('fusion_02',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1', 'OMP_NUM_THREADS': '2'}),
+        ('fusion_04',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1', 'OMP_NUM_THREADS': '4'}),
+        ('fusion_08',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1', 'OMP_NUM_THREADS': '8'}),
+        ('fusion_16',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1', 'OMP_NUM_THREADS': '16'}),
+        ('fusion_32',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1', 'OMP_NUM_THREADS': '32'}),
+
+        ('omp_01',  'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '1'}),
+        ('omp_02',  'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '2'}),
+        ('omp_04',  'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '4'}),
+        ('omp_08',  'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '8'}),
+        ('omp_16',  'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '16'}),
+        ('omp_32',  'cpu', {'BH_VE_CPU_JIT_FUSION': '0', 'OMP_NUM_THREADS': '32'}),
     ],
     'scripts':  scripts
 }
 
 suites = [
-    bohrium,
-    numpy
+    numpy,
+    bohrium
 ]
 
