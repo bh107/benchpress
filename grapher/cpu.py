@@ -1,3 +1,4 @@
+import logging
 from graph import *
 import pprint
 
@@ -36,10 +37,20 @@ class Cpu(Graph):
         bsl_enable  = True
         bsl_engine  = 'omp_01'
         bsl_elapsed = {}
-        
+
         for script, bridge, node, engine, samples in raw:
+            ident       = "%s, %s, %s, %s" % (script, bridge, node, engine)
+            elapsed     = samples['elapsed']
+            nsamples    = len(elapsed)
+
+            # Missing samples
+            if nsamples < 1:
+                logging.error("Dataset [%s]: Missing samples" % ident)
+
+            # Baseline
             if bsl_engine == engine and script not in bsl_elapsed:
-                elapsed = samples['elapsed']
+                if nsamples < 1:
+                    logging.error("Dataset [%s]: Cannot do baseline without baseline sample." % ident)
                 bsl_elapsed[script] = sum(elapsed)/float(len(elapsed))
 
         #
@@ -137,3 +148,5 @@ class Cpu(Graph):
 
             tight_layout()
             self.to_file(script)                # Spit them out to file
+
+
