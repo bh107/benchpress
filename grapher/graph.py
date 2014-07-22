@@ -5,6 +5,26 @@ from pylab import *
 import os
 import re
 
+colors  = [
+    "#B3E2CD", "#FDCDAC", "#CBD5E8",
+    "#F4CAE4", "#E6F5C9", "#FFF2AE",
+    "#F1E2CC", "#CCCCCC",
+    "#B3E2CD", "#FDCDAC", "#CBD5E8",
+    "#F4CAE4", "#E6F5C9", "#FFF2AE",
+    "#F1E2CC", "#CCCCCC",
+    "#B3E2CD", "#FDCDAC", "#CBD5E8",
+    "#F4CAE4", "#E6F5C9", "#FFF2AE",
+    "#F1E2CC", "#CCCCCC",
+]
+
+hatches = [
+    "\\", "+", "o", "/", "-", "O",
+    "\\", "+", "o", "/", "-", "O",
+    "\\", "+", "o", "/", "-", "O",
+    "\\", "+", "o", "/", "-", "O",
+    "\\", "+", "o", "/", "-", "O",
+]
+
 class Graph:
     """
     Baseclass for rendering Matplotlib graphs.

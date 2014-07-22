@@ -97,11 +97,11 @@ def meta(src_dir, suite):
         'started':  str(datetime.now()),
         'ended':    None,
         'hw':       {
-            'cpu':  open('/proc/cpuinfo','r').read(),
+            'cpu':  open('/proc/cpuinfo','r').read() if os.path.isfile('/proc/cpuinfo') else "Unknown",
             'list': hw if hw else 'Unknown',
         },
         'sw':   {
-            'os':       open('/proc/version','r').read(),
+            'os':       open('/proc/version','r').read() if os.path.isfile('/proc/cpuinfo') else 'Probably MacOSX',
             'python':   python_ver if python_ver else 'Unknown',
             'gcc':      gcc_ver if gcc_ver else 'Unknown',
             'clang':    clang_ver if clang_ver else 'Unknown',
