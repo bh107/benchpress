@@ -296,6 +296,9 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
         for env_key, env_value in setup['envs'].iteritems():      #Write environment variables
             job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
 
+        for env_key, env_value in setup['envs_overwrite'].iteritems(): #Write forced environment variables
+            job += 'export %s="%s"\n'%(env_key,env_value)
+
         job += 'export BH_CONFIG=%s\n'%tmp_config_name          #Always setting BH_CONFIG
 
         job += "\n#SBATCH -J '%s'\n"%setup['script_alias']      #Write Slurm parameters
@@ -364,12 +367,13 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                         confparser.write(bh_config)         # And write it to a string buffer
 
                         envs = os.environ.copy()            # Populate environment variables
+                        envs_overwrite = {}
                         if engine_env is not None:
-                            envs.update(engine_env)
+                            envs_overwrite.update(engine_env)
                         if manager_env is not None:
-                            envs.update(manager_env)
+                            envs_overwrite.update(manager_env)
                         if bridge_env is not None:
-                            envs.update(bridge_env)
+                            envs_overwrite.update(bridge_env)
 
                         bridge_cmd = bridge_cmd.replace("{script}", script)
                         bridge_cmd = bridge_cmd.replace("{args}", script_args)
@@ -387,6 +391,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                                'manager':manager,
                                'engine':engine,
                                'envs':envs,
+                               'envs_overwrite':envs_overwrite,
                                'cmd': bridge_cmd.split(" "),
                                'cwd':src_root,
                                'pre-hook': benchmark.get('pre-hook', None),
@@ -525,6 +530,7 @@ if __name__ == "__main__":
                     #The user wants to use SLURM
                     if not args.no_slurm and (args.slurm or run.get('use_slurm_default',False)):
                         nnodes = run['envs'].get('BH_SLURM_NNODES', 1)
+                        nnodes = run['envs_overwrite'].get('BH_SLURM_NNODES', nnodes)
                         slurm_run(job, nnodes, queue=None)
                     else:
                         #The user wants local execution

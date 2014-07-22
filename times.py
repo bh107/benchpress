@@ -20,8 +20,16 @@ def times(results):
         else:
             print res["elapsed"],"%f (%f) %d"%(avg(res["elapsed"]), std(res["elapsed"]), len(res['elapsed']))
 
+def csv(results):
+    i = 1
+    for script, bridge, manager, engine, res in from_str(results):
+        print "%d, %s, %s, %s, %s, %f, %f"%(i, script, bridge, manager, 
+		engine, avg(res["elapsed"]), std(res["elapsed"]))
+        i += 1
+    
+
 def main():
-    printers = {'raw':raw, 'times':times, 'parsed': parsed}
+    printers = {'raw':raw, 'times':times, 'parsed': parsed, 'csv': csv}
 
     parser = argparse.ArgumentParser()
     parser.add_argument("results", help="JSON file containing results")
