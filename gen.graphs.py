@@ -10,25 +10,7 @@ from parser import from_file, avg, variance
 
 formats = ['png', 'pdf', 'eps']
 
-colors  = [
-    "#B3E2CD", "#FDCDAC", "#CBD5E8",
-    "#F4CAE4", "#E6F5C9", "#FFF2AE",
-    "#F1E2CC", "#CCCCCC",
-    "#B3E2CD", "#FDCDAC", "#CBD5E8",
-    "#F4CAE4", "#E6F5C9", "#FFF2AE",
-    "#F1E2CC", "#CCCCCC",
-    "#B3E2CD", "#FDCDAC", "#CBD5E8",
-    "#F4CAE4", "#E6F5C9", "#FFF2AE",
-    "#F1E2CC", "#CCCCCC",
-]
 
-hatches = [
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-]
 
 def group(data, key, warmups):
 
@@ -118,31 +100,16 @@ def ordering(data, order=None):
 
 def main(args):
 
-    data    = from_file(args.results)               # Get data from json-file
-    grouped = group(data, 'elapsed', args.warmups)  # Group by benchmark and "label"
-
-    if args.baseline:                               # Normalize by "baseline"
-        normalized = normalize(grouped, 'elapsed', args.baseline)
-    else:
-        normalized = grouped
-
-    #
-    #   This is bypass stuff
-    #
+    data = from_file(args.results)               # Get data from json-file
 
     for format in args.formats:
-        if args.type in ['bypass_overhead', 'bypass_bwo', 'bypass_bwd']:
-            graph = args.graph_module(
-                args.output, args.formats, args.postfix,
-                "overhead", 'Application', 'Slowdown'
-            )
-            graph.render(data, args.order, args.baseline)
-        else:
-            graph = args.graph_module(
-                args.output, [format], args.postfix,
-                'latency', 'Injected Latency (in ms)', 'Speeddown'
-            )
-            graph.render(grouped, args.order, args.baseline)
+        graph = args.graph_module(
+            args.output, args.formats, args.postfix,
+            graph_title = "Something",
+            xaxis_label = "Threads",
+            yaxis_label = "Wall-Clock in Seconds"
+        )
+        graph.render(data, args.order, args.baseline)
 
 if __name__ == "__main__":
 
@@ -216,5 +183,4 @@ if __name__ == "__main__":
     args.graph_module = graph_types[args.type]
 
     main(args)
-
 
