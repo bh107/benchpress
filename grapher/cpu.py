@@ -21,6 +21,19 @@ class Cpu(Graph):
         engines = set([])
         data = {}
 
+        #
+        # Grab the Baselines
+        bsl_enable  = True
+        bsl_engine  = 'omp_01'
+        bsl_elapsed = {}
+        
+        for script, bridge, node, engine, samples in raw:
+            if bsl_engine == engine and script not in bsl_elapsed:
+                elapsed = samples['elapsed']
+                bsl_elapsed[script] = sum(elapsed)/float(len(elapsed))
+
+        #
+        # Extract remaining
         for script, bridge, node, engine, samples in raw:
             scripts.add(script)
             engines.add(engine)
@@ -29,7 +42,6 @@ class Cpu(Graph):
                 data[script] = {}
 
             data[script][engine] = sum(samples["elapsed"]) / len(samples["elapsed"])
-
         scripts = list(scripts); scripts.sort()
         engines = list(engines); engines.sort()
 
@@ -42,10 +54,17 @@ class Cpu(Graph):
         for script in scripts:
             plots[script] = {}
             for engine in engines:
+                
+                # Compute relative value when using a baseline
+                if bsl_enable:
+                    value = bsl_elapsed[script] / data[script][engine]
+                else:
+                    value = data[script][engine]
+
                 if engine == 'N/A':
                     plots[script][engine_lbls[engine]] = zip(
                         [1,2,4,8,16,32],
-                        [data[script][engine]]*6
+                        [value]*6
                     )
                 else:
                     label, nr = engine.split('_')
@@ -56,7 +75,7 @@ class Cpu(Graph):
 
                     plots[script][label].append((
                         int(nr),
-                        data[script][engine])
+                        value)
                     )
 
         #
@@ -64,7 +83,11 @@ class Cpu(Graph):
         # Where "numbers" are thread-crount and  "time" is elapsed wall-clock.
         #
 
-        linear = [2**x for x in range(0, max_threads)]  # used by xticks...
+        linear = [2**x for x in range(0, max_threads+1)]
+        linear = [0, 1,2,4,8,16,32]
+
+        ideal_v = [1,2,4,8,16,32]
+        print linear
         for script in plots:
             self.graph_title = script
             self.prep()
@@ -81,15 +104,21 @@ class Cpu(Graph):
                 legends['plots'].append(p)
                 legends['legends'].append(engine_lbl)
 
+            if bsl_enable:
+                # The ideal speedup
+                plot(ideal_v, ideal_v, "--")
+
+                ylim(ymin=0.0, ymax=max_threads*+1)
+                yticks(linear, linear)
+                yscale("log")
+
+                self.yaxis_label="In relation to '%s'" % bsl_engine
+
             #
             # Scale x-axis with a neat border
-            xscale("log")   
+            xscale("log")
             xticks(linear, linear)
-            xlim(xmin=min_threads*0.85, xmax=max_threads*1.25)
-
-            #yscale("log")
-            #yticks(linear, linear)
-            #ylim(ymin=min_threads*0.85, ymax=max_threads*1.25)
+            xlim(xmin=0, xmax=max_threads)
 
             #
             # Plot-legends and their positions
