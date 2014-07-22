@@ -1,12 +1,22 @@
 from graph import *
 import pprint
 
+def brange(begin, end):
+    c = i = begin
+    while i <= end:
+        yield i
+        i = 2**c
+        c += 1
+
 class Cpu(Graph):
     """Create a graph that illustrates scalabiltity."""
 
     def render(self, raw, processed=None, params=None):
-        min_threads = 1
-        max_threads = 32
+
+        min_threads     = 1
+        max_threads     = 32
+        linear          = list(brange(min_threads, max_threads))
+        plot_count      = len(linear)
 
         engine_lbls = {
             'N/A':      'NumPy',
@@ -63,8 +73,8 @@ class Cpu(Graph):
 
                 if engine == 'N/A':
                     plots[script][engine_lbls[engine]] = zip(
-                        [1,2,4,8,16,32],
-                        [value]*6
+                        linear,
+                        [value]*plot_count
                     )
                 else:
                     label, nr = engine.split('_')
@@ -82,12 +92,6 @@ class Cpu(Graph):
         # Data is stored as [(1, time), (2, time), (4, time), ... , (32, time)]
         # Where "numbers" are thread-crount and  "time" is elapsed wall-clock.
         #
-
-        linear = [2**x for x in range(0, max_threads+1)]
-        linear = [0, 1,2,4,8,16,32]
-
-        ideal_v = [1,2,4,8,16,32]
-        print linear
         for script in plots:
             self.graph_title = script
             self.prep()
@@ -106,19 +110,19 @@ class Cpu(Graph):
 
             if bsl_enable:
                 # The ideal speedup
-                plot(ideal_v, ideal_v, "--")
+                plot(linear, linear, "--")
 
-                ylim(ymin=0.0, ymax=max_threads*+1)
+                yscale("symlog")
                 yticks(linear, linear)
-                yscale("log")
+                ylim(ymin=min_threads*0.15, ymax=max_threads*1.5)
 
                 self.yaxis_label="In relation to '%s'" % bsl_engine
 
             #
             # Scale x-axis with a neat border
-            xscale("log")
+            xscale("symlog")
             xticks(linear, linear)
-            xlim(xmin=0, xmax=max_threads)
+            xlim(xmin=min_threads*0.15, xmax=max_threads*1.5)
 
             #
             # Plot-legends and their positions
@@ -133,41 +137,3 @@ class Cpu(Graph):
 
             tight_layout()
             self.to_file(script)                # Spit them out to file
-
-        """
-        for script in data:
-
-            if baseline:
-                self.yaxis_label='In relation to "%s"' % baseline
-
-            self.graph_title = script
-            self.prep()                         # Prep it / clear the drawing board
-
-            values = []
-            for label, samples in data[script]:
-                if not 'omp' in label:
-                    continue
-
-                lbl, threads = label.split('omp')
-                values.append((int(threads), samples['elapsed']['avg'].pop()))
-            values.sort()
-
-            sizes   = []
-            speedup = []
-            for nthreads, times in values:
-                sizes.append(nthreads)
-                speedup.append(times)
-
-            linear = [2**x for x in range(0, len(sizes))]
-            xscale("log")   # Scale with a neat border
-            yscale("log")
-            xticks(linear, linear)
-            xlim(xmin=min(linear)*0.85, xmax=max(linear)*1.25)
-            yticks(linear, linear)
-            ylim(ymin=min(linear)*0.85, ymax=max(linear)*1.25)
-
-            plot(linear, linear)
-            plot(linear, speedup)
-
-            self.to_file(script)                # Spit them out to file
-        """
