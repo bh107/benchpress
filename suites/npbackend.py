@@ -1,19 +1,35 @@
 
 scripts   = [
-    ('Heat 2D',       'heat_equation',  '--size=1000*1000*10'),
-    ('Shallow Water', 'shallow_water',  '--size=100*100*10'),
+    ('Heat 2D',            'heat_equation',      '--size=3000*3000*100'),
+    ('snakes_and_ladders', 'snakes_and_ladders', '--size=1000*10'),
+    ('Shallow Water',      'shallow_water',      '--size=2000*2000*100'),
 ]
 
 PREFIX = 'python benchmark/Python/{script}.py {args} ' 
 
-numpy_org = {
+backends = {
     'bridges': [
-	('NumPy Original',   PREFIX + '--bohrium=False', None),
-	('npbacked-numpy',   PREFIX + '--bohrium=True', {'BHPY_BACKEND':'numpy'}),
-	('npbacked-numexpr', PREFIX + '--bohrium=True', {'BHPY_BACKEND':'numexpr', 'OMP_NUM_THREADS':4}),
-	('npbacked-pygpu',   PREFIX + '--bohrium=True', {'BHPY_BACKEND':'pygpu'}),
+	('NumPy Original', PREFIX+'--bohrium=False', None),
+	('npbacked-numpy (vcache=0)', PREFIX+'--bohrium=True',{'BHPY_BACKEND':'numpy','VCACHE_SIZE':0}),
+	('npbacked-numpy (vcache=10)',PREFIX+'--bohrium=True',{'BHPY_BACKEND':'numpy','VCACHE_SIZE':10}),
+	('npbacked-numexpr (vcache=0)', PREFIX+'--bohrium=True',\
+			{'OMP_NUM_THREADS':8, 'BHPY_BACKEND':'numexpr','VCACHE_SIZE':0}),
+	('npbacked-numexpr (vcache=10)',PREFIX+'--bohrium=True',\
+			{'OMP_NUM_THREADS':8,'BHPY_BACKEND':'numexpr','VCACHE_SIZE':10}),
+	('npbacked-pygpu (vcache=0)', PREFIX+'--bohrium=True',{'BHPY_BACKEND':'pygpu','VCACHE_SIZE':0}),
+	('npbacked-pygpu (vcache=10)',PREFIX+'--bohrium=True',{'BHPY_BACKEND':'pygpu','VCACHE_SIZE':10}),
+	('npbacked-pygpu-no-matmul (vcache=0)',PREFIX+'--bohrium=True',\
+			{'BHPY_BACKEND':'pygpu','NO_MATMUL':1,'VCACHE_SIZE':0}),
+	('npbacked-pygpu-no-matmul (vcache=10)',PREFIX+'--bohrium=True',\
+			{'BHPY_BACKEND':'pygpu','NO_MATMUL':1,'VCACHE_SIZE':10}),
 	       ],
     'scripts':  scripts
 }
 
-suites = [numpy_org]
+bohriums = {
+    'bridges': [('Bohrium', PREFIX+'--bohrium=True', None)],
+    'engines': [('GPU', 'gpu', None), ('CPU', 'cpu', {'OMP_NUM_THREADS':8})],
+    'scripts': scripts
+}
+
+suites = [backends, bohriums]
