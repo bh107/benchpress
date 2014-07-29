@@ -25,7 +25,7 @@ hatches = [
     "\\", "+", "o", "/", "-", "O",
 ]
 
-class Graph:
+class Graph(object):
     """
     Baseclass for rendering Matplotlib graphs.
     Does alot of the annoying work, just override the render(...) method,
