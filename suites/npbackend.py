@@ -1,8 +1,9 @@
 
 scripts   = [
-    ('Heat 2D',            'heat_equation',      '--size=3000*3000*100'),
-    ('snakes_and_ladders', 'snakes_and_ladders', '--size=1000*10'),
-    ('Shallow Water',      'shallow_water',      '--size=2000*2000*100'),
+    ('Heat 2D',                      'heat_equation',      '--size=3000*3000*100'),
+    ('Shallow Water',                'shallow_water',      '--size=2000*2000*100'),
+    ('snakes_and_ladders',           'snakes_and_ladders', '--size=1000*10'),
+    ('snakes_and_ladders_no_matmul', 'snakes_and_ladders', '--size=1000*10 --no-extmethods'),
 ]
 
 PREFIX = 'python benchmark/Python/{script}.py {args} ' 
@@ -18,10 +19,6 @@ backends = {
 			{'OMP_NUM_THREADS':8,'BHPY_BACKEND':'numexpr','VCACHE_SIZE':10}),
 	('npbacked-pygpu (vcache=0)', PREFIX+'--bohrium=True',{'BHPY_BACKEND':'pygpu','VCACHE_SIZE':0}),
 	('npbacked-pygpu (vcache=10)',PREFIX+'--bohrium=True',{'BHPY_BACKEND':'pygpu','VCACHE_SIZE':10}),
-	('npbacked-pygpu-no-matmul (vcache=0)',PREFIX+'--bohrium=True',\
-			{'BHPY_BACKEND':'pygpu','NO_MATMUL':1,'VCACHE_SIZE':0}),
-	('npbacked-pygpu-no-matmul (vcache=10)',PREFIX+'--bohrium=True',\
-			{'BHPY_BACKEND':'pygpu','NO_MATMUL':1,'VCACHE_SIZE':10}),
 	       ],
     'scripts':  scripts
 }
