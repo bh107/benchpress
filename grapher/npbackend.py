@@ -9,27 +9,29 @@ class Npbackend(Graph):
 
         for s in set([script for script, bridge, vem, ve, r in data]):
 
-            self.prep()                         # Prep it / clear the drawing board
-            means = []
-            names = []
-
+            res = {}
             for script, bridge, vem, ve, r in data:
-                if script == s and bridge.find("vcache=0") == -1 and bridge.find("no-matmul") == -1:
-                    n = bridge.replace(" (vcache=10)", "")+ve
-                    n = n.replace("N/A", "")
-                    names.append(n)
-                    means.append(np.mean(r['elapsed']))
+                if script == s:
+                    res[bridge + ve] = (np.mean(r['elapsed']), np.std(r['elapsed'])*2)
 
-                    if n == 'NumPy Original':
-                        names = [names[-1]] + names[:-1]
-                        means = [means[-1]] + means[:-1]
+            means = []
+            stderr = []
+            for r in [res['NumPy OriginalN/A'],
+                      res['npbacked-numpy (vcache=10)N/A'],
+                      res['npbacked-numexpr (vcache=10)N/A'],
+                      res['npbacked-pygpu (vcache=10)N/A'],
+                      res['BohriumGPU'],
+                      res['BohriumCPU']]:
+                means.append(r[0])
+                stderr.append(r[1])
+            names = ['Native', 'NumPy', 'Numexpr', 'libgpuarray', 'Bohrium-GPU', 'Bohrium-CPU']
 
-            self.graph_title = s
+            self.graph_title = ""
             self.prep()                         # Prep it / clear the drawing board
             idx = np.arange(len(names))
-            bar(idx, means, align='center')
+            bar(idx, means, align='center', alpha=0.5, ecolor='black', yerr=stderr)
             xticks(idx, names)
-            setp(xticks()[1], rotation=90)
+            setp(xticks()[1], rotation=25)
             xlabel("")
 
             fig = gcf()
