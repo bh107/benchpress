@@ -19,12 +19,12 @@ class Npbackend(Graph):
             for r in [res['NumPy OriginalN/A'],
                       res['npbacked-numpy (vcache=10)N/A'],
                       res['npbacked-numexpr (vcache=10)N/A'],
+                      res['BohriumCPU'],
                       res['npbacked-pygpu (vcache=10)N/A'],
-                      res['BohriumGPU'],
-                      res['BohriumCPU']]:
+                      res['BohriumGPU']]:
                 means.append(r[0])
                 stderr.append(r[1])
-            names = ['Native', 'NumPy', 'Numexpr', 'libgpuarray', 'Bohrium-GPU', 'Bohrium-CPU']
+            names = ['Native', 'NumPy', 'Numexpr', 'Bohrium-CPU', 'libgpuarray', 'Bohrium-GPU']
 
             self.graph_title = ""
             self.prep()                         # Prep it / clear the drawing board
