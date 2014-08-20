@@ -336,17 +336,20 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
                           'script': job})
 
 
-def gen_jobs(uid, result_file, config, src_root, output, suite,
-             benchmarks, nrun, use_perf, use_time, partition, multi_jobs):
+def gen_jobs(uid, result_file, config, src_root, output, suite_file,
+             nrun, use_perf, use_time, partition, multi_jobs):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
-        'meta': meta(src_root, suite),
+        'meta': meta(src_root, suite_file.name),
         'runs': []
     }
 
+    #Lets import the suite file as a Python module
+    sys.path.append(os.path.abspath(os.path.dirname(suite_file.name)))
+    benchmarks = __import__(os.path.basename(suite_file.name)[:-3]).suites
 
-    print "Benchmark suite '%s'; results are written to: %s" % (suite, result_file.name)
+    print "Benchmark suite '%s'; results are written to: %s" % (suite_file.name, result_file.name)
     i=0
     for benchmark in benchmarks:
         for script_alias, script, script_args in benchmark['scripts']:
@@ -420,38 +423,42 @@ def gen_jobs(uid, result_file, config, src_root, output, suite,
                         bh_config.close()
                         write2json(result_file, results)
 
+def parser_bohrium_src(parser, path):
+    """Check that 'path' points to the Bohrium source dir"""
+    if os.path.isdir(path):
+        return os.path.abspath(path)
+    else:
+        parser.error("The path %s does not exist!"%path)
 
 if __name__ == "__main__":
 
-    bsuites = {}        # Load benchmark-suites from 'suites'
-    for name, m in ((module, __import__("suites.%s" % module)) for importer, module, _ in pkgutil.iter_modules(['suites'])):
-        bsuites[name] = m.__dict__[name].suites
-
     parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
     parser.add_argument(
-        'src',
-        help='Path to the Bohrium source-code.'
+        'bohrium_src',
+        help='Path to the Bohrium source-code.',
+        type=lambda x: parser_bohrium_src(parser, x)
     )
     parser.add_argument(
-        '--suite',
-        default="default",
-        choices=[x for x in bsuites],
-        help="Name of the benchmark suite to run."
+        'suite_file',
+        type=argparse.FileType('r'),
+        help="Path to the benchmark suite file."
     )
     parser.add_argument(
         '--output',
-        default="results",
-        help='Where to store benchmark results.'
+        metavar='RESULT_FILE',
+        help='Path to the JSON file where the benchmark results will be written.'
+    )
+    parser.add_argument(
+        '--resume',
+        type=file,
+        metavar='RESULT_FILE',
+        help='Path to the JSON file with the benchmark results to resume.'
     )
     parser.add_argument(
         '--runs',
         default=3,
         type=int,
         help="How many times should each benchmark run."
-    )
-    parser.add_argument(
-        '--resume',
-        help='Path to the stored benchmark results.'
     )
     parser.add_argument(
         '--no-perf',
@@ -492,26 +499,24 @@ if __name__ == "__main__":
         help="Submit 'runs' SLURM jobs instead of one job with 'runs' number of runs."
     )
     args = parser.parse_args()
-    runs = int(args.runs)
 
+    file_name_prefix = 'benchmark-%s-'%os.path.basename(args.suite_file.name)
     if args.resume:
         result_file = open(args.resume, 'r+')
     else:
         result_file = tempfile.NamedTemporaryFile(delete=False,
-                                     dir=args.output,
-                                     prefix='benchmark-%s-'%args.suite,
+                                     prefix=file_name_prefix,
                                      suffix='.json')
     try:
         if not args.resume:
-            uid = os.path.basename(result_file.name)[len('benchmark-%s-'%args.suite):-5]
+            uid = os.path.basename(result_file.name)[len(file_name_prefix):-5]
             gen_jobs(uid,
                 result_file,
                 os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
-                args.src,
+                args.bohrium_src,
                 args.output,
-                args.suite,
-                bsuites[args.suite],
-                runs,
+                args.suite_file,
+                args.runs,
                 args.no_perf,
                 args.no_time,
                 args.partition,
