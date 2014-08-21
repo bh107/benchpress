@@ -6,7 +6,7 @@ scripts   = [
     ('snakes_and_ladders_no_matmul', 'snakes_and_ladders', '--size=1000*10 --no-extmethods'),
 ]
 
-PREFIX = 'python benchmark/Python/{script}.py {args} ' 
+PREFIX = 'python benchmark/Python/{script}.py {args} '
 
 backends = {
     'bridges': [
@@ -25,7 +25,7 @@ backends = {
 
 bohriums = {
     'bridges': [('Bohrium', PREFIX+'--bohrium=True', None)],
-    'engines': [('GPU', 'gpu', None), ('CPU', 'cpu', {'OMP_NUM_THREADS':8})],
+    'engines': [('GPU', 'gpu', {'OMP_NUM_THREADS':8}), ('CPU', 'cpu', {'OMP_NUM_THREADS':8})],
     'scripts': scripts
 }
 
