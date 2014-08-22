@@ -17,6 +17,7 @@ class Npbackend(Graph):
             means = []
             stderr = []
             for r in [res['NumPy OriginalN/A'],
+                      res['npbacked-numpy (vcache=0)N/A'],
                       res['npbacked-numpy (vcache=10)N/A'],
                       res['npbacked-numexpr (vcache=10)N/A'],
                       res['BohriumCPU'],
@@ -24,7 +25,7 @@ class Npbackend(Graph):
                       res['BohriumGPU']]:
                 means.append(r[0])
                 stderr.append(r[1])
-            names = ['Native', 'NumPy', 'Numexpr', 'Bohrium-CPU', 'libgpuarray', 'Bohrium-GPU']
+            names = ['Native', 'NumPy(vcacke=0)', 'NumPy(vcacke=10)', 'Numexpr', 'Bohrium-CPU', 'libgpuarray', 'Bohrium-GPU']
 
             self.graph_title = ""
             self.prep()                         # Prep it / clear the drawing board
@@ -39,4 +40,35 @@ class Npbackend(Graph):
             subplots_adjust()
 
             self.to_file(s)                # Spit them out to file
+
+        native_numpy = {}
+        for script, bridge, vem, ve, r in data:
+            if script == 'snakes_and_ladders_no_matmul':
+                continue
+            if bridge == 'NumPy Original':
+                native_numpy[script] = np.mean(r['elapsed'])
+
+        res = {}
+        for script, bridge, vem, ve, r in data:
+            if script == 'snakes_and_ladders_no_matmul':
+                continue
+            if bridge == 'npbacked-numpy (vcache=0)':
+                res[script] = np.mean(r['elapsed'])/native_numpy[script]
+
+        names = ['Heat Equation', 'Shallow Water', 'Snakes and Ladders']
+        means = [res['Heat 2D'], res['Shallow Water'], res['snakes_and_ladders']]
+
+        self.graph_title = ""
+        self.prep()                         # Prep it / clear the drawing board
+        idx = np.arange(len(names))
+        bar(idx, means, align='center', alpha=0.5, ecolor='black')
+        xticks(idx, names)
+        setp(xticks()[1], rotation=25)
+        xlabel("")
+
+        fig = gcf()
+        fig.tight_layout()
+        subplots_adjust()
+
+        self.to_file("overhead")                # Spit them out to file
 
