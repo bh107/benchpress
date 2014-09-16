@@ -450,7 +450,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--resume',
-        type=file,
+        type=argparse.FileType('r+'),
         metavar='RESULT_FILE',
         help='Path to the JSON file with the benchmark results to resume.'
     )
@@ -502,7 +502,7 @@ if __name__ == "__main__":
 
     file_name_prefix = 'benchmark-%s-'%os.path.basename(args.suite_file.name)
     if args.resume:
-        result_file = open(args.resume, 'r+')
+        result_file = args.resume
     else:
         result_file = tempfile.NamedTemporaryFile(delete=False,
                                      prefix=file_name_prefix,
