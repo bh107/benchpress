@@ -424,6 +424,46 @@ def gen_jobs(result_file, config, src_root, suite_file,
                         bh_config.close()
                         write2json(result_file, results)
 
+def handle_result_file(result_file, args):
+    """Execute, submits, and/or parse results of the benchmarks in 'result_file'
+       Returns True when all benchmark runs is finished"""
+
+    result_file.seek(0)
+    res = json.load(result_file)
+    for run in res['runs']:
+        for job in run['jobs']:
+            if job['status'] == 'finished':
+                continue
+            slurm_id = job.get('slurm_id', None)
+            if slurm_id is None or (job['status'] == 'failed' and args.restart):
+                #The user wants to use SLURM
+                if not args.no_slurm and (args.slurm or run.get('use_slurm_default',False)):
+                    nnodes = run['envs'].get('BH_SLURM_NNODES', 1)
+                    nnodes = run['envs_overwrite'].get('BH_SLURM_NNODES', nnodes)
+                    slurm_run(job, nnodes, queue=None)
+                else:
+                    #The user wants local execution
+                    p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
+                    if run['manager'] and run['manager'] != "node":
+                        p += "%s/"%run['manager_alias']
+                    print "%snode/%s"%(p,run['engine_alias'])
+                    if run['pre-hook'] is not None:
+                        print "pre-hook cmd: \"%s\""%run['pre-hook']
+                        check_call(run['pre-hook'], shell=True)
+                    execute_run(job)
+                    parse_run(run, job)
+            else:#The job has been submitted to SLURM
+                if slurm_run_finished(job):#And it is finished
+                    parse_run(run, job)
+            write2json(result_file, res)
+
+    #Check if all jobs are finished
+    for run in res['runs']:
+        for job in run['jobs']:
+            if job['status'] != 'finished':
+                return False
+    return True
+
 def parser_bohrium_src(parser, path):
     """Check that 'path' points to the Bohrium source dir"""
     if os.path.isdir(path):
@@ -522,44 +562,13 @@ if __name__ == "__main__":
                 args.multi_jobs
             )
 
-        result_file.seek(0)
-        res = json.load(result_file)
+        all_finished = handle_result_file(result_file, args)
 
-        for run in res['runs']:
-            for job in run['jobs']:
-                if job['status'] == 'finished':
-                    continue
-                slurm_id = job.get('slurm_id', None)
-                if slurm_id is None or (job['status'] == 'failed' and args.restart):
-                    #The user wants to use SLURM
-                    if not args.no_slurm and (args.slurm or run.get('use_slurm_default',False)):
-                        nnodes = run['envs'].get('BH_SLURM_NNODES', 1)
-                        nnodes = run['envs_overwrite'].get('BH_SLURM_NNODES', nnodes)
-                        slurm_run(job, nnodes, queue=None)
-                    else:
-                        #The user wants local execution
-                        p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
-                        if run['manager'] and run['manager'] != "node":
-                            p += "%s/"%run['manager_alias']
-                        print "%snode/%s"%(p,run['engine_alias'])
-                        if run['pre-hook'] is not None:
-                            print "pre-hook cmd: \"%s\""%run['pre-hook']
-                            check_call(run['pre-hook'], shell=True)
-                        execute_run(job)
-                        parse_run(run, job)
-                else:#The job has been submitted to SLURM
-                    if slurm_run_finished(job):#And it is finished
-                        parse_run(run, job)
-                write2json(result_file, res)
-
-        #Check if all jobs are finished
-        for run in res['runs']:
-            for job in run['jobs']:
-                if job['status'] != 'finished':
-                    print _C.WARNING,"Benchmark saved in",result_file.name,
-                    print "use resume on",result_file.name,_C.ENDC
-                    sys.exit()
-        print _C.OKGREEN,"Benchmark all finished:",result_file.name,_C.ENDC
+        if all_finished:
+            print _C.OKGREEN,"Benchmark all finished:",result_file.name,_C.ENDC
+        else:
+            print _C.WARNING,"Benchmark saved in",result_file.name,
+            print "use resume on",result_file.name,_C.ENDC
 
     except KeyboardInterrupt:
         print _C.WARNING,"Suspending the benchmark execution,",
