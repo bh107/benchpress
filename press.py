@@ -13,6 +13,7 @@ import os
 import sys
 import re
 import StringIO
+import uuid
 
 import suites
 
@@ -284,10 +285,10 @@ def get_time(filename):
     return time_cmd
 
 
-def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
+def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
 
     cwd = os.path.abspath(os.getcwd())
-    basename = "bh-job-%s.sh"%uid
+    basename = "bh-job-%s.sh"%uuid.uuid4()
     filename = os.path.join(cwd,basename)
 
     job = "#!/bin/bash\n"
@@ -336,7 +337,7 @@ def add_pending_job(setup, nrun, uid, bridge_cmd, manager_cmd, partition=None):
                           'script': job})
 
 
-def gen_jobs(uid, result_file, config, src_root, output, suite_file,
+def gen_jobs(result_file, config, src_root, suite_file,
              nrun, use_perf, use_time, partition, multi_jobs):
     """Generates benchmark jobs based on the benchmark suites"""
 
@@ -416,7 +417,7 @@ def gen_jobs(uid, result_file, config, src_root, output, suite_file,
                             job_nrun = 1
                         for _ in xrange(njobs):
                             i += 1
-                            add_pending_job(run, job_nrun, "%s-%03d"%(uid,i), bridge_cmd, manager_cmd, partition)
+                            add_pending_job(run, job_nrun, bridge_cmd, manager_cmd, partition)
                         results['runs'].append(run)
                         results['meta']['ended'] = str(datetime.now())
 
@@ -445,14 +446,10 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--output',
+        type=str,
         metavar='RESULT_FILE',
-        help='Path to the JSON file where the benchmark results will be written.'
-    )
-    parser.add_argument(
-        '--resume',
-        type=argparse.FileType('r+'),
-        metavar='RESULT_FILE',
-        help='Path to the JSON file with the benchmark results to resume.'
+        help='Path to the JSON file where the benchmark results will be written. '
+             'If the file exist, the benchmark will resume.'
     )
     parser.add_argument(
         '--runs',
@@ -501,20 +498,22 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     file_name_prefix = 'benchmark-%s-'%os.path.basename(args.suite_file.name)
-    if args.resume:
-        result_file = args.resume
-    else:
-        result_file = tempfile.NamedTemporaryFile(delete=False,
-                                     prefix=file_name_prefix,
-                                     suffix='.json')
     try:
-        if not args.resume:
-            uid = os.path.basename(result_file.name)[len(file_name_prefix):-5]
-            gen_jobs(uid,
-                result_file,
+        try:
+            if args.output is None:
+                raise IOError
+            result_file = open(args.output, 'r+')
+        except IOError:
+            if args.output is None:
+                result_file = tempfile.NamedTemporaryFile(delete=False,
+                                             prefix=file_name_prefix,
+                                             suffix='.json')
+            else:
+                result_file = open(args.output, 'w+')
+
+            gen_jobs(result_file,
                 os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
                 args.bohrium_src,
-                args.output,
                 args.suite_file,
                 args.runs,
                 args.no_perf,
