@@ -535,6 +535,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Submit 'runs' SLURM jobs instead of one job with 'runs' number of runs."
     )
+    slurm_grp.add_argument(
+        '--wait',
+        action="store_true",
+        help="Wait for all SLURM jobs to finished before returning."
+    )
     args = parser.parse_args()
 
     file_name_prefix = 'benchmark-%s-'%os.path.basename(args.suite_file.name)
@@ -551,6 +556,7 @@ if __name__ == "__main__":
             else:
                 result_file = open(args.output, 'w+')
 
+            #Populate 'result_file' with benchmark jobs/runs
             gen_jobs(result_file,
                 os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
                 args.bohrium_src,
@@ -562,7 +568,14 @@ if __name__ == "__main__":
                 args.multi_jobs
             )
 
-        all_finished = handle_result_file(result_file, args)
+        if args.wait:
+            while True:#Probe for finished jobs (one second delay)
+                if handle_result_file(result_file, args):
+                    all_finished = True
+                    break
+                time.sleep(1)
+        else:
+            all_finished = handle_result_file(result_file, args)
 
         if all_finished:
             print _C.OKGREEN,"Benchmark all finished:",result_file.name,_C.ENDC
