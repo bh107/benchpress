@@ -552,7 +552,14 @@ if __name__ == "__main__":
                         parse_run(run, job)
                 write2json(result_file, res)
 
-        print _C.WARNING,"Benchmark saved in",result_file.name,_C.ENDC
+        #Check if all jobs are finished
+        for run in res['runs']:
+            for job in run['jobs']:
+                if job['status'] != 'finished':
+                    print _C.WARNING,"Benchmark saved in",result_file.name,
+                    print "use resume on",result_file.name,_C.ENDC
+                    sys.exit()
+        print _C.OKGREEN,"Benchmark all finished:",result_file.name,_C.ENDC
 
     except KeyboardInterrupt:
         print _C.WARNING,"Suspending the benchmark execution,",
