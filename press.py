@@ -512,6 +512,20 @@ if __name__ == "__main__":
         action="store_true",
         help="Restart execution or submission of failed jobs."
     )
+
+    PUB_CMD_DEFAULT="git clone git@bitbucket.org:bohrium/bohrium-by-night.git "\
+                    "&& mv $OUT bohrium-by-night/test/python/numpytest.py.json "\
+                    "&& cd bohrium-by-night && git commit -am 'nightly-test' && git push"
+    parser.add_argument(
+        '--publish-cmd',
+        type=str,
+        nargs='?',
+        const=PUB_CMD_DEFAULT,
+        metavar='COMMAND',
+        help='The publish command to use before exiting (use together with --wait). '\
+             'NB: $OUT is replaced with the name of the output JSON file. '\
+             'The default command is: "%s"'%PUB_CMD_DEFAULT
+    )
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
         '--slurm',
@@ -541,6 +555,9 @@ if __name__ == "__main__":
         help="Wait for all SLURM jobs to finished before returning."
     )
     args = parser.parse_args()
+
+    if args.publish_cmd and not args.wait:
+        parser.error( '--publish-cmd must be used together with --wait' )
 
     file_name_prefix = 'benchmark-%s-'%os.path.basename(args.suite_file.name)
     try:
@@ -582,6 +599,14 @@ if __name__ == "__main__":
         else:
             print _C.WARNING,"Benchmark saved in",result_file.name,
             print "use resume on",result_file.name,_C.ENDC
+
+        if args.publish_cmd:
+            tmpdir = tempfile.mkdtemp()
+            cmd = "cd %s && "%tmpdir
+            cmd += args.publish_cmd.replace("$OUT", result_file.name)
+            cmd += " && cd .. && rm -Rf %s"%tmpdir
+            print _C.WARNING,"Publishing results using '%s'"%cmd,_C.ENDC
+            check_call(cmd, shell=True)
 
     except KeyboardInterrupt:
         print _C.WARNING,"Suspending the benchmark execution,",
