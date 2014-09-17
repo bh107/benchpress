@@ -214,7 +214,7 @@ def parse_run(run, job):
                         print _C.WARNING,"Could not find elapsed-time!", _C.ENDC
                         print _C.WARNING,"STDOUT: ",_C.ENDC
                         print _C.OKGREEN,"\t",out.replace('\n', '\n\t'),_C.ENDC
-                        job['failed'] = True
+                        job['status'] = "failed"
                     else:
                         #We got the result, now the job is finished
                         job['status'] = "finished"
@@ -426,13 +426,13 @@ def gen_jobs(result_file, config, src_root, suite_file,
 
 def handle_result_file(result_file, args):
     """Execute, submits, and/or parse results of the benchmarks in 'result_file'
-       Returns True when all benchmark runs is finished"""
+       Returns True when all benchmark runs is finished or failed"""
 
     result_file.seek(0)
     res = json.load(result_file)
     for run in res['runs']:
         for job in run['jobs']:
-            if job['status'] == 'finished':
+            if job['status'] == 'finished' or (job['status'] == 'failed' and not args.restart):
                 continue
             slurm_id = job.get('slurm_id', None)
             if slurm_id is None or (job['status'] == 'failed' and args.restart):
@@ -457,10 +457,10 @@ def handle_result_file(result_file, args):
                     parse_run(run, job)
             write2json(result_file, res)
 
-    #Check if all jobs are finished
+    #Check if any jobs are pending
     for run in res['runs']:
         for job in run['jobs']:
-            if job['status'] != 'finished':
+            if job['status'] == 'pending':
                 return False
     return True
 
