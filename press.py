@@ -14,6 +14,7 @@ import sys
 import re
 import StringIO
 import uuid
+import time
 
 import suites
 
@@ -182,9 +183,9 @@ def slurm_run(job, nnodes=1, queue=None):
             print "with SLURM ID %d"%job_id
         except:
             print _C.FAIL,"ERR: submitting SLURM job!",_C.ENDC
+            job['status'] = 'failed'
             raise
         job['slurm_id'] = job_id
-        job['status'] = 'failed'
 
 def slurm_run_finished(job):
     print "Checking job %d"%job['slurm_id']
@@ -590,7 +591,7 @@ if __name__ == "__main__":
                 if handle_result_file(result_file, args):
                     all_finished = True
                     break
-                time.sleep(1)
+                time.sleep(5)
         else:
             all_finished = handle_result_file(result_file, args)
 
