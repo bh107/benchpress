@@ -466,6 +466,7 @@ def handle_result_file(result_file, args):
 
 def parser_bohrium_src(parser, path):
     """Check that 'path' points to the Bohrium source dir"""
+    path = os.path.expanduser(path)
     if os.path.isdir(path):
         return os.path.abspath(path)
     else:
@@ -512,19 +513,12 @@ if __name__ == "__main__":
         action="store_true",
         help="Restart execution or submission of failed jobs."
     )
-
-    PUB_CMD_DEFAULT="git clone git@bitbucket.org:bohrium/bohrium-by-night.git "\
-                    "&& mv $OUT bohrium-by-night/test/python/numpytest.py.json "\
-                    "&& cd bohrium-by-night && git commit -am 'nightly-test' && git push"
     parser.add_argument(
         '--publish-cmd',
         type=str,
-        nargs='?',
-        const=PUB_CMD_DEFAULT,
         metavar='COMMAND',
         help='The publish command to use before exiting (use together with --wait). '\
-             'NB: $OUT is replaced with the name of the output JSON file. '\
-             'The default command is: "%s"'%PUB_CMD_DEFAULT
+             'NB: $OUT is replaced with the name of the output JSON file. '
     )
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
@@ -601,10 +595,7 @@ if __name__ == "__main__":
             print "use resume on",result_file.name,_C.ENDC
 
         if args.publish_cmd:
-            tmpdir = tempfile.mkdtemp()
-            cmd = "cd %s && "%tmpdir
-            cmd += args.publish_cmd.replace("$OUT", result_file.name)
-            cmd += " && cd .. && rm -Rf %s"%tmpdir
+            cmd = args.publish_cmd.replace("$OUT", result_file.name)
             print _C.WARNING,"Publishing results using '%s'"%cmd,_C.ENDC
             check_call(cmd, shell=True)
 
