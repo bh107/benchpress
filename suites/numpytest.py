@@ -5,7 +5,9 @@ scripts   = [
 ]
 
 python = {
-    'bridges':  [('python', 'python test/numpy/numpytest.py', None)],
+    'bridges': [('python', 'python test/numpy/numpytest.py', None)],
+    'engines': [('CPU', 'cpu', None),
+                ('GPU', 'gpu', None)],
     'scripts':  scripts,
 }
 
