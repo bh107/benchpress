@@ -44,7 +44,7 @@ def variance(elapsed):
     x_avg = avg(elapsed)
 
     return avg([abs(x - x_avg)**2 for x in elapsed])
-    
+
 def standard_deviation(elapsed):
     """Compute the standard deviation within the samples."""
     count = len(elapsed)
@@ -79,6 +79,8 @@ def from_str(results, wc=False):
         sizes = [cmd for cmd in run['cmd'] if '--size=' in cmd]
         if sizes:
             data['sizes'] =[int(size) for size in sizes[0][len('--size='):].split('*')]
+
+        data['script'] = run['script']
 
         res.append((
             run['script_alias'],
