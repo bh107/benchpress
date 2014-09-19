@@ -15,9 +15,13 @@ class Daily(Graph):
             for script, bridge, vem, ve, r in data:
                 if script == s:
                     name.append("%s/%s"%(bridge,ve))
-                    mean.append(np.mean(r['elapsed']))
-                    stderr.append(np.std(r['elapsed'])*2)
                     filename = r['script']
+                    if len(r['elapsed']) > 0:
+                        mean.append(np.mean(r['elapsed']))
+                        stderr.append(np.std(r['elapsed'])*2)
+                    else:
+                        mean.append(0)
+                        stderr.append(0)
 
             self.graph_title = s
             self.prep()                         # Prep it / clear the drawing board
