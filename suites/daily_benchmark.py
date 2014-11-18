@@ -5,7 +5,6 @@ scripts   = [
     ('Shallow Water',         'shallow_water',         '--size=2000*2000*100'),
     ('Heat Equation',         'heat_equation',         '--size=3000*3000*100'),
     ('N-Body',                'nbody',                 '--size=1000*100'),
-    ('Snakes and Ladders',    'snakes_and_ladders',    '--size=1000*10'),
     ('Wire World',            'wireworld',             '--size=100*100'),
     ('Monte Carlo Pi',        'mc',                    '--size=10000000*100'),
     ('Black Scholes',         'black_scholes',         '--size=1000000*100'),
