@@ -1,19 +1,19 @@
 from default import *
 
 scripts   = [
-    ('Jacobi Stencil',        'jacobi_stencil',        '--size=100*100*10'),
-    ('Shallow Water',         'shallow_water',         '--size=100*100*10'),
-    ('Heat Equation',         'heat_equation',         '--size=100*100*10'),
-    ('N-Body',                'nbody',                 '--size=100*10'),
-    ('Snakes and Ladders',    'snakes_and_ladders',    '--size=100*10'),
-    ('Wire World',            'wireworld',             '--size=10*10'),
-    ('Monte Carlo Pi',        'mc',                    '--size=100*10'),
-    ('Lattice Boltzmann D2Q9','lattice_boltzmann_D2Q9','--size=100*100*10'),
-    ('Gauss Elimination',     'gauss',                 '--size=100'),
-    ('Convolution 2D',        'convolve_2d',           '--size=5'),
-    ('Convolution 3D',        'convolve_3d',           '--size=5'),
-    ('Matrix Multiplication', 'mxmul',                 '--size=100'),
-    ('LU Factorization',      'lu',                    '--size=100'),
+    ('Jacobi Stencil',        'jacobi_stencil',        '--size=3000*3000*100'),
+    ('Shallow Water',         'shallow_water',         '--size=2000*2000*100'),
+    ('Heat Equation',         'heat_equation',         '--size=3000*3000*100'),
+    ('N-Body',                'nbody',                 '--size=1000*100'),
+    ('Snakes and Ladders',    'snakes_and_ladders',    '--size=1000*10'),
+    ('Wire World',            'wireworld',             '--size=100*100'),
+    ('Monte Carlo Pi',        'mc',                    '--size=10000000*100'),
+    ('Black Scholes',         'black_scholes',         '--size=1000000*100'),
+    ('Lattice Boltzmann D2Q9','lattice_boltzmann_D2Q9','--size=1000*1000*10'),
+    ('Gauss Elimination',     'gauss',                 '--size=1000'),
+    ('Convolution 3D',        'convolve_3d',           '--size=100'),
+    ('Matrix Multiplication', 'mxmul',                 '--size=1000'),
+    ('LU Factorization',      'lu',                    '--size=1000'),
 ]
 
 bohrium = {
