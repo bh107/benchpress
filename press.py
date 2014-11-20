@@ -150,6 +150,17 @@ def parse_elapsed_times(output):
         times = [None]
     return times
 
+def parse_and_add_timings(output,timings):
+    """Return list of all timings from the output"""
+
+    for t in re.finditer("\[Timing\]\s*(.*):\s(\d*\.?\d*)", output):
+        k = t.group(1)
+        t = float(t.group(2))
+        if k in timings:
+            timings[k].append(t)
+        else:
+            timings[k] = [t]
+
 def execute_run(job):
     """Execute the run locally"""
 
@@ -219,6 +230,7 @@ def parse_run(run, job):
                     else:
                         #We got the result, now the job is finished
                         job['status'] = "finished"
+                    parse_and_add_timings(out,run['timings'])
                     if len(err) > 0:
                         print _C.WARNING,"STDERR: ",_C.ENDC
                         print _C.FAIL,"\t",err.replace('\n', '\n\t'),_C.ENDC
@@ -407,6 +419,7 @@ def gen_jobs(result_file, config, src_root, suite_file,
                                'use_time':use_time,
                                'use_slurm_default':benchmark.get('use_slurm_default', False),
                                'elapsed': [],
+                               'timings': {},
                                'time': [],
                                'stdout': [],
                                'stderr': [],
