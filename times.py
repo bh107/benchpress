@@ -26,10 +26,24 @@ def csv(results):
         print "%d, %s, %s, %s, %s, %f, %f"%(i, script, bridge, manager, 
 		engine, avg(res["elapsed"]), std(res["elapsed"]))
         i += 1
+
+def troels(results):
+    results = json.loads(results)['runs']
+    i = 0
+    for run in results:
+        i += 1
+        script = run['script_alias']
+        total_time = filter(None,run['elapsed'])
+        timings = run['timings']
+        if i == 1:
+            tk = timings.keys()
+            print "#, Script, Total time, Total time dev., %s"%(", ".join(map(lambda (a,b):a+b,zip(tk,map(lambda s: " ,"+s+" dev.",tk)))))
+        print ("%d, %s, %f, %f, "+(", ".join(map(lambda s: "%f, %f",tk))))%((i,script,avg(total_time),std(total_time))+sum(map(lambda k: (avg(timings[k]),std(timings[k])),tk),()))
+            
     
 
 def main():
-    printers = {'raw':raw, 'times':times, 'parsed': parsed, 'csv': csv}
+    printers = {'raw':raw, 'times':times, 'parsed': parsed, 'csv': csv, 'troels': troels}
 
     parser = argparse.ArgumentParser()
     parser.add_argument("results", help="JSON file containing results")
