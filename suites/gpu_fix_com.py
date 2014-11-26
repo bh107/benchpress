@@ -13,14 +13,14 @@ engines = [
 # Scripts and their arguments
 # (alias, script, arguments)
 scripts   = [
-    ('Gauss f64 1i', 'gauss',     '--size=9000*1 --dtype=float64'),
-    ('LU f64 1i',    'lu',        '--size=9000*1 --dtype=float64'),
-    ('Gauss f32 1i', 'gauss',     '--size=12000*1 --dtype=float32'),
-    ('LU f32 1i',    'lu',        '--size=12000*1 --dtype=float32'),
-    ('Gauss f64 100i', 'gauss',     '--size=9000*100 --dtype=float64'),
-    ('LU f64 100i',    'lu',        '--size=9000*100 --dtype=float64'),
-    ('Gauss f32 100i', 'gauss',     '--size=12000*100 --dtype=float32'),
-    ('LU f32 100i',    'lu',        '--size=12000*100 --dtype=float32'),
+    ('Gauss f64 1i', 'gauss_fi',     '--size=9000*1 --dtype=float64'),
+    ('LU f64 1i',    'lu_fi',        '--size=9000*1 --dtype=float64'),
+    ('Gauss f32 1i', 'gauss_fi',     '--size=12000*1 --dtype=float32'),
+    ('LU f32 1i',    'lu_fi',        '--size=12000*1 --dtype=float32'),
+    ('Gauss f64 100i', 'gauss_fi',     '--size=9000*100 --dtype=float64'),
+    ('LU f64 100i',    'lu_fi',        '--size=9000*100 --dtype=float64'),
+    ('Gauss f32 100i', 'gauss_fi',     '--size=12000*100 --dtype=float32'),
+    ('LU f32 100i',    'lu_fi',        '--size=12000*100 --dtype=float32'),
 
 ]
 
