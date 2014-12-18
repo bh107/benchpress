@@ -369,74 +369,91 @@ def gen_jobs(result_file, config, src_root, suite_file,
         for script_alias, script, script_args in benchmark['scripts']:
             for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
                 for manager_alias, manager, manager_cmd, manager_env in benchmark.get('managers', [('N/A',None,None,None)]):
-                    for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
+                    for fuser_alias, fuser, fuser_env in benchmark.get('fusers', [('N/A', None, None)]):
+                        for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
 
-                        bh_config = StringIO.StringIO()
-                        confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
-                        confparser.read(config)             # Read current configuration
-                                                            # Set the current manager
-                        confparser.set("bridge", "children", manager if manager else "node")
-                        #if manager and manager != "node":
-                        #    confparser.set(manager, "children", "node")
-                        if engine:                          # Set the current engine
-                            confparser.set("node", "children", engine)
+                            bh_config = StringIO.StringIO()
+                            confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
+                            confparser.read(config)             # Read current configuration
+                                                                # Set the current manager
 
-                        confparser.write(bh_config)         # And write it to a string buffer
+                            manager = manager if manager else "node"
+                            fuser = fuser if fuser else "topological"
 
-                        envs = os.environ.copy()            # Populate environment variables
-                        envs_overwrite = {}
-                        if engine_env is not None:
-                            envs_overwrite.update(engine_env)
-                        if manager_env is not None:
-                            envs_overwrite.update(manager_env)
-                        if bridge_env is not None:
-                            envs_overwrite.update(bridge_env)
+                            confparser.set("bridge", "children", manager)
 
-                        bridge_cmd = bridge_cmd.replace("{script}", script)
-                        bridge_cmd = bridge_cmd.replace("{args}", script_args)
+                            # Check that fusers exists in configuration, set
+                            # engine as child of fuser when they are available
+                            # othervise set then as children of manager
+                            has_fusers = confparser.has_section("greedy")
+                            if has_fusers:
+                                confparser.set(
+                                    manager,
+                                    "children",
+                                    fuser
+                                )
+                                if engine:          # Set the current engine
+                                    confparser.set(fuser, "children", engine)
+                            else:
+                                if engine:          # Set the current engine
+                                    confparser.set(manager, "children", engine)
 
-                        p = "Scheduling %s/%s on "%(bridge_alias,script)
-                        if manager and manager != "node":
-                            p += "%s/"%manager_alias
-                        print "%snode/%s"%(p,engine_alias)
+                            confparser.write(bh_config)         # And write it to a string buffer
 
-                        run = {'script_alias':script_alias,
-                               'bridge_alias':bridge_alias,
-                               'engine_alias':engine_alias,
-                               'manager_alias':manager_alias,
-                               'script':script,
-                               'manager':manager,
-                               'engine':engine,
-                               'envs':envs,
-                               'envs_overwrite':envs_overwrite,
-                               'cmd': bridge_cmd.split(" "),
-                               'cwd':src_root,
-                               'pre-hook': benchmark.get('pre-hook', None),
-                               'post-hook': benchmark.get('post-hook', None),
-                               'jobs':[],
-                               'bh_config':bh_config.getvalue(),
-                               'use_perf':use_perf,
-                               'use_time':use_time,
-                               'use_slurm_default':benchmark.get('use_slurm_default', False),
-                               'elapsed': [],
-                               'timings': {},
-                               'time': [],
-                               'stdout': [],
-                               'stderr': [],
-                               'perf':[]}
-                        njobs = 1
-                        job_nrun = nrun
-                        if multi_jobs:
-                            njobs = nrun
-                            job_nrun = 1
-                        for _ in xrange(njobs):
-                            i += 1
-                            add_pending_job(run, job_nrun, bridge_cmd, manager_cmd, partition)
-                        results['runs'].append(run)
-                        results['meta']['ended'] = str(datetime.now())
+                            envs = os.environ.copy()            # Populate environment variables
+                            envs_overwrite = {}
+                            if engine_env is not None:
+                                envs_overwrite.update(engine_env)
+                            if manager_env is not None:
+                                envs_overwrite.update(manager_env)
+                            if bridge_env is not None:
+                                envs_overwrite.update(bridge_env)
 
-                        bh_config.close()
-                        write2json(result_file, results)
+                            bridge_cmd = bridge_cmd.replace("{script}", script)
+                            bridge_cmd = bridge_cmd.replace("{args}", script_args)
+
+                            p = "Scheduling %s/%s on "%(bridge_alias,script)
+                            if manager and manager != "node":
+                                p += "%s/"%manager_alias
+                            print "%snode/%s"%(p,engine_alias)
+
+                            run = {'script_alias':script_alias,
+                                   'bridge_alias':bridge_alias,
+                                   'engine_alias':engine_alias,
+                                   'manager_alias':manager_alias,
+                                   'script':script,
+                                   'manager':manager,
+                                   'engine':engine,
+                                   'envs':envs,
+                                   'envs_overwrite':envs_overwrite,
+                                   'cmd': bridge_cmd.split(" "),
+                                   'cwd':src_root,
+                                   'pre-hook': benchmark.get('pre-hook', None),
+                                   'post-hook': benchmark.get('post-hook', None),
+                                   'jobs':[],
+                                   'bh_config':bh_config.getvalue(),
+                                   'use_perf':use_perf,
+                                   'use_time':use_time,
+                                   'use_slurm_default':benchmark.get('use_slurm_default', False),
+                                   'elapsed': [],
+                                   'timings': {},
+                                   'time': [],
+                                   'stdout': [],
+                                   'stderr': [],
+                                   'perf':[]}
+                            njobs = 1
+                            job_nrun = nrun
+                            if multi_jobs:
+                                njobs = nrun
+                                job_nrun = 1
+                            for _ in xrange(njobs):
+                                i += 1
+                                add_pending_job(run, job_nrun, bridge_cmd, manager_cmd, partition)
+                            results['runs'].append(run)
+                            results['meta']['ended'] = str(datetime.now())
+
+                            bh_config.close()
+                            write2json(result_file, results)
 
 def handle_result_file(result_file, args):
     """Execute, submits, and/or parse results of the benchmarks in 'result_file'
