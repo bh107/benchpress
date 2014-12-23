@@ -7,7 +7,7 @@ def max_deviation(samples):
 class Bypass_bwo(Graph):
     """Basic plot of x,y values with lgnd and stuff."""
 
-    def render(self, data, order=None, baseline=None, highest=None):
+    def render(self, raw, data, order=None, baseline=None, highest=None):
 
         self.prep()                         # Prep it / clear the drawing board
 

@@ -4,7 +4,7 @@ from matplotlib.ticker import FormatStrFormatter
 
 class Daily(Graph):
 
-    def render(self, data, order=None, baseline=None, highest=None):
+    def render(self, raw, data, order=None, baseline=None, highest=None):
 
         #Lets handle one benchmark (script) at a time
         for s in set([script for script, bridge, vem, ve, r in data]):

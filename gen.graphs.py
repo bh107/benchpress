@@ -3,6 +3,7 @@ from copy import copy, deepcopy
 import argparse
 import pkgutil
 import pprint
+import json 
 
 #from grapher.graph import *
 #from grapher.scale import *
@@ -100,6 +101,7 @@ def ordering(data, order=None):
 
 def main(args):
 
+    raw = json.load(open(args.results))
     data = from_file(args.results)               # Get data from json-file
 
     for format in args.formats:
@@ -109,7 +111,7 @@ def main(args):
             xaxis_label = "Threads",
             yaxis_label = "Wall-Clock in Seconds"
         )
-        graph.render(data, args.order, args.baseline)
+        graph.render(raw, data, args.order, args.baseline)
 
 if __name__ == "__main__":
 

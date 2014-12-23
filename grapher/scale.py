@@ -3,7 +3,7 @@ from graph import *
 class Scale(Graph):
     """Create a graph that illustrates scalabiltity."""
 
-    def render(self, data, order=None, baseline=None, highest=None):
+    def render(self, raw, data, order=None, baseline=None, highest=None):
 
         for script in data:
 

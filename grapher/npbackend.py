@@ -4,7 +4,7 @@ from matplotlib.ticker import FormatStrFormatter
 
 class Npbackend(Graph):
 
-    def render(self, data, order=None, baseline=None, highest=None):
+    def render(self, raw, data, order=None, baseline=None, highest=None):
 
         #Lets generate the vcache=10 graphs and with matmul
 
