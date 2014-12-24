@@ -9,6 +9,10 @@ env_types = {
     "OMP_NUM_THREADS": int
 }
 
+engine_ord  = ['numpy', 'fusion', 'sij']
+sample_size = 3
+data_points = 6
+
 def brange(begin, end):
     c = i = begin
     while i <= end:
@@ -86,6 +90,7 @@ def flatten(data):
 
         elapsed = result["elapsed"]
         if has_holes(elapsed):  # Skip result if it "has holes" in elapsed time
+            print("Result discarded elapsed time missing.")
             continue
 
         var = variance(elapsed) # Extract some time information
@@ -116,8 +121,8 @@ def flatten(data):
 def restructure(data_flattened):
     """Take the flattened input and structure it somehow."""
 
-    sample_size = 6
-    labels = ["fusion+", "fusion-", "numpy"]
+
+    labels = ["numpy", "sij", "fusion"]
 
     structured = {}
     for data in data_flattened:
@@ -125,50 +130,76 @@ def restructure(data_flattened):
         script, bridge, engine, fusion, nthreads, average, var, std_dev = data
         if script not in structured:
             structured[script] = {
-                'abs': {'fusion+': [], 'fusion-': [], 'numpy': []},
+                'avg': {'fusion': [], 'sij': [], 'numpy': []},
+                'dev': {'fusion': [], 'sij': [], 'numpy': []},
+                'var': {'fusion': [], 'sij': [], 'numpy': []},
+
                 'rel_first': {
-                    'fusion+':  {'fusion+': [], 'fusion-': [], 'numpy': []},
-                    'fusion-':  {'fusion+': [], 'fusion-': [], 'numpy': []},
-                    'numpy':    {'fusion+': [], 'fusion-': [], 'numpy': []}
+                    'numpy':    {'fusion': [], 'sij': [], 'numpy': []},
+                    'sij':      {'fusion': [], 'sij': [], 'numpy': []},
+                    'fusion':   {'fusion': [], 'sij': [], 'numpy': []}
                 },
                 'rel_all': {
-                    'fusion+':  {'fusion+': [], 'fusion-': [], 'numpy': []},
-                    'fusion-':  {'fusion+': [], 'fusion-': [], 'numpy': []},
-                    'numpy':    {'fusion+': [], 'fusion-': [], 'numpy': []}
+                    'numpy':    {'fusion': [], 'sij': [], 'numpy': []},
+                    'sij':      {'fusion': [], 'sij': [], 'numpy': []},
+                    'fusion':   {'fusion': [], 'sij': [], 'numpy': []}
                 },
             }
 
         # Sort the results
         if 'fusion' in engine:
-            structured[script]['abs']['fusion+'].append((average, var, std_dev))
+            structured[script]['avg']['fusion'].append(average)
+            structured[script]['var']['fusion'].append(var)
+            structured[script]['dev']['fusion'].append(std_dev)
         elif 'omp' in engine:
-            structured[script]['abs']['fusion-'].append((average, var, std_dev))
+            structured[script]['avg']['sij'].append(average)
+            structured[script]['var']['sij'].append(var)
+            structured[script]['dev']['sij'].append(std_dev)
         else:
             # Create pseudo-samples for NumPy
-            for _ in xrange(sample_size):
-                structured[script]['abs']['numpy'].append((average, var, std_dev))
+            for _ in xrange(data_points):
+                structured[script]['avg']['numpy'].append(average)
+                structured[script]['var']['numpy'].append(var)
+                structured[script]['dev']['numpy'].append(std_dev)
+
+    discarded_results = {}
+    for script in structured:   # Verify that we have all absolute numbers
+        for label in labels:
+            if len(structured[script]["avg"][label]) != data_points:
+                if script not in discarded_results:
+                    discarded_results[script] = []
+
+                discarded_results[script].append(label)
+
+    for script in discarded_results:
+        print(
+            "Dropping '%s' data-points are missing, culprit=%s." % (
+            script,
+            ','.join(discarded_results[script])
+        ))
+        del structured[script]
 
     for script in structured:       # Compute relative numbers
         for bsl_label in labels:    # To first value
-            baseline = [structured[script]["abs"][bsl_label][0][0]]*sample_size
+            baseline = [structured[script]["avg"][bsl_label][0]]*data_points
 
             structured[script]['rel_first'][bsl_label] = {}
 
             for other_label in labels:
-                other = [x[0] for x in structured[script]["abs"][other_label]]
+                other = structured[script]["avg"][other_label]
                 structured[script]["rel_first"][bsl_label][other_label] = [
                     bsl / oth for bsl, oth in zip(baseline, other)
                 ]
 
         for bsl_label in labels:    # To each value
-            baseline = [x[0] for x in structured[script]["abs"][bsl_label]]
+            baseline = structured[script]["avg"][bsl_label]
 
             structured[script]['rel_all'][bsl_label] = {
                 bsl_label: [1.0 for _ in baseline]
             }
 
             for other_label in (label for label in labels if label != bsl_label):
-                other = [x[0] for x in structured[script]["abs"][other_label]]
+                other = structured[script]["avg"][other_label]
                 structured[script]["rel_all"][bsl_label][other_label] = [
                     bsl / oth for bsl, oth in zip(baseline, other)
                 ]
@@ -178,68 +209,186 @@ def restructure(data_flattened):
 class Cpu(Graph):
     """Create a graph that illustrates scalabiltity."""
 
-    def render(self, raw, processed=None, params=None):
-
-        import pprint
-        pprint.pprint(raw)
-
-        data_flattened = flatten(raw)
-        data = restructure(data_flattened)
+    def render_rel(self, data, parameters, script, rel_type, rel_engine):
+        self.graph_title = script
+        self.prep()
 
         min_threads     = 1
-        max_threads     = 32
+        max_threads     = max(parameters["env_values"]["OMP_NUM_THREADS"])
         linear          = list(brange(min_threads, max_threads))
         plot_count      = len(linear)
-        
-        engine_ord  = ['numpy', 'fusion+', 'fusion-']
+
+        ylabel("Speedup in relation to '%s'." % rel_engine)
+
+        legends = {'plots': [], 'legends': []}
+        for i, engine in enumerate(engine_ord):
+            elapsed = data[script][rel_type][rel_engine][engine]
+            p, = plot(
+                linear,
+                elapsed,
+                "-*",
+                label=engine,
+                color=colors[i]
+            )
+            legends['plots'].append(p)
+            legends['legends'].append(engine)
+
+        plot(linear, linear, "--", color='gray')  # Linear speedup
+
+        #
+        # Scale y-axis with a neat border
+        yscale("symlog")
+        yticks(linear, linear)
+        ylim(ymin=min_threads*0.15, ymax=max_threads*1.5)
+
+        #
+        # Scale x-axis with a neat border
+        xscale("symlog")
+        xticks(linear, linear)
+        xlim(xmin=min_threads*0.75, xmax=max_threads*1.5)
+
+        #
+        # Plot-legends and their positions
+        lgd = legend(
+            legends['plots'], legends['legends'],
+            loc=3, ncol=3,
+            bbox_to_anchor=(0.10, 0.95, 0.9, 0.102), borderaxespad=0.0,
+        )
+
+        t = title(script)
+        t.set_y(1.05)
+
+        tight_layout()                  # Spit them out to file
+        return self.to_file("%s_%s_%s" % (script, rel_type, rel_engine))
+
+    def render_absolute(self, data, parameters, script):
+
+        self.graph_title = script
+        self.prep()
+
+        min_threads     = 1
+        max_threads     = max(parameters["env_values"]["OMP_NUM_THREADS"])
+        linear          = list(brange(min_threads, max_threads))
+        plot_count      = len(linear)
+
+        elapsed = data[script]['avg']
+        dev = data[script]['dev']
+        var = data[script]['var']
+
+        ylabel("Elapsed wall-clock in seconds")
+
+        N = data_points
+
+        ind = range(N)      # the x locations for the groups
+        width = 0.3       # the width of the bars
+
+        fig, ax = plt.subplots()
+        rects1 = ax.bar(
+            ind,
+            elapsed['numpy'],
+            width,
+            color=colors[0],
+            yerr=dev['numpy']
+        )
+
+        rects2 = ax.bar(
+            [x+width for x in ind],
+            elapsed['fusion'],
+            width,
+            color=colors[1],
+            yerr=dev['fusion']
+        )
+
+        rects3 = ax.bar(
+            [x+width*2 for x in ind],
+            elapsed['sij'],
+            width,
+            color=colors[2],
+            yerr=dev['sij']
+        )
+
+        # add some text for labels, title and axes ticks
+        ax.set_ylabel('Time')
+        ax.set_title(script)
+        ax.set_xticks([x+width*1.5 for x in ind])
+        ax.set_xticklabels( ['1', '2', '4', '8', '16', '32'] )
+
+        ax.legend( (rects1[0], rects2[0], rects3[0]), ('NumPy', 'Fusion', 'Sij') )
+
+        def autolabel(rects):
+            # attach some text labels
+            for rect in rects:
+                height = rect.get_height()
+                ax.text(
+                    rect.get_x()+rect.get_width()/2.,
+                    1.05*height, '%d'%int(height),
+                    ha='center', va='bottom'
+                )
+
+        autolabel(rects1)
+        autolabel(rects2)
+        autolabel(rects3)
+
+        return self.to_file("%s_%s" % (script, 'absolute'))
+
+    def render_html(self, data):
+
+        doc = """<html>
+        <head>
+        <title>CPU Numbers</title>
+        </head>
+        <body>
+        __RESULTS__
+        </body>
+        </html>"""
+
+        results = ""
+        scripts = [script for script in data]
+        scripts.sort()
+        for script in scripts:
+            results += "<h1>%s</h1>" % script
+            results += "<table>"
+            results += """
+            <tr>
+            <td><img src="%s" /></td>
+            <td><img src="%s" /></td>
+            </tr>
+            <tr>
+            <td><img src="%s" /></td>
+            <td><img src="%s" /></td>
+            </tr>
+            """ % (
+                data[script][0],
+                data[script][1],
+                data[script][2],
+                data[script][3]
+            )
+            results += "</table>\n"
+
+        html = doc.replace("__RESULTS__", results)
+        with open('graphs/cpu.html', 'w') as fd:
+            fd.write(html)
+
+    def render(self, raw, data, processed=None, params=None):
+
+        raw = raw["runs"]
+        data_flattened = flatten(raw)
+        parameters = extract_parameters(raw)
+        data = restructure(data_flattened)
 
         #
         # Data is stored as [(1, time), (2, time), (4, time), ... , (32, time)]
         # Where "numbers" are thread-crount and  "time" is elapsed wall-clock.
         #
+
+        graph_filenames = {}
+
         for script in data:
-            self.graph_title = script
-            self.prep()
+            graph_filenames[script] = []
+            fns = self.render_absolute(data, parameters, script)  # Absolute
+            graph_filenames[script].extend(fns)
+            for engine in engine_ord:                       # Relative
+                fns = self.render_rel(data, parameters, script, 'rel_first', engine)
+                graph_filenames[script].extend(fns)
 
-            #
-            # Plot the actual values
-            legends = {'plots': [], 'legends':[]}
-            for c, engine_lbl in enumerate(engine_ord):
-                values      = plots[script][engine_lbl]
-                x_values    = [xval for (xval, yval) in values]
-                y_values    = [yval for (xval, yval) in values]
-                p, = asdf   = plot(x_values, y_values, "-*")
-                
-                legends['plots'].append(p)
-                legends['legends'].append(engine_lbl)
-
-            if bsl_enable:
-                # The ideal speedup
-                plot(linear, linear, "--")
-
-                yscale("symlog")
-                yticks(linear, linear)
-                ylim(ymin=min_threads*0.15, ymax=max_threads*1.5)
-
-                self.yaxis_label="In relation to '%s'" % bsl_engine
-
-            #
-            # Scale x-axis with a neat border
-            xscale("symlog")
-            xticks(linear, linear)
-            xlim(xmin=min_threads*0.15, xmax=max_threads*1.5)
-
-            #
-            # Plot-legends and their positions
-            lgd = legend(
-                legends['plots'], legends['legends'],
-                loc=3, ncol=3,
-                bbox_to_anchor=(0.10, 0.95, 0.9, 0.102), borderaxespad=0.0,
-            )
-
-            t = title(script)
-            t.set_y(1.05)
-
-            tight_layout()
-            self.to_file(script)                # Spit them out to file
-
+        self.render_html(graph_filenames)

@@ -17,6 +17,12 @@ colors  = [
     "#F1E2CC", "#CCCCCC",
 ]
 
+colors = [
+    "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
+    "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
+    "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33"
+]
+
 hatches = [
     "\\", "+", "o", "/", "-", "O",
     "\\", "+", "o", "/", "-", "O",
@@ -75,8 +81,12 @@ class Graph(object):
         except:
             pass
 
+        filenames = []
         for ff in self.file_formats:    # Create the physical files
-            savefig("%s.%s" % (fn, ff))
+            filename = "%s.%s" % (fn, ff)
+            filenames.append(filename)
+            savefig(filename)
 
         show()
 
+        return filenames
