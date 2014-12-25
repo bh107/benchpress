@@ -356,6 +356,11 @@ class Cpu(Graph):
         doc = """<html>
         <head>
         <title>CPU Numbers</title>
+        <style>
+        body {
+            text-align: center;
+        }
+        </style>
         </head>
         <body>
         __RESULTS__
