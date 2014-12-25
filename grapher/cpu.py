@@ -367,7 +367,7 @@ class Cpu(Graph):
 
         doc = """<html>
         <head>
-        <title>CPU Numbers</title>
+        <title>Benchmark Suite CPU Results</title>
         <style>
         body {
             text-align: center;
@@ -375,6 +375,7 @@ class Cpu(Graph):
         </style>
         </head>
         <body>
+        <h1>Benchmark Suite CPU</h1>
         __RESULTS__
         </body>
         </html>"""
@@ -383,7 +384,7 @@ class Cpu(Graph):
         scripts = [script for script in data]
         scripts.sort()
         for script in scripts:
-            results += "<h1>%s</h1>" % script
+            results += "<h2>%s</h2>" % script
             results += "<table>"
             results += """
             <tr>
