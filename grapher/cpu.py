@@ -277,7 +277,7 @@ class Cpu(Graph):
             legends['legends'],
             loc=3,
             ncol=3,
-            bbox_to_anchor=(0.025, 0.95, 0.9, 0.102),
+            bbox_to_anchor=(0.015, 0.95, 0.9, 0.102),
             borderaxespad=0.0,
         )
 
@@ -296,6 +296,10 @@ class Cpu(Graph):
         max_threads     = max(parameters["env_values"]["OMP_NUM_THREADS"])
         linear          = list(brange(min_threads, max_threads))
         plot_count      = len(linear)
+
+        max_runtime = max(
+            [max(data[script]['avg'][engine]) for engine in engine_ord]
+        )
 
         elapsed = data[script]['avg']
         dev = data[script]['dev']
@@ -328,7 +332,11 @@ class Cpu(Graph):
 
         ax.legend(
             [rects[engine] for engine in engine_ord],
-            [engine for engine in engine_ord]
+            [engine for engine in engine_ord],
+            loc=3,
+            ncol=3,
+            bbox_to_anchor=(0.01, 0.95, 0.9, 0.102),
+            borderaxespad=0.0
         )
 
         def autolabel(rectangles):
@@ -337,8 +345,10 @@ class Cpu(Graph):
                 height = rect.get_height()
                 ax.text(
                     rect.get_x()+rect.get_width()/2.,
-                    1.05*height, '%d'%int(height),
-                    ha='center', va='bottom'
+                    1.015 * height,
+                    '%d'%int(height),
+                    ha='center',
+                    va='bottom'
                 )
 
         for engine in engine_ord:
@@ -347,6 +357,8 @@ class Cpu(Graph):
         xlabel("Threads")
         t = title(script)
         t.set_y(1.05)
+
+        ylim(ymin=0, ymax=max_runtime*1.13)
 
         tight_layout()                  # Spit them out to file
         return self.to_file("%s_%s" % (script, 'absolute'))
