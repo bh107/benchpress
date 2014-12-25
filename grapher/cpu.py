@@ -144,6 +144,8 @@ def restructure(data_flattened):
                     'sij':      {'fusion': [], 'sij': [], 'numpy': []},
                     'fusion':   {'fusion': [], 'sij': [], 'numpy': []}
                 },
+                'max': {},
+                'min': {}
             }
 
         # Sort the results
@@ -171,7 +173,7 @@ def restructure(data_flattened):
 
                 discarded_results[script].append(label)
 
-    for script in discarded_results:
+    for script in discarded_results:    # Discard missing script
         print(
             "Dropping '%s' data-points are missing, culprit=%s." % (
             script,
@@ -179,7 +181,8 @@ def restructure(data_flattened):
         ))
         del structured[script]
 
-    for script in structured:       # Compute relative numbers
+    for script in structured:       # Compute relative numbers, min, max
+
         for bsl_label in labels:    # To first value
             baseline = [structured[script]["avg"][bsl_label][0]]*data_points
 
@@ -204,6 +207,14 @@ def restructure(data_flattened):
                     bsl / oth for bsl, oth in zip(baseline, other)
                 ]
 
+        for bsl_label in labels:    # Min, max speedup
+            structured[script]['min'][bsl_label] = {}
+            structured[script]['max'][bsl_label] = {}
+            for other_label in labels:
+                numbers = structured[script]['rel_first'][bsl_label][other_label]
+                structured[script]['max'][bsl_label][other_label] = max(numbers)
+                structured[script]['min'][bsl_label][other_label] = min(numbers)
+
     return structured
 
 class Cpu(Graph):
@@ -218,9 +229,12 @@ class Cpu(Graph):
         linear          = list(brange(min_threads, max_threads))
         plot_count      = len(linear)
 
-
         legends = {'plots': [], 'legends': []}
         for i, engine in enumerate(engine_ord):
+            legend_txt = "%s: %.1fx" % (
+                engine,
+                data[script]['max'][rel_engine][engine]
+            )
             elapsed = data[script][rel_type][rel_engine][engine]
             p, = plot(
                 linear,
@@ -230,16 +244,24 @@ class Cpu(Graph):
                 color=colors[i]
             )
             legends['plots'].append(p)
-            legends['legends'].append(engine)
+            legends['legends'].append(legend_txt)
 
         plot(linear, linear, "--", color='gray')  # Linear speedup
+
+        script_max = 0.0
+        for engine in engine_ord:
+            script_max = max(script_max, data[script]['max'][rel_engine][engine])
 
         #
         # Scale y-axis with a neat border
         ylabel("Speedup in relation to '%s'." % rel_engine)
         yscale("symlog")
-        yticks(linear, linear)
-        ylim(ymin=min_threads*0.15, ymax=max_threads*1.5)
+        yt_range = list(brange(min_threads, max(script_max, max_threads)))
+        yticks(yt_range, yt_range)
+        ylim(
+            ymin=min_threads*0.15,
+            ymax=max(script_max, max_threads)*1.5
+        )
 
         #
         # Scale x-axis with a neat border
@@ -251,9 +273,12 @@ class Cpu(Graph):
         #
         # Plot-legends and their positions
         lgd = legend(
-            legends['plots'], legends['legends'],
-            loc=3, ncol=3,
-            bbox_to_anchor=(0.10, 0.95, 0.9, 0.102), borderaxespad=0.0,
+            legends['plots'],
+            legends['legends'],
+            loc=3,
+            ncol=3,
+            bbox_to_anchor=(0.025, 0.95, 0.9, 0.102),
+            borderaxespad=0.0,
         )
 
         t = title(script)
