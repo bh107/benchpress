@@ -218,7 +218,6 @@ class Cpu(Graph):
         linear          = list(brange(min_threads, max_threads))
         plot_count      = len(linear)
 
-        ylabel("Speedup in relation to '%s'." % rel_engine)
 
         legends = {'plots': [], 'legends': []}
         for i, engine in enumerate(engine_ord):
@@ -237,12 +236,14 @@ class Cpu(Graph):
 
         #
         # Scale y-axis with a neat border
+        ylabel("Speedup in relation to '%s'." % rel_engine)
         yscale("symlog")
         yticks(linear, linear)
         ylim(ymin=min_threads*0.15, ymax=max_threads*1.5)
 
         #
         # Scale x-axis with a neat border
+        xlabel("Threads")
         xscale("symlog")
         xticks(linear, linear)
         xlim(xmin=min_threads*0.75, xmax=max_threads*1.5)
@@ -257,7 +258,7 @@ class Cpu(Graph):
 
         t = title(script)
         t.set_y(1.05)
-
+        
         tight_layout()                  # Spit them out to file
         return self.to_file("%s_%s_%s" % (script, rel_type, rel_engine))
 
@@ -277,47 +278,37 @@ class Cpu(Graph):
 
         ylabel("Elapsed wall-clock in seconds")
 
-        N = data_points
-
-        ind = range(N)      # the x locations for the groups
-        width = 0.3       # the width of the bars
+        ind = range(data_points)                # Group start locations
+        width = 0.3                             # Width of the bars
+        group_width = width * (len(engine_ord)) # Width of the group
+        group_center = group_width / 2.0        # Center of groups
 
         fig, ax = plt.subplots()
-        rects1 = ax.bar(
-            ind,
-            elapsed['numpy'],
-            width,
-            color=colors[0],
-            yerr=dev['numpy']
-        )
 
-        rects2 = ax.bar(
-            [x+width for x in ind],
-            elapsed['fusion'],
-            width,
-            color=colors[1],
-            yerr=dev['fusion']
-        )
-
-        rects3 = ax.bar(
-            [x+width*2 for x in ind],
-            elapsed['sij'],
-            width,
-            color=colors[2],
-            yerr=dev['sij']
-        )
+        rects = {}                          # Draw the bars
+        for i, engine in enumerate(engine_ord):
+            rects[engine] = ax.bar(
+                [x+width*i for x in ind],
+                elapsed[engine],
+                width,
+                color=colors[i],
+                yerr=dev[engine]
+            )
 
         # add some text for labels, title and axes ticks
-        ax.set_ylabel('Time')
+        ax.set_ylabel('Elapsed wall-clock time in seconds')
         ax.set_title(script)
-        ax.set_xticks([x+width*1.5 for x in ind])
-        ax.set_xticklabels( ['1', '2', '4', '8', '16', '32'] )
+        ax.set_xticks([x+group_center for x in ind])
+        ax.set_xticklabels([str(x) for x in linear])
 
-        ax.legend( (rects1[0], rects2[0], rects3[0]), ('NumPy', 'Fusion', 'Sij') )
+        ax.legend(
+            [rects[engine] for engine in engine_ord],
+            [engine for engine in engine_ord]
+        )
 
-        def autolabel(rects):
+        def autolabel(rectangles):
             # attach some text labels
-            for rect in rects:
+            for rect in rectangles:
                 height = rect.get_height()
                 ax.text(
                     rect.get_x()+rect.get_width()/2.,
@@ -325,10 +316,14 @@ class Cpu(Graph):
                     ha='center', va='bottom'
                 )
 
-        autolabel(rects1)
-        autolabel(rects2)
-        autolabel(rects3)
+        for engine in engine_ord:
+            autolabel(rects[engine])
 
+        xlabel("Threads")
+        t = title(script)
+        t.set_y(1.05)
+
+        tight_layout()                  # Spit them out to file
         return self.to_file("%s_%s" % (script, 'absolute'))
 
     def render_html(self, data):
@@ -358,10 +353,10 @@ class Cpu(Graph):
             <td><img src="%s" /></td>
             </tr>
             """ % (
-                data[script][0],
-                data[script][1],
-                data[script][2],
-                data[script][3]
+                data[script][0].replace("graphs"+os.sep, ""),
+                data[script][1].replace("graphs"+os.sep, ""),
+                data[script][2].replace("graphs"+os.sep, ""),
+                data[script][3].replace("graphs"+os.sep, "")
             )
             results += "</table>\n"
 
@@ -376,19 +371,13 @@ class Cpu(Graph):
         parameters = extract_parameters(raw)
         data = restructure(data_flattened)
 
-        #
-        # Data is stored as [(1, time), (2, time), (4, time), ... , (32, time)]
-        # Where "numbers" are thread-crount and  "time" is elapsed wall-clock.
-        #
-
         graph_filenames = {}
-
         for script in data:
             graph_filenames[script] = []
-            fns = self.render_absolute(data, parameters, script)  # Absolute
+            fns = self.render_absolute(data, parameters, script)    # Absolute
             graph_filenames[script].extend(fns)
-            for engine in engine_ord:                       # Relative
+            for engine in engine_ord:                               # Relative
                 fns = self.render_rel(data, parameters, script, 'rel_first', engine)
                 graph_filenames[script].extend(fns)
 
-        self.render_html(graph_filenames)
+        self.render_html(graph_filenames)                           # HTML
