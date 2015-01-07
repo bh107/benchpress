@@ -277,7 +277,7 @@ class Cpu(Graph):
 
         #
         # Scale y-axis with a neat border
-        ylabel("Speedup in relation to '%s'." % rel_engine)
+        ylabel(r"Speedup in relation to \textbf{%s}" % rel_engine)
         yscale("symlog")
         yt_range = list(brange(min_threads, max(script_max, max_threads)))
         yticks(yt_range, yt_range)
@@ -328,8 +328,6 @@ class Cpu(Graph):
         dev = data[script]['dev']
         var = data[script]['var']
 
-        ylabel("Elapsed wall-clock in seconds")
-
         ind = range(data_points)                # Group start locations
         width = 0.3                             # Width of the bars
         group_width = width * (len(engine_ord)) # Width of the group
@@ -348,7 +346,7 @@ class Cpu(Graph):
             )
 
         # add some text for labels, title and axes ticks
-        ax.set_ylabel('Elapsed wall-clock time in seconds')
+        ax.set_ylabel(r"Elapsed wall-clock time in \textbf{seconds}")
         ax.set_title(script)
         ax.set_xticks([x+group_center for x in ind])
         ax.set_xticklabels([str(x) for x in linear])
@@ -388,6 +386,16 @@ class Cpu(Graph):
 
     def render_html(self, filenames, meta, parameters):
 
+        scripts = [script for script in filenames]
+        scripts.sort()
+
+        links = []
+        for script in scripts:
+            links.append('<a href="#%s">%s</a>' % (
+                script.replace(" ", ""),
+                script
+            ))
+
         doc = """<html>
         <head>
         <title>Benchmark Suite CPU Results - REV: %s</title>
@@ -399,15 +407,20 @@ class Cpu(Graph):
         </head>
         <body>
         <h1>Benchmark Suite CPU</h1>
+        <h2>Repos revision: %s</h2>
+        __LINKS__
+        <h2>Results</h2>
         __RESULTS__
         </body>
-        </html>""" % meta["rev"]
+        </html>""" % (meta["rev"], meta["rev"])
+
+        doc = doc.replace("__LINKS__", " | ".join(links))
 
         results = ""
-        scripts = [script for script in filenames]
-        scripts.sort()
+
         for script in scripts:
-            results += "<h2>%s %s</h2>" % (
+            results += '<h3 id="%s">%s %s</h3>' % (
+                script.replace(" ", ""),
                 script,
                 parameters["script_sizes"][script]
             )
