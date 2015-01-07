@@ -1,6 +1,16 @@
 import logging
 from graph import *
 import pprint
+from matplotlib import rcParams
+
+rcParams['axes.labelsize'] = 14
+rcParams['axes.titlesize'] = 16
+rcParams['xtick.labelsize'] = 14
+rcParams['ytick.labelsize'] = 14
+rcParams['legend.fontsize'] = 14
+rcParams['font.family'] = 'serif'
+rcParams['font.serif'] = ['Computer Modern Roman']
+rcParams['text.usetex'] = True
 
 from parser import standard_deviation, variance, avg
 
@@ -25,6 +35,16 @@ def extract_parameters(data):
     # Extract script aliases
     script_aliases = list(set([result["script_alias"] for result in data]))
     script_aliases.sort()
+
+    # Extract script size-args from cmd
+    script_sizes = list(set([
+        (result["script_alias"], cmd) for cmd in result["cmd"]
+                                      for result in data
+                                      if 'size' in cmd
+    ]))
+    if len(script_sizes) != len(script_aliases):
+        print "NO GOOD! Erroneous benchmark results!"
+    script_sizes = dict(script_sizes)
 
     # Extract bridge aliases
     bridge_aliases = list(set([result["bridge_alias"] for result in data]))
@@ -60,6 +80,7 @@ def extract_parameters(data):
         "env_vars": env_vars,
         "env_values": env_values,
         "script_aliases": script_aliases,
+        "script_sizes": script_sizes,
         "bridge_aliases": bridge_aliases,
         "engine_aliases": engine_aliases,
         "manager_aliases": manager_aliases
@@ -231,8 +252,9 @@ class Cpu(Graph):
 
         legends = {'plots': [], 'legends': []}
         for i, engine in enumerate(engine_ord):
-            legend_txt = "%s: %.1fx" % (
+            legend_txt = r"%s: \textbf{%.1f} - \textbf{%.1f}" % (
                 engine,
+                data[script]['min'][rel_engine][engine],
                 data[script]['max'][rel_engine][engine]
             )
             elapsed = data[script][rel_type][rel_engine][engine]
@@ -250,7 +272,8 @@ class Cpu(Graph):
 
         script_max = 0.0
         for engine in engine_ord:
-            script_max = max(script_max, data[script]['max'][rel_engine][engine])
+            for r_eng in engine_ord:
+                script_max = max(script_max, data[script]['max'][r_eng][engine])
 
         #
         # Scale y-axis with a neat border
@@ -289,7 +312,7 @@ class Cpu(Graph):
 
     def render_absolute(self, data, parameters, script):
 
-        self.graph_title = script
+        self.graph_title = r"\textbf{%s}" % script
         self.prep()
 
         min_threads     = 1
@@ -363,11 +386,11 @@ class Cpu(Graph):
         tight_layout()                  # Spit them out to file
         return self.to_file("%s_%s" % (script, 'absolute'))
 
-    def render_html(self, data):
+    def render_html(self, filenames, meta, parameters):
 
         doc = """<html>
         <head>
-        <title>Benchmark Suite CPU Results</title>
+        <title>Benchmark Suite CPU Results - REV: %s</title>
         <style>
         body {
             text-align: center;
@@ -378,13 +401,16 @@ class Cpu(Graph):
         <h1>Benchmark Suite CPU</h1>
         __RESULTS__
         </body>
-        </html>"""
+        </html>""" % meta["rev"]
 
         results = ""
-        scripts = [script for script in data]
+        scripts = [script for script in filenames]
         scripts.sort()
         for script in scripts:
-            results += "<h2>%s</h2>" % script
+            results += "<h2>%s %s</h2>" % (
+                script,
+                parameters["script_sizes"][script]
+            )
             results += "<table>"
             results += """
             <tr>
@@ -396,20 +422,22 @@ class Cpu(Graph):
             <td><img src="%s" /></td>
             </tr>
             """ % (
-                data[script][0].replace("graphs"+os.sep, ""),
-                data[script][1].replace("graphs"+os.sep, ""),
-                data[script][2].replace("graphs"+os.sep, ""),
-                data[script][3].replace("graphs"+os.sep, "")
+                filenames[script][0].replace(self.output+os.sep, ""),
+                filenames[script][1].replace(self.output+os.sep, ""),
+                filenames[script][2].replace(self.output+os.sep, ""),
+                filenames[script][3].replace(self.output+os.sep, "")
             )
             results += "</table>\n"
 
         html = doc.replace("__RESULTS__", results)
-        with open('graphs/cpu.html', 'w') as fd:
+        with open('%s%scpu.html' % (self.output, os.sep), 'w') as fd:
             fd.write(html)
 
     def render(self, raw, data, processed=None, params=None):
 
+        meta = raw["meta"]
         raw = raw["runs"]
+
         data_flattened = flatten(raw)
         parameters = extract_parameters(raw)
         data = restructure(data_flattened)
@@ -420,7 +448,13 @@ class Cpu(Graph):
             fns = self.render_absolute(data, parameters, script)    # Absolute
             graph_filenames[script].extend(fns)
             for engine in engine_ord:                               # Relative
-                fns = self.render_rel(data, parameters, script, 'rel_first', engine)
+                fns = self.render_rel(
+                    data,
+                    parameters,
+                    script,
+                    'rel_first',
+                    engine
+                )
                 graph_filenames[script].extend(fns)
 
-        self.render_html(graph_filenames)                           # HTML
+        self.render_html(graph_filenames, meta, parameters)          # HTML
