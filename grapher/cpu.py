@@ -401,16 +401,82 @@ class Cpu(Graph):
         <title>Benchmark Suite CPU Results - REV: %s</title>
         <style>
         body {
-            text-align: center;
+          padding: 0;
+          margin: auto;
+          height: 1400px;
+          text-align: center;
+        }
+        html {
+          background: #400101;
+        }
+        body {
+          padding: 0;
+          width: 960px;
+          background: #bf0404;
+        }
+        #page {
+          min-height: 100%;
+          height: 100%;
+          position: relative;
+        }
+        #main {
+          padding-bottom: 150px;
+        }
+        /* HEADER */
+        #header {
+          /* BASE CODE */
+          top: 0px;
+            height: 50px;
+          width: 100%;
+          /* STYLING */
+          background: #590202;
+          color: #f2f2f2;
+          display: table;
+          position: absolute;
+        }
+        /* NAVBAR */
+        #navbar {
+          /* BASE CODE */
+          position: fixed;
+             margin-top: 50px;    
+          z-index: 10;
+          width: 960px;
+          height: 10px;
+          /* STYLING */
+          background: yellow;
+        }
+        /* CONTENT */
+        #main {
+          padding-top: 20px;
+        }
+        /* FOOTER */
+        #footer {
+          /* BASE CODE */
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          height: 150px;
+          /* STYLING */
+          background: #590202;
+          display: table;
         }
         </style>
         </head>
         <body>
-        <h1>Benchmark Suite CPU</h1>
-        <h2>Repos revision: %s</h2>
-        __LINKS__
-        <h2>Results</h2>
-        __RESULTS__
+        <div id="page">
+          <div id="header">
+          <h1>Benchmark Suite CPU</h1>
+          <h2>Repos revision: %s</h2>
+          </div>
+          <div id="navbar">
+          __LINKS__
+          </div>
+          <div id="main">
+          <h2>Results</h2>
+          __RESULTS__
+          </div>
+          <div id="footer"></div>
+        </div>
         </body>
         </html>""" % (meta["rev"], meta["rev"])
 
