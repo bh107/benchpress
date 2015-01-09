@@ -11,8 +11,6 @@ from parser import from_file, avg, variance
 
 formats = ['png', 'pdf', 'eps']
 
-
-
 def group(data, key, warmups):
 
     res = []

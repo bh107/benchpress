@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
 import logging
 from graph import *
 import pprint
@@ -141,7 +143,6 @@ def flatten(data):
 
 def restructure(data_flattened):
     """Take the flattened input and structure it somehow."""
-
 
     labels = ["numpy", "sij", "fusion"]
 
@@ -384,10 +385,67 @@ class Cpu(Graph):
         tight_layout()                  # Spit them out to file
         return self.to_file("%s_%s" % (script, 'absolute'))
 
-    def render_html(self, filenames, meta, parameters):
+    def render_html(self, filenames, data, meta, parameters):
 
         scripts = [script for script in filenames]
         scripts.sort()
+
+        table = "<center><table><tr>" 
+
+        for i, bsl_engine in enumerate(engine_ord):
+            table += "<td>"
+            table += """
+            <table style="border: 1px solid gray;">
+            <thead>
+            <tr>
+            <td></td>
+            """
+            for engine in engine_ord:
+                table += """
+                <td colspan="2" style="text-align: center;">%s</td>
+                """ % engine
+            table += """
+            </tr>
+            </thead>
+            """
+
+            table += "<colgroup>"
+            table += "<col>" * (len(engine_ord)*2+1)
+            table += "</colgroup>"
+            table += """
+            <tbody>
+            """
+
+            for script in scripts:
+                
+                table += """
+                <tr>
+                <td>%s</td>
+                """ % script 
+                for engine in engine_ord:
+                    smax = data[script]['max'][bsl_engine][engine]
+                    smin = data[script]['min'][bsl_engine][engine]
+
+                    table += """
+                    <td>%.1f</td>
+                    <td>%.1f</td>
+                    """ % (
+                        smin,
+                        smax
+                    )
+                table += """
+                </tr>"""
+            table += """
+            </tbody>
+            <tfoot>
+            <td colspan="%s" style="text-align: center;">%s</td>
+            </tfoot>
+            </table>""" % (
+                len(engine_ord)*2+1,
+                "<b>Min/Max speedup in relation to %s</b>" % bsl_engine
+            )
+            table += "</td>"
+        table += "</tr></table></center>"
 
         links = []
         for script in scripts:
@@ -401,91 +459,55 @@ class Cpu(Graph):
         <title>Benchmark Suite CPU Results - REV: %s</title>
         <style>
         body {
-          padding: 0;
-          margin: auto;
-          height: 1400px;
-          text-align: center;
+            text-align: center;
         }
-        html {
-          background: #400101;
+        col:nth-child(2n+3) {background: #CCC}
+        h3 {
+            margin: 0;
         }
-        body {
-          padding: 0;
-          width: 960px;
-          background: #bf0404;
+        .anchor {
+            margin-bottom: 80px;
         }
-        #page {
-          min-height: 100%;
-          height: 100%;
-          position: relative;
-        }
-        #main {
-          padding-bottom: 150px;
-        }
-        /* HEADER */
         #header {
-          /* BASE CODE */
-          top: 0px;
-            height: 50px;
-          width: 100%;
-          /* STYLING */
-          background: #590202;
-          color: #f2f2f2;
-          display: table;
-          position: absolute;
+            margin-top: 80px;
+            background-color: white;
         }
-        /* NAVBAR */
         #navbar {
-          /* BASE CODE */
-          position: fixed;
-             margin-top: 50px;    
-          z-index: 10;
-          width: 960px;
-          height: 10px;
-          /* STYLING */
-          background: yellow;
-        }
-        /* CONTENT */
-        #main {
-          padding-top: 20px;
-        }
-        /* FOOTER */
-        #footer {
-          /* BASE CODE */
-          position: absolute;
-          width: 100%;
-          bottom: 0;
-          height: 150px;
-          /* STYLING */
-          background: #590202;
-          display: table;
+            position: fixed;
+            z-index: 10;
+            top: 0px;
+            background-color: white;
+            padding: 20px;
+            margin: auto;
         }
         </style>
         </head>
         <body>
-        <div id="page">
-          <div id="header">
-          <h1>Benchmark Suite CPU</h1>
-          <h2>Repos revision: %s</h2>
-          </div>
-          <div id="navbar">
-          __LINKS__
-          </div>
-          <div id="main">
-          <h2>Results</h2>
-          __RESULTS__
-          </div>
-          <div id="footer"></div>
+
+        <div id="navbar">
+        __LINKS__
+        </div>
+ 
+        <div id="header">
+        <h1>Benchmark Suite CPU</h1>
+        <h2>Repos revision: %s</h2>
+        </div>       
+        <h2>Results</h2>
+        __TABLE__
+        __RESULTS__
+        </div>
+
         </div>
         </body>
         </html>""" % (meta["rev"], meta["rev"])
 
+        doc = doc.replace("__TABLE__", table)
         doc = doc.replace("__LINKS__", " | ".join(links))
 
         results = ""
 
         for script in scripts:
-            results += '<h3 id="%s">%s %s</h3>' % (
+            results += '<div class="anchor" id="%s"></div><h3>%s %s</h3>' % (
                 script.replace(" ", ""),
                 script,
                 parameters["script_sizes"][script]
@@ -522,7 +544,7 @@ class Cpu(Graph):
         data = restructure(data_flattened)
 
         graph_filenames = {}
-        for script in data:
+        for i, script in enumerate(data):
             graph_filenames[script] = []
             fns = self.render_absolute(data, parameters, script)    # Absolute
             graph_filenames[script].extend(fns)
@@ -536,4 +558,4 @@ class Cpu(Graph):
                 )
                 graph_filenames[script].extend(fns)
 
-        self.render_html(graph_filenames, meta, parameters)          # HTML
+        self.render_html(graph_filenames, data, meta, parameters)          # HTML
