@@ -428,7 +428,7 @@ class Cpu(Graph):
 
                     table += """
                     <td>%.1f</td>
-                    <td>%.1f</td>
+                    <td style="text-align: right;">%.1f</td>
                     """ % (
                         smin,
                         smax
