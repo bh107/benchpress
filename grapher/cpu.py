@@ -18,6 +18,8 @@ from parser import standard_deviation, variance, avg
 
 env_types = {
     "BH_VE_CPU_JIT_FUSION": int,
+    "BH_VE_CPU_JIT_DUMPSRC": int,
+    "BH_CORE_VCACHE_SIZE": int,
     "OMP_NUM_THREADS": int
 }
 
