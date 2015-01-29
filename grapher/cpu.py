@@ -13,6 +13,7 @@ rcParams['legend.fontsize'] = 14
 rcParams['font.family'] = 'serif'
 rcParams['font.serif'] = ['Computer Modern Roman']
 rcParams['text.usetex'] = True
+#rcParams['figure.max_num_figures'] = 40
 
 from parser import standard_deviation, variance, avg
 
@@ -20,7 +21,8 @@ env_types = {
     "BH_VE_CPU_JIT_FUSION": int,
     "BH_VE_CPU_JIT_DUMPSRC": int,
     "BH_CORE_VCACHE_SIZE": int,
-    "OMP_NUM_THREADS": int
+    "OMP_NUM_THREADS": int,
+    "GOMP_CPU_AFFINITY": str
 }
 
 engine_ord  = ['numpy', 'fusion', 'sij']
@@ -124,10 +126,13 @@ def flatten(data):
 
         fusion = 0              # Other properties
         nthreads = 0
+        vcache = 0
         if 'envs_overwrite' in result and 'OMP_NUM_THREADS' in result['envs_overwrite']:
             nthreads = int(result["envs_overwrite"]["OMP_NUM_THREADS"])
         if 'envs_overwrite' in result and 'BH_VE_CPU_JIT_FUSION' in result['envs_overwrite']:
             fusion = int(result["envs_overwrite"]["BH_VE_CPU_JIT_FUSION"])
+        if 'envs_overwrite' in result and 'BH_CORE_VCACHE_SIZE' in result['envs_overwrite']:
+            vcache = int(result["envs_overwrite"]["BH_CORE_VCACHE_SIZE"])
 
         flattened.append((
             result['script_alias'],
@@ -135,6 +140,7 @@ def flatten(data):
             result['engine_alias'],
             fusion,
             nthreads,
+            vcache,
             average,
             var,
             std_dev
@@ -151,7 +157,7 @@ def restructure(data_flattened):
     structured = {}
     for data in data_flattened:
 
-        script, bridge, engine, fusion, nthreads, average, var, std_dev = data
+        script, bridge, engine, fusion, nthreads, vcache, average, var, std_dev = data
         if script not in structured:
             structured[script] = {
                 'avg': {'fusion': [], 'sij': [], 'numpy': []},
