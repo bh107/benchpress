@@ -43,11 +43,14 @@ def extract_parameters(data):
     script_aliases.sort()
 
     # Extract script size-args from cmd
-    script_sizes = list(set([
-        (result["script_alias"], cmd) for cmd in result["cmd"]
-                                      for result in data
-                                      if 'size' in cmd
-    ]))
+    all_scripts_and_sizes = set()
+    for result in data:
+        for cmd in result["cmd"]:
+            if "size" in cmd:
+                all_scripts_and_sizes.add((result["script_alias"], cmd.replace("--size=", "")))
+
+    script_sizes = dict(all_scripts_and_sizes)
+
     if len(script_sizes) != len(script_aliases):
         print "NO GOOD! Erroneous benchmark results!"
     script_sizes = dict(script_sizes)
