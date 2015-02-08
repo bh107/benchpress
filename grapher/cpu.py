@@ -379,7 +379,7 @@ class Cpu(Graph):
                 ax.text(
                     rect.get_x()+rect.get_width()/2.,
                     1.015 * height,
-                    '%d'%int(height),
+                    '%.1f' % height,
                     ha='center',
                     va='bottom'
                 )
