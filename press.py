@@ -15,6 +15,8 @@ import re
 import StringIO
 import uuid
 import time
+import base64
+import zlib
 
 import suites
 
@@ -130,6 +132,13 @@ def perf_counters():
 
     return ','.join(events)
 
+def encode_data(data):
+    """return the encoded data as a string"""
+    return base64.b64encode(zlib.compress(data, 9))
+
+def decode_data(data):
+    """return the decoded data as a string"""
+    return base64.b64decode(zlib.decompress(data))
 
 def write2json(json_file, obj):
     json_file.truncate(0)
@@ -219,6 +228,14 @@ def parse_run(run, job):
                     err = err.read()
                     run['stdout'].append(out)
                     run['stderr'].append(err)
+
+                    #Lets parse and remove the data output file 
+                    if run['save_data_output']:
+                        outname = "%s.npz"%base
+                        with open(outname, 'r') as data:
+                            run['data_output'].append(encode_data(data.read()))
+                        os.remove(outname)
+
                     elapsed = parse_elapsed_times(out)[0]
                     print elapsed
                     run['elapsed'].append(elapsed)
@@ -339,6 +356,10 @@ def add_pending_job(setup, nrun, partition):
         if setup['use_perf']:
             cmd += get_perf("%s.perf"%outfile)
         cmd += bridge_cmd
+
+        if setup['save_data_output']:
+            cmd += " --outputfn=%s"%outfile
+
         job += "%s "%cmd
         setup['cmd'] = cmd
 
@@ -440,6 +461,8 @@ def gen_jobs(result_file, config, args):
                                        'bh_config':bh_config.getvalue(),
                                        'use_perf': not args.no_perf,
                                        'use_time': not args.no_time,
+                                       'save_data_output': args.save_data,
+                                       'data_output': [],
                                        'use_slurm_default':benchmark.get('use_slurm_default', False),
                                        'elapsed': [],
                                        'timings': {},
@@ -544,6 +567,12 @@ if __name__ == "__main__":
         '--no-time',
         action="store_true",
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
+    )
+    parser.add_argument(
+        '--save-data',
+        action="store_true",
+        help="Save data output from benchmarks in RESULT_FILE. "\
+             "All benchmarks must support the --outputfn argument."
     )
     parser.add_argument(
         '--restart',
