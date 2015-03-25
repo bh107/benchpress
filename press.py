@@ -298,11 +298,16 @@ def get_time(filename):
     return time_cmd
 
 
-def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
+def add_pending_job(setup, nrun, partition):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uuid.uuid4()
     filename = os.path.join(cwd,basename)
+
+    bridge_cmd = setup['bridge_cmd'].replace("{script}",  setup['script'])
+    bridge_cmd = bridge_cmd.replace("{args}",  setup['script_args'])
+    if setup['manager_cmd'] is not None and len(setup['manager_cmd']) > 0:
+        bridge_cmd = setup['manager_cmd'].replace("{bridge}", bridge_cmd)
 
     job = "#!/bin/bash\n"
     for i in xrange(nrun):
@@ -334,9 +339,8 @@ def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
         if setup['use_perf']:
             cmd += get_perf("%s.perf"%outfile)
         cmd += bridge_cmd
-        if manager_cmd is not None and len(manager_cmd) > 0:
-            cmd = manager_cmd.replace("{bridge}", cmd)
         job += "%s "%cmd
+        setup['cmd'] = cmd
 
         #Pipe the output to files
         job += '1> %s.out 2> %s.err\n'%(outfile,outfile)
@@ -349,21 +353,19 @@ def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
                           'nrun': nrun,
                           'script': job})
 
-
-def gen_jobs(result_file, config, src_root, suite_file,
-             nrun, use_perf, use_time, partition, multi_jobs):
+def gen_jobs(result_file, config, args):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
-        'meta': meta(src_root, suite_file.name),
+        'meta': meta(args.bohrium_src, args.suite_file.name),
         'runs': []
     }
 
     #Lets import the suite file as a Python module
-    sys.path.append(os.path.abspath(os.path.dirname(suite_file.name)))
-    benchmarks = __import__(os.path.basename(suite_file.name)[:-3]).suites
+    sys.path.append(os.path.abspath(os.path.dirname(args.suite_file.name)))
+    benchmarks = __import__(os.path.basename(args.suite_file.name)[:-3]).suites
 
-    print "Benchmark suite '%s'; results are written to: %s" % (suite_file.name, result_file.name)
+    print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
     i=0
     for benchmark in benchmarks:
         for script_alias, script, script_args in benchmark['scripts']:
@@ -409,9 +411,6 @@ def gen_jobs(result_file, config, src_root, suite_file,
                             if bridge_env is not None:
                                 envs_overwrite.update(bridge_env)
 
-                            bridge_cmd = bridge_cmd.replace("{script}", script)
-                            bridge_cmd = bridge_cmd.replace("{args}", script_args)
-
                             p = "Scheduling %s/%s on "%(bridge_alias,script)
                             if manager and manager != "node":
                                 p += "%s/"%manager_alias
@@ -426,14 +425,17 @@ def gen_jobs(result_file, config, src_root, suite_file,
                                    'engine':engine,
                                    'envs':envs,
                                    'envs_overwrite':envs_overwrite,
-                                   'cmd': bridge_cmd.split(" "),
-                                   'cwd':src_root,
+                                   'cwd': args.bohrium_src,
                                    'pre-hook': benchmark.get('pre-hook', None),
                                    'post-hook': benchmark.get('post-hook', None),
+                                   'script' : script,
+                                   'script_args' : script_args,
+                                   'bridge_cmd' : bridge_cmd,
+                                   'manager_cmd' : manager_cmd,
                                    'jobs':[],
                                    'bh_config':bh_config.getvalue(),
-                                   'use_perf':use_perf,
-                                   'use_time':use_time,
+                                   'use_perf': not args.no_perf,
+                                   'use_time': not args.no_time,
                                    'use_slurm_default':benchmark.get('use_slurm_default', False),
                                    'elapsed': [],
                                    'timings': {},
@@ -442,13 +444,13 @@ def gen_jobs(result_file, config, src_root, suite_file,
                                    'stderr': [],
                                    'perf':[]}
                             njobs = 1
-                            job_nrun = nrun
-                            if multi_jobs:
-                                njobs = nrun
+                            job_nrun = args.runs
+                            if args.multi_jobs:
+                                njobs = args.runs
                                 job_nrun = 1
                             for _ in xrange(njobs):
                                 i += 1
-                                add_pending_job(run, job_nrun, bridge_cmd, manager_cmd, partition)
+                                add_pending_job(run, job_nrun, args.partition)
                             results['runs'].append(run)
                             results['meta']['ended'] = str(datetime.now())
 
@@ -531,12 +533,12 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--no-perf',
-        action="store_false",
+        action="store_true",
         help="Disable the use of the perf measuring tool."
     )
     parser.add_argument(
         '--no-time',
-        action="store_false",
+        action="store_true",
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
     )
     parser.add_argument(
@@ -599,16 +601,7 @@ if __name__ == "__main__":
                 result_file = open(args.output, 'w+')
 
             #Populate 'result_file' with benchmark jobs/runs
-            gen_jobs(result_file,
-                os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
-                args.bohrium_src,
-                args.suite_file,
-                args.runs,
-                args.no_perf,
-                args.no_time,
-                args.partition,
-                args.multi_jobs
-            )
+            gen_jobs(result_file, os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini', args)
 
         if args.wait:
             while True:#Probe for finished jobs (one second delay)
