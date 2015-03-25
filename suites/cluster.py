@@ -45,7 +45,7 @@ engines = [('dynamite',  'dynamite',   None)]
 python_script = [('N-body 15k*10', 'nbody', '--size=15000*10')]
 
 python = {
-    'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'engines':  engines,
     'managers': managers,
     'scripts':  python_script

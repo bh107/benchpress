@@ -20,17 +20,17 @@ scripts = [
 
 numpy = {
     'bridges':  [
-        ('NumPy/Native', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/Native', 'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "0", 'VCACHE_BYTES': "0"}),
-        ('NumPy/Oldest', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/Oldest', 'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "10",
              'VCACHE_BYTES': "1048576000",
              "VCACHE_EVICT_STRATEGY": 'RR'}),
-        ('NumPy/Random', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/Random', 'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "10",
              'VCACHE_BYTES': "1048576000",
              "VCACHE_EVICT_STRATEGY": 'RND'}),
-        ('NumPy/SChance',  'python benchmark/Python/{script}.py {args}',
+        ('NumPy/SChance',  'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "10",
              'VCACHE_BYTES': "1048576000",
              "VCACHE_EVICT_STRATEGY": 'SC'}),

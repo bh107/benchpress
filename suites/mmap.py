@@ -19,13 +19,13 @@ scripts = [
 ]
 numpy = {
     'bridges':  [
-        ('NumPy/Native', 'python benchmark/Python/{script}.py {args}', {'VCACHE_LINES': "0"}),
+        ('NumPy/Native', 'python benchmark/python/{script}.py {args}', {'VCACHE_LINES': "0"}),
 
-        ('NumPy/MMAP_100M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/MMAP_100M', 'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "0", "MALLOC_MMAP_MAX": "0", "MALLOC_TRIM_THRESHOLD_": "104857600"} ),
-        ('NumPy/MMAP_512M', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/MMAP_512M', 'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "0", "MALLOC_MMAP_MAX": "0", "MALLOC_TRIM_THRESHOLD_": "536870912"} ),
-        ('NumPy/MMAP_1G', 'python benchmark/Python/{script}.py {args}',
+        ('NumPy/MMAP_1G', 'python benchmark/python/{script}.py {args}',
             {'VCACHE_LINES': "0", "MALLOC_MMAP_MAX": "0", "MALLOC_TRIM_THRESHOLD_": "1048576000"} ),
 
     ],

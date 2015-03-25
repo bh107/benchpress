@@ -16,14 +16,14 @@ scripts   = [
 ]
 
 bohrium = {
-    'bridges': [('Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [('Bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'engines': [('CPU', 'cpu', None),
                 ('GPU', 'gpu', None)],
     'scripts': scripts,
 }
 
 numpy = {
-    'bridges': [('NumPy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+    'bridges': [('NumPy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'engines': [('CPU', 'cpu', None)],
     'scripts': scripts,
 }

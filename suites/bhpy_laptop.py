@@ -30,14 +30,14 @@ scripts = [
 ]
 
 python_bh  = {
-    'bridges':  [('NumPy-BH', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('NumPy-BH', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'engines':  [('cpu',    'cpu',  None)],
     'managers': [('node',   'node', '',  None)],
     'scripts':  scripts
 }
 
 python = {
-    'bridges':  [('NumPy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+    'bridges':  [('NumPy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts
 }
 

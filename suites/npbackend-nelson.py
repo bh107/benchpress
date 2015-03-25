@@ -6,7 +6,7 @@ scripts   = [
     ('snakes_and_ladders_no_matmul', 'snakes_and_ladders', '--size=2000*10 --no-extmethods'),
 ]
 
-PREFIX = 'python benchmark/Python/{script}.py {args} ' 
+PREFIX = 'python benchmark/python/{script}.py {args} ' 
 
 backends = {
     'bridges': [

@@ -12,12 +12,12 @@ scripts = [
 managers= [('node', 'node', '', None)]
 
 numpy = {
-    'bridges':  [('NumPy/Native', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+    'bridges':  [('NumPy/Native', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts,
 }
 
 bohrium = {
-    'bridges':  [('NumPy/Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('NumPy/Bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',  'node', '',  None) ],
     'engines':  [
         ('score',  'score',{'BH_CORE_VCACHE_SIZE': '10', 'BH_VE_CPU_TRAVERSAL': 'naive'}),

@@ -39,7 +39,7 @@ python_script = [\
 ]
 
 python = {
-    'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': managers,
     'engines': engines,
     'scripts': python_script,
@@ -47,7 +47,7 @@ python = {
 }
 
 python_no_proxy = {
-    'bridges':  [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': [('cluster',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
     'engines':  [('cpu', 'cpu', None)],
     'scripts':  python_script,
@@ -55,14 +55,14 @@ python_no_proxy = {
 }
 
 python_viz = {
-    'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers':[('proxyViz', 'proxy', '{bridge} --visualize', None)],
     'engines': engines,
     'scripts': python_script,
     'pre-hook': 'sbatch -p octuplets --nodes 8 hooks/proxy-VEM-pre-hook.sh'
 }
 python_viz_no_proxy = {
-    'bridges':  [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': [('clusterViz',  'cluster', 'mpiexec -ppn 4 -np 1 {bridge} --visualize : -np 31 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':8,'OMP_NUM_THREADS':8})],
     'engines':  [('cpu', 'cpu', None)],
     'scripts':  python_script,

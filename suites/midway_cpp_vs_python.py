@@ -54,7 +54,7 @@ cpp = {
 }
 
 python = {
-    'bridges':  [('NumPy/Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('NumPy/Bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': managers,
     'engines':  engines,
     'scripts':  []+scholes+jacobi+mc

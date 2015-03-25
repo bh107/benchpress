@@ -1,7 +1,7 @@
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bohrium = [
-    ('bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)
+    ('bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)
 ]
 
 # Engines with various parameter setups
