@@ -37,8 +37,6 @@ scripts = [
     #('Wireworld',               'wireworld',                '--size=10*10')
 ]
 
-managers= [('node', 'node', '', None)]
-
 numpy = {
     'bridges':  [('NumPy/Native', 'taskset -c 0 python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts,
@@ -47,6 +45,7 @@ numpy = {
 bohrium = {
     'bridges':  [('NumPy/Bohrium', 'taskset -c 0 python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',  'node', '',  None) ],
+    'filters':  [('complete_reduction', 'complete_reduction', None)],
     'engines':  [
         ('fusion_01',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '1'                           }),
         ('fusion_02',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '2'                           }),
