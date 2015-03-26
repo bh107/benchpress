@@ -138,7 +138,7 @@ def encode_data(data):
 
 def decode_data(data):
     """return the decoded data as a string"""
-    return base64.b64decode(zlib.decompress(data))
+    return zlib.decompress(base64.b64decode(data))
 
 def write2json(json_file, obj):
     json_file.truncate(0)
@@ -229,11 +229,12 @@ def parse_run(run, job):
                     run['stdout'].append(out)
                     run['stderr'].append(err)
 
-                    #Lets parse and remove the data output file 
+                    #Lets parse and remove the data output file
                     if run['save_data_output']:
+                        import numpy as np
                         outname = "%s.npz"%base
-                        with open(outname, 'r') as data:
-                            run['data_output'].append(encode_data(data.read()))
+                        with np.load(outname) as data:
+                            run['data_output'].append(encode_data(data['res'].dumps()))
                         os.remove(outname)
 
                     elapsed = parse_elapsed_times(out)[0]
