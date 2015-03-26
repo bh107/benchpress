@@ -12,7 +12,7 @@ import sys
 import os
 import re
 
-from parser import from_file as rparse
+from result_parser import from_file as rparse
 
 formats = ['png', 'pdf', 'eps']
 

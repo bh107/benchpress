@@ -3,8 +3,8 @@ import argparse
 import pprint
 import json
 
-from parser import from_file, from_str, avg
-from parser import standard_deviation as std
+from result_parser import from_file, from_str, avg
+from result_parser import standard_deviation as std
 
 def raw(results):
     pprint.pprint(results)

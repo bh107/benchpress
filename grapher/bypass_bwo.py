@@ -1,5 +1,5 @@
 from graph import *
-from parser import standard_deviation, avg
+from result_parser import standard_deviation, avg
 
 def max_deviation(samples):
     return max(samples)-min(samples)
