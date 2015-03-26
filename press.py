@@ -233,13 +233,17 @@ def parse_run(run, job):
                     if run['save_data_output']:
                         import numpy as np
                         outname = "%s.npz"%base
-                        with np.load(outname) as data:
-                            try:
-                                res = data['res']
-                                run['data_output'].append(encode_data(data['res'].dumps()))
-                            except KeyError:
-                                print "No 'res' array in data output of %s"%run['script_alias']
-                        os.remove(outname)
+                        try:
+                            with np.load(outname) as data:
+                                try:
+                                    res = data['res']
+                                    run['data_output'].append(encode_data(data['res'].dumps()))
+                                except KeyError:
+                                    print _C.WARNING,"No 'res' array in data output of %s"\
+                                                     %run['script_alias'],_C.ENDC
+                            os.remove(outname)
+                        except IOError:
+                            print _C.WARNING,"Could not find the data output file '%s'"%outname,_C.ENDC
 
                     elapsed = parse_elapsed_times(out)[0]
                     print elapsed
