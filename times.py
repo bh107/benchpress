@@ -48,34 +48,36 @@ def datadiff(results, baseline):
     #Sort results into sets of scripts
     script_sets = {}
     for run in results:
-        assert run['save_data_output'] and len(run['data_output']) == 1
         if run['script_alias'] not in script_sets:
             script_sets[run['script_alias']] = []
         script_sets[run['script_alias']].append(run)
+
+    if len(script_sets) == 0:
+        print "No valid results!"
 
     for s in script_sets.values():
         #Lets find the baseline
         base = None
         for run in s:
-            if run['bridge_alias'] == baseline:
+            if run['bridge_alias'] == baseline and len(run['data_output']) == 1:
                 base = press.decode_data(run['data_output'][0])
                 base = np.loads(base)
                 break
-        assert base is not None
+        if base is None:
+            print "Baseline not found for %s!"%s[0]['script_alias']
+            continue
         for run in s:
             if run['bridge_alias'] == baseline:
+                continue
+            print "%s/%s/%s, "%(run['script_alias'], run['bridge_alias'], run['engine_alias']),
+
+            if not run['save_data_output'] or len(run['data_output']) != 1:
+                print "N/A"
                 continue
             data = press.decode_data(run['data_output'][0])
             data = np.loads(data)
             data = np.sum(np.absolute(data - base))
-            print "%s/%s/%s, %s"%(run['script_alias'], run['bridge_alias'], run['engine_alias'], data)
-
-
-
-
-
-
-
+            print "%s"%(data)
 
 def main():
     printers = {'raw':raw, 'times':times, 'parsed': parsed,

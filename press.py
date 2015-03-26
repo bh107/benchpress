@@ -234,7 +234,11 @@ def parse_run(run, job):
                         import numpy as np
                         outname = "%s.npz"%base
                         with np.load(outname) as data:
-                            run['data_output'].append(encode_data(data['res'].dumps()))
+                            try:
+                                res = data['res']
+                                run['data_output'].append(encode_data(data['res'].dumps()))
+                            except KeyError:
+                                print "No 'res' array in data output of %s"%run['script_alias']
                         os.remove(outname)
 
                     elapsed = parse_elapsed_times(out)[0]
