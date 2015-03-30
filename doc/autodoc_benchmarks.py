@@ -31,14 +31,14 @@ def implementations(pathi=".."+os.sep+".."):
     }
     benchmarks = {}
 
-    for root, dirnames, filenames in os.walk("../.."):
+    for root, dirnames, filenames in os.walk("../benchmarks/"):
         if [x for x in ignore if x in root]:    # Ignore some...
             continue
 
         for filename in filenames:              # Group the rest
             match = re.match(".*\.((cpp)|(py)|(c)$)", filename)
             if match:
-                dirs        = [x for x in root.split(os.sep) if x != ".."]
+                dirs        = [x for x in root.split(os.sep) if x not in ["..", "benchmarks"]]
                 benchmark   = dirs[0]
                 tool        = dirs[1]
                 lang        = match.group(1)
@@ -60,7 +60,7 @@ def implementations(pathi=".."+os.sep+".."):
                         meta["nlangs"] += 1
 
                 if tool not in benchmarks[benchmark][lang]:
-                    benchmarks[benchmark][lang][tool] = filename
+                    benchmarks[benchmark][lang][tool] = os.sep.join(dirs)+os.sep+filename
                     if tool not in meta["tools"]:
                         meta["tools"].append(tool)
                         meta["ntools"] += 1
@@ -96,7 +96,7 @@ def flatten(benchmarks):
                 if lang in impls[bench] and tool in impls[bench][lang]:
                     entry.append("+")
                 else:
-                    entry.append(".")
+                    entry.append(" ")
         flat.append(entry)
 
     return flat
@@ -151,18 +151,17 @@ def modify_column(func, rows):
     return delta
 
 def section_ref(text):
-    return ":ref:`%s`" % text
+    
+    return ":ref:`%s`" % text if text.strip() else text
 
-def main():
-    benchmarks = implementations()
+def benchmark_matrix(benchmarks):
     rows = flatten(benchmarks)
 
-    rows.insert(0, ["Benchmark"] + [" ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ])
+    rows.insert(0, [" "]+[ " ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ])
     rows = modify_column(section_ref, rows)
-    #rows = modify_column(pretty_name, rows)
     table= RstTable([], rows)
 
-    header_row      = ["*"]
+    header_row      = [" "]
     header_widths   = [table.col_widths[0]]
 
     cidx = 1
@@ -170,9 +169,10 @@ def main():
         ntools = benchmarks["__meta__"]["ntools_by_lang"][lang]
         width = 0
         if ntools>1:
-            width = (ntools-1)*3-1
+            width = (ntools-1)*3
         for idx in xrange(cidx, cidx+ntools):
             width += table.col_widths[idx]
+        cidx += ntools
         header_row.append(lang)
         header_widths.append(width)
     
@@ -180,18 +180,25 @@ def main():
     for col, width in zip(header_row, header_widths):
         row.append(col.ljust(width))
     
-    stuff = table.draw_sep(header_widths)+"\n"
-    stuff += table.draw_row(header_row, header_widths)+"\n"
-    stuff += table.render()
+    matrix = table.draw_sep(header_widths)+"\n"
+    matrix += table.draw_row(header_row, header_widths)+"\n"
+    matrix += table.render()
+
+    return matrix
+
+def sections(benchmarks):
+
+    meta = benchmarks["__meta__"]
+    benchs = benchmarks["impls"]
 
     sections = ""
-    for bench in benchmarks["__meta__"]["benchs"]:
-        section_title = pretty_name(bench)
-        section_label = bench
+    for bench_lbl in meta["benchs"]:
+        section_title = pretty_name(bench_lbl)
+        section_label = bench_lbl
         section = [
             "",
             "",
-            ".. _%s:" % bench,
+            ".. _%s:" % bench_lbl,
             "",
             section_title,
             "="*len(section_title),
@@ -199,7 +206,43 @@ def main():
         ]
         sections += "\n".join(section)
 
-    print stuff, sections
+        bench = benchs[bench_lbl]
+        for lang in (lang for lang in lang_order if lang in bench):
+            tools = bench[lang].keys()
+            tools.sort()
+            for tool in tools:
+                bench_tool_lbl = "%s_%s" % (bench_lbl, tool)
+                subsection_title = pretty_name(tool)
+                subsection = [
+                    "",
+                    "",
+                    ".. _%s:" % bench_tool_lbl,
+                    "",
+                    subsection_title,
+                    "-"*len(subsection_title),
+                    ""
+                ]
+                src_path = os.sep.join([
+                    "..","..","benchmarks"
+                ]+bench[lang][tool].split(os.sep))
+                subsection.append("\n.. literalinclude:: %s" % src_path)
+                subsection.append("   :language: %s" % lang)
+                subsection.append("")
+                sections += "\n".join(subsection)
+
+    return sections
+
+def main():
+    benchmarks = implementations()
+  
+    print ""
+    print "=========="
+    print "Benchmarks"
+    print "=========="
+    print ""
+    print benchmark_matrix(benchmarks)
+    print ""
+    print sections(benchmarks)
 
 if __name__ == "__main__":
     main()
