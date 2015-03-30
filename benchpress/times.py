@@ -103,5 +103,3 @@ def main():
     else:
         printer(open(args.results).read())
 
-if __name__ == "__main__":
-    main()

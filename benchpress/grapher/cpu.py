@@ -15,7 +15,7 @@ rcParams['font.serif'] = ['Computer Modern Roman']
 rcParams['text.usetex'] = True
 #rcParams['figure.max_num_figures'] = 40
 
-from result_parser import standard_deviation, variance, avg
+from benchpress.result_parser import standard_deviation, variance, avg
 
 env_types = {
     "BH_VE_CPU_JIT_FUSION": int,

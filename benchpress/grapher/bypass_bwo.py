@@ -1,10 +1,10 @@
 from graph import *
-from result_parser import standard_deviation, avg
+from benchpress.result_parser import standard_deviation, avg
 
 def max_deviation(samples):
     return max(samples)-min(samples)
 
-class Bypass_bwd(Graph):
+class Bypass_bwo(Graph):
     """Basic plot of x,y values with lgnd and stuff."""
 
     def render(self, raw, data, order=None, baseline=None, highest=None):
@@ -34,8 +34,8 @@ class Bypass_bwd(Graph):
 
         # Map the key to a more understandable name
         setup_mapping = {
-            "numpy/proxyVizDCSC/sleep    0ms":  "With Visualization",
-            "numpy/proxyDCSC/sleep    0ms":     "Without Visualization",
+            "numpy/proxyViz/sleep    0ms":  "With Visualization",
+            "numpy/proxy/sleep    0ms":     "Without Visualization",
         }
         
         # Now grab the above from data and create the data-set
@@ -49,7 +49,11 @@ class Bypass_bwd(Graph):
             app_m = app_map[app]
             datasets[app_m][setup]['elapsed'] = avg(sample['elapsed']) 
             datasets[app_m][setup]['std']     = standard_deviation(sample['elapsed']) * 2
+            #datasets[app_m][setup]['std']     = max_deviation(sample['elapsed']) 
 
+        # Dataset needed
+
+        
         # Now this what we need to create the graph.
         N       = len(datasets.keys())
         ind     = np.arange(N)  # the x locations for the groups
@@ -83,8 +87,6 @@ class Bypass_bwd(Graph):
                     bbox_to_anchor=(0., 1.02, 1.,.102), 
                     loc=2, ncol=2, mode="expand", borderaxespad=0.
         )
-        low, high = ax.get_ylim()
-        ax.set_ylim(0, high)
 
         def autolabel(rects):
             # attach some text labels
@@ -99,5 +101,5 @@ class Bypass_bwd(Graph):
         autolabel(rects1)
         autolabel(rects2)
         #plt.tight_layout()
-        self.to_file('bandwidth_dcsc')                # Spit them out to file
+        self.to_file('bandwidth_octuplets')                # Spit them out to file
 
