@@ -353,12 +353,14 @@ def add_pending_job(setup, nrun, partition):
             job += "#SBATCH -p %s\n"%partition
 
         #We need to write the bohrium config file to an unique path
-        job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
+        job += 'echo "%s" > %s\n'%(setup['bh_config'], tmp_config_name)
 
-        job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
+        job += "cd %s\n"%setup['cwd']                           #Change dir and execute cmd
+
+        if setup['pre_clean']:
+            job += "./misc/tools/bhutils.py clean\n"
 
         outfile = "%s-%d"%(filename,i)
-
         cmd = ""
         if setup['use_time']:
             cmd += get_time("%s.time"%outfile)
@@ -471,6 +473,7 @@ def gen_jobs(result_file, config, args):
                                        'use_perf': not args.no_perf,
                                        'use_time': not args.no_time,
                                        'save_data_output': args.save_data,
+                                       'pre_clean': args.pre_clean,
                                        'data_output': [],
                                        'use_slurm_default':benchmark.get('use_slurm_default', False),
                                        'elapsed': [],
@@ -582,6 +585,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Save data output from benchmarks in RESULT_FILE. "\
              "All benchmarks must support the --outputfn argument."
+    )
+    parser.add_argument(
+        '--pre-clean',
+        action="store_true",
+        help="Clean caches such as the fuse or the kernel cache before execution."
     )
     parser.add_argument(
         '--restart',
