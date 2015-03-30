@@ -253,7 +253,8 @@ def restructure(data_flattened):
 class Cpu(Graph):
     """Create a graph that illustrates scalabiltity."""
 
-    rename_labels = {'numpy': 'NumPy', 'fusion': 'Bohrium', 'sij': 'C++'}
+    #rename_labels = {'numpy': 'NumPy', 'fusion': 'Bohrium', 'sij': 'C++'}
+    rename_labels = {'numpy': 'NumPy', 'fusion': 'Bh-Fused', 'sij': 'Bh'}
 
     def render_rel(self, data, parameters, script, rel_type, rel_engine):
         self.graph_title = script.replace('#', '\#')
