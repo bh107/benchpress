@@ -7,7 +7,7 @@ import json
 
 #from grapher.graph import *
 #from grapher.scale import *
-from parser import from_file, avg, variance
+from result_parser import from_file, avg, variance
 
 formats = ['png', 'pdf', 'eps']
 

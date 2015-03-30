@@ -10,13 +10,13 @@ scripts   = [
 ]
 
 python = {
-    'bridges':  [('python-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+    'bridges':  [('python-numpy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts,
 }
 
 bohrium_taskset = {
     'bridges':  [
-        ('bh-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
+        ('bh-numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None),
     ],
     'managers': [
         ('node',  'node', '',  None),
@@ -33,7 +33,7 @@ bohrium_taskset = {
 }
 
 bohrium = {
-    'bridges':  [('bh-numpy-notaskset', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('bh-numpy-notaskset', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': [
         ('node',  'node', '',  None),
     ],

@@ -11,13 +11,13 @@ engines = [('simple',  'simple',   None)]
 python_script = [('Shallow Water 20k','shallow_water','--size=20000*20000*10'),
                  ('Shallow Water 25k','shallow_water','--size=25000*25000*10')]
 python = {
-    'bridges': [('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'engines': engines,
     'managers': managers,
     'scripts': python_script
 }
 python_native = {
-    'bridges': [('numpy-native', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+    'bridges': [('numpy-native', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'scripts': python_script
 }
 

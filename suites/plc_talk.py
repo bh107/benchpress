@@ -15,12 +15,12 @@ scriptsp = [('Heat Equation 2k x 2k','','2000*2000*100')
 
 
 numpy32 = {
-    'bridges': [('numpy32', 'python benchmark/Python/heat_equation.py --dtype=float32 --bohrium=False --size={args}', None)],
+    'bridges': [('numpy32', 'python benchmark/python/heat_equation.py --dtype=float32 --bohrium=False --size={args}', None)],
     'scripts': scriptsp
 }
 
 numpy64 = {
-    'bridges': [('numpy64', 'python benchmark/Python/heat_equation.py --dtype=float64 --bohrium=False --size={args}', None)],
+    'bridges': [('numpy64', 'python benchmark/python/heat_equation.py --dtype=float64 --bohrium=False --size={args}', None)],
     'scripts': scriptsp
 }
 
@@ -35,14 +35,14 @@ opencl64 = {
 }
 
 bohrium32 = {
-    'bridges': [('bohrium32', 'python benchmark/Python/heat_equation.py --dtype=float32 --bohrium=True --size={args}', None)],
+    'bridges': [('bohrium32', 'python benchmark/python/heat_equation.py --dtype=float32 --bohrium=True --size={args}', None)],
     'engines': [('GPU',  'gpu', None)], 
     'managers': [('node',  'node', '',  None)],
     'scripts': scriptsb
 }
 
 bohrium64 = {
-    'bridges': [('bohrium64', 'python benchmark/Python/heat_equation.py --dtype=float64 --bohrium=True --size={args}', None)],
+    'bridges': [('bohrium64', 'python benchmark/python/heat_equation.py --dtype=float64 --bohrium=True --size={args}', None)],
     'engines': [('GPU',  'gpu', None)], 
     'managers': [('node',  'node', '',  None)],
     'scripts': scriptsb

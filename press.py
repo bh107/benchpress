@@ -15,6 +15,8 @@ import re
 import StringIO
 import uuid
 import time
+import base64
+import zlib
 
 import suites
 
@@ -130,6 +132,13 @@ def perf_counters():
 
     return ','.join(events)
 
+def encode_data(data):
+    """return the encoded data as a string"""
+    return base64.b64encode(zlib.compress(data, 9))
+
+def decode_data(data):
+    """return the decoded data as a string"""
+    return zlib.decompress(base64.b64decode(data))
 
 def write2json(json_file, obj):
     json_file.truncate(0)
@@ -219,6 +228,23 @@ def parse_run(run, job):
                     err = err.read()
                     run['stdout'].append(out)
                     run['stderr'].append(err)
+
+                    #Lets parse and remove the data output file
+                    if run['save_data_output']:
+                        import numpy as np
+                        outname = "%s.npz"%base
+                        try:
+                            with np.load(outname) as data:
+                                try:
+                                    res = data['res']
+                                    run['data_output'].append(encode_data(data['res'].dumps()))
+                                except KeyError:
+                                    print _C.WARNING,"No 'res' array in data output of %s"\
+                                                     %run['script_alias'],_C.ENDC
+                            os.remove(outname)
+                        except IOError:
+                            print _C.WARNING,"Could not find the data output file '%s'"%outname,_C.ENDC
+
                     elapsed = parse_elapsed_times(out)[0]
                     print elapsed
                     run['elapsed'].append(elapsed)
@@ -298,11 +324,16 @@ def get_time(filename):
     return time_cmd
 
 
-def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
+def add_pending_job(setup, nrun, partition):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uuid.uuid4()
     filename = os.path.join(cwd,basename)
+
+    bridge_cmd = setup['bridge_cmd'].replace("{script}",  setup['script'])
+    bridge_cmd = bridge_cmd.replace("{args}",  setup['script_args'])
+    if setup['manager_cmd'] is not None and len(setup['manager_cmd']) > 0:
+        bridge_cmd = setup['manager_cmd'].replace("{bridge}", bridge_cmd)
 
     job = "#!/bin/bash\n"
     for i in xrange(nrun):
@@ -322,21 +353,26 @@ def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
             job += "#SBATCH -p %s\n"%partition
 
         #We need to write the bohrium config file to an unique path
-        job += 'echo "%s" > %s'%(setup['bh_config'], tmp_config_name)
+        job += 'echo "%s" > %s\n'%(setup['bh_config'], tmp_config_name)
 
-        job += "\ncd %s\n"%setup['cwd']                           #Change dir and execute cmd
+        job += "cd %s\n"%setup['cwd']                           #Change dir and execute cmd
+
+        if setup['pre_clean']:
+            job += "./misc/tools/bhutils.py clean\n"
 
         outfile = "%s-%d"%(filename,i)
-
         cmd = ""
         if setup['use_time']:
             cmd += get_time("%s.time"%outfile)
         if setup['use_perf']:
             cmd += get_perf("%s.perf"%outfile)
         cmd += bridge_cmd
-        if manager_cmd is not None and len(manager_cmd) > 0:
-            cmd = manager_cmd.replace("{bridge}", cmd)
+
+        if setup['save_data_output']:
+            cmd += " --outputfn=%s"%outfile
+
         job += "%s "%cmd
+        setup['cmd'] = cmd
 
         #Pipe the output to files
         job += '1> %s.out 2> %s.err\n'%(outfile,outfile)
@@ -349,21 +385,19 @@ def add_pending_job(setup, nrun, bridge_cmd, manager_cmd, partition=None):
                           'nrun': nrun,
                           'script': job})
 
-
-def gen_jobs(result_file, config, src_root, suite_file,
-             nrun, use_perf, use_time, partition, multi_jobs):
+def gen_jobs(result_file, config, args):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
-        'meta': meta(src_root, suite_file.name),
+        'meta': meta(args.bohrium_src, args.suite_file.name),
         'runs': []
     }
 
     #Lets import the suite file as a Python module
-    sys.path.append(os.path.abspath(os.path.dirname(suite_file.name)))
-    benchmarks = __import__(os.path.basename(suite_file.name)[:-3]).suites
+    sys.path.append(os.path.abspath(os.path.dirname(args.suite_file.name)))
+    benchmarks = __import__(os.path.basename(args.suite_file.name)[:-3]).suites
 
-    print "Benchmark suite '%s'; results are written to: %s" % (suite_file.name, result_file.name)
+    print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
     i=0
     for benchmark in benchmarks:
         for script_alias, script, script_args in benchmark['scripts']:
@@ -380,7 +414,7 @@ def gen_jobs(result_file, config, src_root, suite_file,
 
                                 manager = manager if manager else "node"
                                 fuser = fuser if fuser else "topological"
-                                
+
                                 has_filter = confparser.has_section(filtr)
                                 if has_filter:
                                     confparser.set("bridge", "children", filtr)
@@ -413,9 +447,6 @@ def gen_jobs(result_file, config, src_root, suite_file,
                                 if bridge_env is not None:
                                     envs_overwrite.update(bridge_env)
 
-                                bridge_cmd = bridge_cmd.replace("{script}", script)
-                                bridge_cmd = bridge_cmd.replace("{args}", script_args)
-
                                 p = "Scheduling %s/%s on "%(bridge_alias,script)
                                 if manager and manager != "node":
                                     p += "%s/"%manager_alias
@@ -430,14 +461,20 @@ def gen_jobs(result_file, config, src_root, suite_file,
                                        'engine':engine,
                                        'envs':envs,
                                        'envs_overwrite':envs_overwrite,
-                                       'cmd': bridge_cmd.split(" "),
-                                       'cwd':src_root,
+                                       'cwd': args.bohrium_src,
                                        'pre-hook': benchmark.get('pre-hook', None),
                                        'post-hook': benchmark.get('post-hook', None),
+                                       'script' : script,
+                                       'script_args' : script_args,
+                                       'bridge_cmd' : bridge_cmd,
+                                       'manager_cmd' : manager_cmd,
                                        'jobs':[],
                                        'bh_config':bh_config.getvalue(),
-                                       'use_perf':use_perf,
-                                       'use_time':use_time,
+                                       'use_perf': not args.no_perf,
+                                       'use_time': not args.no_time,
+                                       'save_data_output': args.save_data,
+                                       'pre_clean': args.pre_clean,
+                                       'data_output': [],
                                        'use_slurm_default':benchmark.get('use_slurm_default', False),
                                        'elapsed': [],
                                        'timings': {},
@@ -446,13 +483,13 @@ def gen_jobs(result_file, config, src_root, suite_file,
                                        'stderr': [],
                                        'perf':[]}
                                 njobs = 1
-                                job_nrun = nrun
-                                if multi_jobs:
-                                    njobs = nrun
+                                job_nrun = args.runs
+                                if args.multi_jobs:
+                                    njobs = args.runs
                                     job_nrun = 1
                                 for _ in xrange(njobs):
                                     i += 1
-                                    add_pending_job(run, job_nrun, bridge_cmd, manager_cmd, partition)
+                                    add_pending_job(run, job_nrun, args.partition)
                                 results['runs'].append(run)
                                 results['meta']['ended'] = str(datetime.now())
 
@@ -535,13 +572,24 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--no-perf',
-        action="store_false",
+        action="store_true",
         help="Disable the use of the perf measuring tool."
     )
     parser.add_argument(
         '--no-time',
-        action="store_false",
+        action="store_true",
         help="Disable the use of the '/usr/bin/time -v' measuring tool."
+    )
+    parser.add_argument(
+        '--save-data',
+        action="store_true",
+        help="Save data output from benchmarks in RESULT_FILE. "\
+             "All benchmarks must support the --outputfn argument."
+    )
+    parser.add_argument(
+        '--pre-clean',
+        action="store_true",
+        help="Clean caches such as the fuse or the kernel cache before execution."
     )
     parser.add_argument(
         '--restart',
@@ -603,16 +651,7 @@ if __name__ == "__main__":
                 result_file = open(args.output, 'w+')
 
             #Populate 'result_file' with benchmark jobs/runs
-            gen_jobs(result_file,
-                os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini',
-                args.bohrium_src,
-                args.suite_file,
-                args.runs,
-                args.no_perf,
-                args.no_time,
-                args.partition,
-                args.multi_jobs
-            )
+            gen_jobs(result_file, os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini', args)
 
         if args.wait:
             while True:#Probe for finished jobs (one second delay)

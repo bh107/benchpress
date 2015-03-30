@@ -8,12 +8,12 @@ scripts = [
 managers= [('node', 'node', '', None)]
 
 numpy = {
-    'bridges':  [('NumPy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+    'bridges':  [('NumPy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
     'scripts':  scripts,
 }
 
 bohrium = {
-    'bridges':  [('Bohrium', 'python benchmark/Python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [('Bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
     'managers': [('node',  'node', '',  None) ],
     'fusers':   [('topological', 'topological', None)],
     'engines':  [

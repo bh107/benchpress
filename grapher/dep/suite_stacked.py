@@ -14,7 +14,7 @@ import re
 import numpy as np
 from matplotlib.ticker import FuncFormatter
 
-from parser import from_file as rparse
+from result_parser import from_file as rparse
 
 def to_percent(y, position):
     # Ignore the passed in position. This has the effect of scaling the default

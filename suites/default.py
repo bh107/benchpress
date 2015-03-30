@@ -1,7 +1,7 @@
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bridges = [
-    ('numpy', 'python benchmark/Python/{script}.py {args} --bohrium=True', None),
+    ('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None),
     ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args}', None),
     ('cpp', 'benchmark/cpp/bin/{script} {args}', None)
 ]
@@ -19,9 +19,8 @@ managers = [
 # Engines with various parameter setups
 # (alias, engine, env-vars)
 engines = [
-    ('naive',   'naive',    None),
-    ('simple',  'simple',   None),
-    ('gpu',     'gpu',      None),
+    ('cpu',   'cpu',    None),
+    ('gpu',   'gpu',    None),
 ]
 
 # Scripts and their arguments
@@ -45,7 +44,7 @@ suite = {
 
 
 native = {
-        'bridges': [('native-numpy', 'python benchmark/Python/{script}.py {args} --bohrium=False', None)],
+        'bridges': [('native-numpy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
         'scripts': scripts
 }
 
