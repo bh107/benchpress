@@ -1,7 +1,6 @@
 from __future__ import print_function
-from benchpress.util import Benchmark
-
-if Benchmark().bohrium:
+import util
+if util.Benchmark().bohrium:
     import bohrium as np
 else:
     import numpy as np
@@ -57,7 +56,7 @@ def price(S, I, flag='c', X=65.0, dT=(1.0/365.0), r=0.08, v=0.3, visualize=False
     return Ps
 
 def main():
-    B = Benchmark()
+    B = util.Benchmark()
     (N, I) = B.size
 
     if B.inputfn:
