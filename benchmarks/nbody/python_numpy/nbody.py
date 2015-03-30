@@ -172,12 +172,12 @@ def main():
 
     B.start()
     simulate(galaxy, I, visualize=B.visualize)
-    R = np.sum(galaxy['x'] + galaxy['y'] + galaxy['z'])
+    R = galaxy['x'] + galaxy['y'] + galaxy['z']
     B.stop()
 
     B.pprint()
     if B.outputfn:
-        B.tofile(B.outputfn, galaxy)
+        B.tofile(B.outputfn, {'res':R})
 
 if __name__ == "__main__":
     main()
