@@ -74,10 +74,14 @@ def datadiff(results, baseline):
             if not run['save_data_output'] or len(run['data_output']) != 1:
                 print "N/A"
                 continue
+            if np.isscalar(base) or base.ndim == 0:
+                continue
             data = press.decode_data(run['data_output'][0])
             data = np.loads(data)
-            data = np.sum(np.absolute(data - base))
-            print "%s"%(data)
+            diff = np.zeros_like(data)
+            nz = base != 0
+            diff[nz] = np.absolute(base[nz] - data[nz]) / np.absolute(base[nz]) 
+            print "%s (std: %s, max: %s)"%(diff.mean(), np.std(diff), np.max(diff))
 
 def main():
     printers = {'raw':raw, 'times':times, 'parsed': parsed,
