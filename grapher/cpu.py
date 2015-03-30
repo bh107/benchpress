@@ -253,8 +253,11 @@ def restructure(data_flattened):
 class Cpu(Graph):
     """Create a graph that illustrates scalabiltity."""
 
+    #rename_labels = {'numpy': 'NumPy', 'fusion': 'Bohrium', 'sij': 'C++'}
+    rename_labels = {'numpy': 'NumPy', 'fusion': 'Bh-Fused', 'sij': 'Bh'}
+
     def render_rel(self, data, parameters, script, rel_type, rel_engine):
-        self.graph_title = script
+        self.graph_title = script.replace('#', '\#')
         self.prep()
 
         min_threads     = 1
@@ -265,7 +268,7 @@ class Cpu(Graph):
         legends = {'plots': [], 'legends': []}
         for i, engine in enumerate(engine_ord):
             legend_txt = r"%s: \textbf{%.1f} - \textbf{%.1f}" % (
-                engine,
+                self.rename_labels[engine],
                 data[script]['min'][rel_engine][engine],
                 data[script]['max'][rel_engine][engine]
             )
@@ -274,7 +277,7 @@ class Cpu(Graph):
                 linear,
                 elapsed,
                 "-*",
-                label=engine,
+                label=self.rename_labels[engine],
                 color=colors[i]
             )
             legends['plots'].append(p)
@@ -289,7 +292,7 @@ class Cpu(Graph):
 
         #
         # Scale y-axis with a neat border
-        ylabel(r"Speedup in relation to \textbf{%s}" % rel_engine)
+        ylabel(r"Speedup in relation to \textbf{%s}" % self.rename_labels[rel_engine])
         yscale("symlog")
         yt_range = list(brange(min_threads, max(script_max, max_threads)))
         yticks(yt_range, yt_range)
@@ -316,7 +319,7 @@ class Cpu(Graph):
             borderaxespad=0.0,
         )
 
-        t = title(script)
+        t = title(script.replace('#', '\#'))
         t.set_y(1.05)
         
         tight_layout()                  # Spit them out to file
@@ -324,7 +327,7 @@ class Cpu(Graph):
 
     def render_absolute(self, data, parameters, script):
 
-        self.graph_title = r"\textbf{%s}" % script
+        self.graph_title = r"\textbf{%s}" % script.replace('#', '\#')
         self.prep()
 
         min_threads     = 1
@@ -359,13 +362,13 @@ class Cpu(Graph):
 
         # add some text for labels, title and axes ticks
         ax.set_ylabel(r"Elapsed wall-clock time in \textbf{seconds}")
-        ax.set_title(script)
+        ax.set_title(script.replace('#', '\#'))
         ax.set_xticks([x+group_center for x in ind])
         ax.set_xticklabels([str(x) for x in linear])
 
         ax.legend(
             [rects[engine] for engine in engine_ord],
-            [engine for engine in engine_ord],
+            [self.rename_labels[engine] for engine in engine_ord],
             loc=3,
             ncol=3,
             bbox_to_anchor=(0.01, 0.95, 0.9, 0.102),
@@ -388,7 +391,7 @@ class Cpu(Graph):
             autolabel(rects[engine])
 
         xlabel("Threads")
-        t = title(script)
+        t = title(script.replace('#', '\#'))
         t.set_y(1.05)
 
         ylim(ymin=0, ymax=max_runtime*1.13)
