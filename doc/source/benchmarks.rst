@@ -56,8 +56,6 @@ Benchmarks
 +-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
 | :ref:`mc`                     | +     |     |         |     |           |       |       |     |       |     |        |
 +-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`mcpi`                   | +     | +   |         |     |           | +     |       | +   |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
 | :ref:`mxmul`                  | +     |     |         |     |           |       |       |     |       |     |        |
 +-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
 | :ref:`nbody`                  | +     |     |         |     |           |       |       |     |       |     |        |
@@ -561,52 +559,6 @@ Python Numpy
 
 .. literalinclude:: ../../benchmarks/mc/python_numpy/mc.py
    :language: py
-
-
-.. _mcpi:
-
-Mcpi
-====
-
-
-.. _mcpi_python_numpy:
-
-Python Numpy
-------------
-
-
-.. literalinclude:: ../../benchmarks/mcpi/python_numpy/mcpi.py
-   :language: py
-
-
-.. _mcpi_c99_omp:
-
-C99 Omp
--------
-
-
-.. literalinclude:: ../../benchmarks/mcpi/c99_omp/src/mcpi.c
-   :language: c
-
-
-.. _mcpi_cpp11_blitz:
-
-Cpp11 Blitz
------------
-
-
-.. literalinclude:: ../../benchmarks/mcpi/cpp11_blitz/src/mcpi.cpp
-   :language: cpp
-
-
-.. _mcpi_cpp11_bxx:
-
-Cpp11 Bxx
----------
-
-
-.. literalinclude:: ../../benchmarks/mcpi/cpp11_bxx/mcpi.cpp
-   :language: cpp
 
 
 .. _mxmul:
