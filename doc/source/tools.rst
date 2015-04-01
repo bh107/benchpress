@@ -6,11 +6,15 @@ Installation
 ============
 
 Benchpress is distributed as a Python package via PyPi. It can also be used directly from an unpacked tar-ball or from a git-clone.
+
+From pypi.python.org
+--------------------
+
 The following shows how to do a user-mode / local installation::
 
   pip install benchpress --user
 
-Extend your ``$PATH``, such that the commands (`bp_run`, `bp_times`, `and bp_grapher`) are readily available::
+Extend your ``$PATH``, such that the commands (`bp_run`, `bp_times`, `bp_compile`, `and bp_grapher`) are readily available::
 
   export PATH=$PATH:$HOME/.local/bin
 
@@ -25,8 +29,8 @@ When using this approach uninstall is equally simple::
 You can do a system-wide installation by omitting the ``--user`` flag. If you do a system-wide installation then extending ``$PATH`` is not required.
 Additionally, implementations and suites will be avaiable are operating systems ``share`` location instead of ``.local``.
 
-Running from source clone or tarball
-------------------------------------
+From clone or tarball
+---------------------
 
 Clone the repos::
 
@@ -40,13 +44,9 @@ or download and unpack tarball::
   cd bohrium-benchpress-*
 
 Then set your ``$PATH`` to the directory you have cloned or extracted to.
-Or just invoke the tools, like so::
+Set your ``$PYTHONPATH`` to the benchpress subdirectory.
 
-  ./bp_times
-  ./bp_run
-  ./bp_graph
-
-Running the Python benchmarks requires that the ``benchpress`` module is in your ``$PYTHONPATH``.
+If you do not want to set paths then your working directory must be the root of the clone/tarball.
 
 Cli
 ===
@@ -66,8 +66,8 @@ bp_grapher
 
 ...
 
-Libraries / Modules
-===================
+Implementations / Libraries / Modules
+=====================================
 
 Python
 ------
