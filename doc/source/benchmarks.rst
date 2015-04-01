@@ -1,112 +1,98 @@
-
 ==========
 Benchmarks
 ==========
 
-+-------------------------------+-------+---------------------+--------------------------------------------------------+
-|                               | py    | c                   | cpp                                                    |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-|                               | Numpy | Omp | Omp Mpi | Seq | Armadillo | Blitz | Boost | Bxx | Eigen | Omp | Opencl |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`LMM_swaption_vec`       | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`black_scholes`          | +     |     |         |     | +         | +     |       | +   | +     |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`convolve`               | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`convolve_2d`            | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`convolve_3d`            | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`convolve_separate_std`  | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`gameoflife`             | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`gauss`                  | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`heat_equation`          | +     | +   | +       | +   |           |       |       |     |       | +   | +      |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`idl_init_bh`            | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`idl_init_fast`          | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`idl_init_orig`          | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`jacobi`                 | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`jacobi_fixed`           | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`jacobi_solve`           | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`jacobi_stencil`         | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`k_nearest_neighbor`     | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`knn_naive`              | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`knn_naive1`             | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`lattice_boltzmann_D2Q9` | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`lbm_2d`                 | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`lbm_3d`                 | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`lu`                     | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`mc`                     | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`mxmul`                  | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`nbody`                  | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`nbody_nice`             | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`ndstencil`              | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`point27`                | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`pricing`                | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`shallow_water`          | +     |     |         | +   |           |       | +     |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`snakes_and_ladders`     | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`sor`                    | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`synth`                  | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`synth_inplace`          | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`synth_stream`           | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`synth_strided`          | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
-| :ref:`wireworld`              | +     |     |         |     |           |       |       |     |       |     |        |
-+-------------------------------+-------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
++-------------------------------+------------------+---------------------+--------------------------------------------------------+
+| 36 Benchmarks                 | py               | c                   | cpp                                                    |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+|                               | Numpy            | Omp | Omp Mpi | Seq | Armadillo | Blitz | Boost | Bxx | Eigen | Omp | Opencl |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`black_scholes`          | +                |     |         |     | +         | +     |       | +   | +     |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`convolve`               | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`convolve_2d`            | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`convolve_3d`            | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`convolve_separate_std`  | + [ISU]_         |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`gameoflife`             | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`gauss`                  | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`heat_equation`          | +                | +   | +       | +   |           |       |       |     |       | +   | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`idl_init_bh`            | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`idl_init_fast`          | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`idl_init_orig`          | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`jacobi`                 | + [BH]_          |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`jacobi_fixed`           | + [BH]_          |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`jacobi_solve`           | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`jacobi_stencil`         | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`k_nearest_neighbor`     | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`knn_naive1`             | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`lattice_boltzmann_D2Q9` | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`lbm_2d`                 | + [IBNP]_        |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`lbm_3d`                 | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`lmm_swaption_vec`       | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`lu`                     | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`mc`                     | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`mxmul`                  | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`nbody`                  | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`nbody_nice`             | + [ISU]_         |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`ndstencil`              | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`point27`                | + [BH]_          |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`pricing`                | + [ISU]_         |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`shallow_water`          | +                |     |         | +   |           |       | +     |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`snakes_and_ladders`     | + [ISU]_         |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`sor`                    | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`synth`                  | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`synth_inplace`          | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`synth_stream`           | +                |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
+| :ref:`wireworld`              | + [ISU]_         |     |         |     |           |       |       |     |       |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+-------+-----+--------+
 
+.. [ISU] The implementation has issues... such as not using of Benchpress, segfaults, or does not run with Bohrium.
+.. [BH] The implementation makes use of Bohrium specific features, which means that Bohrum is required to run it.
+.. [IBNP] The implementation does `import bohrium as np`, which breaks the Bohrium dogma "High-Performance NumPy without changing a single line of code.
+    
 
-
-.. _LMM_swaption_vec:
-
-Lmm Swaption Vec
-================
-
-
-.. _LMM_swaption_vec_python_numpy:
-
-Python Numpy
-------------
-
-
-.. literalinclude:: ../../benchmarks/LMM_swaption_vec/python_numpy/LMM_swaption_vec.py
-   :language: py
 
 
 .. _black_scholes:
 
 Black Scholes
 =============
+
+.. include:: ../../benchmarks/black_scholes/readme.rst
 
 
 .. _black_scholes_python_numpy:
@@ -171,6 +157,22 @@ Python Numpy
 ------------
 
 
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/convolve/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
+.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
+
+
+.. include:: ../../benchmarks/convolve/python_numpy/bohrium.rst
+
+The above note is concerned with the implementation below.
+
+
 .. literalinclude:: ../../benchmarks/convolve/python_numpy/convolve.py
    :language: py
 
@@ -185,6 +187,22 @@ Convolve 2D
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/convolve_2d/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
+.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
+
+
+.. include:: ../../benchmarks/convolve_2d/python_numpy/bohrium.rst
+
+The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/convolve_2d/python_numpy/convolve_2d.py
@@ -203,6 +221,22 @@ Python Numpy
 ------------
 
 
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/convolve_3d/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
+.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
+
+
+.. include:: ../../benchmarks/convolve_3d/python_numpy/bohrium.rst
+
+The above note is concerned with the implementation below.
+
+
 .. literalinclude:: ../../benchmarks/convolve_3d/python_numpy/convolve_3d.py
    :language: py
 
@@ -217,6 +251,14 @@ Convolve Separate Std
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/convolve_separate_std/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/convolve_separate_std/python_numpy/convolve_separate_std.py
@@ -333,6 +375,14 @@ Python Numpy
 ------------
 
 
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/idl_init_bh/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
 .. literalinclude:: ../../benchmarks/idl_init_bh/python_numpy/idl_init_bh.py
    :language: py
 
@@ -347,6 +397,14 @@ Idl Init Fast
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/idl_init_fast/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/idl_init_fast/python_numpy/idl_init_fast.py
@@ -365,6 +423,14 @@ Python Numpy
 ------------
 
 
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/idl_init_orig/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
 .. literalinclude:: ../../benchmarks/idl_init_orig/python_numpy/idl_init_orig.py
    :language: py
 
@@ -374,11 +440,21 @@ Python Numpy
 Jacobi
 ======
 
+.. include:: ../../benchmarks/jacobi/readme.rst
+
 
 .. _jacobi_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
+
+
+.. include:: ../../benchmarks/jacobi/python_numpy/bohrium.rst
+
+The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/jacobi/python_numpy/jacobi.py
@@ -390,11 +466,21 @@ Python Numpy
 Jacobi Fixed
 ============
 
+.. include:: ../../benchmarks/jacobi_fixed/readme.rst
+
 
 .. _jacobi_fixed_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
+
+
+.. include:: ../../benchmarks/jacobi_fixed/python_numpy/bohrium.rst
+
+The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/jacobi_fixed/python_numpy/jacobi_fixed.py
@@ -405,6 +491,8 @@ Python Numpy
 
 Jacobi Solve
 ============
+
+.. include:: ../../benchmarks/jacobi_solve/readme.rst
 
 
 .. _jacobi_solve_python_numpy:
@@ -422,6 +510,8 @@ Python Numpy
 Jacobi Stencil
 ==============
 
+.. include:: ../../benchmarks/jacobi_stencil/readme.rst
+
 
 .. _jacobi_stencil_python_numpy:
 
@@ -438,6 +528,8 @@ Python Numpy
 K Nearest Neighbor
 ==================
 
+.. include:: ../../benchmarks/k_nearest_neighbor/readme.rst
+
 
 .. _k_nearest_neighbor_python_numpy:
 
@@ -445,23 +537,15 @@ Python Numpy
 ------------
 
 
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/k_nearest_neighbor/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
 .. literalinclude:: ../../benchmarks/k_nearest_neighbor/python_numpy/k_nearest_neighbor.py
-   :language: py
-
-
-.. _knn_naive:
-
-Knn Naive
-=========
-
-
-.. _knn_naive_python_numpy:
-
-Python Numpy
-------------
-
-
-.. literalinclude:: ../../benchmarks/knn_naive/python_numpy/knn_naive.py
    :language: py
 
 
@@ -469,6 +553,8 @@ Python Numpy
 
 Knn Naive1
 ==========
+
+.. include:: ../../benchmarks/knn_naive1/readme.rst
 
 
 .. _knn_naive1_python_numpy:
@@ -486,11 +572,21 @@ Python Numpy
 Lattice Boltzmann D2Q9
 ======================
 
+.. include:: ../../benchmarks/lattice_boltzmann_D2Q9/readme.rst
+
 
 .. _lattice_boltzmann_D2Q9_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/lattice_boltzmann_D2Q9/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/lattice_boltzmann_D2Q9/python_numpy/lattice_boltzmann_D2Q9.py
@@ -518,6 +614,8 @@ Python Numpy
 Lbm 3D
 ======
 
+.. include:: ../../benchmarks/lbm_3d/readme.rst
+
 
 .. _lbm_3d_python_numpy:
 
@@ -529,10 +627,38 @@ Python Numpy
    :language: py
 
 
+.. _lmm_swaption_vec:
+
+Lmm Swaption Vec
+================
+
+.. include:: ../../benchmarks/lmm_swaption_vec/readme.rst
+
+
+.. _lmm_swaption_vec_python_numpy:
+
+Python Numpy
+------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/lmm_swaption_vec/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
+
+
+.. literalinclude:: ../../benchmarks/lmm_swaption_vec/python_numpy/lmm_swaption_vec.py
+   :language: py
+
+
 .. _lu:
 
 Lu
 ==
+
+.. include:: ../../benchmarks/lu/readme.rst
 
 
 .. _lu_python_numpy:
@@ -550,6 +676,8 @@ Python Numpy
 Mc
 ==
 
+.. include:: ../../benchmarks/mc/readme.rst
+
 
 .. _mc_python_numpy:
 
@@ -565,6 +693,8 @@ Python Numpy
 
 Mxmul
 =====
+
+.. include:: ../../benchmarks/mxmul/readme.rst
 
 
 .. _mxmul_python_numpy:
@@ -582,6 +712,8 @@ Python Numpy
 Nbody
 =====
 
+.. include:: ../../benchmarks/nbody/readme.rst
+
 
 .. _nbody_python_numpy:
 
@@ -598,11 +730,21 @@ Python Numpy
 Nbody Nice
 ==========
 
+.. include:: ../../benchmarks/nbody_nice/readme.rst
+
 
 .. _nbody_nice_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/nbody_nice/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/nbody_nice/python_numpy/nbody_nice.py
@@ -613,6 +755,8 @@ Python Numpy
 
 Ndstencil
 =========
+
+.. include:: ../../benchmarks/ndstencil/readme.rst
 
 
 .. _ndstencil_python_numpy:
@@ -630,11 +774,21 @@ Python Numpy
 Point27
 =======
 
+.. include:: ../../benchmarks/point27/readme.rst
+
 
 .. _point27_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
+
+
+.. include:: ../../benchmarks/point27/python_numpy/bohrium.rst
+
+The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/point27/python_numpy/point27.py
@@ -646,11 +800,21 @@ Python Numpy
 Pricing
 =======
 
+.. include:: ../../benchmarks/pricing/readme.rst
+
 
 .. _pricing_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/pricing/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/pricing/python_numpy/pricing.py
@@ -661,6 +825,8 @@ Python Numpy
 
 Shallow Water
 =============
+
+.. include:: ../../benchmarks/shallow_water/readme.rst
 
 
 .. _shallow_water_python_numpy:
@@ -698,11 +864,21 @@ Cpp11 Boost
 Snakes And Ladders
 ==================
 
+.. include:: ../../benchmarks/snakes_and_ladders/readme.rst
+
 
 .. _snakes_and_ladders_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/snakes_and_ladders/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/snakes_and_ladders/python_numpy/snakes_and_ladders.py
@@ -713,6 +889,8 @@ Python Numpy
 
 Sor
 ===
+
+.. include:: ../../benchmarks/sor/readme.rst
 
 
 .. _sor_python_numpy:
@@ -730,6 +908,8 @@ Python Numpy
 Synth
 =====
 
+.. include:: ../../benchmarks/synth/readme.rst
+
 
 .. _synth_python_numpy:
 
@@ -745,6 +925,8 @@ Python Numpy
 
 Synth Inplace
 =============
+
+.. include:: ../../benchmarks/synth_inplace/readme.rst
 
 
 .. _synth_inplace_python_numpy:
@@ -762,6 +944,8 @@ Python Numpy
 Synth Stream
 ============
 
+.. include:: ../../benchmarks/synth_stream/readme.rst
+
 
 .. _synth_stream_python_numpy:
 
@@ -773,32 +957,26 @@ Python Numpy
    :language: py
 
 
-.. _synth_strided:
-
-Synth Strided
-=============
-
-
-.. _synth_strided_python_numpy:
-
-Python Numpy
-------------
-
-
-.. literalinclude:: ../../benchmarks/synth_strided/python_numpy/synth_strided.py
-   :language: py
-
-
 .. _wireworld:
 
 Wireworld
 =========
+
+.. include:: ../../benchmarks/wireworld/readme.rst
 
 
 .. _wireworld_python_numpy:
 
 Python Numpy
 ------------
+
+
+.. error:: There are issues with the implementation.
+
+
+.. include:: ../../benchmarks/wireworld/python_numpy/issues.rst
+
+The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/wireworld/python_numpy/wireworld.py

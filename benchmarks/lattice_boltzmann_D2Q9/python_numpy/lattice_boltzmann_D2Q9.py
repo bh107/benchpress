@@ -9,11 +9,8 @@ Address: Rue General Dufour 24,  1211 Geneva 4, Switzerland
 E-mail: Jonas.Latt@cui.unige.ch
 """
 import threading
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 # D2Q9 Lattice constants
 t       = [4/9., 1/9.,1/9.,1/9.,1/9., 1/36.,1/36.,1/36.,1/36.]

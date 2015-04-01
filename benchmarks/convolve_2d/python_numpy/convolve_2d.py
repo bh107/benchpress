@@ -1,10 +1,7 @@
 from __future__ import print_function
 from PIL import Image
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 from bohrium.stdviews import cartesian
 
 def gen_2d_filter(size, weight, datatype=np.float32):

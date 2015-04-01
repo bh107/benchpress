@@ -36,7 +36,7 @@ def implementations(pathi=".."+os.sep+".."):
             continue
 
         for filename in filenames:              # Group the rest
-            match = re.match(".*\.((cpp)|(py)|(c)$)", filename)
+            match = re.match(".*\.((cpp$)|(py$)|(c$)$)", filename)
             if match:
                 dirs        = [x for x in root.split(os.sep) if x not in ["..", "benchmarks"]]
                 benchmark   = dirs[0]
@@ -60,7 +60,15 @@ def implementations(pathi=".."+os.sep+".."):
                         meta["nlangs"] += 1
 
                 if tool not in benchmarks[benchmark][lang]:
-                    benchmarks[benchmark][lang][tool] = os.sep.join(dirs)+os.sep+filename
+                    dogma_rst_path      = os.sep.join(["..","..","benchmarks", benchmark, tool, "dogma.rst"])
+                    bohrium_rst_path    = os.sep.join(["..","..","benchmarks", benchmark, tool, "bohrium.rst"])
+                    issues_rst_path     = os.sep.join(["..","..","benchmarks", benchmark, tool,"issues.rst"])
+                    benchmarks[benchmark][lang][tool] = {
+                        'src':      os.sep.join(dirs)+os.sep+filename,
+                        'dogma':    dogma_rst_path if os.path.exists(dogma_rst_path[1:]) else "",
+                        'bohrium':  bohrium_rst_path if os.path.exists(bohrium_rst_path[1:]) else "",
+                        'issues':   issues_rst_path if os.path.exists(issues_rst_path[1:]) else "",
+                    }
                     if tool not in meta["tools"]:
                         meta["tools"].append(tool)
                         meta["ntools"] += 1
@@ -94,7 +102,14 @@ def flatten(benchmarks):
         for lang in lang_order:
             for tool in meta["tools_by_lang"][lang]:
                 if lang in impls[bench] and tool in impls[bench][lang]:
-                    entry.append("+")
+                    entry_info = "+"
+                    if impls[bench][lang][tool]["issues"]:
+                        entry_info += " [ISU]_"
+                    if impls[bench][lang][tool]["bohrium"]:
+                        entry_info += " [BH]_"
+                    if not impls[bench][lang][tool]["dogma"] and tool == "python_numpy":
+                        entry_info += " [IBNP]_"
+                    entry.append(entry_info)
                 else:
                     entry.append(" ")
         flat.append(entry)
@@ -161,7 +176,7 @@ def benchmark_matrix(benchmarks):
     rows = modify_column(section_ref, rows)
     table= RstTable([], rows)
 
-    header_row      = [" "]
+    header_row      = ["%d Benchmarks "% benchmarks["__meta__"]["nbenchs"]]
     header_widths   = [table.col_widths[0]]
 
     cidx = 1
@@ -183,6 +198,13 @@ def benchmark_matrix(benchmarks):
     matrix = table.draw_sep(header_widths)+"\n"
     matrix += table.draw_row(header_row, header_widths)+"\n"
     matrix += table.render()
+
+    matrix += """
+
+.. [ISU] The implementation has issues... such as not using of Benchpress, segfaults, or does not run with Bohrium.
+.. [BH] The implementation makes use of Bohrium specific features, which means that Bohrum is required to run it.
+.. [IBNP] The implementation does `import bohrium as np`, which breaks the Bohrium dogma "High-Performance NumPy without changing a single line of code.
+    """
 
     return matrix
 
@@ -206,6 +228,15 @@ def sections(benchmarks):
         ]
         sections += "\n".join(section)
 
+        bench_path = os.sep.join([
+            "..","..","benchmarks", bench_lbl
+        ])
+
+        # Add readme.rst to the section
+        bench_readme_path = os.sep.join([bench_path, "readme.rst"])
+        if os.path.exists(bench_readme_path[1:]):
+            sections += "\n.. include:: %s\n" % bench_readme_path
+
         bench = benchs[bench_lbl]
         for lang in (lang for lang in lang_order if lang in bench):
             tools = bench[lang].keys()
@@ -222,9 +253,24 @@ def sections(benchmarks):
                     "-"*len(subsection_title),
                     ""
                 ]
+                # Include issues
+                issues_path = bench[lang][tool]["issues"]
+                if issues_path:
+                    subsection.append("\n.. error:: There are issues with the implementation.\n")
+                    subsection.append("\n.. include:: %s\n" % issues_path)
+                    subsection.append("The above warning is concerned with the implementation below.\n")
+
+                # Include bohrium specifics
+                bohrium_path = bench[lang][tool]["bohrium"]
+                if bohrium_path:
+                    subsection.append("\n.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.\n")
+                    subsection.append("\n.. include:: %s\n" % bohrium_path)
+                    subsection.append("The above note is concerned with the implementation below.\n")
+
+                # Include the source
                 src_path = os.sep.join([
                     "..","..","benchmarks"
-                ]+bench[lang][tool].split(os.sep))
+                ]+bench[lang][tool]['src'].split(os.sep))
                 subsection.append("\n.. literalinclude:: %s" % src_path)
                 subsection.append("   :language: %s" % lang)
                 subsection.append("")
@@ -235,7 +281,6 @@ def sections(benchmarks):
 def main():
     benchmarks = implementations()
   
-    print ""
     print "=========="
     print "Benchmarks"
     print "=========="

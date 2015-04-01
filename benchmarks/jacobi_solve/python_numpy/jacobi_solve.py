@@ -1,9 +1,6 @@
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def freezetrap(height, width, dtype=np.float32):
     grid        = np.zeros((height+2,width+2), dtype=dtype)

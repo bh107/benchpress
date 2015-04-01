@@ -5,11 +5,8 @@ Game of Life
 
 So what does this code example illustrate?
 """
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 SURVIVE_LOW     = 2
 SURVIVE_HIGH    = 3

@@ -1,12 +1,8 @@
 from __future__ import print_function
 import sys
 from numpy.linalg import svd
-import util
-
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def generate_gauss_matrix(filter_shape, sigma, data_type=np.float32):
     """

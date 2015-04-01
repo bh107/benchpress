@@ -5,11 +5,8 @@ k-Nearest Neighbor
 
 So what does this code example illustrate?
 """
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def classify(sample, training, group=None, k=1):
     assert sample.ndim == 2

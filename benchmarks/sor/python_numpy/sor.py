@@ -15,12 +15,8 @@ b1 r1 b1 r1 b1 r1
 
 """
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
-import util
+from benchpress import util
+import numpy as np
 
 def freezetrap(height, width, dtype=np.float32):
     r0   = np.zeros(((height+2)/2,(width+2)/2), dtype=dtype)

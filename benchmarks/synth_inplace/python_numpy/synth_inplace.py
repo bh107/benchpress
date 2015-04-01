@@ -1,11 +1,6 @@
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
-
-import bohrium as bh
+from benchpress import util
+import numpy as np
 
 def model(N, dtype=np.float32):
     """Construct some synthetic data-set to work on."""

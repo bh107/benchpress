@@ -1,9 +1,6 @@
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def model(N, B):
     """Construct pseudo-data representing price samples?"""
@@ -62,17 +59,17 @@ def main():
     if B.inputfn:
         S = B.load_array()
     else:
-        S = model(N, B)              # Construct pseudo-data
+        S = model(N, B)                     # Construct pseudo-data
 
     if B.dumpinput:
         B.dump_arrays("black_scholes", {'input': S})
 
     B.start()
-    R = price(S, I, visualize=B.visualize)   # Run the model
+    R = price(S, I, visualize=B.visualize)  # Run the model
     B.stop()
     B.pprint()
-    # Convert to one array
-    for i in range(len(R)):
+    
+    for i in range(len(R)):                 # Convert to one array
         if hasattr(R[i], "copy2numpy"):
             R[i] = R[i].copy2numpy()[()]
     if B.outputfn:

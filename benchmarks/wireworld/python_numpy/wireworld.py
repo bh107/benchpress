@@ -1,9 +1,6 @@
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 from bohrium.stdviews import D2P8, no_border
 
 def wireworld_init(size):

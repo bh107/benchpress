@@ -1,9 +1,6 @@
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 from bohrium.stdviews import no_border, grid, diagonals
 
 def jacobi_fixed_init(size):
