@@ -18,8 +18,6 @@ import time
 import base64
 import zlib
 
-import suites
-
 class _C:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -27,7 +25,6 @@ class _C:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
-
 
 def meta(src_dir, suite):
     try:

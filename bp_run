@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import argparse
 import tempfile
-from benchpress.press import expand_path, handle_result_file
+import os
+from benchpress.press import *
 
 if __name__ == "__main__":
 

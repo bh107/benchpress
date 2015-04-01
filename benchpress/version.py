@@ -3,7 +3,7 @@ import os
 import re
 
 APP_NAME = 'benchpress'
-APP_VERSION = '0.5'
+APP_VERSION = '0.7'
 
 ignore      = ["_utils", "_doc"]
 

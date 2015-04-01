@@ -324,11 +324,14 @@
 /home/safl/.local/share/benchpress/suites/dynamite_mcore.py
 /home/safl/.local/share/benchpress/suites/default.py
 /home/safl/.local/share/benchpress/suites/midway_knn.py
+/home/safl/.local/share/benchpress/suites/.numpy_only.py.swp
 /home/safl/.local/share/benchpress/suites/midway_stressed.py
 /home/safl/.local/share/benchpress/suites/tiling_stress.py
 /home/safl/.local/share/benchpress/suites/numpytest.py
 /home/safl/.local/share/benchpress/suites/__init__.py
+/home/safl/.local/share/benchpress/suites/numpy_only.py
 /home/safl/.local/share/benchpress/suites/mcore.py
+/home/safl/.local/share/benchpress/suites/default.pyc
 /home/safl/.local/share/benchpress/suites/midway_python_all.py
 /home/safl/.local/share/benchpress/suites/dynamite.py
 /home/safl/.local/share/benchpress/suites/array14.py
@@ -342,6 +345,7 @@
 /home/safl/.local/share/benchpress/suites/gpu_fix_com.py
 /home/safl/.local/share/benchpress/suites/daily_benchmark.py
 /home/safl/.local/share/benchpress/suites/midway_swater.py
+/home/safl/.local/share/benchpress/suites/__init__.pyc
 /home/safl/.local/share/benchpress/suites/vcache.py
 /home/safl/.local/share/benchpress/suites/cpu_static.py
 /home/safl/.local/share/benchpress/suites/opteron_scale.py
@@ -349,6 +353,7 @@
 /home/safl/.local/share/benchpress/suites/2dtest.py
 /home/safl/.local/share/benchpress/suites/reproducibility.py
 /home/safl/.local/share/benchpress/suites/midway_mc.py
+/home/safl/.local/share/benchpress/suites/numpy_only.pyc
 /home/safl/.local/share/benchpress/suites/cluster.py
 /home/safl/.local/share/benchpress/suites/cpp.py
 /home/safl/.local/share/benchpress/suites/npbackend-nelson.py
@@ -359,4 +364,4 @@
 /home/safl/.local/share/benchpress/suites/plc_talk.py
 /home/safl/.local/share/benchpress/suites/vcache_evict.py
 /home/safl/.local/share/benchpress/suites/mmap.py
-/home/safl/.local/lib/python2.7/site-packages/benchpress-0.5.egg-info
+/home/safl/.local/lib/python2.7/site-packages/benchpress-0.6.egg-info
