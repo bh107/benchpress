@@ -6,88 +6,19 @@ import pprint
 import os
 import re
 
+from benchpress.find_implementations import implementations
+
 lang_labels = {
     'c':    'C',
     'cpp':  'C++',
     'py':   'Python'
 }
 lang_order  = ['py', 'c', 'cpp']
-ignore      = ["_utils", "_doc"]
 
 def pretty_name(text):
     """Returns a rewrite like: "snakes_and_ladders" -> "Snakes And Ladders"."""
 
     return text.replace('_', ' ').title()
-
-def implementations(pathi=".."+os.sep+".."):
-    """Walks through the filesystem looking for benchmark implementations."""
-
-    meta = {
-        "langs": [], "tools":[], "benchs":[],
-        "nlangs": 0, "ntools": 0, "nbenchs": 0,
-        "tools_by_lang": {},
-        "ntools_by_lang": {},
-        "tool_to_lang": {}
-    }
-    benchmarks = {}
-
-    for root, dirnames, filenames in os.walk("../benchmarks/"):
-        if [x for x in ignore if x in root]:    # Ignore some...
-            continue
-
-        for filename in filenames:              # Group the rest
-            match = re.match(".*\.((cpp$)|(py$)|(c$)$)", filename)
-            if match:
-                dirs        = [x for x in root.split(os.sep) if x not in ["..", "benchmarks"]]
-                benchmark   = dirs[0]
-                tool        = dirs[1]
-                lang        = match.group(1)
-
-                # Check that the basename matches the benchmark
-                bn = ''.join(os.path.basename(filename).split('.')[:-1])
-                if not bn == benchmark:
-                    continue
-
-                if benchmark not in benchmarks:
-                    benchmarks[benchmark] = {}
-                    meta["benchs"].append(benchmark)
-                    meta["nbenchs"] += 1
-
-                if lang not in benchmarks[benchmark]:
-                    benchmarks[benchmark][lang] = {}
-                    if lang not in meta["langs"]:
-                        meta["langs"].append(lang)
-                        meta["nlangs"] += 1
-
-                if tool not in benchmarks[benchmark][lang]:
-                    dogma_rst_path      = os.sep.join(["..","..","benchmarks", benchmark, tool, "dogma.rst"])
-                    bohrium_rst_path    = os.sep.join(["..","..","benchmarks", benchmark, tool, "bohrium.rst"])
-                    issues_rst_path     = os.sep.join(["..","..","benchmarks", benchmark, tool,"issues.rst"])
-                    benchmarks[benchmark][lang][tool] = {
-                        'src':      os.sep.join(dirs)+os.sep+filename,
-                        'dogma':    dogma_rst_path if os.path.exists(dogma_rst_path[1:]) else "",
-                        'bohrium':  bohrium_rst_path if os.path.exists(bohrium_rst_path[1:]) else "",
-                        'issues':   issues_rst_path if os.path.exists(issues_rst_path[1:]) else "",
-                    }
-                    if tool not in meta["tools"]:
-                        meta["tools"].append(tool)
-                        meta["ntools"] += 1
-
-                if lang not in meta["tools_by_lang"]:
-                    meta["tools_by_lang"][lang] = []
-                    meta["ntools_by_lang"][lang] = 0
-
-                if tool not in meta["tools_by_lang"][lang]:
-                    meta["tools_by_lang"][lang].append(tool)
-                    meta["tools_by_lang"][lang].sort()
-                    meta["ntools_by_lang"][lang] += 1
-
-                if tool not in meta["tool_to_lang"]:
-                    meta["tool_to_lang"][tool] = lang
-
-    meta["benchs"].sort()
-
-    return {"__meta__": meta, "impls": benchmarks}
 
 def flatten(benchmarks):
     """Flattens the benchmarks into a specific ordering."""
@@ -257,14 +188,14 @@ def sections(benchmarks):
                 issues_path = bench[lang][tool]["issues"]
                 if issues_path:
                     subsection.append("\n.. error:: There are issues with the implementation.\n")
-                    subsection.append("\n.. include:: %s\n" % issues_path)
+                    subsection.append("\n.. include:: %s\n" % (".."+os.sep+issues_path))
                     subsection.append("The above warning is concerned with the implementation below.\n")
 
                 # Include bohrium specifics
                 bohrium_path = bench[lang][tool]["bohrium"]
                 if bohrium_path:
                     subsection.append("\n.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.\n")
-                    subsection.append("\n.. include:: %s\n" % bohrium_path)
+                    subsection.append("\n.. include:: %s\n" % (".."+os.sep+bohrium_path))
                     subsection.append("The above note is concerned with the implementation below.\n")
 
                 # Include the source

@@ -31,5 +31,5 @@ setup(
     data_files = make_dfiles('share/benchpress', 'benchmarks') +\
                  make_dfiles('share/benchpress', 'suites'),
     packages = ['benchpress'],
-    scripts = ["bp_run", "bp_times", "bp_grapher", "hooks/proxy-VEM-pre-hook.sh"]
+    scripts = ["bp_run", "bp_times", "bp_grapher", "bp_compile", "hooks/proxy-VEM-pre-hook.sh"]
 )

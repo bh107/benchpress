@@ -1,11 +1,9 @@
 #include <blitz/array.h>
 #include <random/uniform.h>
-#include "util/argparse.hpp"
-#include "util/timing.hpp"
+#include <bp_util.h>
 
 using namespace blitz;
 using namespace ranlib;
-using namespace argparse;
 
 template <typename T>
 Array<T, 1> cnd(Array<T, 1> & x)
@@ -69,49 +67,38 @@ T* pricing(size_t samples, size_t iterations, char flag, T x, T d_t, T r, T v)
 
 int main(int argc, char* argv[])
 {
-    const char usage[] = "usage: ./black_scholes --size=1000*10 [--verbose]";
-    if (2>argc) {
-        cout << usage << endl;
-        return 1;
-    }
+    //const char usage[] = "usage: ./black_scholes --size=1000*10 [--verbose]";
 
-    arguments_t args;                   // Parse command-line
-    if (!parse_args(argc, argv, args)) {
-        cout << "Err: Invalid argument(s)." << endl;
-        cout << usage << endl;
-        return 1;
-    }
-    if (2 > args.size.size()) {
-        cout << "Err: Not enough arguments." << endl;
-        cout << usage << endl;
-        return 1;
-    }
-    if (2 < args.size.size()) {
-        cout << "Err: Too many arguments." << endl;
-        cout << usage << endl;
-        return 1;
-    }
+    bp_arguments_type args = parse_args(argc, argv);        // Parse args
+    const size_t samples    = args.sizes[0];
+    const size_t iterations = args.sizes[1];
 
-    size_t start = sample_time();
+    printf(
+        "Running black_scholes(cpp11_blitz) --size=%ld*%ld\n",
+        samples,
+        iterations
+    );
+
+    size_t start = bp_sample_time();
     double* prices = pricing(           // Do the computations...
-        args.size[0], args.size[1],
+        samples, iterations,
         'c', 65.0, 1.0 / 365.0,
         0.08, 0.3
     );
-    size_t end = sample_time();
+    size_t stop = bp_sample_time();
+    size_t elapsed = stop - start;
                                         // Output timing
-    cout << "{elapsed-time: "<< (end-start)/1000000.0 <<"";
+    printf("Ran black_scholes(cpp11_blitz) iter: %ld size: %ld elapsed-time: %lf\n", iterations, samples, elapsed/(double)1000000.0);
     if (args.verbose) {                 // and values.
         cout << ", \"output\": [";
-        for(size_t i=0; i<args.size[1]; i++) {
+        for(size_t i=0; i<iterations; i++) {
             cout << prices[i];
-            if (args.size[1]-1!=i) {
+            if (iterations-1!=i) {
                 cout << ", ";
             }
         }
         cout << "]" << endl;
     }
-    cout << "}" << endl;
 
     free(prices);                       // Cleanup
     return 0;

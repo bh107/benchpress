@@ -17,7 +17,7 @@ import numpy as np
 #from matplotlib import cm
 
 ###### Flow definition #########################################################
-maxIter = 200000 # Total number of time iterations.
+maxIter = 200 # Total number of time iterations.
 Re      = 220.0  # Reynolds number.
 nx = 520; ny = 180; ly=ny-1.0; q = 9 # Lattice dimensions and populations.
 cx = nx/4; cy=ny/2; r=ny/9;          # Coordinates of the cylinder.

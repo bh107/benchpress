@@ -12,7 +12,7 @@ LIBS=-lm
 EXTRAS+=
 
 $(BENCHMARK): $(BENCH_SRC)
-	$(CC) $(UTILS) $< -o bin/$@ $(CFLAGS) $(INCLUDE) $(LIBS) $(EXTRAS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(LIBS) $(EXTRAS) $(UTILS) $< -o bin/$@ 
 
 clean:
 	rm -rf *.o *~

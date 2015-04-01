@@ -23,6 +23,14 @@ uninstall_sp:
 	@echo "Or just remove those files in some other way."
 	@echo 'rm -rf $$(cat record.txt)'
 
+# Compile all c99 benchmarks
+c99:
+	echo
+
+# Compile all cpp11 benchmarks
+cpp11:
+	echo
+
 # Remove stuff...
 clean:
 	rm -f MANIFEST

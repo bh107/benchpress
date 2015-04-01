@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     const int max_iterations = args.sizes[2];
 
     printf(
-        "Running heat_equation_jacobi on %d*%d for %i iterations.\n",
+        "Running heat_equation(cpp11_omp) --size=%d*%d*%i iterations.\n",
         ydim,
         xdim,
         max_iterations
@@ -82,9 +82,10 @@ int main(int argc, char* argv[])
             break;
         }
     }
-    size_t end = bp_sample_time();
+    size_t stop = bp_sample_time();
+    size_t elapsed = stop - start;
 
-    cout << "{elapsed-time: "<< (end-start)/1000000.0 <<"";          
+    printf("Ran heat_equation(cpp11_omp) iter: %d size: %d*%d elapsed-time: %lf\n", max_iterations, ydim, xdim, elapsed/(double)1000000.0);
     if (args.verbose) {                             // and values.
         cout << ", \"output\": [";
         for(int i=0; i<10; ++i) {
@@ -95,7 +96,6 @@ int main(int argc, char* argv[])
         }
         cout << "]";
     }
-    cout << "}" << endl;
 
     return 0;
 }

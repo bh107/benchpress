@@ -1,30 +1,31 @@
 // Adapted from: http://people.sc.fsu.edu/~jburkardt/m_src/shallow_water_2d/
 // Saved images may be converted into an animated gif with:
 // convert   -delay 20   -loop 0   swater*.png   swater.gif
-
-
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <sys/time.h>
+#include <bp_util.h>
 
 #include <boost/multi_array.hpp>
 
-struct timeval tv;
-struct timezone tz;
-unsigned long long start, end, delta;
-
 int main (int argc, char **argv)
 {
-    if(argc < 3)
-    {
-      fprintf(stderr, "Need two arguments: domain-size and number of iterations\n");
-      return -1;
+    bp_arguments_type args = parse_args(argc, argv);    // Parse args
+    const int n = args.sizes[0];
+    const int other_n = args.sizes[1];
+    const int T = args.sizes[2];
+
+    if (n != other_n) {
+        fprintf(stderr, "Implementation only supports quadratic grid.\n");
+        exit(0);
     }
-    const int n = atoi(argv[1]);
-    const int T = atoi(argv[2]);
+    printf(
+        "Running shallow_water(cpp11_boost) --size=%d*%d*%i\n",
+        n,
+        n,
+        T
+    );
 
     const double g   = 9.8;       // gravitational constant
     const double dt  = 0.02;      // hardwired timestep
@@ -33,7 +34,6 @@ int main (int argc, char **argv)
     const int droploc = n/4;
 
     typedef boost::multi_array<double, 2> array_type;
-    typedef array_type::index index;
 
     array_type H(boost::extents[n+2][n+2]);
     array_type U(boost::extents[n+2][n+2]);
@@ -70,8 +70,7 @@ int main (int argc, char **argv)
 
     H[droploc][droploc] += 5.0;
 
-    gettimeofday(&tv, &tz);
-    start = (long long)tv.tv_usec + ((long long)tv.tv_sec)*1000000;
+    size_t start = bp_sample_time();
 
     for(int iter=0; iter < T; iter++)
     {
@@ -165,10 +164,8 @@ int main (int argc, char **argv)
         for(int j=0;j<n+2;j++)
             res+=H[i][j]/n;
 
+    size_t stop = bp_sample_time();
+    size_t elapsed = stop-start;
 
-    gettimeofday(&tv, &tz);
-    end = (long long)tv.tv_usec + ((long long)tv.tv_sec)*1000000;
-    delta = end - start;
-
-    printf("C++/Boost - iter: %d size: %d elapsed-time: %lf\n", T, n, delta/(double)1000000.0);
+    printf("Ran shallow_water(cpp11_boost) iter: %d size: %d*%d elapsed-time: %lf\n", T, n, n, elapsed/(double)1000000.0);
 }

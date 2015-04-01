@@ -92,14 +92,14 @@ int main (int argc, char **argv)
     MPI_Comm_size(MPI_COMM_WORLD, &worldsize);
 
     bp_arguments_type args = parse_args(argc, argv);        // Parse args
-    const int width = args.sizes[0];
-    int height      = args.sizes[1];
+    int height      = args.sizes[0];
+    const int width = args.sizes[1];
     const int iter  = args.sizes[2];
 
     printf(
-        "Running heat_equation_jacobi on %d*%d for %i iterations.\n",
-        width,
+        "Running heat_equation(c99_omp_mpi) --size=%d*%d*%i\n",
         height,
+        width,
         iter
     );
 
@@ -128,11 +128,11 @@ int main (int argc, char **argv)
     openmp(height,width,grid,iter);
 
     MPI_Barrier(MPI_COMM_WORLD);
-    size_t end = bp_sample_time();
-    size_t elapsed =  end - start;
+    size_t stop = bp_sample_time();
+    size_t elapsed =  stop - start;
 
     if (myrank == 0) {
-        printf("openmp_mpi.c - iter: %d size: %d elapsed-time: %lf\n", iter, width, elapsed/(double)1000000.0);
+        printf("Ran heat_equation(c99_omp_mpi) iter: %d size: %d*%d elapsed-time: %lf\n", iter, height, width, elapsed/(double)1000000.0);
     }
     free(grid);
     MPI_Finalize();

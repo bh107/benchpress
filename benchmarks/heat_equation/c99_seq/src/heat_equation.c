@@ -41,16 +41,16 @@ void sequential(int height, int width, double *grid, int iter)
 int main (int argc, char **argv)
 {
     bp_arguments_type args = parse_args(argc, argv);        // Parse args
-    printf(
-        "Running heat_equation_jacobi on %d*%d for %i iterations.\n",
-        args.sizes[0],
-        args.sizes[1],
-        args.sizes[2]
-    );
-
-    const int width     = args.sizes[0];
-    const int height    = args.sizes[1];
+    const int height    = args.sizes[0];
+    const int width     = args.sizes[1];
     const int iter      = args.sizes[2];
+
+    printf(
+        "Running heat_equation(c99_seq) --size=%d*%d*%i iterations.\n",
+        height,
+        width,
+        iter
+    );
 
     size_t grid_size = height*width*sizeof(double);
     double *grid = (double*)malloc(grid_size);
@@ -77,7 +77,7 @@ int main (int argc, char **argv)
 #endif
     size_t start = bp_sample_time();
     sequential(height,width,grid,iter);
-    size_t end = bp_sample_time();
+    size_t stop = bp_sample_time();
 #ifdef DEBUG
     for (int i = 0; i<height; i++)
     {
@@ -88,9 +88,9 @@ int main (int argc, char **argv)
         printf ("\n");
     }       
 #endif
-    size_t elapsed = end - start;
+    size_t elapsed = stop - start;
 
-    printf("sequential.c - iter: %d size: %d elapsed-time: %lf\n", iter, width, elapsed/(double)1000000.0);
+    printf("Ran heat_equation(c99_seq) iter: %d size: %d*%d elapsed-time: %lf\n", iter, height, width, elapsed/(double)1000000.0);
     free(grid);
     return 0;
 }
