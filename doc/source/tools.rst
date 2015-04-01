@@ -14,7 +14,7 @@ The following shows how to do a user-mode / local installation::
 
   pip install benchpress --user
 
-Extend your ``$PATH``, such that the commands (`bp_run`, `bp_times`, `bp_compile`, `and bp_grapher`) are readily available::
+Extend your ``$PATH``, such that the commands (`bp_info`, `bp_run`, `bp_times`, `bp_compile`, `and bp_grapher`) are readily available::
 
   export PATH=$PATH:$HOME/.local/bin
 
@@ -46,7 +46,10 @@ or download and unpack tarball::
 Then set your ``$PATH`` to the directory you have cloned or extracted to.
 Set your ``$PYTHONPATH`` to the benchpress subdirectory.
 
-If you do not want to set paths then your working directory must be the root of the clone/tarball.
+When in the root or the unpacked source then you can do::
+
+  export PATH=$PATH:`./bp_info --bins`
+  export PYTHONPATH=$PYTHONPATH:`./bp_info --bins`
 
 Cli
 ===

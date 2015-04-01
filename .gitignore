@@ -1,3 +1,4 @@
 *.pyc
 build/
 bin/
+bh-job-*
