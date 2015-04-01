@@ -2,21 +2,26 @@
 import subprocess
 import pprint
 import os
-from benchpress.find_implementations import implementations
+from benchpress.version import get_paths, implementations
 
-def compile(search_path, languages=['c','cpp']):
+def compile(search_path=None, languages=['c','cpp']):
     """Compile benchmarks of the given languages."""
 
-    benchmarks = implementations("benchmarks")
+    paths = get_paths()
+    if not search_path:
+        search_path = paths["benchmarks"]
+
+    benchmarks = implementations(search_path)
     for lang in languages:
         print("# Compiling %s benchmarks")
-        for bench_lbl in benchmarks["impls"]:
-            bench = benchmarks["impls"][bench_lbl]
+        impls = benchmarks["impls"]
+        for bench_lbl in impls:
+            bench = impls[bench_lbl]
             if lang not in bench:
                 continue
             for tool in bench[lang]:
                 target = os.sep.join([bench_lbl, tool])
-                path = os.sep.join(["benchmarks", bench_lbl, tool])
+                path = os.sep.join([search_path, bench_lbl, tool])
 
                 if bench[lang][tool]["issues"]:
                     print("!! Skipping %s, it has known issues" % target)

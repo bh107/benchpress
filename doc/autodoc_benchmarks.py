@@ -6,7 +6,7 @@ import pprint
 import os
 import re
 
-from benchpress.find_implementations import implementations
+from benchpress.version import implementations
 
 lang_labels = {
     'c':    'C',
@@ -210,7 +210,7 @@ def sections(benchmarks):
     return sections
 
 def main():
-    benchmarks = implementations()
+    benchmarks = implementations(".."+os.sep+"benchmarks")
   
     print "=========="
     print "Benchmarks"

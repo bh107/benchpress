@@ -1,3 +1,10 @@
+#
+#
+# This Makefile is intended for aiding development of Benchpress,
+# it is not an interface for using Benchpress
+#
+#
+
 # Generate sphinx doc
 docs:
 	cd doc && ./autodoc_benchmarks.py > source/benchmarks.rst && make html
@@ -22,14 +29,6 @@ uninstall_sp:
 	@echo "And check that record.txt contains what you want to remove."
 	@echo "Or just remove those files in some other way."
 	@echo 'rm -rf $$(cat record.txt)'
-
-# Compile all c99 benchmarks
-c99:
-	echo
-
-# Compile all cpp11 benchmarks
-cpp11:
-	echo
 
 # Remove stuff...
 clean:
