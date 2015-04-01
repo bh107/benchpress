@@ -18,6 +18,8 @@
 /home/safl/.local/lib/python2.7/site-packages/benchpress/press.pyc
 /home/safl/.local/bin/bp_times
 /home/safl/.local/bin/bp_run
+/home/safl/.local/bin/bp_info
+/home/safl/.local/bin/bp_compile
 /home/safl/.local/bin/bp_grapher
 /home/safl/.local/bin/proxy-VEM-pre-hook.sh
 /home/safl/.local/share/benchpress/benchmarks/README.rst
@@ -143,6 +145,7 @@
 /home/safl/.local/share/benchpress/benchmarks/jacobi/cil/bin/empty
 /home/safl/.local/share/benchpress/benchmarks/jacobi/cil/src/empty
 /home/safl/.local/share/benchpress/benchmarks/lbm_2d/readme.rst
+/home/safl/.local/share/benchpress/benchmarks/lbm_2d/python_numpy/issues.rst
 /home/safl/.local/share/benchpress/benchmarks/lbm_2d/python_numpy/lbm_2d.py
 /home/safl/.local/share/benchpress/benchmarks/lbm_2d/cil/bin/empty
 /home/safl/.local/share/benchpress/benchmarks/lbm_2d/cil/src/empty
