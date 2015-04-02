@@ -43,7 +43,7 @@ or download and unpack tarball::
   tar xzvf master.tar.gz
   cd bohrium-benchpress-*
 
-For Benchpress to operate correctly you need to extend two enviroment variables, namely ``PATH`` and ``PYTHONPATH``. Extend ``PATH`` to include the subfolder ``bin`` and ``PYTHONPATH`` to include the subfolder ``module``. You can do this in whatever way your system requires, you will most likely simply be able to do the following::
+For Benchpress to operate correctly you `must` extend the two ``PATH`` and ``PYTHONPATH``. Extend ``PATH`` to include the subfolder ``bin`` and extend ``PYTHONPATH`` to include the subfolder ``module``. You can do this in whatever way your system requires, you will most likely be able to do the following::
 
   source util/setbpenv.bash
 
