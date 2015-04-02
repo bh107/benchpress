@@ -1,6 +1,16 @@
 =====
-Usage
+Using
 =====
+
+bp_info
+-------
+
+...
+
+bp_compile
+----------
+
+...
 
 bp_run
 ------
@@ -17,20 +27,29 @@ bp_grapher
 
 ...
 
-Implementations / Libraries / Modules
-=====================================
+======================
+Extending and Changing
+======================
+
+Benchmark Protocol and conventions
+----------------------------------
+
+...
 
 Python
 ------
 
 ...
 
-C / C++
--------
+C
+--
 
 ...
 
-Protocol
-========
+C++
+---
+
+...
+
 
 ...

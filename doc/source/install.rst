@@ -6,7 +6,7 @@ Benchpress is distributed via PyPi and Github. Which means that you can install 
 The installation method of choice is based on what you want to do with Benchpress. Recommendations are as follows.
 
  * Install Benchpress as a Python packages from PyPi if your sole intent is to `run` benchmarks.
- * Use benchpress directly from clone/tarball if you intend to modify it. Such as adding benchmarks, changing commands or benchmark suites.
+ * Use Benchpress directly from clone/tarball if you intend to modify it. Such as adding benchmarks, changing commands or benchmark suites.
 
 .. note:: Benchpress is designed to work, with minimal friction, in an environment where the user has limited system permissions. Such as shared computing environments, clusters and supercomputers. A system-wide installation of Benchpress is therefore untested. However, it should work if write permission is assigned to Benchpress users for the ``benchmarks`` folder.
 
