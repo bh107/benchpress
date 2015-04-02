@@ -7,8 +7,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   benchmarks
    tools
+   benchmarks
 
 Indices and tables
 ==================

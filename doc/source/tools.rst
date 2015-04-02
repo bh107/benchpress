@@ -5,7 +5,14 @@ Tools
 Installation
 ============
 
-Benchpress is distributed as a Python package via PyPi. It can also be used directly from an unpacked tar-ball or from a git-clone.
+Benchpress is distributed via PyPi and Github. Which means that you can install it as a Python package (from PyPi) or use it directly from an unpacked tarball or git-clone from Github.com.
+The installation method of choice is based on what you want to do with Benchpress. Recommendations are as follows.
+
+ * Install Benchpress as a Python packages from PyPi if your sole intent is to `run` benchmarks.
+ * Use benchpress directly from clone/tarball if you intend to modify anything. Such as adding benchmarks, changing commands or benchmark suites.
+
+.. note:: Benchpress is designed to work, with minimal friction, in an environment where the user has limited system permissions. Such as shared computing environments eg. clusters and supercomputers. A system-wide installation of Benchpress is untested, however, it should work if you assign write permission, for Benchpress users, to the ``benchmarks`` subfolder.
+
 
 From pypi.python.org
 --------------------
@@ -18,16 +25,9 @@ Extend your ``$PATH``, such that the commands (`bp_info`, `bp_run`, `bp_times`, 
 
   export PATH=$PATH:$HOME/.local/bin
 
-The benchmark implementations are available in ``$HOME/.local/share/benchpress/benchmarks``.
-
-The benchmark suites are avaiable in ``$HOME/.local/share/suites``.
-
-When using this approach uninstall is equally simple::
+When you are done using Benchpress, purging it from your system is as easy as::
 
   pip uninstall benchpress
-
-You can do a system-wide installation by omitting the ``--user`` flag. If you do a system-wide installation then extending ``$PATH`` is not required.
-Additionally, implementations and suites will be avaiable are operating systems ``share`` location instead of ``.local``.
 
 From clone or tarball
 ---------------------
@@ -43,16 +43,14 @@ or download and unpack tarball::
   tar xzvf master.tar.gz
   cd bohrium-benchpress-*
 
-Then set your ``$PATH`` to the directory you have cloned or extracted to.
-Set your ``$PYTHONPATH`` to the benchpress subdirectory.
+For Benchpress to operate correctly you need to extend two enviroment variables, namely ``PATH`` and ``PYTHONPATH``. Extend ``PATH`` to include the subfolder ``bin`` and ``PYTHONPATH`` to include the subfolder ``module``. You can do this in whatever way your system requires, you will most likely simply be able to do the following::
 
-When in the root or the unpacked source then you can do::
+  source util/setbpenv.bash
 
-  export PATH=$PATH:`./bp_info --bins`
-  export PYTHONPATH=$PYTHONPATH:`./bp_info --bins`
+Make sure you persists the changes.
 
-Cli
-===
+Usage
+=====
 
 bp_run
 ------
