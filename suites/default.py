@@ -1,3 +1,53 @@
+##################################################################################
+#
+# Definition of launchers used by benchmarks,
+#
+# In a suite the following are "bridges" and further down in this file
+# list called "bridges" exists..
+# .. and quite a Bohrium sounding thing... anyway... here are the 
+# benchmark "bridges"/"launchers"/"runner"/"commands"/"executers".
+# Call them what you like, we called them "bridges" for some reason.
+#
+# In order to be backwards compatible, the stuff below should probably be defined,
+# in the "bridges" list (see further down), however, looking at suites then it is
+# quite clear that the bridge-list never used. Probably because indexing is numerical
+# and not a dict... Anyway instead instead let us define these...
+# matching the file-system conventions.
+#
+
+# Python
+python_numpy    = ('Python/NP', 'python `bp_info --benchmarks`/{script}/python_numpy/{script}.py {args}')
+python_bohrium  = ('Python/BH', 'python -m bohrium `bp_info --benchmarks`/{script}/python_numpy/{script}.py --bohrium=True {args}')
+
+# C
+c99_seq     = ('C/SEQ',     './`bp_info --benchmarks`/{script}/c99_seq/bin/{script} {args}')
+c99_omp     = ('C/OMP',     './`bp_info --benchmarks`/{script}/c99_omp/bin/{script} {args}')
+c99_omp_mpi = ('C/OMP_MPI', 'mpirun ./`bp_info --benchmarks`/{script}/c99_omp_mpi/bin/{script} {args}')
+
+# C++
+cpp11_seq   = ('CPP/SEQ',   './`bp_info --benchmarks`/{script}/cpp11_seq/bin/{script} {args}')
+cpp11_omp   = ('CPP/OMP',   './`bp_info --benchmarks`/{script}/cpp11_omp/bin/{script} {args}')
+cpp11_arma  = ('CPP/Arma',  './`bp_info --benchmarks`/{script}/cpp11_arma/bin/{script} {args}')
+cpp11_blitz = ('CPP/Blitz', './`bp_info --benchmarks`/{script}/cpp11_blitz/bin/{script} {args}')
+cpp11_eigen = ('CPP/Eigen', './`bp_info --benchmarks`/{script}/cpp11_eigen/bin/{script} {args}')
+cpp11_boost = ('CPP/Boost', './`bp_info --benchmarks`/{script}/cpp11_boost/bin/{script} {args}')
+
+# C#
+
+# F#
+
+# ... others
+
+# End of default launchers
+##################################################################################
+
+#
+# The following things seem quite useless... it should probably just be removed...
+# the idea of a "default-suite" is to have of bunch of things that are shared amongst
+# a wealth of benchmarks... time has shown us that only something like a "bridge-definition"
+# is really ever shared...
+#
+
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bridges = [
@@ -5,7 +55,6 @@ bridges = [
     ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args}', None),
     ('cpp', 'benchmark/cpp/bin/{script} {args}', None)
 ]
-
 
 # Managers above the node-vem with various parameter setups.
 # NB: the node-vem is hardcoded, the managers here will have the
@@ -41,7 +90,6 @@ suite = {
     'managers':  managers,
     'scripts':   scripts,
 }
-
 
 native = {
         'bridges': [('native-numpy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
