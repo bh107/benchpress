@@ -1,13 +1,15 @@
-Go [here](http://benchpress.readthedocs.org) for full documentation on Benchpress, see below for a quick start.
+Read the full  
 
 .. image:: https://readthedocs.org/projects/benchpress/badge/?version=latest
-   :target: https://readthedocs.org/projects/benchpress/?badge=latest
+   :target: http://benchpress.readthedocs.org
    :alt: Documentation Status
+
+on Benchpress or see below for a quick start.
 
 Quick Start
 ===========
 
-Jump right into it::
+Fire up your terminal, and::
 
   # Clone the repos
   git clone git@github.com:bh107/benchpress.git
@@ -18,7 +20,7 @@ Jump right into it::
   # Source environment vars
   source util/setbpenv.bash
 
-You now have the Benchpress commands, ``bp_run``, ``bp_times``, ``bp_info``, ``bp_compile``, and ``bp_grapher`` ready at your finger-tops along with all the benchmarks and suites.
+You now have the Benchpress commands, ``bp_run``, ``bp_times``, ``bp_info``, ``bp_compile``, and ``bp_grapher`` ready at your finger-tips along with all the benchmarks and suites.
 
 Go ahead and run the `numpy_only` suite, executing each benchmark in the suite twice::
 
