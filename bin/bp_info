@@ -5,22 +5,30 @@ from benchpress.version import get_paths
 def main():
     parser = argparse.ArgumentParser(description="Retrieve misc. info on Benchpress.")
 
-    parser.add_argument('--module', action='store_true', help="Location of the Python module")
+    parser.add_argument('--mod', action='store_true', help="Location of the Python module")
+    parser.add_argument('--mod_parent', action='store_true', help="Location of the Python module parent")
+    parser.add_argument('--all', action='store_true', help="Show all paths")
+    parser.add_argument('--docsrc', action='store_true', help="Location of the documentation source")
     parser.add_argument('--benchmarks', action='store_true', help="Location of benchmarks")
     parser.add_argument('--suites', action='store_true', help="Location of suites")
     parser.add_argument('--hooks', action='store_true', help="Location of hooks")
-    parser.add_argument('--bins', action='store_true', help="Location of commands")
+    parser.add_argument('--commands', action='store_true', help="Location of commands")
 
     args = parser.parse_args()  # Parse arguments
 
     paths = get_paths()         # Grab the path configuration
     args_dict = args.__dict__
-    for arg in args_dict:
-        if args_dict[arg]:
-            print paths[arg]
-            return
-
-    parser.print_help()
+    if args.all:                # Print all paths
+        for path in sorted(paths):
+            print "%s: %s" % (path, paths[path])
+    else:                       # Print specific paths
+        for arg in sorted(args_dict):
+            if args_dict[arg]:
+                print paths[arg]
+                                
+                                # Did not print any paths
+    if not [arg for arg in args_dict if args_dict[arg]]:
+        parser.print_help()
 
 if __name__ == "__main__":
     main()

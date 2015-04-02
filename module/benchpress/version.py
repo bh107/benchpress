@@ -1,4 +1,5 @@
 import inspect
+import pprint
 import os
 import re
 
@@ -13,34 +14,45 @@ def module_path():
 def get_paths():
     """Get a dict of paths for the various things in benchpress."""
 
-    home = module_path()
-    dirs = home.split(os.sep) 
-
-    share_path = os.sep.join(dirs[:-1])         # When running from checkout
-    bin_path = share_path
-    from_checkout = len(dirs) > 2 and \
-                    dirs[-1] == "benchpress" and \
-                    dirs[-2] == "benchpress"
-
-    # Find the share folder and bin folders when not running from checkout
-    while(len(dirs) > 2 and not from_checkout):
-        dirs.pop()
-        path = os.sep.join(dirs)
-        ls = os.listdir(path)
-        if 'share' in ls and 'bin' in ls:
-            share_path = os.sep.join([path, "share", "benchpress"])
-            bin_path = os.sep.join([path, "bin"])
-            break
-    
     paths = {                                   # Construct the path dict
-        'module': home,
-        'benchmarks': os.sep.join([share_path, "benchmarks"]),
-        'suites': os.sep.join([share_path, "suites"]),
-        'hooks': bin_path,
-        'bins': bin_path
+        'mod': "",
+        'mod_parent': "",
+        'docsrc': "",
+        'benchmarks': "",
+        'suites': "",
+        'hooks': "",
+        'commands': "" 
     }
 
-    for entity in paths:                        # Validate it
+    mod = module_path()
+    mod_parent = os.sep.join(mod.split(os.sep)[:-1])
+    dirs = mod.split(os.sep) 
+
+    paths["mod"] = mod
+    paths["mod_parent"] = mod_parent
+
+    if len(dirs) > 2             and \
+        dirs[-1] == "benchpress" and \
+        dirs[-2] == "module":           # Running from clone/tarball
+        root = os.sep.join(dirs[:-2])
+        paths["docsrc"] = os.sep.join([root, "doc"])
+        paths["benchmarks"] = os.sep.join([root, "benchmarks"])
+        paths["suites"] = os.sep.join([root, "suites"])
+        paths["hooks"] = os.sep.join([root, "hooks"])
+        paths["commands"] = os.sep.join([root, "bin"])
+    else:                               # Running from pip-install
+        while(len(dirs) > 2):
+            dirs.pop()
+            path = os.sep.join(dirs)
+            ls = os.listdir(path)
+            if 'share' in ls and 'bin' in ls:
+                #paths["docsrc"] = Doc source is not installed
+                paths["benchmarks"] = os.sep.join([path, "benchmarks"])
+                paths["suites"] = os.sep.join([path, "suites"])
+                paths["hooks"] = os.sep.join([path, "bin"])
+                paths["commands"] = os.sep.join([path, "bin"])
+                break
+    for entity in paths:                # Check that they actually exist
         if not os.path.exists(paths[entity]):
             raise IOError("Path for %s (%s) does not exist" % (entity, paths[entity]))
 
