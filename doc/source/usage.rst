@@ -2,6 +2,9 @@
 Usage - Commands
 ================
 
+Benchpress provides the following commands: ``bp-info``, ``bp-run``, ``bp-times``, ``bp-compile``, and ``bp-grapher``.
+See below for details on invoking them and see section ?? for examples of using the commands.
+
 bp-info
 -------
 

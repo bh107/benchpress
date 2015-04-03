@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import subprocess
+import argparse
 import pprint
 import os
 from benchpress.version import get_paths, implementations
@@ -41,4 +42,17 @@ def compile(search_path=None, languages=['c','cpp']):
                     print(err)
 
 if __name__ == "__main__":
-    compile()
+
+    parser = argparse.ArgumentParser(description="Compile benchmarks that require it")
+
+    parser.add_argument('--all', action='store_true', help="Compile all")
+    parser.add_argument('--lang', choices=['c', 'cpp'], help="Compile all of the provided language")
+
+    args = parser.parse_args()  # Parse arguments
+
+    if args.all:
+        compile()
+    elif args.lang:
+        compile(languages=[args.lang])
+    else:
+        parser.print_usage()

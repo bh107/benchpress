@@ -2,12 +2,13 @@ usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--with-perf]
               [--with-time] [--save-data] [--pre-clean] [--restart]
               [--publish-cmd COMMAND] [--slurm] [--no-slurm]
               [--partition PARTITION] [--multi-jobs] [--wait]
-              bohrium_src suite_file
+              repos_root suite_file
 
 Runs a benchmark suite and stores the results in a json-file.
 
 positional arguments:
-  bohrium_src           Path to the Bohrium source-code.
+  repos_root            Path to git-repository, revision will be included in
+                        result. Use "NOREPOS" if you do not want it.
   suite_file            Path to the benchmark suite file.
 
 optional arguments:
