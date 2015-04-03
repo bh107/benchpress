@@ -28,7 +28,7 @@ c99_omp_mpi = ('C/OMP_MPI', 'mpirun `bp_info --benchmarks`/{script}/c99_omp_mpi/
 # C++
 cpp11_seq   = ('CPP/SEQ',   '`bp_info --benchmarks`/{script}/cpp11_seq/bin/{script} {args}', None)
 cpp11_omp   = ('CPP/OMP',   '`bp_info --benchmarks`/{script}/cpp11_omp/bin/{script} {args}', None)
-cpp11_arma  = ('CPP/Arma',  '`bp_info --benchmarks`/{script}/cpp11_arma/bin/{script} {args}', None)
+cpp11_arma  = ('CPP/Arma',  '`bp_info --benchmarks`/{script}/cpp11_armadillo/bin/{script} {args}', None)
 cpp11_blitz = ('CPP/Blitz', '`bp_info --benchmarks`/{script}/cpp11_blitz/bin/{script} {args}', None)
 cpp11_eigen = ('CPP/Eigen', '`bp_info --benchmarks`/{script}/cpp11_eigen/bin/{script} {args}', None)
 cpp11_boost = ('CPP/Boost', '`bp_info --benchmarks`/{script}/cpp11_boost/bin/{script} {args}', None)
