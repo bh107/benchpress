@@ -41,4 +41,4 @@ def compile(search_path=None, languages=['c','cpp']):
                     print(err)
 
 if __name__ == "__main__":
-    compile("benchmarks", ['c', 'cpp'])
+    compile()
