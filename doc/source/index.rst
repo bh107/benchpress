@@ -9,7 +9,8 @@ Contents:
 
    quickstart
    install
-   tools
+   usage
+   extending
    benchmarks
 
 Indices and tables
