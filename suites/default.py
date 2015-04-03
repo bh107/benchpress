@@ -32,7 +32,7 @@ cpp11_arma  = ('CPP/Arma',  './`bp_info --benchmarks`/{script}/cpp11_arma/bin/{s
 cpp11_blitz = ('CPP/Blitz', './`bp_info --benchmarks`/{script}/cpp11_blitz/bin/{script} {args}', None)
 cpp11_eigen = ('CPP/Eigen', './`bp_info --benchmarks`/{script}/cpp11_eigen/bin/{script} {args}', None)
 cpp11_boost = ('CPP/Boost', './`bp_info --benchmarks`/{script}/cpp11_boost/bin/{script} {args}', None)
-cpp11_bohrium = ('CPP/BH',  './`bp_info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', None)
+cpp11_bxx   = ('CPP/BH',    './`bp_info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', None)
 
 # C#
 
