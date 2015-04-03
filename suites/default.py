@@ -16,23 +16,23 @@
 #
 
 # Python
-dython_numpy    = ('Dython/NP', 'dython `bp_info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
-python_numpy    = ('Python/NP', 'python `bp_info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
-python_bohrium  = ('Python/BH', 'python -m bohrium `bp_info --benchmarks`/{script}/python_numpy/{script}.py --bohrium=True {args}', None)
+dython_numpy    = ('Dython/NP', 'dython `bp-info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
+python_numpy    = ('Python/NP', 'python `bp-info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
+python_bohrium  = ('Python/BH', 'python -m bohrium `bp-info --benchmarks`/{script}/python_numpy/{script}.py --bohrium=True {args}', None)
 
 # C
-c99_seq     = ('C/SEQ',     '`bp_info --benchmarks`/{script}/c99_seq/bin/{script} {args}', None)
-c99_omp     = ('C/OMP',     '`bp_info --benchmarks`/{script}/c99_omp/bin/{script} {args}', None)
-c99_omp_mpi = ('C/OMP_MPI', 'mpirun `bp_info --benchmarks`/{script}/c99_omp_mpi/bin/{script} {args}', None)
+c99_seq     = ('C/SEQ',     '`bp-info --benchmarks`/{script}/c99_seq/bin/{script} {args}', None)
+c99_omp     = ('C/OMP',     '`bp-info --benchmarks`/{script}/c99_omp/bin/{script} {args}', None)
+c99_omp_mpi = ('C/OMP_MPI', 'mpirun `bp-info --benchmarks`/{script}/c99_omp_mpi/bin/{script} {args}', None)
 
 # C++
-cpp11_seq   = ('CPP/SEQ',   '`bp_info --benchmarks`/{script}/cpp11_seq/bin/{script} {args}', None)
-cpp11_omp   = ('CPP/OMP',   '`bp_info --benchmarks`/{script}/cpp11_omp/bin/{script} {args}', None)
-cpp11_arma  = ('CPP/Arma',  '`bp_info --benchmarks`/{script}/cpp11_armadillo/bin/{script} {args}', None)
-cpp11_blitz = ('CPP/Blitz', '`bp_info --benchmarks`/{script}/cpp11_blitz/bin/{script} {args}', None)
-cpp11_eigen = ('CPP/Eigen', '`bp_info --benchmarks`/{script}/cpp11_eigen/bin/{script} {args}', None)
-cpp11_boost = ('CPP/Boost', '`bp_info --benchmarks`/{script}/cpp11_boost/bin/{script} {args}', None)
-cpp11_bxx   = ('CPP/BH',    '`bp_info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', None)
+cpp11_seq   = ('CPP/SEQ',   '`bp-info --benchmarks`/{script}/cpp11_seq/bin/{script} {args}', None)
+cpp11_omp   = ('CPP/OMP',   '`bp-info --benchmarks`/{script}/cpp11_omp/bin/{script} {args}', None)
+cpp11_arma  = ('CPP/Arma',  '`bp-info --benchmarks`/{script}/cpp11_armadillo/bin/{script} {args}', None)
+cpp11_blitz = ('CPP/Blitz', '`bp-info --benchmarks`/{script}/cpp11_blitz/bin/{script} {args}', None)
+cpp11_eigen = ('CPP/Eigen', '`bp-info --benchmarks`/{script}/cpp11_eigen/bin/{script} {args}', None)
+cpp11_boost = ('CPP/Boost', '`bp-info --benchmarks`/{script}/cpp11_boost/bin/{script} {args}', None)
+cpp11_bxx   = ('CPP/BH',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', None)
 
 # C#
 

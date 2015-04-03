@@ -3,7 +3,7 @@ from default import *
 suites = [
     {
         'bridges':  [
-            ('NumPy', 'taskset -c 0 python `bp_info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
+            ('NumPy', 'taskset -c 0 python `bp-info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
         ],
         'scripts':  [
             ('Black Scholes',               'black_scholes',    '--size=1000000*10'),

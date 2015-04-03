@@ -2,29 +2,28 @@
 Usage
 =====
 
-bp_info
+bp-info
 -------
 
-...
+.. literalinclude:: usage_bp-info.rst
 
-bp_compile
-----------
-
-...
-
-bp_run
+bp-run
 ------
 
-...
+.. literalinclude:: usage_bp-run.rst
 
-bp_times
+bp-times
 --------
 
-...
+.. literalinclude:: usage_bp-times.rst
 
-bp_grapher
+bp-grapher
+----------
+
+.. literalinclude:: usage_bp-grapher.rst
+
+bp-compile
 ----------
 
 ...
-
 

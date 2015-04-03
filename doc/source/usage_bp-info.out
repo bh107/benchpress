@@ -1,0 +1,15 @@
+usage: bp-info [-h] [--mod] [--mod_parent] [--all] [--docsrc] [--benchmarks]
+               [--suites] [--hooks] [--commands]
+
+Retrieve misc. info on Benchpress.
+
+optional arguments:
+  -h, --help    show this help message and exit
+  --mod         Location of the Python module
+  --mod_parent  Location of the Python module parent
+  --all         Show all paths
+  --docsrc      Location of the documentation source
+  --benchmarks  Location of benchmarks
+  --suites      Location of suites
+  --hooks       Location of hooks
+  --commands    Location of commands

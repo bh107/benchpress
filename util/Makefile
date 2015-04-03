@@ -7,8 +7,8 @@
 #
 # cd ../ && source util/setbpenv.bash
 #
-DOCSRC := $(shell bp_info --docsrc)
-MOD_PARENT := $(shell bp_info --mod_parent)
+DOCSRC := $(shell bp-info --docsrc)
+MOD_PARENT := $(shell bp-info --mod_parent)
 
 # Install / uninstall using pip
 install:
@@ -20,6 +20,10 @@ uninstall:
 # Generate sphinx doc
 docs:
 	cd $(DOCSRC) && ./autodoc_benchmarks.py > source/benchmarks.rst && make html
+	cd $(DOCSRC) && bp-info -h > source/usage_bp-info.out
+	cd $(DOCSRC) && bp-run -h > source/usage_bp-run.out
+	cd $(DOCSRC) && bp-times -h > source/usage_bp-times.out
+	cd $(DOCSRC) && bp-grapher -h > source/usage_bp-grapher.out
 
 # Upload to PyPi
 upload:

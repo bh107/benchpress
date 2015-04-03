@@ -1,0 +1,43 @@
+usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--no-perf]
+              [--no-time] [--save-data] [--pre-clean] [--restart]
+              [--publish-cmd COMMAND] [--slurm] [--no-slurm]
+              [--partition PARTITION] [--multi-jobs] [--wait]
+              bohrium_src suite_file
+
+Runs a benchmark suite and stores the results in a json-file.
+
+positional arguments:
+  bohrium_src           Path to the Bohrium source-code.
+  suite_file            Path to the benchmark suite file.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output RESULT_FILE  Path to the JSON file where the benchmark results will
+                        be written. If the file exist, the benchmark will
+                        resume.
+  --runs RUNS           How many times should each benchmark run.
+  --no-perf             Disable the use of the perf measuring tool.
+  --no-time             Disable the use of the '/usr/bin/time -v' measuring
+                        tool.
+  --save-data           Save data output from benchmarks in RESULT_FILE. All
+                        benchmarks must support the --outputfn argument.
+  --pre-clean           Clean caches such as the fuse or the kernel cache
+                        before execution.
+  --restart             Restart execution or submission of failed jobs.
+  --publish-cmd COMMAND
+                        The publish command to use before exiting (use
+                        together with --wait). NB: $OUT is replaced with the
+                        name of the output JSON file.
+
+SLURM Queuing System:
+  --slurm               Use the SLURM queuing system. This overwrite the
+                        default value specified in the suite
+                        ('use_slurm_default')
+  --no-slurm            Do not use the SLURM queuing system. This overwrite
+                        the default value specified in the suite
+                        ('use_slurm_default')
+  --partition PARTITION
+                        Submit to a specific SLURM partition.
+  --multi-jobs          Submit 'runs' SLURM jobs instead of one job with
+                        'runs' number of runs.
+  --wait                Wait for all SLURM jobs to finished before returning.

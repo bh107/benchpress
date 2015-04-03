@@ -34,11 +34,11 @@ setup(              # Set it up
                  make_dfiles('share/benchpress', paths['suites']),
     packages = ['benchpress'],
     scripts = [
-        os.sep.join([paths["commands"], "bp_info"]),
-        os.sep.join([paths["commands"], "bp_run"]),
-        os.sep.join([paths["commands"], "bp_times"]),
-        os.sep.join([paths["commands"], "bp_grapher"]),
-        os.sep.join([paths["commands"], "bp_compile"]),
+        os.sep.join([paths["commands"], "bp-info"]),
+        os.sep.join([paths["commands"], "bp-run"]),
+        os.sep.join([paths["commands"], "bp-times"]),
+        os.sep.join([paths["commands"], "bp-grapher"]),
+        os.sep.join([paths["commands"], "bp-compile"]),
         os.sep.join([paths["hooks"], "proxy-VEM-pre-hook.sh"])
     ]
 )

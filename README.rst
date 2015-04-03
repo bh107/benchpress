@@ -20,13 +20,13 @@ Fire up your terminal, and::
   # Source environment vars
   source util/setbpenv.bash
 
-You now have the Benchpress commands, ``bp_run``, ``bp_times``, ``bp_info``, ``bp_compile``, and ``bp_grapher`` ready at your finger-tips along with all the benchmarks and suites.
+You now have the Benchpress commands, ``bp-run``, ``bp-times``, ``bp-info``, ``bp-compile``, and ``bp-grapher`` ready at your finger-tips along with all the benchmarks and suites.
 
 Go ahead and run the `numpy_only` suite, executing each benchmark in the suite twice::
 
-  bp_run --no-perf --no-time --runs 2 --output my_run.json suites/numpy_only.py
+  bp-run --no-perf --no-time --runs 2 --output my_run.json suites/numpy_only.py
 
 The above will store results from the run in the file `my_run.json`. You can inspect the elapsed wall-clock by executing::
 
-  bp_times my_run.json
+  bp-times my_run.json
 

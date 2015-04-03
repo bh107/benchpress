@@ -5,19 +5,19 @@ import pprint
 import os
 from benchpress.gen_graphs import main
 from benchpress import result_parser
+import benchpress.grapher
 
 if __name__ == "__main__":
 
     graph_types = {}    # Auto-load all graph-modules from grapher/*
                         # The graph-class must be a capilized version of the
                         # filename
-    for _, module, _ in pkgutil.iter_modules(['benchpress'+os.sep+'grapher']):
+    for _, module, _ in pkgutil.iter_modules([os.path.dirname(benchpress.grapher.__file__)]):
         if module == 'graph':
             continue
 
         module_caps = module.capitalize()
         m = __import__("benchpress.grapher.%s" % module, globals(), locals(), [module_caps], -1)
-
         graph_types[module] = m.__dict__[module_caps]
 
     parser = argparse.ArgumentParser(
