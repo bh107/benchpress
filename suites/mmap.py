@@ -1,5 +1,7 @@
 from default import *
 
+# TODO: Adapt this to the benchpress after the "makeover".
+
 scripts = [
     ('Jacobi Stencil',  'jacobi_stencil',   '--size=8000*8000*3'),
     ('Cloth',           'cloth',            '--size=3000*3000*1'),

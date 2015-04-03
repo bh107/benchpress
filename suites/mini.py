@@ -5,7 +5,7 @@ scripts   = [
 ]
 
 python = {
-    'bridges':  [('python-numpy', 'dython benchmark/python/{script}.py {args} --bohrium=False', None)],
+    'bridges':  [dython_numpy],
     'scripts':  scripts,
 }
 

@@ -1,3 +1,4 @@
+from default import *
 
 managers = [
 #    ('cluster2',  'cluster', 'mpiexec -ppn 1 -np 1 {bridge} : -np 1 ~/.local/bin/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':2}),
@@ -28,13 +29,13 @@ python_script = [\
 ]
 
 python = {
-    'bridges': [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [python_bohrium],
     'engines': engines,
     'managers': managers,
     'scripts': python_script
 }
 python_native = {
-    'bridges': [('numpy-native', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
+    'bridges': [python_numpy],
     'scripts': python_script
 }
 

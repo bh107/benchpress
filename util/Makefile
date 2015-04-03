@@ -10,20 +10,20 @@
 DOCSRC := $(shell bp_info --docsrc)
 MOD_PARENT := $(shell bp_info --mod_parent)
 
-# Generate sphinx doc
-docs:
-	cd $(DOCSRC) && ./autodoc_benchmarks.py > source/benchmarks.rst && make html
-
-# Upload to PyPi
-upload:
-	python setup.py bdist sdist upload
-
 # Install / uninstall using pip
 install:
 	pip install benchpress --user
 
 uninstall:
 	pip uninstall benchpress
+
+# Generate sphinx doc
+docs:
+	cd $(DOCSRC) && ./autodoc_benchmarks.py > source/benchmarks.rst && make html
+
+# Upload to PyPi
+upload:
+	cd $(MOD_PARENT) && python setup.py bdist sdist upload
 
 # Install / Uninstall using setup.py
 install_sp:

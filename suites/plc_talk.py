@@ -1,3 +1,5 @@
+# TODO: Adapt this to the benchpress after the "makeover".
+
 scriptso = [('Heat Equation 2k x 2k','','2000 2000 1000')
            , ('Heat Equation 4k x 4k','','4000 4000 1000')
            , ('Heat Equation 8k x 8k','','8000 8000 1000')

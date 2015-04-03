@@ -38,12 +38,12 @@ scripts = [
 ]
 
 numpy = {
-    'bridges':  [('NumPy/Native', 'taskset -c 0 python benchmark/python/{script}.py {args} --bohrium=False', None)],
+    'bridges':  [python_numpy],
     'scripts':  scripts,
 }
 
 bohrium = {
-    'bridges':  [('NumPy/Bohrium', 'taskset -c 0 python benchmark/python/{script}.py {args} --bohrium=True', None)],
+    'bridges':  [python_bohrium],
     'managers': [('node',  'node', '',  None) ],
     'filters':  [('complete_reduction', 'complete_reduction', None)],
     'engines':  [

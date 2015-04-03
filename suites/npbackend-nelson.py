@@ -1,4 +1,6 @@
 
+# TODO: Adapt this to the benchpress after the "makeover".
+
 scripts   = [
     ('Heat 2D',                      'heat_equation',      '--size=6000*6000*100'),
     ('Shallow Water',                'shallow_water',      '--size=4000*4000*100'),

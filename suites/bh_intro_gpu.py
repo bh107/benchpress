@@ -1,14 +1,16 @@
+from default import *
+
 engines = [('GPU',  'gpu',   None)]
 
 python_script = [('Shallow Water 4k x 4k','shallow_water','--size=4000*4000*100 --dtype=float64'),
                  ]
 python = {
-    'bridges': [('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [python_bohrium],
     'engines': engines,
     'scripts': python_script
 }
 python_native = {
-    'bridges': [('numpy-native', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
+    'bridges': [python_numpy],
     'scripts': python_script
 }
 
@@ -27,12 +29,12 @@ cil_native = {
 cpp_script = [('Black Scholes 64M','black_scholes','--size=32000000*50'),
               ]
 cpp = {
-    'bridges': [('CPP', 'benchmark/cpp/bin/{script} {args}', None)],
+    'bridges': [cpp11_bxx],
     'engines': engines,
     'scripts': cpp_script
 }
 blitz = {
-    'bridges': [('blitz++', 'benchmark/blitz/bin/{script} {args}', None)],
+    'bridges': [cpp11_blitz],
     'scripts': cpp_script
 }
 
