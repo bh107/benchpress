@@ -23,10 +23,10 @@ omp_1_32 = [
 ] 
 
 suites = [
-    {'bridges': [python_bohrium],   'scripts': scripts, 'engines': fusion_1_32 + omp_1_32, 'filters':  [('complete_reduction', 'complete_reduction', None)]},
-    {'bridges': [cpp11_bxx],        'scripts': scripts, 'engines': fusion_1_32 + omp_1_32, 'filters':  [('complete_reduction', 'complete_reduction', None)]},
-    {'bridges': [cpp11_arma],       'scripts': scripts, 'engines': omp_1_32},
-    {'bridges': [cpp11_blitz],      'scripts': scripts},
     {'bridges': [python_numpy],     'scripts': scripts}, 
+    {'bridges': [cpp11_blitz],      'scripts': scripts},
+    {'bridges': [cpp11_arma],       'scripts': scripts, 'engines': omp_1_32},
+    {'bridges': [cpp11_bxx],        'scripts': scripts, 'engines': fusion_1_32 + omp_1_32, 'filters':  [('complete_reduction', 'complete_reduction', None)]},
+    {'bridges': [python_bohrium],   'scripts': scripts, 'engines': fusion_1_32 + omp_1_32, 'filters':  [('complete_reduction', 'complete_reduction', None)]},
 ]
 
