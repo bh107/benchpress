@@ -16,9 +16,9 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
     parser.add_argument(
-        'bohrium_src',
-        help='Path to the Bohrium source-code.',
-        type=lambda x: expand_path(parser, x)
+        'repos_root',
+        help='Path to git-repository, revision will be included in result. Use "NOREPOS" if you do not want it.',
+        type=lambda x: expand_path(parser, x) if not x == "NOREPOS" else None
     )
     parser.add_argument(
         'suite_file',

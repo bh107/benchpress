@@ -325,7 +325,7 @@ def add_pending_job(setup, nrun, partition):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uuid.uuid4()
-    filename = os.path.join(cwd,basename)
+    filename = os.path.join(cwd, basename)
 
     bridge_cmd = setup['bridge_cmd'].replace("{script}",  setup['script'])
     bridge_cmd = bridge_cmd.replace("{args}",  setup['script_args'])
@@ -352,10 +352,12 @@ def add_pending_job(setup, nrun, partition):
         #We need to write the bohrium config file to an unique path
         job += 'echo "%s" > %s\n'%(setup['bh_config'], tmp_config_name)
 
+        """
         job += "cd %s\n"%setup['cwd']                           #Change dir and execute cmd
 
         if setup['pre_clean']:
             job += "./misc/tools/bhutils.py clean\n"
+        """
 
         outfile = "%s-%d"%(filename,i)
         cmd = ""
@@ -386,7 +388,7 @@ def gen_jobs(result_file, config, args):
     """Generates benchmark jobs based on the benchmark suites"""
 
     results = {
-        'meta': meta(args.bohrium_src, args.suite_file.name),
+        'meta': meta(args.repos_root, args.suite_file.name),
         'runs': []
     }
 
@@ -458,7 +460,6 @@ def gen_jobs(result_file, config, args):
                                        'engine':engine,
                                        'envs':envs,
                                        'envs_overwrite':envs_overwrite,
-                                       'cwd': args.bohrium_src,
                                        'pre-hook': benchmark.get('pre-hook', None),
                                        'post-hook': benchmark.get('post-hook', None),
                                        'script' : script,
@@ -467,8 +468,8 @@ def gen_jobs(result_file, config, args):
                                        'manager_cmd' : manager_cmd,
                                        'jobs':[],
                                        'bh_config':bh_config.getvalue(),
-                                       'use_perf': not args.no_perf,
-                                       'use_time': not args.no_time,
+                                       'use_perf': args.with_perf,
+                                       'use_time': args.with_time,
                                        'save_data_output': args.save_data,
                                        'pre_clean': args.pre_clean,
                                        'data_output': [],
