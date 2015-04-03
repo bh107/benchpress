@@ -39,14 +39,14 @@ if __name__ == "__main__":
         help="How many times should each benchmark run."
     )
     parser.add_argument(
-        '--no-perf',
+        '--with-perf',
         action="store_true",
-        help="Disable the use of the perf measuring tool."
+        help="Enable the use of the perf measuring tool."
     )
     parser.add_argument(
-        '--no-time',
+        '--with-time',
         action="store_true",
-        help="Disable the use of the '/usr/bin/time -v' measuring tool."
+        help="Enable the use of the '/usr/bin/time -v' measuring tool."
     )
     parser.add_argument(
         '--save-data',
@@ -100,6 +100,11 @@ if __name__ == "__main__":
         help="Wait for all SLURM jobs to finished before returning."
     )
     args = parser.parse_args()
+
+    if args.with_perf:
+        args.no_perf = False
+    if args.with_time:
+        args.no_timer = False
 
     if args.publish_cmd and not args.wait:
         parser.error( '--publish-cmd must be used together with --wait' )

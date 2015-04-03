@@ -1,5 +1,5 @@
-usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--no-perf]
-              [--no-time] [--save-data] [--pre-clean] [--restart]
+usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--with-perf]
+              [--with-time] [--save-data] [--pre-clean] [--restart]
               [--publish-cmd COMMAND] [--slurm] [--no-slurm]
               [--partition PARTITION] [--multi-jobs] [--wait]
               bohrium_src suite_file
@@ -16,8 +16,8 @@ optional arguments:
                         be written. If the file exist, the benchmark will
                         resume.
   --runs RUNS           How many times should each benchmark run.
-  --no-perf             Disable the use of the perf measuring tool.
-  --no-time             Disable the use of the '/usr/bin/time -v' measuring
+  --with-perf           Enable the use of the perf measuring tool.
+  --with-time           Enable the use of the '/usr/bin/time -v' measuring
                         tool.
   --save-data           Save data output from benchmarks in RESULT_FILE. All
                         benchmarks must support the --outputfn argument.

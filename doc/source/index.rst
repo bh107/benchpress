@@ -10,6 +10,7 @@ Contents:
    quickstart
    install
    usage
+   usage_examples
    extending
    benchmarks
 
