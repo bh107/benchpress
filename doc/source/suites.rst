@@ -1,6 +1,6 @@
-======================
-Extending and Changing
-======================
+======
+Suites
+======
 
 Benchmark Protocol and conventions
 ----------------------------------
@@ -22,5 +22,3 @@ C++
 
 ...
 
-
-...
