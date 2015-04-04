@@ -11,7 +11,7 @@ Contents:
    install
    usage
    usage_examples
-   extending
+   suites 
    benchmarks
 
 Indices and tables
