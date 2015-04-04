@@ -1,0 +1,8 @@
+usage: bp-compile [-h] [--all] [--lang {c,cpp}]
+
+Compile benchmarks that require it
+
+optional arguments:
+  -h, --help      show this help message and exit
+  --all           Compile all
+  --lang {c,cpp}  Compile all of the provided language

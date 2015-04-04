@@ -1,3 +1,3 @@
 include ../../_utils/cpp11/Makefile.common
 CXXFLAGS+=-fopenmp
-LIBS+=-larmadillo
+LIBS+=-larmadillo -lopenblas -llapack

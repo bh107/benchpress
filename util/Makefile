@@ -19,11 +19,13 @@ uninstall:
 
 # Generate sphinx doc
 docs:
-	cd $(DOCSRC) && ./autodoc_benchmarks.py > source/benchmarks.rst && make html
+	cd $(DOCSRC) && ./autodoc_benchmarks.py > source/benchmarks.rst
 	cd $(DOCSRC) && bp-info -h > source/usage_bp-info.out
 	cd $(DOCSRC) && bp-run -h > source/usage_bp-run.out
 	cd $(DOCSRC) && bp-times -h > source/usage_bp-times.out
 	cd $(DOCSRC) && bp-grapher -h > source/usage_bp-grapher.out
+	cd $(DOCSRC) && bp-compile -h > source/usage_bp-compile.out
+	cd $(DOCSRC) && make html
 
 # Upload to PyPi
 upload:
