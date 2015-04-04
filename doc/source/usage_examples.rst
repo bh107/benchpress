@@ -90,7 +90,7 @@ If you would like to execute the same benchmark but using Bohrium as backend the
 
   python -m bohrium `bp-info --benchmarks`/heat_equation/python_numpy/heat_equation.py --size=10000*10000*10 --bohrium=True
 
-Notice the ``-m bohrium`` right after the ``python`` command, and the ``--bohrium=True`` argument at the end. Both are needed.
+.. note:: Notice the ``-m bohrium`` right after the ``python`` command, and the ``--bohrium=True`` argument at the end. Both are needed.
 
 The ``-m bohrium`` flag overloads the ``numpy`` module, which means you do not have to change the code to run using Bohrium.
 
