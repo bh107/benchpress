@@ -2,6 +2,10 @@
 Welcome to Benchpress
 =====================
 
+.. image:: _static/logo.jpg
+   :alt: alternate text
+   :align: right
+
 Contents:
 
 .. toctree::
