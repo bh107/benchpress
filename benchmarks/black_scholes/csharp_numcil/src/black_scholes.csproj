@@ -8,7 +8,7 @@
     <ProjectGuid>{AE1D260B-58A7-4811-8914-0615A4559A48}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>blackscholes</RootNamespace>
-    <AssemblyName>blackscholes</AssemblyName>
+    <AssemblyName>black_scholes</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
