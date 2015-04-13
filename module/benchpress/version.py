@@ -79,7 +79,7 @@ def implementations(search_path=None):
             continue
 
         for filename in filenames:              # Group the rest
-            match = re.match(".*\.((cpp$)|(py$)|(c$)$)", filename)
+            match = re.match(".*\.((cpp$)|(py$)|(cs$)|(c$)$)", filename)
             if match:
                 dirs        = [x for x in root.split(os.sep) if x not in search_path.split(os.sep)]
                 benchmark   = dirs[0]
