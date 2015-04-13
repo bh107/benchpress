@@ -35,6 +35,9 @@ cpp11_boost = ('CPP/Boost', '`bp-info --benchmarks`/{script}/cpp11_boost/bin/{sc
 cpp11_bxx   = ('CPP/BH',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', None)
 
 # C#
+cil_managed   = ('Mono/Managed', 'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=False {args}', {'NUMCIL_DISABLE_UNSAFE': '1'})
+cil_unsafe    = ('Mono/Unsafe',  'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=False {args}', None)
+cil_bohrium   = ('Mono/Bohrium', 'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=True  {args}', None)
 
 # F#
 
@@ -54,7 +57,7 @@ cpp11_bxx   = ('CPP/BH',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{scri
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bridges = [
     ('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None),
-    ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/Release/{script}.exe {args}', None),
+    ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/{script}.exe {args} --bohrium=True', None),
     ('cpp', 'benchmark/cpp/bin/{script} {args}', None)
 ]
 
