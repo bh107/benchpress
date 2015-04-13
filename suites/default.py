@@ -100,3 +100,18 @@ native = {
 
 suites = [suite, native]
 
+"""
+cpu_stack = [
+    ('bridge',  [('Default', 'bridge', None)]),
+    ('filter',  [('CREDUCE', 'complete_reduction', None)]),
+    ('vem',     [('Node', 'node', None)]),
+    ('fuser',   [('Topological', 'topological', None)]),
+    ('ve',      [('CPU', 'cpu', None)])
+]
+
+cpu_suites = {
+    'launchers': [python_numpy, python_bohrium],
+    'scripts': scripts,
+    'bohrium': cpu_stack
+}
+"""
