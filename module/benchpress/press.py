@@ -384,8 +384,10 @@ def add_pending_job(setup, nrun, partition):
                           'nrun': nrun,
                           'script': job})
 
-def gen_jobs(result_file, config, args):
-    """Generates benchmark jobs based on the benchmark suites"""
+def gen_jobs_old(result_file, config, args):
+    """
+    Generates benchmark jobs based on the "old" benchmark suite format.
+    """
 
     results = {
         'meta': meta(args.repos_root, args.suite_file.name),
@@ -494,6 +496,11 @@ def gen_jobs(result_file, config, args):
                                 bh_config.close()
                                 write2json(result_file, results)
 
+def gen_jobs(result_file, config, args):
+    """Generates benchmark jobs based on the benchmark suites"""
+
+    return gen_jobs_old(result_file, config, args)
+
 def handle_result_file(result_file, args):
     """Execute, submits, and/or parse results of the benchmarks in 'result_file'
        Returns True when all benchmark runs is finished or failed"""
@@ -535,7 +542,13 @@ def handle_result_file(result_file, args):
     return True
 
 def expand_path(parser, path):
-    """Check that 'path' points to the Bohrium source dir"""
+    """
+    Expand then given path.
+
+    Such as expanding the tilde in "~/bohrium", thereby providing
+    the absolute path to the directory "bohrium" in the home folder.
+    """
+
     path = os.path.expanduser(path)
     if os.path.isdir(path):
         return os.path.abspath(path)
