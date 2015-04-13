@@ -13,6 +13,8 @@ import os
 import sys
 import re
 import StringIO
+import itertools
+import pprint
 import uuid
 import time
 import base64
@@ -403,19 +405,27 @@ def add_pending_job(setup, nrun, partition):
                           'nrun': nrun,
                           'script': job})
 
-def gen_jobs_old(result_file, config, args):
-    """
-    Generates benchmark jobs based on the "old" benchmark suite format.
-    """
+def prep_results(repos_root, suite_filename):
+    """Extract meta-information from system and prepare the result-dict"""
 
-    results = {
-        'meta': meta(args.repos_root, args.suite_file.name),
+    return {
+        'meta': meta(repos_root, suite_filename),
         'runs': []
     }
 
-    #Lets import the suite file as a Python module
-    sys.path.append(os.path.abspath(os.path.dirname(args.suite_file.name)))
-    benchmarks = __import__(os.path.basename(args.suite_file.name)[:-3]).suites
+def load_suite(filename):
+    """Load the suite from file."""
+
+    sys.path.append(os.path.abspath(os.path.dirname(filename)))
+    return __import__(os.path.basename(filename)[:-3]).suites
+
+def gen_jobs_bridge_format(result_file, config, args):
+    """
+    Generates benchmark jobs based on the "bridge/old" benchmark suite format.
+    """
+
+    results = prep_results(args.repos_root, args.suite_file.name)
+    benchmarks = load_suite(args.suite_file.name)
 
     print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
     i=0
@@ -515,10 +525,212 @@ def gen_jobs_old(result_file, config, args):
                                 bh_config.close()
                                 write2json(result_file, results)
 
+class StackCombinator(object):
+    """
+    Construct a list of stack configurations.
+
+    Creates all combinations of the different variations at each
+    level in the stack. Starts with the outer-most.
+    """
+
+    def __init__(self, bohrium):
+        """Count the number of variations at each level in the stack."""
+
+        self.bohrium = bohrium
+
+        combinations = {}
+        for lvl, variations in enumerate(bohrium):
+            combinations[lvl] = len(variations)
+
+        self.combinations = combinations
+
+    def sum(self):
+        """Sum up the combinations are each level."""
+
+        count = 0
+        for lvl in self.combinations:
+            count += self.combinations[lvl]
+        return count
+
+    def get(self):
+        """Get a combination of component variations."""
+
+        combination = []
+        for lvl in xrange(0, len(self.combinations)):
+            nvariations = self.combinations[lvl]
+            combination.append(nvariations-1 if nvariations > 0 else 0)
+        return combination
+
+    def decrement(self):
+        """Remove a combination"""
+
+        for lvl in xrange(0, len(self.combinations)):
+            if self.combinations[lvl] > 0:
+                self.combinations[lvl] = self.combinations[lvl] -1
+                break
+
+    def get_confs(self):
+        """Returns a list of configurations."""
+
+        combinations = []
+        while(self.sum()>0):
+            combination = self.get()
+            if combination not in combinations:
+                combinations.append(combination)
+            self.decrement()
+
+        confs = []
+        for combination in combinations:
+            conf = []
+            for lvl in xrange(0, len(combination)):
+                variation = combination[lvl]
+                conf.append(self.bohrium[lvl][variation])
+            confs.append(conf)
+
+        return confs
+
+def gen_jobs_launcher_format(result_file, config, args):
+    print("Launcher style.")
+
+    results = prep_results(args.repos_root, args.suite_file.name)
+    suites = load_suite(args.suite_file.name)
+
+    print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
+    i=0
+    for suite in suites:
+        for script_alias, script, script_args in suite['scripts']:
+            for launcher_alias, launcher_cmd, launcher_env in suite['launchers']:
+                if "bohrium" in suite:    # Create Bohrium config
+
+                    confparser = SafeConfigParser()     # Read current configuration
+                    confparser.read(config)             # 
+
+                    combinations = StackCombinator(suite["bohrium"]).get_confs()
+                    
+                    for stack in combinations:
+                        envs = os.environ.copy()        # Orig environment variables
+                        envs_overwrite = {}             # Overwritten by components
+
+                        if not stack[0][1] == "bridge":
+                            raise Exception("First component must be a bridge.")
+
+                        engine = ""
+                        engine_alias = ""
+                        manager = ""
+                        manager_alias = ""
+                        manager_cmd = ""
+
+                        component_names = []
+                        for cidx, component in enumerate(stack):
+                            last = cidx == len(stack)-1
+                            comp_alias  = component[0]  # Grab the alias
+                            comp_name   = component[1]  # Grab the name
+                            comp_envs   = component[-1] # and environment
+
+                            if comp_envs:               # Overwrite envs
+                                envs_overwrite.update(comp_envs)
+
+                            if not confparser.has_section(comp_name):
+                                raise Exception("Component does not exist.")
+                                                        
+                                                        # Collect all components
+                            if comp_name not in component_names:
+                                component_names.append(comp_name)
+
+                            # This is to remain backwards compatible.
+                            comp_type = confparser.get(comp_name, "type")
+                            if comp_type == "ve" and not engine:
+                                engine = comp_name
+                                engine_alias = comp_alias
+                            elif comp_type == "vem" and not manager:
+                                manager = comp_name
+                                manager_alias = comp_alias
+                                manager_cmd = component[2]
+
+                            if not last:                # Set the child
+                                name_child = stack[cidx+1][1]
+                                confparser.set(comp_name, "children", name_child)
+                            elif confparser.has_option(comp_name, "children"):
+                                remove_option(comp_name, "children")
+
+                        # Remove all unused components from configuration file
+                        all_components = confparser.sections()
+                        for comp_name in all_components:
+                            if comp_name not in component_names:
+                                confparser.remove_section(comp_name)
+
+                        bh_config = StringIO.StringIO() # Construct a new config
+                        confparser.write(bh_config)     # And write it to a string buffer
+
+                        #
+                        #   Now do this...
+                        #
+                        p = "Scheduling %s/%s on " % (launcher_alias, script)
+                        if manager and manager != "node":
+                            p += "%s/ " % manager_alias
+                        print "%snode/%s" % (p, engine_alias)
+
+                        run = {
+                            'script_alias':script_alias,
+                            'bridge_alias':launcher_alias,
+                            'engine_alias':engine_alias,
+                            'manager_alias':manager_alias,
+                            'script':script,
+                            'manager':manager,
+                            'engine':engine,
+                            'envs':envs,
+                            'envs_overwrite':envs_overwrite,
+                            'pre-hook': suite.get('pre-hook', None),
+                            'post-hook': suite.get('post-hook', None),
+                            'script' : script,
+                            'script_args' : script_args,
+                            'bridge_cmd' : launcher_cmd,
+                            'manager_cmd' : manager_cmd,
+                            'jobs':[],
+                            'bh_config':bh_config.getvalue(),
+                            'use_perf': args.with_perf,
+                            'use_time': args.with_time,
+                            'save_data_output': args.save_data,
+                            'pre_clean': args.pre_clean,
+                            'data_output': [],
+                            'use_slurm_default':suite.get('use_slurm_default', False),
+                            'elapsed': [],
+                            'timings': {},
+                            'time': [],
+                            'stdout': [],
+                            'stderr': [],
+                            'perf':[]
+                        }
+                        njobs = 1
+                        job_nrun = args.runs
+                        if args.multi_jobs:
+                            njobs = args.runs
+                            job_nrun = 1
+                        for _ in xrange(njobs):
+                            i += 1
+                            add_pending_job(run, job_nrun, args.partition)
+                        results['runs'].append(run)
+                        results['meta']['ended'] = str(datetime.now())
+
+                        bh_config.close()
+                        write2json(result_file, results)
+
 def gen_jobs(result_file, config, args):
     """Generates benchmark jobs based on the benchmark suites"""
 
-    return gen_jobs_old(result_file, config, args)
+    benchmarks = load_suite(args.suite_file.name)
+    nsuites = len(benchmarks)
+    nnew = 0
+    for suite in benchmarks:
+        if "launchers" in suite:
+            nnew += 1
+
+    if nnew == 0:
+        gen_jobs_bridge_format(result_file, config, args)
+    elif nnew == nsuites:
+        gen_jobs_launcher_format(result_file, config, args)
+    else:
+        print "ERROR! Cant mix and match launcher and bridge suite format."
 
 def handle_result_file(result_file, args):
     """Execute, submits, and/or parse results of the benchmarks in 'result_file'

@@ -122,28 +122,23 @@ cil_bohrium   = ('Mono/Bohrium', 'mono `bp-info --benchmarks`/{script}/csharp_nu
 #
 #   Bohrium stack configurations
 #
-#   stack_name = [
-#        (component_type, [(label, component_name, env_vars)]),
-#        (component_type, [(label, component_name, env_vars)]),
-#        (component_type, [(label, component_name, env_vars)]),
-#        (component_type, [(label, component_name, env_vars)]),
-#        (component_type, [(label, component_name, env_vars)]),
+#   bh_stack_name = [
+#        (label, component_name, env_vars),
+#        (label, component_name, env_vars),
+#        (label, component_name, env_vars),
+#        (label, component_name, env_vars),
+#        (label, component_name, env_vars),
 #   ]
 #
-bh_cpu_stack = [
-    ('bridge',  [('default',    'bridge',             None)]),
-    ('filter',  [('creduce',    'complete_reduction', None)]),
-    ('vem',     [('node',       'node',               None)]),
-    ('fuser',   [('topo',       'topological',        None)]),
-    ('ve',      [('cpu',        'cpu',                None)])
-]
 
-bh_gpu_stack = [
-    ('bridge',  [('default',    'bridge',             None)]),
-    ('vem',     [('node',       'node',               None)]),
-    ('fuser',   [('topo',       'topological',        None)]),
-    ('ve',      [('gpu',        'gpu',                None)]),
-    ('ve',      [('cpu',        'cpu',                None)])
+#
+#   This is "special" stack configuration that facilitates executing benchmarks
+#   that has nothing to do with Bohrium.
+#
+bh_stack_none = [
+    [('NA', 'bridge', None)],
+    [('NA', 'node', None)],
+    [('NA', 'cpu', None)]
 ]
 
 # End of the new format
