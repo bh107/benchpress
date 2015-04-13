@@ -14,7 +14,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>../bin</OutputPath>
+    <OutputPath>..\bin</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>../bin</OutputPath>
+    <OutputPath>..\bin</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>True</Externalconsole>
@@ -45,15 +45,15 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="blackscholes.cs">
-      <DependentUpon>blackscholes.tt</DependentUpon>
+    <Compile Include="black_scholes.cs">
+      <DependentUpon>black_scholes.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="blackscholes.tt">
+    <None Include="black_scholes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>blackscholes.cs</LastGenOutput>
+      <LastGenOutput>black_scholes.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

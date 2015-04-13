@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "..\..\_utils\cil\Utilities\Utilities.csproj", "{D6CA1418-5885-4311-AFD8-94916E437EFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackscholes", "src\blackscholes.csproj", "{AE1D260B-58A7-4811-8914-0615A4559A48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "black_scholes", "src\black_scholes.csproj", "{AE1D260B-58A7-4811-8914-0615A4559A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
