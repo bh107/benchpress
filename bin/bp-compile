@@ -5,7 +5,7 @@ import pprint
 import os
 from benchpress.version import get_paths, implementations
 
-def compile(search_path=None, languages=['c','cpp']):
+def compile(search_path=None, languages=['c','cpp', 'cs']):
     """Compile benchmarks of the given languages."""
 
     paths = get_paths()
@@ -14,7 +14,7 @@ def compile(search_path=None, languages=['c','cpp']):
 
     benchmarks = implementations(search_path)
     for lang in languages:
-        print("# Compiling %s benchmarks")
+        print("# Compiling %s benchmarks" % lang)
         impls = benchmarks["impls"]
         for bench_lbl in impls:
             bench = impls[bench_lbl]
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compile benchmarks that require it")
 
     parser.add_argument('--all', action='store_true', help="Compile all")
-    parser.add_argument('--lang', choices=['c', 'cpp'], help="Compile all of the provided language")
+    parser.add_argument('--lang', choices=['c', 'cpp', 'cs'], help="Compile all of the provided language")
 
     args = parser.parse_args()  # Parse arguments
 
