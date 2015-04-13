@@ -1,0 +1,18 @@
+ROOT=../..
+
+BENCH_SRC   = $(wildcard *.sln)
+BENCHMARK   = $(subst .sln,,$(BENCH_SRC))
+
+BUILD=xbuild
+BUILD_FLAGS=/p:Configuration=Release
+
+$(BENCHMARK): $(BENCH_SRC)
+	$(BUILD) $(BUILD_FLAGS) $(BENCH_SRC)
+
+clean:
+	rm -rf src/obj
+	find bin/ -type f -name "*" -exec rm  {} \;
+
+all: $(BENCHMARK)
+
+.phony: clean all

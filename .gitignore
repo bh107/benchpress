@@ -4,3 +4,6 @@ dist/
 MANIFEST
 bin/
 bh-job-*
+benchmarks/_utils/cil/Utilities/obj
+*.mdb
+benchmarks/black_scholes/cil/src/obj

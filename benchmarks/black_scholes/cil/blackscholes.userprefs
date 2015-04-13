@@ -1,0 +1,19 @@
+﻿<Properties StartupItem="../../_utils/cil/Utilities/Utilities.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../_utils/cil/Utilities/Render.cs">
+    <Files>
+      <File FileName="../../_utils/cil/Utilities/Render.cs" Line="22" Column="47" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="../../../../duplicati-git/Duplicati/Server/WebServer/ControlHandler.cs" line="117" offsetX="907" offsetY="1740" expression="ex" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <DisabledProjects>
+    <String>../../../bridge/NumCIL/NumCIL/NumCIL.csproj</String>
+    <String>../../../bridge/cil/NumCIL.Bohrium/NumCIL.Bohrium.csproj</String>
+    <String>../../../bridge/NumCIL/NumCIL.Unsafe/NumCIL.Unsafe.csproj</String>
+  </DisabledProjects>
+</Properties>
