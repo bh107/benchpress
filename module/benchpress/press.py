@@ -26,7 +26,27 @@ class _C:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
+def expand_path(parser, path):
+    """
+    Expand then given path.
+
+    Such as expanding the tilde in "~/bohrium", thereby providing
+    the absolute path to the directory "bohrium" in the home folder.
+    """
+
+    path = os.path.expanduser(path)
+    if os.path.isdir(path):
+        return os.path.abspath(path)
+    else:
+        parser.error("The path %s does not exist!" % path)
+
+
 def meta(src_dir, suite):
+    """
+    Extract various meta-information from the system,
+    such as compiler-version, repos-version, hardware info etc.
+    """
+
     try:
         p = Popen(              # Try grabbing the repos-revision
             ["git", "log", "--pretty=format:%H", "-n", "1"],
@@ -129,6 +149,47 @@ def perf_counters():
 
     return ','.join(events)
 
+def get_perf(filename):
+    """Return the perf command"""
+
+    out, err = Popen(
+        ['which', 'perf'],
+        stdout=PIPE,
+        stderr=PIPE
+    ).communicate()
+
+    # Some distros have a wrapper script :(
+    if not err and out:
+        perf_cmd = out.strip()
+        out, err = Popen(
+            ['perf', 'list'],
+            stderr=PIPE,
+            stdout=PIPE,
+        ).communicate()
+
+    if err or not out:
+        print _C.WARNING,"ERR: perf installation broken, disabling perf (%s): %s"%(err,out),_C.ENDC
+        perf_cmd = ""
+    else:
+        perf_cmd += ' stat -x , -e %s -o %s '%(perf_counters(), filename)
+    return perf_cmd
+
+
+def get_time(filename):
+    """Return the time command"""
+
+    out, err = Popen(
+        ['which', 'time'],
+        stdout=PIPE,
+        stderr=PIPE
+    ).communicate()
+    if err or not out:
+        print _C.WARNING,"ERR: time installation broken, disabling time (%s): %s"%(err,out),_C.ENDC
+        time_cmd = ""
+    else:
+        time_cmd = " %s -v -o %s "%(out.strip(),filename)
+    return time_cmd
+
 def encode_data(data):
     """return the encoded data as a string"""
     return base64.b64encode(zlib.compress(data, 9))
@@ -143,7 +204,6 @@ def write2json(json_file, obj):
     json_file.write(json.dumps(obj, indent=4))
     json_file.flush()
     os.fsync(json_file)
-
 
 def parse_elapsed_times(output):
     """Return list of elapsed times from the output"""
@@ -279,47 +339,6 @@ def parse_run(run, job):
         os.remove(job['filename'])
     except OSError:
         print _C.WARNING,"Could not find the batch script: ",job['filename'],_C.ENDC
-
-
-def get_perf(filename):
-    """Return the perf command"""
-    out, err = Popen(
-        ['which', 'perf'],
-        stdout=PIPE,
-        stderr=PIPE
-    ).communicate()
-
-    # Some distros have a wrapper script :(
-    if not err and out:
-        perf_cmd = out.strip()
-        out, err = Popen(
-            ['perf', 'list'],
-            stderr=PIPE,
-            stdout=PIPE,
-        ).communicate()
-
-    if err or not out:
-        print _C.WARNING,"ERR: perf installation broken, disabling perf (%s): %s"%(err,out),_C.ENDC
-        perf_cmd = ""
-    else:
-        perf_cmd += ' stat -x , -e %s -o %s '%(perf_counters(), filename)
-    return perf_cmd
-
-
-def get_time(filename):
-    """Return the time command"""
-    out, err = Popen(
-        ['which', 'time'],
-        stdout=PIPE,
-        stderr=PIPE
-    ).communicate()
-    if err or not out:
-        print _C.WARNING,"ERR: time installation broken, disabling time (%s): %s"%(err,out),_C.ENDC
-        time_cmd = ""
-    else:
-        time_cmd = " %s -v -o %s "%(out.strip(),filename)
-    return time_cmd
-
 
 def add_pending_job(setup, nrun, partition):
 
@@ -541,17 +560,4 @@ def handle_result_file(result_file, args):
                 return False
     return True
 
-def expand_path(parser, path):
-    """
-    Expand then given path.
-
-    Such as expanding the tilde in "~/bohrium", thereby providing
-    the absolute path to the directory "bohrium" in the home folder.
-    """
-
-    path = os.path.expanduser(path)
-    if os.path.isdir(path):
-        return os.path.abspath(path)
-    else:
-        parser.error("The path %s does not exist!" % path)
 
