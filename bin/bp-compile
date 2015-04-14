@@ -5,14 +5,14 @@ import pprint
 import os
 from benchpress.version import get_paths, implementations
 
-def compile(search_path=None, languages=['c','cpp', 'cs']):
+def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False):
     """Compile benchmarks of the given languages."""
 
     paths = get_paths()
     if not search_path:
         search_path = paths["benchmarks"]
 
-    benchmarks = implementations(search_path)
+    benchmarks = implementations(search_path, verbose=verbose)
     for lang in languages:
         print("# Compiling %s benchmarks" % lang)
         impls = benchmarks["impls"]
@@ -47,12 +47,13 @@ if __name__ == "__main__":
 
     parser.add_argument('--all', action='store_true', help="Compile all")
     parser.add_argument('--lang', choices=['c', 'cpp', 'cs'], help="Compile all of the provided language")
+    parser.add_argument('--verbose', action='store_true', help="Output verbose debug info when finding benchmarks")
 
     args = parser.parse_args()  # Parse arguments
 
     if args.all:
-        compile()
+        compile(verbose=args.verbose)
     elif args.lang:
-        compile(languages=[args.lang])
+        compile(languages=[args.lang], verbose=args.verbose)
     else:
         parser.print_usage()

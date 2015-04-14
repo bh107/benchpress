@@ -6,7 +6,8 @@ import re
 APP_NAME = 'benchpress'
 APP_VERSION = '0.9'
 
-ignore      = ["_utils", "_doc"]
+ignore_dirs  = ["_utils", "_doc"]
+ignore_files = ['empty', 'readme.rst', 'dogma.rst', '.DS_Store', 'README.rst', 'issues.rst', 'bohrium.rst', 'Makefile', '.gitignore']
 
 def module_path():
     return os.path.dirname(__file__)
@@ -58,7 +59,7 @@ def get_paths():
 
     return paths
 
-def implementations(search_path=None):
+def implementations(search_path=None, verbose=False):
     """Walks through the filesystem looking for benchmark implementations."""
 
     paths = get_paths()
@@ -75,11 +76,18 @@ def implementations(search_path=None):
     benchmarks = {}
 
     for root, dirnames, filenames in os.walk(search_path):
-        if [x for x in ignore if x in root]:    # Ignore some...
+        if [x for x in ignore_dirs if x in root]:    # Ignore some...
             continue
 
         for filename in filenames:              # Group the rest
+            if filename in ignore_files:
+                continue
+
             match = re.match(".*\.((cpp$)|(py$)|(cs$)|(c$)$)", filename)
+
+            if verbose and not match:
+                print("Skipping file %s, it does not have the right extension" % filename)
+
             if match:
                 dirs        = [x for x in root.split(os.sep) if x not in search_path.split(os.sep)]
                 benchmark   = dirs[0]
@@ -89,6 +97,8 @@ def implementations(search_path=None):
                 # Check that the basename matches the benchmark
                 bn = ''.join(os.path.basename(filename).split('.')[:-1])
                 if not bn == benchmark:
+                    if verbose:
+                        print("Skipping file %s, it does not match the benchmark name %s" % (filename, benchmark))
                     continue
 
                 if benchmark not in benchmarks:
