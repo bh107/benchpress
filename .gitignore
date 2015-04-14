@@ -18,3 +18,4 @@ benchmarks/jacobi_stencil/csharp_numcil/src/obj
 benchmarks/nbody/csharp_numcil/src/obj
 benchmarks/shallow_water/csharp_numcil/src/obj
 benchmarks/nbody_nice/csharp_numcil/src/obj
+shallow_water.userprefs
