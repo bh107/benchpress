@@ -11,9 +11,16 @@ from benchpress.version import implementations
 lang_labels = {
     'c':    'C',
     'cpp':  'C++',
-    'py':   'Python'
+    'py':   'Python',
+    'cs':   'C#'
 }
-lang_order  = ['py', 'c', 'cpp']
+lang_pygment = {
+    'c':    'c',
+    'cpp':  'cpp',
+    'py':   'python',
+    'cs':   'csharp'
+}
+lang_order  = ['py', 'c', 'cpp', 'cs']
 
 def pretty_name(text):
     """Returns a rewrite like: "snakes_and_ladders" -> "Snakes And Ladders"."""
@@ -119,7 +126,7 @@ def benchmark_matrix(benchmarks):
         for idx in xrange(cidx, cidx+ntools):
             width += table.col_widths[idx]
         cidx += ntools
-        header_row.append(lang)
+        header_row.append(lang_labels[lang])
         header_widths.append(width)
     
     row = []
@@ -203,7 +210,7 @@ def sections(benchmarks):
                     "..","..","benchmarks"
                 ]+bench[lang][tool]['src'].split(os.sep))
                 subsection.append("\n.. literalinclude:: %s" % src_path)
-                subsection.append("   :language: %s" % lang)
+                subsection.append("   :language: %s" % lang_pygment[lang])
                 subsection.append("")
                 sections += "\n".join(subsection)
 

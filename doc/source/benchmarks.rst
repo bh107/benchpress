@@ -2,87 +2,87 @@
 Benchmarks
 ==========
 
-+-------------------------------+------------------+---------------------+-------------------------------------------------------------------+
-| 38 Benchmarks                 | py               | c                   | cpp                                                               |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-|                               | Numpy            | Omp | Omp Mpi | Seq | Armadillo | Blitz | Boost | Bxx | Eigen    | Omp | Opencl   | Seq |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`black_scholes`          | +                |     |         |     | +         | +     |       | +   | + [ISU]_ |     |          | +   |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`convolve`               | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`convolve_2d`            | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`convolve_3d`            | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`convolve_separate_std`  | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`gameoflife`             | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`gauss`                  | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`heat_equation`          | +                | +   | +       | +   |           |       |       |     |          | +   | + [ISU]_ |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`idl_init_bh`            | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`idl_init_fast`          | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`idl_init_orig`          | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`jacobi`                 | + [BH]_          |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`jacobi_fixed`           | + [BH]_          |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`jacobi_solve`           | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`jacobi_stencil`         | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`k_nearest_neighbor`     | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`knn_naive1`             | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`lattice_boltzmann_D2Q9` | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`lbm_2d`                 | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`lbm_3d`                 | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`leibnitz_pi`            | + [IBNP]_        |     |         | +   |           |       |       |     |          |     |          | +   |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`lmm_swaption_vec`       | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`lu`                     | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`mc`                     | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`mxmul`                  | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`nbody`                  | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`nbody_nice`             | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`ndstencil`              | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`point27`                | + [BH]_          |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`pricing`                | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`reactiondiffusion`      |                  |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`shallow_water`          | +                |     |         | +   |           |       | +     |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`snakes_and_ladders`     | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`sor`                    | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`synth`                  | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`synth_inplace`          | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`synth_stream`           | +                |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
-| :ref:`wireworld`              | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |
-+-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+
++-------------------------------+------------------+---------------------+-------------------------------------------------------------------+--------+
+| 38 Benchmarks                 | Python           | C                   | C++                                                               | C#     |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+|                               | Numpy            | Omp | Omp Mpi | Seq | Armadillo | Blitz | Boost | Bxx | Eigen    | Omp | Opencl   | Seq | Numcil |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`black_scholes`          | +                |     |         |     | +         | +     |       | +   | + [ISU]_ |     |          | +   | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`convolve`               | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`convolve_2d`            | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`convolve_3d`            | + [ISU]_ [BH]_   |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`convolve_separate_std`  | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`gameoflife`             | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`gauss`                  | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`heat_equation`          | +                | +   | +       | +   |           |       |       |     |          | +   | + [ISU]_ |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`idl_init_bh`            | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`idl_init_fast`          | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`idl_init_orig`          | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`jacobi`                 | + [BH]_          |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`jacobi_fixed`           | + [BH]_          |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`jacobi_solve`           | +                |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`jacobi_stencil`         | +                |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`k_nearest_neighbor`     | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`knn_naive1`             | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`lattice_boltzmann_D2Q9` | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`lbm_2d`                 | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`lbm_3d`                 | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`leibnitz_pi`            | +                |     |         | +   |           |       |       | +   |          | +   |          | +   |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`lmm_swaption_vec`       | + [ISU]_ [IBNP]_ |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`lu`                     | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`mc`                     | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`mxmul`                  | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`nbody`                  | +                |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`nbody_nice`             | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`ndstencil`              | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`point27`                | + [BH]_          |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`pricing`                | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`reactiondiffusion`      |                  |     |         |     |           |       |       |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`shallow_water`          | +                |     |         | +   |           |       | +     |     |          |     |          |     | +      |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`snakes_and_ladders`     | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`sor`                    | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`synth`                  | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`synth_inplace`          | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`synth_stream`           | +                |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
+| :ref:`wireworld`              | + [ISU]_         |     |         |     |           |       |       |     |          |     |          |     |        |
++-------------------------------+------------------+-----+---------+-----+-----------+-------+-------+-----+----------+-----+----------+-----+--------+
 
 .. [ISU] The implementation has issues... such as not using of Benchpress, segfaults, or does not run with Bohrium.
 .. [BH] The implementation makes use of Bohrium specific features, which means that Bohrum is required to run it.
@@ -106,7 +106,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/black_scholes/python_numpy/black_scholes.py
-   :language: py
+   :language: python
 
 
 .. _black_scholes_cpp11_armadillo:
@@ -167,6 +167,16 @@ Cpp11 Seq
    :language: cpp
 
 
+.. _black_scholes_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/black_scholes/csharp_numcil/src/black_scholes.cs
+   :language: csharp
+
+
 .. _convolve:
 
 Convolve
@@ -196,7 +206,7 @@ The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/convolve/python_numpy/convolve.py
-   :language: py
+   :language: python
 
 
 .. _convolve_2d:
@@ -228,7 +238,7 @@ The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/convolve_2d/python_numpy/convolve_2d.py
-   :language: py
+   :language: python
 
 
 .. _convolve_3d:
@@ -260,7 +270,7 @@ The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/convolve_3d/python_numpy/convolve_3d.py
-   :language: py
+   :language: python
 
 
 .. _convolve_separate_std:
@@ -284,7 +294,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/convolve_separate_std/python_numpy/convolve_separate_std.py
-   :language: py
+   :language: python
 
 
 .. _gameoflife:
@@ -300,7 +310,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/gameoflife/python_numpy/gameoflife.py
-   :language: py
+   :language: python
 
 
 .. _gauss:
@@ -316,7 +326,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/gauss/python_numpy/gauss.py
-   :language: py
+   :language: python
 
 
 .. _heat_equation:
@@ -334,7 +344,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/heat_equation/python_numpy/heat_equation.py
-   :language: py
+   :language: python
 
 
 .. _heat_equation_c99_omp:
@@ -416,7 +426,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/idl_init_bh/python_numpy/idl_init_bh.py
-   :language: py
+   :language: python
 
 
 .. _idl_init_fast:
@@ -440,7 +450,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/idl_init_fast/python_numpy/idl_init_fast.py
-   :language: py
+   :language: python
 
 
 .. _idl_init_orig:
@@ -464,7 +474,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/idl_init_orig/python_numpy/idl_init_orig.py
-   :language: py
+   :language: python
 
 
 .. _jacobi:
@@ -490,7 +500,17 @@ The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/jacobi/python_numpy/jacobi.py
-   :language: py
+   :language: python
+
+
+.. _jacobi_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/jacobi/csharp_numcil/src/jacobi.cs
+   :language: csharp
 
 
 .. _jacobi_fixed:
@@ -516,7 +536,17 @@ The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/jacobi_fixed/python_numpy/jacobi_fixed.py
-   :language: py
+   :language: python
+
+
+.. _jacobi_fixed_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/jacobi_fixed/csharp_numcil/src/jacobi_fixed.cs
+   :language: csharp
 
 
 .. _jacobi_solve:
@@ -534,7 +564,17 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/jacobi_solve/python_numpy/jacobi_solve.py
-   :language: py
+   :language: python
+
+
+.. _jacobi_solve_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/jacobi_solve/csharp_numcil/src/jacobi_solve.cs
+   :language: csharp
 
 
 .. _jacobi_stencil:
@@ -552,7 +592,17 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/jacobi_stencil/python_numpy/jacobi_stencil.py
-   :language: py
+   :language: python
+
+
+.. _jacobi_stencil_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/jacobi_stencil/csharp_numcil/src/jacobi_stencil.cs
+   :language: csharp
 
 
 .. _k_nearest_neighbor:
@@ -578,7 +628,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/k_nearest_neighbor/python_numpy/k_nearest_neighbor.py
-   :language: py
+   :language: python
 
 
 .. _knn_naive1:
@@ -596,7 +646,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/knn_naive1/python_numpy/knn_naive1.py
-   :language: py
+   :language: python
 
 
 .. _lattice_boltzmann_D2Q9:
@@ -622,7 +672,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/lattice_boltzmann_D2Q9/python_numpy/lattice_boltzmann_D2Q9.py
-   :language: py
+   :language: python
 
 
 .. _lbm_2d:
@@ -648,7 +698,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/lbm_2d/python_numpy/lbm_2d.py
-   :language: py
+   :language: python
 
 
 .. _lbm_3d:
@@ -666,7 +716,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/lbm_3d/python_numpy/lbm_3d.py
-   :language: py
+   :language: python
 
 
 .. _leibnitz_pi:
@@ -684,7 +734,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/leibnitz_pi/python_numpy/leibnitz_pi.py
-   :language: py
+   :language: python
 
 
 .. _leibnitz_pi_c99_seq:
@@ -695,6 +745,26 @@ C99 Seq
 
 .. literalinclude:: ../../benchmarks/leibnitz_pi/c99_seq/src/leibnitz_pi.c
    :language: c
+
+
+.. _leibnitz_pi_cpp11_bxx:
+
+Cpp11 Bxx
+---------
+
+
+.. literalinclude:: ../../benchmarks/leibnitz_pi/cpp11_bxx/src/leibnitz_pi.cpp
+   :language: cpp
+
+
+.. _leibnitz_pi_cpp11_omp:
+
+Cpp11 Omp
+---------
+
+
+.. literalinclude:: ../../benchmarks/leibnitz_pi/cpp11_omp/src/leibnitz_pi.cpp
+   :language: cpp
 
 
 .. _leibnitz_pi_cpp11_seq:
@@ -730,7 +800,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/lmm_swaption_vec/python_numpy/lmm_swaption_vec.py
-   :language: py
+   :language: python
 
 
 .. _lu:
@@ -748,7 +818,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/lu/python_numpy/lu.py
-   :language: py
+   :language: python
 
 
 .. _mc:
@@ -766,7 +836,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/mc/python_numpy/mc.py
-   :language: py
+   :language: python
 
 
 .. _mxmul:
@@ -784,7 +854,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/mxmul/python_numpy/mxmul.py
-   :language: py
+   :language: python
 
 
 .. _nbody:
@@ -802,7 +872,17 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/nbody/python_numpy/nbody.py
-   :language: py
+   :language: python
+
+
+.. _nbody_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/nbody/csharp_numcil/src/nbody.cs
+   :language: csharp
 
 
 .. _nbody_nice:
@@ -828,7 +908,17 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/nbody_nice/python_numpy/nbody_nice.py
-   :language: py
+   :language: python
+
+
+.. _nbody_nice_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/nbody_nice/csharp_numcil/src/nbody_nice.cs
+   :language: csharp
 
 
 .. _ndstencil:
@@ -846,7 +936,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/ndstencil/python_numpy/ndstencil.py
-   :language: py
+   :language: python
 
 
 .. _point27:
@@ -872,7 +962,7 @@ The above note is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/point27/python_numpy/point27.py
-   :language: py
+   :language: python
 
 
 .. _pricing:
@@ -898,13 +988,23 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/pricing/python_numpy/pricing.py
-   :language: py
+   :language: python
 
 
 .. _reactiondiffusion:
 
 Reactiondiffusion
 =================
+
+
+.. _reactiondiffusion_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/reactiondiffusion/csharp_numcil/src/reactiondiffusion.cs
+   :language: csharp
 
 
 .. _shallow_water:
@@ -922,7 +1022,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/shallow_water/python_numpy/shallow_water.py
-   :language: py
+   :language: python
 
 
 .. _shallow_water_c99_seq:
@@ -943,6 +1043,16 @@ Cpp11 Boost
 
 .. literalinclude:: ../../benchmarks/shallow_water/cpp11_boost/src/shallow_water.cpp
    :language: cpp
+
+
+.. _shallow_water_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../benchmarks/shallow_water/csharp_numcil/src/shallow_water.cs
+   :language: csharp
 
 
 .. _snakes_and_ladders:
@@ -968,7 +1078,7 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/snakes_and_ladders/python_numpy/snakes_and_ladders.py
-   :language: py
+   :language: python
 
 
 .. _sor:
@@ -986,7 +1096,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/sor/python_numpy/sor.py
-   :language: py
+   :language: python
 
 
 .. _synth:
@@ -1004,7 +1114,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/synth/python_numpy/synth.py
-   :language: py
+   :language: python
 
 
 .. _synth_inplace:
@@ -1022,7 +1132,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/synth_inplace/python_numpy/synth_inplace.py
-   :language: py
+   :language: python
 
 
 .. _synth_stream:
@@ -1040,7 +1150,7 @@ Python Numpy
 
 
 .. literalinclude:: ../../benchmarks/synth_stream/python_numpy/synth_stream.py
-   :language: py
+   :language: python
 
 
 .. _wireworld:
@@ -1066,5 +1176,5 @@ The above warning is concerned with the implementation below.
 
 
 .. literalinclude:: ../../benchmarks/wireworld/python_numpy/wireworld.py
-   :language: py
+   :language: python
 

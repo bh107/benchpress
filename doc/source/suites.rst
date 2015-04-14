@@ -23,13 +23,13 @@ Python
 C
 --
 
-.. literalinclude:: ../../benchmarks/leibnitz_pi/c99_seq/leibnitz_pi.c
+.. literalinclude:: ../../benchmarks/leibnitz_pi/c99_seq/src/leibnitz_pi.c
    :language: c
 
 C++
 ---
 
-.. literalinclude:: ../../benchmarks/leibnitz_pi/cpp11_seq/leibnitz_pi.cpp
+.. literalinclude:: ../../benchmarks/leibnitz_pi/cpp11_seq/src/leibnitz_pi.cpp
    :language: cpp
 
 
