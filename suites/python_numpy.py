@@ -1,10 +1,6 @@
 from default import *
 
-suites = [
-    {
-        'bridges':  [
-            ('NumPy', 'taskset -c 0 python `bp-info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
-        ],
+suites = [{
         'scripts':  [
             ('Black Scholes',               'black_scholes',    '--size=1000000*10'),
             ('Game of Life',                'gameoflife',       '--size=10000*10000*10'),
@@ -29,6 +25,7 @@ suites = [
             ('Synthetic Stream #1 Range',   'synth_stream',     '--size=50000000*10*1'),
             ('Synthetic Stream #2 Random',  'synth_stream',     '--size=50000000*10*2'),
         ],
-    }
-]
+        'launchers':  [python_numpy],
+        'bohrium': bh_stack_none
+}]
 

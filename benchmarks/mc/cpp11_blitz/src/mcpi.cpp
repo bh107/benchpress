@@ -30,42 +30,25 @@ double monte_carlo_pi(int samples, int iterations)
 
 int main(int argc, char* argv[])
 {
-    const char usage[] = "usage: ./monte_carlo_pi --size=1000*10 [--verbose]";
-    if (2>argc) {
-        cout << usage << endl;
+    bp_util_type bp = bp_util_create(argc, argv, 2);// Grab arguments
+    if (bp.args.has_error) {
         return 1;
     }
+    const int samples = bp.args.sizes[0];
+    const int iterations = bp.args.sizes[1]
 
-    arguments_t args;                               // Parse command-line
-    if (!parse_args(argc, argv, args)) {
-        cout << "Err: Invalid argument(s)." << endl;
-        cout << usage << endl;
-        return 1;
-    }
-    if (2 > args.size.size()) {
-        cout << "Err: Not enough arguments." << endl;
-        cout << usage << endl;
-        return 1;
-    }
-    if (2 < args.size.size()) {
-        cout << "Err: Too many arguments." << endl;
-        cout << usage << endl;
-        return 1;
-    }
+    bp.timer_start();
+    double pi = monte_carlo_pi(samples, iterations);
+    bp.timer_end();
 
     size_t start = sample_time();
-    double mcp = monte_carlo_pi(args.size[0], args.size[1]);
+    double pi = monte_carlo_pi(samples, iterations);
     size_t end = sample_time();
-                                                    // Output timing
-    cout << "{elapsed-time: "<< (end-start)/1000000.0 <<"";          
-    if (args.verbose) {                             // and values.
-        cout << ", \"output\": [";
-        cout << mcp;
-        cout << "]";
+
+	bp.print("mcpi(cpp11_blitz)");     
+    if (bp.args.verbose) {                             // and values.
+        cout << "PI-approximation = " << pi << endl;
     }
-    cout << "--size=" << args.size[0];
-    cout << "*" << args.size[1];
-    cout << "}" << endl;
 
     return 0;
 }

@@ -26,6 +26,7 @@ docs:
 	cd $(DOCSRC) && bp-grapher -h > source/usage_bp-grapher.out
 	cd $(DOCSRC) && bp-compile -h > source/usage_bp-compile.out
 	cd $(DOCSRC) && make html
+	xdg-open $(DOCSRC)/build/html/index.html
 
 # Upload to PyPi
 upload:

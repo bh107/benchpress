@@ -90,29 +90,23 @@ T* pricing(size_t samples, size_t iterations, char flag, T x, T d_t, T r, T v)
 
 int main(int argc, char* argv[])
 {
-    //const char usage[] = "usage: ./black_scholes --size=1000*10 [--verbose]";
+    bp_util_type bp = bp_util_create(argc, argv, 2);    // Grab arguments
+    if (bp.args.has_error) {
+        return 1;
+    }
+    const size_t samples    = bp.args.sizes[0];
+    const size_t iterations = bp.args.sizes[1];
 
-    bp_arguments_type args = parse_args(argc, argv);        // Parse args
-    const size_t samples    = args.sizes[0];
-    const size_t iterations = args.sizes[1];
-
-    printf(
-        "Running black_scholes(cpp11_bxx) --size=%ld*%ld\n",
-        samples,
-        iterations
-    );
-
-    size_t start = bp_sample_time();
-    double* prices = pricing(           // Do the computations...
+    bp.timer_start();                                   // Start timer
+    double* prices = pricing(                           // Run...
         samples, iterations,
         'c', 65.0, 1.0 / 365.0,
         0.08, 0.3
     );
-    size_t stop = bp_sample_time();
-    size_t elapsed = stop - start;
-                                        // Output timing
-    printf("Ran black_scholes(cpp11_bxx) iter: %ld size: %ld elapsed-time: %lf\n", iterations, samples, elapsed/(double)1000000.0);
-    if (args.verbose) {                 // and values.
+    bp.timer_stop();                                    // Stop timer
+    
+    bp.print("black_scholes(cpp11_bxx)");               // Print restults..
+    if (bp.args.verbose) {                              // ..verbosely.
         cout << ", \"output\": [";
         for(size_t i=0; i<iterations; i++) {
             cout << prices[i];
@@ -122,7 +116,8 @@ int main(int argc, char* argv[])
         }
         cout << "]" << endl;
     }
-    free(prices);                       // Cleanup
+    free(prices);                                       // Cleanup
+
     return 0;
 }
 
