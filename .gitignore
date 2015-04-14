@@ -9,3 +9,9 @@ benchmarks/_utils/cil/Utilities/obj
 benchmarks/black_scholes/cil/src/obj
 benchmarks/black_scholes/cs_cil/src/obj
 benchmarks/black_scholes/csharp_numcil/src/obj
+benchmarks/jacobi/csharp_numcil/src/obj
+black_scholes.userprefs
+jacobi.userprefs
+benchmarks/jacobi_fixed/csharp_numcil/src/obj
+benchmarks/jacobi_solve/csharp_numcil/src/obj
+benchmarks/jacobi_stencil/csharp_numcil/src/obj
