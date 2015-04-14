@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AE1D26CB-58A7-4811-8914-0615A4559A48}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>jacobi</RootNamespace>
-    <AssemblyName>jacobi</AssemblyName>
+    <RootNamespace>jacobi_stencil</RootNamespace>
+    <AssemblyName>jacobi_stencil</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
