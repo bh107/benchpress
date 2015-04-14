@@ -22,9 +22,9 @@ int main(int argc, char* argv[])
     double pi = leibnitz_pi(nelements);             // Run benchmark
     bp.timer_stop();                                // Stop timer
     
-    bp.print("leibnitz_pi(c99_seq)");               // Print results
-    if (bp.args.verbose) {
-        printf("PI = %.11f\n", pi);
+    bp.print("leibnitz_pi(c99_seq)");               // Print results..
+    if (bp.args.verbose) {							// ..and value.
+        printf("PI-approximation = %.11f\n", pi);
     }
 
     return 0;

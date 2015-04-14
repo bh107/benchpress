@@ -15,16 +15,20 @@ double leibnitz_pi(int nelements)
 
 int main(int argc, char* argv[])
 {
-    bp_util_type bp = bp_util_create(argc, argv, 1);
+    bp_util_type bp = bp_util_create(argc, argv, 1);// Grab arguments
+    if (bp.args.has_error) {
+        return 1;
+    }
     const int nelements = bp.args.sizes[0];
 
-    bp.timer_start();
-    double pi = leibnitz_pi(nelements);
-    bp.timer_stop();
+    bp.timer_start();                               // Start timer
+    double pi = leibnitz_pi(nelements);             // Run benchmark
+    bp.timer_stop();                                // Stop timer
 
-    bp.print("leibnitz_pi(cpp11_seq)");
-    if (bp.args.verbose) {                             // and values.
-        cout << fixed << setprecision(11) << "PI = " << pi << endl;
+    bp.print("leibnitz_pi(cpp11_seq)");				// Print results..
+    if (bp.args.verbose) {                          // ..and value.
+        cout << fixed << setprecision(11)
+			 << "PI-approximation = " << pi << endl;
     }
 
     return 0;
