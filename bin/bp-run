@@ -71,6 +71,10 @@ if __name__ == "__main__":
         help='The publish command to use before exiting (use together with --wait). '\
              'NB: $OUT is replaced with the name of the output JSON file. '
     )
+    parser.add_argument(
+        '--bh_config_file',
+        help="Override the path to the bohrium config.ini file, which is normally read from ~/.bohrium/config.ini."
+    )
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
         '--slurm',
@@ -110,6 +114,8 @@ if __name__ == "__main__":
         parser.error( '--publish-cmd must be used together with --wait' )
 
     file_name_prefix = 'benchmark-%s-' % os.path.basename(args.suite_file.name)
+    temp_bh_config = None
+
     try:
         try:
             if args.output is None:
@@ -123,8 +129,29 @@ if __name__ == "__main__":
             else:
                 result_file = open(args.output, 'w+')
 
+            bh_config_file = args.bh_config_file
+
+            if bh_config_file == None:
+
+                guesses = [
+                          os.getenv('BH_CONFIG'),
+                          os.path.join(os.getenv('HOME'),     '.bohrium', 'config.ini'),
+                    '/' + os.path.join('etc',                 'bohrium', 'config.ini'),
+                    '/' + os.path.join('usr', 'etc',          'bohrium', 'config.ini'),
+                    '/' + os.path.join('usr', 'local', 'etc', 'bohrium', 'config.ini'),
+                    '/' + os.path.join('opt', 'etc',          'bohrium', 'config.ini')
+                ]
+
+                for guess in guesses:
+                    if guess != None and os.path.isfile(guess):
+                        bh_config_file = guess
+                        print _C.OKBLUE, "Using Bohrium config file",bh_config_file,_C.ENDC
+                        break
+            if not os.path.isfile(bh_config_file):
+                raise IOError('File not found: ' + bh_config_file)
+
             #Populate 'result_file' with benchmark jobs/runs
-            gen_jobs(result_file, os.getenv('HOME')+os.sep+'.bohrium'+os.sep+'config.ini', args)
+            gen_jobs(result_file, bh_config_file, args)
 
         if args.wait:
             while True:#Probe for finished jobs (one second delay)
