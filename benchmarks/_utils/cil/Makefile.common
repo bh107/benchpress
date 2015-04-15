@@ -11,7 +11,9 @@ $(BENCHMARK): $(BENCH_SRC)
 
 clean:
 	rm -rf src/obj
-	find bin/ -type f -name "*" -exec rm  {} \;
+	rm -rf bin
+	rm -rf ../../_utils/cil/Utilities/bin
+	rm -rf ../../_utils/cil/Utilities/obj
 
 all: $(BENCHMARK)
 
