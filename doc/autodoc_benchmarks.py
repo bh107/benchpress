@@ -40,7 +40,8 @@ def flatten(benchmarks):
         for lang in lang_order:
             for tool in meta["tools_by_lang"][lang]:
                 if lang in impls[bench] and tool in impls[bench][lang]:
-                    entry_info = "+"
+                    #entry_info = "+"
+                    entry_info = section_ref("* <%s_%s>" % (bench, tool))
                     if impls[bench][lang][tool]["issues"]:
                         entry_info += " [ISU]_"
                     if impls[bench][lang][tool]["bohrium"]:
