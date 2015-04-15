@@ -1,10 +1,12 @@
+from benchpress.default import *
+
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bohrium = [
-    ('bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)
+    python_bohrium
 ]
 numpy = [
-    ('numpy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)
+    python_numpy
 ]
 
 # Engines with various parameter setups

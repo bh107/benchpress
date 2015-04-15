@@ -31,13 +31,14 @@ for (i in n:1) {
 print(put[1,1])
 """
 import math
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def main():
+
+    B = util.Benchmark()
+    magic_number = B.size[0] # Set to 252
+
     S0      = 100.0         # Pricing parameters
     r       = 0.03
     alpha   = 0.07
@@ -45,7 +46,7 @@ def main():
     expiry  = 1.0
     strike  = 100.0
 
-    n   = int(expiry * 252)
+    n   = int(expiry * magic_number)
     dt  = expiry / n
     u   = math.exp( alpha*dt + sigma*math.sqrt(dt) )
     d   = math.exp( alpha*dt - sigma*math.sqrt(dt) )
@@ -55,7 +56,6 @@ def main():
     asc     = np.array( range(0, n+1) )
     desc    = np.array( range(n,-1,-1) )
 
-    B = util.Benchmark()
     B.start()
 
     put         = np.zeros( (n+1, n+1) )

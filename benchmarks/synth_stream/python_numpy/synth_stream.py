@@ -1,20 +1,7 @@
-"""
-This synthetic benchmark constructs a streamable expression.
-
---size=N, I, S
-
-N = Number of elements in the arrays.
-I = Number of "trials" / "iterations" to run the expression
-S = The generator used, 0 = ones, 1 = range, 2 = random.
-
-"""
 from __future__ import print_function
 import sys
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def stream_this(generator, N):
 

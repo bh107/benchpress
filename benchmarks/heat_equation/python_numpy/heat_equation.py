@@ -5,11 +5,8 @@ Jacobi Stencil
 
 So what does this code example illustrate?
 """
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def freezetrap(height, width, dtype=np.float32):
     """Construct the grid."""

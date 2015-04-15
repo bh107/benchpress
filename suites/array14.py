@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 scripts = [
     ('Convolve 2D', 'convolve_2d',  '--size=25'),
@@ -9,21 +9,24 @@ scripts = [
     ('Jacobi Fixed','jacobi_fixed', '--size=1250*600')
 ]
 
-managers= [('node', 'node', '', None)]
-
 numpy = {
-    'bridges':  [('NumPy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
-    'scripts':  scripts,
+    'scripts': scripts,
+    'launchers': [python_numpy],
+    'bohrium': bh_stack_none
 }
 
 bohrium = {
-    'bridges':  [('Bohrium',    'python benchmark/python/{script}.py {args} --bohrium=True', None)],
-    'managers': [('node',       'node', '',  None)],
-    'engines':  [
-        #('cpu_fused',   'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "1"}),
-        ('cpu_sij',     'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "0"}),
+    'scripts': scripts,
+    'launchers': [python_bohrium],
+    'bohrium': [
+        [('default',    'bridge',             None)],
+        [('node',       'node',               None)],
+        [('topo',       'topological',        None)],
+        [
+            ('cpu_fused',   'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "1"}),
+            ('cpu_sij',     'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "0"}),
+        ]
     ],
-    'scripts':  scripts
 }
 
 suites = [

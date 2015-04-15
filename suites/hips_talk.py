@@ -1,5 +1,8 @@
-scripts = [('Heat Equation 26k**2*10','','26000 10')]
+from benchpress.default import *
 
+# TODO: Adapt this to the benchpress after the "makeover".
+
+scripts = [('Heat Equation 26k**2*10','','26000 10')]
 
 C = {
     'bridges': [

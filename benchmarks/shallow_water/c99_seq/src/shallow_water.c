@@ -7,14 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <sys/time.h>
-
-
-struct timeval tv;
-struct timezone tz;
-unsigned long long start, end, delta;
-
+#include <bp_util.h>
 
 #define iH(y,x) (H[(x)+(y)*(n+2)])
 #define iU(y,x) (U[(x)+(y)*(n+2)])
@@ -30,13 +23,18 @@ unsigned long long start, end, delta;
 
 int main (int argc, char **argv)
 {
-    if(argc < 3)
-    {
-      fprintf(stderr, "Need two arguments: domain-size and number of iterations\n");
-      return -1;
+    bp_util_type bp = bp_util_create(argc, argv, 3);
+    if (bp.args.has_error) {
+        return 1;
     }
-    const int n = atoi(argv[1]);
-    const int T = atoi(argv[2]);
+    const int n = bp.args.sizes[0];
+    const int other_n = bp.args.sizes[1];
+    const int T = bp.args.sizes[2];
+
+    if (n != other_n) {
+        fprintf(stderr, "Implementation only supports quadratic grid.\n");
+        exit(0);
+    }
 
     const double g   = 9.8;       // gravitational constant
     const double dt  = 0.02;      // hardwired timestep
@@ -80,8 +78,8 @@ int main (int argc, char **argv)
 
     iH(droploc,droploc) += 5.0;
 
-    gettimeofday(&tv, &tz);
-    start = (long long)tv.tv_usec + ((long long)tv.tv_sec)*1000000;
+    
+    bp.timer_start();
 
     for(int iter=0; iter < T; iter++)
     {
@@ -175,11 +173,6 @@ int main (int argc, char **argv)
         for(int j=0;j<n+2;j++)
             res+=iH(i,j)/n;
 
-//    printf("res: %lf\n", res);
-
-    gettimeofday(&tv, &tz);
-    end = (long long)tv.tv_usec + ((long long)tv.tv_sec)*1000000;
-    delta = end - start;
-
-    printf("ANSI C - iter: %d size: %d elapsed-time: %lf\n", T, n, delta/(double)1000000.0);
+    bp.timer_stop();
+    bp.print("shallow_water(c99_seq)");
 }

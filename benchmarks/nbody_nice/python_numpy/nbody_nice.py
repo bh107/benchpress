@@ -10,11 +10,8 @@ This is done to keep the simulation simple enough for teaching purposes
 All the work is done in the calc_force, move and random_galaxy functions.
 To vectorize the code these are the functions to transform.
 """
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 G = 6.673e-11
 solarmass=1.98892e30
@@ -195,7 +192,7 @@ def show(sub, solarsystem, bodies):
     try:
         sub.set_zbound(-sub.zm, sub.zm)
     except AttributeError:
-        print 'Warning: correct 3D plots may require matplotlib-1.1 or later'
+        print('Warning: correct 3D plots may require matplotlib-1.1 or later')
 
     plt.draw()
 
@@ -210,11 +207,9 @@ def main():
     z_max = 1e18
     dt = 1e12
 
-    print("INITIALIZING SYSTEM")
     solarsystem, astoroids = random_system(x_max, y_max, z_max, num_planets, num_asteroids, B)
     if B.verbose:
         P3 = gfx_init(x_max, y_max, z_max)
-    print("I WILL START NOW")
     B.start()
     for _ in range(num_iteratinos):
         move(solarsystem, astoroids, dt)

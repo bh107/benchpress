@@ -10,7 +10,7 @@ This is done to keep the simulation simple enough for teaching purposes
 All the work is done in the calc_force, move and random_galaxy functions.
 To vectorize the code these are the functions to transform.
 """
-import util
+from benchpress import util
 if util.Benchmark().bohrium:
     import bohrium as np
 else:
@@ -172,12 +172,12 @@ def main():
 
     B.start()
     simulate(galaxy, I, visualize=B.visualize)
-    R = np.sum(galaxy['x'] + galaxy['y'] + galaxy['z'])
+    R = galaxy['x'] + galaxy['y'] + galaxy['z']
     B.stop()
 
     B.pprint()
     if B.outputfn:
-        B.tofile(B.outputfn, galaxy)
+        B.tofile(B.outputfn, {'res':R})
 
 if __name__ == "__main__":
     main()

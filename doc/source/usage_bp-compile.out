@@ -1,0 +1,9 @@
+usage: bp-compile [-h] [--all] [--lang {c,cpp,cs}] [--verbose]
+
+Compile benchmarks that require it
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --all              Compile all
+  --lang {c,cpp,cs}  Compile all of the provided language
+  --verbose          Output verbose debug info when finding benchmarks

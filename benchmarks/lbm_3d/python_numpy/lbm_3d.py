@@ -5,11 +5,8 @@ from __future__ import print_function
 ## equivalent 'equilibrium' density is found, and the densities
 ## relax towards that state, in a proportion governed by omega.
 ##               Iain Haslam, March 2006.
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def the_method(T, F, FEQ, BOUND, BOUNDi, omega, deltaU, t1, t2, t3):
     

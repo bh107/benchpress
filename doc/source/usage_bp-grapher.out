@@ -1,0 +1,25 @@
+usage: bp-grapher [-h] [--output OUTPUT] [--postfix POSTFIX]
+                  [--formats FORMATS [FORMATS ...]]
+                  [--type {bypass_bwd,bypass_overhead,scale,bypass_latency,bypass_bwo,daily,npbackend,cluster,cpu,absolute}]
+                  [--warmups WARMUPS] [--baseline BASELINE]
+                  [--order ORDER [ORDER ...]] [--ylimit YLIMIT]
+                  results
+
+Generate different types of graphs.
+
+positional arguments:
+  results               Path to benchmark results.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output OUTPUT       Where to store generated graphs.
+  --postfix POSTFIX     Append this to the filename of the generated graph(s).
+  --formats FORMATS [FORMATS ...]
+                        Output file-format(s) of the generated graph(s).
+  --type {bypass_bwd,bypass_overhead,scale,bypass_latency,bypass_bwo,daily,npbackend,cluster,cpu,absolute}
+                        The type of graph to generate
+  --warmups WARMUPS     Specify the amount of samples from warm-up rounds.
+  --baseline BASELINE   Baseline label for relative graphs.
+  --order ORDER [ORDER ...]
+                        Ordering of the ticks.
+  --ylimit YLIMIT       Max value of the y-axis

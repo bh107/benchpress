@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46D2B3E7-DA6C-4E65-B111-A79F47A4A2FC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>shallow_water</RootNamespace>
+    <AssemblyName>shallow_water</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="NumCIL">
+      <HintPath>..\..\..\_utils\cil\Utilities\bin\$(Configuration)\NumCIL.dll</HintPath>
+    </Reference>
+    <Reference Include="NumCIL.Unsafe">
+      <HintPath>..\..\..\_utils\cil\Utilities\bin\$(Configuration)\NumCIL.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="NumCIL.Bohrium">
+      <HintPath>..\..\..\_utils\cil\Utilities\bin\$(Configuration)\NumCIL.Bohrium.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="shallow_water.cs">
+      <DependentUpon>shallow_water.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\_utils\cil\Utilities\Utilities.csproj">
+      <Project>{D6CA1418-5885-4311-AFD8-94916E437EFE}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shallow_water.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>shallow_water.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>

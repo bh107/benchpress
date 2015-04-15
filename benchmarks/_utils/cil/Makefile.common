@@ -1,0 +1,58 @@
+ROOT=../..
+
+BENCH_SRC   = $(wildcard *.sln)
+BENCHMARK   = $(subst .sln,,$(BENCH_SRC))
+
+GACUTIL_FOUND=$(lastword $(shell gacutil -l NumCIL))
+
+BUILD=xbuild
+BUILD_FLAGS=/p:Configuration=Release
+
+ifneq ("$(wildcard $(BH_MONO_LIB_PATH)/NumCIL.dll)","")
+	NUMCIL_FOUND=OWN
+else ifneq ("z$(GACUTIL_FOUND)","z0")
+	NUMCIL_FOUND=GAC
+else ifneq ("$(wildcard ~/.local/lib/mono/NumCIL.dll)","")
+	NUMCIL_FOUND=~/.local/lib/mono/
+else ifneq ("$(wildcard /lib/mono/NumCIL.dll)","")
+	NUMCIL_FOUND=/lib/mono/
+else ifneq ("$(wildcard /usr/lib/mono/NumCIL.dll)","")
+	NUMCIL_FOUND=/usr/lib/mono/
+else ifneq ("$(wildcard /usr/local/lib/mono/NumCIL.dll)","")
+	NUMCIL_FOUND=/usr/local/lib/mono/
+else ifneq ("$(wildcard /opt/lib/mono/NumCIL.dll)","")
+	NUMCIL_FOUND=/opt/lib/mono/
+else
+	NUMCIIL_FOUND=MISSING
+endif
+
+
+ifeq ("$(NUMCIL_FOUND)", "MISSING")
+	NUMCIL_REPORT_MESSAGE="\n\n****************** Warning: ******************\nCould NOT find NumCIL.dll, please set the environment variable BH_MONO_LIB_PATH to the folder where the NumCIL library is located\n\n"
+else ifeq ("$(NUMCIL_FOUND)","OWN")
+	NUMCIL_REPORT_MESSAGE="Using NumCIL from supplied environment variable"
+else ifeq ("$(NUMCIL_FOUND)","GAC")
+	NUMCIL_REPORT_MESSAGE="Using NumCIL from GAC"
+else
+	NUMCIL_REPORT_MESSAGE="Using NumCIL from $(NUMCIL_FOUND)"
+	NUMCIL_ENVVAR=BH_MONO_LIB_PATH=$(NUMCIL_FOUND)
+endif
+
+
+../../_utils/cil/Utilities/bin/Utilities.dll:
+	echo "$(NUMCIL_REPORT_MESSAGE)"
+	$(NUMCIL_ENVVAR) $(BUILD) $(BUILD_FLAGS) ../../_utils/cil/Utilities/Utilities.sln
+
+$(BENCHMARK): $(BENCH_SRC) ../../_utils/cil/Utilities/bin/Utilities.dll
+	echo "$(NUMCIL_REPORT_MESSAGE)"
+	$(NUMCIL_ENVVAR) $(BUILD) $(BUILD_FLAGS) $(BENCH_SRC)
+
+clean:
+	rm -rf src/obj
+	rm -rf bin
+	rm -rf ../../_utils/cil/Utilities/bin
+	rm -rf ../../_utils/cil/Utilities/obj
+
+all: $(BENCHMARK)
+
+.phony: clean all

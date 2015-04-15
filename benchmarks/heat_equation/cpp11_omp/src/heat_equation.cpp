@@ -8,15 +8,14 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if (2>argc) {
-        cout << "usage: " << argv[0] << " --size=10000*10000*10 [--verbose]" << endl;
+    bp_util_type bp = bp_util_create(argc, argv, 3);// Grab arguments
+    if (bp.args.has_error) {
         return 1;
     }
+    bp.timer_start();
 
-    bp_arguments_type args = parse_args(argc, argv);        // Parse args
-
-    const int width     = args.sizes[0];
-    const int height    = args.sizes[1];
+    const int width     = bp.args.sizes[0];
+    const int height    = bp.args.sizes[1];
 
     const int ydim = 10000;
     if (ydim != height) {
@@ -30,14 +29,7 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    const int max_iterations = args.sizes[2];
-
-    printf(
-        "Running heat_equation_jacobi on %d*%d for %i iterations.\n",
-        ydim,
-        xdim,
-        max_iterations
-    );
+    const int max_iterations = bp.args.sizes[2];
 
     double epsilon  = 0.005;
     double delta    = epsilon+1.0;
@@ -59,7 +51,7 @@ int main(int argc, char* argv[])
         grid[ydim-1][i] = 40.0;
     }
 
-    size_t start = bp_sample_time();
+    bp.timer_start();
     auto iterations = 0;            // Compute the heat equation
     while(delta>epsilon) {
         ++iterations;
@@ -82,10 +74,10 @@ int main(int argc, char* argv[])
             break;
         }
     }
-    size_t end = bp_sample_time();
+    bp.timer_stop();
 
-    cout << "{elapsed-time: "<< (end-start)/1000000.0 <<"";          
-    if (args.verbose) {                             // and values.
+    bp.print("heat_equation(cpp11_omp)");
+    if (bp.args.verbose) {                             // and values.
         cout << ", \"output\": [";
         for(int i=0; i<10; ++i) {
             for(int j=0; j<10; ++j) {
@@ -95,7 +87,6 @@ int main(int argc, char* argv[])
         }
         cout << "]";
     }
-    cout << "}" << endl;
 
     return 0;
 }

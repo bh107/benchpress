@@ -19,12 +19,10 @@ If not, see <http://www.gnu.org/licenses/>.
 */
 #include <iostream>
 #include <Eigen/Dense>
-#include "util/timing.hpp"
-#include "util/argparse.hpp"
+#include <bp_util.h>
 
 using namespace std;
 using namespace Eigen;
-using namespace argparse;
 
 template <typename T>
 Array<T, Dynamic, 1>& cnd(const Array<T, Dynamic, 1>& x)
@@ -92,51 +90,34 @@ T* pricing(size_t samples, size_t iterations, char flag, T x, T d_t, T r, T v)
 
 int main(int argc, char* argv[])
 {
-    const char usage[] = "usage: ./black_scholes --size=1000*10 [--verbose]";
-    if (2>argc) {
-        cout << usage << endl;
+    bp_util_type bp = bp_util_create(argc, argv, 2);    // Grab arguments
+    if (bp.args.has_error) {
         return 1;
     }
-    
-    arguments_t args;                   // Parse command-line
-    if (!parse_args(argc, argv, args)) {
-        cout << "Err: Invalid argument(s)." << endl;
-        cout << usage << endl;
-        return 1;
-    }
-    if (2 > args.size.size()) {
-        cout << "Err: Not enough arguments." << endl;
-        cout << usage << endl;
-        return 1;
-    }
-    if (2 < args.size.size()) {
-        cout << "Err: Too many arguments." << endl;
-        cout << usage << endl;
-        return 1;
-    }
+    const size_t samples    = bp.args.sizes[0];
+    const size_t iterations = bp.args.sizes[1];
 
-    size_t start = sample_time();
-    double* prices = pricing(           // Do the computations...
-        args.size[0], args.size[1],
+    bp.timer_start();                                   // Start timer
+    double* prices = pricing(                           // Run...
+        samples, iterations,
         'c', 65.0, 1.0 / 365.0,
         0.08, 0.3
     );
-    size_t end = sample_time();
-                                        // Output timing
-    cout << "{elapsed-time: "<< (end-start)/1000000.0 <<"";          
-    if (args.verbose) {                 // and values.
+    bp.timer_stop();                                    // Stop timer
+    
+    bp.print("black_scholes(cpp11_bxx)");               // Print restults..
+    if (bp.args.verbose) {                              // ..verbosely.
         cout << ", \"output\": [";
-        for(size_t i=0; i<args.size[1]; i++) {
+        for(size_t i=0; i<iterations; i++) {
             cout << prices[i];
-            if (args.size[1]-1!=i) {
+            if (iterations-1!=i) {
                 cout << ", ";
             }
         }
         cout << "]" << endl;
     }
-    cout << "}" << endl;
+    free(prices);                                       // Cleanup
 
-    free(prices);                       // Cleanup
     return 0;
 }
 

@@ -7,11 +7,8 @@ So what does this code example illustrate?
 
 Adapted from: http://people.sc.fsu.edu/~jburkardt/m_src/shallow_water_2d/
 """
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 g = 9.80665 # gravitational acceleration
 
@@ -120,11 +117,10 @@ def main():
 
     B.start()
     M = simulate(M, I, visualize=B.visualize)
-    R = np.sum(M)
     B.stop()
     B.pprint()
     if B.outputfn:
-        B.tofile(B.outputfn, {'res': R})
+        B.tofile(B.outputfn, {'res': M})
 
 if __name__ == "__main__":
     main()

@@ -1,10 +1,7 @@
 from __future__ import print_function
 import itertools as it
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def shape(dims, size=20):
     """

@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 scripts   = [
     ('Jacobi Stencil',        'jacobi_stencil',        '--size=3000*3000*100'),
@@ -16,14 +16,14 @@ scripts   = [
 ]
 
 bohrium = {
-    'bridges': [('Bohrium', 'python benchmark/python/{script}.py {args} --bohrium=True', None)],
+    'bridges': [python_bohrium],
     'engines': [('CPU', 'cpu', None),
                 ('GPU', 'gpu', None)],
     'scripts': scripts,
 }
 
 numpy = {
-    'bridges': [('NumPy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
+    'bridges': [python_numpy],
     'engines': [('CPU', 'cpu', None)],
     'scripts': scripts,
 }

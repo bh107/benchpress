@@ -43,17 +43,13 @@ void openmp(int height, int width, double *grid, int iter)
 
 int main (int argc, char **argv)
 {
-    bp_arguments_type args = parse_args(argc, argv);        // Parse args
-    printf(
-        "Running heat_equation_jacobi on %d*%d for %i iterations.\n",
-        args.sizes[0],
-        args.sizes[1],
-        args.sizes[2]
-    );
-
-    const int width     = args.sizes[0];
-    const int height    = args.sizes[1];
-    const int iter      = args.sizes[2];
+    bp_util_type bp = bp_util_create(argc, argv, 3);
+    if (bp.args.has_error) {
+        return 1;
+    }
+    const int height    = bp.args.sizes[0];
+    const int width     = bp.args.sizes[1];
+    const int iter      = bp.args.sizes[2];
 
     size_t grid_size = height*width*sizeof(double);
     double *grid = (double*)malloc(grid_size);
@@ -78,9 +74,9 @@ int main (int argc, char **argv)
         printf ("\n");
     }       
 #endif
-    size_t start = bp_sample_time();
+    bp.timer_start();
     openmp(height,width,grid,iter);
-    size_t end = bp_sample_time();
+    bp.timer_stop();
 #ifdef DEBUG
     for (int i = 0; i<height; i++)
     {
@@ -91,9 +87,7 @@ int main (int argc, char **argv)
         printf ("\n");
     }       
 #endif
-    size_t elapsed = end - start;
-
-    printf("sequential.c - iter: %d size: %d elapsed-time: %lf\n", iter, width, elapsed/(double)1000000.0);
+    bp.print("heat_equation(c99_omp)");
     free(grid);
     return 0;
 }

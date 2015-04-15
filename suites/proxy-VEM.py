@@ -1,3 +1,7 @@
+from benchpress.default import *
+
+# TODO: Adapt this to the benchpress after the "makeover".
+
 managers = [\
            ('proxy', 'proxy', '{bridge}', None),
 ]

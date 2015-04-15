@@ -1,3 +1,7 @@
+from benchpress.default import *
+
+# TODO: Adapt to new benchmark locations
+
 managers = [
     ('node',  'node', '',  None),
     ('cluster1',  'cluster', 'mpiexec -ppn 1 -np 1 {bridge} : -np 0 taskset -c 1 ./vem/cluster/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':1}),

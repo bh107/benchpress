@@ -91,17 +91,13 @@ int main (int argc, char **argv)
     MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
     MPI_Comm_size(MPI_COMM_WORLD, &worldsize);
 
-    bp_arguments_type args = parse_args(argc, argv);        // Parse args
-    const int width = args.sizes[0];
-    int height      = args.sizes[1];
-    const int iter  = args.sizes[2];
-
-    printf(
-        "Running heat_equation_jacobi on %d*%d for %i iterations.\n",
-        width,
-        height,
-        iter
-    );
+    bp_util_type bp = bp_util_create(argc, argv, 3);
+    if (bp.args.has_error) {
+        return 1;
+    }
+    int height      = bp.args.sizes[0];
+    const int width = bp.args.sizes[1];
+    const int iter  = bp.args.sizes[2];
 
     //Local vertical size. NB: the horizontal size is always the full grid including borders
     height = (width-2) / worldsize;
@@ -124,15 +120,14 @@ int main (int argc, char **argv)
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
-    size_t start = bp_sample_time();
+    bp.timer_start();
     openmp(height,width,grid,iter);
 
     MPI_Barrier(MPI_COMM_WORLD);
-    size_t end = bp_sample_time();
-    size_t elapsed =  end - start;
+    bp.timer_stop();
 
     if (myrank == 0) {
-        printf("openmp_mpi.c - iter: %d size: %d elapsed-time: %lf\n", iter, width, elapsed/(double)1000000.0);
+        bp.print("heat_equation(c99_omp_mpi)");
     }
     free(grid);
     MPI_Finalize();

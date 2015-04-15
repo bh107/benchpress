@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+import argparse
+import pkgutil
+import pprint
+import os
+from benchpress.gen_graphs import main
+from benchpress import result_parser
+import benchpress.grapher
+
+if __name__ == "__main__":
+
+    graph_types = {}    # Auto-load all graph-modules from grapher/*
+                        # The graph-class must be a capilized version of the
+                        # filename
+    for _, module, _ in pkgutil.iter_modules([os.path.dirname(benchpress.grapher.__file__)]):
+        if module == 'graph':
+            continue
+
+        module_caps = module.capitalize()
+        m = __import__("benchpress.grapher.%s" % module, globals(), locals(), [module_caps], -1)
+        graph_types[module] = m.__dict__[module_caps]
+
+    parser = argparse.ArgumentParser(
+        description = 'Generate different types of graphs.'
+    )
+    parser.add_argument(
+        'results',
+        help='Path to benchmark results.'
+    )
+    parser.add_argument(
+        '--output',
+        default="graphs",
+        help='Where to store generated graphs.'
+    )
+    parser.add_argument(
+        '--postfix',
+        default='runtime',
+        help="Append this to the filename of the generated graph(s)."
+    )
+    parser.add_argument(
+        '--formats',
+        default=['png'],
+        nargs='+',
+        help="Output file-format(s) of the generated graph(s)."
+    )
+    parser.add_argument(
+        '--type',
+        default=[[gt for gt in graph_types][0]],
+        nargs=1,
+        choices=[gt for gt in graph_types],
+        help="The type of graph to generate"
+    )
+    parser.add_argument(
+        '--warmups',
+        default=0,
+        type=int,
+        help="Specify the amount of samples from warm-up rounds."
+    )
+    parser.add_argument(
+        '--baseline',
+        default=None,
+        help='Baseline label for relative graphs.'
+    )
+    parser.add_argument(
+        '--order',
+        default=None,
+        nargs='+',
+        help='Ordering of the ticks.'
+    )
+    parser.add_argument(
+        '--ylimit',
+        default=None,
+        help="Max value of the y-axis"
+    )
+
+    args = parser.parse_args()
+    args.type = args.type.pop()
+    args.graph_module = graph_types[args.type]
+
+    main(args)
+

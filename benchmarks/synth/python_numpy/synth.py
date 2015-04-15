@@ -1,9 +1,6 @@
 from __future__ import print_function
-import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+from benchpress import util
+import numpy as np
 
 def main():
     B = util.Benchmark()
@@ -19,7 +16,7 @@ def main():
 
     B.stop()
     B.pprint()
-
+    R[0]
     if B.verbose:
         print(R)
     if B.outputfn:
