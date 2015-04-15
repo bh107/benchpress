@@ -636,7 +636,12 @@ def gen_jobs_launcher_format(result_file, config, args):
                                 envs_overwrite.update(comp_envs)
 
                             if not confparser.has_section(comp_name):
-                                raise Exception("Component does not exist.")
+                                if args.bh_config_file == None:
+                                    raise Exception("Component does not exist: " + str(comp_name) 
+                                        + "\nThis is probably caused by not being able to find the Bohrium config file."
+                                        + "\nTry setting --bh_config_file with the path to the Bohrium config file")
+                                else:
+                                    raise Exception("Component does not exist: " + str(comp_name))
                                                         
                                                         # Collect all components
                             if comp_name not in component_names:

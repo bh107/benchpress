@@ -12,6 +12,17 @@ class _C:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
+DUMMY_BH_CONFIG = """
+[bridge]
+type = bridge
+
+[node]
+type = vem
+
+[cpu]
+type = ve
+"""
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a json-file.')
@@ -147,6 +158,15 @@ if __name__ == "__main__":
                         bh_config_file = guess
                         print _C.OKBLUE, "Using Bohrium config file",bh_config_file,_C.ENDC
                         break
+
+            if bh_config_file == None:
+                handle, temp_bh_config = tempfile.mkstemp(prefix=file_name_prefix, suffix='.ini')
+                bh_config_file = temp_bh_config
+                print _C.WARNING, "Bohrium config file not found, using dummy file",bh_config_file,_C.ENDC
+
+                with os.fdopen(handle, 'w+') as config_file:
+                    config_file.write(DUMMY_BH_CONFIG)
+
             if not os.path.isfile(bh_config_file):
                 raise IOError('File not found: ' + bh_config_file)
 
@@ -178,3 +198,9 @@ if __name__ == "__main__":
         print "use resume on",result_file.name,_C.ENDC
     finally:
         result_file.close()
+        if temp_bh_config != None:
+            try:
+                os.unlink(temp_bh_config)
+            except:
+                pass
+
