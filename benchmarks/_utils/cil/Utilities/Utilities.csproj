@@ -34,24 +34,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="NumCIL">
       <HintPath>$(BH_MONO_LIB_PATH)\NumCIL.dll</HintPath>
-      <HintPath>$(HOME)\.local\lib\mono\NumCIL.dll</HintPath>      
-      <HintPath>\usr\lib\mono\NumCIL.dll</HintPath>
-      <HintPath>\usr\local\lib\mono\NumCIL.dll</HintPath>
-      <HintPath>\opt\lib\mono\NumCIL.dll</HintPath>
     </Reference>
     <Reference Include="NumCIL.Unsafe">
       <HintPath>$(BH_MONO_LIB_PATH)\NumCIL.Unsafe.dll</HintPath>
-      <HintPath>$(HOME)\.local\lib\mono\NumCIL.Unsafe.dll</HintPath>      
-      <HintPath>\usr\lib\mono\NumCIL.Unsafe.dll</HintPath>
-      <HintPath>\usr\local\lib\mono\NumCIL.Unsafe.dll</HintPath>
-      <HintPath>\opt\lib\mono\NumCIL.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="NumCIL.Bohrium">
       <HintPath>$(BH_MONO_LIB_PATH)\NumCIL.Bohrium.dll</HintPath>
-      <HintPath>$(HOME)\.local\lib\mono\NumCIL.Bohrium.dll</HintPath>      
-      <HintPath>\usr\lib\mono\NumCIL.Bohrium.dll</HintPath>
-      <HintPath>\usr\local\lib\mono\NumCIL.Bohrium.dll</HintPath>
-      <HintPath>\opt\lib\mono\NumCIL.Bohrium.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

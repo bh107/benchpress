@@ -33,9 +33,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="NumCIL" />
-    <Reference Include="NumCIL.Unsafe" />
-    <Reference Include="NumCIL.Bohrium" />
+    <Reference Include="NumCIL">
+      <HintPath>..\..\..\_utils\cil\Utilities\bin\$(Configuration)\NumCIL.dll</HintPath>
+    </Reference>
+    <Reference Include="NumCIL.Unsafe">
+      <HintPath>..\..\..\_utils\cil\Utilities\bin\$(Configuration)\NumCIL.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="NumCIL.Bohrium">
+      <HintPath>..\..\..\_utils\cil\Utilities\bin\$(Configuration)\NumCIL.Bohrium.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
