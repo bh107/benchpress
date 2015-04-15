@@ -1,18 +1,6 @@
-======
-Suites
-======
-
-Benchmark Protocol and conventions
-----------------------------------
-
-...
-
 =======================
 Implementing Benchmarks
 =======================
-
-Benchmark Protocol and conventions
-==================================
 
 Python
 ------

@@ -13,9 +13,11 @@ Contents:
 
    quickstart
    install
-   usage
+   usage_commands
    usage_examples
-   suites 
+   usage_suites
+   protocol
+   implementing 
    benchmarks
 
 Indices and tables
