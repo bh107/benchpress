@@ -5,7 +5,7 @@ import pprint
 import os
 from benchpress.version import get_paths, implementations
 
-def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False):
+def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False, make_target='all'):
     """Compile benchmarks of the given languages."""
 
     paths = get_paths()
@@ -30,7 +30,7 @@ def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False):
 
                 print("## Compiling %s" % target)
                 process = subprocess.Popen(
-                    "make",
+                    ["make", make_target],
                     cwd=path,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE
@@ -48,12 +48,13 @@ if __name__ == "__main__":
     parser.add_argument('--all', action='store_true', help="Compile all")
     parser.add_argument('--lang', choices=['c', 'cpp', 'cs'], help="Compile all of the provided language")
     parser.add_argument('--verbose', action='store_true', help="Output verbose debug info when finding benchmarks")
+    parser.add_argument('--target', choices=['all', 'clean'], help="Choose which command to give to the make script", default='all')
 
     args = parser.parse_args()  # Parse arguments
 
     if args.all:
-        compile(verbose=args.verbose)
+        compile(verbose=args.verbose, make_target=args.target)
     elif args.lang:
-        compile(languages=[args.lang], verbose=args.verbose)
+        compile(languages=[args.lang], verbose=args.verbose, make_target=args.target)
     else:
         parser.print_usage()
