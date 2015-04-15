@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 scripts = [
     #('LMM Swaption',            'LMM_swaption_vec',         '--size=1000*1000'),

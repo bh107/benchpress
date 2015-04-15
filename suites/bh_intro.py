@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 # TODO: Adapt to new benchmark locations
 

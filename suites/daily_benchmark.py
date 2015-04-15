@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 scripts   = [
     ('Jacobi Stencil',        'jacobi_stencil',        '--size=3000*3000*100'),
