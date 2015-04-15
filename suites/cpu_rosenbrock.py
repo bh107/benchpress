@@ -9,9 +9,9 @@ bh_stack_cpu_t4 = [
     [('node',       'node',               None)],
     [('topo',       'topological',        None)],
     [
-        ('cpu_t04', 'cpu',   {"OMP_NUM_THREADS": "4"}),
-        ('cpu_t02', 'cpu',   {"OMP_NUM_THREADS": "2"}),
-        ('cpu_t01', 'cpu',   {"OMP_NUM_THREADS": "1"}),
+        ('cpu_t04', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "4"}),
+        ('cpu_t02', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "2"}),
+        ('cpu_t01', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "1"}),
     ]
 ]
 
@@ -21,12 +21,12 @@ bh_stack_cpu_t32 = [
     [('node',       'node',               None)],
     [('topo',       'topological',        None)],
     [
-        ('cpu_t32', 'cpu',   {"OMP_NUM_THREADS": "32"}),
-        ('cpu_t16', 'cpu',   {"OMP_NUM_THREADS": "16"}),
-        ('cpu_t08', 'cpu',   {"OMP_NUM_THREADS": "8"}),
-        ('cpu_t04', 'cpu',   {"OMP_NUM_THREADS": "4"}),
-        ('cpu_t02', 'cpu',   {"OMP_NUM_THREADS": "2"}),
-        ('cpu_t01', 'cpu',   {"OMP_NUM_THREADS": "1"}),
+        ('cpu_t32', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "32"}),
+        ('cpu_t16', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "16"}),
+        ('cpu_t08', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "8"}),
+        ('cpu_t04', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "4"}),
+        ('cpu_t02', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "2"}),
+        ('cpu_t01', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "1"}),
     ]
 ]
 
