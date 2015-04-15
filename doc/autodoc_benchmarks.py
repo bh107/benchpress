@@ -77,21 +77,29 @@ class RstTable(object):
             cols.append(row[cidx].ljust(cwidth))
         return "| %s |" % " | ".join(cols)
 
-    def draw_sep(self, widths=None):
+    def draw_sep(self, widths=None, sep='-'):
         if not widths:
             widths = self.col_widths
 
         seps = []
         for cidx, cwidth in enumerate(widths):
-            seps.append("-"*(cwidth+2))
+            seps.append(sep*(cwidth+2))
         return "+%s+" % "+".join(seps)
 
     def render(self):
 
         rows = []
+        sepper = "-"
         for row in self.rows:
-            rows.append(self.draw_sep())
+            rows.append(self.draw_sep(sep=sepper))
             rows.append(self.draw_row(row))
+
+            stuffing = [entry.lower() for entry in row]
+            if "numpy" in stuffing or "python" in stuffing:
+                sepper = "="
+            else:
+                sepper = "-"
+
         rows.append(self.draw_sep())
 
         return "\n".join(rows)
