@@ -87,16 +87,16 @@ class RstTable(object):
         return "+%s+" % "+".join(seps)
 
     def render(self):
-
+        first = True 
         rows = []
         sepper = "-"
         for row in self.rows:
             rows.append(self.draw_sep(sep=sepper))
             rows.append(self.draw_row(row))
-
             stuffing = [entry.lower() for entry in row]
-            if "numpy" in stuffing or "python" in stuffing:
+            if ("numpy" in stuffing or "python" in stuffing) and first:
                 sepper = "="
+                first = False
             else:
                 sepper = "-"
 
@@ -119,8 +119,18 @@ def section_ref(text):
 def benchmark_matrix(benchmarks):
     rows = flatten(benchmarks)
 
-    rows.insert(0, [" "]+[ " ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ])
+    tool_header = [" "]+[ " ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ]
+
+    rows.insert(0, tool_header)
     rows = modify_column(section_ref, rows)
+
+    rerow = []
+    for ridx, row in enumerate(rows):
+        rerow.append(row)   
+        if ((ridx+1) % 15) == 0:
+            rerow.append(tool_header)
+    rows = rerow
+
     table= RstTable([], rows)
 
     header_row      = ["%d Benchmarks "% benchmarks["__meta__"]["nbenchs"]]
