@@ -9,21 +9,24 @@ scripts = [
     ('Jacobi Fixed','jacobi_fixed', '--size=1250*600')
 ]
 
-managers= [('node', 'node', '', None)]
-
 numpy = {
-    'bridges':  [python_numpy],
-    'scripts':  scripts,
+    'scripts': scripts,
+    'launchers': [python_numpy],
+    'bohrium': bh_stack_none
 }
 
 bohrium = {
-    'bridges':  [python_bohrium],
-    'managers': [('node', 'node', '', None)],
-    'engines':  [
-        #('cpu_fused',   'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "1"}),
-        ('cpu_sij', 'cpu', {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "0"}),
+    'scripts': scripts,
+    'launchers': [python_bohrium],
+    'bohrium': [
+        [('default',    'bridge',             None)],
+        [('node',       'node',               None)],
+        [('topo',       'topological',        None)],
+        [
+            ('cpu_fused',   'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "1"}),
+            ('cpu_sij',     'cpu',  {"BH_VE_CPU_JIT_DUMPSRC": "1", "BH_VE_CPU_JIT_FUSION": "0"}),
+        ]
     ],
-    'scripts':  scripts
 }
 
 suites = [

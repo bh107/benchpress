@@ -87,23 +87,20 @@ double run_mcpi(int64_t samples, int64_t iterations)
 
 int main(int argc, char** argv)
 {
-    bp_arguments_type args = parse_args(argc, argv);        // Parse args
+    bp_util_type bp = bp_util_create(argc, argv, 2);// Grab arguments
+    if (bp.args.has_error) {
+        return 1;
+    }
+    const int samples = bp.args.sizes[0];
+    const int iterations = bp.args.sizes[1]
 
-    printf(                                                 // Info
-        "Running MonteCarlo PI with %d samples for %d trials\n",
-        args.sizes[0], args.sizes[1]
-    );
-    size_t begin = bp_sample_time();
-    double res = run_mcpi(args.sizes[0], args.sizes[1]);    // Run
-    size_t end = bp_sample_time();
-                                                            
-    printf("size: %d*%d, elapsed-time: %f\n",               // Report 
-        args.sizes[0],
-        args.sizes[1],
-        (end-begin)/1000000.0
-    );
-    if (args.verbose) {                                     // Report verbose
-        printf("PI = %f\n", res);
+    bp.timer_start();
+    double pi = monte_carlo_pi(samples, iterations);
+    bp.timer_end();
+
+    bp.print("mcpi(c99_omp)");;
+    if (bp.args.verbose) {
+        printf("PI-approximation = %f\n", pi);
     }
 
     return 0;

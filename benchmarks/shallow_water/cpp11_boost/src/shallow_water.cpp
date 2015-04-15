@@ -11,21 +11,18 @@
 
 int main (int argc, char **argv)
 {
-    bp_arguments_type args = parse_args(argc, argv);    // Parse args
-    const int n = args.sizes[0];
-    const int other_n = args.sizes[1];
-    const int T = args.sizes[2];
+    bp_util_type bp = bp_util_create(argc, argv, 3);
+    if (bp.args.has_error) {
+        return 1;
+    }
+    const int n         = bp.args.sizes[0];
+    const int other_n   = bp.args.sizes[1];
+    const int T         = bp.args.sizes[2];
 
     if (n != other_n) {
         fprintf(stderr, "Implementation only supports quadratic grid.\n");
         exit(0);
     }
-    printf(
-        "Running shallow_water(cpp11_boost) --size=%d*%d*%i\n",
-        n,
-        n,
-        T
-    );
 
     const double g   = 9.8;       // gravitational constant
     const double dt  = 0.02;      // hardwired timestep
@@ -70,7 +67,7 @@ int main (int argc, char **argv)
 
     H[droploc][droploc] += 5.0;
 
-    size_t start = bp_sample_time();
+    bp.timer_start();
 
     for(int iter=0; iter < T; iter++)
     {
@@ -164,8 +161,6 @@ int main (int argc, char **argv)
         for(int j=0;j<n+2;j++)
             res+=H[i][j]/n;
 
-    size_t stop = bp_sample_time();
-    size_t elapsed = stop-start;
-
-    printf("Ran shallow_water(cpp11_boost) iter: %d size: %d*%d elapsed-time: %lf\n", T, n, n, elapsed/(double)1000000.0);
+    bp.timer_stop();
+    bp.print("shallow_water(cpp11_boost)");
 }

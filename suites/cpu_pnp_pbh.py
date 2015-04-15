@@ -38,30 +38,36 @@ scripts = [
 ]
 
 numpy = {
-    'bridges':  [python_numpy],
     'scripts':  scripts,
+    'launchers':  [python_numpy],
+    'bohrium': bh_stack_none
 }
 
 bohrium = {
-    'bridges':  [python_bohrium],
-    'managers': [('node',  'node', '',  None) ],
-    'filters':  [('complete_reduction', 'complete_reduction', None)],
-    'engines':  [
-        ('fusion_01',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '1'                           }),
-        ('fusion_02',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '2'                           }),
-        ('fusion_04',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '4'                           }),
-        ('fusion_08',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '8'                           }),
-        ('fusion_16',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '16'                          }),
-        ('fusion_32',   'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '32'                          }),
+    'scripts':  scripts,
+    'launchers':  [python_bohrium],
+    'bohrium':  [
+        [('default',    'bridge',             None)],
+        [('creduce',    'complete_reduction', None)],
+        [('node',       'node',               None)],
+        [('topo',       'topological',        None)],
+ 
+        [
+            ('cpu_fs_t01',      'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '1'                           }),
+            ('cpu_fs_t02',      'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '2'                           }),
+            ('cpu_fs_t04',      'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '4'                           }),
+            ('cpu_fs_t08',      'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '8'                           }),
+            ('cpu_fs_t16',      'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '16'                          }),
+            ('cpu_fs_t32',      'cpu', {'BH_VE_CPU_JIT_FUSION': '1',    'OMP_NUM_THREADS': '32'                          }),
 
-        ('omp_01',      'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '1'                           }),
-        ('omp_02',      'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '2'                           }),
-        ('omp_04',      'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '4'                           }),
-        ('omp_08',      'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '8'                           }),
-        ('omp_16',      'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '16'                          }),
-        ('omp_32',      'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '32'                          }),
+            ('cpu_t01',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '1'                           }),
+            ('cpu_t02',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '2'                           }),
+            ('cpu_t04',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '4'                           }),
+            ('cpu_t08',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '8'                           }),
+            ('cpu_t16',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '16'                          }),
+            ('cpu_t32',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '32'                          }),
+        ]
     ],
-    'scripts':  scripts
 }
 
 suites = [
