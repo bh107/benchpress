@@ -33,15 +33,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="NumCIL">
-      <HintPath>\usr\local\lib\mono\NumCIL.dll</HintPath>
-    </Reference>
-    <Reference Include="NumCIL.Unsafe">
-      <HintPath>\usr\local\lib\mono\NumCIL.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="NumCIL.Bohrium">
-      <HintPath>\usr\local\lib\mono\NumCIL.Bohrium.dll</HintPath>
-    </Reference>
+    <Reference Include="NumCIL" />
+    <Reference Include="NumCIL.Unsafe" />
+    <Reference Include="NumCIL.Bohrium" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

@@ -4,7 +4,7 @@ BENCH_SRC   = $(wildcard *.sln)
 BENCHMARK   = $(subst .sln,,$(BENCH_SRC))
 
 BUILD=xbuild
-BUILD_FLAGS=/p:Configuration=Release /p:AdditionalReferencePaths=~/.local/lib:/usr/local/lib:/usr/lib
+BUILD_FLAGS=/p:Configuration=Release
 
 $(BENCHMARK): $(BENCH_SRC)
 	$(BUILD) $(BUILD_FLAGS) $(BENCH_SRC)
