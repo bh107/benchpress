@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 bh_stack_cpu_t32 = [
     [('default',    'bridge',             None)],

@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 managers = [
 #    ('cluster2',  'cluster', 'mpiexec -ppn 1 -np 1 {bridge} : -np 1 ~/.local/bin/bh_vem_cluster_slave',  {'BH_SLURM_NNODES':2}),

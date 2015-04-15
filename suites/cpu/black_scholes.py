@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 scripts = [
     ('Black Scholes', 'black_scholes', '--size=5000000*10'),

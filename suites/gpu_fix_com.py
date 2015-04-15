@@ -1,4 +1,4 @@
-from default import *
+from benchpress.default import *
 
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
