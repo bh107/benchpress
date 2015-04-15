@@ -1,5 +1,5 @@
 .. image:: https://readthedocs.org/projects/benchpress/badge/?version=latest
-    :target: https://readthedocs.org/projects/benchpress/?badge=latest
+    :target: http://benchpress.readthedocs.org/
     :alt: Documentation Status
 
 .. image:: https://pypip.in/version/benchpress/badge.svg
