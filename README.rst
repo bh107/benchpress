@@ -1,3 +1,19 @@
+.. image:: https://readthedocs.org/projects/benchpress/badge/?version=latest
+    :target: https://readthedocs.org/projects/benchpress/?badge=latest
+    :alt: Documentation Status
+
+.. image:: https://pypip.in/version/benchpress/badge.svg
+    :target: https://pypi.python.org/pypi/benchpress/
+    :alt: Latest Version
+
+.. image:: https://pypip.in/py_versions/benchpress/badge.svg
+    :target: https://pypi.python.org/pypi/benchpress/
+    :alt: Supported Python versions
+
+.. image:: https://pypip.in/implementation/benchpress/badge.svg
+    :target: https://pypi.python.org/pypi/benchpress/
+    :alt: Supported Python implementations
+
 Quick Start
 ===========
 
