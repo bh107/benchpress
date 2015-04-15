@@ -598,6 +598,11 @@ def gen_jobs_launcher_format(result_file, config, args):
     print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
     i=0
     for suite in suites:
+        
+        # Add a simple generator if we are not using Bohrium
+        if not "bohrium" in suite or suite["bohrium"] == None:
+            suite["bohrium"] = [[('NA', 'bridge', None)],[('NA', 'node', None)],[('NA', 'cpu', None)]]
+
         for script_alias, script, script_args in suite['scripts']:
             for launcher_alias, launcher_cmd, launcher_env in suite['launchers']:
                 if "bohrium" in suite:    # Create Bohrium config
