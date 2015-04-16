@@ -83,7 +83,7 @@ if __name__ == "__main__":
              'NB: $OUT is replaced with the name of the output JSON file. '
     )
     parser.add_argument(
-        '--bh_config_file',
+        '--bh-config-file',
         help="Override the path to the bohrium config.ini file, which is normally read from ~/.bohrium/config.ini."
     )
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
