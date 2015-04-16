@@ -92,13 +92,13 @@ int main(int argc, char** argv)
         return 1;
     }
     const int samples = bp.args.sizes[0];
-    const int iterations = bp.args.sizes[1]
+    const int iterations = bp.args.sizes[1];
 
     bp.timer_start();
     double pi = monte_carlo_pi(samples, iterations);
-    bp.timer_end();
+    bp.timer_stop();
 
-    bp.print("mcpi(c99_omp)");;
+    bp.print("mcpi(c99_omp)");
     if (bp.args.verbose) {
         printf("PI-approximation = %f\n", pi);
     }
