@@ -1,6 +1,4 @@
-Simulates the dissipation of heat in a grid of size H * W until it converges with a max of I iterations::
-
-An iterative Jacobi method performing a stencil operation of a two-dimensional rectangular grid until it converges or until max iterations is reached.
+Simulates the dissipation of heat in a grid of size H * W until it converges with a max of I iterations. An iterative Jacobi method performing a stencil operation of a two-dimensional rectangular grid until it converges or until max iterations is reached.
 
 Runs Jacobi on a rectangular grid for until it converges or until max iterations is reached::
 
