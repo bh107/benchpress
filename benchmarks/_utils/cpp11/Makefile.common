@@ -11,6 +11,8 @@ INCLUDE=-I$(ROOT)/_utils/c99/include
 LIBS=-lm
 EXTRAS+=
 
+all: $(BENCHMARK)
+
 $(BENCHMARK): $(BENCH_SRC)
 	$(CXX) $(UTILS) $(CXXFLAGS) $(INCLUDE) $< $(LIBS) $(EXTRAS) -o bin/$@ 
 

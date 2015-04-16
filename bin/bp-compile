@@ -24,6 +24,8 @@ def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False, make_t
                 target = os.sep.join([bench_lbl, tool])
                 path = os.sep.join([search_path, bench_lbl, tool])
 
+                print target, path
+
                 if bench[lang][tool]["issues"]:
                     print("!! Skipping %s, it has known issues" % target)
                     continue
