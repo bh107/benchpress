@@ -8,24 +8,19 @@ Welcome to Benchpress
 
 Contents:
 
-.. toctree::
-   :maxdepth: 2
++------------------------------+------------------------------+
+| .. toctree::                 | .. toctree::                 |
+|    :maxdepth: 2              |    :maxdepth: 1              |
+|                              |    :numbered:                |
+|    quickstart                |    :glob:                    |
+|    install                   |                              |
+|    usage_commands            |    benchmarks/*              |
+|    usage_examples            |                              |
+|    usage_suites              |                              |
+|    protocol                  |                              |
+|    implementing              |                              |
++------------------------------+------------------------------+
 
-   quickstart
-   install
-   usage_commands
-   usage_examples
-   usage_suites
-   protocol
-   implementing 
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :numbered:
-   :glob:
-
-   benchmarks/*
 
 Indices and tables
 ==================
