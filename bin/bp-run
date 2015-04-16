@@ -83,8 +83,13 @@ if __name__ == "__main__":
              'NB: $OUT is replaced with the name of the output JSON file. '
     )
     parser.add_argument(
-        '--bh_config_file',
+        '--bh-config-file',
         help="Override the path to the bohrium config.ini file, which is normally read from ~/.bohrium/config.ini."
+    )
+    parser.add_argument(
+        '--resume-only',
+        action="store_true",
+        help="Ensures that no new jobs will be generated, the script will always resume a previous run or fail."
     )
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
@@ -133,6 +138,9 @@ if __name__ == "__main__":
                 raise IOError
             result_file = open(args.output, 'r+')
         except IOError:
+            if args.resume_only:
+                raise Exception('Failed to open output file in resume-only mode')
+
             if args.output is None:
                 result_file = tempfile.NamedTemporaryFile(delete=False,
                                              prefix=file_name_prefix,
