@@ -17,13 +17,13 @@ int main(int argc, char* argv[])
     const int width     = bp.args.sizes[0];
     const int height    = bp.args.sizes[1];
 
-    const int ydim = 10000;
+    const int ydim = 14000;
     if (ydim != height) {
         cout << "Multidimensional arrays in C11 does not support dynamic size, so it has to be: " << ydim << "." << endl;
         return 0;
     }
 
-    const int xdim = 10000;
+    const int xdim = 14000;
     if (xdim != width) {
         cout << "Multidimensional arrays in C11 does not support dynamic size, so it has to be: " << xdim << "." << endl;
         return 0;
