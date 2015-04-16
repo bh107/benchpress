@@ -10,7 +10,7 @@ typedef union philox2x32_as_1x64 {
     uint64_t combined;
 } philox2x32_as_1x64_t;
 
-double mcpi_fused(int64_t samples, uint64_t xr_count, uint64_t yr_count, uint64_t key)
+double montecarlo_pi_fused(int64_t samples, uint64_t xr_count, uint64_t yr_count, uint64_t key)
 {
     uint64_t darts = 0;
 
@@ -40,7 +40,7 @@ double mcpi_fused(int64_t samples, uint64_t xr_count, uint64_t yr_count, uint64_
     return (double)darts/samples*4;
 }
 
-double mcpi(int64_t samples, uint64_t xr_count, uint64_t yr_count, uint64_t key)
+double montecarlo_pi(int64_t samples, uint64_t xr_count, uint64_t yr_count, uint64_t key)
 {
     uint64_t darts = 0;
     
@@ -66,7 +66,7 @@ double mcpi(int64_t samples, uint64_t xr_count, uint64_t yr_count, uint64_t key)
     return (double)darts/samples*4;
 }
 
-double run_mcpi(int64_t samples, int64_t iterations)
+double run_montecarlo_pi(int64_t samples, int64_t iterations)
 {
     const uint64_t key = 1597416434;    // Philox key
     uint64_t random_count = 0;          // Calls to philox
@@ -77,8 +77,8 @@ double run_mcpi(int64_t samples, int64_t iterations)
     for(int64_t i=0; i<iterations; ++i) {
         xr_count = random_count++;
         yr_count = random_count++;
-        //pi_accu += mcpi_fused(samples, xr_count, yr_count, key);
-        pi_accu += mcpi(samples, xr_count, yr_count, key);
+        //pi_accu += montecarlo_pi_fused(samples, xr_count, yr_count, key);
+        pi_accu += montecarlo_pi(samples, xr_count, yr_count, key);
     }
     pi_accu /= iterations;              // Approximated value of PI
 
@@ -95,10 +95,10 @@ int main(int argc, char** argv)
     const int iterations = bp.args.sizes[1];
 
     bp.timer_start();
-    double pi = monte_carlo_pi(samples, iterations);
+    double pi = run_montecarlo_pi(samples, iterations);
     bp.timer_stop();
 
-    bp.print("mcpi(c99_omp)");
+    bp.print("montecarlo_pi(c99_omp)");
     if (bp.args.verbose) {
         printf("PI-approximation = %f\n", pi);
     }
