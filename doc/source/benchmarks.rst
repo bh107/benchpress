@@ -151,10 +151,7 @@ Cpp11 Eigen
 
 .. error:: There are issues with the implementation.
 
-
-.. include:: ../../benchmarks/black_scholes/cpp11_eigen/issues.rst
-
-The above warning is concerned with the implementation below.
+    Compilation errors.
 
 
 .. literalinclude:: ../../benchmarks/black_scholes/cpp11_eigen/src/black_scholes.cpp
@@ -195,18 +192,32 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Fails when running with Bohrium::
 
-.. include:: ../../benchmarks/convolve/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      python -m bohrium convolve.py --size=25 --bohrium=True
+
+    
+
+    Produces the following error::
+
+    
+
+      ~/.local/lib/python2.7/site-packages/bohrium/__main__.py:20: RuntimeWarning: Encounter ing an operation not supported by Bohrium. It will be handled by the original NumPy. execfile(sys.argv[0])
+
+      Segmentation fault (core dumped)
+
+    
 
 
 .. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
 
+    The view generator ``bohrium.stdviews`` module is used.
 
-.. include:: ../../benchmarks/convolve/python_numpy/bohrium.rst
+    
 
-The above note is concerned with the implementation below.
+    Specifically the ``cartesian`` generator.
 
 
 .. literalinclude:: ../../benchmarks/convolve/python_numpy/convolve.py
@@ -227,18 +238,32 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Fails when running with Bohrium::
 
-.. include:: ../../benchmarks/convolve_2d/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      python -m bohrium convolve_2d.py --size=25 --bohrium=True
+
+    
+
+    Produces the following error::
+
+    
+
+      ~/.local/lib/python2.7/site-packages/bohrium/__main__.py:20: RuntimeWarning: Encounter ing an operation not supported by Bohrium. It will be handled by the original NumPy. execfile(sys.argv[0])
+
+      Segmentation fault (core dumped)
+
+    
 
 
 .. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
 
+    The view generator ``bohrium.stdviews`` module is used.
 
-.. include:: ../../benchmarks/convolve_2d/python_numpy/bohrium.rst
+    
 
-The above note is concerned with the implementation below.
+    Specifically the ``cartesian`` generator.
 
 
 .. literalinclude:: ../../benchmarks/convolve_2d/python_numpy/convolve_2d.py
@@ -259,18 +284,34 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Fails when running with Bohrium::
 
-.. include:: ../../benchmarks/convolve_3d/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      python -m bohrium convolve_3d.py --size=25 --bohrium=True
+
+    
+
+    Produces the following error::
+
+    
+
+      .local/lib/python2.7/site-packages/bohrium/__main__.py:21: RuntimeWarning: Encountering an operation not supported by Bohrium. It will be handled by the original NumPy.
+
+        else:
+
+      Segmentation fault (core dumped)
+
+    
 
 
 .. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
 
+    The view generator ``bohrium.stdviews`` module is used.
 
-.. include:: ../../benchmarks/convolve_3d/python_numpy/bohrium.rst
+    
 
-The above note is concerned with the implementation below.
+    Specifically the ``cartesian`` generator.
 
 
 .. literalinclude:: ../../benchmarks/convolve_3d/python_numpy/convolve_3d.py
@@ -291,10 +332,21 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Running::
 
-.. include:: ../../benchmarks/convolve_separate_std/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      python -m bohrium convolve_separate_std.py --size=500*15 --bohrium=True
+
+    
+
+    Produces the error::
+
+    
+
+      Segmentation fault (core dumped)
+
+      
 
 
 .. literalinclude:: ../../benchmarks/convolve_separate_std/python_numpy/convolve_separate_std.py
@@ -399,10 +451,15 @@ Cpp11 Opencl
 
 .. error:: There are issues with the implementation.
 
+    Two known issues::
 
-.. include:: ../../benchmarks/heat_equation/cpp11_opencl/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+     * Implementation compiles (with warning) but execution is untested.
+
+     * Implementation does not use ``bp-util`` for argparsing and timing, getting it to run in a suite might be cumbersome...
+
+    
 
 
 .. literalinclude:: ../../benchmarks/heat_equation/cpp11_opencl/src/heat_equation.cpp
@@ -451,10 +508,9 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Several issues with this Benchmark, it might have worked a year ago, but it currently relies on Bohrium features that no longer exists and other problems.
 
-.. include:: ../../benchmarks/idl_init_bh/python_numpy/issues.rst
-
-The above warning is concerned with the implementation below.
+    
 
 
 .. literalinclude:: ../../benchmarks/idl_init_bh/python_numpy/idl_init_bh.py
@@ -475,10 +531,19 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Several issues, among them:
 
-.. include:: ../../benchmarks/idl_init_fast/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+     * Does not use the benchpress util
+
+     * Fails horribly when executed with Bohrium
+
+     * ...
+
+    
+
+    Needs a lot of love.
 
 
 .. literalinclude:: ../../benchmarks/idl_init_fast/python_numpy/idl_init_fast.py
@@ -499,10 +564,19 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Several issues, among them:
 
-.. include:: ../../benchmarks/idl_init_orig/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+     * Does not use the benchpress util
+
+     * Fails horribly when executed with Bohrium
+
+     * ...
+
+    
+
+    Needs a lot of love.
 
 
 .. literalinclude:: ../../benchmarks/idl_init_orig/python_numpy/idl_init_orig.py
@@ -525,10 +599,7 @@ Python Numpy
 
 .. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
 
-
-.. include:: ../../benchmarks/jacobi/python_numpy/bohrium.rst
-
-The above note is concerned with the implementation below.
+    Uses Bohrium features from ``bohrium.stdviews`` specifically ``no_border``, ``grid``, and ``diagonals``.
 
 
 .. literalinclude:: ../../benchmarks/jacobi/python_numpy/jacobi.py
@@ -561,10 +632,7 @@ Python Numpy
 
 .. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
 
-
-.. include:: ../../benchmarks/jacobi_fixed/python_numpy/bohrium.rst
-
-The above note is concerned with the implementation below.
+    Uses Bohrium features from ``bohrium.stdviews`` specifically ``no_border``, ``grid``, and ``diagonals``.
 
 
 .. literalinclude:: ../../benchmarks/jacobi_fixed/python_numpy/jacobi_fixed.py
@@ -597,10 +665,7 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
-
-.. include:: ../../benchmarks/k_nearest_neighbor/python_numpy/issues.rst
-
-The above warning is concerned with the implementation below.
+    Does not actually call the implementation.
 
 
 .. literalinclude:: ../../benchmarks/k_nearest_neighbor/python_numpy/k_nearest_neighbor.py
@@ -641,10 +706,13 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Copies data back and forth between NumPy and Bohrium::
 
-.. include:: ../../benchmarks/lattice_boltzmann_D2Q9/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      .local/lib/python2.7/site-packages/bohrium/__main__.py:55: RuntimeWarning: Encountering an operation not supported by Bohrium. It will be handled by the original NumPy.
+
+    
 
 
 .. literalinclude:: ../../benchmarks/lattice_boltzmann_D2Q9/python_numpy/lattice_boltzmann_D2Q9.py
@@ -667,10 +735,15 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Cannot run with Bohrium, fails with error::
 
-.. include:: ../../benchmarks/lbm_2d/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      TypeError: Cannot determine the correct signature (sqrt:int64)
+
+    
+
+    Also, does not use benchpress util for argparsing and timing.
 
 
 .. literalinclude:: ../../benchmarks/lbm_2d/python_numpy/lbm_2d.py
@@ -769,10 +842,35 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Error when running with Bohrium::
 
-.. include:: ../../benchmarks/lmm_swaption_vec/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      Traceback (most recent call last):
+
+        File "/usr/lib/python2.7/runpy.py", line 162, in _run_module_as_main
+
+          "__main__", fname, loader, pkg_name)
+
+        File "/usr/lib/python2.7/runpy.py", line 72, in _run_code
+
+          exec code in run_globals
+
+        File "/home/safl/.local/lib/python2.7/site-packages/bohrium/__main__.py", line 20, in <module>
+
+          execfile(sys.argv[0])
+
+        File "LMM_swaption_vec.py", line 108, in <module>
+
+          main()
+
+        File "LMM_swaption_vec.py", line 56, in main
+
+          eps = np.concatenate((eps_tmp,-eps_tmp), axis = 1)
+
+      AttributeError: 'module' object has no attribute 'concatenate'
+
+    
 
 
 .. literalinclude:: ../../benchmarks/lmm_swaption_vec/python_numpy/lmm_swaption_vec.py
@@ -907,10 +1005,7 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
-
-.. include:: ../../benchmarks/nbody_nice/python_numpy/issues.rst
-
-The above warning is concerned with the implementation below.
+    Visualization does not work when running with Bohrium since it relies on NumPy masked array.
 
 
 .. literalinclude:: ../../benchmarks/nbody_nice/python_numpy/nbody_nice.py
@@ -961,10 +1056,7 @@ Python Numpy
 
 .. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.
 
-
-.. include:: ../../benchmarks/point27/python_numpy/bohrium.rst
-
-The above note is concerned with the implementation below.
+    Uses the Bohrium features from ``bohrium.stdviews`` specifically ``no_border`` and ``D3P27``.
 
 
 .. literalinclude:: ../../benchmarks/point27/python_numpy/point27.py
@@ -987,10 +1079,15 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Running with Bohrium results in::
 
-.. include:: ../../benchmarks/pricing/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      Segmentation fault (core dumped)
+
+    
+
+    I seem to recall that this benchmark was never correctly ported.
 
 
 .. literalinclude:: ../../benchmarks/pricing/python_numpy/pricing.py
@@ -1049,10 +1146,7 @@ Cpp11 Bxx
 
 .. error:: There are issues with the implementation.
 
-
-.. include:: ../../benchmarks/rosenbrock/cpp11_bxx/issues.rst
-
-The above warning is concerned with the implementation below.
+    BXX, does not handle slices as arguments properly.
 
 
 .. literalinclude:: ../../benchmarks/rosenbrock/cpp11_bxx/src/rosenbrock.cpp
@@ -1143,10 +1237,7 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
-
-.. include:: ../../benchmarks/snakes_and_ladders/python_numpy/issues.rst
-
-The above warning is concerned with the implementation below.
+    Implementation seems broken when running with Bohrium, it looks like it does nothing but copy data back and forth between NumPy and Bohrium.
 
 
 .. literalinclude:: ../../benchmarks/snakes_and_ladders/python_numpy/snakes_and_ladders.py
@@ -1241,10 +1332,13 @@ Python Numpy
 
 .. error:: There are issues with the implementation.
 
+    Fails when running with Bohrium, with the error::
 
-.. include:: ../../benchmarks/wireworld/python_numpy/issues.rst
+    
 
-The above warning is concerned with the implementation below.
+      AttributeError: 'module' object has no attribute 'tile'
+
+    
 
 
 .. literalinclude:: ../../benchmarks/wireworld/python_numpy/wireworld.py

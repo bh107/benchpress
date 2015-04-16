@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import argparse
+import textwrap
 import Cheetah
 import fnmatch
 import pprint
@@ -213,16 +214,23 @@ def sections(benchmarks):
                 # Include issues
                 issues_path = bench[lang][tool]["issues"]
                 if issues_path:
-                    subsection.append("\n.. error:: There are issues with the implementation.\n")
-                    subsection.append("\n.. include:: %s\n" % (".."+os.sep+issues_path))
-                    subsection.append("The above warning is concerned with the implementation below.\n")
+
+                    issues_txt = []
+                    for line in open(issues_path).readlines():
+                        issues_txt.append(" "*4+line)
+                    issues_txt = "\n".join(issues_txt)
+
+                    subsection.append("\n.. error:: There are issues with the implementation.\n\n%s"%issues_txt)
 
                 # Include bohrium specifics
                 bohrium_path = bench[lang][tool]["bohrium"]
                 if bohrium_path:
-                    subsection.append("\n.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.\n")
-                    subsection.append("\n.. include:: %s\n" % (".."+os.sep+bohrium_path))
-                    subsection.append("The above note is concerned with the implementation below.\n")
+                    bohrium_txt = []
+                    for line in open(bohrium_path).readlines():
+                        bohrium_txt.append(" "*4+line)
+                    bohrium_txt = "\n".join(bohrium_txt)
+
+                    subsection.append("\n.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.\n\n%s"%bohrium_txt)
 
                 # Include the source
                 src_path = os.sep.join([
