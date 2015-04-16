@@ -2,7 +2,7 @@ from __future__ import print_function
 from benchpress import util
 import numpy as np
 
-def freezetrap(height, width, dtype=np.float32):
+def init_grid(height, width, dtype=np.float32):
     grid        = np.zeros((height+2,width+2), dtype=dtype)
     grid[:,0]   = dtype(-273.15)
     grid[:,-1]  = dtype(-273.15)
@@ -10,16 +10,20 @@ def freezetrap(height, width, dtype=np.float32):
     grid[0,:]   = dtype(40.0)
     return grid
 
-def iterate(grid, iterations, visualize=False):
+def jacobi(grid, iterations, visualize=False):
+
     center = grid[1:-1, 1:-1]
     north  = grid[0:-2, 1:-1]
     east   = grid[1:-1, 2:  ]
     west   = grid[1:-1, 0:-2]
     south  = grid[2:  , 1:-1]
+
     for i in xrange(iterations):
         center[:] = 0.2*(center+north+east+west+south)
+
         if visualize:
             np.visualize(grid, "2d", 0, 0.0, 5.5)
+
     return grid
 
 def main():
@@ -28,17 +32,23 @@ def main():
     W = B.size[1]
     I = B.size[2]
 
-    ft = freezetrap(H, W, dtype=B.dtype)
+    if B.inputfn:
+        grid = B.load_array()
+    else:
+        grid = init_grid(H, W, dtype=B.dtype)
+
+    if B.dumpinput:
+        B.dump_arrays("jacobi_solve", {'input': ft})
 
     B.start()
-    R = iterate(ft, I, visualize=B.visualize)
+    grid = jacobi(ft, I, visualize=B.visualize)
     B.stop()
 
     B.pprint()
     if B.verbose:
-        print(R)
+        print(grid)
     if B.outputfn:
-        B.tofile(B.outputfn, {'res': R})
+        B.tofile(B.outputfn, {'res': grid})
 
 if __name__ == "__main__":
     main()
