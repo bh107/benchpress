@@ -28,10 +28,7 @@ def jacobi(grid, epsilon=0.005, max_iterations=None, visualize=False):
 
         if max_iterations != None and max_iterations <= iteration:
             break
-
-        if visualize:
-            np.visualize(grid, "2d", 0, 0.0, 5.5)
-
+   
     return iteration, grid
 
 def main():
@@ -53,6 +50,8 @@ def main():
     B.stop()
 
     B.pprint()
+    if B.visualize:
+        util.visualize_grid(grid, block=True)
     if B.verbose:
         print("Iterations=%s, Grid: %s." % (M, grid))
     if B.outputfn:

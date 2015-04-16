@@ -1,8 +1,18 @@
-Simulates the dissipation of heat in a grid of size H * W until it converges with a max of I iterations. An iterative Jacobi method performing a stencil operation of a two-dimensional rectangular grid until it converges or until max iterations is reached.
+Simulates the dissipation of heat using an iterative Jacobi method on a two-dimensional grid of size H * W until it converges with a max of I iterations.
 
-Runs Jacobi on a rectangular grid for until it converges or until max iterations is reached::
+The benchmark performs two major computational tasks, applying the stencil-update :math:`0.2*(x_1, x_2, x_3, x_4, x_4)` and computing convergence critiria.
+Invoke with::
 
-  --size=3000*3000*100
+  --size=H*W*I
 
 Use ``--verbose`` to print number of iterations executed and a subset of the grid.
-Set iterations = 0 to disable max_iterations.
+
+Use ``--size=H*W*0`` to run until convergence with no limitations on number of iterations.
+
++-------------------------------------------+-------------------------------------------+-------------------------------------------+
+| ``--size=100*100*1 --visualize``          | ``--size=100*100*100 --visualize``        |  ``--size=100*100*1000 --visualize``      |  
++-------------------------------------------+-------------------------------------------+-------------------------------------------+
+| .. image:: _static/heat_equation_0001.png | .. image:: _static/heat_equation_0100.png | .. image:: _static/heat_equation_1000.png |
++-------------------------------------------+-------------------------------------------+-------------------------------------------+
+
+See :ref:`heat_equation_fixed` for a variation of the benchmark that only applies the stencil update, that is, it skips the convergence computation.

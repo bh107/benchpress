@@ -1,8 +1,8 @@
 usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--with-perf]
               [--with-time] [--save-data] [--pre-clean] [--restart]
-              [--publish-cmd COMMAND] [--bh_config_file BH_CONFIG_FILE]
-              [--slurm] [--no-slurm] [--partition PARTITION] [--multi-jobs]
-              [--wait]
+              [--publish-cmd COMMAND] [--bh-config-file BH_CONFIG_FILE]
+              [--resume-only] [--slurm] [--no-slurm] [--partition PARTITION]
+              [--multi-jobs] [--wait]
               repos_root suite_file
 
 Runs a benchmark suite and stores the results in a json-file.
@@ -30,9 +30,11 @@ optional arguments:
                         The publish command to use before exiting (use
                         together with --wait). NB: $OUT is replaced with the
                         name of the output JSON file.
-  --bh_config_file BH_CONFIG_FILE
+  --bh-config-file BH_CONFIG_FILE
                         Override the path to the bohrium config.ini file,
                         which is normally read from ~/.bohrium/config.ini.
+  --resume-only         Ensures that no new jobs will be generated, the script
+                        will always resume a previous run or fail.
 
 SLURM Queuing System:
   --slurm               Use the SLURM queuing system. This overwrite the

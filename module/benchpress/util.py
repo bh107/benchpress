@@ -224,6 +224,7 @@ class Benchmark:
                 '*'.join([str(s) for s in self.size]),
                 self.__elapsed
         ))
+
     def random_array(self, shape, dtype=None):
         if dtype is None:
             dtype = self.dtype
@@ -232,6 +233,15 @@ class Benchmark:
         else:
             return toarray(np.random.random(shape), dtype=dtype, bohrium=self.bohrium)
 
+def visualize_grid(grid, title="", block=False):
+    """Created to visualize the 2D grid used by Heat Equation."""
+
+    import matplotlib.pyplot as plt
+
+    plt.imshow(grid, extent=[0, 1, 0, 1])
+    plt.colorbar()
+    plt.show(block=block)
+           
 def main():
     B = Benchmark()
     B.start()
