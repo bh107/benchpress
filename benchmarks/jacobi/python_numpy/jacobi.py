@@ -10,7 +10,7 @@ def jacobi_init(size):
 
     return data
 
-def jacobi(data):
+def jacobi(data, max_iterations=0):
 
     active      = no_border(data,1)
     g           = grid(data,1)
@@ -18,25 +18,31 @@ def jacobi(data):
     fak         = 1./20
     residual    = 110000000
 
+    iterations = 0
     while residual>(10**-2) * (active.shape[0]**2):
         update    = (4*sum(g) + sum(d))*fak
         residual  = np.sum(abs(update-active))
         active[:] = update
+        iterations += 1
+        if max_iterations and iterations >= max_iterations:
+            break
 
-    return data
+    return iterations, data
 
 def main():
     B = util.Benchmark()
-    N, = B.size
+    N, I = B.size
     data = jacobi_init(N)
 
     B.start()
-    R = jacobi(data)
+    M, R = jacobi(data, I)
     B.stop()
 
     B.pprint()
     if B.verbose:
         print(R)
+    if B.visualize:
+        util.visualize_grid(R, block=True)
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
 

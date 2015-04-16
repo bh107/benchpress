@@ -24,7 +24,7 @@ def jacobi_fixed(data, iterations):
 
 def main():
     B = util.Benchmark()
-    (N, I) = B.size
+    N, I = B.size
     data = jacobi_fixed_init(N)
 
     B.start()
@@ -34,6 +34,8 @@ def main():
     B.pprint()
     if B.verbose:
         print(R)
+    if B.visualize:
+        util.visualize_grid(R, block=True)
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
 

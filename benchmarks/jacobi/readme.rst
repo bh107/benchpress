@@ -1,3 +1,11 @@
-This implementation runs jacobi on a quadratic grid until it converges.
+Solver using an iterative Jacobi-method, with a maximum number of iterations.
 
-Example params: --size=1000
+Run until convergence::
+
+  --size=1000*0
+
+Run with a maximum of 10 iterations::
+
+  --size=1000*10
+
+See also `jacobi_fixed` for an implementation without convergence.
