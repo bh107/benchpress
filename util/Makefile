@@ -19,7 +19,7 @@ uninstall:
 
 # Generate sphinx doc
 docs:
-	cd $(DOCSRC) && ./autodoc_benchmarks.py > source/benchmarks.rst
+	cd $(DOCSRC) && ./autodoc_benchmarks.py
 	cd $(DOCSRC) && bp-info -h > source/usage_bp-info.out
 	cd $(DOCSRC) && bp-run -h > source/usage_bp-run.out
 	cd $(DOCSRC) && bp-times -h > source/usage_bp-times.out

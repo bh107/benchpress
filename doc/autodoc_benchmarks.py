@@ -23,6 +23,8 @@ lang_pygment = {
 }
 lang_order  = ['py', 'c', 'cpp', 'cs']
 
+benchmarks_relpath = os.sep.join(["..", "..", "..", "benchmarks"])
+
 def pretty_name(text):
     """Returns a rewrite like: "snakes_and_ladders" -> "Snakes And Ladders"."""
 
@@ -117,7 +119,7 @@ def section_ref(text):
     
     return ":ref:`%s`" % text if text.strip() else text
 
-def benchmark_matrix(benchmarks):
+def benchmark_index(benchmarks):
     rows = flatten(benchmarks)
 
     tool_header = [" "]+[ " ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ]
@@ -166,16 +168,17 @@ def benchmark_matrix(benchmarks):
 
     return matrix
 
-def sections(benchmarks):
+def benchmark_sections(benchmarks):
 
     meta = benchmarks["__meta__"]
     benchs = benchmarks["impls"]
 
-    sections = ""
+    sections = {}
     for bench_lbl in meta["benchs"]:
+        section = ""
         section_title = pretty_name(bench_lbl)
         section_label = bench_lbl
-        section = [
+        section = "\n".join([
             "",
             "",
             ".. _%s:" % bench_lbl,
@@ -183,17 +186,15 @@ def sections(benchmarks):
             section_title,
             "="*len(section_title),
             ""
-        ]
-        sections += "\n".join(section)
-
-        bench_path = os.sep.join([
-            "..","..","benchmarks", bench_lbl
         ])
+
+        bench_path = os.sep.join([benchmarks_relpath, bench_lbl])
 
         # Add readme.rst to the section
         bench_readme_path = os.sep.join([bench_path, "readme.rst"])
-        if os.path.exists(bench_readme_path[1:]):
-            sections += "\n.. include:: %s\n" % bench_readme_path
+        #print bench_readme_path[4:]
+        if os.path.exists(bench_readme_path[4:]):
+            section += "\n.. include:: %s\n" % bench_readme_path
 
         bench = benchs[bench_lbl]
         for lang in (lang for lang in lang_order if lang in bench):
@@ -233,26 +234,35 @@ def sections(benchmarks):
                     subsection.append("\n.. note:: There is Bohrium-specific code this implementation, this means Bohrium is required to run it.\n\n%s"%bohrium_txt)
 
                 # Include the source
-                src_path = os.sep.join([
-                    "..","..","benchmarks"
-                ]+bench[lang][tool]['src'].split(os.sep))
+                src_path = os.sep.join([benchmarks_relpath] + bench[lang][tool]['src'].split(os.sep))
                 subsection.append("\n.. literalinclude:: %s" % src_path)
                 subsection.append("   :language: %s" % lang_pygment[lang])
                 subsection.append("")
-                sections += "\n".join(subsection)
+                section += "\n".join(subsection)
+
+        sections[bench_lbl] = section
 
     return sections
 
 def main():
     benchmarks = implementations(".."+os.sep+"benchmarks")
   
-    print "=========="
-    print "Benchmarks"
-    print "=========="
-    print ""
-    print benchmark_matrix(benchmarks)
-    print ""
-    print sections(benchmarks)
+    index = benchmark_index(benchmarks)
+    with open(os.sep.join(["source", "benchmarks", "autodoc_index.rst"]), 'w') as fd:
+        fd.write("==========\n")
+        fd.write("Benchmarks\n")
+        fd.write("==========\n")
+        fd.write("\n")
+        fd.write(index)
+
+    sections = benchmark_sections(benchmarks)
+    bench_lbl_listing = []
+    bench_labels = [lbl for lbl in sections]
+    bench_labels.sort()
+    for bench_lbl in bench_labels:
+        with open(os.sep.join(["source", "benchmarks", "%s.rst" % bench_lbl]), 'w') as fd:
+            fd.write(sections[bench_lbl])
+            bench_lbl_listing.append(bench_lbl)
 
 if __name__ == "__main__":
     main()
