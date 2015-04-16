@@ -27,26 +27,26 @@ using namespace bxx;
 template <typename T>
 multi_array<T>& cnd(multi_array<T>& x)
 {
-    multi_array<T> l, k, w;
+    multi_array<T> L, K, W;
     multi_array<bool> mask;
     T a1 = 0.31938153,
       a2 =-0.356563782,
       a3 = 1.781477937,
       a4 =-1.821255978,
       a5 = 1.330274429,
-      pp = 2.5066282746310002; // sqrt(2.0*PI)
+      PP = 2.5066282746310002; // sqrt(2.0*PI)
 
-    l = abs(x);
-    k = 1.0 / (1.0 + 0.2316419 * l);
-    w = 1.0 - 1.0 / pp * exp(-1.0*l*l/2.0) * \
-        (a1*k + \
-         a2*(add(k,(T)2)) + \
-         a3*(add(k,(T)3)) + \
-         a4*(add(k,(T)4)) + \
-         a5*(add(k,(T)5)));
+    L = abs(x);
+    K = 1.0 / (1.0 + 0.2316419 * L);
+    W = 1.0 - 1.0 / PP * exp(-1.0*L*L/2.0) * \
+        (a1*K + \
+         a2*(pow(K, (T)2)) + \
+         a3*(pow(K, (T)3)) + \
+         a4*(pow(K, (T)4)) + \
+         a5*(pow(K, (T)5)));
 
     mask = x < 0.0;
-    return w * as<T>(!mask) + (1.0-w)* as<T>(mask);
+    return W * as<T>(!mask) + (1.0-W)* as<T>(mask);
 }
 
 //FLOP count: 2*s+i*(s*8+2*s*26) where s is samples and i is iterations
@@ -54,10 +54,10 @@ template <typename T>
 T* pricing(size_t samples, size_t iterations, char flag, T x, T d_t, T r, T v)
 {
     multi_array<T> d1, d2, res, s;
-    T* p    = (T*)malloc(sizeof(T)*iterations);    // Intermediate results
-    T t     = d_t;                              // Initial delta
+    T* p    = (T*)malloc(sizeof(T)*iterations);     // Intermediate results
+    T t     = d_t;                                  // Initial delta
 
-    s = random<T>((int64_t)samples)*4.0 +58.0;           // Model between 58-62
+    s = random<T>((int64_t)samples)*4.0 +58.0;      // Model between 58-62
 
     for(size_t i=0; i<iterations; i++) {
         d1 = (log(s/x) + (r+v*v/2.0)*t) / (v*sqrt(t));
