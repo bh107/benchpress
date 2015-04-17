@@ -27,6 +27,8 @@ int main(int argc, char* argv[])
 
     // Create the pseudo-data
     double* dataset = (double*)malloc(sizeof(double)*nelements);
+
+    #pragma omp parallel for
     for(int i=0; i<nelements; ++i) {
         dataset[i] = i/nelements;
     }

@@ -36,6 +36,13 @@ stack_omp_t32 = [
         ('cpu_t04', 'cpu',   {"OMP_NUM_THREADS": "4"}),
         ('cpu_t02', 'cpu',   {"OMP_NUM_THREADS": "2"}),
         ('cpu_t01', 'cpu',   {"OMP_NUM_THREADS": "1"}),
+
+        ('cpu_af_t32', 'cpu',   {"OMP_NUM_THREADS": "32", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('cpu_af_t16', 'cpu',   {"OMP_NUM_THREADS": "16", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('cpu_af_t08', 'cpu',   {"OMP_NUM_THREADS": "8", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('cpu_af_t04', 'cpu',   {"OMP_NUM_THREADS": "4", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('cpu_af_t02', 'cpu',   {"OMP_NUM_THREADS": "2", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('cpu_af_t01', 'cpu',   {"OMP_NUM_THREADS": "1", "GOMP_CPU_AFFINITY": "0-31" }),
     ]
 ]
 
