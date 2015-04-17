@@ -31,7 +31,17 @@ void openmp(int height, int width, double *grid, int iter)
 
     double *T = (double*)malloc(height*width*sizeof(double));
 
-    //memcpy(T, grid, height*width*sizeof(double));
+    //
+    // NumaEffects - begin
+    //
+    // memcpy(T, grid, height*width*sizeof(double)); <-- bad idea
+    //
+    // memcpy is sequentiel and will touch the entire
+    // grid on one numa-node.
+    //
+    // Instead of memset, parallel copy
+    // is performed with the following loop construct:
+    //
     grid_i = grid;
     T_i = T;
     #pragma omp parallel for collapse(2)
@@ -42,6 +52,8 @@ void openmp(int height, int width, double *grid, int iter)
             ++grid_i;
         }
     }
+    //
+    // NumaEffects - end
     for(int n=0; n<iter; ++n)
     {
         double delta=0;
@@ -50,7 +62,17 @@ void openmp(int height, int width, double *grid, int iter)
         {
             delta += innerloop(grid, T, width, i);
         }
-        //memcpy(grid, T, height*width*sizeof(double));
+        //
+        // NumaEffects - begin
+        //
+        // memcpy(grid, T, height*width*sizeof(double)); // <-- bad idea
+        //
+        // memcpy is sequentiel and will touch the entire
+        // grid on one numa-node.
+        //
+        // Instead of memset, parallel copy
+        // is performed with the following loop construct:
+        //
         grid_i = grid;
         T_i = T;
         #pragma omp parallel for collapse(2)
@@ -61,6 +83,8 @@ void openmp(int height, int width, double *grid, int iter)
                 *grid_i = *T_i;
             }
         }
+        //
+        // NumaEffects - end
     }
     free(T);
 }
@@ -77,7 +101,16 @@ int main (int argc, char **argv)
 
     size_t grid_size = height*width*sizeof(double);
     double *grid = (double*)malloc(grid_size);
-    //memset(grid, 0, grid_size);
+    //
+    // NumaEffects - begin
+    //
+    // memset(grid, 0, grid_size);  // <--- bad idea.
+    // memset is sequentiel and will touch the entire
+    // grid on one numa-node.
+    //
+    // Instead of memset, parallel initialization
+    // is performed with the following loop construct:
+    //
     double* grid_i = grid;
     #pragma omp parallel for collapse(2)
     for(int i=0; i<height; ++i) {
@@ -86,6 +119,8 @@ int main (int argc, char **argv)
             ++grid_i;
         }
     }
+    //
+    // NumaEffects - end
     for(int j=0; j<width;j++) {
         grid[j] = 40.0;
         grid[j+(height-1)*width] = -273.15;
