@@ -54,9 +54,9 @@ def play(state, iterations, version=1, visualize=False):
         cells[:] = cells * c1 + c2                              # Update
 
     if version == 1:                # Select the update function
-        update_func = update_optimized
-    elif version == 2:
         update_func = update
+    elif version == 2:
+        update_func = update_optimized
 
     for i in xrange(iterations):    # Run the game
         update_func()
