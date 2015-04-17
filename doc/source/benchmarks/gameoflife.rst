@@ -5,6 +5,8 @@
 Gameoflife
 ==========
 
+.. include:: ../../../benchmarks/gameoflife/readme.rst
+
 
 .. _gameoflife_python_numpy:
 

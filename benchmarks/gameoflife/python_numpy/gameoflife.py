@@ -7,6 +7,7 @@ So what does this code example illustrate?
 """
 from benchpress import util
 import numpy as np
+from gameoflife_viz import render
 
 SURVIVE_LOW     = 2
 SURVIVE_HIGH    = 3
@@ -17,7 +18,7 @@ def randomstate(height, width, B, prob=0.2):
     state[1:-1,1:-1] = B.random_array((width,height)) < prob
     return state
 
-def play(state, iterations):
+def play(state, iterations, visualize=False):
 
     cells = state[1:-1,1:-1]
     ul = state[0:-2, 0:-2]
@@ -36,7 +37,10 @@ def play(state, iterations):
         stay = (live >= SURVIVE_LOW) & (live <= SURVIVE_HIGH)   # find cells the stay alive
         dead = neighbors * (cells == 0)                         # extract dead cell neighbors
         spawn = dead == SPAWN                                   # find cells that spaw new life
+        
         cells[:] = stay | spawn                                 # save result for next iteration
+        if visualize:
+            render(state)
 
     return state
 
@@ -51,12 +55,14 @@ def main():
         S = randomstate(W, H, B)
 
     B.start()
-    R = play(S, I)
+    R = play(S, I, B.visualize)
     B.stop()
 
     B.pprint()
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
+    if B.visualize:
+        render(R, True)
 
 if __name__ == "__main__":
     main()
