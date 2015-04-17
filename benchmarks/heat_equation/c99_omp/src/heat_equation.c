@@ -26,17 +26,41 @@ inline double innerloop(const double* grid, double* T, int width, int i)
 
 void openmp(int height, int width, double *grid, int iter)
 {
+    double* grid_i;
+    double* T_i;
+
     double *T = (double*)malloc(height*width*sizeof(double));
-    memcpy(T, grid, height*width*sizeof(double));
+
+    //memcpy(T, grid, height*width*sizeof(double));
+    grid_i = grid;
+    T_i = T;
+    #pragma omp parallel for collapse(2)
+    for(int i=0; i<height; ++i) {
+        for(int j=0; j<width; ++j) {
+            *T_i = *grid_i;
+            ++T_i;
+            ++grid_i;
+        }
+    }
     for(int n=0; n<iter; ++n)
     {
         double delta=0;
-        #pragma omp parallel for shared(grid,T) reduction(+:delta)
+        #pragma omp parallel for shared(grid, T) reduction(+:delta)
         for(int i=0; i<height-2; ++i)
         {
             delta += innerloop(grid, T, width, i);
         }
-        memcpy(grid, T, height*width*sizeof(double));
+        //memcpy(grid, T, height*width*sizeof(double));
+        grid_i = grid;
+        T_i = T;
+        #pragma omp parallel for collapse(2)
+        for(int i=0; i<height; ++i) {
+            for(int j=0; j<width; ++j) {
+                ++grid_i;
+                ++T_i;
+                *grid_i = *T_i;
+            }
+        }
     }
     free(T);
 }
@@ -53,14 +77,20 @@ int main (int argc, char **argv)
 
     size_t grid_size = height*width*sizeof(double);
     double *grid = (double*)malloc(grid_size);
-    memset(grid, 0, grid_size);
-    for(int j=0; j<width;j++)
-    {
+    //memset(grid, 0, grid_size);
+    double* grid_i = grid;
+    #pragma omp parallel for collapse(2)
+    for(int i=0; i<height; ++i) {
+        for(int j=0; j<width; ++j) {
+            *grid_i = 0;
+            ++grid_i;
+        }
+    }
+    for(int j=0; j<width;j++) {
         grid[j] = 40.0;
         grid[j+(height-1)*width] = -273.15;
     }
-    for(int j=1; j<height-1;j++)
-    {
+    for(int j=1; j<height-1;j++) {
         grid[j*width] = -273.15;
         grid[j*width+width-1]= -273.15;
     }
