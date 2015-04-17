@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
     auto grid = new double[ydim][xdim];
     auto temp = new double[ydim][xdim];
 
+    #pragma omp parallel for collapse(2)
     for(int i=0; i<ydim; i++){      // Initialize the grid
         for(int j=0;j<xdim;j++){
             grid[i][j] = 0;
@@ -56,8 +57,8 @@ int main(int argc, char* argv[])
     while(delta>epsilon) {
         ++iterations;
         delta = 0.0;
+        #pragma omp parallel for reduction(+:delta) collapse(2)
         for(int i=1; i<ydim-1; i++){
-            #pragma omp parallel for reduction(+:delta)
             for(int j=1;j<xdim-1;j++){
                 temp[i][j] = (grid[i-1][j] + grid[i+1][j] + grid[i][j] + grid[i][j-1] + grid[i][j+1])*0.2;
                 delta += abs(temp[i][j] - grid[i][j]);
