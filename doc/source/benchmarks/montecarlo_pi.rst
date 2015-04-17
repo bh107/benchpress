@@ -28,6 +28,16 @@ C99 Omp
    :language: c
 
 
+.. _montecarlo_pi_c99_seq:
+
+C99 Seq
+-------
+
+
+.. literalinclude:: ../../../benchmarks/montecarlo_pi/c99_seq/src/montecarlo_pi.c
+   :language: c
+
+
 .. _montecarlo_pi_cpp11_blitz:
 
 Cpp11 Blitz
@@ -50,4 +60,14 @@ Cpp11 Bxx
 
 
 .. literalinclude:: ../../../benchmarks/montecarlo_pi/cpp11_bxx/src/montecarlo_pi.cpp
+   :language: cpp
+
+
+.. _montecarlo_pi_cpp11_omp:
+
+Cpp11 Omp
+---------
+
+
+.. literalinclude:: ../../../benchmarks/montecarlo_pi/cpp11_omp/src/montecarlo_pi.cpp
    :language: cpp

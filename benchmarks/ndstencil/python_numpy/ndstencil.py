@@ -3,11 +3,11 @@ import itertools as it
 from benchpress import util
 import numpy as np
 
-def shape(dims, size=20):
+def create_shape(dims, size=20):
     """
     Generate a suitable N dimensional shape of size
     size**2 core elements
-   """
+    """
     shape=[]
     for _ in xrange(dims):
         ds = size/dims
@@ -17,7 +17,7 @@ def shape(dims, size=20):
 
     return shape
 
-def world(shape, core_v, edge_v, dtype=np.float32):
+def create_world(shape, core_v, edge_v, dtype=np.float32):
     """
     Generate an N=len(shape) dimensional world with core values
     set to core_v and edge values set to edge_v
@@ -28,6 +28,15 @@ def world(shape, core_v, edge_v, dtype=np.float32):
     w[v][:] = w.dtype.type(core_v)
 
     return w
+
+def create_random_world(shape, B):
+    """
+    Generate an N=len(shape) dimensional world with
+    random values.
+
+    .. note:: This is not used...
+    """
+    return np.array(B.random_array(shape), dtype=B.dtype)
 
 def solve(stencil, world, I):
     """
@@ -51,7 +60,8 @@ def main():
     if B.inputfn:
         world = B.load_array()
     else:
-        world = np.array(B.random_array(shape(D, size)), dtype=B.dtype)
+        world = create_world(create_shape(D, size), 0.0, 255.0, dtype=B.dtype)
+        #world = create_random_world(create_shape(D, size), B)
 
     stencil = [world[s] for s in [map((lambda se : slice(se[0],se[1])),i)
                                   for i in it.product([(0,-2),(1,-1),(2,None)],
@@ -64,11 +74,13 @@ def main():
     B.stop()
     B.pprint()
     if B.verbose:
-        print( "Solving",D, "dimensional",world.shape,"problem with",     \
-               len([i for i in it.product([None,None,None], repeat=D)]), \
-               "point stencil.")
+        print( "Solving",D, "dimensional",world.shape,"problem with",       \
+               len([i for i in it.product([None,None,None], repeat=D)]),    \
+               "point stencil.")    
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
+    if B.visualize and D in [2]:
+        util.visualize_grid(world, "World", block=True)
 
 if __name__ == "__main__":
     main()
