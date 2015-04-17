@@ -18,7 +18,7 @@ def randomstate(height, width, B, prob=0.2):
     state[1:-1,1:-1] = B.random_array((width,height)) < prob
     return state
 
-def play(state, iterations, visualize=False):
+def play(state, iterations, version=1, visualize=False):
 
     cells = state[1:-1,1:-1]
     ul = state[0:-2, 0:-2]
@@ -30,8 +30,10 @@ def play(state, iterations, visualize=False):
     lm = state[2:  , 1:-1]
     lr = state[2:  , 2:  ]
 
-    for i in xrange(iterations):
-
+    def update():
+        """
+        This is the first implementation of the game rules.
+        """
         neighbors = ul + um + ur + ml + mr + ll + lm + lr       # count neighbors
         live = neighbors * cells                                # extract live cells neighbors
         stay = (live >= SURVIVE_LOW) & (live <= SURVIVE_HIGH)   # find cells the stay alive
@@ -39,6 +41,25 @@ def play(state, iterations, visualize=False):
         spawn = dead == SPAWN                                   # find cells that spaw new life
         
         cells[:] = stay | spawn                                 # save result for next iteration
+
+    def update_optimized():
+        """
+        This is an optimized implementation of the game rules.
+        """
+        neighbors = ul + um + ur + ml + mr + ll + lm + lr       # Count neighbors
+
+        c1 = (neighbors == SURVIVE_LOW)                         # Life conditions
+        c2 = (neighbors == SPAWN)
+        
+        cells[:] = cells * c1 + c2                              # Update
+
+    if version == 1:                # Select the update function
+        update_func = update_optimized
+    elif version == 2:
+        update_func = update
+
+    for i in xrange(iterations):    # Run the game
+        update_func()
         if visualize:
             render(state)
 
@@ -47,7 +68,10 @@ def play(state, iterations, visualize=False):
 def main():
 
     B = util.Benchmark()
-    (W, H, I) = B.size
+    (W, H, I, V) = B.size
+
+    if V not in [1, 2]:
+        raise Exception("Unsupported rule-implementation.")
 
     if B.inputfn:
         S = B.load_array()
@@ -55,7 +79,7 @@ def main():
         S = randomstate(W, H, B)
 
     B.start()
-    R = play(S, I, B.visualize)
+    R = play(S, I, V, B.visualize)
     B.stop()
 
     B.pprint()
