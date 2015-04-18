@@ -38,21 +38,6 @@ C99 Seq
    :language: c
 
 
-.. _montecarlo_pi_cpp11_blitz:
-
-Cpp11 Blitz
------------
-
-
-.. error:: There are issues with the implementation.
-
-    Not ported to use bp_util.
-
-
-.. literalinclude:: ../../../benchmarks/montecarlo_pi/cpp11_blitz/src/montecarlo_pi.cpp
-   :language: cpp
-
-
 .. _montecarlo_pi_cpp11_bxx:
 
 Cpp11 Bxx

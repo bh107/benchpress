@@ -45,9 +45,9 @@ def extract_parameters(data):
     # Extract script size-args from cmd
     all_scripts_and_sizes = set()
     for result in data:
-        for cmd in result["cmd"]:
-            if "size" in cmd:
-                all_scripts_and_sizes.add((result["script_alias"], cmd.replace("--size=", "")))
+        cmd = result["cmd"]
+        if "size" in cmd:
+            all_scripts_and_sizes.add((result["script_alias"], cmd.replace("--size=", "")))
 
     script_sizes = dict(all_scripts_and_sizes)
 
@@ -182,11 +182,11 @@ def restructure(data_flattened):
             }
 
         # Sort the results
-        if 'fusion' in engine:
+        if 'cpu_fs_t' in engine:
             structured[script]['avg']['fusion'].append(average)
             structured[script]['var']['fusion'].append(var)
             structured[script]['dev']['fusion'].append(std_dev)
-        elif 'omp' in engine:
+        elif 'cpu_t' in engine:
             structured[script]['avg']['sij'].append(average)
             structured[script]['var']['sij'].append(var)
             structured[script]['dev']['sij'].append(std_dev)
@@ -254,7 +254,7 @@ class Cpu(Graph):
     """Create a graph that illustrates scalabiltity."""
 
     #rename_labels = {'numpy': 'NumPy', 'fusion': 'Bohrium', 'sij': 'C++'}
-    rename_labels = {'numpy': 'NumPy', 'fusion': 'Bh-Fused', 'sij': 'Bh'}
+    rename_labels = {'numpy': 'NumPy', 'fusion': 'Bh-VFC', 'sij': 'Bh-V'}
 
     def render_rel(self, data, parameters, script, rel_type, rel_engine):
         self.graph_title = script.replace('#', '\#')
@@ -519,7 +519,6 @@ class Cpu(Graph):
         doc = doc.replace("__LINKS__", " | ".join(links))
 
         results = ""
-
         for script in scripts:
             results += '<div class="anchor" id="%s"></div><h3>%s %s</h3>' % (
                 script.replace(" ", ""),
@@ -555,6 +554,7 @@ class Cpu(Graph):
 
         data_flattened = flatten(raw)
         parameters = extract_parameters(raw)
+        print(parameters)
         data = restructure(data_flattened)
 
         graph_filenames = {}

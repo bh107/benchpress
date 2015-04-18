@@ -18,26 +18,6 @@ Python Numpy
    :language: python
 
 
-.. _black_scholes_cpp11_armadillo:
-
-Cpp11 Armadillo
----------------
-
-
-.. literalinclude:: ../../../benchmarks/black_scholes/cpp11_armadillo/src/black_scholes.cpp
-   :language: cpp
-
-
-.. _black_scholes_cpp11_blitz:
-
-Cpp11 Blitz
------------
-
-
-.. literalinclude:: ../../../benchmarks/black_scholes/cpp11_blitz/src/black_scholes.cpp
-   :language: cpp
-
-
 .. _black_scholes_cpp11_bxx:
 
 Cpp11 Bxx
@@ -45,21 +25,6 @@ Cpp11 Bxx
 
 
 .. literalinclude:: ../../../benchmarks/black_scholes/cpp11_bxx/src/black_scholes.cpp
-   :language: cpp
-
-
-.. _black_scholes_cpp11_eigen:
-
-Cpp11 Eigen
------------
-
-
-.. error:: There are issues with the implementation.
-
-    Compilation errors.
-
-
-.. literalinclude:: ../../../benchmarks/black_scholes/cpp11_eigen/src/black_scholes.cpp
    :language: cpp
 
 
