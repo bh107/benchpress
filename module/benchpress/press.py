@@ -616,7 +616,8 @@ def gen_jobs_launcher_format(result_file, config, args):
                         envs = os.environ.copy()        # Orig environment variables
                         envs_overwrite = {}             # Overwritten by components
 
-                        envs_overwrite.update(launcher_env)
+                        if launcher_env:
+                            envs_overwrite.update(launcher_env)
 
                         if not stack[0][1] == "bridge":
                             raise Exception("First component must be a bridge.")
