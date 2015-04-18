@@ -28,7 +28,12 @@ nulb    = uLB*r/Re; omega = 1.0 / (3.*nulb+0.5); # Relaxation parameter.
 c = np.array([(x,y) for x in [0,-1,1] for y in [0,-1,1]]) # Lattice velocities.
 t = 1./36. * np.ones(q)                                   # Lattice weights.
 
-t[np.asarray([la.norm(ci)<1.1 for ci in c])] = 1./9.; t[0] = 4./9.
+something = np.asarray([la.norm(ci) for ci in c])
+print(something)
+something = something < 1.1
+print(something)
+t[np.asarray(something)] = 1./9.;
+t[0] = 4./9.
 noslip = [c.tolist().index((-c[i]).tolist()) for i in range(q)] 
 i1 = np.arange(q)[np.asarray([ci[0]<0  for ci in c])] # Unknown on right wall.
 i2 = np.arange(q)[np.asarray([ci[0]==0 for ci in c])] # Vertical middle.

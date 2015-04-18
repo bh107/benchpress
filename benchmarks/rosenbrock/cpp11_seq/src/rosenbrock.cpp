@@ -9,7 +9,7 @@ double rosenbrock(int nelements, double* x)
 {
     double sum = 0.0;
     for(int i=0; i<nelements-1; ++i) {
-        sum += 100.0*pow((x[i+1] - pow(x[i], 2)), 2) + pow((1-x[i]), 2);
+        sum += pow((1-x[i]), 2) + 100.0*pow((x[i+1] - pow(x[i], 2)), 2);
     }
     return sum;
 }
