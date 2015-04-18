@@ -8,6 +8,10 @@ import re
 
 import numpy as np
 
+# Check whether the numpy module is overruled by Bohrium
+bh_is_loaded_as_np = np.__name__ == "bohrium"
+bh_target = np.target.TARGET if bh_is_loaded_as_np else "none"
+
 #In order to support runs without bohrium installed, we need some import hacks
 try:
     import numpy_force as np
@@ -138,16 +142,30 @@ class Benchmark:
         if len(self.size) == 0:
             raise argparse.ArgumentTypeError('Size must be specified e.g. --size=100*10*1')
 
+        if not bh_is_loaded_as_np and args.bohrium:
+            print(
+                """
+                !!!!!!!
+
+                WARNING:
+                
+                --bohrium does not enable Bohrium!
+
+                Unless the benchmark does an explicit check (which it should not).
+                To enable Bohrium, overload NumPy with 'python -m bohrium ...'
+                
+                !!!!!!!
+                """
+            )
+
         # Unify the options: 'target' and 'bohrium'
-        if args.bohrium:
-            self.target = "bhc"
+        # TODO: This should check the environment for target.
+        if bh_is_loaded_as_np:
             self.bohrium = True
-        elif args.target.lower() != 'none':
-            self.target = args.target
-            self.bohrium = True
+            self.target = bh_target
         else:
-            self.target = args.target
-            self.bohrium = args.bohrium
+            self.bohrium = False
+            self.target = "none"
 
         self.no_extmethods = args.no_extmethods
 
