@@ -38,10 +38,10 @@ def main():
         grid = init_grid(H, W, dtype=B.dtype)
 
     if B.dumpinput:
-        B.dump_arrays("jacobi_solve", {'input': ft})
+        B.dump_arrays("jacobi_solve", {'input': grid})
 
     B.start()
-    grid = jacobi(ft, I, visualize=B.visualize)
+    grid = jacobi(grid, I, visualize=B.visualize)
     B.stop()
 
     B.pprint()
