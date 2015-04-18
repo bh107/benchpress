@@ -27,6 +27,13 @@ bh_stack_cpu_t32 = [
         ('cpu_t04', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "4"}),
         ('cpu_t02', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "2"}),
         ('cpu_t01', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "1", "OMP_NUM_THREADS": "1"}),
+
+        ('cpu_t32', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "0", "OMP_NUM_THREADS": "32"}),
+        ('cpu_t16', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "0", "OMP_NUM_THREADS": "16"}),
+        ('cpu_t08', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "0", "OMP_NUM_THREADS": "8"}),
+        ('cpu_t04', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "0", "OMP_NUM_THREADS": "4"}),
+        ('cpu_t02', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "0", "OMP_NUM_THREADS": "2"}),
+        ('cpu_t01', 'cpu',   {"BH_VE_CPU_JIT_FUSION": "0", "OMP_NUM_THREADS": "1"}),
     ]
 ]
 
@@ -34,8 +41,8 @@ bh_stack_cpu_t32 = [
 #   Scripts
 #
 scripts = [
-    ('Game of Life v1',   'gameoflife',  '--size=10000*10000*1'),
-    ('Game of Life v2',   'gameoflife',  '--size=10000*10000*2'),
+    ('Game of Life v1',   'gameoflife',  '--size=10000*10000*10*1'),
+    ('Game of Life v2',   'gameoflife',  '--size=10000*10000*10*2'),
 ]
 #
 #   Default launchers (python_numpy, python_bohrium) are used.
