@@ -174,8 +174,8 @@ class Benchmark:
 
         #
         # Also make them available via the parser and arg objects
-        self.p      = p
-        self.args   = args
+        #self.p      = p
+        #self.args   = args
 
     def start(self):
         flush()
