@@ -43,7 +43,8 @@ scripts = [
 numpy = {
     'scripts':  scripts,
     'launchers':  [python_numpy],
-    'bohrium': bh_stack_none
+    'bohrium': bh_stack_none,
+    "use_slurm_default": True,
 }
 
 bohrium = {
@@ -71,6 +72,7 @@ bohrium = {
             ('cpu_t32',         'cpu', {'BH_VE_CPU_JIT_FUSION': '0',    'OMP_NUM_THREADS': '32'                          }),
         ]
     ],
+    "use_slurm_default": True,
 }
 
 suites = [
