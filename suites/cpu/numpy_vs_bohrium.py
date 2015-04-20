@@ -45,6 +45,7 @@ numpy = {
     'launchers':  [python_numpy],
     'bohrium': bh_stack_none,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 bohrium = {
@@ -73,6 +74,7 @@ bohrium = {
         ]
     ],
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 suites = [
