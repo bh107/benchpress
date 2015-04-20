@@ -536,10 +536,10 @@ class Cpu(Graph):
             <td><img src="%s" /></td>
             </tr>
             """ % (
-                filenames[script][0].replace(self.output+os.sep, ""),
-                filenames[script][1].replace(self.output+os.sep, ""),
-                filenames[script][2].replace(self.output+os.sep, ""),
-                filenames[script][3].replace(self.output+os.sep, "")
+                os.path.basename(filenames[script][0]),
+                os.path.basename(filenames[script][1]),
+                os.path.basename(filenames[script][2]),
+                os.path.basename(filenames[script][3])
             )
             results += "</table>\n"
 
