@@ -115,6 +115,7 @@ def meta(src_dir, suite):
 
     info = {
         'suite':    suite,
+        'use_grapher': "",
         'rev':      rev if rev else 'Unknown',
         'hostname': hostname if hostname else 'Unknown',
         'started':  str(datetime.now()),
@@ -724,6 +725,13 @@ def gen_jobs_launcher_format(result_file, config, args):
                             add_pending_job(run, job_nrun, args.partition)
                         results['runs'].append(run)
                         results['meta']['ended'] = str(datetime.now())
+
+                        use_grapher = suite.get("use_grapher", "")
+                        if use_grapher and "use_grapher" in results["meta"]:
+                            existing_grapher = results["meta"]["use_grapher"]
+                            if existing_grapher and existing_grapher != use_grapher:
+                                raise Exception("Multiple different graphers. Nogo.")
+                            results["meta"]["use_grapher"] = use_grapher
 
                         bh_config.close()
                         write2json(result_file, results)
