@@ -131,6 +131,7 @@ if __name__ == "__main__":
 
     file_name_prefix = 'benchmark-%s-' % os.path.basename(args.suite_file.name)
     temp_bh_config = None
+    result_file = None
 
     try:
         try:
@@ -205,7 +206,12 @@ if __name__ == "__main__":
         print _C.WARNING,"Suspending the benchmark execution,",
         print "use resume on",result_file.name,_C.ENDC
     finally:
-        result_file.close()
+        if result_file != None:
+            try:
+                result_file.close()
+            except:
+                pass
+
         if temp_bh_config != None:
             try:
                 os.unlink(temp_bh_config)
