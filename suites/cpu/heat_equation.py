@@ -34,8 +34,8 @@ bohrium = {
 }
 
 suites = [
-    cseq,
-    omp,
-    bohrium,
-    np
+    numpy,
+    sequential,
+    multicore,
+    bohrium
 ]
