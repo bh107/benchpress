@@ -28,12 +28,12 @@ using System.Text;
 
 using R = NumCIL.Range;
 
-namespace jacobi
+namespace HeatEquation
 {
 	using NumCIL.Double;
 	using T = System.Double;
 
-    public static class JacobiSolverDouble
+    public static class HeatEquationSolverDouble
     {
     	public static NdArray Create(long width, long height)
     	{
@@ -110,12 +110,12 @@ namespace jacobi
     }
 }
 
-namespace jacobi
+namespace HeatEquation
 {
 	using NumCIL.Float;
 	using T = System.Single;
 
-    public static class JacobiSolverSingle
+    public static class HeatEquationSolverSingle
     {
     	public static NdArray Create(long width, long height)
     	{

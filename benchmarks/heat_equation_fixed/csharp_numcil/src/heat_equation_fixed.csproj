@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AE1D26CB-58A7-4811-8914-0615A4559A48}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>jacobi_stencil</RootNamespace>
+    <RootNamespace>heat_equation</RootNamespace>
     <AssemblyName>jacobi_stencil</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -15,7 +15,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\bin</OutputPath>
-    <DefineConstants>DEBUG;JACOBI_STENCIL</DefineConstants>
+    <DefineConstants>DEBUG;HEATEQUATION_FIXED</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Commandlineparameters>--size=100*10</Commandlineparameters>
@@ -25,7 +25,7 @@
     <DebugType>none</DebugType>
     <Optimize>True</Optimize>
     <OutputPath>..\bin</OutputPath>
-    <DefineConstants>JACOBI_STENCIL</DefineConstants>
+    <DefineConstants>HEATEQUATION_FIXED</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>True</Externalconsole>
@@ -44,17 +44,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\jacobi\csharp_numcil\src\AssemblyInfo.cs" />
-    <Compile Include="..\..\..\jacobi\csharp_numcil\src\Main.cs" />
-    <Compile Include="..\..\..\jacobi\csharp_numcil\src\jacobi.cs">
-      <DependentUpon>..\..\..\jacobi\csharp_numcil\src\jacobi.tt</DependentUpon>
+    <Compile Include="..\..\..\heat_equation\csharp_numcil\src\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\heat_equation\csharp_numcil\src\Main.cs" />
+    <Compile Include="..\..\..\heat_equation\csharp_numcil\src\heat_equation.cs">
+      <DependentUpon>heat_equation.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="..\..\..\jacobi\csharp_numcil\src\jacobi.tt">
+    <None Include="..\..\..\heat_equation\csharp_numcil\src\heat_equation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>..\..\..\jacobi\csharp_numcil\src\jacobi.cs</LastGenOutput>
+      <LastGenOutput>..\..\..\heat_equation\csharp_numcil\src\heat_equation.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

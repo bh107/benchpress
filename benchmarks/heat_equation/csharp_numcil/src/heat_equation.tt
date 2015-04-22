@@ -30,12 +30,12 @@ using System.Text;
 using R = NumCIL.Range;
 <# foreach(var typename in new[] {new {Sys = "Double", Cil = "Double" }, new { Sys = "Single", Cil = "Float" } }){ #>
 
-namespace jacobi
+namespace HeatEquation
 {
 	using NumCIL.<#=typename.Cil#>;
 	using T = System.<#=typename.Sys#>;
 
-    public static class JacobiSolver<#=typename.Sys#>
+    public static class HeatEquationSolver<#=typename.Sys#>
     {
     	public static NdArray Create(long width, long height)
     	{

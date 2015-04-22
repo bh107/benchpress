@@ -27,34 +27,27 @@ using System.Text;
 using NumCIL;
 using Utilities;
 
-namespace jacobi
+namespace HeatEquation
 {
-	public static class Jacobi
+	public static class HeatEquation
     {
 		public static void Main (string[] args)
 		{
 			bool solveDelta = true;
 			bool useIterationLimit = false;
-			bool quadratic = true;
+			bool quadratic = false;
 
 			// These compile directives add support for building the benchmark in various configurations
-			#if JACOBI_FIXED
+			#if HEATEQUATION_FIXED
 			solveDelta = false;
 			useIterationLimit = true;
-			quadratic = true;
 			#endif
 
-			#if JACOBI_SOLVE
+			#if HEATEQUATION_SOLVE
 			solveDelta = true;
 			useIterationLimit = true;
-			quadratic = false;
 			#endif
 
-			#if JACOBI_STENCIL
-			solveDelta = false;
-			useIterationLimit = true;
-			quadratic = false;
-			#endif
 
 			var numArgs = 1 + (quadratic ? 0 : 1) + (useIterationLimit ? 1 : 0);
 
@@ -69,13 +62,13 @@ namespace jacobi
 					long? iterations = useIterationLimit ? (long?)arglist.Pop() : null;
 					
 					if (input.type == typeof(double)) {
-						var data = JacobiSolverDouble.Create(sizew, sizeh);
-						using (new DispTimer(string.Format("Jacobi (Double) {0}x{1}*{2}", sizew, sizeh, iterations)))
-							JacobiSolverDouble.Solve(data, solveDelta, iterations);
+						var data = HeatEquationSolverDouble.Create(sizew, sizeh);
+						using (new DispTimer(string.Format("HeatEquation (Double) {0}x{1}*{2}", sizew, sizeh, iterations)))
+							HeatEquationSolverDouble.Solve(data, solveDelta, iterations);
 					} else {
-						var data = JacobiSolverSingle.Create (sizew, sizeh);
-						using (new DispTimer(string.Format("Jacobi (Float) {0}x{1}*{2}", sizew, sizeh, iterations)))
-							JacobiSolverSingle.Solve(data, solveDelta, iterations);
+						var data = HeatEquationSolverSingle.Create (sizew, sizeh);
+						using (new DispTimer(string.Format("HeatEquation (Float) {0}x{1}*{2}", sizew, sizeh, iterations)))
+							HeatEquationSolverSingle.Solve(data, solveDelta, iterations);
 					}
 				}
 			);

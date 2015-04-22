@@ -1,1 +1,0 @@
-This is a dummy file to make the bp-compile tool pick up the benchmark
