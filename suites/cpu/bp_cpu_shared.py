@@ -3,6 +3,7 @@
 #
 bh_stack_cpu_t32 = [
     [('default',    'bridge',             None)],
+    [('creduce',    'complete_reduction', None)],
     [('node',       'node',               None)],
     [('topo',       'topological',        None)],
     [
