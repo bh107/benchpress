@@ -8,7 +8,7 @@
     <ProjectGuid>{AE1D26CB-58A7-4811-8914-0615A4559A48}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>heat_equation</RootNamespace>
-    <AssemblyName>jacobi_stencil</AssemblyName>
+    <AssemblyName>heat_equation_fixed</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
