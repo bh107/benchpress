@@ -114,8 +114,8 @@ cpp11_bxx   = ('CPP/BH',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{scri
 
 # C#
 cil_managed   = ('Mono/Managed', 'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=False {args}', {'NUMCIL_DISABLE_UNSAFE': '1'})
-cil_unsafe    = ('Mono/Unsafe',  'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=False {args}', None)
-cil_bohrium   = ('Mono/Bohrium', 'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=True  {args}', None)
+cil_unsafe    = ('Mono/Unsafe',  'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=False {args}', {'NUMCIL_DISABLE_UNSAFE': '0'})
+cil_bohrium   = ('Mono/Bohrium', 'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=True  {args}', {'BH_GC_FLUSH': '1'})
 
 # F#
 

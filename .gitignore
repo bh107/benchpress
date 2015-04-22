@@ -22,3 +22,6 @@ benchmarks/nbody_nice/csharp_numcil/src/obj
 shallow_water.userprefs
 benchmarks/reactiondiffusion/csharp_numcil/src/obj
 reactiondiffusion.userprefs
+benchmarks/heat_equation/csharp_numcil/src/obj
+benchmarks/heat_equation_fixed/csharp_numcil/src/obj
+*.userprefs
