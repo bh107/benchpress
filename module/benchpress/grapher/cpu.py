@@ -544,7 +544,7 @@ class Cpu(Graph):
             results += "</table>\n"
 
         html = doc.replace("__RESULTS__", results)
-        with open('%s%scpu.html' % (self.output, os.sep), 'w') as fd:
+        with open('%s%sindex.html' % (self.output, os.sep), 'w') as fd:
             fd.write(html)
 
     def render(self, raw, data, processed=None, params=None):
