@@ -143,7 +143,7 @@ def random_system(x_max, y_max, z_max, n, b):
 
 def main():
     B = util.Benchmark()                            # Initialize Benchpress
-    nbodies, timesteps = B.size                     # Grab arguments
+    nplanets, nbodies, timesteps = B.size           # Grab arguments
 
     x_max = 1e18                                    # Simulation constants
     y_max = 1e18
@@ -154,7 +154,7 @@ def main():
         x_max,
         y_max,
         z_max,
-        10,
+        nplanets,
         nbodies
     )
 
