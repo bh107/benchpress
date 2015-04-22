@@ -15,11 +15,11 @@ bh_stack_cpu_t32 = [
 ]
 
 scripts = [
-    ('Jacobi',              'jacobi',              '--size=10000'),
+    ('Jacobi',              'jacobi_fixed',        '--size=5000*10'),
     ('nBody',               'nbody',               '--size=5000*10'),
     ('Shallow Water',       'shallow_water',       '--size=5000*5000*10'),
     ('Black Scholes',       'black_scholes',       '--size=3200000*36'),
-    ('nBody Nice',          'nbody_nice',          '--size=15*5000000*10')
+    ('nBody Nice',          'nbody_nice',          '--size=15*1000000*10')
 ]
 
 
