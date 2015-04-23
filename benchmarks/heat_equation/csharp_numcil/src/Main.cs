@@ -41,11 +41,6 @@ namespace HeatEquation
 			useIterationLimit = true;
 			#endif
 
-			#if HEATEQUATION_SOLVE
-			useIterationLimit = true;
-			#endif
-
-
 			var numArgs = 1 + (quadratic ? 0 : 1) + (useIterationLimit ? 1 : 0);
 
 			Utilities.RunBenchmark.Run(args, numArgs,
@@ -83,7 +78,7 @@ namespace HeatEquation
 						}
 					}
 
-					Console.WriteLine("Iterations: ", usedIterations);
+					Console.WriteLine("Iterations: {0}", usedIterations);
 				}
 			);
 		}
