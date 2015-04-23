@@ -33,18 +33,15 @@ namespace HeatEquation
     {
 		public static void Main (string[] args)
 		{
-			bool solveDelta = true;
 			bool useIterationLimit = false;
 			bool quadratic = false;
 
 			// These compile directives add support for building the benchmark in various configurations
 			#if HEATEQUATION_FIXED
-			solveDelta = false;
 			useIterationLimit = true;
 			#endif
 
 			#if HEATEQUATION_SOLVE
-			solveDelta = true;
 			useIterationLimit = true;
 			#endif
 
@@ -68,7 +65,7 @@ namespace HeatEquation
 							NumCIL.Bohrium.Utility.Flush();
 						using (new DispTimer(string.Format("HeatEquation (Double) {0}x{1}*{2}", sizew, sizeh, iterations)))
 						{
-							var r = HeatEquationSolverDouble.Solve(data, solveDelta, iterations);
+							var r = HeatEquationSolverDouble.Solve(data, iterations);
 							usedIterations = r.Item1;
 							if (input.use_bohrium)
 								NumCIL.Bohrium.Utility.Flush();
@@ -79,7 +76,7 @@ namespace HeatEquation
 							NumCIL.Bohrium.Utility.Flush();
 						using (new DispTimer(string.Format("HeatEquation (Float) {0}x{1}*{2}", sizew, sizeh, iterations)))
 						{
-							var r = HeatEquationSolverSingle.Solve(data, solveDelta, iterations);
+							var r = HeatEquationSolverSingle.Solve(data, iterations);
 							usedIterations = r.Item1;
 							if (input.use_bohrium)
 								NumCIL.Bohrium.Utility.Flush();

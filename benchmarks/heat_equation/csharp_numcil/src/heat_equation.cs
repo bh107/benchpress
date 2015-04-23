@@ -64,7 +64,7 @@ namespace HeatEquation
             {
 				iteration++;
 
-				var work = 0.2 * (center + north + east + west + south);
+				var work = 0.2f * (center + north + east + west + south);
 				delta = (work - center).Abs().Sum();
 				center[R.All] = work;
 
@@ -113,7 +113,7 @@ namespace HeatEquation
             {
 				iteration++;
 
-				var work = 0.2 * (center + north + east + west + south);
+				var work = 0.2f * (center + north + east + west + south);
 				delta = (work - center).Abs().Sum();
 				center[R.All] = work;
 
