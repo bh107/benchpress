@@ -39,75 +39,42 @@ namespace HeatEquation
     {
     	public static NdArray Create(long width, long height)
     	{
-    		return Generate.Zeroes(height + 2, width + 2);
+			var res = Generate.Zeroes(height + 2, width + 2);
+
+			res[R.All, R.El(0)] += -273.5f;
+			res[R.All, R.El(-1)] += -273.5f;
+			res[0] += 40f;
+			res[-1] += -273.5f;
+
+			return res;
     	}
     
-        public static T Solve(NdArray full, bool calculateDelta, long? fixedIterations = null)
-        {
-            if (fixedIterations == null)
-                calculateDelta = true;
-			
-			var width = full.Shape.Dimensions[0].Length - 2;
-			var height = full.Shape.Dimensions[1].Length - 2;
-            var work = Generate.Zeroes(width, height);
-            var diff = Generate.Zeroes(width, height);
-            var tmpdelta = Generate.Zeroes(width);
-            var deltares = Generate.Empty(1);
+        public static Tuple<int, NdArray> Solve(NdArray full, long? fixedIterations = null)
+        {			
+            var center = full[R.Slice(1, -1),  R.Slice(1, -1) ];
+            var north =    full[R.Slice(1, -1),  R.Slice(0, -2) ];
+            var east =  full[R.Slice(0, -2),  R.Slice(1, -1) ];
+            var west = full[R.Slice(2,  0),  R.Slice(1, -1) ];
+            var south =  full[R.Slice(1, -1),  R.Slice(2,  0) ];
 
-            full.Name = "full";
-            work.Name = "work";
-            diff.Name = "diff";
-            tmpdelta.Name = "tmpdelta";
-
-            var cells = full[R.Slice(1, -1),  R.Slice(1, -1) ];
-            var up =    full[R.Slice(1, -1),  R.Slice(0, -2) ];
-            var left =  full[R.Slice(0, -2),  R.Slice(1, -1) ];
-            var right = full[R.Slice(2,  0),  R.Slice(1, -1) ];
-            var down =  full[R.Slice(1, -1),  R.Slice(2,  0) ];
-
-            cells.Name = "cells";
-            up.Name = "up";
-            left.Name = "left";
-            right.Name = "right";
-            down.Name = "down";
-
-            full[R.All, R.El(0)] += -273.5f;
-            full[R.All, R.El(-1)] += -273.5f;
-            full[0] += 40f;
-            full[-1] += -273.5f;
-
-            T epsilon = width * height * 0.002f;
+			T epsilon = 0.005f;
             T delta = epsilon + 1;
 
-            int i = 0;
+            int iteration = 0;
 
-            work[R.All] = cells;
-
-            while (fixedIterations.HasValue ? (i < fixedIterations.Value) : epsilon < delta)
+            while (epsilon < delta)
             {
-                i++;
-                
-                work += up;
-                work += left;
-                work += right;
-                work += down;
-                work *= 0.2f;
+				iteration++;
 
-                if (calculateDelta)
-                {
-                    Sub.Apply(cells, work, diff);
-                    Abs.Apply(diff, diff);
-                    Add.Reduce(diff, 0, tmpdelta);
-                    delta = Add.Reduce(tmpdelta, 0, deltares).Value[0];
-                }
-                cells[R.All] = work;
+				var work = 0.2 * (center + north + east + west + south);
+				delta = (work - center).Abs().Sum();
+				center[R.All] = work;
+
+				if (fixedIterations != null && fixedIterations.Value <= iteration)
+					break;
             }
 
-            if (calculateDelta)
-                return delta;
-            else
-                //Access the data to ensure it is flushed
-                return full.Value[0];
+			return new Tuple<int, NdArray>(iteration, full);
         }
     }
 }

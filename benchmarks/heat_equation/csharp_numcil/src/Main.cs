@@ -60,16 +60,33 @@ namespace HeatEquation
 					var sizew = arglist.Pop();
 					var sizeh = quadratic ? sizew : arglist.Pop();					
 					long? iterations = useIterationLimit ? (long?)arglist.Pop() : null;
+					int usedIterations;
 					
 					if (input.type == typeof(double)) {
 						var data = HeatEquationSolverDouble.Create(sizew, sizeh);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
 						using (new DispTimer(string.Format("HeatEquation (Double) {0}x{1}*{2}", sizew, sizeh, iterations)))
-							HeatEquationSolverDouble.Solve(data, solveDelta, iterations);
+						{
+							var r = HeatEquationSolverDouble.Solve(data, solveDelta, iterations);
+							usedIterations = r.Item1;
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+						}
 					} else {
 						var data = HeatEquationSolverSingle.Create (sizew, sizeh);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
 						using (new DispTimer(string.Format("HeatEquation (Float) {0}x{1}*{2}", sizew, sizeh, iterations)))
-							HeatEquationSolverSingle.Solve(data, solveDelta, iterations);
+						{
+							var r = HeatEquationSolverSingle.Solve(data, solveDelta, iterations);
+							usedIterations = r.Item1;
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+						}
 					}
+
+					Console.WriteLine("Iterations: ", usedIterations);
 				}
 			);
 		}

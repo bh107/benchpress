@@ -54,7 +54,7 @@
   <ItemGroup>
     <None Include="..\..\..\heat_equation\csharp_numcil\src\heat_equation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>..\..\..\heat_equation\csharp_numcil\src\heat_equation.cs</LastGenOutput>
+      <LastGenOutput>heat_equation.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
