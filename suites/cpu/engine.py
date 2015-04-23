@@ -10,7 +10,7 @@ scripts = [
 bohrium = {
     'scripts': scripts,
     'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32
+    'bohrium': bh_stack_cpu_t32_all
 }
 
 omp = {
