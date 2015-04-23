@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;HEATEQUATION_FIXED</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Commandlineparameters>--size=100*10</Commandlineparameters>
+    <Commandlineparameters>--size=100*100*10</Commandlineparameters>
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
