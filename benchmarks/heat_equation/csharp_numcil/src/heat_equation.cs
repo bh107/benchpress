@@ -55,21 +55,27 @@ namespace HeatEquation
             var west = full[R.Slice(2,  0),  R.Slice(1, -1) ];
             var south =  full[R.Slice(1, -1),  R.Slice(2,  0) ];
 
-			T epsilon = 0.005f;
-            T delta = epsilon + 1;
 
-            int iteration = 0;
-
-            while (epsilon < delta)
+            if (fixedIterations != null)
             {
-				iteration++;
+            	for(var i =0; i < fixedIterations.Value; i++)
+            	center[R.All] = 0.2f * (center + north + east + west + south);
+            }
+            else
+            {
+				T epsilon = 0.005f;
+	            T delta = epsilon + 1;
 
-				var work = 0.2f * (center + north + east + west + south);
-				delta = (work - center).Abs().Sum();
-				center[R.All] = work;
+	            int iteration = 0;
 
-				if (fixedIterations != null && fixedIterations.Value <= iteration)
-					break;
+	            while (epsilon < delta)
+	            {
+					iteration++;
+
+					var work = 0.2f * (center + north + east + west + south);
+					delta = (work - center).Abs().Sum();
+					center[R.All] = work;
+	            }
             }
 
 			return new Tuple<int, NdArray>(iteration, full);
@@ -104,21 +110,27 @@ namespace HeatEquation
             var west = full[R.Slice(2,  0),  R.Slice(1, -1) ];
             var south =  full[R.Slice(1, -1),  R.Slice(2,  0) ];
 
-			T epsilon = 0.005f;
-            T delta = epsilon + 1;
 
-            int iteration = 0;
-
-            while (epsilon < delta)
+            if (fixedIterations != null)
             {
-				iteration++;
+            	for(var i =0; i < fixedIterations.Value; i++)
+            	center[R.All] = 0.2f * (center + north + east + west + south);
+            }
+            else
+            {
+				T epsilon = 0.005f;
+	            T delta = epsilon + 1;
 
-				var work = 0.2f * (center + north + east + west + south);
-				delta = (work - center).Abs().Sum();
-				center[R.All] = work;
+	            int iteration = 0;
 
-				if (fixedIterations != null && fixedIterations.Value <= iteration)
-					break;
+	            while (epsilon < delta)
+	            {
+					iteration++;
+
+					var work = 0.2f * (center + north + east + west + south);
+					delta = (work - center).Abs().Sum();
+					center[R.All] = work;
+	            }
             }
 
 			return new Tuple<int, NdArray>(iteration, full);
