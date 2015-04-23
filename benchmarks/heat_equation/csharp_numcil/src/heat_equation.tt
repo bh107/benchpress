@@ -63,7 +63,7 @@ namespace HeatEquation
             	for(var i =0; i < fixedIterations.Value; i++)
             		center[R.All] = 0.2f * (center + north + east + west + south);
 
-				return new Tuple<int, NdArray>(fixedIterations, full);
+				return new Tuple<int, NdArray>((int)fixedIterations.Value, full);
             }
             else
             {
