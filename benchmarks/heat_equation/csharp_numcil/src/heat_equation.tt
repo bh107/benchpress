@@ -41,10 +41,10 @@ namespace HeatEquation
     	{
 			var res = Generate.Zeroes(height + 2, width + 2);
 
-			res[R.All, R.El(0)] += -273.5f;
-			res[R.All, R.El(-1)] += -273.5f;
-			res[0] += 40f;
-			res[-1] += -273.5f;
+			res[R.All, R.El(0)] = -273.5f;
+			res[R.All, R.El(-1)] = -273.5f;
+			res[0] = 40f;
+			res[-1] = -273.5f;
 
 			return res;
     	}
@@ -52,10 +52,10 @@ namespace HeatEquation
         public static Tuple<int, NdArray> Solve(NdArray full, long? fixedIterations = null)
         {			
             var center = full[R.Slice(1, -1),  R.Slice(1, -1) ];
-            var north =    full[R.Slice(1, -1),  R.Slice(0, -2) ];
-            var east =  full[R.Slice(0, -2),  R.Slice(1, -1) ];
-            var west = full[R.Slice(2,  0),  R.Slice(1, -1) ];
-            var south =  full[R.Slice(1, -1),  R.Slice(2,  0) ];
+            var north  = full[R.Slice(1, -1),  R.Slice(0, -2) ];
+            var east   = full[R.Slice(0, -2),  R.Slice(1, -1) ];
+            var west   = full[R.Slice(2,  0),  R.Slice(1, -1) ];
+            var south  = full[R.Slice(1, -1),  R.Slice(2,  0) ];
 
 
             if (fixedIterations != null)
