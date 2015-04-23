@@ -43,19 +43,27 @@ namespace nice
 					if (input.type == typeof(double)) 
 					{
 						var data = NiceSolverDouble.Create(planets, asteroids);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
 						using (new DispTimer(string.Format("Nice (Double) {0}x{1}*{2}", planets, asteroids, iterations)))
 						{
 							NiceSolverDouble.Solve(data, iterations, image_output);
 							//NiceSolverDouble.Sync(data);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
 						}
 					} 
 					else 
 					{
 						var data = NiceSolverSingle.Create(planets, asteroids);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
 						using (new DispTimer(string.Format("Nice (Single) {0}x{1}*{2}", planets, asteroids, iterations)))
 						{
 							NiceSolverSingle.Solve(data, iterations, image_output);
 							//NiceSolverSingle.Sync(data);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
 						}
 					}
 				}
