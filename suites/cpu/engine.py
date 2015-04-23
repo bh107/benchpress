@@ -10,25 +10,29 @@ scripts = [
 bohrium = {
     'scripts': scripts,
     'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32_all
+    'bohrium': bh_stack_cpu_t32_all,
+    "use_slurm_default": True,
 }
 
 omp = {
     'scripts': scripts,
     'launchers': [cpp11_omp],
-    'bohrium': stack_omp_t32
+    'bohrium': stack_omp_t32,
+    "use_slurm_default": True,
 }
 
 cseq = {
     'scripts': scripts,
     'launchers': [c99_seq],
-    'bohrium': bh_stack_none
+    'bohrium': bh_stack_none,
+    "use_slurm_default": True,
 }
 
 np = {
     'scripts': scripts,
     'launchers': [python_numpy],
-    'bohrium': bh_stack_none
+    'bohrium': bh_stack_none,
+    "use_slurm_default": True,
 }
 
 #
