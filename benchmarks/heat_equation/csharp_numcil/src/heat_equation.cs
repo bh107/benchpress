@@ -59,7 +59,9 @@ namespace HeatEquation
             if (fixedIterations != null)
             {
             	for(var i =0; i < fixedIterations.Value; i++)
-            	center[R.All] = 0.2f * (center + north + east + west + south);
+            		center[R.All] = 0.2f * (center + north + east + west + south);
+
+				return new Tuple<int, NdArray>(fixedIterations, full);
             }
             else
             {
@@ -76,9 +78,10 @@ namespace HeatEquation
 					delta = (work - center).Abs().Sum();
 					center[R.All] = work;
 	            }
+
+				return new Tuple<int, NdArray>(iteration, full);
             }
 
-			return new Tuple<int, NdArray>(iteration, full);
         }
     }
 }
@@ -114,7 +117,9 @@ namespace HeatEquation
             if (fixedIterations != null)
             {
             	for(var i =0; i < fixedIterations.Value; i++)
-            	center[R.All] = 0.2f * (center + north + east + west + south);
+            		center[R.All] = 0.2f * (center + north + east + west + south);
+
+				return new Tuple<int, NdArray>(fixedIterations, full);
             }
             else
             {
@@ -131,9 +136,10 @@ namespace HeatEquation
 					delta = (work - center).Abs().Sum();
 					center[R.All] = work;
 	            }
+
+				return new Tuple<int, NdArray>(iteration, full);
             }
 
-			return new Tuple<int, NdArray>(iteration, full);
         }
     }
 }
