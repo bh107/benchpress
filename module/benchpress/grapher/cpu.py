@@ -22,7 +22,10 @@ env_types = {
     "BH_VE_CPU_JIT_DUMPSRC": int,
     "BH_CORE_VCACHE_SIZE": int,
     "OMP_NUM_THREADS": int,
-    "GOMP_CPU_AFFINITY": str
+    "GOMP_CPU_AFFINITY": str,
+    "BH_CPU_JIT_LEVEL": int,
+    "BH_CPU_VCACHE_SIZE": int,
+    "BH_CPU_BIND": int
 }
 
 engine_ord  = ['numpy', 'fusion', 'sij']
