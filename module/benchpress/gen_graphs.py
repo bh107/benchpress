@@ -102,12 +102,10 @@ def main(args):
     raw = json.load(open(args.results))
     data = from_file(args.results)               # Get data from json-file
 
-    for format in args.formats:
-        graph = args.graph_module(
-            args.output, args.formats, args.postfix,
-            graph_title = "Something",
-            xaxis_label = "Threads",
-            yaxis_label = "Wall-Clock in Seconds"
-        )
-        graph.render(raw, data, args.order, args.baseline)
-
+    grapher = args.graph_module(
+        args.output, args.formats, args.postfix,
+        graph_title = "Something",
+        xaxis_label = "Threads",
+        yaxis_label = "Wall-Clock in Seconds"
+    )
+    grapher.render(raw, data, args.order, args.baseline)

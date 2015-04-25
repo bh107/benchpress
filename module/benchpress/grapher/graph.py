@@ -1,92 +1,189 @@
-import matplotlib
-matplotlib.use('Agg')       # Essential for generating graphs "headless".
-
-from pylab import *
+#!/usr/bi "\\",n/env python
+# -*- coding: utf8 -*-
+import string
 import os
-import re
+import matplotlib
+matplotlib.use('Agg')   # Essential for "headless" operation
+import pylab
 
-colors  = [
-    "#B3E2CD", "#FDCDAC", "#CBD5E8",
-    "#F4CAE4", "#E6F5C9", "#FFF2AE",
-    "#F1E2CC", "#CCCCCC",
-    "#B3E2CD", "#FDCDAC", "#CBD5E8",
-    "#F4CAE4", "#E6F5C9", "#FFF2AE",
-    "#F1E2CC", "#CCCCCC",
-    "#B3E2CD", "#FDCDAC", "#CBD5E8",
-    "#F4CAE4", "#E6F5C9", "#FFF2AE",
-    "#F1E2CC", "#CCCCCC",
-]
+def brange(begin, end):
+    thres = 0
+    i = 0
+    while thres < end:
+        thres = 2**i
+        i += 1
+    thres = end
+        
+    c = i = begin
+    while i <= end:
+        yield i
+        i = 2**c
+        c += 1
 
-colors = [
-    "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-    "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-    "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33"
-]
+def sanitize_fn(filename):
+    valid_chars = ".-_%s%s" % (string.digits, string.ascii_lowercase)
+    sanitized = []
+    for idx, char in enumerate(filename.lower()):
+        if char not in valid_chars:
+            char = "_"
+        sanitized.append(char)
+    return "".join(sanitized)
 
-hatches = [
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-    "\\", "+", "o", "/", "-", "O",
-]
+def texsafe(text):
+    """Escape text such that it is tex-safe."""
+    conv = {
+        '&': r'\&',
+        '%': r'\%',
+        '$': r'\$',
+        '#': r'\#',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\^{}',
+        '\\': r'\textbackslash{}',
+        '<': r'\textless',
+        '>': r'\textgreater',
+    }
+    escaped = []
+    
+    for char in text:
+        if char in conv:
+            char = conv[char]
+        escaped.append(char)
+    return "".join(escaped)
 
 class Graph(object):
     """
     Baseclass for rendering Matplotlib graphs.
-    Does alot of the annoying work, just override the render(...) method,
+    Does alot of the annoying work, just override the plot(...) method,
     and you are good to go!
     """
 
-    def __init__(
-        self,
-        output="/tmp",
-        file_formats=["pdf"],
-        file_postfix='runtime',
-        graph_title="Unknown Graph",
-        xaxis_label="Problemsize",
-        yaxis_label="Time in Seconds"
-    ):
-        self.graph_title    = graph_title
-        self.xaxis_label    = xaxis_label
-        self.yaxis_label    = yaxis_label
-        self.output         = output
-        self.file_formats   = file_formats
-        self.file_postfix   = file_postfix
+    colors = [
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+    ]
 
-    def prep(self):
-        clf()                       # Essential! Othervise the plots will be f**d up!
-        figure(1)
+    markers = [
+        r'o',
+        r's',
+        r'D',
+        r'*',
+        r'<',
+        r'>',
+        r'^',
+        r'v',
+        r'$\clubsuit$',
+        r'p',
+        r'd',
+    ]
 
-        gca().yaxis.grid(True)      # Makes it easier to compare bars
-        gca().xaxis.grid(False)
-        gca().set_axisbelow(True)
+    marker_sizes = [
+        6,6,6,9,7,
+        7,7,7,7,7,
+        7,7
+    ]
 
-        title(self.graph_title)     # Title and axis labels
-        ylabel(self.yaxis_label)    # Label on the y-axis
-        xlabel(self.xaxis_label)    # Label on the x-axis
+    hatches = [
+        r'o',
+        r's',
+        r'D',
+        r'*',
+        r'<',
+        r'>',
+        r'^',
+        r'v',
+        r'$\clubsuit$',
+        r'p',
+        r'd',
+    ]
+
+    def __init__(self,
+                 title = "Untitled Graph",
+                 line_width = 2,
+                 fn_pattern = "{title}.{ext}",
+                 file_formats = ["png"],
+                 output_path = "."):
+
+        self.title = title
+        self.line_width = line_width
+        self.fn_pattern = fn_pattern
+        self.file_formats = file_formats
+        self.output_path = os.path.expandvars(os.path.expanduser(output_path))
+
+        self._mpl_init()
+
+    def _mpl_init(self):
+        matplotlib.rcParams['axes.labelsize'] = 12
+        matplotlib.rcParams['axes.titlesize'] = 14
+        matplotlib.rcParams['xtick.labelsize'] = 12
+        matplotlib.rcParams['ytick.labelsize'] = 12
+        matplotlib.rcParams['legend.fontsize'] = 12
+        matplotlib.rcParams['font.family'] = 'serif'
+        matplotlib.rcParams['font.serif'] = ['Computer Modern Roman']
+        matplotlib.rcParams['text.usetex'] = True
+        matplotlib.rcParams['figure.max_open_warning'] = 400
 
     def render(self):
-        raise Exception('YOU ARE DOING IT WRONG!')
+        raise Exception("Unimplemented the actual plotting.")
 
-    def to_file(self, text):        # Creates the output-file.
+    def prep(self):
+        pylab.clf()                     # Essential! Othervise the plots will be f**d up!
+        pylab.figure(1)
 
-        fn = self.output +os.sep+ text.lower() +'_'+self.file_postfix
-        dname = os.path.dirname(fn)
-        bname = re.sub('\W', '_', os.path.basename(fn))
-        fn = dname +os.sep+ bname
+        pylab.gca().yaxis.grid(True)    # Makes it easier to compare bars
+        pylab.gca().xaxis.grid(False)
+        pylab.gca().set_axisbelow(True)
 
-        try:                            # Create output directory
-            os.makedirs(self.output)
-        except:
-            pass
+    def tofile(self, fn_args):          # Creates the output-file.
 
-        filenames = []
-        for ff in self.file_formats:    # Create the physical files
-            filename = "%s.%s" % (fn, ff)
-            filenames.append(filename)
-            savefig(filename)
+        if not os.path.exists(self.output_path):
+            raise("Output path %s does not exists. Cannot spit out graphs")
 
-        show()
+        paths = []
+        for file_format in self.file_formats:
+        
+            filename = sanitize_fn(self.fn_pattern.format(
+                ext=file_format,
+                **fn_args
+            ))
+            abs_path = os.sep.join([
+                self.output_path,
+                filename
+            ])
+            paths.append(abs_path)
 
-        return filenames
+            pylab.savefig(abs_path)
+            pylab.show()
+
+        return paths
+
+class Grapher(object):
+    """
+    Take a result file and produces some output.
+    
+    Can be just a single graph, but multiple graphs,
+    html, and other stuff is more likely.
+    """
+    
+    def __init__(
+        self,
+        output_path,
+        file_formats,
+        postfix,
+        graph_title=None,
+        xaxis_label=None,
+        yaxis_label=None
+        ):
+        self.output_path = output_path
+        self.file_formats = file_formats
+        self.postfix = postfix
+        self.graph_title = graph_title,
+        self.xaxis_label = xaxis_label
+        self.yaxis_label = yaxis_label
+
+    def render(self, raw, data, order, baseline):
+        raise Exception("Unimplemented.")
