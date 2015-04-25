@@ -174,6 +174,48 @@ def datasets_rename(datasets, mapping):
         renamed[script] = dataset_rename(datasets[script], mapping)
     return renamed
 
+def datasets_baselinify(datasets):
+    """
+    Create baseline versions of the datasets.
+    Uses the first value of each dataset.
+    
+    Adds min/max, removed dev as it does not apply
+    well to the relative numbers...
+    """
+    global_max = 0.0
+    baselines = {ident: datasets[ident]["avg"][0] for ident in datasets}
+    baselined = {}                  # Make datasets relative
+    for bsl_ident in baselines:
+        if bsl_ident not in baselined:
+            baselined[bsl_ident] = {}
+        bsl = baselines[bsl_ident]  # Grab the baseline
+
+        for ident in datasets:
+            # Constrcut the baselined entry
+            baselined[bsl_ident][ident] = {
+                "avg": [],
+                "min": 0.0,
+                "max": 0.0
+            }
+            # Compute the relative numbers
+            for sample in datasets[ident]["avg"]:
+                baselined[bsl_ident][ident]["avg"].append(
+                    bsl / sample
+                )
+            # Highest relative value
+            baselined[bsl_ident][ident]["min"] = min(
+                baselined[bsl_ident][ident]["avg"]
+            )
+            # Lowest relative value
+            local_max = max(
+                baselined[bsl_ident][ident]["avg"]
+            )
+            baselined[bsl_ident][ident]["max"] = local_max
+            if local_max > global_max:
+                global_max = local_max
+
+    return global_max, baselined
+
 def extract_parameters(raw):
 
     # Extract script aliases

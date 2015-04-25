@@ -89,7 +89,7 @@ class AbsoluteLine(Graph):
         t.set_y(1.15)
         pylab.tight_layout()
 
-        self.tofile({"title": self.title})              # Finally write it to file
+        return self.tofile({"title": self.title})              # Finally write it to file
 
 class AbsoluteBar(Graph):
     """
@@ -191,7 +191,7 @@ class AbsoluteBar(Graph):
 
         pylab.tight_layout()                  # Spit them out to file
 
-        self.tofile({"title": self.title})              # Finally write it to file
+        return self.tofile({"title": self.title})              # Finally write it to file
 
 class Absolute(Graph):
 
@@ -215,13 +215,14 @@ class Absolute(Graph):
             "title": self.title,
             "line_width": self.line_width,
             "file_formats": self.file_formats,
-            "fn_pattern": self.fn_pattern
+            "fn_pattern": self.fn_pattern,
+            "output_path": self.output_path
         }
         if nidents < 4:
             g = AbsoluteBar(**args)
         else:
             g = AbsoluteLine(**args)
-        g.render(datasets)
+        return g.render(datasets)
 
 if __name__ == "__main__":
     path = "engine.json"

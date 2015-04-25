@@ -3,7 +3,7 @@
 import pprint
 import json
 from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
-from benchpress.cpu_result_parser import datasets_rename, ident_mapping
+from benchpress.cpu_result_parser import datasets_rename, ident_mapping, datasets_baselinify
 from graph import Graph, texsafe, brange, pylab, matplotlib
 
 class Relative(Graph):
@@ -29,56 +29,20 @@ class Relative(Graph):
         title = "Untitled Speedup Graph",
         line_width = 2,
         fn_pattern = "{title}_rel_{baseline}.{ext}",
-        file_formats = ["png"]):
+        file_formats = ["png"],
+        output_path = "."):
 
-        super(Relative, self).__init__(title, line_width, fn_pattern, file_formats)
-
-    def baselinify(self, datasets):
-        """
-        Create baseline versions of the datasets.
-        Uses the first value of each dataset.
-        
-        Adds min/max, removed dev as it does not apply
-        well to the relative numbers...
-        """
-        global_max = 0.0
-        baselines = {ident: datasets[ident]["avg"][0] for ident in datasets}
-        baselined = {}                  # Make datasets relative
-        for bsl_ident in baselines:
-            if bsl_ident not in baselined:
-                baselined[bsl_ident] = {}
-            bsl = baselines[bsl_ident]  # Grab the baseline
-
-            for ident in datasets:
-                # Constrcut the baselined entry
-                baselined[bsl_ident][ident] = {
-                    "avg": [],
-                    "min": 0.0,
-                    "max": 0.0
-                }
-                # Compute the relative numbers
-                for sample in datasets[ident]["avg"]:
-                    baselined[bsl_ident][ident]["avg"].append(
-                        bsl / sample
-                    )
-                # Highest relative value
-                baselined[bsl_ident][ident]["min"] = min(
-                    baselined[bsl_ident][ident]["avg"]
-                )
-                # Lowest relative value
-                local_max = max(
-                    baselined[bsl_ident][ident]["avg"]
-                )
-                baselined[bsl_ident][ident]["max"] = local_max
-                if local_max > global_max:
-                    global_max = local_max
-
-        return global_max, baselined
+        super(Relative, self).__init__(title,
+                                       line_width,
+                                       fn_pattern,
+                                       file_formats,
+                                       output_path)
 
     def render(self, datasets):
 
+        paths = []
         thread_limit = 32
-        global_max, baselined = self.baselinify(datasets)
+        global_max, baselined = datasets_baselinify(datasets)
 
         linear = list(brange(1, thread_limit))
 
@@ -149,10 +113,12 @@ class Relative(Graph):
             t.set_y(1.15)
             pylab.tight_layout()
 
-            self.tofile({                                   # Finally write it to file
+            paths += self.tofile({                                   # Finally write it to file
                 "title": self.title,
                 "baseline": bsl_ident
             })
+
+        return paths
 
 if __name__ == "__main__":
     path = "engine.json"

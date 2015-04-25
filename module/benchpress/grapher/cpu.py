@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 import pprint
+import os
 from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
-from benchpress.cpu_result_parser import datasets_rename, ident_mapping, extract_parameters
+from benchpress.cpu_result_parser import datasets_rename, ident_mapping, extract_parameters, datasets_baselinify
 from graph import Grapher, Graph, texsafe, brange, pylab, matplotlib
 from relative import Relative
 from absolute import Absolute
@@ -19,14 +20,16 @@ class Cpu(Grapher):
             graph_title, xaxis_label, yaxis_label
         )
 
-    def render_html(self, filenames, data, meta, parameters):
+    def html_index(self, raw, datasets, paths, parameters):
 
-        scripts = [script for script in filenames]
+        meta = raw["meta"]
+        scripts = [script for script in datasets]
         scripts.sort()
 
         table = "<center><table><tr>" 
 
-        for i, bsl_engine in enumerate(engine_ord):
+        idents = sorted(list(set([ident for script in scripts for ident in datasets[script]])))
+        for idx, bsl_ident in enumerate(idents):
             table += "<td>"
             table += """
             <table style="border: 1px solid gray;">
@@ -34,17 +37,17 @@ class Cpu(Grapher):
             <tr>
             <td></td>
             """
-            for engine in engine_ord:
+            for ident in idents:
                 table += """
                 <td colspan="2" style="text-align: center;">%s</td>
-                """ % engine
+                """ % ident
             table += """
             </tr>
             </thead>
             """
 
             table += "<colgroup>"
-            table += "<col>" * (len(engine_ord)*2+1)
+            table += "<col>" * (len(idents)*2+1)
             table += "</colgroup>"
             table += """
             <tbody>
@@ -56,17 +59,15 @@ class Cpu(Grapher):
                 <tr>
                 <td>%s</td>
                 """ % script 
-                for engine in engine_ord:
-                    smax = data[script]['max'][bsl_engine][engine]
-                    smin = data[script]['min'][bsl_engine][engine]
+                (global_max, data) = datasets_baselinify(datasets[script])
+                for ident in idents:
+                    smax = data[bsl_ident][ident]['max']
+                    smin = data[bsl_ident][ident]['min']
 
                     table += """
                     <td>%.1f</td>
                     <td style="text-align: right;">%.1f</td>
-                    """ % (
-                        smin,
-                        smax
-                    )
+                    """ % (smin, smax)
                 table += """
                 </tr>"""
             table += """
@@ -75,8 +76,8 @@ class Cpu(Grapher):
             <td colspan="%s" style="text-align: center;">%s</td>
             </tfoot>
             </table>""" % (
-                len(engine_ord)*2+1,
-                "<b>Min/Max speedup in relation to %s</b>" % bsl_engine
+                len(idents)*2+1,
+                "<b>Min/Max speedup in relation to %s</b>" % bsl_ident
             )
             table += "</td>"
         table += "</tr></table></center>"
@@ -140,31 +141,22 @@ class Cpu(Grapher):
 
         results = ""
         for script in scripts:
-            results += '<div class="anchor" id="%s"></div><h3>%s %s</h3>' % (
+            results += '<div class="anchor" id="%s"></div><h3>%s (%s)</h3>' % (
                 script.replace(" ", ""),
                 script,
-                parameters["script_sizes"][script]
+                parameters["script_args"][script]
             )
             results += "<table>"
-            results += """
-            <tr>
-            <td><img src="%s" /></td>
-            <td><img src="%s" /></td>
-            </tr>
-            <tr>
-            <td><img src="%s" /></td>
-            <td><img src="%s" /></td>
-            </tr>
-            """ % (
-                os.path.basename(filenames[script][0]),
-                os.path.basename(filenames[script][1]),
-                os.path.basename(filenames[script][2]),
-                os.path.basename(filenames[script][3])
-            )
+            results += "<tr>"
+
+            for pidx, path in enumerate(paths[script]):
+                results += """<td><img src="%s" /></td>""" % os.path.basename(path)
+            results += "</tr>"
             results += "</table>\n"
+            break
 
         html = doc.replace("__RESULTS__", results)
-        with open('%s%sindex.html' % (self.output, os.sep), 'w') as fd:
+        with open('%s%sindex.html' % (self.output_path, os.sep), 'w') as fd:
             fd.write(html)
 
     def render(self, raw, data, order, baseline):
@@ -180,7 +172,21 @@ class Cpu(Grapher):
             ident_mapping
         )
 
+        paths = {} # script_alias -> [fn1, ..., fnn]
         scripts = sorted([script for script in datasets])
         for script in scripts:
-            Relative(title=script).render(datasets[script])
-            Absolute(title=script).render(datasets[script])
+            paths[script] = []  
+
+            paths[script] += Absolute(  # Generate absolute graphs
+                title=script,
+                output_path=self.output_path
+            ).render(datasets[script])
+
+            paths[script] += Relative(  # Generate speedup graphs
+                title=script,
+                output_path=self.output_path
+            ).render(datasets[script])
+                                
+            break
+                                    # Index them
+        self.html_index(raw, datasets, paths, parameters)
