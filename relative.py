@@ -75,7 +75,7 @@ class Relative(Graph):
 
         return global_max, baselined
 
-    def plot(self, datasets):
+    def render(self, datasets):
 
         thread_limit = 32
         global_max, baselined = self.baselinify(datasets)
@@ -153,7 +153,6 @@ class Relative(Graph):
                 "title": self.title,
                 "baseline": bsl_ident
             })
-            break
 
 if __name__ == "__main__":
     path = "engine.json"
@@ -167,5 +166,5 @@ if __name__ == "__main__":
     scripts = sorted([script for script in datasets])
     for script in scripts:
         graph = Relative(title=script)
-        graph.plot(datasets[script])
+        graph.render(datasets[script])
         break

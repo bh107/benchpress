@@ -128,7 +128,7 @@ class Graph(object):
         matplotlib.rcParams['text.usetex'] = True
         matplotlib.rcParams['figure.max_open_warning'] = 400
 
-    def plot(self):
+    def render(self):
         raise Exception("Unimplemented the actual plotting.")
 
     def prep(self):
