@@ -7,6 +7,18 @@ import re
 serial_launchers = ['Python/NP', 'CPP/SEQ', 'CPP/SEQ/TS', 'C/SEQ', 'C/SEQ/TS']
 parallel_launchers = ['Python/BH', 'CPP/BH', 'CPP/OMP', 'C/OMP', 'C/OMP_MPI']
 
+ident_mapping = {
+    "C/SEQ/NA/NA": "C/S",
+    "CPP/OMP/node/omp": "C++/P",
+    "CPP/OMP/node/omp_af": "C++/PA",
+    "Python/BH/node/cpu": "BH",
+    "Python/BH/node/cpu_vc": "BH/V",
+    "Python/BH/node/cpu_vc_fs": "BH/VF",
+    "Python/BH/node/cpu_vc_fs_ct": "BH/VFC",
+    "Python/BH/node/cpu_fs": "BH/VFC",
+    "Python/NP/NA/NA": "NumPy",
+}
+
 def pop_max(samples):
     """Remove and return the largest among given samples."""
 
@@ -148,6 +160,20 @@ def datasetify(runs_grouped, length=6):
 
     return dataset
 
+def dataset_rename(dataset, mapping):
+    renamed = {}
+    for ident in dataset:
+        if ident not in mapping:
+            raise Exception("Failed renaming, ident(%s) does not exist in mapping." % ident)
+        renamed[mapping[ident]] = dataset[ident]
+    return renamed
+
+def datasets_rename(datasets, mapping):
+    renamed = {}
+    for script in datasets:
+        renamed[script] = dataset_rename(datasets[script], mapping)
+    return renamed
+
 def main(file_path="result.json"):
     results = json.load(open(file_path)) 
 
@@ -155,9 +181,9 @@ def main(file_path="result.json"):
     runs_flattened = flatten(runs)
     runs_grouped = group_by_script(runs_flattened)
     datasets = datasetify(runs_grouped)
-    pprint.pprint(datasets)
-    for run in runs_flattened:
-        print run
+    datasets_renamed = datasets_rename(datasets, ident_mapping)
+    pprint.pprint(datasets_renamed)
+
 if __name__ == "__main__":
     path = "/home/safl/remote/erda/public_base/Bohrium/safl/numbers/engine-01/result.json"
     #path = "result.json"
