@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 import pprint
 import json
-from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
+from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, ident_ordering, order_idents
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping
 from graph import Graph, texsafe, brange, pylab, matplotlib
 
@@ -49,7 +49,8 @@ class AbsoluteLine(Graph):
 
         plots = []
         legend_texts = []
-        for idx, ident in enumerate(sorted(datasets)): # Plot datasets
+        idents = order_idents(datasets.keys(), ident_ordering)
+        for idx, ident in enumerate(idents): # Plot datasets
             dataset = datasets[ident]["avg"]
             deviation = datasets[ident]["avg"]
             plt, = pylab.plot(
@@ -132,7 +133,7 @@ class AbsoluteBar(Graph):
         linear          = list(brange(min_threads, max_threads))
         plot_count      = len(linear)
 
-        idents = sorted(datasets)
+        idents = order_idents(datasets.keys(), ident_ordering)
         max_runtime = max(
             [max(datasets[ident]['avg']) for ident in idents]
         )

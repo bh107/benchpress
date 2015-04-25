@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 import pprint
 import os
-from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
+from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, order_idents, ident_ordering
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping, extract_parameters, datasets_baselinify
 from graph import Grapher, Graph, texsafe, brange, pylab, matplotlib
 from relative import Relative
@@ -28,7 +28,9 @@ class Cpu(Grapher):
 
         table = "<center><table><tr>" 
 
-        idents = sorted(list(set([ident for script in scripts for ident in datasets[script]])))
+        unordered_idents = sorted(list(set([ident for script in scripts for ident in datasets[script]])))
+        idents = order_idents(unordered_idents, ident_ordering)
+
         for idx, bsl_ident in enumerate(idents):
             table += "<td>"
             table += """
@@ -153,7 +155,6 @@ class Cpu(Grapher):
                 results += """<td><img src="%s" /></td>""" % os.path.basename(path)
             results += "</tr>"
             results += "</table>\n"
-            break
 
         html = doc.replace("__RESULTS__", results)
         with open('%s%sindex.html' % (self.output_path, os.sep), 'w') as fd:
@@ -161,11 +162,9 @@ class Cpu(Grapher):
 
     def render(self, raw, data, order, baseline):
 
-        # Extract parameters to use for bounds-checking
-        parameters = extract_parameters(raw)
-
-        # Extract datasets
-        runs_flattened = flatten(raw["runs"])
+        parameters = extract_parameters(raw)                # Extract parameters
+        
+        runs_flattened = flatten(raw["runs"])               # Extract datasets
         runs_grouped = group_by_script(runs_flattened)
         datasets = datasets_rename(
             datasetify(runs_grouped),
@@ -177,16 +176,14 @@ class Cpu(Grapher):
         for script in scripts:
             paths[script] = []  
 
-            paths[script] += Absolute(  # Generate absolute graphs
+            paths[script] += Absolute(                      # Absolute graphs
                 title=script,
                 output_path=self.output_path
             ).render(datasets[script])
 
-            paths[script] += Relative(  # Generate speedup graphs
+            paths[script] += Relative(                      # Speedup graphs
                 title=script,
                 output_path=self.output_path
             ).render(datasets[script])
-                                
-            break
-                                    # Index them
-        self.html_index(raw, datasets, paths, parameters)
+                                        
+        self.html_index(raw, datasets, paths, parameters)   # Index them

@@ -4,9 +4,6 @@ import math
 import json
 import re
 
-serial_launchers = ['Python/NP', 'CPP/SEQ', 'CPP/SEQ/TS', 'C/SEQ', 'C/SEQ/TS']
-parallel_launchers = ['Python/BH', 'CPP/BH', 'CPP/OMP', 'C/OMP', 'C/OMP_MPI']
-
 ident_mapping = {
     "C/SEQ/NA/NA": "C/S",
     "CPP/OMP/node/omp": "C++/P",
@@ -18,6 +15,29 @@ ident_mapping = {
     "Python/BH/node/cpu_fs": "BH/VFC",
     "Python/NP/NA/NA": "NumPy",
 }
+
+ident_ordering = [
+    "NumPy",
+    "C/S",
+    "BH",
+    "BH/V",
+    "BH/VF",
+    "BH/VFC",
+    "C++/P",
+    "C++/PA"
+]
+
+def order_idents(idents, ordering):
+
+    no_order = list(set(idents) - set(ordering))
+    if len(no_order) > 0:
+        raise Exception("Ordering is not defined for idents(%s)" % no_order)
+
+    ordered = []
+    for ident in ordering:
+        if ident in idents:
+            ordered.append(ident)
+    return ordered
 
 def pop_max(samples):
     """Remove and return the largest among given samples."""

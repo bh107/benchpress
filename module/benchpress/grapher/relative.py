@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 import pprint
 import json
-from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
+from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, ident_ordering, order_idents
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping, datasets_baselinify
 from graph import Graph, texsafe, brange, pylab, matplotlib
 
@@ -46,13 +46,13 @@ class Relative(Graph):
 
         linear = list(brange(1, thread_limit))
 
-        bsl_idents = sorted([ident for ident in baselined])
-        for bsl_ident in bsl_idents:# Construct data using ident as baseline
+        idents = order_idents(baselined.keys(), ident_ordering)
+        for bsl_ident in idents:    # Construct data using ident as baseline
             self.prep()             # Do some MPL-magic
 
             plots = []
             legend_texts = []
-            for idx, ident in enumerate(sorted(baselined[bsl_ident])): # Plot datasets
+            for idx, ident in enumerate(idents): # Plot datasets
                 dataset = baselined[bsl_ident][ident]["avg"]
                 plt, = pylab.plot(
                     linear,
