@@ -27,10 +27,11 @@ class Relative(Graph):
     def __init__(
         self,
         title = "Untitled Speedup Graph",
+        line_width = 2,
         fn_pattern = "{title}_rel_{baseline}.{ext}",
         file_formats = ["png"]):
 
-        super(Relative, self).__init__(title, fn_pattern, file_formats)
+        super(Relative, self).__init__(title, line_width, fn_pattern, file_formats)
 
     def baselinify(self, datasets):
         """
@@ -84,18 +85,47 @@ class Relative(Graph):
         bsl_idents = sorted([ident for ident in baselined])
         for bsl_ident in bsl_idents:# Construct data using ident as baseline
             self.prep()             # Do some MPL-magic
-            for idx, ident in enumerate(sorted(baselined)): # Plot datasets
+
+            plots = []
+            legend_texts = []
+            for idx, ident in enumerate(sorted(baselined[bsl_ident])): # Plot datasets
                 dataset = baselined[bsl_ident][ident]["avg"]
                 plt, = pylab.plot(
                     linear,
                     dataset,
-                    "-*",
+                    linestyle="-",
                     label=ident,
-                    color=Graph.colors[idx]
+                    color=Graph.colors[idx],
+                    lw=self.line_width,
+                    marker=Graph.markers[idx],
+                    markersize=Graph.marker_sizes[idx]
                 )
-            pylab.plot(linear, linear, "--", color='gray')  # Linear, for reference
+                plots.append(plt)
+
+                legend_txt = r"%s: \textbf{%.1f} - \textbf{%.1f}" % (
+                    ident,
+                    baselined[bsl_ident][ident]["min"],
+                    baselined[bsl_ident][ident]["max"]
+                )
+                legend_texts.append(legend_txt)
+
+            pylab.plot(
+                linear,
+                linear,
+                "--",
+                color='gray',
+                lw=self.line_width
+            )  # Linear, for reference
 
             # TODO: Legends
+            pylab.legend(
+                plots,
+                legend_texts,
+                loc=3,
+                ncol=3,
+                bbox_to_anchor=(0.015, 0.95, 0.9, 0.102),
+                borderaxespad=0.0
+            )
             pylab.ylabel(                                   # Y-Axis
                 r"Speedup in relation to \textbf{%s}" % bsl_ident
             )
@@ -115,12 +145,15 @@ class Relative(Graph):
             pylab.xticks(linear, linear)
             pylab.gca().xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
-            pylab.title(texsafe(self.title))
+            t = pylab.title(texsafe(self.title))                # Title
+            t.set_y(1.15)
+            pylab.tight_layout()
 
             self.tofile({                                   # Finally write it to file
                 "title": self.title,
                 "baseline": bsl_ident
             })
+            break
 
 if __name__ == "__main__":
     path = "engine.json"
@@ -135,3 +168,4 @@ if __name__ == "__main__":
     for script in scripts:
         graph = Relative(title=script)
         graph.plot(datasets[script])
+        break

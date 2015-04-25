@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bi "\\",n/env python
 # -*- coding: utf8 -*-
 import string
 import os
@@ -61,22 +61,50 @@ class Graph(object):
     """
 
     colors = [
-        "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-        "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-        "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33"
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+        "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666",
+    ]
+
+    markers = [
+        r'o',
+        r's',
+        r'D',
+        r'*',
+        r'<',
+        r'>',
+        r'^',
+        r'v',
+        r'$\clubsuit$',
+        r'p',
+        r'd',
+    ]
+
+    marker_sizes = [
+        6,6,6,9,7,
+        7,7,7,7,7,
+        7,7
     ]
 
     hatches = [
-        "\\", "+", "o", "/", "-", "O",
-        "\\", "+", "o", "/", "-", "O",
-        "\\", "+", "o", "/", "-", "O",
-        "\\", "+", "o", "/", "-", "O",
-        "\\", "+", "o", "/", "-", "O",
+        r'o',
+        r's',
+        r'D',
+        r'*',
+        r'<',
+        r'>',
+        r'^',
+        r'v',
+        r'$\clubsuit$',
+        r'p',
+        r'd',
     ]
 
     def __init__(
         self,
         title = "Untitled Graph",
+        line_width = 2,
         fn_pattern = "{title}.{ext}",
         file_formats = ["png"],
         directory="."):
@@ -85,15 +113,16 @@ class Graph(object):
         self.fn_pattern = fn_pattern
         self.file_formats = file_formats
         self.output_path = os.path.expandvars(os.path.expanduser(directory))
+        self.line_width = line_width
 
         self._mpl_init()
 
     def _mpl_init(self):
-        matplotlib.rcParams['axes.labelsize'] = 14
-        matplotlib.rcParams['axes.titlesize'] = 16
-        matplotlib.rcParams['xtick.labelsize'] = 14
-        matplotlib.rcParams['ytick.labelsize'] = 14
-        matplotlib.rcParams['legend.fontsize'] = 14
+        matplotlib.rcParams['axes.labelsize'] = 12
+        matplotlib.rcParams['axes.titlesize'] = 14
+        matplotlib.rcParams['xtick.labelsize'] = 12
+        matplotlib.rcParams['ytick.labelsize'] = 12
+        matplotlib.rcParams['legend.fontsize'] = 12
         matplotlib.rcParams['font.family'] = 'serif'
         matplotlib.rcParams['font.serif'] = ['Computer Modern Roman']
         matplotlib.rcParams['text.usetex'] = True
