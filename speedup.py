@@ -84,17 +84,19 @@ class Relative(Graph):
         bsl_idents = sorted([ident for ident in baselined])
         for bsl_ident in bsl_idents:# Construct data using ident as baseline
             self.prep()             # Do some MPL-magic
-            for idx, ident in enumerate(sorted(baselined)):
+            for idx, ident in enumerate(sorted(baselined)): # Plot datasets
                 dataset = baselined[bsl_ident][ident]["avg"]
-                plt, = pylab.plot( 
+                plt, = pylab.plot(
                     linear,
                     dataset,
                     "-*",
                     label=ident,
                     color=Graph.colors[idx]
                 )
-            # Todo: labels
-            pylab.ylabel(
+            pylab.plot(linear, linear, "--", color='gray')  # Linear, for reference
+
+            # TODO: Legends
+            pylab.ylabel(                                   # Y-Axis
                 r"Speedup in relation to \textbf{%s}" % bsl_ident
             )
             pylab.yscale("symlog", basey=2, basex=2)
@@ -107,21 +109,21 @@ class Relative(Graph):
             pylab.yticks(yticks, yticks)
             pylab.gca().yaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
-            pylab.xlabel(r"Threads")
+            pylab.xlabel(r"Threads")                        # X-Axis
             pylab.xscale("symlog", basey=2, basex=2)
             pylab.xlim(xmin=0.8, xmax=thread_limit*1.20)
             pylab.xticks(linear, linear)
             pylab.gca().xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
-            pylab.plot(linear, linear, "--", color='gray')  # Linear speedup
             pylab.title(texsafe(self.title))
-            self.tofile({           # Finally write it to file
+
+            self.tofile({                                   # Finally write it to file
                 "title": self.title,
                 "baseline": bsl_ident
             })
 
 if __name__ == "__main__":
-    path = "result.json"
+    path = "engine.json"
     runs_flattened = flatten(json.load(open(path))["runs"])
     runs_grouped = group_by_script(runs_flattened)
     datasets = datasets_rename(
@@ -131,7 +133,5 @@ if __name__ == "__main__":
 
     scripts = sorted([script for script in datasets])
     for script in scripts:
-        if 'synthetic' not in script.lower():
-            continue
         graph = Relative(title=script)
         graph.plot(datasets[script])
