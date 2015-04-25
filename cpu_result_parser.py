@@ -174,7 +174,9 @@ def datasets_rename(datasets, mapping):
         renamed[script] = dataset_rename(datasets[script], mapping)
     return renamed
 
-def main(file_path="result.json"):
+if __name__ == "__main__":
+    path = "/home/safl/remote/erda/public_base/Bohrium/safl/numbers/engine-01/result.json"
+
     results = json.load(open(file_path)) 
 
     runs = results["runs"]
@@ -182,9 +184,3 @@ def main(file_path="result.json"):
     runs_grouped = group_by_script(runs_flattened)
     datasets = datasetify(runs_grouped)
     datasets_renamed = datasets_rename(datasets, ident_mapping)
-    pprint.pprint(datasets_renamed)
-
-if __name__ == "__main__":
-    path = "/home/safl/remote/erda/public_base/Bohrium/safl/numbers/engine-01/result.json"
-    #path = "result.json"
-    main(path)

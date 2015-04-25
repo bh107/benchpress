@@ -4,7 +4,7 @@ import pprint
 import json
 from cpu_result_parser import flatten, group_by_script, datasetify
 from cpu_result_parser import datasets_rename, ident_mapping
-from graph import Graph, texsafe, pylab
+from graph import Graph, texsafe, brange, pylab, matplotlib
 
 class Relative(Graph):
     """
@@ -14,14 +14,12 @@ class Relative(Graph):
     Format of the datasets must be:
     {
         "ident1": {
-            "avg": [v1, ... , vn],
-            "dev": [u1, ... , un]
+            "avg": [v1, ... , vn]
         },
         ...
         ,
          "identm": {
-            "avg": [v1, ... , vn],
-            "dev": [u1, ... , un]
+            "avg": [v1, ... , vn]
         }
     }
     """
@@ -34,27 +32,92 @@ class Relative(Graph):
 
         super(Relative, self).__init__(title, fn_pattern, file_formats)
 
+    def baselinify(self, datasets):
+        """
+        Create baseline versions of the datasets.
+        Uses the first value of each dataset.
+        
+        Adds min/max, removed dev as it does not apply
+        well to the relative numbers...
+        """
+        global_max = 0.0
+        baselines = {ident: datasets[ident]["avg"][0] for ident in datasets}
+        baselined = {}                  # Make datasets relative
+        for bsl_ident in baselines:
+            if bsl_ident not in baselined:
+                baselined[bsl_ident] = {}
+            bsl = baselines[bsl_ident]  # Grab the baseline
+
+            for ident in datasets:
+                # Constrcut the baselined entry
+                baselined[bsl_ident][ident] = {
+                    "avg": [],
+                    "min": 0.0,
+                    "max": 0.0
+                }
+                # Compute the relative numbers
+                for sample in datasets[ident]["avg"]:
+                    baselined[bsl_ident][ident]["avg"].append(
+                        bsl / sample
+                    )
+                # Highest relative value
+                baselined[bsl_ident][ident]["min"] = min(
+                    baselined[bsl_ident][ident]["avg"]
+                )
+                # Lowest relative value
+                local_max = max(
+                    baselined[bsl_ident][ident]["avg"]
+                )
+                baselined[bsl_ident][ident]["max"] = local_max
+                if local_max > global_max:
+                    global_max = local_max
+
+        return global_max, baselined
+
     def plot(self, datasets):
-        self.prep()                 # Do some MPL-magic
-        pprint.pprint(datasets)
-        # Compute baselines, max/min for each
 
-        keys = sorted([key for key in datasets])
-        for key in keys:            # Construct data using key as baseline
+        thread_limit = 32
+        global_max, baselined = self.baselinify(datasets)
 
-            # Todo: plot the data
+        linear = list(brange(1, thread_limit))
 
+        bsl_idents = sorted([ident for ident in baselined])
+        for bsl_ident in bsl_idents:# Construct data using ident as baseline
+            self.prep()             # Do some MPL-magic
+            for idx, ident in enumerate(sorted(baselined)):
+                dataset = baselined[bsl_ident][ident]["avg"]
+                plt, = pylab.plot( 
+                    linear,
+                    dataset,
+                    "-*",
+                    label=ident,
+                    color=Graph.colors[idx]
+                )
             # Todo: labels
+            pylab.ylabel(
+                r"Speedup in relation to \textbf{%s}" % bsl_ident
+            )
+            pylab.yscale("symlog", basey=2, basex=2)
+            pylab.ylim(
+                ymin=0,
+                ymax=max(global_max*1.2, thread_limit*1.2),
+                
+            )
+            yticks = list(brange(1, max(thread_limit, global_max*2)))
+            pylab.yticks(yticks, yticks)
+            pylab.gca().yaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
-            # Todo: x-ticks and labels
-            # Todo: y-ticks and labels
-
-            pylab.title(texsafe(self.title))
-            pylab.ylabel(r"Speedup in relation to \textbf{%s}" % key)
             pylab.xlabel(r"Threads")
+            pylab.xscale("symlog", basey=2, basex=2)
+            pylab.xlim(xmin=0.8, xmax=thread_limit*1.20)
+            pylab.xticks(linear, linear)
+            pylab.gca().xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
+
+            pylab.plot(linear, linear, "--", color='gray')  # Linear speedup
+            pylab.title(texsafe(self.title))
             self.tofile({           # Finally write it to file
                 "title": self.title,
-                "baseline": key
+                "baseline": bsl_ident
             })
 
 if __name__ == "__main__":
@@ -67,9 +130,8 @@ if __name__ == "__main__":
     )
 
     scripts = sorted([script for script in datasets])
-    pprint.pprint(scripts)
     for script in scripts:
-        datasets = datasets[script]
+        if 'synthetic' not in script.lower():
+            continue
         graph = Relative(title=script)
-        graph.plot(datasets)
-        break
+        graph.plot(datasets[script])

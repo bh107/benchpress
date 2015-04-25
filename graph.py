@@ -6,6 +6,20 @@ import matplotlib
 matplotlib.use('Agg')   # Essential for "headless" operation
 import pylab
 
+def brange(begin, end):
+    thres = 0
+    i = 0
+    while thres < end:
+        thres = 2**i
+        i += 1
+    thres = end
+        
+    c = i = begin
+    while i <= end:
+        yield i
+        i = 2**c
+        c += 1
+
 def sanitize_fn(filename):
     valid_chars = ".-_%s%s" % (string.digits, string.ascii_lowercase)
     sanitized = []
@@ -32,9 +46,10 @@ def texsafe(text):
         '>': r'\textgreater',
     }
     escaped = []
+    
     for char in text:
         if char in conv:
-            char = escaped.append(conv[char])
+            char = conv[char]
         escaped.append(char)
     return "".join(escaped)
 
