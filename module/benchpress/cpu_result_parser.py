@@ -6,6 +6,9 @@ import re
 
 ident_mapping = {
     "C/SEQ/NA/NA": "C/S",
+    "C/SEQ/TS/NA/NA": "C/ST",
+    "C/OMP/node/omp": "C/P",
+    "C/OMP/node/omp_af": "C/PA",
     "CPP/OMP/node/omp": "C++/P",
     "CPP/OMP/node/omp_af": "C++/PA",
     "Python/BH/node/cpu": "BH",
@@ -19,10 +22,13 @@ ident_mapping = {
 ident_ordering = [
     "NumPy",
     "C/S",
+    "C/ST",
     "BH",
     "BH/V",
     "BH/VF",
     "BH/VFC",
+    "C/P",
+    "C/PA",
     "C++/P",
     "C++/PA"
 ]
