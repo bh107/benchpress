@@ -2,8 +2,8 @@
 # -*- coding: utf8 -*-
 import pprint
 import json
-from cpu_result_parser import flatten, group_by_script, datasetify
-from cpu_result_parser import datasets_rename, ident_mapping
+from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
+from benchpress.cpu_result_parser import datasets_rename, ident_mapping
 from graph import Graph, texsafe, brange, pylab, matplotlib
 
 class Relative(Graph):

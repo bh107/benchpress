@@ -2,8 +2,8 @@
 # -*- coding: utf8 -*-
 import pprint
 import json
-from cpu_result_parser import flatten, group_by_script, datasetify
-from cpu_result_parser import datasets_rename, ident_mapping
+from benchpress.cpu_result_parser import flatten, group_by_script, datasetify
+from benchpress.cpu_result_parser import datasets_rename, ident_mapping
 from graph import Graph, texsafe, brange, pylab, matplotlib
 
 class AbsoluteLine(Graph):
@@ -26,14 +26,18 @@ class AbsoluteLine(Graph):
     }
     """
 
-    def __init__(
-        self,
-        title = "Untitled Absolute Graph",
-        line_width = 2,
-        fn_pattern = "{title}_abs.{ext}",
-        file_formats = ["png"]):
+    def __init__(self,
+                 title = "Untitled Absolute Graph",
+                 line_width = 2,
+                 fn_pattern = "{title}_abs.{ext}",
+                 file_formats = ["png"],
+                 output_path = "."):
 
-        super(AbsoluteLine, self).__init__(title, line_width, fn_pattern, file_formats)
+        super(AbsoluteLine, self).__init__(title,
+                                           line_width,
+                                           fn_pattern,
+                                           file_formats,
+                                           output_path)
 
     def render(self, datasets):
 
@@ -107,14 +111,17 @@ class AbsoluteBar(Graph):
     }
     """
 
-    def __init__(
-        self,
-        title = "Untitled Absolute Graph",
-        line_width = 2,
-        fn_pattern = "{title}_abs.{ext}",
-        file_formats = ["png"]):
-
-        super(AbsoluteBar, self).__init__(title, line_width, fn_pattern, file_formats)
+    def __init__(self,
+                 title = "Untitled Absolute Graph",
+                 line_width = 2,
+                 fn_pattern = "{title}_abs.{ext}",
+                 file_formats = ["png"],
+                 output_path = "."):
+        super(AbsoluteBar, self).__init__(title,
+                                          line_width,
+                                          fn_pattern,
+                                          file_formats,
+                                          output_path)
 
     def render(self, datasets):
         self.prep()             # Do some MPL-magic
@@ -131,7 +138,7 @@ class AbsoluteBar(Graph):
         )
 
         ind = range(data_points)                # Group start locations
-        width = 0.1                             # Width of the bars
+        width = 0.3                             # Width of the bars
         group_width = width * (len(idents))     # Width of the group
         group_center = group_width / 2.0        # Center of groups
 
@@ -188,14 +195,18 @@ class AbsoluteBar(Graph):
 
 class Absolute(Graph):
 
-    def __init__(
-        self,
-        title = "Untitled Absolute Graph",
-        line_width = 2,
-        fn_pattern = "{title}_abs.{ext}",
-        file_formats = ["png"]):
+    def __init__(self,
+                 title = "Untitled Absolute Graph",
+                 line_width = 2,
+                 fn_pattern = "{title}_abs.{ext}",
+                 file_formats = ["png"],
+                 output_path = "."):
 
-        super(Absolute, self).__init__(title, line_width, fn_pattern, file_formats)
+        super(Absolute, self).__init__(title,
+                                       line_width,
+                                       fn_pattern,
+                                       file_formats,
+                                       output_path)
 
     def render(self, datasets):
 

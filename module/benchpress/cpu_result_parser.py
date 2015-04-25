@@ -174,6 +174,72 @@ def datasets_rename(datasets, mapping):
         renamed[script] = dataset_rename(datasets[script], mapping)
     return renamed
 
+def extract_parameters(raw):
+
+    # Extract script aliases
+    script_aliases = list(set([result["script_alias"] for result in raw["runs"]]))
+    script_aliases.sort()
+
+    # Extract script size-args from cmd
+    script_aliases = []
+    script_args = {}
+    for result in raw["runs"]:
+        script_alias = result["script_alias"]
+        if script_alias not in script_aliases:
+            script_aliases.append(script_alias)
+            script_args[script_alias] = []
+
+        script_args[script_alias].append(
+            result["script_args"]
+        )
+    
+    # Verify that the same arguments are used for scripts
+    for script_alias in script_aliases:
+        if len(set(script_args[script_alias])) != 1:
+            raise Exception("Different args used for same script!")
+        script_args[script_alias] = script_args[script_alias][0]
+
+    script_aliases.sort()
+
+    # Extract bridge aliases
+    bridge_aliases = list(set([result["bridge_alias"] for result in raw["runs"]]))
+    bridge_aliases.sort()
+
+    # Extract engine aliases
+    engine_aliases = list(set([result["engine_alias"] for result in raw["runs"]]))
+    engine_aliases.sort()
+
+    # Extract manager aliases
+    manager_aliases = list(set([result["manager_alias"] for result in raw["runs"]]))
+    manager_aliases.sort()
+
+    # Extract environment variables
+    env_vars = list(set([env for result in raw["runs"] for env in result["envs_overwrite"] ]))
+    env_vars.sort()
+
+    # Extract values of environment variables and convert their types
+    env_values = {env: [] for env in env_vars}
+    for result in raw["runs"]:
+        for env in env_vars:
+            if env in result["envs_overwrite"]:
+                env_values[env].append(result["envs_overwrite"][env])
+
+    # Sort the extracted environment variables
+    for env in env_vars:
+        env_values[env] = list(set(env_values[env]))
+        env_values[env].sort()
+
+    return {
+        "env_vars": env_vars,
+        "env_values": env_values,
+        "script_aliases": script_aliases,
+        "script_args": script_args,
+        "bridge_aliases": bridge_aliases,
+        "engine_aliases": engine_aliases,
+        "manager_aliases": manager_aliases
+    }
+
+
 if __name__ == "__main__":
     path = "/home/safl/remote/erda/public_base/Bohrium/safl/numbers/engine-01/result.json"
 

@@ -101,19 +101,18 @@ class Graph(object):
         r'd',
     ]
 
-    def __init__(
-        self,
-        title = "Untitled Graph",
-        line_width = 2,
-        fn_pattern = "{title}.{ext}",
-        file_formats = ["png"],
-        directory="."):
+    def __init__(self,
+                 title = "Untitled Graph",
+                 line_width = 2,
+                 fn_pattern = "{title}.{ext}",
+                 file_formats = ["png"],
+                 output_path = "."):
 
         self.title = title
+        self.line_width = line_width
         self.fn_pattern = fn_pattern
         self.file_formats = file_formats
-        self.output_path = os.path.expandvars(os.path.expanduser(directory))
-        self.line_width = line_width
+        self.output_path = os.path.expandvars(os.path.expanduser(output_path))
 
         self._mpl_init()
 
@@ -161,3 +160,30 @@ class Graph(object):
             pylab.show()
 
         return paths
+
+class Grapher(object):
+    """
+    Take a result file and produces some output.
+    
+    Can be just a single graph, but multiple graphs,
+    html, and other stuff is more likely.
+    """
+    
+    def __init__(
+        self,
+        output_path,
+        file_formats,
+        postfix,
+        graph_title=None,
+        xaxis_label=None,
+        yaxis_label=None
+        ):
+        self.output_path = output_path
+        self.file_formats = file_formats
+        self.postfix = postfix
+        self.graph_title = graph_title,
+        self.xaxis_label = xaxis_label
+        self.yaxis_label = yaxis_label
+
+    def render(self, raw, data, order, baseline):
+        raise Exception("Unimplemented.")
