@@ -10,6 +10,7 @@ numpy = {
     'launchers': [python_numpy],
     'bohrium': bh_stack_none,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 sequential = {
@@ -17,6 +18,7 @@ sequential = {
     'launchers': [c99_seq, cpp11_seq, c99_seq_ts, cpp11_seq_ts],
     'bohrium': bh_stack_none,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 multicore = {
@@ -24,6 +26,7 @@ multicore = {
     'launchers': [cpp11_omp],
     'bohrium': stack_omp_t32,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 bohrium = {
@@ -31,6 +34,7 @@ bohrium = {
     'launchers': [python_bohrium, cpp11_bxx],
     'bohrium': bh_stack_cpu_t32,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 suites = [

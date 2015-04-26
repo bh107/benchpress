@@ -5,13 +5,15 @@ scripts = [
     ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
     ('Leibnitz PI',     'leibnitz_pi',      '--size=200000000'),
     ('Rosenbrock',      'rosenbrock',       '--size=100000000*10'),
+    ('Shallow Water',   'shallow_water',    '--size=5000*5000*10'),
 ]
 
 bohrium = {
     'scripts': scripts,
     'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32_all,
+    'bohrium': bh_stack_cpu_t32,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 omp = {
@@ -19,6 +21,7 @@ omp = {
     'launchers': [cpp11_omp],
     'bohrium': stack_omp_t32,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 cseq = {
@@ -26,6 +29,7 @@ cseq = {
     'launchers': [c99_seq],
     'bohrium': bh_stack_none,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 np = {
@@ -33,6 +37,7 @@ np = {
     'launchers': [python_numpy],
     'bohrium': bh_stack_none,
     "use_slurm_default": True,
+    "use_grapher": "cpu"
 }
 
 #
