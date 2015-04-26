@@ -38,6 +38,26 @@ Cpp11 Boost
    :language: cpp
 
 
+.. _shallow_water_cpp11_omp:
+
+Cpp11 Omp
+---------
+
+
+.. literalinclude:: ../../../benchmarks/shallow_water/cpp11_omp/src/shallow_water.cpp
+   :language: cpp
+
+
+.. _shallow_water_cpp11_seq:
+
+Cpp11 Seq
+---------
+
+
+.. literalinclude:: ../../../benchmarks/shallow_water/cpp11_seq/src/shallow_water.cpp
+   :language: cpp
+
+
 .. _shallow_water_csharp_numcil:
 
 Csharp Numcil

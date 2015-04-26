@@ -21,13 +21,3 @@ Python Numpy
 
 .. literalinclude:: ../../../benchmarks/jacobi_fixed/python_numpy/jacobi_fixed.py
    :language: python
-
-
-.. _jacobi_fixed_csharp_numcil:
-
-Csharp Numcil
--------------
-
-
-.. literalinclude:: ../../../benchmarks/jacobi_fixed/csharp_numcil/src/jacobi_fixed.cs
-   :language: csharp

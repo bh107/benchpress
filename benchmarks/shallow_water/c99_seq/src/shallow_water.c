@@ -167,12 +167,13 @@ int main (int argc, char **argv)
         }
     }
 
+    /* NumPy implementation does not do this!
     // res = numpy.add.reduce(numpy.add.reduce(H / n))
     double res = 0.0;
     for(int i=0;i<n+2;i++)
         for(int j=0;j<n+2;j++)
             res+=iH(i,j)/n;
-
+    */
     bp.timer_stop();
     bp.print("shallow_water(c99_seq)");
 }
