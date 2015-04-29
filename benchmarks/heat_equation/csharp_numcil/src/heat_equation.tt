@@ -43,8 +43,8 @@ namespace HeatEquation
 
 			res[R.All, R.El(0)] = -273.5f;
 			res[R.All, R.El(-1)] = -273.5f;
-			res[0] = 40f;
-			res[-1] = -273.5f;
+			res[R.El(0), R.All] = 40f;
+			res[R.El(-1), R.All] = -273.5f;
 
 			return res;
     	}
