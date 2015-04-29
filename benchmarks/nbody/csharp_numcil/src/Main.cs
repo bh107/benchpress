@@ -46,6 +46,9 @@ namespace nbody
 					{
 						if (input.type == typeof(double)) {
 							var data = new nBodySolverDoubleNoTempArrays.Galaxy(size);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+
 							using (new DispTimer(string.Format("nBodyNoTemp (Double) {0}*{1}", size, iterations)))
 							{
 								nBodySolverDoubleNoTempArrays.Solve(data, iterations);
@@ -53,6 +56,9 @@ namespace nbody
 							}
 						} else {
 							var data = new nBodySolverFloatNoTempArrays.Galaxy (size);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+
 							using (new DispTimer(string.Format("nBodyNoTemp (Float) {0}*{1}", size, iterations)))
 							{
 								nBodySolverFloatNoTempArrays.Solve(data, iterations);
@@ -64,6 +70,9 @@ namespace nbody
 					{
 						if (input.type == typeof(double)) {
 							var data = new nBodySolverDouble.Galaxy(size);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+
 							using (new DispTimer(string.Format("nBody (Double) {0}*{1}", size, iterations)))
 							{
 								nBodySolverDouble.Solve(data, iterations);
@@ -71,6 +80,9 @@ namespace nbody
 							}
 						} else {
 							var data = new nBodySolverFloat.Galaxy (size);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+						
 							using (new DispTimer(string.Format("nBody (Float) {0}*{1}", size, iterations)))
 							{
 								nBodySolverFloat.Solve(data, iterations);

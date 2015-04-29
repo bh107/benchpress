@@ -41,6 +41,9 @@ namespace blackscholes
 					
 					if (input.type == typeof(double)) {
 						var data = BlackScholesSolverDouble.Create(size);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
+
 						using (new DispTimer(string.Format("BlackScholes (Double) {0}*{1}", size, iterations)))
 						{
 							BlackScholesSolverDouble.Solve(data, iterations);
@@ -48,6 +51,9 @@ namespace blackscholes
 						}
 					} else {
 						var data = BlackScholesSolverSingle.Create (size);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
+
 						using (new DispTimer(string.Format("BlackScholes (Float) {0}*{1}", size, iterations)))
 						{
 							BlackScholesSolverSingle.Solve(data, iterations);

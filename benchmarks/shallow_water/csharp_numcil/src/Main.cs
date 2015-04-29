@@ -42,14 +42,29 @@ namespace shallow_water
 					var sizeY = input.sizes[1];
 					var iterations = input.sizes[2];
 				
-					if (input.type == typeof(double)) {
+					if (input.type == typeof(double)) 
+					{
 						var data = new ShallowWaterSolver.DataDouble (sizeX);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
+					
 						using (new DispTimer(string.Format("ShallowWater (Double) {0}*{1}*{2}", sizeX, sizeY, iterations)))
+						{
 							ShallowWaterSolver.SolveDouble (iterations, data);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+						}
 					} else {
 						var data = new ShallowWaterSolver.DataFloat (sizeX);
+						if (input.use_bohrium)
+							NumCIL.Bohrium.Utility.Flush();
+
 						using (new DispTimer(string.Format("ShallowWater (Float) {0}*{1}*{2}", sizeX, sizeY, iterations)))
+						{
 							ShallowWaterSolver.SolveFloat (iterations, data);
+							if (input.use_bohrium)
+								NumCIL.Bohrium.Utility.Flush();
+						}
 					}
 				}, 
 				
