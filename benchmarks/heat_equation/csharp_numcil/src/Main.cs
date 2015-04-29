@@ -47,11 +47,11 @@ namespace HeatEquation
 				// Running the benchmark
 				(input) => 
 				{
-					var arglist = new Stack<long>(input.sizes);
+					var arglist = new Queue<long>(input.sizes);
 
-					var sizew = arglist.Pop();
-					var sizeh = quadratic ? sizew : arglist.Pop();					
-					long? iterations = useIterationLimit ? (long?)arglist.Pop() : null;
+					var sizew = arglist.Dequeue();
+					var sizeh = quadratic ? sizew : arglist.Dequeue();					
+					long? iterations = useIterationLimit ? (long?)arglist.Dequeue() : null;
 					int usedIterations;
 					
 					if (input.type == typeof(double)) {
