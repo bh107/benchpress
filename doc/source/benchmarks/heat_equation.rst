@@ -79,3 +79,13 @@ Cpp11 Opencl
 
 .. literalinclude:: ../../../benchmarks/heat_equation/cpp11_opencl/src/heat_equation.cpp
    :language: cpp
+
+
+.. _heat_equation_csharp_numcil:
+
+Csharp Numcil
+-------------
+
+
+.. literalinclude:: ../../../benchmarks/heat_equation/csharp_numcil/src/heat_equation.cs
+   :language: csharp

@@ -28,9 +28,17 @@ try:
     import bohrium as bh
     toarray = bh.array
     flush = bh.flush
+    rand = bh.random.random_sample
+    randint = bh.random.random_integers
+    randseed =  bh.random.seed
+    bh_module_exist = True
 except ImportError:
     toarray = numpy_array
     flush = numpy_flush
+    rand = np.random.random_sample
+    randint = np.random.random_integers
+    randseed =  np.random.seed
+    bh_module_exist = False
 
 def t_or_f(arg):
     """Helper function to parse "True/true/TrUe/False..." as bools."""
@@ -136,8 +144,8 @@ class Benchmark:
         self.dumpinput  = args.dumpinput
         self.inputfn    = args.inputfn
         self.outputfn   = args.outputfn
-        self.seed       = args.seed
-        np.random.seed(self.seed)
+        self.seed       = int(args.seed)
+        randseed(self.seed)
 
         if len(self.size) == 0:
             raise argparse.ArgumentTypeError('Size must be specified e.g. --size=100*10*1')
@@ -148,12 +156,12 @@ class Benchmark:
                 !!!!!!!
 
                 WARNING:
-                
+
                 --bohrium does not enable Bohrium!
 
                 Unless the benchmark does an explicit check (which it should not).
                 To enable Bohrium, overload NumPy with 'python -m bohrium ...'
-                
+
                 !!!!!!!
                 """
             )
@@ -247,9 +255,16 @@ class Benchmark:
         if dtype is None:
             dtype = self.dtype
         if issubclass(np.dtype(dtype).type, np.integer):
-            return toarray(np.random.randint(shape), dtype=dtype, bohrium=self.bohrium)
+            if bh_module_exist:
+                ret = randint(shape, bohrium=self.bohrium)
+            else:
+                ret = randint(shape)
         else:
-            return toarray(np.random.random(shape), dtype=dtype, bohrium=self.bohrium)
+            if bh_module_exist:
+                ret = rand(shape, bohrium=self.bohrium)
+            else:
+                ret = rand(shape)
+        return toarray(ret, dtype=dtype, bohrium=self.bohrium)
 
 def visualize_grid(grid, title="", block=False):
     """Created to visualize the 2D grid used by Heat Equation."""
@@ -259,7 +274,7 @@ def visualize_grid(grid, title="", block=False):
     plt.imshow(grid, extent=[0, 1, 0, 1])
     plt.colorbar()
     plt.show(block=block)
-           
+
 def main():
     B = Benchmark()
     B.start()

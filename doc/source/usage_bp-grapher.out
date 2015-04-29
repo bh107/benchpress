@@ -1,6 +1,6 @@
 usage: bp-grapher [-h] [--output OUTPUT] [--postfix POSTFIX]
                   [--formats FORMATS [FORMATS ...]]
-                  [--type {bypass_bwd,bypass_overhead,scale,bypass_latency,bypass_bwo,daily,npbackend,cluster,cpu,absolute}]
+                  [--type {bypass_bwd,bypass_overhead,scale,bypass_latency,bypass_bwo,daily,npbackend,relative,cluster,cpu,absolute}]
                   [--warmups WARMUPS] [--baseline BASELINE]
                   [--order ORDER [ORDER ...]] [--ylimit YLIMIT]
                   results
@@ -16,7 +16,7 @@ optional arguments:
   --postfix POSTFIX     Append this to the filename of the generated graph(s).
   --formats FORMATS [FORMATS ...]
                         Output file-format(s) of the generated graph(s).
-  --type {bypass_bwd,bypass_overhead,scale,bypass_latency,bypass_bwo,daily,npbackend,cluster,cpu,absolute}
+  --type {bypass_bwd,bypass_overhead,scale,bypass_latency,bypass_bwo,daily,npbackend,relative,cluster,cpu,absolute}
                         The type of graph to generate
   --warmups WARMUPS     Specify the amount of samples from warm-up rounds.
   --baseline BASELINE   Baseline label for relative graphs.
