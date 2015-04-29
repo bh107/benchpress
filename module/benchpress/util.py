@@ -31,12 +31,14 @@ try:
     rand = bh.random.random_sample
     randint = bh.random.random_integers
     randseed =  bh.random.seed
+    bh_module_exist = True
 except ImportError:
     toarray = numpy_array
     flush = numpy_flush
     rand = np.random.random_sample
     randint = np.random.random_integers
     randseed =  np.random.seed
+    bh_module_exist = False
 
 def t_or_f(arg):
     """Helper function to parse "True/true/TrUe/False..." as bools."""
@@ -253,9 +255,16 @@ class Benchmark:
         if dtype is None:
             dtype = self.dtype
         if issubclass(np.dtype(dtype).type, np.integer):
-            return toarray(randint(shape), dtype=dtype, bohrium=self.bohrium)
+            if bh_module_exist:
+                ret = randint(shape, bohrium=self.bohrium)
+            else:
+                ret = randint(shape)
         else:
-            return toarray(rand(shape), dtype=dtype, bohrium=self.bohrium)
+            if bh_module_exist:
+                ret = rand(shape, bohrium=self.bohrium)
+            else:
+                ret = rand(shape)
+        return toarray(ret, dtype=dtype, bohrium=self.bohrium)
 
 def visualize_grid(grid, title="", block=False):
     """Created to visualize the 2D grid used by Heat Equation."""
