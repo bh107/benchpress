@@ -40,8 +40,8 @@ def sane_label_name(bridge, ve):
 
 
 def filter_results(bridge, ve):
-    #if bridge == 'Python/BH':
-    #    return False
+    if bridge == 'Python/BH':
+        return False
 
     return True
 
