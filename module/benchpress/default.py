@@ -11,7 +11,7 @@
 # Bridges  with various parameter setups
 # (alias, cmd (relative to the root of bohrium), env-vars)
 bridges = [
-    ('numpy', 'python benchmark/python/{script}.py {args} --bohrium=True', None),
+    ('numpy', 'python benchmark/python/{script}.py {args}', None),
     ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/{script}.exe {args} --bohrium=True', None),
     ('cpp', 'benchmark/cpp/bin/{script} {args}', None)
 ]
@@ -52,7 +52,7 @@ suite = {
 }
 
 native = {
-        'bridges': [('native-numpy', 'python benchmark/python/{script}.py {args} --bohrium=False', None)],
+        'bridges': [('native-numpy', 'python benchmark/python/{script}.py {args}', None)],
         'scripts': scripts
 }
 
