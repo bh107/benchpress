@@ -45,11 +45,42 @@ def filter_results(bridge, ve):
 
     return True
 
+def sort_key(el):
+
+    _,bridge,_,ve,_ = el
+
+    if bridge == 'Python/NP':
+        return 0
+    elif bridge == 'Mono/Managed':
+        return 1
+    elif bridge == 'Mono/Unsafe':
+        return 2
+    elif bridge == 'Python/BH':
+        return 50
+    else:
+        if ve == 'cpu_t01':
+            return 3
+        elif ve == 'cpu_t02':
+            return 4
+        elif ve == 'cpu_t04':
+            return 5
+        elif ve == 'cpu_t08':
+            return 6
+        elif ve == 'cpu_t16':
+            return 7
+        elif ve == 'cpu_t32':
+            return 8
+        elif ve == 'NA':
+            return 100
+
+
 
 class Cilpaper(Graph):
 
     def render(self, raw, data, order=None, baseline=None, highest=None):
         self.file_formats = ['pdf']
+
+        data = sorted(data, key=sort_key)
 
         #Lets handle one benchmark (script) at a time
         for s in set([script for script, bridge, vem, ve, r in data]):
