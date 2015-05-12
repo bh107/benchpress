@@ -95,10 +95,11 @@ def step(H, U, V, dt=0.02, dx=1.0, dy=1.0):
 def simulate(H, timesteps, visualize=False):
     U = np.zeros_like(H)
     V = np.zeros_like(H)
+
     for i in xrange(timesteps):
         (H, U, V) = step(H, U, V)
         if visualize:
-            pass
+            util.plot_surface(H, "3d", 0, 0, 5.5)
     return H
 
 def main():
@@ -118,13 +119,13 @@ def main():
     B.start()
     M = simulate(M, I, visualize=B.visualize)
     B.stop()
+
     B.pprint()
     if B.outputfn:
         B.tofile(B.outputfn, {'res': M})
 
     if B.visualize:
-        from shallow_water_visuals import plot_surface
-        plot_surface(M)
+        util.confirm_exit()
 
 if __name__ == "__main__":
     main()

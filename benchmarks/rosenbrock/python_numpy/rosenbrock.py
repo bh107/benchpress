@@ -8,7 +8,10 @@ def rosen(x):
 def main():
     B = util.Benchmark()                        # Initialize Benchpress
     N, T = B.size                               # Grab command-line arguments
-    dataset = np.arange(N)/N                    # Create psuedo-data
+    dataset = np.arange(
+        N,
+        dtype=np.float64
+    ) / np.float64(N)                           # Create psuedo-data
     B.start()                                   # Sample wall-clock start
     for _ in xrange(0, T):                      # Do T trials of..
         R = rosen(dataset)                      # ..executing rosenbrock.

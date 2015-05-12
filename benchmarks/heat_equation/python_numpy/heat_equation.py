@@ -28,6 +28,9 @@ def jacobi(grid, epsilon=0.005, max_iterations=None, visualize=False):
 
         if max_iterations != None and max_iterations <= iteration:
             break
+
+        if visualize:
+            util.plot_surface(grid, "2d", 0, 200, -200)
    
     return iteration, grid
 
@@ -43,19 +46,19 @@ def main():
         grid = init_grid(H, W, dtype=B.dtype)
 
     if B.dumpinput:
-        B.dump_arrays("jacobi_solve", {'input': ft})
+        B.dump_arrays("jacobi_solve", {'input': grid})
 
     B.start()
     M, grid = jacobi(grid, max_iterations=I, visualize=B.visualize)
     B.stop()
 
     B.pprint()
-    if B.visualize:
-        util.visualize_grid(grid, block=True)
     if B.verbose:
         print("Iterations=%s, Grid: %s." % (M, grid))
     if B.outputfn:
         B.tofile(B.outputfn, {'res': grid})
+    if B.visualize:
+        util.confirm_exit()
 
 if __name__ == "__main__":
     main()

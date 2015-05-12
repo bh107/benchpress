@@ -8,6 +8,8 @@ import re
 
 import numpy as np
 
+gfx_handle = None
+
 # Check whether the numpy module is overruled by Bohrium
 bh_is_loaded_as_np = np.__name__ == "bohrium"
 bh_target = np.target.TARGET if bh_is_loaded_as_np else "none"
@@ -24,8 +26,78 @@ def numpy_flush():
 def numpy_array(ary, bohrium=False, dtype=np.float64):
     return np.array(ary, dtype=dtype)
 
+def numpy_plot_surface(ary, mode="2d", colormap=0, lowerbound=-200, upperbound=200):
+
+    def surface2d():
+        global gfx_handle
+        if not gfx_handle:
+            import matplotlib.pyplot as plt
+            plt.figure()
+            img = plt.imshow(ary, interpolation="nearest", cmap = plt.cm.gray)
+            plt.show(False)
+            gfx_handle = {
+                "plt": plt,
+                "img": img
+            }
+        else:
+            plt = gfx_handle["plt"]
+            img = gfx_handle["img"]
+
+        plt.ion()
+        img.set_data(ary)
+        plt.draw()
+
+    def surface3d():
+        global gfx_handle
+        import matplotlib.pyplot as plt
+        from mpl_toolkits.mplot3d import Axes3D
+        from matplotlib.ticker import LinearLocator, FormatStrFormatter
+        from matplotlib import cm
+
+        if not gfx_handle:
+            gfx_handle = {
+                "fig": plt.figure()
+            }
+            plt.show(False)
+
+        fig = gfx_handle["fig"]
+
+        ax = fig.gca(projection='3d')
+
+        H, W = ary.shape
+        X = np.arange(0, W, 1)
+        Y = np.arange(0, H, 1)
+        X, Y = np.meshgrid(X, Y)
+
+        surf = ax.plot_surface(
+            X, Y, ary, rstride=1, cstride=1, cmap='winter',
+            linewidth=0, antialiased=False
+        )
+        if "surf" in gfx_handle:
+            gfx_handle["surf"].remove()
+        
+        gfx_handle["surf"] = surf
+        ax.set_zlim(0, 10)
+
+        ax.zaxis.set_major_locator(LinearLocator(10))
+        ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+
+        plt.ion()
+        plt.draw()
+
+    if mode.lower() == "2d":
+        surface2d()
+    elif mode.lower() == "3d":
+        surface3d()
+    else:
+        raise Exception("Invalid mode.")
+
+def confirm_exit(msg="Hit Enter to exit..."):
+    raw_input(msg)
+
 try:
     import bohrium as bh
+    from bohrium import visualization
     toarray = bh.array
     flush = bh.flush
     rand = bh.random.random_sample
@@ -39,6 +111,11 @@ except ImportError:
     randint = np.random.random_integers
     randseed =  np.random.seed
     bh_module_exist = False
+
+if bh_is_loaded_as_np:
+    plot_surface = visualization.plot_surface
+else:
+    plot_surface = numpy_plot_surface
 
 def t_or_f(arg):
     """Helper function to parse "True/true/TrUe/False..." as bools."""
@@ -266,14 +343,7 @@ class Benchmark:
                 ret = rand(shape)
         return toarray(ret, dtype=dtype, bohrium=self.bohrium)
 
-def visualize_grid(grid, title="", block=False):
-    """Created to visualize the 2D grid used by Heat Equation."""
 
-    import matplotlib.pyplot as plt
-
-    plt.imshow(grid, extent=[0, 1, 0, 1])
-    plt.colorbar()
-    plt.show(block=block)
 
 def main():
     B = Benchmark()

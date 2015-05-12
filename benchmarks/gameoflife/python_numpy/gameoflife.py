@@ -7,7 +7,6 @@ So what does this code example illustrate?
 """
 from benchpress import util
 import numpy as np
-from gameoflife_viz import render
 
 SURVIVE_LOW     = 2
 SURVIVE_HIGH    = 3
@@ -61,7 +60,7 @@ def play(state, iterations, version=1, visualize=False):
     for i in xrange(iterations):    # Run the game
         update_func()
         if visualize:
-            render(state)
+            util.plot_surface(state, "2d", 16, 1, 0)
 
     return state
 
@@ -86,7 +85,7 @@ def main():
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
     if B.visualize:
-        render(R, True)
+        util.confirm_exit()
 
 if __name__ == "__main__":
     main()

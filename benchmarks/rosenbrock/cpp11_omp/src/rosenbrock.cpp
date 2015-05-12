@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 
     #pragma omp parallel for
     for(int i=0; i<nelements; ++i) {
-        dataset[i] = i/nelements;
+        dataset[i] = i/(double)nelements;
     }
 
     bp.timer_start();                               // Start timer

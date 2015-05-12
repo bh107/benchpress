@@ -22,7 +22,7 @@ def jacobi(grid, iterations, visualize=False):
         center[:] = 0.2*(center+north+east+west+south)
 
         if visualize:
-            np.visualize(grid, "2d", 0, 0.0, 5.5)
+            util.plot_surface(grid, "2d", 0, 200, -200)
 
     return grid
 
@@ -49,6 +49,8 @@ def main():
         print(grid)
     if B.outputfn:
         B.tofile(B.outputfn, {'res': grid})
+    if B.visualize:
+        util.confirm_exit()
 
 if __name__ == "__main__":
     main()
