@@ -3,7 +3,7 @@ from benchpress.default import *
 bh_stack_cpu_t32 = [
     [('default',    'bridge',             None)],
     [('node',       'node',               None)],
-    [('topo',       'topological',        None)],
+    [('fuser',      'singleton',          None)],
     [
         ('cpu_t32', 'cpu',   {"OMP_NUM_THREADS": "32"}),
         ('cpu_t16', 'cpu',   {"OMP_NUM_THREADS": "16"}),
