@@ -71,10 +71,12 @@ bp_arguments_type bp_parse_args(int argc, char** argv)
     args.has_error = 0;
 
     static int verbose_flag;
+    static int visualize_flag;
     while (1)
     {
         static struct option long_options[] = {
-            {"verbose", no_argument,       &verbose_flag, 1},
+            {"verbose", no_argument, &verbose_flag, 1},
+            {"visualize", no_argument, &visualize_flag, 1},
             {"size",    required_argument, 0, 's'},
             {0, 0, 0, 0}
         };
@@ -102,6 +104,7 @@ bp_arguments_type bp_parse_args(int argc, char** argv)
         }
     }
     args.verbose = verbose_flag;
+    args.visualize = visualize_flag;
     return args;
 }
 

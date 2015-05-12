@@ -3,6 +3,7 @@ typedef struct bp_arguments {
     int nsizes;
     int sizes[16];
     int verbose;
+    int visualize;
     int has_unknown;
     int has_error;
 } bp_arguments_type;
