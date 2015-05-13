@@ -11,7 +11,7 @@ scripts = [
 bohrium = {
     'scripts': scripts,
     'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32,
+    'bohrium': bh_stack_cpu_t32_best,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }
@@ -46,6 +46,5 @@ np = {
 suites = [
     cseq,
     omp,
-    bohrium,
-    np
+    bohrium
 ]
