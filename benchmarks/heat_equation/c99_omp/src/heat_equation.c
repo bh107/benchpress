@@ -4,39 +4,14 @@
 #include <string.h>
 #include <bp_util.h>
 
-void solve(int height, int width, double *grid, int iter)
+void solve(int height, int width, double *grid, double epsilon, int max_iterations)
 {
-    double* grid_i;
-    double* T_i;
-
     double *T = (double*)malloc(height*width*sizeof(double));
 
-    //
-    // NumaEffects - begin
-    //
-    // memcpy(T, grid, height*width*sizeof(double)); <-- bad idea
-    //
-    // memcpy is sequentiel and will touch the entire
-    // grid on one numa-node.
-    //
-    // Instead of memset, parallel copy
-    // is performed with the following loop construct:
-    //
-    grid_i = grid;
-    T_i = T;
-    #pragma omp parallel for collapse(2)
-    for(int i=0; i<height; ++i) {
-        for(int j=0; j<width; ++j) {
-            *T_i = *grid_i;
-            ++T_i;
-            ++grid_i;
-        }
-    }
-    //
-    // NumaEffects - end
-    for(int n=0; n<iter; ++n)
-    {
-        double delta=0;
+    double delta = epsilon+1.0;
+    int iterations = 0;
+
+    while(delta>epsilon) {
         #pragma omp parallel for shared(grid, T) reduction(+:delta)
         for(int i=0; i<height-2; ++i)
         {
@@ -57,29 +32,25 @@ void solve(int height, int width, double *grid, int iter)
             }
             delta += delta_local;
         }
-        //
-        // NumaEffects - begin
-        //
-        // memcpy(grid, T, height*width*sizeof(double)); // <-- bad idea
-        //
-        // memcpy is sequentiel and will touch the entire
-        // grid on one numa-node.
-        //
-        // Instead of memset, parallel copy
-        // is performed with the following loop construct:
-        //
-        grid_i = grid;
-        T_i = T;
-        #pragma omp parallel for collapse(2)
-        for(int i=0; i<height; ++i) {
-            for(int j=0; j<width; ++j) {
-                ++grid_i;
-                ++T_i;
-                *grid_i = *T_i;
+
+        #pragma omp parallel for shared(grid, T)
+        for(int i=0; i<height-2; ++i)
+        {
+            int a = i * width;
+            const double *center = &grid[a+width+1];
+            double *t_center = &T[a+width+1];
+
+            for(int j=0; j<width-2; ++j)
+            {
+                *t_center = *center;
+                ++t_center;
+                ++center;
             }
         }
-        //
-        // NumaEffects - end
+
+        if (iterations>=max_iterations) {
+            break;
+        }
     }
     free(T);
 }
@@ -93,6 +64,7 @@ int main (int argc, char **argv)
     const int height    = bp.args.sizes[0];
     const int width     = bp.args.sizes[1];
     const int iter      = bp.args.sizes[2];
+    double epsilon = 0.005;
 
     size_t grid_size = height*width*sizeof(double);
     double *grid = (double*)malloc(grid_size);
@@ -135,7 +107,7 @@ int main (int argc, char **argv)
     }       
 #endif
     bp.timer_start();
-    solve(height, width, grid, iter);
+    solve(height, width, grid, epsilon, iter);
     bp.timer_stop();
 #ifdef DEBUG
     for (int i = 0; i<height; i++)
