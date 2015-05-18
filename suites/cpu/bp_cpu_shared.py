@@ -1,6 +1,21 @@
 #
 #   Common / Shared stack configurations for CPU suites.
 #
+bh_stack_cpu_t32_best = [
+    [('default',    'bridge',             None)],
+    [('creduce',    'complete_reduction', None)],
+    [('node',       'node',               None)],
+    [('topo',       'topological',        None)],
+    [
+        ('cpu_vc_fs_ct_t32', 'cpu',   {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "32"}),
+        ('cpu_vc_fs_ct_t16', 'cpu',   {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "16"}),
+        ('cpu_vc_fs_ct_t08', 'cpu',   {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "8"}),
+        ('cpu_vc_fs_ct_t04', 'cpu',   {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "4"}),
+        ('cpu_vc_fs_ct_t02', 'cpu',   {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "2"}),
+        ('cpu_vc_fs_ct_t01', 'cpu',   {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "1"}),
+    ]
+]
+
 bh_stack_cpu_t32 = [
     [('default',    'bridge',             None)],
     [('creduce',    'complete_reduction', None)],
