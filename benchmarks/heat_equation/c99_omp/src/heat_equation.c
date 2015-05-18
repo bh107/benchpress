@@ -4,6 +4,7 @@
 #include <string.h>
 #include <bp_util.h>
 
+/*
 void solve(int height, int width, double *grid, double epsilon, int max_iterations)
 {
     double *T = (double*)malloc(height*width*sizeof(double));
@@ -33,6 +34,56 @@ void solve(int height, int width, double *grid, double epsilon, int max_iteratio
                 center++;up++;left++;right++;down++;t_center++;
             }
             delta += delta_local;
+        }
+
+        #pragma omp parallel for shared(grid, T)
+        for(int i=0; i<height-2; ++i)
+        {
+            int a = i * width;
+            const double *center = &grid[a+width+1];
+            double *t_center = &T[a+width+1];
+
+            for(int j=0; j<width-2; ++j)
+            {
+                *t_center = *center;
+                ++t_center;
+                ++center;
+            }
+        }
+
+        if (iterations>=max_iterations) {
+            break;
+        }
+    }
+    free(T);
+}*/
+
+void solve(int height, int width, double *grid, double epsilon, int max_iterations)
+{
+    double *T = (double*)malloc(height*width*sizeof(double));
+
+    double delta = epsilon+1.0;
+    int iterations = 0;
+
+    while(delta>epsilon) {
+        ++iterations;
+
+        #pragma omp parallel for shared(grid, T) reduction(+:delta)
+        for(int i=0; i<height-2; ++i)
+        {
+            for(int j=0; j<width-2; ++j)
+            {
+                const int a = i * width + j;
+                const double *up     = &grid[a+1];
+                const double *left   = &grid[a+width];
+                const double *right  = &grid[a+width+2];
+                const double *down   = &grid[a+1+width*2];
+                const double *center = &grid[a+width+1];
+                double *t_center = &T[a+width+1];
+
+                *t_center = (*center + *up + *left + *right + *down) * 0.2;
+                delta += fabs(*t_center - *center);
+            }
         }
 
         #pragma omp parallel for shared(grid, T)
