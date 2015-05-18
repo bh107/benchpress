@@ -4,27 +4,7 @@
 #include <string.h>
 #include <bp_util.h>
 
-inline double innerloop(const double* grid, double* T, int width, int i)
-{
-    int a = i * width;
-    const double *up     = &grid[a+1];
-    const double *left   = &grid[a+width];
-    const double *right  = &grid[a+width+2];
-    const double *down   = &grid[a+1+width*2];
-    const double *center = &grid[a+width+1];
-    double *t_center = &T[a+width+1];
-
-    double delta = 0;
-    for(int j=0; j<width-2; ++j)
-    {
-        *t_center = (*center + *up + *left + *right + *down) * 0.2;
-        delta += fabs(*t_center - *center);
-        center++;up++;left++;right++;down++;t_center++;
-    }
-    return delta;
-}
-
-void openmp(int height, int width, double *grid, int iter)
+void solve(int height, int width, double *grid, int iter)
 {
     double* grid_i;
     double* T_i;
@@ -60,7 +40,22 @@ void openmp(int height, int width, double *grid, int iter)
         #pragma omp parallel for shared(grid, T) reduction(+:delta)
         for(int i=0; i<height-2; ++i)
         {
-            delta += innerloop(grid, T, width, i);
+            int a = i * width;
+            const double *up     = &grid[a+1];
+            const double *left   = &grid[a+width];
+            const double *right  = &grid[a+width+2];
+            const double *down   = &grid[a+1+width*2];
+            const double *center = &grid[a+width+1];
+            double *t_center = &T[a+width+1];
+
+            double delta_local = 0;
+            for(int j=0; j<width-2; ++j)
+            {
+                *t_center = (*center + *up + *left + *right + *down) * 0.2;
+                delta_local += fabs(*t_center - *center);
+                center++;up++;left++;right++;down++;t_center++;
+            }
+            delta += delta_local;
         }
         //
         // NumaEffects - begin
@@ -140,7 +135,7 @@ int main (int argc, char **argv)
     }       
 #endif
     bp.timer_start();
-    openmp(height,width,grid,iter);
+    solve(height, width, grid, iter);
     bp.timer_stop();
 #ifdef DEBUG
     for (int i = 0; i<height; i++)
