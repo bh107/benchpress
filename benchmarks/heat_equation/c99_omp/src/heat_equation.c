@@ -12,6 +12,8 @@ void solve(int height, int width, double *grid, double epsilon, int max_iteratio
     int iterations = 0;
 
     while(delta>epsilon) {
+        ++iterations;
+
         #pragma omp parallel for shared(grid, T) reduction(+:delta)
         for(int i=0; i<height-2; ++i)
         {

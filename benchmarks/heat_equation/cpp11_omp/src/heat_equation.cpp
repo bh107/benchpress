@@ -11,13 +11,14 @@ using namespace std;
 
 void solve(auto grid, double epsilon, int max_iterations)
 {
-    double delta = epsilon+1.0;
     auto temp = new double[ydim][xdim];
 
+    double delta = epsilon+1.0;
     auto iterations = 0;            // Compute the heat equation
+
     while(delta>epsilon) {
         ++iterations;
-        delta = 0.0;
+
         #pragma omp parallel for reduction(+:delta) collapse(2)
         for(int i=1; i<ydim-1; i++){
             for(int j=1;j<xdim-1;j++){
@@ -32,6 +33,7 @@ void solve(auto grid, double epsilon, int max_iterations)
                 grid[i][j] = temp[i][j];
             }
         }
+
         if (iterations>=max_iterations) {
             break;
         }
