@@ -5,8 +5,7 @@ BENCHMARK   = $(subst .cpp,, $(subst src/,,$(BENCH_SRC)))
 
 CXX=g++
 DEBUG=
-CXXFLAGS=-Wall -Wextra -O3 -std=c++1y $(DEBUG)
-#CXXFLAGS=-Wall -Wextra -O3 -std=c++11 $(DEBUG)
+CXXFLAGS=-Wall -Wextra -O3 -std=c++11 $(DEBUG)
 UTILS=$(ROOT)/_utils/c99/src/bp_util.c
 INCLUDE=-I$(ROOT)/_utils/c99/include
 LIBS=-lm

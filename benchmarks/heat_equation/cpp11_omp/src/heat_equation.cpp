@@ -9,27 +9,28 @@
 
 using namespace std;
 
-void solve(auto grid, double epsilon, int max_iterations)
+template <typename T>
+void solve(T grid, double epsilon, int max_iterations)
 {
-    auto temp = new double[ydim][xdim];
+    T temp = new double[ydim][xdim];
 
     double delta = epsilon+1.0;
-    auto iterations = 0;            // Compute the heat equation
+    int iterations = 0;            // Compute the heat equation
 
     while(delta>epsilon) {
         ++iterations;
 
         #pragma omp parallel for reduction(+:delta) collapse(2)
-        for(int i=1; i<ydim-1; i++){
-            for(int j=1;j<xdim-1;j++){
+        for (int i=1; i<ydim-1; i++) {
+            for(int j=1;j<xdim-1;j++) {
                 temp[i][j] = (grid[i-1][j] + grid[i+1][j] + grid[i][j] + grid[i][j-1] + grid[i][j+1])*0.2;
                 delta += abs(temp[i][j] - grid[i][j]);
             }
         }
 
         #pragma omp parallel for collapse(2)
-        for(int i=1;i<ydim-1; i++){
-            for(int j=1;j<xdim-1;j++){
+        for (int i=1;i<ydim-1; i++) {
+            for(int j=1;j<xdim-1;j++) {
                 grid[i][j] = temp[i][j];
             }
         }
@@ -67,29 +68,29 @@ int main(int argc, char* argv[])
 
     auto grid = new double[ydim][xdim];
     #pragma omp parallel for collapse(2)
-    for(int i=0; i<ydim; i++){      // Initialize the grid
-        for(int j=0;j<xdim;j++){
+    for (int i=0; i<ydim; i++) {      // Initialize the grid
+        for (int j=0;j<xdim;j++) {
             grid[i][j] = 0;
         }
     }
-    for(int i=0; i<ydim; i++){      // And borders
+    for (int i=0; i<ydim; i++) {      // And borders
         grid[i][0]      = -273.15;
         grid[i][xdim-1] = -273.15;
     }
-    for(int i=0; i<xdim; i++){
+    for (int i=0; i<xdim; i++) {
         grid[0][i]      = -273.15;
         grid[ydim-1][i] = 40.0;
     }
 
-    bp.timer_start();                                   // Rn
+    bp.timer_start();                                   // Start timer
     solve(grid, epsilon, max_iterations);
     bp.timer_stop();
 
     bp.print("heat_equation(cpp11_omp)");
     if (bp.args.verbose) {                             // and values.
         cout << ", \"output\": [";
-        for(int i=0; i<10; ++i) {
-            for(int j=0; j<10; ++j) {
+        for (int i=0; i<10; ++i) {
+            for (int j=0; j<10; ++j) {
                 cout << grid[i][j] << ", ";
             }
             cout << endl;
