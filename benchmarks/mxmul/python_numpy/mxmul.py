@@ -31,6 +31,8 @@ def main():
     B.pprint()
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
+    if B.verbose:
+        print(R)
 
 if __name__ == "__main__":
     main()
