@@ -1,0 +1,6 @@
+0: BH_FREE OPS=1{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x2246fa0 Type: BH_FLOAT32 #elem: 25 Data: 0x7f08a90bf000 ]]
+}
+1: BH_DISCARD OPS=1{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x2246fa0 Type: BH_FLOAT32 #elem: 25 Data: 0x7f08a90bf000 ]]
+}

@@ -1,0 +1,77 @@
+0: BH_RANGE OPS=1{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+1: BH_MULTIPLY OPS=3{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP2 [ CONST(BH_UINT32)=1 ]
+}
+2: BH_ADD OPS=3{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP2 [ CONST(BH_UINT32)=0 ]
+}
+3: BH_IDENTITY OPS=2{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1bad920 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+4: BH_FREE OPS=1{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+5: BH_DISCARD OPS=1{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x1b98800 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+6: BH_RANGE OPS=1{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+7: BH_MULTIPLY OPS=3{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP2 [ CONST(BH_UINT32)=1 ]
+}
+8: BH_ADD OPS=3{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+  OP2 [ CONST(BH_UINT32)=0 ]
+}
+9: BH_IDENTITY OPS=2{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x221c280 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+10: BH_FREE OPS=1{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+11: BH_DISCARD OPS=1{
+  OP0 [ Dims: 1 Start: 0 Shape:  25 Stride:  1 Base=>[ Addr: 0x22451c0 Type: BH_UINT32 #elem: 25 Data: (nil) ]]
+}
+12: BH_IDENTITY OPS=2{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x220bd90 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+  OP1 [ CONST(BH_FLOAT32)=0.000000 ]
+}
+13: BH_NONE OPS=0{
+}
+14: BH_MULTIPLY OPS=3{
+  OP0 [ Dims: 3 Start: 0 Shape:  5,5,5 Stride:  25,5,1 Base=>[ Addr: 0x1be6340 Type: BH_FLOAT32 #elem: 125 Data: (nil) ]]
+  OP1 [ Dims: 3 Start: 0 Shape:  5,5,5 Stride:  5,0,1 Base=>[ Addr: 0x1bad920 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+  OP2 [ Dims: 3 Start: 0 Shape:  5,5,5 Stride:  0,1,5 Base=>[ Addr: 0x221c280 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+}
+15: BH_ADD_REDUCE OPS=3{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x2246fa0 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+  OP1 [ Dims: 3 Start: 0 Shape:  5,5,5 Stride:  25,5,1 Base=>[ Addr: 0x1be6340 Type: BH_FLOAT32 #elem: 125 Data: (nil) ]]
+  OP2 [ CONST(BH_INT64)=2 ]
+}
+16: BH_FREE OPS=1{
+  OP0 [ Dims: 3 Start: 0 Shape:  5,5,5 Stride:  25,5,1 Base=>[ Addr: 0x1be6340 Type: BH_FLOAT32 #elem: 125 Data: (nil) ]]
+}
+17: BH_DISCARD OPS=1{
+  OP0 [ Dims: 3 Start: 0 Shape:  5,5,5 Stride:  25,5,1 Base=>[ Addr: 0x1be6340 Type: BH_FLOAT32 #elem: 125 Data: (nil) ]]
+}
+18: BH_FREE OPS=1{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x220bd90 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+}
+19: BH_DISCARD OPS=1{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x220bd90 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+}
+20: BH_SYNC OPS=1{
+  OP0 [ Dims: 2 Start: 0 Shape:  5,5 Stride:  5,1 Base=>[ Addr: 0x2246fa0 Type: BH_FLOAT32 #elem: 25 Data: (nil) ]]
+}
