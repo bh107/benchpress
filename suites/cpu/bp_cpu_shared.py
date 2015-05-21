@@ -6,6 +6,7 @@ bh_stack_cpu_t32_best = [
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
     [
         ('cpu_vc_fs_ct_t32',    'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "32", "BH_BCEXP_SIGN": "0"}),
         ('cpu_vc_fs_ct_t16',    'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "16", "BH_BCEXP_SIGN": "0"}),
@@ -21,6 +22,7 @@ bh_stack_cpu_t32 = [
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
     [
         ('cpu_vc_fs_ct_t32',    'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "32", "BH_BCEXP_SIGN": "0"}),
         ('cpu_vc_fs_ct_t16',    'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "16", "BH_BCEXP_SIGN": "0"}),
@@ -43,6 +45,7 @@ bh_stack_cpu_t32_all = [
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
     [
         ('cpu_vc_fs_ct_t32',    'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "32", "BH_BCEXP_SIGN": "0"}),
         ('cpu_vc_fs_ct_t16',    'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "16", "BH_BCEXP_SIGN": "0"}),
@@ -80,6 +83,7 @@ bh_stack_cpu_t4 = [
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
     [
         ('cpu_fs_t04',          'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "4", "BH_BCEXP_SIGN": "0"}),
         ('cpu_fs_t02',          'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS": "2", "BH_BCEXP_SIGN": "0"}),
@@ -96,6 +100,7 @@ stack_omp_t32 = [
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
     [
         ('omp_af_t32',          'cpu',  {"OMP_NUM_THREADS": "32", "GOMP_CPU_AFFINITY": "0-31" }),
         ('omp_af_t16',          'cpu',  {"OMP_NUM_THREADS": "16", "GOMP_CPU_AFFINITY": "0-31" }),

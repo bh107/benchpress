@@ -2,20 +2,12 @@ from benchpress.default import *
 from bp_cpu_shared import *
 
 scripts = [
-    ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
+    ('Heat Equation', 'heat_equation', '--size=14000*14000*10'),
 ]
-
-numpy = {
-    'scripts': scripts,
-    'launchers': [python_numpy],
-    'bohrium': bh_stack_none,
-    "use_slurm_default": True,
-    "use_grapher": "cpu"
-}
 
 sequential = {
     'scripts': scripts,
-    'launchers': [c99_seq, c99_seq_ts],
+    'launchers': [c99_seq],
     'bohrium': bh_stack_none,
     "use_slurm_default": True,
     "use_grapher": "cpu"
@@ -31,14 +23,13 @@ multicore = {
 
 bohrium = {
     'scripts': scripts,
-    'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32,
+    'launchers': [python_bohrium, cpp11_bxx],
+    'bohrium': bh_stack_cpu_t32_best,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }
 
 suites = [
-    numpy,
     sequential,
     multicore,
     bohrium
