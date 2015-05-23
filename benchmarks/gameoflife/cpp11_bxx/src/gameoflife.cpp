@@ -11,10 +11,10 @@ using namespace std;
 using namespace bxx;
 
 template <typename T>
-void randomstate(int height, int width, multi_array<T>& state, T prob)
+void world(int height, int width, multi_array<T>& state)
 {
-    state = zeros<T>(height+2, width+2);
-    state[_(1,-2)][_(1,-2)] = as<T>(randu<T>(height, width) < prob);
+    state = ones<T>(height+2, width+2);
+    state[_(2,-3)][_(2,-3)] = (T)0;
 }
 
 template <typename T>
@@ -47,7 +47,7 @@ void play(multi_array<T>& state, int iterations, int version, int visualize)
             cells(as<T>(stay || spawn));                        // Update state
 
             if (visualize) {
-                plot_surface(state, 0, 16, 0, 1);
+                plot_surface(state, 0, 16, 1, 0);
             }
         }
     } else if (2 == version) {      // This is an optimized version of the game rules
@@ -61,7 +61,7 @@ void play(multi_array<T>& state, int iterations, int version, int visualize)
             cells(cells * c1 + c2);                             // Update
 
             if (visualize) {
-                plot_surface(state, 0, 16, 0, 1);
+                plot_surface(state, 0, 16, 1, 0);
             }
         }
     } else {
@@ -70,10 +70,10 @@ void play(multi_array<T>& state, int iterations, int version, int visualize)
 }
 
 template <typename T>
-void bench(bp_util_type& bp, const int W, const int H, const int I, const int V, const T P)
+void bench(bp_util_type& bp, const int W, const int H, const int I, const int V)
 {
     multi_array<T> state;                           // Construct matrices
-    randomstate(H, W, state, P);
+    world(H, W, state);
 
     Runtime::instance().flush();
     bp.timer_start();                               // Start timer
@@ -100,9 +100,8 @@ int main(int argc, char* argv[])
     const int H = bp.args.sizes[1];
     const int I = bp.args.sizes[2];
     const int V = bp.args.sizes[3];
-    const double P = 0.2;
 
-    bench(bp, W, H, I, V, (double)P);
+    bench<double>(bp, W, H, I, V);
 
     return 0;
 }

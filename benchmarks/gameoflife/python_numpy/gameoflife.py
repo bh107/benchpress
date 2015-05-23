@@ -12,9 +12,9 @@ SURVIVE_LOW     = 2
 SURVIVE_HIGH    = 3
 SPAWN           = 3
 
-def randomstate(height, width, B, prob=0.2):
-    state = np.zeros((height+2,width+2))
-    state[1:-1,1:-1] = B.random_array((width,height)) < prob
+def world(height, width, B):
+    state = np.ones((height+2,width+2), dtype=B.dtype)
+    state[2:-2,2:-2] = B.dtype(0)
     return state
 
 def play(state, iterations, version=1, visualize=False):
@@ -58,16 +58,16 @@ def play(state, iterations, version=1, visualize=False):
         update_func = update_optimized
 
     for i in xrange(iterations):    # Run the game
-        update_func()
         if visualize:
             util.plot_surface(state, "2d", 16, 1, 0)
+        update_func()
 
     return state
 
 def main():
 
     B = util.Benchmark()
-    (W, H, I, V) = B.size
+    (H, W, I, V) = B.size
 
     if V not in [1, 2]:
         raise Exception("Unsupported rule-implementation.")
@@ -75,7 +75,7 @@ def main():
     if B.inputfn:
         S = B.load_array()
     else:
-        S = randomstate(W, H, B)
+        S = world(H, W, B)
 
     B.start()
     R = play(S, I, V, B.visualize)
