@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
             }
         }
         cout << fixed << setprecision(10)
-			 << "Result = " << << r << endl;
+			 << "Result = " << r << endl;
     }
 
     delete a; 
