@@ -4,14 +4,15 @@ from bp_cpu_shared import *
 scripts = [
     ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
     ('Leibnitz PI',     'leibnitz_pi',      '--size=200000000'),
+    ('Mxmul',           'mxmul',            '--size=2000'),
     ('Rosenbrock',      'rosenbrock',       '--size=100000000*10'),
     ('Shallow Water',   'shallow_water',    '--size=5000*5000*10'),
 ]
 
-bohrium = {
+cseq = {
     'scripts': scripts,
-    'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32_best,
+    'launchers': [c99_seq],
+    'bohrium': bh_stack_none,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }
@@ -24,18 +25,10 @@ omp = {
     "use_grapher": "cpu"
 }
 
-cseq = {
+bohrium = {
     'scripts': scripts,
-    'launchers': [c99_seq],
-    'bohrium': bh_stack_none,
-    "use_slurm_default": True,
-    "use_grapher": "cpu"
-}
-
-np = {
-    'scripts': scripts,
-    'launchers': [python_numpy],
-    'bohrium': bh_stack_none,
+    'launchers': [python_bohrium],
+    'bohrium': bh_stack_cpu_t32_best,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }

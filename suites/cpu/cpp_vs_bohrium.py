@@ -7,7 +7,7 @@ scripts = [
     ('Game of Life v2', 'gameoflife',       '--size=10000*10000*10*2'),
     ('Leibnitz PI',     'leibnitz_pi',      '--size=200000000'),
     ('Montecarlo PI',   'montecarlo_pi',    '--size=200000000'),
-    ('Mxmul',           'mxmul',            '--size=1500'),
+    ('Mxmul',           'mxmul',            '--size=2000'),
     ('Rosenbrock',      'rosenbrock',       '--size=100000000*10'),
     ('Shallow Water',   'shallow_water',    '--size=5000*5000*10'),
 ]
