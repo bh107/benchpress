@@ -47,7 +47,7 @@ void play(multi_array<T>& state, int iterations, int version, int visualize)
             cells(as<T>(stay || spawn));                        // Update state
 
             if (visualize) {
-                plot_surface(state, 0, 16, 1, 0);
+                plot_surface(state, 1, 16, 1, 0);
             }
         }
     } else if (2 == version) {      // This is an optimized version of the game rules
@@ -61,7 +61,7 @@ void play(multi_array<T>& state, int iterations, int version, int visualize)
             cells(cells * c1 + c2);                             // Update
 
             if (visualize) {
-                plot_surface(state, 0, 16, 1, 0);
+                plot_surface(state, 1, 16, 1, 0);
             }
         }
     } else {

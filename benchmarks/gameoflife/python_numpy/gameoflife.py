@@ -13,8 +13,8 @@ SURVIVE_HIGH    = 3
 SPAWN           = 3
 
 def world(height, width, B):
-    state = np.ones((height+2,width+2), dtype=B.dtype)
-    state[2:-2,2:-2] = B.dtype(0)
+    state = np.ones((height+2, width+2), dtype=B.dtype)
+    state[2:-2, 2:-2] = B.dtype(0)
     return state
 
 def play(state, iterations, version=1, visualize=False):
@@ -59,7 +59,7 @@ def play(state, iterations, version=1, visualize=False):
 
     for i in xrange(iterations):    # Run the game
         if visualize:
-            util.plot_surface(state, "2d", 16, 1, 0)
+            util.plot_surface(state, "3d", 16, 1, 0)
         update_func()
 
     return state
