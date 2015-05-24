@@ -3,10 +3,10 @@ from bp_cpu_shared import *
 
 scripts = [
     ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
-    ('Game of Life v1', 'gameoflife',       '--size=10000*10000*10*1'),
-    ('Game of Life v2', 'gameoflife',       '--size=10000*10000*10*2'),
+    #('Game of Life v1', 'gameoflife',       '--size=10000*10000*10*1'),
+    #('Game of Life v2', 'gameoflife',       '--size=10000*10000*10*2'),
     ('Leibnitz PI',     'leibnitz_pi',      '--size=200000000'),
-    ('Montecarlo PI',   'montecarlo_pi',    '--size=200000000'),
+    #('Montecarlo PI',   'montecarlo_pi',    '--size=200000000'),
     ('Mxmul',           'mxmul',            '--size=2000'),
     ('Rosenbrock',      'rosenbrock',       '--size=100000000*10'),
     ('Shallow Water',   'shallow_water',    '--size=5000*5000*10'),
