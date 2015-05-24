@@ -11,8 +11,8 @@ Contents:
 +------------------------------+------------------------------+
 | .. toctree::                 | .. toctree::                 |
 |    :maxdepth: 2              |    :maxdepth: 1              |
-|                              |    :numbered:                |
-|    quickstart                |    :glob:                    |
+|                              |    :glob:                    |
+|    quickstart                |                              |
 |    install                   |                              |
 |    usage_commands            |    benchmarks/*              |
 |    usage_examples            |                              |

@@ -34,11 +34,6 @@ Cpp11 Bxx
 ---------
 
 
-.. error:: There are issues with the implementation.
-
-    BXX, does not handle slices as arguments properly.
-
-
 .. literalinclude:: ../../../benchmarks/rosenbrock/cpp11_bxx/src/rosenbrock.cpp
    :language: cpp
 

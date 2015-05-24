@@ -34,6 +34,11 @@ Cpp11 Seq
 ---------
 
 
+.. error:: There are issues with the implementation.
+
+    In progress...
+
+
 .. literalinclude:: ../../../benchmarks/black_scholes/cpp11_seq/src/black_scholes.cpp
    :language: cpp
 

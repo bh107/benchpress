@@ -48,6 +48,16 @@ C99 Seq
    :language: c
 
 
+.. _heat_equation_cpp11_bxx:
+
+Cpp11 Bxx
+---------
+
+
+.. literalinclude:: ../../../benchmarks/heat_equation/cpp11_bxx/src/heat_equation.cpp
+   :language: cpp
+
+
 .. _heat_equation_cpp11_omp:
 
 Cpp11 Omp
