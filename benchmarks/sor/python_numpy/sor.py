@@ -50,6 +50,8 @@ def solve(grid, epsilon=0.005, max_iterations=None):
                 np.sum(np.absolute(r1[:-1,:-1] - b1[:-1,1:])) + \
                 np.sum(np.absolute(r0[1:,1:]   - b1[:-1,1:])) + \
                 np.sum(np.absolute(b0[1:,:-1]  - r1[:-1,:-1]))
+        if util.Benchmark().bohrium:
+            np.flush()
         if max_iterations != None and max_iterations <= iteration:
             break
     return (r0,r1,b0,b1)
@@ -64,6 +66,8 @@ def iterate(grid, iterations):
         r0[1:,1:]   = (r0[1:,1:] + b1[:-1,1:] + b1[1:,1:] + b0[1:,:-1] + b0[1:,1:])*0.2
         b1[:-1,1:]  = (b1[:-1,1:] + r0[:-1,1:] + r0[1:,1:] + r1[:-1,:-1] + r1[:-1,1:])*0.2
         b0[1:,:-1]  = (b0[1:,:-1] + r1[:-1,:-1] + r1[1:,:-1] + r0[1:,:-1] + r0[1:,1:])*0.2
+        if util.Benchmark().bohrium:
+            np.flush()
     return (r0,r1,b0,b1)
 
 def main():

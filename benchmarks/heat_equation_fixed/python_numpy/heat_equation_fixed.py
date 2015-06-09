@@ -21,6 +21,8 @@ def jacobi(grid, iterations, visualize=False):
     for i in xrange(iterations):
         center[:] = 0.2*(center+north+east+west+south)
 
+        if util.Benchmark().bohrium:
+            np.flush()
         if visualize:
             util.plot_surface(grid, "2d", 0, 200, -200)
 

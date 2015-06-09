@@ -41,6 +41,9 @@ def wireworld(world, iterations):
         sim += MASK * 4 # conductors->4   
         sim *= 2        # Upgrade all to new state
 
+        if util.Benchmark().bohrium:
+            np.flush()
+
     return sim
 
 def main():

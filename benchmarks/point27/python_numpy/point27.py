@@ -19,6 +19,8 @@ def point27(data, iterations):
     stencil = D3P27(data)
     for _ in xrange(iterations):
         active[:] = sum(stencil)/27.0
+        if util.Benchmark().bohrium:
+            np.flush()
 
     return active
 

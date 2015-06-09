@@ -98,6 +98,8 @@ def simulate(H, timesteps, visualize=False):
 
     for i in xrange(timesteps):
         (H, U, V) = step(H, U, V)
+        if util.Benchmark().bohrium:
+            np.flush()
         if visualize:
             util.plot_surface(H, "3d", 0, 0, 5.5)
     return H
