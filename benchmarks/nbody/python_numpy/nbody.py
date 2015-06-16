@@ -150,6 +150,8 @@ def move(galaxy, dt):
 def simulate(galaxy, timesteps, visualize=False):
     for i in xrange(timesteps):
         move(galaxy,dt)
+        if util.Benchmark().bohrium:
+            np.flush()
         if visualize:#NB: this is only for experiments
             T = np.zeros((3, len(galaxy['x'])), dtype=np.float32)
             T[0,:] = galaxy['x']
@@ -166,6 +168,8 @@ def main():
         galaxy = B.load_arrays(B.inputfn)
     else:
         galaxy = random_galaxy(N, B, B.dtype)
+        if util.Benchmark().bohrium:
+            np.flush()
 
     if B.dumpinput:
         B.dump_arrays("nbody", galaxy)

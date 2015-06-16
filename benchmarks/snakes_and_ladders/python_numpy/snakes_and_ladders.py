@@ -80,6 +80,10 @@ def main():
 
         # Store/plot the accumulated marginal probability at the k-th iteration
         a = a + m[0]
+
+        if util.Benchmark().bohrium:
+            np.flush()
+
         if B.visualize:
             pyplot.figure(2)
             pyplot.plot(a[0:size])
