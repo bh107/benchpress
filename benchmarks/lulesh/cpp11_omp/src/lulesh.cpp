@@ -75,7 +75,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <bp_util.h>
+
+#if defined(_OPENMP)
 #include <omp.h>
+#else
+inline int omp_get_max_threads() { return 1; }
+inline int omp_get_thread_num()  { return 0; }
+inline int omp_get_num_threads() { return 1; }
+#endif
+
 
 #define LULESH_SHOW_PROGRESS 0
 
@@ -2959,7 +2968,12 @@ void LagrangeLeapFrog()
 
 int main(int argc, char *argv[])
 {
- 	Index_t edgeElems = atoi(argv[1]);
+    bp_util_type bp = bp_util_create(argc, argv, 1);// Grab arguments
+    if (bp.args.has_error) {
+        return 1;
+    }
+
+    Index_t edgeElems = bp.args.sizes[0];
 	Index_t edgeNodes = edgeElems+1 ;
 	// Real_t ds = Real_t(1.125)/Real_t(edgeElems) ; /* may accumulate roundoff */
 	Real_t tx, ty, tz ;
@@ -3175,7 +3189,8 @@ int main(int argc, char *argv[])
 	timeval start, end;
 	gettimeofday(&start, NULL);
 
-	
+	bp.timer_start();                               // Start timer
+    
 	while(domain.time() < domain.stoptime() ) {
 		
 		TimeIncrement() ;
@@ -3187,10 +3202,10 @@ int main(int argc, char *argv[])
 #endif
 	}
 
-	
+	bp.timer_stop();                                // Stop timer
 	gettimeofday(&end, NULL);
+    if (bp.args.verbose) {
 	double elapsed_time = double(end.tv_sec - start.tv_sec) + double(end.tv_usec - start.tv_usec) *1e-6;
-	
 	
 	printf("\n\nElapsed time = %12.6e\n\n", elapsed_time);
     
@@ -3221,7 +3236,8 @@ int main(int argc, char *argv[])
 	printf("        MaxAbsDiff   = %12.6e\n",   MaxAbsDiff   );
 	printf("        TotalAbsDiff = %12.6e\n",   TotalAbsDiff );
 	printf("        MaxRelDiff   = %12.6e\n\n", MaxRelDiff   );
-	
+	}
+    bp.print("lulesh(cpp11_omp)");
 	return 0 ;
 }
 

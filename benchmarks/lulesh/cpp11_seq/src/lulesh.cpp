@@ -67,6 +67,7 @@ Additional BSD Notice
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <bp_util.h>
 
 //#define LULESH_SHOW_PROGRESS 1
 
@@ -2660,7 +2661,12 @@ void LagrangeLeapFrog()
 
 int main(int argc, char *argv[])
 {
-   Index_t edgeElems = atoi(argv[1]);
+   bp_util_type bp = bp_util_create(argc, argv, 1);// Grab arguments
+    if (bp.args.has_error) {
+        return 1;
+    }
+
+    Index_t edgeElems = bp.args.sizes[0];
    Index_t edgeNodes = edgeElems+1 ;
    // Real_t ds = Real_t(1.125)/Real_t(edgeElems) ; /* may accumulate roundoff */
    Real_t tx, ty, tz ;
@@ -2871,7 +2877,9 @@ int main(int argc, char *argv[])
    }
 
    timeval start, end;
-   gettimeofday(&start, NULL);
+	gettimeofday(&start, NULL);
+
+	bp.timer_start();                               // Start timer
 
 
    /* timestep to solution */
@@ -2885,7 +2893,9 @@ int main(int argc, char *argv[])
 #endif
    }
 
-   	gettimeofday(&end, NULL);
+   	bp.timer_stop();                                // Stop timer
+	gettimeofday(&end, NULL);
+    if (bp.args.verbose) {
         double elapsed_time = double(end.tv_sec - start.tv_sec) + double(end.tv_usec - start.tv_usec) *1e-6;
 
 
@@ -2924,7 +2934,8 @@ int main(int argc, char *argv[])
    //for (Index_t i=0; i<mesh.numElem(); i++)
    //    fprintf(fp,"%.6f\n",mesh.x(i));
    //fclose(fp);
-               
+   }
+   bp.print("lulesh(cpp11_seq)");
    return 0 ;
 }
 

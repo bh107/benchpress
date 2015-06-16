@@ -2510,6 +2510,6 @@ int main(int argc, char *argv[]){
         printf("   TotalAbsDiff = %12.6e\n", TotalAbsDiff);
         printf("   MaxRelDiff   = %12.6e\n\n", MaxRelDiff);
     }
-    bp.print("heat_equation(cpp11_bxx)");
+    bp.print("lulesh(cpp11_bxx)");
 	return 0;
 }
