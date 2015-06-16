@@ -6,6 +6,7 @@ Game of Life
 So what does this code example illustrate?
 """
 from benchpress import util
+from gameoflife_utils import pattern_paths, insert_cells, cells_from_file
 import numpy as np
 
 SURVIVE_LOW     = 2
@@ -15,6 +16,10 @@ SPAWN           = 3
 def world(height, width, B):
     state = np.ones((height+2, width+2), dtype=B.dtype)
     state[2:-2, 2:-2] = B.dtype(0)
+    return state
+
+def world_zeros(height, width, B):
+    state = np.zeros((height+2, width+2), dtype=B.dtype)
     return state
 
 def play(state, iterations, version=1, visualize=False):
@@ -71,9 +76,14 @@ def main():
 
     if V not in [1, 2]:
         raise Exception("Unsupported rule-implementation.")
-
     if B.inputfn:
-        S = B.load_array()
+        if "LIF" in B.inputfn:
+            paths = pattern_paths("cells")
+            S = world_zeros(H, W, B)
+            cells = cells_from_file(B.inputfn)
+            insert_cells(S, cells)
+        else:
+            S = B.load_array()
     else:
         S = world(H, W, B)
 
