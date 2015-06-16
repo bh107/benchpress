@@ -2,16 +2,16 @@ from __future__ import print_function
 from benchpress import util
 import numpy as np
 import math
+try:
+    import numpy_force as npf
+except ImportError:
+    import numpy as npf
 
 def model(N, B):
     """Construct pseudo-data representing price samples?"""
-
-    if util.Benchmark().bohrium:
-        S = numpy.random.random(N).astype(B.dtype)
-    else:
-        S = np.random.random(N).astype(B.dtype)
-    S = np.array(S*4.0-2.0 + 60.0) # Price is between 58-62
-
+    # Create the outside of bohrium 
+    S = npf.random.random(N).astype(B.dtype)*4.0 + 58.0 # Price is between 58-62
+    S = np.array(S) 
     return S
 
 def CND(X):
