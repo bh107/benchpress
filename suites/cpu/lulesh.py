@@ -8,6 +8,13 @@ bh_stack = [
     [('topo',       'topological',  None)],
     [('node',       'node',         None)],
     [
+        ('cpu_vc_t32',          'cpu',  {"BH_CPU_JIT_LEVEL": "2", "OMP_NUM_THREADS": "32", "BH_BCEXP_SIGN": "0"}),
+        ('cpu_vc_t16',          'cpu',  {"BH_CPU_JIT_LEVEL": "2", "OMP_NUM_THREADS": "16", "BH_BCEXP_SIGN": "0"}),
+        ('cpu_vc_t08',          'cpu',  {"BH_CPU_JIT_LEVEL": "2", "OMP_NUM_THREADS": "8" , "BH_BCEXP_SIGN": "0"}),
+        ('cpu_vc_t04',          'cpu',  {"BH_CPU_JIT_LEVEL": "2", "OMP_NUM_THREADS": "4" , "BH_BCEXP_SIGN": "0"}),
+        ('cpu_vc_t02',          'cpu',  {"BH_CPU_JIT_LEVEL": "2", "OMP_NUM_THREADS": "2" , "BH_BCEXP_SIGN": "0"}),
+        ('cpu_vc_t01',          'cpu',  {"BH_CPU_JIT_LEVEL": "2", "OMP_NUM_THREADS": "1" , "BH_BCEXP_SIGN": "0"}),
+
         ('cpu_vc_t32',          'cpu',  {"BH_CPU_JIT_LEVEL": "1", "OMP_NUM_THREADS": "32", "BH_BCEXP_SIGN": "0"}),
         ('cpu_vc_t16',          'cpu',  {"BH_CPU_JIT_LEVEL": "1", "OMP_NUM_THREADS": "16", "BH_BCEXP_SIGN": "0"}),
         ('cpu_vc_t08',          'cpu',  {"BH_CPU_JIT_LEVEL": "1", "OMP_NUM_THREADS": "8" , "BH_BCEXP_SIGN": "0"}),
