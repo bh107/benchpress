@@ -79,6 +79,8 @@ inline real4  SQRT(real4  arg) { return sqrtf(arg) ; }
 inline real8  SQRT(real8  arg) { return sqrt(arg) ; }
 inline real10 SQRT(real10 arg) { return sqrtl(arg) ; }
 
+Real_t Gamma[4][8];
+
 /************************************************************/
 /* Allow for flexible data layout experiments by separating */
 /* array interface from underlying implementation.          */
@@ -543,13 +545,6 @@ void CalcAccelerationForNodes() {
 }
 
 static inline
-void InitStressTermsForElems(multi_array<Real_t>& sigxx,
-                             multi_array<Real_t>& sigyy,
-                             multi_array<Real_t>& sigzz) {
-    sigxx(sigyy(sigzz((((Real_t)-1) * domain.m_p) - domain.m_q)));
-}
-
-static inline
 Real_t CalcElemShapeFunctionDerivatives(const Real_t* const x,
 									    const Real_t* const y,
 									    const Real_t* const z,
@@ -730,7 +725,6 @@ void CalcElemNodeNormals(Real_t pfx[8],
 static inline
 void IntegrateStressForElems(Index_t *nodelist,
                              Real_t *x, Real_t *y, Real_t *z,
-                             Real_t *sigxx, Real_t *sigyy, Real_t *sigzz,
                              Real_t *determ, Index_t *nodeElemCount,
                              Index_t *nodeElemStart, Index_t *nodeElemCornerList,
                              Real_t *lfx, Real_t *lfy, Real_t *lfz,
@@ -739,6 +733,9 @@ void IntegrateStressForElems(Index_t *nodelist,
     Real_t *fx_elem = Allocate<Real_t>(numElem8) ;
     Real_t *fy_elem = Allocate<Real_t>(numElem8) ;
     Real_t *fz_elem = Allocate<Real_t>(numElem8) ;
+
+    Real_t *p = domain.m_p.data_export();
+    Real_t *q = domain.m_q.data_export();
 
 #pragma omp parallel for firstprivate(numElem)
     for(Index_t k=0 ; k<numElem ; ++k) {
@@ -758,11 +755,12 @@ void IntegrateStressForElems(Index_t *nodelist,
 
         CalcElemNodeNormals(B[0], B[1], B[2], x_local, y_local, z_local);
 
-        Index_t k8 = k*8;
-        Real_t stress_xx = sigxx[k];
-        Real_t stress_yy = sigyy[k];
-        Real_t stress_zz = sigzz[k];
+        // InitStressTermsForElems
+        Real_t stress_xx, stress_yy, stress_zz;
+        stress_xx = stress_yy = stress_zz = - p[k] - q[k];
 
+        //SumElemStressesToNodeForces
+        Index_t k8 = k*8;
         fx_elem[k8+0]    = -( stress_xx * B[0][0] );
         fx_elem[k8+1] = -( stress_xx * B[0][1] );
     	fx_elem[k8+2] = -( stress_xx * B[0][2] );
@@ -1053,41 +1051,6 @@ void CalcFBHourglassForceForElems(Index_t *nodelist, Real_t *determ, Index_t *no
 	Real_t *fy_elem = Allocate<Real_t>(numElem8) ;
 	Real_t *fz_elem = Allocate<Real_t>(numElem8) ;
 
-    Real_t  gamma[4][8];
-
-    gamma[0][0] = Real_t( 1.);
-    gamma[0][1] = Real_t( 1.);
-    gamma[0][2] = Real_t(-1.);
-    gamma[0][3] = Real_t(-1.);
-    gamma[0][4] = Real_t(-1.);
-    gamma[0][5] = Real_t(-1.);
-    gamma[0][6] = Real_t( 1.);
-    gamma[0][7] = Real_t( 1.);
-    gamma[1][0] = Real_t( 1.);
-    gamma[1][1] = Real_t(-1.);
-    gamma[1][2] = Real_t(-1.);
-    gamma[1][3] = Real_t( 1.);
-    gamma[1][4] = Real_t(-1.);
-    gamma[1][5] = Real_t( 1.);
-    gamma[1][6] = Real_t( 1.);
-    gamma[1][7] = Real_t(-1.);
-    gamma[2][0] = Real_t( 1.);
-    gamma[2][1] = Real_t(-1.);
-    gamma[2][2] = Real_t( 1.);
-    gamma[2][3] = Real_t(-1.);
-    gamma[2][4] = Real_t( 1.);
-    gamma[2][5] = Real_t(-1.);
-    gamma[2][6] = Real_t( 1.);
-    gamma[2][7] = Real_t(-1.);
-    gamma[3][0] = Real_t(-1.);
-    gamma[3][1] = Real_t( 1.);
-    gamma[3][2] = Real_t(-1.);
-    gamma[3][3] = Real_t( 1.);
-    gamma[3][4] = Real_t( 1.);
-    gamma[3][5] = Real_t(-1.);
-    gamma[3][6] = Real_t( 1.);
-    gamma[3][7] = Real_t(-1.);
-
     /*************************************************/
     /*    compute the hourglass modes */
 
@@ -1112,52 +1075,52 @@ void CalcFBHourglassForceForElems(Index_t *nodelist, Real_t *determ, Index_t *no
 
         for(Index_t i1=0;i1<4;++i1) {
             Real_t hourmodx =
-            x8n[i3] * gamma[i1][0] + x8n[i3+1] * gamma[i1][1] +
-            x8n[i3+2] * gamma[i1][2] + x8n[i3+3] * gamma[i1][3] +
-            x8n[i3+4] * gamma[i1][4] + x8n[i3+5] * gamma[i1][5] +
-            x8n[i3+6] * gamma[i1][6] + x8n[i3+7] * gamma[i1][7];
+            x8n[i3] * Gamma[i1][0] + x8n[i3+1] * Gamma[i1][1] +
+            x8n[i3+2] * Gamma[i1][2] + x8n[i3+3] * Gamma[i1][3] +
+            x8n[i3+4] * Gamma[i1][4] + x8n[i3+5] * Gamma[i1][5] +
+            x8n[i3+6] * Gamma[i1][6] + x8n[i3+7] * Gamma[i1][7];
 
             Real_t hourmody =
-            y8n[i3] * gamma[i1][0] + y8n[i3+1] * gamma[i1][1] +
-            y8n[i3+2] * gamma[i1][2] + y8n[i3+3] * gamma[i1][3] +
-            y8n[i3+4] * gamma[i1][4] + y8n[i3+5] * gamma[i1][5] +
-            y8n[i3+6] * gamma[i1][6] + y8n[i3+7] * gamma[i1][7];
+            y8n[i3] * Gamma[i1][0] + y8n[i3+1] * Gamma[i1][1] +
+            y8n[i3+2] * Gamma[i1][2] + y8n[i3+3] * Gamma[i1][3] +
+            y8n[i3+4] * Gamma[i1][4] + y8n[i3+5] * Gamma[i1][5] +
+            y8n[i3+6] * Gamma[i1][6] + y8n[i3+7] * Gamma[i1][7];
 
             Real_t hourmodz =
-            z8n[i3] * gamma[i1][0] + z8n[i3+1] * gamma[i1][1] +
-            z8n[i3+2] * gamma[i1][2] + z8n[i3+3] * gamma[i1][3] +
-            z8n[i3+4] * gamma[i1][4] + z8n[i3+5] * gamma[i1][5] +
-            z8n[i3+6] * gamma[i1][6] + z8n[i3+7] * gamma[i1][7];
+            z8n[i3] * Gamma[i1][0] + z8n[i3+1] * Gamma[i1][1] +
+            z8n[i3+2] * Gamma[i1][2] + z8n[i3+3] * Gamma[i1][3] +
+            z8n[i3+4] * Gamma[i1][4] + z8n[i3+5] * Gamma[i1][5] +
+            z8n[i3+6] * Gamma[i1][6] + z8n[i3+7] * Gamma[i1][7];
 
-            hourgam0[i1] = gamma[i1][0] -  volinv*(dvdx[i3  ] * hourmodx +
+            hourgam0[i1] = Gamma[i1][0] -  volinv*(dvdx[i3  ] * hourmodx +
                                                    dvdy[i3  ] * hourmody +
                                                    dvdz[i3  ] * hourmodz );
 
-            hourgam1[i1] = gamma[i1][1] -  volinv*(dvdx[i3+1] * hourmodx +
+            hourgam1[i1] = Gamma[i1][1] -  volinv*(dvdx[i3+1] * hourmodx +
                                                    dvdy[i3+1] * hourmody +
                                                    dvdz[i3+1] * hourmodz );
 
-            hourgam2[i1] = gamma[i1][2] -  volinv*(dvdx[i3+2] * hourmodx +
+            hourgam2[i1] = Gamma[i1][2] -  volinv*(dvdx[i3+2] * hourmodx +
                                                    dvdy[i3+2] * hourmody +
                                                    dvdz[i3+2] * hourmodz );
 
-            hourgam3[i1] = gamma[i1][3] -  volinv*(dvdx[i3+3] * hourmodx +
+            hourgam3[i1] = Gamma[i1][3] -  volinv*(dvdx[i3+3] * hourmodx +
                                                    dvdy[i3+3] * hourmody +
                                                    dvdz[i3+3] * hourmodz );
 
-            hourgam4[i1] = gamma[i1][4] -  volinv*(dvdx[i3+4] * hourmodx +
+            hourgam4[i1] = Gamma[i1][4] -  volinv*(dvdx[i3+4] * hourmodx +
                                                    dvdy[i3+4] * hourmody +
                                                    dvdz[i3+4] * hourmodz );
 
-            hourgam5[i1] = gamma[i1][5] -  volinv*(dvdx[i3+5] * hourmodx +
+            hourgam5[i1] = Gamma[i1][5] -  volinv*(dvdx[i3+5] * hourmodx +
                                                    dvdy[i3+5] * hourmody +
                                                    dvdz[i3+5] * hourmodz );
 
-            hourgam6[i1] = gamma[i1][6] -  volinv*(dvdx[i3+6] * hourmodx +
+            hourgam6[i1] = Gamma[i1][6] -  volinv*(dvdx[i3+6] * hourmodx +
                                                    dvdy[i3+6] * hourmody +
                                                    dvdz[i3+6] * hourmodz );
 
-            hourgam7[i1] = gamma[i1][7] -  volinv*(dvdx[i3+7] * hourmodx +
+            hourgam7[i1] = Gamma[i1][7] -  volinv*(dvdx[i3+7] * hourmodx +
                                                    dvdy[i3+7] * hourmody +
                                                    dvdz[i3+7] * hourmodz );
 
@@ -1406,22 +1369,10 @@ void CalcVolumeForceForElems() {
         Index_t *nodeElemStart = domain.m_nodeElemStart.data_export();
         Index_t *nodeElemCornerList = domain.m_nodeElemCornerList.data_export();
 
-        multi_array<Real_t> sigxx;
-        multi_array<Real_t> sigyy;
-        multi_array<Real_t> sigzz;
-        sigxx = zeros<Real_t>(numElem);
-        sigyy = zeros<Real_t>(numElem);
-        sigzz = zeros<Real_t>(numElem);
-        InitStressTermsForElems(sigxx, sigyy, sigzz);
-
-        Real_t * lsigxx = sigxx.data_export();
-        Real_t * lsigyy = sigyy.data_export();
-        Real_t * lsigzz = sigzz.data_export();
-
         multi_array<Real_t> determ;
         determ = zeros<Real_t>(numElem);
         Real_t * ldeterm = determ.data_export();
-        IntegrateStressForElems(nodelist, x, y, z, lsigxx, lsigyy, lsigzz,
+        IntegrateStressForElems(nodelist, x, y, z,
                                 ldeterm, nodeElemCount, nodeElemStart,
                                 nodeElemCornerList, lfx, lfy, lfz,
                                 domain.numElem());
@@ -1641,7 +1592,6 @@ void CalcLagrangeElements(Real_t deltatime) {
         vdovthird = vdov/Real_t(3.0);
 
         domain.m_vdov(vdov);
-
         domain.m_dxx -= vdovthird;
         domain.m_dyy -= vdovthird;
         domain.m_dzz -= vdovthird;
@@ -2276,6 +2226,40 @@ int main(int argc, char *argv[]){
 
     Real_t tx, ty, tz;
     Index_t nidx, zidx;
+
+    // Initialize constant array needed in HourGlass calc
+    Gamma[0][0] = Real_t( 1.);
+    Gamma[0][1] = Real_t( 1.);
+    Gamma[0][2] = Real_t(-1.);
+    Gamma[0][3] = Real_t(-1.);
+    Gamma[0][4] = Real_t(-1.);
+    Gamma[0][5] = Real_t(-1.);
+    Gamma[0][6] = Real_t( 1.);
+    Gamma[0][7] = Real_t( 1.);
+    Gamma[1][0] = Real_t( 1.);
+    Gamma[1][1] = Real_t(-1.);
+    Gamma[1][2] = Real_t(-1.);
+    Gamma[1][3] = Real_t( 1.);
+    Gamma[1][4] = Real_t(-1.);
+    Gamma[1][5] = Real_t( 1.);
+    Gamma[1][6] = Real_t( 1.);
+    Gamma[1][7] = Real_t(-1.);
+    Gamma[2][0] = Real_t( 1.);
+    Gamma[2][1] = Real_t(-1.);
+    Gamma[2][2] = Real_t( 1.);
+    Gamma[2][3] = Real_t(-1.);
+    Gamma[2][4] = Real_t( 1.);
+    Gamma[2][5] = Real_t(-1.);
+    Gamma[2][6] = Real_t( 1.);
+    Gamma[2][7] = Real_t(-1.);
+    Gamma[3][0] = Real_t(-1.);
+    Gamma[3][1] = Real_t( 1.);
+    Gamma[3][2] = Real_t(-1.);
+    Gamma[3][3] = Real_t( 1.);
+    Gamma[3][4] = Real_t( 1.);
+    Gamma[3][5] = Real_t(-1.);
+    Gamma[3][6] = Real_t( 1.);
+    Gamma[3][7] = Real_t(-1.);
 
     /* Initialize Sedov Mesh */
     domain.sizeX() = edgeElems;
