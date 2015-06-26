@@ -2887,8 +2887,8 @@ int main(int argc, char *argv[])
 
     /* timestep to solution */
     while(mesh.time() < mesh.stoptime() ) {
-        if (maxCycles && (domain.cycle() > maxCycles)) {
-            printf("Stopping before running cycle %d.\n", domain.cycle());
+        if (maxCycles && (mesh.cycle() > maxCycles)) {
+            printf("Stopping before running cycle %d.\n", mesh.cycle());
             break;
         }
         TimeIncrement() ;
