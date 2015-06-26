@@ -2968,13 +2968,16 @@ void LagrangeLeapFrog()
 
 int main(int argc, char *argv[])
 {
-    bp_util_type bp = bp_util_create(argc, argv, 1);// Grab arguments
+    bp_util_type bp = bp_util_create(argc, argv, 2);// Grab arguments
     if (bp.args.has_error) {
         return 1;
     }
 
     Index_t edgeElems = bp.args.sizes[0];
 	Index_t edgeNodes = edgeElems+1 ;
+
+    Index_t maxCycles = bp.args.sizes[1];
+
 	// Real_t ds = Real_t(1.125)/Real_t(edgeElems) ; /* may accumulate roundoff */
 	Real_t tx, ty, tz ;
 	Index_t nidx, zidx ;
@@ -3192,7 +3195,10 @@ int main(int argc, char *argv[])
 	bp.timer_start();                               // Start timer
     
 	while(domain.time() < domain.stoptime() ) {
-		
+	    if (maxCycles && (domain.cycle() > maxCycles)) {
+            printf("Stopping before running cycle %d.\n", domain.cycle());
+            break;
+        }	
 		TimeIncrement() ;
 		LagrangeLeapFrog() ;
 		/* problem->commNodes->Transfer(CommNodes::syncposvel) ; */
