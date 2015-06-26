@@ -25,7 +25,7 @@ bh_stack = [
 ]
 
 scripts = [
-    ('Lulesh', 'lulesh', '--size=70'),
+    ('Lulesh', 'lulesh', '--size=70*5'),
 ]
 
 sequential = {
