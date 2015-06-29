@@ -3,10 +3,6 @@ from __future__ import print_function
 from benchpress import util
 import numpy as np
 import math
-try:
-    import numpy_force as npf
-except ImportError:
-    import numpy as npf
 
 def window(B,a=0.37):
     assert (len(B.shape) == 2)
@@ -57,17 +53,16 @@ def main():
 
     B = util.Benchmark()
 
-    sd = { 512:1, 256:2, 128:4, 64:8, 32:16, 16:32}
+    sd = { 512:1, 256:2, 128:4, 64:8, 32:16, 16:32 }
     try:
         h = sd[B.size[0]]
         w = sd[B.size[1]]
     except KeyError:
         raise ValueError('Only valid sizes are: '+str(sd.keys()))
-    if B.inputfn:
-        B_x0 = npf.loadtxt(B.inputfn, dtype=B.dtype)[::h,::w]
-    else: 
-         B_x0 = npf.loadtxt('../idl_data.txt',dtype=B.dtype)[::h,::w]
-    B_x0 = np.array(B_x0)
+
+    inputfn = B.inputfn if B.inputfn else '../idl_input-float64_512*512.npz' 
+    B_x0 = B.load_array(inputfn, 'input', dtype=B.dtype)[::h,::w]
+
     B.start()
     B_x0 = window(B_x0)
     R = calcB(B_x0)
@@ -76,7 +71,6 @@ def main():
 
     if B.outputfn:
         B.tofile(B.outputfn, {'res':R})
-
     
 if __name__ == '__main__':
     main()
