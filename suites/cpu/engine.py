@@ -2,6 +2,7 @@ from benchpress.default import *
 from bp_cpu_shared import *
 
 scripts = [
+    ('Black Scholes',   'black_scholes',    '--size=5000000*10'),
     ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
     ('Leibnitz PI',     'leibnitz_pi',      '--size=200000000'),
     ('Mxmul',           'mxmul',            '--size=2000'),

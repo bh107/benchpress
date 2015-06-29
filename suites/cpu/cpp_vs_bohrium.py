@@ -2,6 +2,7 @@ from benchpress.default import *
 from bp_cpu_shared import *
 
 scripts = [
+    ('Black Scholes',   'black_scholes',    '--size=5000000*10'),
     ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
     #('Game of Life v1', 'gameoflife',       '--size=10000*10000*10*1'),
     #('Game of Life v2', 'gameoflife',       '--size=10000*10000*10*2'),
