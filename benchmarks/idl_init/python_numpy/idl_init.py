@@ -65,12 +65,12 @@ def main():
 
     B.start()
     B_x0 = window(B_x0)
-    R = calcB(B_x0)
+    Rx, Ry, Rz = calcB(B_x0)
     B.stop()
     B.pprint()
 
     if B.outputfn:
-        B.tofile(B.outputfn, {'res':R})
+        B.tofile(B.outputfn, {'res_x': Rx, 'res_y': Ry, 'res_z': Rz})
     
 if __name__ == '__main__':
     main()
