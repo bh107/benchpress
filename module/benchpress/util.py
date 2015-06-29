@@ -310,9 +310,7 @@ class Benchmark:
         if not filename:        # Default to the cmd-line parameter
             filename = self.inputfn
 
-        npz = np.load(filename)
-        for k in npz:
-            print(k)
+        npz = np.load(filename) # Load the arrays from disk (npz-file)
 
         arrays  = {}            # Make sure arrays are in the correct space
         for k in npz:
