@@ -70,7 +70,8 @@ def main():
     B.pprint()
 
     if B.outputfn:
-        B.tofile(B.outputfn, {'res_x': Rx, 'res_y': Ry, 'res_z': Rz})
+        R = Rx+Ry+Rz
+        B.tofile(B.outputfn, {'res': R, 'res_x': Rx, 'res_y': Ry, 'res_z': Rz})
     
 if __name__ == '__main__':
     main()
