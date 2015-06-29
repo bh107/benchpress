@@ -71,6 +71,7 @@ void pricing(double* market, double *prices,
 
     for(size_t iter=0; iter<iterations; ++iter) {
         double res = 0;
+        #pragma omp parallel for reduction(+:res)
         for(size_t sample=0; sample<samples; ++sample) {
             double d1 = (log(market[sample]/x) + (r+v*v/2)*t) / (v*sqrt(t));
             double d2 = d1-v*sqrt(t);

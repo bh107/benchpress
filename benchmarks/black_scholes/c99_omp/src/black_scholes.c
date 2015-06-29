@@ -1,11 +1,13 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <cmath>
+#include <inttypes.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 #include <Random123/philox.h>
 #include <bp_util.h>
 
-using namespace std;
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 typedef union philox2x32_as_1x64 {
     philox2x32_ctr_t orig;
@@ -17,18 +19,16 @@ double* model(int64_t samples)
     const uint64_t key = 0;
     double* data = (double*)malloc(sizeof(double)*samples);
 
+    #pragma omp parallel for
     for(int64_t count = 0; count<samples; ++count) {
         philox2x32_as_1x64_t counter;
         counter.combined = count;
 
-        philox2x32_as_1x64_t x_philox;
-
-        x_philox.orig = philox2x32(
+        uint64_t x_raw = ((philox2x32_as_1x64_t)philox2x32(
           counter.orig,
-          (philox2x32_key_t){ { key } } 
-        );
-
-        double x = x_philox.combined;
+          (philox2x32_key_t){ { key } }
+        )).combined;
+        double x = x_raw;
         x /= 18446744073709551616.000000;
         x *= 4.0;
         x += 58.0;          // Model between 58-62
@@ -71,6 +71,7 @@ void pricing(double* market, double *prices,
 
     for(size_t iter=0; iter<iterations; ++iter) {
         double res = 0;
+        #pragma omp parallel for reduction(+:res)
         for(size_t sample=0; sample<samples; ++sample) {
             double d1 = (log(market[sample]/x) + (r+v*v/2)*t) / (v*sqrt(t));
             double d2 = d1-v*sqrt(t);
@@ -107,7 +108,7 @@ int main(int argc, char* argv[])
     );
     bp.timer_stop();
     
-    bp.print("black_scholes(cpp11_seq)");
+    bp.print("black_scholes(c99_seq)");
     if (bp.args.verbose) {                 // and values.
         printf("output: [ ");
         for(int i=0; i<iterations; ++i) {

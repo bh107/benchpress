@@ -4,7 +4,7 @@ import os
 import re
 
 APP_NAME = 'benchpress'
-APP_VERSION = '0.9'
+APP_VERSION = '1.0'
 
 ignore_dirs  = ["_utils", "_doc"]
 ignore_files = ['empty', 'readme.rst', 'dogma.rst', '.DS_Store', 'README.rst', 'issues.rst', 'bohrium.rst', 'Makefile', '.gitignore']

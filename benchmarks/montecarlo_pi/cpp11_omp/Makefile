@@ -1,3 +1,3 @@
-include ../../_utils/c99/Makefile.common
+include ../../_utils/cpp11/Makefile.common
 CFLAGS+=-fopenmp
 

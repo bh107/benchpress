@@ -1,11 +1,13 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <cmath>
+#include <inttypes.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 #include <Random123/philox.h>
 #include <bp_util.h>
 
-using namespace std;
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 typedef union philox2x32_as_1x64 {
     philox2x32_ctr_t orig;
@@ -21,14 +23,11 @@ double* model(int64_t samples)
         philox2x32_as_1x64_t counter;
         counter.combined = count;
 
-        philox2x32_as_1x64_t x_philox;
-
-        x_philox.orig = philox2x32(
+        uint64_t x_raw = ((philox2x32_as_1x64_t)philox2x32(
           counter.orig,
-          (philox2x32_key_t){ { key } } 
-        );
-
-        double x = x_philox.combined;
+          (philox2x32_key_t){ { key } }
+        )).combined;
+        double x = x_raw;
         x /= 18446744073709551616.000000;
         x *= 4.0;
         x += 58.0;          // Model between 58-62
@@ -107,7 +106,7 @@ int main(int argc, char* argv[])
     );
     bp.timer_stop();
     
-    bp.print("black_scholes(cpp11_seq)");
+    bp.print("black_scholes(c99_seq)");
     if (bp.args.verbose) {                 // and values.
         printf("output: [ ");
         for(int i=0; i<iterations; ++i) {
