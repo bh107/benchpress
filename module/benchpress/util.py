@@ -271,7 +271,6 @@ class Benchmark:
         self.__elapsed = time.time() - self.__elapsed
 
     def tofile(self, filename, arrays):
-
         for k in arrays:
             arrays[k] = toarray(arrays[k], bohrium=False)
         np.savez(filename, **arrays)
@@ -297,27 +296,41 @@ class Benchmark:
         filename = "%s_%s" % (prefix, '_'.join(names))
         self.tofile(filename, arrays)
 
-    def load_arrays(self, filename=None):
+    def load_arrays(self, filename=None, dtype=None):
+        """
+        Load arrays from disk (npz-file) and ensure they
+        are in the right "space", that is, Numpy or Bohrium.
+
+        Optionally convert the array dtype.
+
+        :filename: npz-file containing arrays.
+        :dtype: Convert arrays to this dtype; None = No conversion.
+        """
 
         if not filename:        # Default to the cmd-line parameter
             filename = self.inputfn
 
         npz = np.load(filename)
+        for k in npz:
+            print(k)
 
         arrays  = {}            # Make sure arrays are in the correct space
         for k in npz:
-            arrays[k] = toarray(npz[k], bohrium=self.bohrium)
+            if dtype:           # Convert type when requested
+                arrays[k] = toarray(npz[k], bohrium=self.bohrium, dtype=dtype)
+            else:               # Othervise, use format they are stored in.
+                arrays[k] = toarray(npz[k], bohrium=self.bohrium)
 
-        del npz                # We no longer need these
+        del npz                 # We no longer need these
 
         return arrays
 
-    def load_array(self, filename=None, label='input'):
+    def load_array(self, filename=None, label='input', dtype=None):
 
         if not filename:
             filename = self.inputfn
 
-        return self.load_arrays(filename)[label]
+        return self.load_arrays(filename, dtype)[label]
 
     def pprint(self):
         print("%s - target: %s, bohrium: %s, size: %s, elapsed-time: %f" % (
