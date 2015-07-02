@@ -5,6 +5,31 @@ import pprint
 import os
 from benchpress.version import get_paths, implementations
 
+class bgcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def print_header(text):
+    print(bgcolors.UNDERLINE + bgcolors.HEADER + text + bgcolors.ENDC)
+
+def print_good(text):
+    print(bgcolors.OKGREEN + text + bgcolors.ENDC)
+
+def print_warning(text):
+    print(bgcolors.WARNING + text + bgcolors.ENDC)
+
+def print_fail(text):
+    print(bgcolors.FAIL + text + bgcolors.ENDC)
+
+def print_info(text):
+    print(bgcolors.OKBLUE + text + bgcolors.ENDC)
+
 def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False, make_target='all'):
     """Compile benchmarks of the given languages."""
 
@@ -13,9 +38,11 @@ def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False, make_t
         search_path = paths["benchmarks"]
 
     benchmarks = implementations(search_path, verbose=verbose)
+    summary = []
     for lang in languages:
-        print("# Compiling %s benchmarks" % lang)
+        print_header("# Compiling %s benchmarks" % lang)
         impls = benchmarks["impls"]
+
         for bench_lbl in impls:
             bench = impls[bench_lbl]
             if lang not in bench:
@@ -24,13 +51,12 @@ def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False, make_t
                 target = os.sep.join([bench_lbl, tool])
                 path = os.sep.join([search_path, bench_lbl, tool])
 
-                print target, path
-
                 if bench[lang][tool]["issues"]:
-                    print("!! Skipping %s, it has known issues" % target)
+                    print_warning("!! Skipping %s, it has known issues" % target)
+                    summary.append((target, "Known issues."))
                     continue
 
-                print("## Compiling %s" % target)
+                print_info("## Compiling %s" % target)
                 process = subprocess.Popen(
                     ["make", make_target],
                     cwd=path,
@@ -39,9 +65,19 @@ def compile(search_path=None, languages=['c','cpp', 'cs'], verbose=False, make_t
                 )
                 out, err = process.communicate()
                 if out:
-                    print(out)
+                    print_good(out)
                 if err:
-                    print(err)
+                    print_fail(err)
+                    summary.append((target, err))
+                else:
+                    summary.append((target, None))
+   
+    print_header("Summary")
+    for target, msg in summary:
+        if msg:
+            print_fail(target)
+        else:
+            print_good(target)
 
 if __name__ == "__main__":
 
