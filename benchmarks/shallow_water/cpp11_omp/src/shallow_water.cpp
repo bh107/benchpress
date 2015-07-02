@@ -16,9 +16,9 @@ int main (int argc, char **argv)
     if (bp.args.has_error) {
         return 1;
     }
-    const int height    = bp.args.sizes[0];
-    const int width     = bp.args.sizes[1];
-    const int T         = bp.args.sizes[2];
+    const int height        = bp.args.sizes[0];
+    const int width         = bp.args.sizes[1];
+    const int iterations    = bp.args.sizes[2];
 
     if (width != WIDTH) {
         fprintf(stderr, "Unsupported size, size must be %dx%d\n", WIDTH, HEIGHT);
@@ -76,7 +76,7 @@ int main (int argc, char **argv)
 
     bp.timer_start();
 
-    for(int iter=0; iter < T; iter++) {
+    for(int iter=0; iter < iterations; iter++) {
 
         #pragma omp parallel for        
         for(int i=0; i<WIDTH+2; i++) {  // Reflecting boundary conditions
