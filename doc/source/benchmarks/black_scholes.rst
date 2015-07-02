@@ -18,6 +18,26 @@ Python Numpy
    :language: python
 
 
+.. _black_scholes_c99_omp:
+
+C99 Omp
+-------
+
+
+.. literalinclude:: ../../../benchmarks/black_scholes/c99_omp/src/black_scholes.c
+   :language: c
+
+
+.. _black_scholes_c99_seq:
+
+C99 Seq
+-------
+
+
+.. literalinclude:: ../../../benchmarks/black_scholes/c99_seq/src/black_scholes.c
+   :language: c
+
+
 .. _black_scholes_cpp11_bxx:
 
 Cpp11 Bxx
@@ -28,15 +48,20 @@ Cpp11 Bxx
    :language: cpp
 
 
+.. _black_scholes_cpp11_omp:
+
+Cpp11 Omp
+---------
+
+
+.. literalinclude:: ../../../benchmarks/black_scholes/cpp11_omp/src/black_scholes.cpp
+   :language: cpp
+
+
 .. _black_scholes_cpp11_seq:
 
 Cpp11 Seq
 ---------
-
-
-.. error:: There are issues with the implementation.
-
-    In progress...
 
 
 .. literalinclude:: ../../../benchmarks/black_scholes/cpp11_seq/src/black_scholes.cpp

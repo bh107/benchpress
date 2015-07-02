@@ -2,24 +2,34 @@ from __future__ import print_function
 from benchpress import util
 import numpy as np
 
-def solve(N, B):
-    x = B.random_array((N,), dtype=B.dtype)
-    y = B.random_array((N,), dtype=B.dtype)
-    z = np.sqrt(x**2 + y**2) <= 1.0
-    return np.sum(z) * 4.0 / N
+def montecarlo_pi_se(samples, B):
 
-def montecarlo_pi(N, I, B):
+    return np.sum(np.sqrt(
+        B.random_array((samples,), dtype=B.dtype)**2 + \
+        B.random_array((samples,), dtype=B.dtype)**2
+    ) <= 1.0) * 4.0 / samples
+
+def montecarlo_pi(samples, B):
+
+    x = B.random_array((samples,), dtype=B.dtype)
+    y = B.random_array((samples,), dtype=B.dtype)
+    m = np.sqrt(x*x + y*y) <= 1.0
+
+    return np.sum(m) * 4.0 / samples
+
+def solve(samples, iterations, B):
     acc=0.0
-    for i in xrange(I):
-        acc += solve(N, B)
-    acc /= I
+    for _ in xrange(iterations):
+        acc += montecarlo_pi(samples, B)
+        #acc += montecarlo_pi_se(samples, B)
+    acc /= iterations
     return acc
 
 def main():
     B = util.Benchmark()
-    N, I = B.size
+    samples, iterations = B.size
     B.start()
-    R = montecarlo_pi(N, I, B)
+    R = solve(samples, iterations, B)
     B.stop()
     B.pprint()
     if B.verbose:

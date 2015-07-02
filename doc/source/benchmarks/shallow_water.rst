@@ -38,6 +38,16 @@ Cpp11 Boost
    :language: cpp
 
 
+.. _shallow_water_cpp11_bxx:
+
+Cpp11 Bxx
+---------
+
+
+.. literalinclude:: ../../../benchmarks/shallow_water/cpp11_bxx/src/shallow_water.cpp
+   :language: cpp
+
+
 .. _shallow_water_cpp11_omp:
 
 Cpp11 Omp

@@ -14,7 +14,6 @@ double montecarlo_pi(uint32_t samples, uint32_t x_index, uint32_t y_index, uint3
 {
     uint64_t darts = 0;
     
-    #pragma omp parallel for reduction(+:darts)
     for (uint32_t eidx=0; eidx<samples; ++eidx) {
 
         philox2x32_as_1x64_t x_counter;
@@ -75,7 +74,7 @@ int main(int argc, char** argv)
     double pi = run_montecarlo_pi(samples, iterations);
     bp.timer_stop();
 
-    bp.print("montecarlo_pi(cpp11_omp)");
+    bp.print("montecarlo_pi(cpp11_seq)");
     if (bp.args.verbose) {
         printf("PI-approximation = %f\n", pi);
     }

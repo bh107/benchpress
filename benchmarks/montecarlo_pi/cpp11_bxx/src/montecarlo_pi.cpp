@@ -1,25 +1,32 @@
 #include <iostream>
 #include "bxx/bohrium.hpp"
+#include <bp_util.h>
 
 using namespace std;
 using namespace bxx;
-using namespace argparse;
 
-double monte_carlo_pi(int samples, int iterations)
+template <typename T>
+multi_array<T>& monte_carlo_pi(int samples)
 {
-    multi_array<double> x, y, m, c, accu(1);    // Operands
-    accu = (double)0.0;                         // Acculumate across iterations
-    for(int i=0; i<iterations; ++i) {
-        x = random<double>(samples);            // Sample random numbers
-        y = random<double>(samples);
-        m = as<double>(sqrt(x*x + y*y)<=1.0);   // Model
-        c = sum(m);                             // Count
+    multi_array<T> x, y, m;             // Operands
 
-        accu += (c*4.0) / (double)samples;      // Approximate
+    x = randu<T>(samples);              // Sample random numbers
+    y = randu<T>(samples);
+    m = as<T>(sqrt(x*x + y*y) <= 1.0);  // Model
+
+    return sum(m) * 4.0 / (T)samples;   // Count
+}
+
+template <typename T>
+T solve(int samples, int iterations)
+{
+    multi_array<T> acc;                 // Acculumate across iterations
+    acc = zeros<T>(1);
+    for(int i=0; i<iterations; ++i) {
+        acc += monte_carlo_pi<T>(samples);        
     }
-    accu /= (double)iterations;
-    
-    return scalar(accu);
+    acc /= (T)iterations;
+    return scalar(acc);
 }
 
 int main(int argc, char* argv[])
@@ -29,14 +36,16 @@ int main(int argc, char* argv[])
         return 1;
     }
     const int samples = bp.args.sizes[0];
-    const int iterations = bp.args.sizes[1]
+    const int iterations = bp.args.sizes[1];
 
+    Runtime::instance().flush();
     bp.timer_start();
-    double pi = monte_carlo_pi(samples, iterations);
-    bp.timer_end();
+    double pi = solve<double>(samples, iterations);
+    Runtime::instance().flush();
+    bp.timer_stop();
                                                     // Output timing
-    bp.print("mc(cpp11_bxx)");
-    if (bp.args.verbose) {                             // and values.
+    bp.print("montecarlo_pi(cpp11_bxx)");
+    if (bp.args.verbose) {                          // and values.
         cout << "PI-approximation = " << pi << endl;
     }
 

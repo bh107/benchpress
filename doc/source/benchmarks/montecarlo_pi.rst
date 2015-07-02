@@ -34,11 +34,6 @@ C99 Seq
 -------
 
 
-.. error:: There are issues with the implementation.
-
-    In progress...
-
-
 .. literalinclude:: ../../../benchmarks/montecarlo_pi/c99_seq/src/montecarlo_pi.c
    :language: c
 
@@ -59,12 +54,15 @@ Cpp11 Omp
 ---------
 
 
-.. error:: There are issues with the implementation.
-
-    In progress...
-
-    
-
-
 .. literalinclude:: ../../../benchmarks/montecarlo_pi/cpp11_omp/src/montecarlo_pi.cpp
+   :language: cpp
+
+
+.. _montecarlo_pi_cpp11_seq:
+
+Cpp11 Seq
+---------
+
+
+.. literalinclude:: ../../../benchmarks/montecarlo_pi/cpp11_seq/src/montecarlo_pi.cpp
    :language: cpp
