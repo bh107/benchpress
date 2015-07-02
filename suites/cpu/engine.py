@@ -5,6 +5,7 @@ scripts = [
     ('Black Scholes',   'black_scholes',    '--size=5000000*10'),
     ('Heat Equation',   'heat_equation',    '--size=14000*14000*10'),
     ('Leibnitz PI',     'leibnitz_pi',      '--size=200000000'),
+    ('Monte Carlo PI',  'montecarlo_pi',    '--size=50000000*10'),
     ('Mxmul',           'mxmul',            '--size=2000'),
     ('Rosenbrock',      'rosenbrock',       '--size=100000000*10'),
     ('Shallow Water',   'shallow_water',    '--size=5000*5000*10'),
