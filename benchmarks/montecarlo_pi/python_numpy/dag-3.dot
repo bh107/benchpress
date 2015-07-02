@@ -1,7 +1,0 @@
-digraph G {
-labelloc="t";
-label="DAG with a total cost of 0 bytes";
-graph [bgcolor=white, fontname="Courier New"]
-node [shape=box color=black, fontname="Courier New"]
-0[label="Kernel 0, cost: 0 bytes\nShape: ], ]      scalar: false\lSweeps: \lInput views: \lOutput views: \lParameters: \lConstants: \lTemp base-arrays: \lFree base-arrays: \l[ Addr: 0x242f920 Type: BH_FLOAT64 #elem: 1 Data: (nil) ]\lDiscard base-arrays: \l[ Addr: 0x242f920 Type: BH_FLOAT64 #elem: 1 Data: (nil) ]\lSync base-arrays: \l[0] BH_FREE OPS=1{\l  OP0 [ Dims: 1 Start: 0 Shape:  1 Stride:  1 Base=>[ Addr: 0x242f920 Type: BH_FLOAT64 #elem: 1 Data: (nil) ]]\l}\l[1] BH_DISCARD OPS=1{\l  OP0 [ Dims: 1 Start: 0 Shape:  1 Stride:  1 Base=>[ Addr: 0x242f920 Type: BH_FLOAT64 #elem: 1 Data: (nil) ]]\l}\l"];
-}
