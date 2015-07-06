@@ -8,9 +8,10 @@ using namespace bxx;
 
 multi_array<double>& leibnitz_pi(int nelements)
 {
-    multi_array<double> n;
-    n = range<double>(nelements);
-    return sum(1.0/(4.0*n+1.0) - 1.0/(4.0*n+3.0));
+    multi_array<int> n;
+    n = range<int>(nelements);
+    return sum(1.0/as<double>((int)4*n+(int)1) -
+               1.0/as<double>((int)4*n+(int)3));
 }
 
 int main(int argc, char* argv[])
