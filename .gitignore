@@ -1,4 +1,5 @@
 .idea
+*.dot
 *.pyc
 build/
 dist/
