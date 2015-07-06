@@ -8,8 +8,8 @@ using namespace std;
 double rosenbrock(int nelements, double* x)
 {
     double sum = 0.0;
-    for(int i=0; i<nelements-1; ++i) {
-        sum += pow((1-x[i]), 2) + 100.0*pow((x[i+1] - pow(x[i], 2)), 2);
+    for(int i=0; i<nelements-2; ++i) {
+        sum += 100.0*pow((x[i+1] - pow(x[i], 2)), 2) + pow((1-x[i]), 2);
     }
     return sum;
 }
@@ -25,8 +25,9 @@ int main(int argc, char* argv[])
 
     // Create the pseudo-data
     double* dataset = (double*)malloc(sizeof(double)*nelements);
+
     for(int i=0; i<nelements; ++i) {
-        dataset[i] = i/(float)nelements;
+        dataset[i] = i/(double)nelements;
     }
 
     bp.timer_start();                               // Start timer

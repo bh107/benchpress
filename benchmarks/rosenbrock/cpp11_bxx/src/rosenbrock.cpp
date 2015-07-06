@@ -9,8 +9,8 @@ using namespace bxx;
 double rosenbrock(multi_array<double>& x)
 {
     return scalar<double>(sum(
-        pow(1.0-x[_(0,-2)], 2.0) + \
-        100.0 * pow(x[_(1,-1)]-pow(x[_(0,-2)], 2.0), 2.0)
+        100.0 * pow(x[_ABF()]-pow(x[_ABL()], 2.0), 2.0) +
+        pow(1.0-x[_ABL()], 2.0)
     ));
 }
 
