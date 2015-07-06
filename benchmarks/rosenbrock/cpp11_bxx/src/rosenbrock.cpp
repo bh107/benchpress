@@ -26,11 +26,13 @@ int main(int argc, char* argv[])
     multi_array<double> dataset;                    // Create pseudo-data
     dataset = range<double>(nelements) / (double)nelements;
 
+    Runtime::instance().flush();
     bp.timer_start();                               // Start timer
     double res = 0.0;
     for(int i=0; i<trials; ++i) {
         res = rosenbrock(dataset);                  // Run benchmark
     }
+    Runtime::instance().flush();
     bp.timer_stop();                                // Stop timer
     bp.print("rosenbrock(cpp11_bxx)");
     if (bp.args.verbose) {                          // ..and value.

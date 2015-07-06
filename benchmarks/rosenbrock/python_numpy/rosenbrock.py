@@ -24,11 +24,15 @@ def main():
         B.dump_arrays("rosenbrock", {'input': dataset})
 
     B.start()                                   # Sample wall-clock start
+    res = 0.0
     for _ in xrange(0, T):                      # Do T trials of..
-        R = rosen(dataset)                      # ..executing rosenbrock.
+        res += rosen(dataset)                   # ..executing rosenbrock.
+    res /= T
     B.stop()                                    # Sample wall-clock stop
     B.pprint()                                  # Print elapsed wall-clock etc.
 
+    R = np.zeros((1), dtype=B.dtype)
+    R[0] = res
     if B.outputfn:
         B.tofile(B.outputfn, {'res':R})
 

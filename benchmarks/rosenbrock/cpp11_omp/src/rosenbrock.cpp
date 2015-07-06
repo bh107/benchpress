@@ -36,8 +36,9 @@ int main(int argc, char* argv[])
     bp.timer_start();                               // Start timer
     double res = 0.0;
     for(int i=0; i<trials; ++i) {
-        res = rosenbrock(nelements, dataset);       // Run benchmark
+        res += rosenbrock(nelements, dataset);      // Run benchmark
     }
+    res /= trials;
     bp.timer_stop();                                // Stop timer
     bp.print("rosenbrock(cpp11_omp)");
     if (bp.args.verbose) {                          // ..and value.

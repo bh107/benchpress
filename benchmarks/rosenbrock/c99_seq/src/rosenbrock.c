@@ -23,15 +23,17 @@ int main(int argc, char* argv[])
 
     // Create the pseudo-data
     double* dataset = (double*)malloc(sizeof(double)*nelements);
+
     for(int i=0; i<nelements; ++i) {
-        dataset[i] = i/nelements;
+        dataset[i] = i/(double)nelements;
     }
 
     bp.timer_start();                               // Start timer
     double res = 0.0;
     for(int i=0; i<trials; ++i) {
-        res += rosenbrock(nelements, dataset);       // Run benchmark
+        res += rosenbrock(nelements, dataset);      // Run benchmark
     }
+    res /= trials;
     bp.timer_stop();                                // Stop timer
     
     bp.print("rosenbrock(c99_seq)");                // Print results..
