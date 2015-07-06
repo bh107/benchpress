@@ -22,11 +22,13 @@ int main(int argc, char* argv[])
     }
     const int nelements = bp.args.sizes[0];
 
+    Runtime::instance().flush();
     bp.timer_start();                               // Start timer
     double pi = leibnitz_pi(nelements);             // Run benchmark
+    Runtime::instance().flush();
     bp.timer_stop();                                // Stop timer
 
-    bp.print("leibnitz_pi(cpp11_omp)");				// Print results..
+    bp.print("leibnitz_pi(cpp11_bxx)");				// Print results..
     if (bp.args.verbose) {                          // ..and value.
         cout << fixed << setprecision(11)
 			 << "PI-approximation = " << pi << endl;
