@@ -7,7 +7,7 @@ double leibnitz_pi(int nelements)
     for(int n=0; n<nelements; ++n) {
         sum += 1.0/(4*n+1) - 1.0/(4*n+3);
     }
-    return 4.0*sum;
+    return sum;
 }
 
 int main(int argc, char* argv[])
@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     const int nelements = bp.args.sizes[0];
 
     bp.timer_start();                               // Start timer
-    double pi = leibnitz_pi(nelements);             // Run benchmark
+    double pi = 4.0*leibnitz_pi(nelements);         // Run benchmark
     bp.timer_stop();                                // Stop timer
     
     bp.print("leibnitz_pi(c99_seq)");               // Print results..

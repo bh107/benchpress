@@ -6,12 +6,11 @@
 using namespace std;
 using namespace bxx;
 
-double leibnitz_pi(int nelements)
+multi_array<double>& leibnitz_pi(int nelements)
 {
     multi_array<double> n;
     n = range<double>(nelements);
-
-    return scalar(4.0*sum(1.0/(4.0*n+1.0) - 1.0/(4.0*n+3.0)));
+    return sum(1.0/(4.0*n+1.0) - 1.0/(4.0*n+3.0));
 }
 
 int main(int argc, char* argv[])
@@ -24,7 +23,7 @@ int main(int argc, char* argv[])
 
     Runtime::instance().flush();
     bp.timer_start();                               // Start timer
-    double pi = leibnitz_pi(nelements);             // Run benchmark
+    double pi = 4.0*scalar(leibnitz_pi(nelements)); // Run benchmark
     Runtime::instance().flush();
     bp.timer_stop();                                // Stop timer
 
