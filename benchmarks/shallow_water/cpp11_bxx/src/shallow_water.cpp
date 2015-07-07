@@ -35,7 +35,7 @@ void step(multi_array<T>& H, multi_array<T>& U, multi_array<T>& V, T dt, T dx, T
     // Reflecting boundary conditions
     H[_ALL()][0]   =       H[_ALL()][1];
     U[_ALL()][0]   =       U[_ALL()][1];
-    V[_ALL()][0]   =       V[_ALL()][1];
+    V[_ALL()][0]   = (T)-1*V[_ALL()][1];
 
     H[_ALL()][-1]  =       H[_ALL()][-2];
     U[_ALL()][-1]  =       U[_ALL()][-2];
@@ -51,43 +51,41 @@ void step(multi_array<T>& H, multi_array<T>& U, multi_array<T>& V, T dt, T dx, T
 
     // First half step
     // height
-    Hx =              (H[_ABF()][_INNER()] + H[_ABL()][_INNER()])/(T)2 - 
-          dt/(2*dx) * (U[_ABF()][_INNER()] - U[_ABL()][_INNER()]);
+    Hx = (H[_ABF()][_INNER()] + H[_ABL()][_INNER()]) / (T)2 - dt/((T)2*dx) * (U[_ABF()][_INNER()] - U[_ABL()][_INNER()]);
 
     // x momentum
-    Ux =             (U[_ABF()][_INNER()]     + U[_ABL()][_INNER()])/(T)2 -
-    dt/(2*dx) * ((pow(U[_ABF()][_INNER()], 2.0)/H[_ABF()][_INNER()] + g/(T)2*pow(H[_ABF()][_INNER()], 2.0)) -
-                 (pow(U[_ABL()][_INNER()], 2.0)/H[_ABL()][_INNER()] + g/(T)2*pow(H[_ABL()][_INNER()], 2.0)));
-
+    Ux =                (U[_ABF()][_INNER()]       + U[_ABL()][_INNER()]) / (T)2 -
+    dt/((T)2*dx) * ((pow(U[_ABF()][_INNER()], 2.0) / H[_ABF()][_INNER()] + g / (T)2 * pow(H[_ABF()][_INNER()], 2.0)) -
+                    (pow(U[_ABL()][_INNER()], 2.0) / H[_ABL()][_INNER()] + g / (T)2 * pow(H[_ABL()][_INNER()], 2.0)));
+    
     // y momentum
-    Vx =              (V[_ABF()][_INNER()] + V[_ABL()][_INNER()])/(T)2 -
-         dt/(2*dx) * ((U[_ABF()][_INNER()] * V[_ABF()][_INNER()] / H[_ABF()][_INNER()]) -
-                      (U[_ABL()][_INNER()] * V[_ABL()][_INNER()] / H[_ABL()][_INNER()]));
+    Vx =            (V[_ABF()][_INNER()] + V[_ABL()][_INNER()]) / (T)2 -
+    dt/((T)2*dx) * ((U[_ABF()][_INNER()] * V[_ABF()][_INNER()]  / H[_ABF()][_INNER()]) -
+                    (U[_ABL()][_INNER()] * V[_ABL()][_INNER()]  / H[_ABL()][_INNER()]));
 
     // height
-    Hy =        (H[_INNER()][_ABF()] + H[_INNER()][_ABL()])/(T)2 -
-    dt/(2*dy) * (V[_INNER()][_ABF()] - V[_INNER()][_ABL()]);
+    Hy = (H[_INNER()][_ABF()] + H[_INNER()][_ABL()]) / (T)2 - dt/((T)2*dy) * (V[_INNER()][_ABF()] - V[_INNER()][_ABL()]);
 
     // x momentum
-    Uy =            (U[_INNER()][_ABF()] + U[_INNER()][_ABL()])/(T)2 -
-         dt/(2*dy)*((V[_INNER()][_ABF()] * U[_INNER()][_ABF()] / H[_INNER()][_ABF()]) -
-                    (V[_INNER()][_ABL()] * U[_INNER()][_ABL()] / H[_INNER()][_ABL()]));
+    Uy =          (U[_INNER()][_ABF()] + U[_INNER()][_ABL()]) / (T)2 -
+    dt/((T)2*dy)*((V[_INNER()][_ABF()] * U[_INNER()][_ABF()]  / H[_INNER()][_ABF()]) -
+                  (V[_INNER()][_ABL()] * U[_INNER()][_ABL()]  / H[_INNER()][_ABL()]));
 
     // y momentum
-    Vy =           (V[_INNER()][_ABF()] +     V[_INNER()][_ABL()])/(T)2 -
-    dt/(2*dy)*((pow(V[_INNER()][_ABF()],2.0)/ H[_INNER()][_ABF()] + g/(T)2*pow(H[_INNER()][_ABF()],2.0)) -
-               (pow(V[_INNER()][_ABL()],2.0)/ H[_INNER()][_ABL()] + g/(T)2*pow(H[_INNER()][_ABL()],2.0)));
+    Vy =              (V[_INNER()][_ABF()] +     V[_INNER()][_ABL()]) / (T)2 -
+    dt/((T)2*dy)*((pow(V[_INNER()][_ABF()],2.0)/ H[_INNER()][_ABF()] + g/(T)2*pow(H[_INNER()][_ABF()],2.0)) -
+                  (pow(V[_INNER()][_ABL()],2.0)/ H[_INNER()][_ABL()] + g/(T)2*pow(H[_INNER()][_ABL()],2.0)));
     //
     // Second half step
 
     // height
-    H[_INNER()][_INNER()] -= (dt/dx)*(Ux[_ABF()][_ALL()]-Ux[_ABL()][_ALL()]) +
-                             (dt/dy)*(Vy[_ALL()][_ABF()]-Vy[_ALL()][_ABL()]);
+    H[_INNER()][_INNER()] -= (dt/dx)*(Ux[_ABF()][_ALL()] - Ux[_ABL()][_ALL()]) + (dt/dy) * (Vy[_ALL()][_ABF()] - Vy[_ALL()][_ABL()]);
+
     // x momentum
     U[_INNER()][_INNER()] -= (dt/dx)*((pow(Ux[_ABF()][_ALL()],2.0) / Hx[_ABF()][_ALL()] + g/(T)2*pow(Hx[_ABF()][_ALL()],2.0)) -
                                       (pow(Ux[_ABL()][_ALL()],2.0) / Hx[_ABL()][_ALL()] + g/(T)2*pow(Hx[_ABL()][_ALL()],2.0))) +
-                             (dt/dy)*((   Vy[_ALL()][_ABF()] *      Uy[_ALL()][_ABF()] /            Hy[_ALL()][_ABF()]) -
-                                      (   Vy[_ALL()][_ABL()] *      Uy[_ALL()][_ABL()] /            Hy[_ALL()][_ABL()]));
+                             (dt/dy)*((Vy[_ALL()][_ABF()] * Uy[_ALL()][_ABF()] / Hy[_ALL()][_ABF()]) -
+                                      (Vy[_ALL()][_ABL()] * Uy[_ALL()][_ABL()] / Hy[_ALL()][_ABL()]));
     // y momentum
     V[_INNER()][_INNER()] -= (dt/dx)*((    Ux[_ABF()][_ALL()] *      Vx[_ABF()][_ALL()] /            Hx[_ABF()][_ALL()]) -
                                       (    Ux[_ABL()][_ALL()] *      Vx[_ABL()][_ALL()] /            Hx[_ABL()][_ALL()])) +
@@ -131,18 +129,18 @@ int main(int argc, char* argv[])
     droplet = 8.0 * exp(-5.0 * (pow(xx,2.0) + pow(yy,2.0)));
                                                 // Let it drip into the water
     size_t droploc = height / 2;
-    H[_(droploc,droploc+7)][_(droploc,droploc+7)] = droplet;
+    H[_(droploc,droploc+7)][_(droploc,droploc+7)] += droplet;
     droploc = height / 4;
-    H[_(droploc,droploc+7)][_(droploc,droploc+7)] = droplet;
+    H[_(droploc,droploc+7)][_(droploc,droploc+7)] += droplet;
 
-    Runtime::instance().flush();
+    Runtime::instance().flush();                // Run the simulation
     bp.timer_start();
     simulate(H, U, V, timesteps, (int)bp.args.visualize);
     Runtime::instance().flush();
     bp.timer_stop();
     
     bp.print("shallow_water(cpp11_bxx)");
-    if (bp.args.verbose) {                 // and values.
+    if (bp.args.verbose) {                      // and values.
         cout << ", output: " << endl;
     }
 
