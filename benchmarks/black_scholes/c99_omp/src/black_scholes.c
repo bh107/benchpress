@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
     );
     bp.timer_stop();
     
-    bp.print("black_scholes(c99_seq)");
+    bp.print("black_scholes(c99_omp)");
     if (bp.args.verbose) {                 // and values.
         printf("output: [ ");
         for(int i=0; i<iterations; ++i) {

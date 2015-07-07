@@ -17,6 +17,7 @@ double* model(int64_t samples)
     const uint64_t key = 0;
     double* data = (double*)malloc(sizeof(double)*samples);
 
+    #pragma omp parallel for
     for(int64_t count = 0; count<samples; ++count) {
         philox2x32_as_1x64_t counter;
         counter.combined = count;
@@ -108,7 +109,7 @@ int main(int argc, char* argv[])
     );
     bp.timer_stop();
     
-    bp.print("black_scholes(cpp11_seq)");
+    bp.print("black_scholes(cpp11_omp)");
     if (bp.args.verbose) {                 // and values.
         printf("output: [ ");
         for(int i=0; i<iterations; ++i) {
