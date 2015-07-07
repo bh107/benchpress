@@ -41,7 +41,15 @@ def calc_force(a, b, dt):
     dz = b['z'] - a['z'][:,None]
     pm = b['m'] * a['m'][:,None]
 
-    r = ( dx ** 2 + dy ** 2 + dz ** 2) ** 0.5
+    #
+    # For some reason then this pow(T, 0.5) is deadly to performance...
+    # sqrt(T) is equivalent math, trying it out instead.
+    #
+    # This might actually be a neat optimization:
+    # pow(T, 0.K) => k-root(T)
+    #
+    #r = ( dx ** 2 + dy ** 2 + dz ** 2) ** 0.5
+    r = np.sqrt( dx ** 2 + dy ** 2 + dz ** 2)
 
     Fx = G * pm / r ** 2 * (dx / r) 
     Fy = G * pm / r ** 2 * (dy / r) 
