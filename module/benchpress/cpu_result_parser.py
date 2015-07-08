@@ -33,19 +33,18 @@ ident_ordering = [
     "NumPy",
     "C/S",
     "C/ST",
-    "BXX",
-    "BXX/V",
-    "BXX/VF",
-    "BXX/VFC",
-    "BXX",
+    "C/P",
+    "C/PA",
+    "C++/P",
+    "C++/PA",
     "BHP",
     "BHP/V",
     "BHP/VF",
     "BHP/VFC",
-    "C/P",
-    "C/PA",
-    "C++/P",
-    "C++/PA"
+    "BXX",
+    "BXX/V",
+    "BXX/VF",
+    "BXX/VFC"
 ]
 
 def order_idents(idents, ordering):
