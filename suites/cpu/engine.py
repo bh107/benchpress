@@ -11,10 +11,10 @@ scripts = [
     ('Shallow Water',   'shallow_water',    '--size=5000*5000*10'),
 ]
 
-cseq = {
+bohrium = {
     'scripts': scripts,
-    'launchers': [c99_seq],
-    'bohrium': bh_stack_none,
+    'launchers': [python_bohrium, cpp11_bxx],
+    'bohrium': bh_stack_cpu_t32_best,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }
@@ -27,10 +27,10 @@ omp = {
     "use_grapher": "cpu"
 }
 
-bohrium = {
+cseq = {
     'scripts': scripts,
-    'launchers': [python_bohrium],
-    'bohrium': bh_stack_cpu_t32_best,
+    'launchers': [c99_seq],
+    'bohrium': bh_stack_none,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }
@@ -40,6 +40,6 @@ bohrium = {
 #
 suites = [
     cseq,
-    omp,
-    bohrium
+    bohrium,
+    omp
 ]
