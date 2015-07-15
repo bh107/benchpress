@@ -7,10 +7,7 @@ GPL
 """
 
 from benchpress import util
-if util.Benchmark().bohrium:
-    import bohrium as np
-else:
-    import numpy as np
+import numpy as np
 
 import time as tid
 
@@ -76,8 +73,6 @@ x_ice = np.ones(shape=(steps+1, N_L, N_W)); #percentage ice cover
 
 I_export = 0 #[m^3] volume of ice exportet away
 
-if util.Benchmark().bohrium:
-    np.flush()
 B.start()
 for i in range(steps): #Forward euler
     h_ice[i,:,:] = V[i,:,:] #if V > 0.5 -> h_ice = V and h_ice = 1
