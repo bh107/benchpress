@@ -2,7 +2,7 @@ from benchpress.default import *
 from bp_cpu_shared import *
 
 scripts = [
-    ('Water / Ice Sim.', 'wisp', '--size=1000*1000*10'),
+    ('Water-Ice Simulation', 'wisp', '--size=1000*1000*10'),
 ]
 
 numpy = {
