@@ -35,9 +35,10 @@ scripts = [
     ('SOR',                     'sor',                      '--size=5000*5000*10'),
     ('Synthetic',               'synth',                    '--size=200000000*10'),
     ('Synthetic Inplace',       'synth_inplace',            '--size=200000000*10'),
-    ('Synthetic Stream #0 Ones',   'synth_stream',  '--size=50000000*20*0'),
-    ('Synthetic Stream #1 Range',  'synth_stream',  '--size=50000000*10*1'),
-    ('Synthetic Stream #2 Random', 'synth_stream',  '--size=50000000*10*2'),
+    ('Synthetic Stream #0 Ones',    'synth_stream',  '--size=50000000*20*0'),
+    ('Synthetic Stream #1 Range',   'synth_stream',  '--size=50000000*10*1'),
+    ('Synthetic Stream #2 Random',  'synth_stream',  '--size=50000000*10*2'),
+    ('Water-Ice Simulation',        'wisp',                 '--size=1000*1000*10'),
     #('Wireworld',               'wireworld',                '--size=10*10')
 ]
 
