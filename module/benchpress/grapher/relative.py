@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 import pprint
 import json
+import copy
 from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, ident_ordering, order_idents
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping, datasets_baselinify
 from graph import Graph, texsafe, brange, pylab, matplotlib
@@ -38,13 +39,11 @@ class Relative(Graph):
                                        file_formats,
                                        output_path)
 
-    def render(self, datasets):
+    def render(self, datasets, sample_points):
 
         paths = []
-        thread_limit = 32
+        thread_max = max(sample_points)
         global_max, baselined = datasets_baselinify(datasets)
-
-        linear = list(brange(1, thread_limit))
 
         idents = order_idents(baselined.keys(), ident_ordering)
         for bsl_ident in idents:    # Construct data using ident as baseline
@@ -52,10 +51,10 @@ class Relative(Graph):
 
             plots = []
             legend_texts = []
-            for idx, ident in enumerate(idents): # Plot datasets
+            for idx, ident in enumerate(idents):            # Plot datasets
                 dataset = baselined[bsl_ident][ident]["avg"]
                 plt, = pylab.plot(
-                    linear,
+                    sample_points,
                     dataset,
                     linestyle="-",
                     label=ident,
@@ -74,14 +73,13 @@ class Relative(Graph):
                 legend_texts.append(legend_txt)
 
             pylab.plot(
-                linear,
-                linear,
+                sample_points,
+                sample_points,
                 "--",
                 color='gray',
                 lw=self.line_width
-            )  # Linear, for reference
+            )                                               # sample_points, for reference
 
-            # TODO: Legends
             pylab.legend(
                 plots,
                 legend_texts,
@@ -89,31 +87,38 @@ class Relative(Graph):
                 ncol=3,
                 bbox_to_anchor=(0.015, 0.95, 0.9, 0.102),
                 borderaxespad=0.0
-            )
+            )                                               # legends
+
+            pylab.xlabel(r"Threads")                        # X-Axis - begin
+            pylab.xscale("symlog", basey=2, basex=2)
+            pylab.xlim(xmin=0.8, xmax=thread_max*1.20)
+            pylab.xticks(sample_points, sample_points)
+            pylab.gca().xaxis.set_major_formatter(
+                matplotlib.ticker.ScalarFormatter()
+            )                                               # X-Axis - end
+
             pylab.ylabel(                                   # Y-Axis
                 r"Speedup in relation to \textbf{%s}" % bsl_ident
             )
             pylab.yscale("symlog", basey=2, basex=2)
             pylab.ylim(
                 ymin=0,
-                ymax=max(global_max*1.2, thread_limit*1.2),
-                
+                ymax=max(global_max*1.2, thread_max*1.2),
             )
-            yticks = list(brange(1, max(thread_limit, global_max*2)))
+            
+            yticks = copy.deepcopy(sample_points)
+            if global_max*2 > thread_max:
+                yticks[-1] = int(global_max*2)
             pylab.yticks(yticks, yticks)
-            pylab.gca().yaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
+            pylab.gca().yaxis.set_major_formatter(
+                matplotlib.ticker.ScalarFormatter()
+            )                                               # Y-Axis - end
 
-            pylab.xlabel(r"Threads")                        # X-Axis
-            pylab.xscale("symlog", basey=2, basex=2)
-            pylab.xlim(xmin=0.8, xmax=thread_limit*1.20)
-            pylab.xticks(linear, linear)
-            pylab.gca().xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
-
-            t = pylab.title(texsafe(self.title))                # Title
+            t = pylab.title(texsafe(self.title))            # Title
             t.set_y(1.15)
             pylab.tight_layout()
 
-            paths += self.tofile({                                   # Finally write it to file
+            paths += self.tofile({                          # Finally write it to file
                 "title": self.title,
                 "baseline": bsl_ident
             })

@@ -39,11 +39,9 @@ class AbsoluteLine(Graph):
                                            file_formats,
                                            output_path)
 
-    def render(self, datasets):
+    def render(self, datasets, sample_points):
 
-        thread_limit = 32
-
-        linear = list(brange(1, thread_limit))
+        thread_limit = max(sample_points)
 
         self.prep()             # Do some MPL-magic
 
@@ -54,7 +52,7 @@ class AbsoluteLine(Graph):
             dataset = datasets[ident]["avg"]
             deviation = datasets[ident]["avg"]
             plt, = pylab.plot(
-                linear,
+                sample_points,
                 dataset,
                 linestyle="-",
                 label=ident,
@@ -83,7 +81,7 @@ class AbsoluteLine(Graph):
         pylab.xlabel(r"Threads")                        # X-Axis
         pylab.xscale("symlog", basey=2, basex=2)
         pylab.xlim(xmin=0.8, xmax=thread_limit*1.20)
-        pylab.xticks(linear, linear)
+        pylab.xticks(sample_points, sample_points)
         pylab.gca().xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
         t = pylab.title(texsafe(self.title))            # Title
@@ -124,14 +122,14 @@ class AbsoluteBar(Graph):
                                           file_formats,
                                           output_path)
 
-    def render(self, datasets):
+    def render(self, datasets, sample_points):
         self.prep()             # Do some MPL-magic
 
-        min_threads     = 1
-        max_threads     = 32 
+        min_threads     = min(sample_points)
+        max_threads     = max(sample_points)
         data_points = 6
-        linear          = list(brange(min_threads, max_threads))
-        plot_count      = len(linear)
+        #linear          = list(brange(min_threads, max_threads))
+        plot_count      = len(sample_points)
 
         idents = order_idents(datasets.keys(), ident_ordering)
         max_runtime = max(
@@ -158,7 +156,7 @@ class AbsoluteBar(Graph):
         # add some text for labels, title and axes ticks
         ax.set_ylabel(r"Elapsed wall-clock time in \textbf{seconds}")
         ax.set_xticks([x+group_center for x in ind])
-        ax.set_xticklabels([str(x) for x in linear])
+        ax.set_xticklabels([str(x) for x in sample_points])
 
         ax.legend(
             [rects[ident] for ident in idents],
@@ -209,7 +207,7 @@ class Absolute(Graph):
                                        file_formats,
                                        output_path)
 
-    def render(self, datasets):
+    def render(self, datasets, sample_points):
 
         nidents = len([ident for ident in datasets])
         args = {
@@ -223,7 +221,7 @@ class Absolute(Graph):
             g = AbsoluteBar(**args)
         else:
             g = AbsoluteLine(**args)
-        return g.render(datasets)
+        return g.render(datasets, sample_points)
 
 if __name__ == "__main__":
     path = "engine.json"
@@ -237,4 +235,4 @@ if __name__ == "__main__":
     scripts = sorted([script for script in datasets])
     for script in scripts:
         graph = Absolute(title=script)
-        graph.render(datasets[script])
+        graph.render(datasets[script], [1,2,4,8,16,32])

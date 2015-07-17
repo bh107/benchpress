@@ -171,6 +171,10 @@ class Cpu(Grapher):
             ident_mapping
         )
 
+        # Use OMP_NUM_THREADS as sample points
+        sample_points = sorted([int(t) for t in parameters['env_values']['OMP_NUM_THREADS']])
+        print(sample_points)
+
         paths = {} # script_alias -> [fn1, ..., fnn]
         scripts = sorted([script for script in datasets])
         for script in scripts:
@@ -179,11 +183,11 @@ class Cpu(Grapher):
             paths[script] += Absolute(                      # Absolute graphs
                 title=script,
                 output_path=self.output_path
-            ).render(datasets[script])
+            ).render(datasets[script], sample_points)
 
             paths[script] += Relative(                      # Speedup graphs
                 title=script,
                 output_path=self.output_path
-            ).render(datasets[script])
+            ).render(datasets[script], sample_points)
                                         
         self.html_index(raw, datasets, paths, parameters)   # Index them
