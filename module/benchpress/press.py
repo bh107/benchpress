@@ -358,6 +358,8 @@ def add_pending_job(setup, nrun, partition):
     for i in xrange(nrun):
         tmp_config_name = "/tmp/%s_%d.config.ini"%(basename, i)
         for env_key, env_value in setup['envs'].iteritems():      #Write environment variables
+            if "BASH_FUNC_module" in env_key:
+                continue
             job += 'export %s="${%s:-%s}"\n'%(env_key,env_key,env_value)
 
         for env_key, env_value in setup['envs_overwrite'].iteritems(): #Write forced environment variables
