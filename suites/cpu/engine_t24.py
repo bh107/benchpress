@@ -22,7 +22,7 @@ bohrium = {
 omp = {
     'scripts': scripts,
     'launchers': [cpp11_omp],
-    'bohrium': stack_omp_t32,
+    'bohrium': stack_omp_t24,
     "use_slurm_default": True,
     "use_grapher": "cpu"
 }

@@ -178,3 +178,26 @@ stack_omp_t32 = [
     ]
 ]
 
+stack_omp_t24 = [
+    [('default',    'bridge',       None)],
+    [('bccon',      'bccon',        None)],
+    [('bcexp',      'bcexp',        None)],
+    [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
+    [
+        ('omp_af_t24',          'cpu',  {"OMP_NUM_THREADS": "24", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('omp_af_t16',          'cpu',  {"OMP_NUM_THREADS": "16", "GOMP_CPU_AFFINITY": "0-31" }),
+        ('omp_af_t08',          'cpu',  {"OMP_NUM_THREADS": "8",  "GOMP_CPU_AFFINITY": "0-31" }),
+        ('omp_af_t04',          'cpu',  {"OMP_NUM_THREADS": "4",  "GOMP_CPU_AFFINITY": "0-31" }),
+        ('omp_af_t02',          'cpu',  {"OMP_NUM_THREADS": "2",  "GOMP_CPU_AFFINITY": "0-31" }),
+        ('omp_af_t01',          'cpu',  {"OMP_NUM_THREADS": "1",  "GOMP_CPU_AFFINITY": "0-31" }),
+
+        ('omp_t24',             'cpu',  {"OMP_NUM_THREADS": "24"}),
+        ('omp_t16',             'cpu',  {"OMP_NUM_THREADS": "16"}),
+        ('omp_t08',             'cpu',  {"OMP_NUM_THREADS": "8"}),
+        ('omp_t04',             'cpu',  {"OMP_NUM_THREADS": "4"}),
+        ('omp_t02',             'cpu',  {"OMP_NUM_THREADS": "2"}),
+        ('omp_t01',             'cpu',  {"OMP_NUM_THREADS": "1"}),
+    ]
+]
+
