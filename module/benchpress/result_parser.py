@@ -29,6 +29,7 @@ tokens = [
     ('time',    'utime', "User\stime\s\(seconds\):\s([\d.]+)", float),
     ('time',    'stime', "System\stime\s\(seconds\):\s([\d.]+)", float),
     ('time',    'resident_kb', "Maximum\sresident\sset\ssize\s\(kbytes\):\s(\d+)", int),
+    ('stdout',  'fuseprice', "\[PRICER-FILTER\] total cost: (\d+)", int),
 ]
 
 def avg(elapsed):

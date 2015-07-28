@@ -80,17 +80,25 @@ def datadiff(results, baseline):
             data = np.loads(data)
             diff = np.zeros_like(data)
             nz = base != 0
-            diff[nz] = np.absolute(base[nz] - data[nz]) / np.absolute(base[nz]) 
+            diff[nz] = np.absolute(base[nz] - data[nz]) / np.absolute(base[nz])
             print "%s (std: %s, max: %s)"%(diff.mean(), np.std(diff), np.max(diff))
 
+def fusepricer(results):
+    for script, bridge, manager, engine, res in from_str(results):
+        print "%s [%s, %s, %s]:" % (script, bridge, manager, engine),
+        if 'fuseprice' not in res:
+            print "N/A"
+        else:
+            print res['fuseprice']
+
 def main():
-    printers = {'raw':raw, 'times':times, 'parsed': parsed,
-                'csv': csv, 'troels': troels, 'datadiff': datadiff}
+    printers = {'raw':raw, 'times':times, 'parsed': parsed, 'csv': csv, \
+                'troels': troels, 'datadiff': datadiff, 'pricer':fusepricer}
 
     parser = argparse.ArgumentParser()
     parser.add_argument("results", help="JSON file containing results")
     parser.add_argument(
-        "--printer",
+        "-p", "--printer",
         choices=[p for p in printers],
         default='times',
         help="How to print results."
