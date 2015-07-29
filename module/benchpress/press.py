@@ -601,7 +601,7 @@ def gen_jobs_launcher_format(result_file, config, args):
     print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
     i=0
     for suite in suites:
-        
+
         # Add a simple generator if we are not using Bohrium
         if not "bohrium" in suite or suite["bohrium"] == None:
             suite["bohrium"] = [[('NA', 'bridge', None)],[('NA', 'node', None)],[('NA', 'cpu', None)]]
@@ -611,10 +611,10 @@ def gen_jobs_launcher_format(result_file, config, args):
                 if "bohrium" in suite:    # Create Bohrium config
 
                     confparser = SafeConfigParser()     # Read current configuration
-                    confparser.read(config)             # 
+                    confparser.read(config)             #
 
                     combinations = StackCombinator(suite["bohrium"]).get_confs()
-                    
+
                     for stack in combinations:
                         envs = os.environ.copy()        # Orig environment variables
                         envs_overwrite = {}             # Overwritten by components
@@ -643,12 +643,12 @@ def gen_jobs_launcher_format(result_file, config, args):
 
                             if not confparser.has_section(comp_name):
                                 if args.bh_config_file == None:
-                                    raise Exception("Component does not exist: " + str(comp_name) 
+                                    raise Exception("Component does not exist: " + str(comp_name)
                                         + "\nThis is probably caused by not being able to find the Bohrium config file."
                                         + "\nTry setting --bh_config_file with the path to the Bohrium config file")
                                 else:
                                     raise Exception("Component does not exist: " + str(comp_name))
-                                                        
+
                                                         # Collect all components
                             if comp_name not in component_names:
                                 component_names.append(comp_name)
@@ -670,10 +670,10 @@ def gen_jobs_launcher_format(result_file, config, args):
                                 remove_option(comp_name, "children")
 
                         # Remove all unused components from configuration file
-                        all_components = confparser.sections()
-                        for comp_name in all_components:
-                            if comp_name not in component_names:
-                                confparser.remove_section(comp_name)
+                    #    all_components = confparser.sections()
+                    #    for comp_name in all_components:
+                    #        if comp_name not in component_names:
+                    #        confparser.remove_section(comp_name)
 
                         bh_config = StringIO.StringIO() # Construct a new config
                         confparser.write(bh_config)     # And write it to a string buffer
