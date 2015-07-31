@@ -631,7 +631,6 @@ def gen_jobs_launcher_format(result_file, config, args):
                         manager_alias = ""
                         manager_cmd = ""
 
-                        component_names = []
                         for cidx, component in enumerate(stack):
                             last = cidx == len(stack)-1
                             comp_alias  = component[0]  # Grab the alias
@@ -649,10 +648,6 @@ def gen_jobs_launcher_format(result_file, config, args):
                                 else:
                                     raise Exception("Component does not exist: " + str(comp_name))
 
-                                                        # Collect all components
-                            if comp_name not in component_names:
-                                component_names.append(comp_name)
-
                             # This is to remain backwards compatible.
                             comp_type = confparser.get(comp_name, "type")
                             if comp_type == "ve" and not engine:
@@ -669,14 +664,9 @@ def gen_jobs_launcher_format(result_file, config, args):
                             elif confparser.has_option(comp_name, "children"):
                                 remove_option(comp_name, "children")
 
-                        # Remove all unused components from configuration file
-                    #    all_components = confparser.sections()
-                    #    for comp_name in all_components:
-                    #        if comp_name not in component_names:
-                    #        confparser.remove_section(comp_name)
-
                         bh_config = StringIO.StringIO() # Construct a new config
                         confparser.write(bh_config)     # And write it to a string buffer
+                        #print bh_config.getvalue()
 
                         #
                         #   Now do this...
@@ -687,6 +677,7 @@ def gen_jobs_launcher_format(result_file, config, args):
                         print "%snode/%s" % (p, engine_alias)
 
                         run = {
+                            'stack' : stack,
                             'script_alias':script_alias,
                             'bridge_alias':launcher_alias,
                             'engine_alias':engine_alias,

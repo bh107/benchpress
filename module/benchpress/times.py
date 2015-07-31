@@ -84,12 +84,20 @@ def datadiff(results, baseline):
             print "%s (std: %s, max: %s)"%(diff.mean(), np.std(diff), np.max(diff))
 
 def fusepricer(results):
+    out = ""
     for script, bridge, manager, engine, res in from_str(results):
-        print "%s [%s, %s, %s]:" % (script, bridge, manager, engine),
+        s = "%s ["%script
+        for label, name, env in res['stack']:
+            s += "%s/"%label
+        out += "%s]"%s[:-1]
         if 'fuseprice' not in res:
-            print "N/A"
+            out += "N/A"
         else:
-            print res['fuseprice']
+            out += " %s"%str(res['fuseprice'])
+        out += "\n"
+    out = out.split("\n")
+    out.sort()
+    print "\n".join(out)
 
 def main():
     printers = {'raw':raw, 'times':times, 'parsed': parsed, 'csv': csv, \

@@ -82,6 +82,7 @@ def from_str(results, wc=False):
             data['sizes'] =[int(size) for size in sizes[0][len('--size='):].split('*')]
 
         data['script'] = run['script']
+        data['stack'] = run['stack']
 
         res.append((
             run['script_alias'],
