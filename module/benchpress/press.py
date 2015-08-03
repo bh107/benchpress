@@ -349,10 +349,8 @@ def add_pending_job(setup, nrun, partition):
     basename = "bh-job-%s.sh"%uuid.uuid4()
     filename = os.path.join(cwd, basename)
 
-    bridge_cmd = setup['bridge_cmd'].replace("{script}",  setup['script'])
-    bridge_cmd = bridge_cmd.replace("{args}",  setup['script_args'])
-    if setup['manager_cmd'] is not None and len(setup['manager_cmd']) > 0:
-        bridge_cmd = setup['manager_cmd'].replace("{bridge}", bridge_cmd)
+    bridge_cmd = setup['bridge_cmd'].replace("{script}", setup['script'])
+    bridge_cmd = bridge_cmd.replace("{args}", setup['script_args'])
 
     job = "#!/bin/bash\n"
     for i in xrange(nrun):
@@ -422,111 +420,12 @@ def load_suite(filename):
     sys.path.append(os.path.abspath(os.path.dirname(filename)))
     return __import__(os.path.basename(filename)[:-3]).suites
 
-def gen_jobs_bridge_format(result_file, config, args):
-    """
-    Generates benchmark jobs based on the "bridge/old" benchmark suite format.
-    """
-
-    results = prep_results(args.repos_root, args.suite_file.name)
-    benchmarks = load_suite(args.suite_file.name)
-
-    print "Benchmark suite '%s'; results are written to: %s" % (args.suite_file.name, result_file.name)
-    i=0
-    for benchmark in benchmarks:
-        for script_alias, script, script_args in benchmark['scripts']:
-            for bridge_alias, bridge_cmd, bridge_env in benchmark['bridges']:
-                for manager_alias, manager, manager_cmd, manager_env in benchmark.get('managers', [('N/A',None,None,None)]):
-                    for fuser_alias, fuser, fuser_env in benchmark.get('fusers', [('N/A', None, None)]):
-                        for filtr_alias, filtr, filtr_env in benchmark.get('filters', [('N/A', None, None)]):
-                            for engine_alias, engine, engine_env in benchmark.get('engines', [('N/A',None,None)]):
-
-                                bh_config = StringIO.StringIO()
-                                confparser = SafeConfigParser()     # Parser to modify the Bohrium configuration file.
-                                confparser.read(config)             # Read current configuration
-                                                                    # Set the current manager
-
-                                manager = manager if manager else "node"
-                                fuser = fuser if fuser else "topological"
-
-                                has_filter = confparser.has_section(filtr)
-                                if has_filter:
-                                    confparser.set("bridge", "children", filtr)
-                                    confparser.set(filtr, "children", manager)
-
-                                # Check that fusers exists in configuration, set
-                                # engine as child of fuser when they are available
-                                # othervise set then as children of manager
-                                has_fusers = confparser.has_section("greedy")
-                                if has_fusers:
-                                    confparser.set(
-                                        manager,
-                                        "children",
-                                        fuser
-                                    )
-                                    if engine:          # Set the current engine
-                                        confparser.set(fuser, "children", engine)
-                                else:
-                                    if engine:          # Set the current engine
-                                        confparser.set(manager, "children", engine)
-
-                                confparser.write(bh_config)         # And write it to a string buffer
-
-                                envs = os.environ.copy()            # Populate environment variables
-                                envs_overwrite = {}
-                                if engine_env is not None:
-                                    envs_overwrite.update(engine_env)
-                                if manager_env is not None:
-                                    envs_overwrite.update(manager_env)
-                                if bridge_env is not None:
-                                    envs_overwrite.update(bridge_env)
-
-                                p = "Scheduling %s/%s on "%(bridge_alias,script)
-                                if manager and manager != "node":
-                                    p += "%s/"%manager_alias
-                                print "%snode/%s"%(p,engine_alias)
-
-                                run = {'script_alias':script_alias,
-                                       'bridge_alias':bridge_alias,
-                                       'engine_alias':engine_alias,
-                                       'manager_alias':manager_alias,
-                                       'script':script,
-                                       'manager':manager,
-                                       'engine':engine,
-                                       'envs':envs,
-                                       'envs_overwrite':envs_overwrite,
-                                       'pre-hook': benchmark.get('pre-hook', None),
-                                       'post-hook': benchmark.get('post-hook', None),
-                                       'script' : script,
-                                       'script_args' : script_args,
-                                       'bridge_cmd' : bridge_cmd,
-                                       'manager_cmd' : manager_cmd,
-                                       'jobs':[],
-                                       'bh_config':bh_config.getvalue(),
-                                       'use_perf': args.with_perf,
-                                       'use_time': args.with_time,
-                                       'save_data_output': args.save_data,
-                                       'pre_clean': args.pre_clean,
-                                       'data_output': [],
-                                       'use_slurm_default':benchmark.get('use_slurm_default', False),
-                                       'elapsed': [],
-                                       'timings': {},
-                                       'time': [],
-                                       'stdout': [],
-                                       'stderr': [],
-                                       'perf':[]}
-                                njobs = 1
-                                job_nrun = args.runs
-                                if args.multi_jobs:
-                                    njobs = args.runs
-                                    job_nrun = 1
-                                for _ in xrange(njobs):
-                                    i += 1
-                                    add_pending_job(run, job_nrun, args.partition)
-                                results['runs'].append(run)
-                                results['meta']['ended'] = str(datetime.now())
-
-                                bh_config.close()
-                                write2json(result_file, results)
+def stack_label(stack):
+    """Returns a descriptive label of the stack"""
+    ret = ""
+    for component in stack[1:]:
+        ret += "%s/"%component[1]
+    return ret[:-1] #We remove the last "/" before returning
 
 class StackCombinator(object):
     """
@@ -610,12 +509,7 @@ def gen_jobs_launcher_format(result_file, config, args):
             for launcher_alias, launcher_cmd, launcher_env in suite['launchers']:
                 if "bohrium" in suite:    # Create Bohrium config
 
-                    confparser = SafeConfigParser()     # Read current configuration
-                    confparser.read(config)             #
-
-                    combinations = StackCombinator(suite["bohrium"]).get_confs()
-
-                    for stack in combinations:
+                    for stack in StackCombinator(suite["bohrium"]).get_confs():
                         envs = os.environ.copy()        # Orig environment variables
                         envs_overwrite = {}             # Overwritten by components
 
@@ -625,30 +519,45 @@ def gen_jobs_launcher_format(result_file, config, args):
                         if not stack[0][1] == "bridge":
                             raise Exception("First component must be a bridge.")
 
-                        engine = ""
-                        engine_alias = ""
-                        manager = ""
-                        manager_alias = ""
-                        manager_cmd = ""
+                        # Read current configuration
+                        confparser = SafeConfigParser()
+                        confparser.read(config)
 
-                        for cidx, component in enumerate(stack):
-                            last = cidx == len(stack)-1
-                            comp_alias  = component[0]  # Grab the alias
-                            comp_name   = component[1]  # Grab the name
-                            comp_envs   = component[-1] # and environment
-
-                            if comp_envs:               # Overwrite envs
-                                envs_overwrite.update(comp_envs)
-
+                        # Check config consistency
+                        for comp_alias, comp_name, comp_envs in stack:
                             if not confparser.has_section(comp_name):
                                 if args.bh_config_file == None:
-                                    raise Exception("Component does not exist: " + str(comp_name)
-                                        + "\nThis is probably caused by not being able to find the Bohrium config file."
-                                        + "\nTry setting --bh_config_file with the path to the Bohrium config file")
+                                    raise Exception("Component does not exist: %s\n"
+                                            "This is probably caused by not being able to find "
+                                            "the Bohrium config file.\n"
+                                            "Try setting --bh_config_file with the path to "
+                                            "the Bohrium config file"%comp_name)
                                 else:
-                                    raise Exception("Component does not exist: " + str(comp_name))
+                                    raise Exception("Component does not exist: %s"%comp_name)
 
-                            # This is to remain backwards compatible.
+                        # List of component names
+                        stack_comps = [comp[1] for comp in stack]
+
+                        # Remove unused config sections
+                        for sec in confparser.sections():
+                            if sec not in stack_comps:
+                                confparser.remove_section(sec)
+
+                        # Remove the chidren option
+                        for sec in confparser.sections():
+                            confparser.remove_option(sec, "children")
+
+                        # Write the stack
+                        confparser.add_section("stack_default")
+                        confparser.set("stack_default", "type", "stack")
+                        comp_prev = "stack_default"
+                        for comp in stack_comps[1:]:
+                            confparser.set("stack_default", comp_prev, comp)
+                            comp_prev = comp
+
+                        #Let's extract the VEM and VE names in order to remain backwards compatible.
+                        engine = ""; engine_alias = ""; manager = ""; manager_alias = "";
+                        for comp_alias, comp_name, _ in stack:
                             comp_type = confparser.get(comp_name, "type")
                             if comp_type == "ve" and not engine:
                                 engine = comp_name
@@ -656,13 +565,6 @@ def gen_jobs_launcher_format(result_file, config, args):
                             elif comp_type == "vem" and not manager:
                                 manager = comp_name
                                 manager_alias = comp_alias
-                                manager_cmd = component[2]
-
-                            if not last:                # Set the child
-                                name_child = stack[cidx+1][1]
-                                confparser.set(comp_name, "children", name_child)
-                            elif confparser.has_option(comp_name, "children"):
-                                remove_option(comp_name, "children")
 
                         bh_config = StringIO.StringIO() # Construct a new config
                         confparser.write(bh_config)     # And write it to a string buffer
@@ -671,11 +573,7 @@ def gen_jobs_launcher_format(result_file, config, args):
                         #
                         #   Now do this...
                         #
-                        p = "Scheduling %s/%s on " % (launcher_alias, script)
-                        if manager and manager != "node":
-                            p += "%s/ " % manager_alias
-                        print "%snode/%s" % (p, engine_alias)
-
+                        print "Scheduling %s"%stack_label(stack)
                         run = {
                             'stack' : stack,
                             'script_alias':script_alias,
@@ -692,7 +590,6 @@ def gen_jobs_launcher_format(result_file, config, args):
                             'script' : script,
                             'script_args' : script_args,
                             'bridge_cmd' : launcher_cmd,
-                            'manager_cmd' : manager_cmd,
                             'jobs':[],
                             'bh_config':bh_config.getvalue(),
                             'use_perf': args.with_perf,
@@ -740,7 +637,7 @@ def gen_jobs(result_file, config, args):
             nnew += 1
 
     if nnew == 0:
-        gen_jobs_bridge_format(result_file, config, args)
+        print "ERROR! The bridge suite format is not supported anymore!"
     elif nnew == nsuites:
         gen_jobs_launcher_format(result_file, config, args)
     else:
@@ -765,10 +662,7 @@ def handle_result_file(result_file, args):
                     slurm_run(job, nnodes, queue=None)
                 else:
                     #The user wants local execution
-                    p = "Executing %s/%s on "%(run['bridge_alias'],run['script'])
-                    if run['manager'] and run['manager'] != "node":
-                        p += "%s/"%run['manager_alias']
-                    print "%snode/%s"%(p,run['engine_alias'])
+                    print "Executing %s"%stack_label(run['stack'])
                     if run['pre-hook'] is not None:
                         print "pre-hook cmd: \"%s\""%run['pre-hook']
                         check_call(run['pre-hook'], shell=True)
