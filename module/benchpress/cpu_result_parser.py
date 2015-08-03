@@ -97,6 +97,9 @@ def tmean(samples):
     Returns a truncated mean, average of the samples without
     outliers (smallest and largest).
     """
+    if len(samples) <= 1:
+        return mean(samples)
+
     tsamples = list(samples)        # Truncate samples
     largest = pop_max(tsamples)
     smallest = pop_min(tsamples)
@@ -105,6 +108,9 @@ def tmean(samples):
 
 def tstd_dev(samples):
     """Compute the truncated standard deviation within the samples."""
+    if len(samples) <= 1:
+        return std_dev(samples)
+
     tsamples = list(samples)        # Truncate samples
     pop_max(tsamples)
     pop_min(tsamples)
@@ -218,7 +224,7 @@ def datasets_baselinify(datasets):
     """
     Create baseline versions of the datasets.
     Uses the first value of each dataset.
-    
+
     Adds min/max, removed dev as it does not apply
     well to the relative numbers...
     """
@@ -274,7 +280,7 @@ def extract_parameters(raw):
         script_args[script_alias].append(
             result["script_args"]
         )
-    
+
     # Verify that the same arguments are used for scripts
     for script_alias in script_aliases:
         if len(set(script_args[script_alias])) != 1:
@@ -325,7 +331,7 @@ def extract_parameters(raw):
 if __name__ == "__main__":
     path = "/home/safl/remote/erda/public_base/Bohrium/safl/numbers/engine-01/result.json"
 
-    results = json.load(open(file_path)) 
+    results = json.load(open(file_path))
 
     runs = results["runs"]
     runs_flattened = flatten(runs)
