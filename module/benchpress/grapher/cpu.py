@@ -11,22 +11,13 @@ from absolute import Absolute
 class Cpu(Grapher):
     """Create a graph that illustrates scalabiltity."""
 
-    def __init__(
-        self, output_path, file_formats, postfix,
-        graph_title, xaxis_label,  yaxis_label
-    ):
-        super(Cpu, self).__init__(
-            output_path, file_formats, postfix,
-            graph_title, xaxis_label, yaxis_label
-        )
-
     def html_index(self, raw, datasets, paths, parameters):
 
         meta = raw["meta"]
         scripts = [script for script in datasets]
         scripts.sort()
 
-        table = "<center><table><tr>" 
+        table = "<center><table><tr>"
 
         unordered_idents = sorted(list(set([ident for script in scripts for ident in datasets[script]])))
         idents = order_idents(unordered_idents, ident_ordering)
@@ -56,11 +47,11 @@ class Cpu(Grapher):
             """
 
             for script in scripts:
-                
+
                 table += """
                 <tr>
                 <td>%s</td>
-                """ % script 
+                """ % script
                 (global_max, data) = datasets_baselinify(datasets[script])
                 for ident in idents:
                     smax = data[bsl_ident][ident]['max']
@@ -124,11 +115,11 @@ class Cpu(Grapher):
         <div id="navbar">
         __LINKS__
         </div>
- 
+
         <div id="header">
         <h1>Benchmark Suite CPU</h1>
         <h2>Repos revision: %s</h2>
-        </div>       
+        </div>
         <h2>Results</h2>
         __TABLE__
         __RESULTS__
@@ -163,7 +154,7 @@ class Cpu(Grapher):
     def render(self, raw, data, order, baseline):
 
         parameters = extract_parameters(raw)                # Extract parameters
-        
+
         runs_flattened = flatten(raw["runs"])               # Extract datasets
         runs_grouped = group_by_script(runs_flattened)
         datasets = datasets_rename(
@@ -178,7 +169,7 @@ class Cpu(Grapher):
         paths = {} # script_alias -> [fn1, ..., fnn]
         scripts = sorted([script for script in datasets])
         for script in scripts:
-            paths[script] = []  
+            paths[script] = []
 
             paths[script] += Absolute(                      # Absolute graphs
                 title=script,
@@ -189,5 +180,5 @@ class Cpu(Grapher):
                 title=script,
                 output_path=self.output_path
             ).render(datasets[script], sample_points)
-                                        
+
         self.html_index(raw, datasets, paths, parameters)   # Index them

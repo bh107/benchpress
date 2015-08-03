@@ -207,7 +207,7 @@ class Absolute(Graph):
                                        file_formats,
                                        output_path)
 
-    def render(self, datasets, sample_points):
+    def render(self, datasets, sample_points, order=None, baseline=None):
 
         nidents = len([ident for ident in datasets])
         args = {
@@ -222,17 +222,3 @@ class Absolute(Graph):
         else:
             g = AbsoluteLine(**args)
         return g.render(datasets, sample_points)
-
-if __name__ == "__main__":
-    path = "engine.json"
-    runs_flattened = flatten(json.load(open(path))["runs"])
-    runs_grouped = group_by_script(runs_flattened)
-    datasets = datasets_rename(
-        datasetify(runs_grouped),
-        ident_mapping
-    )
-
-    scripts = sorted([script for script in datasets])
-    for script in scripts:
-        graph = Absolute(title=script)
-        graph.render(datasets[script], [1,2,4,8,16,32])
