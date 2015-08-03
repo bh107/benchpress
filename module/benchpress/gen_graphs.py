@@ -3,7 +3,7 @@ from copy import copy, deepcopy
 import argparse
 import pkgutil
 import pprint
-import json 
+import json
 
 #from grapher.graph import *
 #from grapher.scale import *
@@ -104,8 +104,5 @@ def main(args):
 
     grapher = args.graph_module(
         args.output, args.formats, args.postfix,
-        graph_title = "Something",
-        xaxis_label = "Threads",
-        yaxis_label = "Wall-Clock in Seconds"
     )
     grapher.render(raw, data, args.order, args.baseline)
