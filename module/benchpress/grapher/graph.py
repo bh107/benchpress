@@ -13,7 +13,7 @@ def brange(begin, end):
         thres = 2**i
         i += 1
     thres = end
-        
+
     c = i = begin
     while i <= end:
         yield i
@@ -46,7 +46,7 @@ def texsafe(text):
         '>': r'\textgreater',
     }
     escaped = []
-    
+
     for char in text:
         if char in conv:
             char = conv[char]
@@ -141,11 +141,11 @@ class Graph(object):
     def tofile(self, fn_args):          # Creates the output-file.
 
         if not os.path.exists(self.output_path):
-            raise("Output path %s does not exists. Cannot spit out graphs")
+            raise Exception("Output path %s does not exists. Cannot spit out graphs")
 
         paths = []
         for file_format in self.file_formats:
-        
+
             filename = sanitize_fn(self.fn_pattern.format(
                 ext=file_format,
                 **fn_args
@@ -164,11 +164,11 @@ class Graph(object):
 class Grapher(object):
     """
     Take a result file and produces some output.
-    
+
     Can be just a single graph, but multiple graphs,
     html, and other stuff is more likely.
     """
-    
+
     def __init__(
         self,
         output_path,
