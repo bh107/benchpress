@@ -60,6 +60,11 @@ if __name__ == "__main__":
         help="Enable the use of the '/usr/bin/time -v' measuring tool."
     )
     parser.add_argument(
+        '--verbose',
+        action="store_true",
+        help="Write stdout and stderr to console when executing"
+    )
+    parser.add_argument(
         '--save-data',
         action="store_true",
         help="Save data output from benchmarks in RESULT_FILE. "\
