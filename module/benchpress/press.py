@@ -582,6 +582,7 @@ def gen_jobs_launcher_format(result_file, config, args):
                         #
                         #   Now do this...
                         #
+                        print "Scheduling %s on %s"%(script_alias, stack_label(stack))
                         print "Scheduling %s"%stack_label(stack)
                         run = {
                             'stack' : stack,
@@ -671,7 +672,7 @@ def handle_result_file(result_file, args):
                     slurm_run(job, nnodes, queue=None)
                 else:
                     #The user wants local execution
-                    print "Executing %s"%stack_label(run['stack'])
+                    print "Executing %s on %s"%(run['script_alias'], stack_label(run['stack']))
                     if run['pre-hook'] is not None:
                         print "pre-hook cmd: \"%s\""%run['pre-hook']
                         check_call(run['pre-hook'], shell=True)
