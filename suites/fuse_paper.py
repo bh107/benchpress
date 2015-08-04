@@ -20,6 +20,12 @@ scripts = [
 #    ('wireworld',       'wireworld',       '--size=10*1'   ),
 ]
 
+scripts = [
+    ('Heat Equation',   'heat_equation',   '--size=100*100*1' ),
+    ('nBody',           'nbody',           '--size=100*1'      ),
+    ('Shallow Water',   'shallow_water',   '--size=100*100*1' ),
+    ]
+
 bh_stack_cpu_pricer = [
     [('default',    'bridge',       None)],
     [('bccon',      'bccon',        None)],
@@ -28,6 +34,7 @@ bh_stack_cpu_pricer = [
         ('single',     'singleton',  None),
         ('topo',       'topological',  None),
         ('greedy',     'greedy',  None),
+        ('optimal',    'optimal',  None),
     ],
     [('node',       'node',         None)],
     [('pricer',     'pricer',       None)],
