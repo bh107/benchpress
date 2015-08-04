@@ -230,7 +230,7 @@ def parse_and_add_timings(output,timings):
         else:
             timings[k] = [t]
 
-def execute_run(job):
+def execute_run(job, verbose=False):
     """Execute the run locally"""
 
     with open(job['filename'], 'w') as f:
@@ -239,7 +239,11 @@ def execute_run(job):
         f.flush()
         os.fsync(f)
         try:# Then we execute the batch script
-            p = Popen(['bash', f.name])
+            p = Popen(['bash', f.name], stdout=PIPE)
+            if verbose:
+                while p.poll() is None:
+                    print p.stdout.readline()
+                print p.stdout.read()
             p.wait()
         except KeyboardInterrupt:
             p.kill()
@@ -396,7 +400,7 @@ def add_pending_job(setup, nrun, partition):
         setup['cmd'] = cmd
 
         #Pipe the output to files
-        job += '1> %s.out 2> %s.err\n'%(outfile,outfile)
+        job += '> >(tee %s.out) 2> >(tee %s.err >&2)'%(outfile,outfile)
 
         #Cleanup the config file
         job += "\nrm %s\n\n\n"%tmp_config_name
@@ -666,7 +670,7 @@ def handle_result_file(result_file, args):
                     if run['pre-hook'] is not None:
                         print "pre-hook cmd: \"%s\""%run['pre-hook']
                         check_call(run['pre-hook'], shell=True)
-                    execute_run(job)
+                    execute_run(job, args.verbose)
                     parse_run(run, job)
             else:#The job has been submitted to SLURM
                 if slurm_run_finished(job):#And it is finished
