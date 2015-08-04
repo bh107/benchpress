@@ -3,6 +3,7 @@ from benchpress.default import *
 scripts = [
     ('Heat Equation',   'heat_equation',   '--size=100*100*1' ),
     ('nBody',           'nbody',           '--size=100*1'      ),
+    ('nBody-NICE',      'nbody_nice',      '--size=100*100*1'  ),
     ('Shallow Water',   'shallow_water',   '--size=100*100*1' ),
     ('Black Scholes',   'black_scholes',   '--size=1000*1'   ),
     ('Jacobi Fixed',    'jacobi_fixed',    '--size=1000*1'   ),
@@ -13,17 +14,17 @@ scripts = [
     ('LU',              'lu',              '--size=100*100*1'   ),
     ('Synth',           'synth',           '--size=100*1'   ),
     ('point27',         'point27',         '--size=100*1'   ),
-    ('lbm_3d',          'lbm_3d',          '--size=10*10*10*1'   ),
     ('rosenbrock',      'rosenbrock',      '--size=100*1'   ),
     ('wisp',            'wisp',            '--size=100*100*1'   ),
+#    ('lbm_3d',          'lbm_3d',          '--size=10*10*10*1'   ),
 #    ('lbm_2d',          'lbm_2d',          '--size=10*10*1'   ),
 #    ('wireworld',       'wireworld',       '--size=10*1'   ),
 ]
 
-scripts = [
-    ('Heat Equation',   'heat_equation',   '--size=100*100*1' ),
-    ('nBody',           'nbody',           '--size=100*1'      ),
-    ('Shallow Water',   'shallow_water',   '--size=100*100*1' ),
+testscripts = [
+        #('Heat Equation',   'heat_equation',   '--size=100*100*1' ),
+    ('nBody-NICE',      'nbody_nice',      '--size=100*100*1'  ),
+    #('Shallow Water',   'shallow_water',   '--size=100*100*1' ),
     ]
 
 bh_stack_cpu_pricer = [
@@ -31,10 +32,10 @@ bh_stack_cpu_pricer = [
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [
-        ('single',     'singleton',  None),
-        ('topo',       'topological',  None),
-        ('greedy',     'greedy',  None),
-        ('optimal',    'optimal',  None),
+        ('single',     'singleton',   {"BH_SINGLETON_FUSE_CACHE": "false"}),
+        ('topo',       'topological', {"BH_TOPOLOGICAL_FUSE_CACHE": "false"}),
+        ('greedy',     'greedy',      {"BH_GREEDY_FUSE_CACHE": "false"}),
+        ('optimal',    'optimal',     {"BH_OPTIMAL_FUSE_CACHE": "false"}),
     ],
     [('node',       'node',         None)],
     [('pricer',     'pricer',       None)],
