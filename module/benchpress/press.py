@@ -539,6 +539,11 @@ def gen_jobs_launcher_format(result_file, config, args):
                                 else:
                                     raise Exception("Component does not exist: %s"%comp_name)
 
+                        # Write envs
+                        for _, _, comp_envs in stack:
+                            if comp_envs is not None:
+                                envs_overwrite.update(comp_envs)
+
                         # List of component names
                         stack_comps = [comp[1] for comp in stack]
 
