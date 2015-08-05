@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib.ticker import FormatStrFormatter
 from matplotlib import pyplot
 
-def plot(cmds, res):
+def plot(cmds, res, baseline):
 
     import matplotlib.pyplot as plt
 
@@ -24,9 +24,12 @@ def plot(cmds, res):
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
     ax.set_xticklabels(cmds, rotation=-35)
-    ax.set_ylabel('Cost in bytes')
-    #ax.set_ylabel('Cost compared to singleton')
-    #ax.set_ylim(0,1)
+    if baseline is None:
+        ax.set_ylabel('Cost in bytes')
+    else:
+        ax.set_ylabel('Cost compared to %s'%baseline)
+    ax.set_ylim(0,30)
+    #ax.set_yscale('log')
     ax.legend(bars, fusers)
 
 def get_stack_name(stack):
@@ -80,6 +83,24 @@ class Fuse_price(Graph):
                             raise Exception("The optimal fuser isn't best: %s(%d) < %s(%d)"\
                                              %(comp, value, comp_optimal, best))
 
+        #Extract the name of the baseline component
+        comp_baseline = None
+        if baseline is not None:
+            for comp in comps:
+                if baseline in comp:
+                    comp_baseline = comp
+                    break
+            if comp_baseline is None:
+                raise Exception("Couldn't find the specified baseline"\
+                                " %s in the result json"%baseline)
+
+        #Remove the baseline component from 'comps' and make all values reletive
+        comps.remove(comp_baseline)
+        for script in scripts:
+            for comp in comps:
+                if res[script][comp_baseline] > 0 or res[script][comp] > 0:
+                    res[script][comp] = res[script][comp_baseline] / res[script][comp]
+
         #Convert to a bar-plot friendly format
         data = []
         for comp in comps:
@@ -87,6 +108,6 @@ class Fuse_price(Graph):
             for script in scripts:
                 values.append(res[script][comp])
             data.append((comp,values))
-        plot(scripts, data)
+        plot(scripts, data, baseline)
         self.tofile({"title": self.title})
 
