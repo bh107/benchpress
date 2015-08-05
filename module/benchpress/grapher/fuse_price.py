@@ -53,7 +53,10 @@ class Fuse_price(Graph):
             for script, _, _, _, r in data:
                 if script == s:
                     comp = get_stack_name(r['stack'])
-                    value = r['fuseprice'][0]
+                    try:
+                        value = r['fuseprice'][0]
+                    except:
+                        value = 0
                     comps.add(comp)
                     if s in res:
                         res[s][comp] = value
