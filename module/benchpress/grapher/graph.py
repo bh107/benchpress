@@ -101,19 +101,8 @@ class Graph(object):
         r'd',
     ]
 
-    def __init__(self,
-                 title = "Untitled Graph",
-                 line_width = 2,
-                 fn_pattern = "{title}.{ext}",
-                 file_formats = ["png"],
-                 output_path = "."):
-
-        self.title = title
-        self.line_width = line_width
-        self.fn_pattern = fn_pattern
-        self.file_formats = file_formats
-        self.output_path = os.path.expandvars(os.path.expanduser(output_path))
-
+    def __init__(self, args):
+        self.args = args
         self._mpl_init()
 
     def _mpl_init(self):
@@ -140,18 +129,18 @@ class Graph(object):
 
     def tofile(self, fn_args):          # Creates the output-file.
 
-        if not os.path.exists(self.output_path):
+        if not os.path.exists(self.args.output_path):
             raise Exception("Output path %s does not exists. Cannot spit out graphs")
 
         paths = []
-        for file_format in self.file_formats:
+        for file_format in self.args.file_formats:
 
-            filename = sanitize_fn(self.fn_pattern.format(
+            filename = sanitize_fn(self.args.fn_pattern.format(
                 ext=file_format,
                 **fn_args
             ))
             abs_path = os.sep.join([
-                self.output_path,
+                self.args.output_path,
                 filename
             ])
             paths.append(abs_path)

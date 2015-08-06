@@ -7,8 +7,8 @@ from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, o
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping, extract_parameters, datasets_baselinify
 from benchpress import result_parser
 from graph import Grapher, Graph, texsafe, brange, pylab, matplotlib
-from relative import Relative
-from absolute import Absolute
+from relative import relative
+from absolute import absolute
 
 class Cpu(Grapher):
     """Create a graph that illustrates scalabiltity."""
@@ -176,14 +176,9 @@ class Cpu(Grapher):
         for script in scripts:
             paths[script] = []
 
-            paths[script] += Absolute(                      # Absolute graphs
-                title=script,
-                output_path=self.output_path
-            ).render(datasets[script], sample_points)
-
-            paths[script] += Relative(                      # Speedup graphs
-                title=script,
-                output_path=self.output_path
-            ).render(datasets[script], sample_points)
+            # Absolute graphs
+            paths[script] += absolute(script, self.output_path, datasets[script], sample_points)
+            # Speedup graphs
+            paths[script] += relative(script, self.output_path, datasets[script], sample_points)
 
         self.html_index(raw, datasets, paths, parameters)   # Index them

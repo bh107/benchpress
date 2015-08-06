@@ -26,19 +26,6 @@ class AbsoluteLine(Graph):
     }
     """
 
-    def __init__(self,
-                 title = "Untitled Absolute Graph",
-                 line_width = 2,
-                 fn_pattern = "{title}_abs.{ext}",
-                 file_formats = ["png"],
-                 output_path = "."):
-
-        super(AbsoluteLine, self).__init__(title,
-                                           line_width,
-                                           fn_pattern,
-                                           file_formats,
-                                           output_path)
-
     def render(self, datasets, sample_points):
 
         thread_limit = max(sample_points)
@@ -57,7 +44,7 @@ class AbsoluteLine(Graph):
                 linestyle="-",
                 label=ident,
                 color=Graph.colors[idx],
-                lw=self.line_width,
+                lw=self.args.line_width,
                 marker=Graph.markers[idx],
                 markersize=Graph.marker_sizes[idx]
             )
@@ -84,11 +71,11 @@ class AbsoluteLine(Graph):
         pylab.xticks(sample_points, sample_points)
         pylab.gca().xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
-        t = pylab.title(texsafe(self.title))            # Title
+        t = pylab.title(texsafe(self.args.title))            # Title
         t.set_y(1.15)
         pylab.tight_layout()
 
-        return self.tofile({"title": self.title})              # Finally write it to file
+        return self.tofile({"title": self.args.title})              # Finally write it to file
 
 class AbsoluteBar(Graph):
     """
@@ -109,18 +96,6 @@ class AbsoluteBar(Graph):
         }
     }
     """
-
-    def __init__(self,
-                 title = "Untitled Absolute Graph",
-                 line_width = 2,
-                 fn_pattern = "{title}_abs.{ext}",
-                 file_formats = ["png"],
-                 output_path = "."):
-        super(AbsoluteBar, self).__init__(title,
-                                          line_width,
-                                          fn_pattern,
-                                          file_formats,
-                                          output_path)
 
     def render(self, datasets, sample_points):
         self.prep()             # Do some MPL-magic
@@ -183,42 +158,31 @@ class AbsoluteBar(Graph):
             autolabel(rects[ident])
 
         pylab.xlabel("Threads")
-        t = pylab.title(texsafe(self.title))
+        t = pylab.title(texsafe(self.args.title))
         t.set_y(1.05)
 
         pylab.ylim(ymin=0, ymax=max_runtime*1.13)
 
         pylab.tight_layout()                  # Spit them out to file
 
-        return self.tofile({"title": self.title})              # Finally write it to file
+        return self.tofile({"title": self.args.title})              # Finally write it to file
 
-class Absolute(Graph):
+class ArgsDummy(object):
+    pass
 
-    def __init__(self,
-                 title = "Untitled Absolute Graph",
-                 line_width = 2,
-                 fn_pattern = "{title}_abs.{ext}",
-                 file_formats = ["png"],
-                 output_path = "."):
+def absolute(title, output_path, datasets, sample_points):
+    args = ArgsDummy()
+    args.title = title
+    args.output_path = output_path
+    args.line_width = 2
+    args.fn_pattern = "{title}_abs.{ext}"
+    args.file_formats = ["png"]
 
-        super(Absolute, self).__init__(title,
-                                       line_width,
-                                       fn_pattern,
-                                       file_formats,
-                                       output_path)
+    nidents = len([ident for ident in datasets])
+    if nidents < 4:
+        g = AbsoluteBar(args)
+    else:
+        g = AbsoluteLine(args)
+    return g.render(datasets, sample_points)
 
-    def render(self, datasets, sample_points, order=None, baseline=None):
 
-        nidents = len([ident for ident in datasets])
-        args = {
-            "title": self.title,
-            "line_width": self.line_width,
-            "file_formats": self.file_formats,
-            "fn_pattern": self.fn_pattern,
-            "output_path": self.output_path
-        }
-        if nidents < 4:
-            g = AbsoluteBar(**args)
-        else:
-            g = AbsoluteLine(**args)
-        return g.render(datasets, sample_points)

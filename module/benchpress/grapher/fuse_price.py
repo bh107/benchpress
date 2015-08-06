@@ -2,6 +2,8 @@ from graph import Graph
 import numpy as np
 from matplotlib.ticker import FormatStrFormatter
 from matplotlib import pyplot
+from benchpress import result_parser
+import json
 
 def plot(cmds, res, baseline):
 
@@ -45,7 +47,11 @@ def get_stack_name(stack):
 
 class Fuse_price(Graph):
 
-    def render(self, raw, data, order=None, baseline=None):
+    def render(self, args):
+
+        raw = json.load(open(args.results))
+        data = result_parser.from_file(args.results)
+
         self.prep()             # Do some MPL-magic
 
         # Extract result data
@@ -85,21 +91,22 @@ class Fuse_price(Graph):
 
         #Extract the name of the baseline component
         comp_baseline = None
-        if baseline is not None:
+        if args.baseline is not None:
             for comp in comps:
-                if baseline in comp:
+                if args.baseline in comp:
                     comp_baseline = comp
                     break
             if comp_baseline is None:
                 raise Exception("Couldn't find the specified baseline"\
-                                " %s in the result json"%baseline)
+                                " %s in the result json"%args.baseline)
 
-        #Remove the baseline component from 'comps' and make all values reletive
-        comps.remove(comp_baseline)
-        for script in scripts:
-            for comp in comps:
-                if res[script][comp_baseline] > 0 or res[script][comp] > 0:
-                    res[script][comp] = res[script][comp_baseline] / res[script][comp]
+        if comp_baseline is not None:
+            #Remove the baseline component from 'comps' and make all values reletive
+            comps.remove(comp_baseline)
+            for script in scripts:
+                for comp in comps:
+                    if res[script][comp_baseline] > 0 or res[script][comp] > 0:
+                        res[script][comp] = res[script][comp_baseline] / res[script][comp]
 
         #Convert to a bar-plot friendly format
         data = []
@@ -108,6 +115,6 @@ class Fuse_price(Graph):
             for script in scripts:
                 values.append(res[script][comp])
             data.append((comp,values))
-        plot(scripts, data, baseline)
+        plot(scripts, data, args.baseline)
         self.tofile({"title": self.title})
 

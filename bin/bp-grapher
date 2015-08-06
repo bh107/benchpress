@@ -17,7 +17,10 @@ if __name__ == "__main__":
 
         module_caps = module.capitalize()
         m = __import__("benchpress.grapher.%s" % module, globals(), locals(), [module_caps], -1)
-        graph_types[module] = m.__dict__[module_caps]
+        try:
+            graph_types[module] = m.__dict__[module_caps]
+        except KeyError:
+            pass
 
     parser = argparse.ArgumentParser(
         description = 'Generate different types of graphs.'

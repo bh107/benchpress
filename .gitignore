@@ -3,8 +3,8 @@
 *.pyc
 build/
 dist/
+benchmarks/**/bin
 MANIFEST
-bin/
 bh-job-*
 benchmarks/_utils/cil/Utilities/obj
 *.mdb

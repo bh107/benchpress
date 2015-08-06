@@ -7,7 +7,7 @@ from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, i
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping, datasets_baselinify
 from graph import Graph, texsafe, brange, pylab, matplotlib
 
-class Relative(Graph):
+class RelativeGraph(Graph):
     """
     Renders multiple graphs, one for each possible baseline,
     using the first value for each provided dataset in the dict of datasets.
@@ -24,20 +24,6 @@ class Relative(Graph):
         }
     }
     """
-
-    def __init__(
-        self,
-        title = "Untitled Speedup Graph",
-        line_width = 2,
-        fn_pattern = "{title}_rel_{baseline}.{ext}",
-        file_formats = ["png"],
-        output_path = "."):
-
-        super(Relative, self).__init__(title,
-                                       line_width,
-                                       fn_pattern,
-                                       file_formats,
-                                       output_path)
 
     def render(self, datasets, sample_points):
 
@@ -59,7 +45,7 @@ class Relative(Graph):
                     linestyle="-",
                     label=ident,
                     color=Graph.colors[idx],
-                    lw=self.line_width,
+                    lw=self.args.line_width,
                     marker=Graph.markers[idx],
                     markersize=Graph.marker_sizes[idx]
                 )
@@ -77,7 +63,7 @@ class Relative(Graph):
                 sample_points,
                 "--",
                 color='gray',
-                lw=self.line_width
+                lw=self.args.line_width
             )                                               # sample_points, for reference
 
             pylab.legend(
@@ -105,7 +91,7 @@ class Relative(Graph):
                 ymin=0,
                 ymax=max(global_max*1.2, thread_max*1.2),
             )
-            
+
             yticks = copy.deepcopy(sample_points)
             if global_max*2 > thread_max:
                 yticks[-1] = int(global_max*2)
@@ -114,28 +100,27 @@ class Relative(Graph):
                 matplotlib.ticker.ScalarFormatter()
             )                                               # Y-Axis - end
 
-            t = pylab.title(texsafe(self.title))            # Title
+            t = pylab.title(texsafe(self.args.title))            # Title
             t.set_y(1.15)
             pylab.tight_layout()
 
             paths += self.tofile({                          # Finally write it to file
-                "title": self.title,
+                "title": self.args.title,
                 "baseline": bsl_ident
             })
 
         return paths
 
-if __name__ == "__main__":
-    path = "engine.json"
-    runs_flattened = flatten(json.load(open(path))["runs"])
-    runs_grouped = group_by_script(runs_flattened)
-    datasets = datasets_rename(
-        datasetify(runs_grouped),
-        ident_mapping
-    )
+class ArgsDummy(object):
+    pass
 
-    scripts = sorted([script for script in datasets])
-    for script in scripts:
-        graph = Relative(title=script)
-        graph.render(datasets[script])
-        break
+def relative(title, output_path, datasets, sample_points):
+    args = ArgsDummy()
+    args.title = title
+    args.output_path = output_path
+    args.line_width = 2
+    args.fn_pattern = "{title}_rel_{baseline}.{ext}"
+    args.file_formats = ["png"]
+
+    return RelativeGraph(args).render(datasets, sample_points)
+
