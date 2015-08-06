@@ -159,11 +159,7 @@ class Grapher(object):
     """
 
     def __init__(self, args):
-        self.output_path = args.output_path
-        self.file_formats = args.formats
-        self.graph_title = None
-        self.xaxis_label = None
-        self.yaxis_label = None
+        self.args = args
 
     def render(self, raw, data, order, baseline):
         raise Exception("Unimplemented.")

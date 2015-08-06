@@ -150,13 +150,13 @@ class Cpu(Grapher):
             results += "</table>\n"
 
         html = doc.replace("__RESULTS__", results)
-        with open('%s%sindex.html' % (self.output_path, os.sep), 'w') as fd:
+        with open('%s%sindex.html' % (self.args.output_path, os.sep), 'w') as fd:
             fd.write(html)
 
-    def render(self, args):
+    def render(self):
 
-        raw = json.load(open(args.results))
-        data = result_parser.from_file(args.results)
+        raw = json.load(open(self.args.results))
+        data = result_parser.from_file(self.args.results)
 
         parameters = extract_parameters(raw)                # Extract parameters
 
@@ -177,8 +177,8 @@ class Cpu(Grapher):
             paths[script] = []
 
             # Absolute graphs
-            paths[script] += absolute(script, self.output_path, datasets[script], sample_points)
+            paths[script] += absolute(script, self.args.output_path, datasets[script], sample_points)
             # Speedup graphs
-            paths[script] += relative(script, self.output_path, datasets[script], sample_points)
+            paths[script] += relative(script, self.args.output_path, datasets[script], sample_points)
 
         self.html_index(raw, datasets, paths, parameters)   # Index them
