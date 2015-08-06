@@ -133,7 +133,7 @@ class Graph(object):
             raise Exception("Output path %s does not exists. Cannot spit out graphs")
 
         paths = []
-        for file_format in self.args.file_formats:
+        for file_format in self.args.formats:
 
             filename = sanitize_fn(self.args.fn_pattern.format(
                 ext=file_format,
@@ -159,11 +159,7 @@ class Grapher(object):
     """
 
     def __init__(self, args):
-        self.output_path = args.output_path
-        self.file_formats = args.formats
-        self.graph_title = None
-        self.xaxis_label = None
-        self.yaxis_label = None
+        self.args = args
 
     def render(self, raw, data, order, baseline):
         raise Exception("Unimplemented.")

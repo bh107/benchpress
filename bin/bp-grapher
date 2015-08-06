@@ -80,5 +80,5 @@ if __name__ == "__main__":
     args.output_path = os.path.expandvars(os.path.expanduser(args.output_path))
 
     g = graph_types[args.type](args)
-    g.render(args)
+    g.render()
 

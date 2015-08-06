@@ -30,7 +30,7 @@ def plot(cmds, res, baseline):
         ax.set_ylabel('Cost in bytes')
     else:
         ax.set_ylabel('Cost compared to %s'%baseline)
-    ax.set_ylim(0,30)
+    #ax.set_ylim(0,30)
     #ax.set_yscale('log')
     ax.legend(bars, fusers)
 
@@ -47,10 +47,10 @@ def get_stack_name(stack):
 
 class Fuse_price(Graph):
 
-    def render(self, args):
+    def render(self):
 
-        raw = json.load(open(args.results))
-        data = result_parser.from_file(args.results)
+        raw = json.load(open(self.args.results))
+        data = result_parser.from_file(self.args.results)
 
         self.prep()             # Do some MPL-magic
 
@@ -91,14 +91,14 @@ class Fuse_price(Graph):
 
         #Extract the name of the baseline component
         comp_baseline = None
-        if args.baseline is not None:
+        if self.args.baseline is not None:
             for comp in comps:
-                if args.baseline in comp:
+                if self.args.baseline in comp:
                     comp_baseline = comp
                     break
             if comp_baseline is None:
                 raise Exception("Couldn't find the specified baseline"\
-                                " %s in the result json"%args.baseline)
+                                " %s in the result json"%self.args.baseline)
 
         if comp_baseline is not None:
             #Remove the baseline component from 'comps' and make all values reletive
@@ -115,6 +115,6 @@ class Fuse_price(Graph):
             for script in scripts:
                 values.append(res[script][comp])
             data.append((comp,values))
-        plot(scripts, data, args.baseline)
-        self.tofile({"title": self.title})
+        plot(scripts, data, self.args.baseline)
+        self.tofile({"title": "fuse-price"})
 
