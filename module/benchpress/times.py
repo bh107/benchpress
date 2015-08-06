@@ -7,6 +7,13 @@ import press
 from result_parser import from_file, from_str, avg
 from result_parser import standard_deviation as std
 
+def stack_label(stack):
+    """Returns a descriptive label of the stack"""
+    ret = ""
+    for component in stack[1:]:
+        ret += "%s/"%component[1]
+    return ret[:-1] #We remove the last "/" before returning
+
 def raw(results):
     pprint.pprint(results)
 
@@ -15,7 +22,7 @@ def parsed(results):
 
 def times(results):
     for script, bridge, manager, engine, res in from_str(results):
-        print "%s [%s, %s, %s]:" % (script, bridge, manager, engine),
+        print "%s [%s]:" % (script, stack_label(res['stack'])),
         if 'elapsed' not in res or len(res['elapsed']) < 1:
             print "N/A"
         else:
