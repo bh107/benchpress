@@ -2,9 +2,8 @@
 import argparse
 import pkgutil
 import pprint
+import json
 import os
-from benchpress.gen_graphs import main
-from benchpress import result_parser
 import benchpress.grapher
 
 if __name__ == "__main__":
@@ -28,14 +27,14 @@ if __name__ == "__main__":
         help='Path to benchmark results.'
     )
     parser.add_argument(
-        '--output',
-        default="graphs",
+        '--output-path',
+        default=".",
         help='Where to store generated graphs.'
     )
     parser.add_argument(
-        '--postfix',
-        default='runtime',
-        help="Append this to the filename of the generated graph(s)."
+        '--fn-pattern',
+        default='{title}.{ext}',
+        help="The output filename pattern."
     )
     parser.add_argument(
         '--formats',
@@ -75,7 +74,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     args.type = args.type.pop()
-    args.graph_module = graph_types[args.type]
+    args.output_path = os.path.expandvars(os.path.expanduser(args.output_path))
 
-    main(args)
+    g = graph_types[args.type](args)
+    g.render(args)
 

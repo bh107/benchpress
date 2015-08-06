@@ -2,7 +2,7 @@ from benchpress.default import *
 from bp_cpu_shared import *
 
 scripts = [
-    ('NBody Nice',  'nbody_nice', '--size=10*2000000*10'),
+    ('NBody Nice',  'nbody_nice', '--size=10*200*1'),
 ]
 
 numpy = {

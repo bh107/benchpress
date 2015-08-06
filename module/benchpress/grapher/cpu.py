@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 import pprint
+import json
 import os
 from benchpress.cpu_result_parser import flatten, group_by_script, datasetify, order_idents, ident_ordering
 from benchpress.cpu_result_parser import datasets_rename, ident_mapping, extract_parameters, datasets_baselinify
+from benchpress import result_parser
 from graph import Grapher, Graph, texsafe, brange, pylab, matplotlib
 from relative import Relative
 from absolute import Absolute
@@ -151,7 +153,10 @@ class Cpu(Grapher):
         with open('%s%sindex.html' % (self.output_path, os.sep), 'w') as fd:
             fd.write(html)
 
-    def render(self, raw, data, order, baseline):
+    def render(self, args):
+
+        raw = json.load(open(args.results))
+        data = result_parser.from_file(args.results)
 
         parameters = extract_parameters(raw)                # Extract parameters
 

@@ -169,21 +169,12 @@ class Grapher(object):
     html, and other stuff is more likely.
     """
 
-    def __init__(
-        self,
-        output_path,
-        file_formats,
-        postfix,
-        graph_title=None,
-        xaxis_label=None,
-        yaxis_label=None
-        ):
-        self.output_path = output_path
-        self.file_formats = file_formats
-        self.postfix = postfix
-        self.graph_title = graph_title,
-        self.xaxis_label = xaxis_label
-        self.yaxis_label = yaxis_label
+    def __init__(self, args):
+        self.output_path = args.output_path
+        self.file_formats = args.formats
+        self.graph_title = None
+        self.xaxis_label = None
+        self.yaxis_label = None
 
     def render(self, raw, data, order, baseline):
         raise Exception("Unimplemented.")
