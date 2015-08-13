@@ -8,6 +8,8 @@ import json
 def plot(cmds, res, baseline):
 
     import matplotlib.pyplot as plt
+    from matplotlib import rcParams
+    rcParams.update({'figure.autolayout': True})
 
     ind = np.arange(len(cmds))  # the x locations for the groups
     width = 1.0/(len(res)+1)       # the width of the bars
@@ -25,7 +27,7 @@ def plot(cmds, res, baseline):
 
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
-    ax.set_xticklabels(cmds, rotation=-35)
+    ax.set_xticklabels(cmds, rotation=+90, fontsize=10)
     if baseline is None:
         ax.set_ylabel('Cost in bytes')
     else:
@@ -108,13 +110,22 @@ class Fuse_price(Graph):
                     if res[script][comp_baseline] > 0 or res[script][comp] > 0:
                         res[script][comp] = res[script][comp_baseline] / res[script][comp]
 
-        #Convert to a bar-plot friendly format
-        data = []
-        for comp in comps:
-            values = []
-            for script in scripts:
-                values.append(res[script][comp])
-            data.append((comp,values))
-        plot(scripts, data, self.args.baseline)
-        self.tofile({"title": "fuse-price"})
+        plots = {'MC':[], 'Other': []}
+        for script in scripts:
+            if not script in ['MonteCarlo', 'Black Scholes']:
+                plots['Other'].append(script)
+            else:
+                plots['MC'].append(script)
+        print plots
+
+        for group, scripts in plots.iteritems():
+            #Convert to a bar-plot friendly format
+            data = []
+            for comp in comps:
+                values = []
+                for script in scripts:
+                    values.append(res[script][comp])
+                data.append((comp,values))
+            plot(scripts, data, self.args.baseline)
+            self.tofile({"title": "fuse-price-%s"%group})
 
