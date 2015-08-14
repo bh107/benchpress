@@ -1,4 +1,4 @@
-from graph import Graph
+from graph import Graph, texsafe
 import numpy as np
 from matplotlib.ticker import FormatStrFormatter
 from matplotlib import pyplot
@@ -8,8 +8,11 @@ import json
 def plot(cmds, res, baseline):
 
     import matplotlib.pyplot as plt
-    from matplotlib import rcParams
-    rcParams.update({'figure.autolayout': True})
+
+    t = cmds
+    cmds = []
+    for cmd in t:
+        cmds.append(texsafe(cmd))
 
     ind = np.arange(len(cmds))  # the x locations for the groups
     width = 1.0/(len(res)+1)       # the width of the bars
@@ -20,7 +23,7 @@ def plot(cmds, res, baseline):
     fusers = []
     for fuser, costs in res:
         c = plt.cm.jet(1. * i / (len(res) - 1))
-        b = ax.bar(ind+i*width, costs, width, color=c)
+        b = ax.bar(ind+i*width, costs, width, color=c, log=True)
         bars.append(b)
         fusers.append(fuser)
         i+=1
@@ -32,13 +35,11 @@ def plot(cmds, res, baseline):
         ax.set_ylabel('Cost in bytes')
     else:
         ax.set_ylabel('Cost compared to %s'%baseline)
-    #ax.set_ylim(0,30)
-    #ax.set_yscale('log')
     ax.legend(bars, fusers)
 
 def get_stack_name(stack):
     names = [comp[0] for comp in stack][1:]
-    names.remove("node")
+    if "node" in names: names.remove("node")
     names.remove("bccon")
     names.remove("bcexp")
     names.remove("pricer")
@@ -108,11 +109,34 @@ class Fuse_price(Graph):
             for script in scripts:
                 for comp in comps:
                     if res[script][comp_baseline] > 0 or res[script][comp] > 0:
-                        res[script][comp] = res[script][comp_baseline] / res[script][comp]
+                        try:
+                            res[script][comp] = res[script][comp_baseline] / res[script][comp]
+                        except:
+                            res[script][comp] = 0
 
+        plots = {'filecache':[], 'memcache': [], 'nocache': []}
+        for cachetype in plots.iterkeys():
+            for comp in comps:
+                if cachetype in comp:
+                    plots[cachetype].append(comp)
+
+        for cachetype, comps in plots.iteritems():
+            #Convert to a bar-plot friendly format
+            data = []
+            for comp in comps:
+                values = []
+                for script in scripts:
+                    values.append(res[script][comp])
+                data.append((comp,values))
+            plot(scripts, data, self.args.baseline)
+            self.tofile({"title": "fuse-price-%s"%cachetype})
+
+        """
         plots = {'MC':[], 'Other': []}
         for script in scripts:
-            if not script in ['MonteCarlo', 'Black Scholes']:
+            if not script in ['Monte Carlo PI', 'Black Scholes', 'Synthetic Stream', 'Leibnitz PI',
+                        'Synthetic Stream #0 Ones','Synthetic Stream #1 Range','Synthetic Stream #2 Random',
+                        'Matrix Multiplication' ] or True:
                 plots['Other'].append(script)
             else:
                 plots['MC'].append(script)
@@ -128,4 +152,6 @@ class Fuse_price(Graph):
                 data.append((comp,values))
             plot(scripts, data, self.args.baseline)
             self.tofile({"title": "fuse-price-%s"%group})
+            return
+        """
 

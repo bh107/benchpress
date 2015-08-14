@@ -115,6 +115,8 @@ class Graph(object):
         matplotlib.rcParams['font.serif'] = ['Computer Modern Roman']
         matplotlib.rcParams['text.usetex'] = True
         matplotlib.rcParams['figure.max_open_warning'] = 400
+        matplotlib.rcParams['figure.autolayout'] = True
+
 
     def render(self):
         raise Exception("Unimplemented the actual plotting.")
