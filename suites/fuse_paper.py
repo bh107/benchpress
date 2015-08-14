@@ -1,27 +1,6 @@
 from benchpress.default import *
 
 scripts = [
-    ('Heat Equation',   'heat_equation',   '--size=100*100*1' ),
-    ('nBody',           'nbody',           '--size=100*1'      ),
-    ('nBody-NICE',      'nbody_nice',      '--size=100*100*1'  ),
-    ('Shallow Water',   'shallow_water',   '--size=100*100*1' ),
-    ('Black Scholes',   'black_scholes',   '--size=1000*1'   ),
-    ('Jacobi Fixed',    'jacobi_fixed',    '--size=1000*1'   ),
-    ('SOR',             'sor',             '--size=100*100*1'   ),
-    ('MonteCarlo',      'montecarlo_pi',   '--size=1000*1'   ),
-    ('GameOfLife',      'gameoflife',      '--size=100*100*1*1'   ),
-    ('Gauss',           'gauss',           '--size=100*100*1'   ),
-    ('LU',              'lu',              '--size=100*100*1'   ),
-    ('Synth',           'synth',           '--size=100*1'   ),
-    ('point27',         'point27',         '--size=100*1'   ),
-    ('rosenbrock',      'rosenbrock',      '--size=100*1'   ),
-    ('wisp',            'wisp',            '--size=100*100*1'   ),
-#    ('lbm_3d',          'lbm_3d',          '--size=10*10*10*1'   ),
-#    ('lbm_2d',          'lbm_2d',          '--size=10*10*1'   ),
-#    ('wireworld',       'wireworld',       '--size=10*1'   ),
-]
-
-scripts = [
     ('Black Scholes',           'black_scholes',            '--size=5000000*10'),
     ('Game of Life v1',         'gameoflife',               '--size=10000*10000*10*1'),
     ('Game of Life v2',         'gameoflife',               '--size=10000*10000*10*2'),
@@ -48,7 +27,7 @@ scripts = [
     ('Synthetic Stream #0 Ones',    'synth_stream',  '--size=50000000*20*0'),
     ('Synthetic Stream #1 Range',   'synth_stream',  '--size=50000000*10*1'),
     ('Synthetic Stream #2 Random',  'synth_stream',  '--size=50000000*10*2'),
-    ('Water-Ice Simulation',        'wisp',                 '--size=1000*1000*10'),
+    #('Water-Ice Simulation',        'wisp',                 '--size=1000*1000*10'),
     #('Rosenbrock',              'rosenbrock',               '--size=100000000*10'),
     #('Pricing American',        'pricing',                  '--size=100'),
     #('Wireworld',               'wireworld',                '--size=10*10')
@@ -57,17 +36,29 @@ scripts = [
     #('Lattice Boltzmann 3D',    'lbm_3d',                   '--size=150*150*150*10'),
 ]
 
+def fuse_cache(value):
+    return {\
+            "BH_SINGLETON_FUSE_CACHE": value,
+            "BH_TOPOLOGICAL_FUSE_CACHE": value,
+            "BH_GREEDY_FUSE_CACHE": value,
+            "BH_OPTIMAL_FUSE_CACHE": value\
+            }
+
 bh_stack_cpu_pricer = [
     [('default',    'bridge',       None)],
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
     [
-        ('single',     'singleton',   {"BH_SINGLETON_FUSE_CACHE": "true"}),
-        ('topo',       'topological', {"BH_TOPOLOGICAL_FUSE_CACHE": "true"}),
-        ('greedy',     'greedy',      {"BH_GREEDY_FUSE_CACHE": "true"}),
-        ('optimal',    'optimal',     {"BH_OPTIMAL_FUSE_CACHE": "true"}),
+        ('Singleton',  'singleton',   None),
+        ('Naive',      'topological', None),
+        ('Greedy',     'greedy',      None),
+        ('Optimal',    'optimal',     None),
     ],
-    [('node',       'node',         None)],
+    [
+        ('filecache',  'node', fuse_cache("true")),
+        ('memcache',  'node', fuse_cache("")),
+        ('nocache',  'node', fuse_cache("false")),
+    ],
     [('pricer',     'pricer',       None)],
     [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS":4})],
 
