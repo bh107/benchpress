@@ -428,10 +428,10 @@ def stack_label(stack):
     """Returns a descriptive label of the stack"""
     ret = ""
     for component in stack[1:]:
-        ret += "%s/"%component[1]
+        ret += "%s/"%component[0]
     return ret[:-1] #We remove the last "/" before returning
 
-class StackCombinator(object):
+def stack_combinations(stack, tmp=[], out=[]):
     """
     Construct a list of stack configurations.
 
@@ -439,61 +439,13 @@ class StackCombinator(object):
     level in the stack. Starts with the outer-most.
     """
 
-    def __init__(self, bohrium):
-        """Count the number of variations at each level in the stack."""
+    if len(stack) == 0:
+        out.append(tmp)
+        return
 
-        self.bohrium = bohrium
+    for comp in stack[0]:
+        stack_combinations(stack[1:], tmp + [comp], out)
 
-        combinations = {}
-        for lvl, variations in enumerate(bohrium):
-            combinations[lvl] = len(variations)
-
-        self.combinations = combinations
-
-    def sum(self):
-        """Sum up the combinations are each level."""
-
-        count = 0
-        for lvl in self.combinations:
-            count += self.combinations[lvl]
-        return count
-
-    def get(self):
-        """Get a combination of component variations."""
-
-        combination = []
-        for lvl in xrange(0, len(self.combinations)):
-            nvariations = self.combinations[lvl]
-            combination.append(nvariations-1 if nvariations > 0 else 0)
-        return combination
-
-    def decrement(self):
-        """Remove a combination"""
-
-        for lvl in xrange(0, len(self.combinations)):
-            if self.combinations[lvl] > 0:
-                self.combinations[lvl] = self.combinations[lvl] -1
-                break
-
-    def get_confs(self):
-        """Returns a list of configurations."""
-
-        combinations = []
-        while(self.sum()>0):
-            combination = self.get()
-            if combination not in combinations:
-                combinations.append(combination)
-            self.decrement()
-
-        confs = []
-        for combination in combinations:
-            conf = []
-            for lvl in xrange(0, len(combination)):
-                variation = combination[lvl]
-                conf.append(self.bohrium[lvl][variation])
-            confs.append(conf)
-
-        return confs
 
 def gen_jobs_launcher_format(result_file, config, args):
     print("Launcher style.")
@@ -513,7 +465,9 @@ def gen_jobs_launcher_format(result_file, config, args):
             for launcher_alias, launcher_cmd, launcher_env in suite['launchers']:
                 if "bohrium" in suite:    # Create Bohrium config
 
-                    for stack in StackCombinator(suite["bohrium"]).get_confs():
+                    combi = []
+                    stack_combinations(suite["bohrium"], out=combi)
+                    for stack in combi:
                         envs = os.environ.copy()        # Orig environment variables
                         envs_overwrite = {}             # Overwritten by components
 
@@ -583,7 +537,6 @@ def gen_jobs_launcher_format(result_file, config, args):
                         #   Now do this...
                         #
                         print "Scheduling %s on %s"%(script_alias, stack_label(stack))
-                        print "Scheduling %s"%stack_label(stack)
                         run = {
                             'stack' : stack,
                             'script_alias':script_alias,

@@ -11,7 +11,7 @@ def stack_label(stack):
     """Returns a descriptive label of the stack"""
     ret = ""
     for component in stack[1:]:
-        ret += "%s/"%component[1]
+        ret += "%s/"%component[0]
     return ret[:-1] #We remove the last "/" before returning
 
 def raw(results):
