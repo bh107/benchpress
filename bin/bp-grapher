@@ -5,6 +5,7 @@ import pprint
 import json
 import os
 import benchpress.grapher
+from benchpress import result_parser
 
 if __name__ == "__main__":
 
@@ -23,7 +24,8 @@ if __name__ == "__main__":
             pass
 
     parser = argparse.ArgumentParser(
-        description = 'Generate different types of graphs.'
+        description = 'Generate different types of graphs.',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument(
         'results',
@@ -33,6 +35,11 @@ if __name__ == "__main__":
         '--output-path',
         default=".",
         help='Where to store generated graphs.'
+    )
+    parser.add_argument(
+        '--title',
+        default="graph",
+        help='The title of the graph.'
     )
     parser.add_argument(
         '--fn-pattern',
@@ -51,6 +58,37 @@ if __name__ == "__main__":
         nargs=1,
         choices=[gt for gt in graph_types],
         help="The type of graph to generate"
+    )
+    parser.add_argument(
+        '--data-to-display',
+        default=[t[1] for t in result_parser.tokens][0],
+        nargs=1,
+        choices=[t[1] for t in result_parser.tokens],
+        help="The type of graph to generate"
+    )
+    parser.add_argument(
+        '--stacks-to-display',
+        metavar="RegEx",
+        default=".*",
+        help="All stacks that match the RegEx are showed in the generated graph(s)."
+    )
+    parser.add_argument(
+        '--stacks-not-to-display',
+        metavar="RegEx",
+        default="NotIncluded",
+        help="All stacks that match the RegEx are not showed in the generated graph(s)."
+    )
+    parser.add_argument(
+        '--scripts-to-display',
+        metavar="RegEx",
+        default=".*",
+        help="All scripts that match the RegEx are showed in the generated graph(s)."
+    )
+    parser.add_argument(
+        '--scripts-not-to-display',
+        metavar="RegEx",
+        default="NotIncluded",
+        help="All scripts that match the RegEx are NOT showed in the generated graph(s)."
     )
     parser.add_argument(
         '--warmups',
@@ -74,6 +112,7 @@ if __name__ == "__main__":
         default=None,
         help="Max value of the y-axis"
     )
+
 
     args = parser.parse_args()
     args.type = args.type.pop()
