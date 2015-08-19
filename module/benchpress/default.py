@@ -80,7 +80,7 @@ suites = [suite, native]
 #
 # In a suite the following are "bridges" and further down in this file
 # list called "bridges" exists..
-# .. and quite a Bohrium sounding thing... anyway... here are the 
+# .. and quite a Bohrium sounding thing... anyway... here are the
 # benchmark "bridges"/"launchers"/"runner"/"commands"/"executers".
 # Call them what you like, we called them "bridges" for some reason.
 #
@@ -95,6 +95,7 @@ suites = [suite, native]
 dython_numpy    = ('Dython/NP', 'dython `bp-info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
 python_numpy    = ('Python/NP', 'python `bp-info --benchmarks`/{script}/python_numpy/{script}.py {args}', None)
 python_bohrium  = ('Python/BH', 'python -m bohrium `bp-info --benchmarks`/{script}/python_numpy/{script}.py --bohrium=True {args}', None)
+dython_bohrium  = ('Dython/BH', 'dython -m bohrium `bp-info --benchmarks`/{script}/python_numpy/{script}.py --bohrium=True {args}', None)
 
 # C
 c99_seq     = ('C/SEQ',     '`bp-info --benchmarks`/{script}/c99_seq/bin/{script} {args}', None)

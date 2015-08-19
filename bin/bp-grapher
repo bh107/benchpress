@@ -64,7 +64,7 @@ if __name__ == "__main__":
         default=[t[1] for t in result_parser.tokens][0],
         nargs=1,
         choices=[t[1] for t in result_parser.tokens],
-        help="The type of graph to generate"
+        help="The data to display in the generated graph(s)"
     )
     parser.add_argument(
         '--stacks-to-display',
@@ -116,6 +116,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     args.type = args.type.pop()
+    args.data_to_display = args.data_to_display.pop()
     args.output_path = os.path.expandvars(os.path.expanduser(args.output_path))
 
     g = graph_types[args.type](args)
