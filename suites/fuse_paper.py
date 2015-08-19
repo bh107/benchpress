@@ -1,6 +1,6 @@
 from benchpress.default import *
 
-scripts = [
+scripts_cpu = [
     ('Black Scholes',           'black_scholes',            '--size=5000000*10'),
     ('Game of Life v1',         'gameoflife',               '--size=10000*10000*10*1'),
     ('Game of Life v2',         'gameoflife',               '--size=10000*10000*10*2'),
@@ -36,6 +36,13 @@ scripts = [
     #('Lattice Boltzmann 3D',    'lbm_3d',                   '--size=150*150*150*10'),
 ]
 
+scripts_gpu = [
+    ('Black Scholes', 'black_scholes',  '--size=32000000*50 --dtype=float32'),
+    ('SOR',           'sor',            '--size=8000*8000*100 --dtype=float32'),
+    ('Shallow Water', 'shallow_water',  '--size=2000*4000*100 --dtype=float32'),
+    ('N-body',        'nbody',          '--size=3200*50 --dtype=float32'),
+    ]
+
 def fuse_cache(value):
     return {\
             "BH_SINGLETON_FUSE_CACHE": value,
@@ -44,7 +51,7 @@ def fuse_cache(value):
             "BH_OPTIMAL_FUSE_CACHE": value\
             }
 
-bh_stack_cpu_pricer = [
+stack_cpu = [
     [('default',    'bridge',       None)],
     [('bccon',      'bccon',        None)],
     [('bcexp',      'bcexp',        None)],
@@ -61,16 +68,42 @@ bh_stack_cpu_pricer = [
     ],
     [('pricer',     'pricer',       None)],
     [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS":4})],
-
 ]
 
-bh_cpu_pricer_suite = {
-    'scripts': scripts,
+stack_gpu = [
+    [('default',    'bridge',       None)],
+    [('bcexp_gpu',  'bcexp_gpu',    None)],
+    [('dimclean',   'dimclean',     None)],
+    [
+        ('Singleton',  'singleton',   None),
+        ('Naive',      'topological', None),
+        ('Greedy',     'greedy',      None),
+        ('Optimal',    'optimal',     None),
+    ],
+    [
+        ('filecache',  'node', fuse_cache("true")),
+        ('memcache',  'node', fuse_cache("")),
+        ('nocache',  'node', fuse_cache("false")),
+    ],
+    [('pricer',     'pricer',   None)],
+    [('gpu',        'gpu',      None)],
+    [('cpu',        'cpu',      {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS":4})],
+]
+
+suite_cpu = {
+    'scripts': scripts_cpu,
     'launchers':  [python_bohrium],
-    'bohrium': bh_stack_cpu_pricer
+    'bohrium': stack_cpu
+}
+
+suite_gpu = {
+    'scripts': scripts_gpu,
+    'launchers':  [python_bohrium],
+    'bohrium': stack_gpu
 }
 
 suites = [
-    bh_cpu_pricer_suite,
+ #   suite_cpu,
+    suite_gpu,
 ]
 
