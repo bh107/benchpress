@@ -44,12 +44,19 @@ scripts_gpu = [
     ]
 
 def fuse_cache(value):
-    return {\
-            "BH_SINGLETON_FUSE_CACHE": value,
-            "BH_TOPOLOGICAL_FUSE_CACHE": value,
-            "BH_GREEDY_FUSE_CACHE": value,
-            "BH_OPTIMAL_FUSE_CACHE": value\
-            }
+    envs = ["BH_SINGLETON_FUSE_CACHE", "BH_TOPOLOGICAL_FUSE_CACHE",\
+            "BH_GREEDY_FUSE_CACHE", "BH_OPTIMAL_FUSE_CACHE", "BH_GENTLE_FUSE_CACHE"]
+    ret = {}
+    for env in envs:
+        ret[env] = value
+    return ret
+
+def cache_path(value, out={}):
+    envs = ["BH_SINGLETON_CACHE_PATH", "BH_TOPOLOGICAL_CACHE_PATH",\
+            "BH_GREEDY_CACHE_PATH", "BH_OPTIMAL_CACHE_PATH", "BH_GENTLE_CACHE_PATH"]
+    for env in envs:
+        out[env] = value
+    return out
 
 stack_cpu = [
     [('default',    'bridge',       None)],
@@ -63,7 +70,7 @@ stack_cpu = [
     ],
     [
         ('filecache',  'node', fuse_cache("true")),
-        ('memcache',  'node', fuse_cache("")),
+        ('memcache',  'node', cache_path("", fuse_cache("true"))),
         ('nocache',  'node', fuse_cache("false")),
     ],
     [('pricer',     'pricer',       None)],
@@ -103,7 +110,7 @@ suite_gpu = {
 }
 
 suites = [
- #   suite_cpu,
-    suite_gpu,
+    suite_cpu,
+    suite_gpu
 ]
 
