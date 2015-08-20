@@ -61,7 +61,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--data-to-display',
-        default=[t[1] for t in result_parser.tokens][0],
+        default=[[t[1] for t in result_parser.tokens][0]],
         nargs=1,
         choices=[t[1] for t in result_parser.tokens],
         help="The data to display in the generated graph(s)"
@@ -108,9 +108,14 @@ if __name__ == "__main__":
         help='Ordering of the ticks.'
     )
     parser.add_argument(
-        '--ylimit',
+        '--ymax',
         default=None,
         help="Max value of the y-axis"
+    )
+    parser.add_argument(
+        '--ymin',
+        default=None,
+        help="Min value of the y-axis"
     )
 
 

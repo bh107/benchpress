@@ -6,7 +6,7 @@ from benchpress import result_parser
 import json
 import re
 
-def plot(cmds, res, baseline):
+def plot(cmds, res, baseline, ymin=None, ymax=None):
 
     import matplotlib.pyplot as plt
 
@@ -31,8 +31,13 @@ def plot(cmds, res, baseline):
         c = plt.cm.jet(1. * i / (len(res) - 1))
         b = ax.bar(ind+i*width, avg, width, color=c, log=False, yerr=err)
         bars.append(b)
-        comps.append(comp)
+        comps.append(texsafe(comp))
         i+=1
+
+    if ymin is not None:
+        plt.ylim(ymin=int(ymin))
+    if ymax is not None:
+        plt.ylim(ymax=int(ymax))
 
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
@@ -46,9 +51,11 @@ def plot(cmds, res, baseline):
 def get_stack_name(stack):
     names = [comp[0] for comp in stack][1:]
     if "node" in names: names.remove("node")
-    names.remove("bccon")
-    names.remove("bcexp")
-    names.remove("pricer")
+    if "bccon" in names: names.remove("bccon")
+    if "bcexp" in names: names.remove("bcexp")
+    if "pricer" in names: names.remove("pricer")
+    if "bcexp_gpu" in names: names.remove("bcexp_gpu")
+    if "dimclean" in names: names.remove("dimclean")
     ret = ""
     for name in names:
         ret += "%s/"%name
@@ -129,6 +136,6 @@ class Bar_per_script(Graph):
             for script in scripts:
                 values.append(res[script][comp])
             data.append((comp,values))
-        plot(scripts, data, self.args.baseline)
+        plot(scripts, data, self.args.baseline, self.args.ymin, self.args.ymax)
         self.tofile({"title": self.args.title})
 
