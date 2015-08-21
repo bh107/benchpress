@@ -6,7 +6,7 @@ from benchpress import result_parser
 import json
 import re
 
-def plot(cmds, res, baseline, ymin=None, ymax=None):
+def plot(cmds, res, baseline, args):
 
     import matplotlib.pyplot as plt
 
@@ -34,18 +34,18 @@ def plot(cmds, res, baseline, ymin=None, ymax=None):
         comps.append(texsafe(comp))
         i+=1
 
-    if ymin is not None:
-        plt.ylim(ymin=int(ymin))
-    if ymax is not None:
-        plt.ylim(ymax=int(ymax))
+    if args.ymin is not None:
+        plt.ylim(ymin=int(args.ymin))
+    if args.ymax is not None:
+        plt.ylim(ymax=int(args.ymax))
 
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
     ax.set_xticklabels(cmds, rotation=+90, fontsize=10)
     if baseline is None:
-        ax.set_ylabel('Cost in bytes')
+        ax.set_ylabel(args.data_to_display)
     else:
-        ax.set_ylabel('Cost compared to %s'%baseline)
+        ax.set_ylabel('%s compared to %s'%(args.data_to_display, baseline))
     ax.legend(bars, comps)
 
 def get_stack_name(stack):
@@ -129,13 +129,19 @@ class Bar_per_script(Graph):
                         except ZeroDivisionError:
                             res[script][comp] = (0,0)
 
+        comps.sort()
+        scripts.sort()
+
         #Convert to a bar-plot friendly format
         data = []
         for comp in comps:
             values = []
-            for script in scripts:
-                values.append(res[script][comp])
+            for script in (scripts):
+                try:
+                    values.append(res[script][comp])
+                except KeyError:
+                    values.append((0,0))
             data.append((comp,values))
-        plot(scripts, data, self.args.baseline, self.args.ymin, self.args.ymax)
+        plot(scripts, data, self.args.baseline, self.args)
         self.tofile({"title": self.args.title})
 
