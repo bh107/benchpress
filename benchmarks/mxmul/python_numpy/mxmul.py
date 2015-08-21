@@ -5,7 +5,10 @@ import numpy as np
 def main():
 
     B = util.Benchmark()
-    N, = B.size
+    try:
+        N,I = B.size                            # Grab command-line arguments
+    except ValueError:
+        N,I = (B.size[0], 1)
     nelements = B.dtype(N*N)
 
     # Load or create matrices
@@ -23,9 +26,12 @@ def main():
     if B.dumpinput:
         B.dump_arrays("mxmul", {'x': x, 'y': y})
 
+    C = np.zeros_like(x)
+
     # Do the matrix multiplication
     B.start()
-    C = np.add.reduce(x[:,np.newaxis] * np.transpose(y), -1)
+    for _ in xrange(I):
+        C += np.add.reduce(x[:,np.newaxis] * np.transpose(y), -1)
     #R = np.dot(x, y)
     B.stop()
 
