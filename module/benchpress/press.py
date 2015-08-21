@@ -347,7 +347,7 @@ def parse_run(run, job):
     except OSError:
         print _C.WARNING,"Could not find the batch script: ",job['filename'],_C.ENDC
 
-def add_pending_job(setup, nrun, partition):
+def add_pending_job(setup, nrun, partition, nice):
 
     cwd = os.path.abspath(os.getcwd())
     basename = "bh-job-%s.sh"%uuid.uuid4()
@@ -374,6 +374,7 @@ def add_pending_job(setup, nrun, partition):
         job += "#SBATCH -e /tmp/bh-slurm-%%j.err\n"
         if partition is not None:
             job += "#SBATCH -p %s\n"%partition
+        job += "#SBATCH --nice=%d\n"%nice
 
         #We need to write the bohrium config file to an unique path
         job += 'echo "%s" > %s\n'%(setup['bh_config'], tmp_config_name)
@@ -575,7 +576,7 @@ def gen_jobs_launcher_format(result_file, config, args):
                             job_nrun = 1
                         for _ in xrange(njobs):
                             i += 1
-                            add_pending_job(run, job_nrun, args.partition)
+                            add_pending_job(run, job_nrun, args.partition, args.nice)
                         results['runs'].append(run)
                         results['meta']['ended'] = str(datetime.now())
 
