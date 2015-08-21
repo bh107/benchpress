@@ -9,9 +9,14 @@ def leibnitz_pi(N):
 
 def main():
     B = util.Benchmark()                        # Initialize Benchpress
-    N, = B.size                                 # Grab command-line arguments
+    try:
+        N,I = B.size                            # Grab command-line arguments
+    except ValueError:
+        N,I = (B.size[0], 1)
     B.start()                                   # Sample wall-clock start
-    R = 4.0*leibnitz_pi(N)                      # Execute benchmark
+    R = 0.0
+    for _ in xrange(I):
+        R += 4.0*leibnitz_pi(N)                      # Execute benchmark
     B.stop()                                    # Sample wall-clock stop
     B.pprint()                                  # Print elapsed wall-clock etc.
     if B.verbose:                               # Print more, such as results
