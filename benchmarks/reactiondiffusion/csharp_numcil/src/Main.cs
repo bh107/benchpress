@@ -29,36 +29,36 @@ using Utilities;
 
 namespace reactiondiffusion
 {
-	public static class ReactionDiffusion
+    public static class ReactionDiffusion
     {
-		public static void Main (string[] args)
-		{
-			Utilities.RunBenchmark.Run(args, 2, (input) => 
-				{
-					var size = input.sizes[0];
-					var iterations = input.sizes[1];
-					var image_output = RunBenchmark.ParseBoolOption(input.cmd_opts, "images");
+        public static void Main (string[] args)
+        {
+            Utilities.RunBenchmark.Run(args, 2, (input) =>
+                {
+                    var size = input.sizes[0];
+                    var iterations = input.sizes[1];
+                    var image_output = RunBenchmark.ParseBoolOption(input.cmd_opts, "images");
 
-					if (input.type == typeof(double)) 
-					{
-						var data = ReactionDiffusionSolverDouble.Create(size);
-						using (new DispTimer(string.Format("ReactionDiffusion (Double) {0}*{1}", size, iterations)))
-						{
-							ReactionDiffusionSolverDouble.Solve(data, iterations, image_output);
-							//ReactionDiffusionSolverDouble.Sync(data);
-						}
-					} 
-					else 
-					{
-						var data = ReactionDiffusionSolverSingle.Create(size);
-						using (new DispTimer(string.Format("ReactionDiffusion (Single) {0}*{1}", size, iterations)))
-						{
-							ReactionDiffusionSolverSingle.Solve(data, iterations, image_output);
-							//ReactionDiffusionSingle.Sync(data);
-						}
-					}
-				}
-			);
-		}
+                    if (input.type == typeof(double))
+                    {
+                        var data = ReactionDiffusionSolverDouble.Create(size);
+                        using (new DispTimer(string.Format("ReactionDiffusion (Double) {0}*{1}", size, iterations)))
+                        {
+                            ReactionDiffusionSolverDouble.Solve(data, iterations, image_output);
+                            ReactionDiffusionSolverDouble.Sync(data);
+                        }
+                    }
+                    else
+                    {
+                        var data = ReactionDiffusionSolverSingle.Create(size);
+                        using (new DispTimer(string.Format("ReactionDiffusion (Single) {0}*{1}", size, iterations)))
+                        {
+                            ReactionDiffusionSolverSingle.Solve(data, iterations, image_output);
+                                                        ReactionDiffusionSolverSingle.Sync(data);
+                        }
+                    }
+                }
+            );
+        }
     }
 }
