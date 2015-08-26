@@ -57,7 +57,7 @@ def price(S, I, flag='c', X=65.0, dT=(1.0/365.0), r=0.08, v=0.3, visualize=False
         T += dT
         if visualize:   #NB: this is only for experiments
             np.visualize(P, "3d", 0, 0.0, 10)
-        B.flush()
+        util.Benchmark().flush()
 
     return Ps
 

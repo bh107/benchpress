@@ -179,7 +179,7 @@ def main():
         if B.visualize and timestep % 10 == 0:          # With or without..
             gfx_show(plt, P3, solarsystem, asteroids)   # ..visuals
         move(solarsystem, asteroids, dt)
-        B.flush()
+        util.Benchmark().flush()
     B.stop()                                            # Timer stop
 
     B.pprint()                                          # Print results..

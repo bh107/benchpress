@@ -13,7 +13,7 @@ def main():
 
     for _ in xrange(I):
         R = a+b+c
-        B.flush()
+        util.Benchmark().flush()
 
     B.stop()
     B.pprint()

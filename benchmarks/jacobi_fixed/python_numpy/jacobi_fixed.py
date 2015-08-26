@@ -19,7 +19,7 @@ def jacobi_fixed(data, iterations):
 
     for _ in xrange(iterations):
         active[:] = (4*sum(g) + sum(d))*fak
-        B.flush()
+        util.Benchmark().flush()
 
     return data
 

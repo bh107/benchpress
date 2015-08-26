@@ -25,8 +25,7 @@ def jacobi(grid, epsilon=0.005, max_iterations=None, visualize=False):
         work = 0.2*(center+north+east+west+south)
         delta = np.sum(np.absolute(work-center))
         center[:] = work
-
-        B.flush()
+        util.Benchmark().flush()
 
         if max_iterations != None and max_iterations <= iteration:
             break

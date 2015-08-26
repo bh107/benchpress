@@ -24,7 +24,7 @@ def jacobi(data, max_iterations=0):
         residual  = np.sum(abs(update-active))
         active[:] = update
         iterations += 1
-        B.flush()
+        util.Benchmark().flush()
 
         if max_iterations and iterations >= max_iterations:
             break

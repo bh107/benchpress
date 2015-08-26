@@ -46,7 +46,7 @@ def solve(stencil, world, I):
     FAC = 1.0/len(stencil)
     for _ in xrange(I):
         stencil[len(stencil)/2][:] = sum(stencil)*FAC
-        B.flush()
+        util.Benchmark().flush()
 
     return world
 

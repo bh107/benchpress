@@ -81,7 +81,7 @@ def main():
         # Store/plot the accumulated marginal probability at the k-th iteration
         a = a + m[0]
 
-        B.flush()
+        util.Benchmark().flush()
 
         if B.visualize:
             pyplot.figure(2)
