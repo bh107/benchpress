@@ -14,13 +14,12 @@ def point27_init(size):
 
 def point27(data, iterations):
     """TODO: Describe the benchmark."""
-    
+
     active  = no_border(data, 1)
     stencil = D3P27(data)
     for _ in xrange(iterations):
         active[:] = sum(stencil)/27.0
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     return active
 
@@ -32,7 +31,7 @@ def main():
     B = util.Benchmark()        # Benchmark setup
     (N, I) = B.size
     data = point27_init(N)
-    
+
     B.start()                   # Benchmark run, timing, pprint
     R = point27(data, I)
     B.stop()

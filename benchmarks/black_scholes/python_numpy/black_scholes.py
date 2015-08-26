@@ -9,9 +9,9 @@ except ImportError:
 
 def model(N, B):
     """Construct pseudo-data representing price samples?"""
-    # Create the outside of bohrium 
+    # Create the outside of bohrium
     S = npf.random.random(N).astype(B.dtype)*4.0 + 58.0 # Price is between 58-62
-    S = np.array(S) 
+    S = np.array(S)
     return S
 
 def CND(X):
@@ -31,8 +31,8 @@ def CND(X):
          a5 * (K**5))
 
     mask    = X<0
-    w       = w * ~mask + (1.0-w)*mask  
-                                        
+    w       = w * ~mask + (1.0-w)*mask
+
     return w
 
 def BS(CallPutFlag, S, X, T, r, v):
@@ -57,8 +57,7 @@ def price(S, I, flag='c', X=65.0, dT=(1.0/365.0), r=0.08, v=0.3, visualize=False
         T += dT
         if visualize:   #NB: this is only for experiments
             np.visualize(P, "3d", 0, 0.0, 10)
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     return Ps
 
@@ -78,7 +77,7 @@ def main():
     R = price(S, I, visualize=B.visualize)  # Run the model
     B.stop()
     B.pprint()
-    
+
     for i in range(len(R)):                 # Convert to one array
         if hasattr(R[i], "copy2numpy"):
             R[i] = R[i].copy2numpy()[()]

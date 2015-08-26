@@ -13,8 +13,7 @@ def main():
 
     for _ in xrange(I):
         R = a+b+c
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     B.stop()
     B.pprint()

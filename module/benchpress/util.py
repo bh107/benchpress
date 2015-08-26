@@ -75,7 +75,7 @@ def numpy_plot_surface(ary, mode="2d", colormap=0, lowerbound=-200, upperbound=2
         )
         if "surf" in gfx_handle:
             gfx_handle["surf"].remove()
-        
+
         gfx_handle["surf"] = surf
         ax.set_zlim(0, 10)
 
@@ -210,12 +210,17 @@ class Benchmark:
                        action   = 'store_true',
                        help     = "Print out misc. information from script."
         )
+        p.add_argument('--no-flush',
+                       action   = 'store_true',
+                       help     = "Disable calls to flush within benchmark iterations."
+        )
 
         args, unknown = p.parse_known_args()   # Parse the arguments
 
         #
         # Conveniently expose options to the user
         #
+        self.args = args
         self.size       = [int(i) for i in args.size.split("*")] if args.size else []
         self.dtype      = eval("np.%s" % args.dtype)
         self.dumpinput  = args.dumpinput
@@ -354,7 +359,11 @@ class Benchmark:
                 ret = rand(shape)
         return toarray(ret, dtype=dtype, bohrium=self.bohrium)
 
-
+    def flush(self):
+        """Executes the queued instructions when running through Bohrium"""
+        if self.bohrium and not self.args.no_flush:
+            import bohrium as bh
+            bh.flush()
 
 def main():
     B = Benchmark()

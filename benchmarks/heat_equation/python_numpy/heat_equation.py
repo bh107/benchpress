@@ -26,15 +26,14 @@ def jacobi(grid, epsilon=0.005, max_iterations=None, visualize=False):
         delta = np.sum(np.absolute(work-center))
         center[:] = work
 
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
         if max_iterations != None and max_iterations <= iteration:
             break
 
         if visualize:
             util.plot_surface(grid, "2d", 0, 200, -200)
-   
+
     return iteration, grid
 
 def main():

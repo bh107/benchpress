@@ -38,11 +38,10 @@ def wireworld(world, iterations):
         sim += MASK * 1 # New head pos->1
         MASK = (sim==8) # Mask non conductors
         sim *= ~MASK    # conductors->0
-        sim += MASK * 4 # conductors->4   
+        sim += MASK * 4 # conductors->4
         sim *= 2        # Upgrade all to new state
 
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     return sim
 

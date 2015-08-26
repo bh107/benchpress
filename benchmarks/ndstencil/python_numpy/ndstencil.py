@@ -46,8 +46,7 @@ def solve(stencil, world, I):
     FAC = 1.0/len(stencil)
     for _ in xrange(I):
         stencil[len(stencil)/2][:] = sum(stencil)*FAC
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     return world
 
@@ -76,7 +75,7 @@ def main():
     if B.verbose:
         print( "Solving",D, "dimensional",world.shape,"problem with",       \
                len([i for i in it.product([None,None,None], repeat=D)]),    \
-               "point stencil.")    
+               "point stencil.")
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
     if B.visualize and D in [2]:

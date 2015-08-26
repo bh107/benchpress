@@ -24,7 +24,7 @@ def fill_diagonal(a, val):
     d,_ = a.shape   # This only makes sense for square matrices
     a.shape=d*d     # Flatten a without making a copy
     a[::d+1]=val    # Assign the diagonal values
-    a.shape = (d,d) # Return a to its original shape 
+    a.shape = (d,d) # Return a to its original shape
 
 def calc_force(a, b, dt):
     """
@@ -33,7 +33,7 @@ def calc_force(a, b, dt):
     """
     # Ignore division by zero since we fix it explicitely by setting the diagonal in the forces arrays
     npf.seterr(divide='ignore',invalid='ignore')
- 
+
     G = 6.673e-11
 
     dx = b['x'] - a['x'][:,None]
@@ -51,10 +51,10 @@ def calc_force(a, b, dt):
     #r = ( dx ** 2 + dy ** 2 + dz ** 2) ** 0.5
     r = np.sqrt( dx ** 2 + dy ** 2 + dz ** 2)
 
-    Fx = G * pm / r ** 2 * (dx / r) 
-    Fy = G * pm / r ** 2 * (dy / r) 
-    Fz = G * pm / r ** 2 * (dz / r) 
-    
+    Fx = G * pm / r ** 2 * (dx / r)
+    Fy = G * pm / r ** 2 * (dy / r)
+    Fz = G * pm / r ** 2 * (dz / r)
+
     # The diagonal nan numbers must be removed so that the force from a body
     # upon itself is zero
     if a is b:
@@ -83,7 +83,7 @@ def move(solarsystem, asteroids, dt):
 
 def random_system(x_max, y_max, z_max, n, b, dtype=npf.float):
     """Generate a galaxy of random bodies"""
-    
+
     solarmass=1.98892e30
 
     def circlev(rx, ry, rz):
@@ -107,7 +107,7 @@ def random_system(x_max, y_max, z_max, n, b, dtype=npf.float):
         solarsystem['y'],
         solarsystem['z']
     )
-    
+
     absangle = npf.arctan(npf.absolute(solarsystem['y']/solarsystem['x']))
     thetav= npf.pi/2-absangle
     solarsystem['vx']   = -1*npf.sign(solarsystem['y'])*npf.cos(thetav)*magv
@@ -136,21 +136,21 @@ def random_system(x_max, y_max, z_max, n, b, dtype=npf.float):
         asteroids['y'],
         asteroids['z']
     )
-        
+
     absangle = npf.arctan(npf.absolute(asteroids['y'] / asteroids['x']))
     thetav= npf.pi/2-absangle
     asteroids['vx']   = -1*npf.sign(asteroids['y'])*npf.cos(thetav)*magv
     asteroids['vy']   = npf.sign(asteroids['x'])*npf.sin(thetav)*magv
     asteroids['vz']   = npf.zeros(b)
     asteroids['m']    = npf.random.random(b)*solarmass*10+1e14;
-    
+
     ss = {}
     for key in solarsystem:
         ss[key] = np.array(solarsystem[key].astype(dtype))
     a = {}
     for key in asteroids:
         a[key] = np.array(asteroids[key].astype(dtype))
-        
+
     return ss, a
 
 def main():
@@ -179,8 +179,7 @@ def main():
         if B.visualize and timestep % 10 == 0:          # With or without..
             gfx_show(plt, P3, solarsystem, asteroids)   # ..visuals
         move(solarsystem, asteroids, dt)
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
     B.stop()                                            # Timer stop
 
     B.pprint()                                          # Print results..

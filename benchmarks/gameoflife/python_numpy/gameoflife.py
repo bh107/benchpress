@@ -43,7 +43,7 @@ def play(state, iterations, version=1, visualize=False):
         stay = (live >= SURVIVE_LOW) & (live <= SURVIVE_HIGH)   # find cells the stay alive
         dead = neighbors * (cells == 0)                         # extract dead cell neighbors
         spawn = dead == SPAWN                                   # find cells that spaw new life
-        
+
         cells[:] = stay | spawn                                 # save result for next iteration
 
     def update_optimized():
@@ -54,7 +54,7 @@ def play(state, iterations, version=1, visualize=False):
 
         c1 = (neighbors == SURVIVE_LOW)                         # Life conditions
         c2 = (neighbors == SPAWN)
-        
+
         cells[:] = cells * c1 + c2                              # Update
 
     if version == 1:                # Select the update function
@@ -66,8 +66,7 @@ def play(state, iterations, version=1, visualize=False):
         if visualize:
             util.plot_surface(state, "3d", 16, 1, 0)
         update_func()
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     return state
 

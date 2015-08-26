@@ -19,9 +19,7 @@ def jacobi_fixed(data, iterations):
 
     for _ in xrange(iterations):
         active[:] = (4*sum(g) + sum(d))*fak
-
-        if util.Benchmark().bohrium:
-            np.flush()
+        B.flush()
 
     return data
 

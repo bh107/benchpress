@@ -27,6 +27,7 @@ def main():
     res = 0.0
     for _ in xrange(0, T):                      # Do T trials of..
         res += rosen(dataset)                   # ..executing rosenbrock.
+        B.flush()
     res /= T
     B.stop()                                    # Sample wall-clock stop
     B.pprint()                                  # Print elapsed wall-clock etc.
