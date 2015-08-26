@@ -124,6 +124,14 @@ if __name__ == "__main__":
         action="store_true",
         help="Wait for all SLURM jobs to finished before returning."
     )
+    slurm_grp.add_argument(
+        '--nice',
+        type=int,
+        help="The scheduling priority - range is from -10000 (highest priority) to "\
+             "10000 (lowest  priority) where zero is default.  Only  privileged  "\
+             "users can specify a negative priority.",
+        default=0
+    )
     args = parser.parse_args()
 
     if args.with_perf:
