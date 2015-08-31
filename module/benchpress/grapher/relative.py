@@ -30,7 +30,7 @@ class Relative(Graph):
         title = "Untitled Speedup Graph",
         line_width = 2,
         fn_pattern = "{title}_rel_{baseline}.{ext}",
-        file_formats = ["png"],
+        file_formats = ["png","pdf"],
         output_path = "."):
 
         super(Relative, self).__init__(title,

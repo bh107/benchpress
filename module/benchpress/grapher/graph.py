@@ -105,7 +105,7 @@ class Graph(object):
                  title = "Untitled Graph",
                  line_width = 2,
                  fn_pattern = "{title}.{ext}",
-                 file_formats = ["png"],
+                 file_formats = ["png", "pdf"],
                  output_path = "."):
 
         self.title = title

@@ -46,13 +46,14 @@ ident_ordering = [
 
     "SP",
     "PP",
-    "SS",
 
     "SP/AL",
     "PP/AL",
 
     "SP/AN",
     "PP/AN",
+
+    "SS",
 
     "C/S",
     "C/ST",

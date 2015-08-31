@@ -30,7 +30,7 @@ class AbsoluteLine(Graph):
                  title = "Untitled Absolute Graph",
                  line_width = 2,
                  fn_pattern = "{title}_abs.{ext}",
-                 file_formats = ["png"],
+                 file_formats = ["png", "pdf"],
                  output_path = "."):
 
         super(AbsoluteLine, self).__init__(title,
@@ -114,7 +114,7 @@ class AbsoluteBar(Graph):
                  title = "Untitled Absolute Graph",
                  line_width = 2,
                  fn_pattern = "{title}_abs.{ext}",
-                 file_formats = ["png"],
+                 file_formats = ["png", "pdf"],
                  output_path = "."):
         super(AbsoluteBar, self).__init__(title,
                                           line_width,
@@ -198,7 +198,7 @@ class Absolute(Graph):
                  title = "Untitled Absolute Graph",
                  line_width = 2,
                  fn_pattern = "{title}_abs.{ext}",
-                 file_formats = ["png"],
+                 file_formats = ["png", "pdf"],
                  output_path = "."):
 
         super(Absolute, self).__init__(title,
