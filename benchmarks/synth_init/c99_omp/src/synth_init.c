@@ -7,13 +7,16 @@
 
 void seq_init(double* grid, size_t nelements)
 {
-    memset(grid, 0.25, sizeof(*grid)*nelements);
+    for(size_t eidx=0; eidx<nelements; ++eidx) {
+        grid[eidx] = 0.25;
+    } 
+
 }
 
 void seq_exec(double* grid, size_t nelements)
 {
     for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = (grid[eidx] + eidx) * 0.25;
+        grid[eidx] = (grid[eidx]+1)*0.2;
     } 
 }
 
@@ -29,7 +32,7 @@ void par_exec(double* grid, size_t nelements)
 {
     #pragma omp parallel for
     for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = (grid[eidx] + eidx) * 0.25;
+        grid[eidx] = (grid[eidx]+1)*0.2;
     } 
 }
 
@@ -60,11 +63,13 @@ int main (int argc, char **argv)
             fprintf(stdout, "Serial initialization\n");
             seq_init(grid, nelements);
             break;
+
         case 1:
         case 3:
             fprintf(stdout, "Parallel initialization\n");
             par_init(grid, nelements);
             break;
+
         default:
             fprintf(stderr, "Unknown mode.\n");
     }
@@ -78,6 +83,7 @@ int main (int argc, char **argv)
                 seq_exec(grid, nelements);
             }
             break;
+
         case 2:
         case 3:
             fprintf(stdout, "Parallel execution\n");
@@ -85,6 +91,7 @@ int main (int argc, char **argv)
                 par_exec(grid, nelements);
             }
             break;
+
         default:
             fprintf(stderr, "Unknown mode.\n");
     }
@@ -92,6 +99,13 @@ int main (int argc, char **argv)
 
     bp.print("synth_init(c99_omp)");
 
+    if (bp.args.verbose) {
+        double sum = 0.0;
+        for(size_t i=0; i<nelements; ++i) {
+            sum += grid[i];
+        }
+        fprintf(stdout, "Sum = %f\n", sum);
+    }
     free(grid);
     return 0;
 }
