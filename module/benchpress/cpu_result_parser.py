@@ -12,12 +12,16 @@ ident_mapping = {
     "C/OMP/node/omp_af": "C/PA",
     "C/OMP//omp_af": "C/PA",
 
-    "C/SEQ/NA/NA": "C/SS",
-    "C/OMP/node/omp_si_pe": "C/SP",
-    "C/OMP/node/omp_pi_se": "C/PS",
-    "C/OMP/node/omp_pi_pe": "C/PP",
-    "C/OMP/node/omp_af_pi_pe": "C/PP/AF",
-    "C/OMP/node/omp_af_si_pe": "C/SP/AF",
+    "C/OMP/node/omp_si_pe": "SP",
+    "C/OMP/node/omp_pi_pe": "PP",
+
+    "C/OMP/node/omp_af_si_pe": "SP/AL",
+    "C/OMP/node/omp_af_pi_pe": "PP/AL",
+
+    "C/OMP/node/omp_af2_si_pe": "SP/AN",
+    "C/OMP/node/omp_af2_pi_pe": "PP/AN",
+
+    "C/SEQ/NA/NA": "SS",
 
     "CPP/OMP/node/omp": "C++/P",
     "CPP/OMP//omp": "C++/P",
@@ -40,13 +44,15 @@ ident_mapping = {
 ident_ordering = [
     "NumPy",
 
-    "C/SS",
-    "C/SP",
-    "C/PS",
-    "C/PP",
-    "C/SP/AF",
-    "C/PP/AF",
-    "C/PS/AF",
+    "SP",
+    "PP",
+    "SS",
+
+    "SP/AL",
+    "PP/AL",
+
+    "SP/AN",
+    "PP/AN",
 
     "C/S",
     "C/ST",
