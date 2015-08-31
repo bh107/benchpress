@@ -11,6 +11,14 @@ ident_mapping = {
     "C/OMP//omp": "C/P",
     "C/OMP/node/omp_af": "C/PA",
     "C/OMP//omp_af": "C/PA",
+
+    "C/OMP/node/omp_si_se": "C/SS",
+    "C/OMP/node/omp_si_pe": "C/SP",
+    "C/OMP/node/omp_pi_se": "C/PS",
+    "C/OMP/node/omp_pi_pe": "C/PP",
+    "C/OMP/node/omp_af_pi_pe": "C/PP/AF",
+    "C/OMP/node/omp_af_si_pe": "C/SP/AF",
+
     "CPP/OMP/node/omp": "C++/P",
     "CPP/OMP//omp": "C++/P",
     "CPP/OMP/node/omp_af": "C++/PA",
@@ -31,6 +39,15 @@ ident_mapping = {
 
 ident_ordering = [
     "NumPy",
+
+    "C/SS",
+    "C/SP",
+    "C/PS",
+    "C/PP",
+    "C/SP/AF",
+    "C/PP/AF",
+    "C/PS/AF",
+
     "C/S",
     "C/ST",
     "C/P",

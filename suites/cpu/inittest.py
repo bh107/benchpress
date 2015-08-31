@@ -38,10 +38,12 @@ stack_omp_t32 = [
         ('omp_si_pe_t04',    'cpu',  {"OMP_NUM_THREADS": "4",  "SYNTH_INIT_MODE": 2}),
         ('omp_si_pe_t02',    'cpu',  {"OMP_NUM_THREADS": "2",  "SYNTH_INIT_MODE": 2}),
         ('omp_si_pe_t01',    'cpu',  {"OMP_NUM_THREADS": "1",  "SYNTH_INIT_MODE": 2}),
+        
+        ('omp_si_se',    'cpu',  {"OMP_NUM_THREADS": "1",  "SYNTH_INIT_MODE": 0}),
     ]
 ]
 
-omp = {
+c99 = {
     'scripts': scripts,
     'launchers': [c99_omp],
     'bohrium': stack_omp_t32,
@@ -49,10 +51,11 @@ omp = {
     "use_grapher": "cpu"
 }
 
+
 #
 #   As usual, put them into the list of suites to run.
 #
 suites = [
-    omp
+    c99
 ]
 
