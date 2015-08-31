@@ -53,9 +53,9 @@ stack_serial = [
 ]
 
 parallel    = ('C/OMP',     '`bp-info --benchmarks`/{script}/c99_omp/bin/{script} {args}', None)
-serial      = ('C/SEQ',     '`bp-info --benchmarks`/{script}/c99_seq/bin/{script} {args}', None)
+serial      = ('C/SEQ',     '`bp-info --benchmarks`/{script}/c99_omp/bin/{script} {args}', None)
 parallel_ts = ('C/OMP/TS',  'taskset -c 0 `bp-info --benchmarks`/{script}/c99_omp/bin/{script} {args}', None)
-serial_ts   = ('C/SEQ/TS',  'taskset -c 0 `bp-info --benchmarks`/{script}/c99_seq/bin/{script} {args}', None)
+serial_ts   = ('C/SEQ/TS',  'taskset -c 0 `bp-info --benchmarks`/{script}/c99_omp/bin/{script} {args}', None)
 
 serial = {
     'scripts': scripts,
