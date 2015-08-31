@@ -1,8 +1,8 @@
 usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--with-perf]
-              [--with-time] [--save-data] [--pre-clean] [--restart]
-              [--publish-cmd COMMAND] [--bh-config-file BH_CONFIG_FILE]
-              [--resume-only] [--slurm] [--no-slurm] [--partition PARTITION]
-              [--multi-jobs] [--wait]
+              [--with-time] [--verbose] [--save-data] [--pre-clean]
+              [--restart] [--publish-cmd COMMAND]
+              [--bh-config-file BH_CONFIG_FILE] [--resume-only] [--slurm]
+              [--no-slurm] [--partition PARTITION] [--multi-jobs] [--wait]
               repos_root suite_file
 
 Runs a benchmark suite and stores the results in a json-file.
@@ -21,6 +21,7 @@ optional arguments:
   --with-perf           Enable the use of the perf measuring tool.
   --with-time           Enable the use of the '/usr/bin/time -v' measuring
                         tool.
+  --verbose             Write stdout and stderr to console when executing
   --save-data           Save data output from benchmarks in RESULT_FILE. All
                         benchmarks must support the --outputfn argument.
   --pre-clean           Clean caches such as the fuse or the kernel cache

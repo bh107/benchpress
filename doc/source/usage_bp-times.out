@@ -1,4 +1,4 @@
-usage: bp-times [-h] [--printer {troels,datadiff,times,raw,csv,parsed}]
+usage: bp-times [-h] [-p {troels,datadiff,times,raw,pricer,csv,parsed}]
                 [--baseline BASELINE]
                 results
 
@@ -7,6 +7,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --printer {troels,datadiff,times,raw,csv,parsed}
+  -p {troels,datadiff,times,raw,pricer,csv,parsed}, --printer {troels,datadiff,times,raw,pricer,csv,parsed}
                         How to print results.
   --baseline BASELINE   Set a baseline run.
