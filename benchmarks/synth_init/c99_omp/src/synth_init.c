@@ -13,7 +13,7 @@ void seq_init(double* grid, size_t nelements)
 void seq_exec(double* grid, size_t nelements)
 {
     for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = eidx / 2.0;
+        grid[eidx] = (grid[eidx] + eidx) * 0.25;
     } 
 }
 
@@ -29,19 +29,28 @@ void par_exec(double* grid, size_t nelements)
 {
     #pragma omp parallel for
     for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = eidx / 2.0;
+        grid[eidx] = (grid[eidx] + eidx) * 0.25;
     } 
 }
 
 int main (int argc, char **argv)
 {
-    bp_util_type bp = bp_util_create(argc, argv, 3);
+    bp_util_type bp = bp_util_create(argc, argv, 2);
     if (bp.args.has_error) {
         return 1;
     }
     const size_t nelements     = bp.args.sizes[0];
     const size_t iterations    = bp.args.sizes[1];
-    const size_t mode          = bp.args.sizes[2];
+
+    char* env = getenv("SYNTH_INIT_MODE");
+    if (!env) {
+        fprintf(stderr, "No init mode provided, set SYNTH_INIT_MODE to 0,1,2, or 3.\n");
+        return 0;
+    }
+    const int mode = atoi(env);
+    if ((mode<0) || (mode>3)) {
+        fprintf(stderr, "Invalid init mode, set SYNTH_INIT_MODE to 0,1,2, or 3.\n");
+    }
 
     double *grid = malloc(sizeof(*grid)*nelements);
 
