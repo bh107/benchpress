@@ -1,7 +1,7 @@
 from benchpress.default import *
 
 scripts = [
-    ('Synth Init',   'synth_init',    '--size=500000000*10'),
+    ('Synth Init',   'synth_init',    '--size=100000000*10'),
 ]
 
 stack_omp_t32 = [

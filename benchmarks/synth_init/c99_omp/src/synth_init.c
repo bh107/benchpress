@@ -7,7 +7,7 @@
 
 void seq_init(double* grid, size_t nelements)
 {
-    memset(grid, 0, nelements);
+    memset(grid, 0.25, sizeof(*grid)*nelements);
 }
 
 void seq_exec(double* grid, size_t nelements)
@@ -21,7 +21,7 @@ void par_init(double* grid, size_t nelements)
 {
     #pragma omp parallel for
     for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = 0;
+        grid[eidx] = 0.25;
     }
 }
 
