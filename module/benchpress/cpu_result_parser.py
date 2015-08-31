@@ -12,7 +12,7 @@ ident_mapping = {
     "C/OMP/node/omp_af": "C/PA",
     "C/OMP//omp_af": "C/PA",
 
-    "C/OMP/node/omp_si_se": "C/SS",
+    "C/SEQ/NA/NA": "C/SS",
     "C/OMP/node/omp_si_pe": "C/SP",
     "C/OMP/node/omp_pi_se": "C/PS",
     "C/OMP/node/omp_pi_pe": "C/PP",
