@@ -86,7 +86,7 @@ def the_method(T, F, FEQ, BOUND, BOUNDi, omega, deltaU, t1, t2, t3):
     F[18,:,-1 ,:-1] = T[18,:,0 ,1:]
     F[18,:,-1 , -1] = T[18,:,0 ,0 ]
     #Densities bouncing back at next timestep
-    BB = np.empty(F.shape)
+    BB = np.zeros(F.shape)
     T[:] = F
     T[1:,:,:,:] *= BOUND[np.newaxis,:,:,:]
     BB[2 ,:,:,:] += T[1 ,:,:,:]
