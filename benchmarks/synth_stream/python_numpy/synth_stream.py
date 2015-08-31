@@ -9,7 +9,6 @@ def stream_this(generator, N):
     y = generator(N)
     z = (x*x + y*y) / 4
     r = np.sum(z)
-    del x,y,z
 
     return r
 

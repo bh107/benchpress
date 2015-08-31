@@ -7,17 +7,16 @@ def model(N, dtype=np.float32):
     
     return np.ones(N, dtype=dtype)
 
-def computation(X, N, I, B):
+def computation(X, I):
     """Compute something..."""
 
-    X = np.ones(N, dtype=B.dtype)
     N = X                   # Pseudo-grid
     S = X
     E = X
     W = X
     C = X
     for i in xrange(0, I):  # Pseudo-relaxation
-        X[:] = X + N + S + E - W - C
+        X[:] = N - S + E - W + C
 
     return X
 
@@ -34,15 +33,11 @@ def main():
         B.dump_arrays("synth_inplace", {'input': X})
 
     B.start()
-    R = computation(X, N, I, B)
-    #if util.Benchmark().bohrium:
-    #    np.flush()
-
+    R = computation(X, I)
     B.stop()
     B.pprint()
     if B.verbose:
-        #print(np.sum(R))
-        print(R)
+        print(np.sum(R))
 
 if __name__ == "__main__":
     main()
