@@ -67,7 +67,7 @@ serial = {
 
 parallel = {
     'scripts': scripts,
-    'launchers': [parallel, parallel_ts],
+    'launchers': [parallel],
     'bohrium': stack_parallel,
     "use_slurm_default": True,
     "use_grapher": "cpu"
