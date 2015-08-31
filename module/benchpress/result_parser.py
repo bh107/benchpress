@@ -24,6 +24,7 @@ import re
 
 tokens = [
     ('stdout',  'elapsed', 'elapsed-time: ([\d.]+)', float),
+    ('stdout',  'time-ve-cpu', '\[Timing\] \[VE-CPU\] Execution: ([\d.]+)', float),
     ('stdout',  'bytes_missed', "bytes_missed:.?'(\d+)'", int),
     ('stdout',  'bytes_reused', "bytes_reused:.?'(\d+)'", int),
     ('time',    'utime', "User\stime\s\(seconds\):\s([\d.]+)", float),
