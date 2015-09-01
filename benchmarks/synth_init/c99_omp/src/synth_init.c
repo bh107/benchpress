@@ -5,35 +5,28 @@
 #include <bp_util.h>
 #include <omp.h>
 
-void seq_init(double* grid, size_t nelements)
-{
-    for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = 0.25;
-    } 
-
+void ser_init(double* grid, size_t nelements) {
+    memset(grid, 0, sizeof(*grid)*nelements);
 }
 
-void seq_exec(double* grid, size_t nelements)
-{
+void ser_exec(double* grid, size_t nelements) {
     for(size_t eidx=0; eidx<nelements; ++eidx) {
         grid[eidx] = (grid[eidx]+1)*0.2;
-    } 
-}
-
-void par_init(double* grid, size_t nelements)
-{
-    #pragma omp parallel for
-    for(size_t eidx=0; eidx<nelements; ++eidx) {
-        grid[eidx] = 0.25;
     }
 }
 
-void par_exec(double* grid, size_t nelements)
-{
+void par_init(double* grid, size_t nelements) {
+    #pragma omp parallel for
+    for(size_t eidx=0; eidx<nelements; ++eidx) {
+        grid[eidx] = 0.0;
+    }
+}
+
+void par_exec(double* grid, size_t nelements) {
     #pragma omp parallel for
     for(size_t eidx=0; eidx<nelements; ++eidx) {
         grid[eidx] = (grid[eidx]+1)*0.2;
-    } 
+    }
 }
 
 int main (int argc, char **argv)
@@ -61,7 +54,7 @@ int main (int argc, char **argv)
         case 0:
         case 2:
             fprintf(stdout, "Serial initialization\n");
-            seq_init(grid, nelements);
+            ser_init(grid, nelements);
             break;
 
         case 1:
@@ -80,7 +73,7 @@ int main (int argc, char **argv)
         case 1:
             fprintf(stdout, "Serial execution\n");
             for(size_t i=0; i<iterations; ++i) {
-                seq_exec(grid, nelements);
+                ser_exec(grid, nelements);
             }
             break;
 
