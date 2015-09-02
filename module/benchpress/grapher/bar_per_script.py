@@ -117,7 +117,7 @@ class Bar_per_script(Graph):
                                 " %s in the result json"%self.args.baseline)
 
         if comp_baseline is not None:
-            #Remove the baseline component from 'comps' and make all values reletive
+            #Remove the baseline component from 'comps' and make all values relative
             comps.remove(comp_baseline)
             (base_avg, base_err) = res[script][comp_baseline]
             for script in scripts:
@@ -126,7 +126,7 @@ class Bar_per_script(Graph):
                         try:
                             (avg, err) = res[script][comp]
                             res[script][comp] = (base_avg/avg, 0)
-                        except ZeroDivisionError:
+                        except (ZeroDivisionError, KeyError) as e:
                             res[script][comp] = (0,0)
 
         comps.sort()
