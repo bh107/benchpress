@@ -3,20 +3,20 @@ import sys
 from benchpress import util
 import numpy as np
 
-#def stream_this(generator, N):
-#
-#    x = generator(N)
-#    y = generator(N)
-#    z = (x*x + y*y) / 4
-#    r = np.sum(z)
-#
-#    return r
-
 def stream_this(generator, N):
 
-    r = np.sum((generator(N)**2+generator(N)**2)/4)
+    x = generator(N)
+    y = generator(N)
+    z = (x*x + y*y) / 4
+    r = np.sum(z)
 
     return r
+
+#def stream_this(generator, N):
+#
+#    r = np.sum((generator(N)**2+generator(N)**2)/4)
+#
+#    return r
 
 def main():
     B = util.Benchmark()
