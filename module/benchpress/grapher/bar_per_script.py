@@ -134,16 +134,40 @@ class Bar_per_script(Graph):
         comps.sort()
         scripts.sort()
 
+        #Translate comps names
+        tmp = comps
+        comps = []
+        for (old, new) in self.args.stack_map:
+            for i in xrange(len(tmp)):
+                if re.search(old, tmp[i]) is not None:
+                    new = tmp[i] if new == "" else new
+                    comps.append((tmp[i],new))
+                    tmp.pop(i)
+                    break
+        comps += [(t,t) for t in tmp]
+
+        #Translate script names
+        tmp = scripts
+        scripts = []
+        for (old, new) in self.args.script_map:
+            for i in xrange(len(tmp)):
+                if re.search(old, tmp[i]) is not None:
+                    new = tmp[i] if new == "" else new
+                    scripts.append((tmp[i],new))
+                    tmp.pop(i)
+                    break
+        scripts += [(t,t) for t in tmp]
+
         #Convert to a bar-plot friendly format
         data = []
-        for comp in comps:
+        for (comp_old, comp_new) in comps:
             values = []
-            for script in (scripts):
+            for (script_old, script_new) in scripts:
                 try:
-                    values.append(res[script][comp])
+                    values.append(res[script_old][comp_old])
                 except KeyError:
                     values.append((0,0))
-            data.append((comp,values))
-        plot(scripts, data, self.args.baseline, self.args)
+            data.append((comp_new,values))
+        plot([s[1] for s in scripts], data, self.args.baseline, self.args)
         self.tofile({"title": self.args.title})
 

@@ -117,12 +117,43 @@ if __name__ == "__main__":
         default=None,
         help="Min value of the y-axis"
     )
-
+    parser.add_argument(
+        '--stack-map',
+        default=None,
+        metavar="RegEx:label,...,RegEx:label",
+        help="Comma separated list of original-to-new-stack names"
+    )
+    parser.add_argument(
+        '--script-map',
+        default=None,
+        metavar="RegEx:label,...,RegEx:label",
+        help="Comma separated list of original-to-new-script names"
+    )
 
     args = parser.parse_args()
     args.type = args.type.pop()
     args.data_to_display = args.data_to_display.pop()
     args.output_path = os.path.expandvars(os.path.expanduser(args.output_path))
+
+    #Let's parse the stack map
+    stack_map = []
+    if args.stack_map is not None:
+        for label in args.stack_map.split(","):
+            if ":" not in label:
+                raise ValueError("--stack-map expects syntax: 'old_label:new_labe'")
+            (old, new) = label.split(":")
+            stack_map.append((old, new))
+    args.stack_map = stack_map
+
+    #Let's parse the script map
+    script_map = []
+    if args.script_map is not None:
+        for label in args.script_map.split(","):
+            if ":" not in label:
+                raise ValueError("--script-map expects syntax: 'old_label:new_labe'")
+            (old, new) = label.split(":")
+            script_map.append((old, new))
+    args.script_map = script_map
 
     g = graph_types[args.type](args)
     g.render()
