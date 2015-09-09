@@ -16,7 +16,9 @@ def plot(cmds, res, baseline, args):
         cmds.append(texsafe(cmd))
 
     ind = np.arange(len(cmds))  # the x locations for the groups
-    width = 1.0/(len(res)+1)       # the width of the bars
+
+    margin = 0.05
+    width = (1.-2.*margin)/len(res)
 
     fig, ax = plt.subplots()
     i = 0
@@ -27,7 +29,7 @@ def plot(cmds, res, baseline, args):
         avg = [v[0] for v in value]
         err = [v[1] for v in value]
         if len([v for v in avg if v > 0]) == 0:
-            raise ValueError("All values to display are zero!")
+            raise ValueError("All values to display are zero in '%s'"%comp)
         c = plt.cm.jet(1. * i / (len(res) - 1))
         b = ax.bar(ind+i*width, avg, width, color=c, log=False, yerr=err)
         bars.append(b)
@@ -46,7 +48,8 @@ def plot(cmds, res, baseline, args):
         ax.set_ylabel(args.data_to_display)
     else:
         ax.set_ylabel('%s compared to %s'%(args.data_to_display, baseline))
-    ax.legend(bars, comps)
+
+    ax.legend(bars, comps, loc='upper right', bbox_to_anchor=(0.5, 1.05), fancybox=True, shadow=True)
 
 def get_stack_name(stack):
     names = [comp[0] for comp in stack][1:]
@@ -91,6 +94,29 @@ class Bar_per_script(Graph):
                     else:
                         res[s] = {comp:value}
 
+        #Extract the name of the baseline component
+        comp_baseline = None
+        if self.args.baseline is not None:
+            for comp in comps:
+                if self.args.baseline in comp:
+                    comp_baseline = comp
+                    break
+            if comp_baseline is None:
+                raise Exception("Couldn't find the specified baseline"\
+                                " %s in the result json"%self.args.baseline)
+
+        if self.args.baseline is not None:
+            #Let's make all values relative compared to the baseline
+            for script in scripts:
+                (base_avg, base_err) = res[script][comp_baseline]
+                for comp in comps:
+                    if res[script][comp_baseline] > 0 or res[script][comp] > 0:
+                        try:
+                            (avg, err) = res[script][comp]
+                            res[script][comp] = (base_avg/avg, 0)
+                        except (ZeroDivisionError, KeyError) as e:
+                            res[script][comp] = (0,0)
+
         #Filter scripts and component stacks
         tmp = comps
         comps = []
@@ -104,30 +130,6 @@ class Bar_per_script(Graph):
             if re.search(self.args.scripts_to_display, script) is not None and\
                 re.search(self.args.scripts_not_to_display, script) is None:
                 scripts.append(script)
-
-        #Extract the name of the baseline component
-        comp_baseline = None
-        if self.args.baseline is not None:
-            for comp in comps:
-                if self.args.baseline in comp:
-                    comp_baseline = comp
-                    break
-            if comp_baseline is None:
-                raise Exception("Couldn't find the specified baseline"\
-                                " %s in the result json"%self.args.baseline)
-
-        if comp_baseline is not None:
-            #Remove the baseline component from 'comps' and make all values relative
-            comps.remove(comp_baseline)
-            (base_avg, base_err) = res[script][comp_baseline]
-            for script in scripts:
-                for comp in comps:
-                    if res[script][comp_baseline] > 0 or res[script][comp] > 0:
-                        try:
-                            (avg, err) = res[script][comp]
-                            res[script][comp] = (base_avg/avg, 0)
-                        except (ZeroDivisionError, KeyError) as e:
-                            res[script][comp] = (0,0)
 
         comps.sort()
         scripts.sort()
