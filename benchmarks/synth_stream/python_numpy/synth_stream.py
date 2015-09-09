@@ -12,6 +12,12 @@ def stream_this(generator, N):
 
     return r
 
+#def stream_this(generator, N):
+#
+#    r = np.sum((generator(N)**2+generator(N)**2)/4)
+#
+#    return r
+
 def main():
     B = util.Benchmark()
     if len(B.size) != 3:
