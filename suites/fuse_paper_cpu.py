@@ -2,17 +2,17 @@ from benchpress.default import *
 import copy
 
 scripts_cpu = [
-    ('Black Scholes',           'black_scholes',            '--size=5000000*25'),
+    ('Black Scholes',           'black_scholes',            '--size=15000000*20'),
+    ('Game of Life',            'gameoflife',               '--size=10000*10000*20*2'),
+    ('Heat Equation',           'heat_equation',            '--size=12000*12000*20'),
+    ('Leibnitz PI',             'leibnitz_pi',              '--size=100000000*20'),
+    ('Gauss Elimination',       'gauss',                    '--size=2800'),
+    ('LU Factorization',        'lu',                       '--size=2800'),
+    ('Monte Carlo PI',          'montecarlo_pi',            '--size=100000000*20'),
+    ('27 Point Stencil',        'point27',                  '--size=350*20'),
+    ('Shallow Water',           'shallow_water',            '--size=3200*3200*20'),
+    ('Rosenbrock',              'rosenbrock',               '--size=200000000*20'),
 #    ('Game of Life v1',         'gameoflife',               '--size=10000*10000*10*1'),
-    ('Game of Life',            'gameoflife',               '--size=10000*10000*10*2'),
-    ('Gauss Elimination',       'gauss',                    '--size=2000'),
-    ('Heat Equation',           'heat_equation',            '--size=14000*14000*10'),
-    ('Leibnitz PI',             'leibnitz_pi',              '--size=100000000*8'),
-    ('LU Factorization',        'lu',                       '--size=2000'),
-    ('Monte Carlo PI',          'montecarlo_pi',            '--size=60000000*15'),
-    ('27 Point Stencil',        'point27',                  '--size=150*130'),
-    ('Shallow Water',           'shallow_water',            '--size=5000*5000*5'),
-    ('Rosenbrock',              'rosenbrock',               '--size=100000000*20'),
     #('Matrix Multiplication',   'mxmul',                    '--size=500*5'),
     #('Heat Equation FI',        'heat_equation_fixed',      '--size=14000*14000*10'),
     #('Jacobi',                  'jacobi',                   '--size=14000*10'),
@@ -28,12 +28,11 @@ scripts_cpu = [
 ]
 
 scripts_cpu_no_optimal = [
-    ('SOR',                     'sor',                      '--size=5000*5000*30'),
-    ('NBody',                   'nbody',                    '--size=2000*50'),
-    ('NBody Nice',              'nbody_nice',               '--size=10*2000000*10'),
-    ('Lattice Boltzmann D2Q9',  'lattice_boltzmann_D2Q9',   '--size=180*180*10'),
-    ('Lattice Boltzmann 3D',    'lbm_3d',                   '--size=100*100*100*10'),
-    ('Water-Ice Simulation',    'wisp',                     '--size=800*800*10'),
+    ('SOR',                     'sor',                      '--size=12000*12000*20'),
+    ('NBody',                   'nbody',                    '--size=6000*20'),
+    ('NBody Nice',              'nbody_nice',               '--size=20*2000000*20'),
+    ('Lattice Boltzmann',       'lbm_3d',                   '--size=150*150*150*20'),
+    ('Water-Ice Simulation',    'wisp',                     '--size=800*800*20'),
 ]
 
 def fuse_cache(value):
