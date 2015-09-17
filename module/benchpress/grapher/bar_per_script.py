@@ -49,7 +49,7 @@ def plot(cmds, res, baseline, args):
     else:
         ax.set_ylabel('%s compared to %s'%(args.data_to_display, baseline))
 
-    ax.legend(bars, comps, loc='upper right', bbox_to_anchor=(0.5, 1.05), fancybox=True, shadow=True)
+    ax.legend(bars, comps, ncol=len(comps), loc='upper center', bbox_to_anchor=(0.5, 1.05), fancybox=True, shadow=True)
 
 def get_stack_name(stack):
     names = [comp[0] for comp in stack][1:]
