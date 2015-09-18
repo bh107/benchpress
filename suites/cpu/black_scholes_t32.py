@@ -6,8 +6,8 @@ scripts = [
 ]
 
 
-cpp11_bxx           = ('BXX/+OPT',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', {"BCEXP_CPU_POWK": "1"})
-cpp11_bxx_powk_off  = ('BXX/-OPT',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', {"BCEXP_CPU_POWK": "0"})
+cpp11_bxx           = ('BXX/+OPT',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', {"BH_BCEXP_CPU_POWK": "1"})
+cpp11_bxx_powk_off  = ('BXX/-OPT',    '`bp-info --benchmarks`/{script}/cpp11_bxx/bin/{script} {args}', {"BH_BCEXP_CPU_POWK": "0"})
 
 bohrium = {
     'scripts': scripts,
