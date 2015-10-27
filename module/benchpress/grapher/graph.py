@@ -106,11 +106,12 @@ class Graph(object):
         self._mpl_init()
 
     def _mpl_init(self):
-        matplotlib.rcParams['axes.labelsize'] = 12
-        matplotlib.rcParams['axes.titlesize'] = 14
-        matplotlib.rcParams['xtick.labelsize'] = 12
-        matplotlib.rcParams['ytick.labelsize'] = 12
-        matplotlib.rcParams['legend.fontsize'] = 12
+        size = self.args.fontsize
+        matplotlib.rcParams['axes.labelsize'] = size
+        matplotlib.rcParams['axes.titlesize'] = size + 2
+        matplotlib.rcParams['xtick.labelsize'] = size
+        matplotlib.rcParams['ytick.labelsize'] = size
+        matplotlib.rcParams['legend.fontsize'] = size
         matplotlib.rcParams['font.family'] = 'serif'
         matplotlib.rcParams['font.serif'] = ['Computer Modern Roman']
         matplotlib.rcParams['text.usetex'] = True

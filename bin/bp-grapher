@@ -118,6 +118,12 @@ if __name__ == "__main__":
         help="Min value of the y-axis"
     )
     parser.add_argument(
+        '--fontsize',
+        default=12,
+        type=int,
+        help="Fontsize."
+    )
+    parser.add_argument(
         '--stack-map',
         default=None,
         metavar="RegEx:label,...,RegEx:label",
