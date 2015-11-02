@@ -90,7 +90,7 @@ class Relative(Graph):
             )                                               # legends
 
             pylab.xlabel(r"Threads")                        # X-Axis - begin
-            pylab.xscale("symlog", basey=2, basex=2)
+            #pylab.xscale("symlog", basey=2, basex=2)
             pylab.xlim(xmin=0.8, xmax=thread_max*1.20)
             pylab.xticks(sample_points, sample_points)
             pylab.gca().xaxis.set_major_formatter(
@@ -100,7 +100,7 @@ class Relative(Graph):
             pylab.ylabel(                                   # Y-Axis
                 r"Speedup in relation to \textbf{%s}" % bsl_ident
             )
-            pylab.yscale("symlog", basey=2, basex=2)
+            #pylab.yscale("symlog", basey=2, basex=2)
             pylab.ylim(
                 ymin=0,
                 ymax=max(global_max*1.2, thread_max*1.2),
