@@ -41,6 +41,8 @@ def plot(cmds, res, baseline, args):
     if args.ymax is not None:
         plt.ylim(ymax=int(args.ymax))
 
+    plt.xlim(xmax=ind[-1]+1)
+
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
     ax.set_xticklabels(cmds, rotation=+90)
@@ -53,7 +55,7 @@ def plot(cmds, res, baseline, args):
               comps,
               ncol=len(comps),
               loc='upper center',
-              bbox_to_anchor=(0.5, 1.05),
+              bbox_to_anchor=(0.5, 1.06),
               fancybox=True,
               shadow=True,
               columnspacing=1)
