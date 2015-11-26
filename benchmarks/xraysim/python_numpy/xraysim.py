@@ -175,10 +175,14 @@ def main():
     B = util.Benchmark()
     scene_res = B.size[0]
     detector_res = B.size[1]
+    iterations = B.size[2]
     scene = setup(scene_res, detector_res)
 
     B.start()
-    detector_results = xraysim(*scene,  visualize=B.visualize)
+    for _ in xrange(iterations):
+        detector_results = xraysim(*scene,  visualize=B.visualize)
+        if util.Benchmark().bohrium:
+            np.flush()
     B.stop()
     B.pprint()
 
