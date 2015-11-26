@@ -70,6 +70,8 @@ def xraysim(sourcelist,
             scenegrid,
             scenematerials,
             materials,
+            scene_resolution,
+            detector_resolution,
             verbose=False,
             visualize=False):
     """ performs the calculations figuring out what is detected
@@ -96,12 +98,13 @@ def xraysim(sourcelist,
 
         materials:     a dict containing all materials used in the scenematerials
                        as Material objects
+
+        scene_resolution:    resolution of the scene cubic, e.g. 32 equals 32^3
+
+        detector_resolution: resolution of the detectors squared, e.g. 22 equals 22^2
     """
     ## indexing constants
     power = 3
-
-    ARES = 32
-    BRES = 32
 
     # generate an array of endpoints for rays (at the detector)
     detectors = []
@@ -133,7 +136,7 @@ def xraysim(sourcelist,
             t = np.add.reduce(t)
             t = np.add.reduce(t)
             t = np.add.reduce(t)
-            dtectattenuates = t.reshape(ARES, BRES)
+            dtectattenuates = t.reshape(detector_resolution, detector_resolution)
 
             pixelintensity = ((np.ones(raylengths.shape) * source[power] * Const.invsqr) / raylengths).reshape(dshape)
             area = np.dot( rayudirs, pixelareavector.reshape(3,1) ).reshape(dshape)
@@ -145,17 +148,20 @@ def xraysim(sourcelist,
                 if util.Benchmark().bohrium:
                     low  = low.copy2numpy()
                     high = high.copy2numpy()
-
                 util.plot_surface(result, "2d", 0, low-0.001*low, high-0.5*high)
                 util.plot_surface(result, "2d", 0, low-0.001*low, high-0.5*high)
 
     #We return only the result of the detectors
     return ret
 
-def setup():
-    """Build a scene to xray """
+def setup(scene_res, detector_res):
+    """Returns a scene to xray
 
-    srclist, detectorlist, scenedefs, objectlist = snake()
+       scene_res:    resolution of the scene cubic, e.g. 32 equals 32^3
+       detector_res: resolution of the detectors squared, e.g. 22 equals 22^2
+    """
+
+    srclist, detectorlist, scenedefs, objectlist = snake(scene_res, detector_res)
 
     # build a model of all materials
     materials = Material.initAll()
@@ -163,11 +169,13 @@ def setup():
     # build scene
     scenegrid, scenematerials = buildscene(scenedefs, objectlist)
 
-    return (srclist, detectorlist, scenegrid, scenematerials, materials)
+    return (srclist, detectorlist, scenegrid, scenematerials, materials, scene_res, detector_res)
 
 def main():
     B = util.Benchmark()
-    scene = setup()
+    scene_res = B.size[0]
+    detector_res = B.size[1]
+    scene = setup(scene_res, detector_res)
 
     B.start()
     detector_results = xraysim(*scene,  visualize=B.visualize)

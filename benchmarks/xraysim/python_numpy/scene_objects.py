@@ -245,7 +245,7 @@ def man():
     return ([asource], [adetector], scenedefs, objects)
 
 
-def snake():
+def snake(scen_res=22, detector_res=32):
     """ creates a 2 small boxes within a bigger box in the lower left corner of the detector  """
     # DEFINING THE EXPERIMENTAL SETUP, THE SOURCE, SCENE AND DETECTOR DEFINITIONS
     asource   = [
@@ -257,17 +257,17 @@ def snake():
     scenedefs = [
                   0.2, 0.2, 1.2,     # position lower left
                   0.8, 0.8, 1.8,     # position upper right
-                  SSX,               # resolution1 (#pixels)
-                  SSY,               # resolution2 (#pixels)
-                  SSZ                # resolution3 (#pixels)
+                  scen_res,          # resolution1 (#pixels)
+                  scen_res,          # resolution2 (#pixels)
+                  scen_res           # resolution3 (#pixels)
                 ]                    # voxelcount = res1 * res2 * res3
 
     adetector = [                    # rectangular surface spanned by 3 points, 2 resolutions
                    0.0,  0.0,  2.0,  # corner 0 position
                    0.0,  1.0,  2.0,  # corner h2 position
                    1.0,  0.0,  2.0,  # corner h1 position
-                  ARES,              # resolution1 (#pixels)
-                  BRES               # resolution2 (#pixels)
+                  detector_res,      # resolution1 (#pixels)
+                  detector_res       # resolution2 (#pixels)
                 ]
 
 

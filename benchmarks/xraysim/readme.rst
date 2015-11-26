@@ -1,6 +1,6 @@
 x-ray simulator
-Params, --size=Height*Width*Iterations::
+Params, --size=SceneRes*DetectorRes::
 
-  --size=1000*1000*10
+  --size=33*22
 
 ...
