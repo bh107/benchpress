@@ -19,8 +19,8 @@ def main():
 
     B.start()
     R = la.gauss(S)
-    #print("Why this helps I have no idea.")    # Mysterie fix
-    #sys.stdout.flush()                         # Mysterie fix
+#    print("Why this helps I have no idea.")    # Mysterie fix
+#    sys.stdout.flush()                         # Mysterie fix
 
     if util.Benchmark().bohrium:
         R.copy2numpy()
@@ -30,6 +30,9 @@ def main():
     B.pprint()
     if B.outputfn:
         B.tofile(B.outputfn, {'res': R})
+
+    if B.verbose:
+        print (R)
 
 
 if __name__ == "__main__":
