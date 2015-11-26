@@ -270,6 +270,14 @@ def snake(scen_res=22, detector_res=32):
                   detector_res       # resolution2 (#pixels)
                 ]
 
+    bdetector = [                    # rectangular surface spanned by 3 points, 2 resolutions
+                   0.5,  0.0,  2.0,  # corner 0 position
+                   0.0,  1.0,  2.0,  # corner h2 position
+                   1.0,  0.0,  2.0,  # corner h1 position
+                  detector_res,      # resolution1 (#pixels)
+                  detector_res       # resolution2 (#pixels)
+                ]
+
 
     # DEFINING THE SCENE SETUP, HOW THE OBJECTS IN THE EXPERIMENT ARE PLACED
     # SHAPED, AND WHAT MATERIALS THEEY ARE MADE FROM
@@ -338,5 +346,5 @@ def snake(scen_res=22, detector_res=32):
              [0.55, 0.55, 1.65]]
           ]
 
-    return ([asource], [adetector], scenedefs, [o0,o1,o2,o3,o4,o5,o6,o7])
+    return ([asource], [adetector, bdetector], scenedefs, [o0,o1,o2,o3,o4,o5,o6,o7])
 
