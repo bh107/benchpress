@@ -70,8 +70,8 @@ def xraysim(sourcelist,
             scenegrid,
             scenematerials,
             materials,
-            verbose=False
-              ):
+            verbose=False,
+            visualize=False):
     """ performs the calculations figuring out what is detected
         INPUT:
         sourcelist: list of np.array([
@@ -139,6 +139,15 @@ def xraysim(sourcelist,
             area = np.dot( rayudirs, pixelareavector.reshape(3,1) ).reshape(dshape)
             result += pixelintensity * area * np.exp(- dtectattenuates)
             ret.append(result)
+            if visualize:
+                low = np.minimum.reduce(result.flatten())
+                high = np.maximum.reduce(result.flatten())
+                if util.Benchmark().bohrium:
+                    low  = low.copy2numpy()
+                    high = high.copy2numpy()
+
+                util.plot_surface(result, "2d", 0, low-0.001*low, high-0.5*high)
+                util.plot_surface(result, "2d", 0, low-0.001*low, high-0.5*high)
 
     #We return only the result of the detectors
     return ret
@@ -161,12 +170,15 @@ def main():
     scene = setup()
 
     B.start()
-    detector_results = xraysim(*scene)
+    detector_results = xraysim(*scene,  visualize=B.visualize)
     B.stop()
     B.pprint()
 
     if B.outputfn:
         B.tofile(B.outputfn, {'res': detector_results[0]})
+
+    if B.visualize:
+        util.confirm_exit()
 
 if __name__ == '__main__':
     main()
