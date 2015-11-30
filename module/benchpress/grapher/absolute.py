@@ -176,7 +176,8 @@ def absolute(title, output_path, datasets, sample_points):
     args.output_path = output_path
     args.line_width = 2
     args.fn_pattern = "{title}_abs.{ext}"
-    args.file_formats = ["png"]
+    args.formats = ["png"]
+    args.fontsize = 10
 
     nidents = len([ident for ident in datasets])
     if nidents < 4:

@@ -25,7 +25,7 @@ def create_world(shape, core_v, edge_v, dtype=np.float32):
     w = np.empty(shape, dtype=dtype)
     w[:] = w.dtype.type(edge_v)
     v = [s for s in it.starmap(slice,it.repeat((1,-1),len(w.shape)))]
-    w[v][:] = w.dtype.type(core_v)
+    w[tuple(v)][:] = w.dtype.type(core_v)
 
     return w
 
@@ -62,7 +62,7 @@ def main():
         world = create_world(create_shape(D, size), 0.0, 255.0, dtype=B.dtype)
         #world = create_random_world(create_shape(D, size), B)
 
-    stencil = [world[s] for s in [map((lambda se : slice(se[0],se[1])),i)
+    stencil = [world[tuple(s)] for s in [map((lambda se : slice(se[0],se[1])),i)
                                   for i in it.product([(0,-2),(1,-1),(2,None)],
                                                       repeat=len(world.shape))]]
     if B.dumpinput:

@@ -1,6 +1,19 @@
 #
 #   Common / Shared stack configurations for CPU suites.
 #
+
+bh_stack_cpu_t32_all = [
+    [('default',    'bridge',       None)],
+    [('bccon',      'bccon',        None)],
+    [('bcexp',      'bcexp',        None)],
+    [('topo',       'topological',  None)],
+    [('node',       'node',         None)],
+    [
+        ('cpu_t01',             'cpu',  {"BH_CPU_JIT_LEVEL": "1", "OMP_NUM_THREADS": "1" , "BH_BCEXP_SIGN": "0", "BH_CPU_VCACHE_SIZE": "0"}),
+        ('cpu_t02',             'cpu',  {"BH_CPU_JIT_LEVEL": "1", "OMP_NUM_THREADS": "2" , "BH_BCEXP_SIGN": "0", "BH_CPU_VCACHE_SIZE": "0"}),
+    ]
+]
+
 bh_stack_cpu_t32_all = [
     [('default',    'bridge',       None)],
     [('bccon',      'bccon',        None)],

@@ -28,6 +28,15 @@ ident_mapping = {
     "CPP/OMP/node/omp_af": "C++/PA",
     "CPP/OMP//omp_af": "C++/PA",
     "CPP/BH/node/cpu_vc_fs_ct": "BXX/VFC",
+
+    "CPP/Arma/node/omp_af": "Armadillo",
+    "CPP/Arma/node/omp": "Armadillo/NA",
+    "CPP/Blitz/node/omp": "Blitz++",
+    "CPP/Blitz/node/omp_af": "Blitz++/NA",
+    "BXX/-OPT/node/cpu_vc_fs_ct": "BXX-O",
+    "BXX/+OPT/node/cpu_vc_fs_ct": "BXX+O",
+
+
     "Python/BH/node/cpu": "BHP",
     "Python/BH//cpu": "BHP",
     "Python/BH/node/cpu_vc": "BHP/V",
@@ -42,6 +51,13 @@ ident_mapping = {
 }
 
 ident_ordering = [
+    "Armadillo",
+    "Armadillo/NA",
+    "Blitz++",
+    "BXX+O",
+    "BXX-O",
+    "Blitz++/NA",
+
     "NumPy",
 
     "SP",

@@ -120,7 +120,8 @@ def relative(title, output_path, datasets, sample_points):
     args.output_path = output_path
     args.line_width = 2
     args.fn_pattern = "{title}_rel_{baseline}.{ext}"
-    args.file_formats = ["png"]
+    args.formats = ["png"]
+    args.fontsize = 10
 
     return RelativeGraph(args).render(datasets, sample_points)
 

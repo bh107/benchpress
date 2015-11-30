@@ -153,6 +153,79 @@ class Cpu(Grapher):
         with open('%s%sindex.html' % (self.args.output_path, os.sep), 'w') as fd:
             fd.write(html)
 
+    def tex_summary(self, raw, datasets, paths, parameters):
+
+        meta = raw["meta"]
+        scripts = [script for script in datasets]
+        scripts.sort()
+
+        table = "<center><table><tr>"
+
+        unordered_idents = sorted(list(set([ident for script in scripts for ident in datasets[script]])))
+        idents = order_idents(unordered_idents, ident_ordering)
+
+
+
+        for idx, bsl_ident in ((i, x) for i, x in enumerate(idents) if x == 'SS'):
+            table += "<td>"
+            table += """
+            <table style="border: 1px solid gray;">
+            <thead>
+            <tr>
+            <td></td>
+            """
+            for ident in (x for x in idents if x != bsl_ident and x != "C++/P"):
+                table += """
+                <td colspan="2" style="text-align: center;">%s</td>
+                """ % ident
+            table += """
+            </tr>
+            </thead>
+            """
+
+            table += "<colgroup>"
+            table += "<col>" * (len(idents)*2+1)
+            table += "</colgroup>"
+            table += """
+            <tbody>
+            """
+
+            for script in scripts:
+
+                table += """
+                <tr>
+                <td>%s</td>
+                """ % script
+                (global_max, data) = datasets_baselinify(datasets[script])
+                for ident in (x for x in idents if x != bsl_ident and x != "C++/P"):
+
+                    smax = data[bsl_ident][ident]['max']
+                    smin = data[bsl_ident][ident]['min']
+
+                    table += """
+                    <td>%.1f</td>
+                    <td style="text-align: right;">%.1f</td>
+                    """ % (smin, smax)
+                table += """
+                </tr>"""
+            table += """
+            </tbody>
+            <tfoot>
+            <td colspan="%s" style="text-align: center;">%s</td>
+            </tfoot>
+            </table>""" % (
+                len(idents)*2+1,
+                "<b>Min/Max speedup in relation to %s</b>" % bsl_ident
+            )
+            table += "</td>"
+        table += "</tr></table></center>"
+        
+        doc = "__TABLE__"
+        doc = doc.replace("__TABLE__", table)
+        
+        with open('%s%sindex.html' % (self.output_path, os.sep), 'w') as fd:
+            fd.write(doc)
+
     def render(self):
 
         raw = json.load(open(self.args.results))
