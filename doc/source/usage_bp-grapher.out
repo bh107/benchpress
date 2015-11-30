@@ -1,8 +1,14 @@
-usage: bp-grapher [-h] [--output OUTPUT] [--postfix POSTFIX]
-                  [--formats FORMATS [FORMATS ...]]
-                  [--type {relative,cilpaper,cpu,absolute}]
-                  [--warmups WARMUPS] [--baseline BASELINE]
-                  [--order ORDER [ORDER ...]] [--ylimit YLIMIT]
+usage: bp-grapher [-h] [--output-path OUTPUT_PATH] [--title TITLE]
+                  [--fn-pattern FN_PATTERN] [--formats FORMATS [FORMATS ...]]
+                  [--type {bar_per_script,cilpaper,cpu}]
+                  [--data-to-display {elapsed,time-ve-cpu,bytes_missed,bytes_reused,utime,stime,resident_kb,fuseprice}]
+                  [--stacks-to-display RegEx] [--stacks-not-to-display RegEx]
+                  [--scripts-to-display RegEx]
+                  [--scripts-not-to-display RegEx] [--warmups WARMUPS]
+                  [--baseline BASELINE] [--order ORDER [ORDER ...]]
+                  [--ymax YMAX] [--ymin YMIN] [--fontsize FONTSIZE]
+                  [--stack-map RegEx:label,...,RegEx:label]
+                  [--script-map RegEx:label,...,RegEx:label]
                   results
 
 Generate different types of graphs.
@@ -12,14 +18,43 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --output OUTPUT       Where to store generated graphs.
-  --postfix POSTFIX     Append this to the filename of the generated graph(s).
+  --output-path OUTPUT_PATH
+                        Where to store generated graphs. (default: .)
+  --title TITLE         The title of the graph. (default: graph)
+  --fn-pattern FN_PATTERN
+                        The output filename pattern. (default: {title}.{ext})
   --formats FORMATS [FORMATS ...]
                         Output file-format(s) of the generated graph(s).
-  --type {relative,cilpaper,cpu,absolute}
-                        The type of graph to generate
+                        (default: ['png'])
+  --type {bar_per_script,cilpaper,cpu}
+                        The type of graph to generate (default:
+                        ['bar_per_script'])
+  --data-to-display {elapsed,time-ve-cpu,bytes_missed,bytes_reused,utime,stime,resident_kb,fuseprice}
+                        The data to display in the generated graph(s)
+                        (default: ['elapsed'])
+  --stacks-to-display RegEx
+                        All stacks that match the RegEx are showed in the
+                        generated graph(s). (default: .*)
+  --stacks-not-to-display RegEx
+                        All stacks that match the RegEx are not showed in the
+                        generated graph(s). (default: NotIncluded)
+  --scripts-to-display RegEx
+                        All scripts that match the RegEx are showed in the
+                        generated graph(s). (default: .*)
+  --scripts-not-to-display RegEx
+                        All scripts that match the RegEx are NOT showed in the
+                        generated graph(s). (default: NotIncluded)
   --warmups WARMUPS     Specify the amount of samples from warm-up rounds.
-  --baseline BASELINE   Baseline label for relative graphs.
+                        (default: 0)
+  --baseline BASELINE   Baseline label for relative graphs. (default: None)
   --order ORDER [ORDER ...]
-                        Ordering of the ticks.
-  --ylimit YLIMIT       Max value of the y-axis
+                        Ordering of the ticks. (default: None)
+  --ymax YMAX           Max value of the y-axis (default: None)
+  --ymin YMIN           Min value of the y-axis (default: None)
+  --fontsize FONTSIZE   Fontsize. (default: 12)
+  --stack-map RegEx:label,...,RegEx:label
+                        Comma separated list of original-to-new-stack names
+                        (default: None)
+  --script-map RegEx:label,...,RegEx:label
+                        Comma separated list of original-to-new-script names
+                        (default: None)
