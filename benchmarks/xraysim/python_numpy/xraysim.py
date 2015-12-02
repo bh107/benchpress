@@ -182,7 +182,8 @@ def main():
     for _ in xrange(iterations):
         detector_results = xraysim(*scene,  visualize=B.visualize)
         if util.Benchmark().bohrium:
-            np.flush()
+            B.flush()
+
     B.stop()
     B.pprint()
 
