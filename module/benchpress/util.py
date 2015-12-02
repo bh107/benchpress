@@ -268,10 +268,14 @@ class Benchmark:
         #self.args   = args
 
     def start(self):
+        if self.bohrium:
+            bh.target.tally()
         flush()
         self.__elapsed = time.time()
 
     def stop(self):
+        if self.bohrium:
+            bh.target.tally()
         flush()
         self.__elapsed = time.time() - self.__elapsed
 
