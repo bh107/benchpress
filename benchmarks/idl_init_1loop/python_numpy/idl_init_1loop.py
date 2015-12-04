@@ -42,10 +42,12 @@ def calcB(B, alpha=1.0,
     
     Cl = C / l
     exprx = np.exp((-r * x[:,None,None]))
+    ucosuz = u * np.cos(uz)
+    ucosuy = u * np.cos(uy)
     util.Benchmark().flush()
     for i in range(n):        
-        sincos = sinuy[i,:,None] * (u * np.cos(uz))[:,None,:] 
-        cossin = (u * np.cos(uy))[i,:,None] * sinuz[:,None,:]
+        sincos = sinuy[i,:,None] * ucosuz[:,None,:] 
+        cossin = ucosuy[i,:,None] * sinuz[:,None,:]
         temp_x = C * sinuy[i,:,None] * sinuz[:,None,:]
         temp_y = Cl * (alpha * math.pi / z_max * sincos - r * math.pi / y_max * cossin)
         temp_z = Cl * (alpha * math.pi / y_max * cossin + r * math.pi / z_max * sincos)
