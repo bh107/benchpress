@@ -49,8 +49,8 @@ def calcB(B, alpha=1.0,
         sincos = sinuy[i,:,None] * ucosuz[:,None,:] 
         cossin = ucosuy[i,:,None] * sinuz[:,None,:]
         temp_x = C * sinuy[i,:,None] * sinuz[:,None,:]
-        temp_y = Cl * (alpha * math.pi / z_max * sincos - r * math.pi / y_max * cossin)
-        temp_z = Cl * (alpha * math.pi / y_max * cossin + r * math.pi / z_max * sincos)
+        temp_y = Cl * (alpha * math.pi / z_max * sincos - r * (math.pi / y_max) * cossin)
+        temp_z = Cl * (alpha * math.pi / y_max * cossin + r * (math.pi / z_max) * sincos)
         del sincos
         del cossin
         Bx[:,i,:] = np.sum(np.sum(temp_x * exprx[:,None],-1),-1)
