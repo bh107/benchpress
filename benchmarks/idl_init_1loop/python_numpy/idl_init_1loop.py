@@ -40,26 +40,38 @@ def calcB(B, alpha=1.0,
     By = np.empty((n,n,n),dtype=B.dtype)
     Bz = np.empty((n,n,n),dtype=B.dtype)
     
-    Cl = C / l
     exprx = np.exp((-r * x[:,None,None]))
     ucosuz = u * np.cos(uz)
     ucosuy = u * np.cos(uy)
     util.Benchmark().flush()
     for i in range(n):        
-        sincos = sinuy[i,:,None] * ucosuz[:,None,:] 
+        temp_x = C * sinuy[i,:,None] * sinuz[:,None,:] 
+        Bx[:,i,:] = np.sum(np.sum(temp_x * exprx[:,None],-1),-1)
+        del temp_x
+        if util.Benchmark().bohrium:
+            Bx = np.array(Bx,bohrium=False)
+
+    for i in range(n):        
+        sincos = sinuy[i,:,None] * ucosuz[:,None,:]
         cossin = ucosuy[i,:,None] * sinuz[:,None,:]
-        temp_x = C * sinuy[i,:,None] * sinuz[:,None,:]
-        temp_y = Cl * (alpha * math.pi / z_max * sincos - r * (math.pi / y_max) * cossin)
-        temp_z = Cl * (alpha * math.pi / y_max * cossin + r * (math.pi / z_max) * sincos)
+        temp_y = C/l * (alpha * math.pi / z_max * sincos - r * (math.pi / y_max) * cossin)
         del sincos
         del cossin
-        Bx[:,i,:] = np.sum(np.sum(temp_x * exprx[:,None],-1),-1)
         By[:,i,:] = np.sum(np.sum(temp_y * exprx[:,None],-1),-1)
-        Bz[:,i,:] = np.sum(np.sum(temp_z * exprx[:,None],-1),-1)
-        del temp_x
         del temp_y
+        if util.Benchmark().bohrium:
+            By = np.array(Bx,bohrium=False)
+
+    for i in range(n):        
+        sincos = sinuy[i,:,None] * ucosuz[:,None,:]
+        cossin = ucosuy[i,:,None] * sinuz[:,None,:]
+        temp_z = C/l * (alpha * math.pi / y_max * cossin + r * (math.pi / z_max) * sincos)
+        del sincos
+        del cossin
+        Bz[:,i,:] = np.sum(np.sum(temp_z * exprx[:,None],-1),-1)
         del temp_z
-        util.Benchmark().flush()
+        if util.Benchmark().bohrium:
+            Bz = np.array(Bx,bohrium=False)
     return (Bx, By, Bz)
 
 def main():
