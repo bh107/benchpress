@@ -61,7 +61,7 @@ def calcB(B, alpha=1.0,
         By[:,i,:] = np.sum(np.sum(temp_y * exprx[:,None],-1),-1)
         del temp_y
         if util.Benchmark().bohrium:
-            By = np.array(Bx,bohrium=False)
+            By = np.array(By,bohrium=False)
         util.Benchmark().flush()
 
     for i in range(n):        
@@ -73,7 +73,7 @@ def calcB(B, alpha=1.0,
         Bz[:,i,:] = np.sum(np.sum(temp_z * exprx[:,None],-1),-1)
         del temp_z
         if util.Benchmark().bohrium:
-            Bz = np.array(Bx,bohrium=False)
+            Bz = np.array(Bz,bohrium=False)
         util.Benchmark().flush()
     return (Bx, By, Bz)
 
