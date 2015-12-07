@@ -50,6 +50,7 @@ def calcB(B, alpha=1.0,
         del temp_x
         if util.Benchmark().bohrium:
             Bx = np.array(Bx,bohrium=False)
+        util.Benchmark().flush()
 
     for i in range(n):        
         sincos = sinuy[i,:,None] * ucosuz[:,None,:]
@@ -61,6 +62,7 @@ def calcB(B, alpha=1.0,
         del temp_y
         if util.Benchmark().bohrium:
             By = np.array(Bx,bohrium=False)
+        util.Benchmark().flush()
 
     for i in range(n):        
         sincos = sinuy[i,:,None] * ucosuz[:,None,:]
@@ -72,6 +74,7 @@ def calcB(B, alpha=1.0,
         del temp_z
         if util.Benchmark().bohrium:
             Bz = np.array(Bx,bohrium=False)
+        util.Benchmark().flush()
     return (Bx, By, Bz)
 
 def main():
