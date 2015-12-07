@@ -48,9 +48,9 @@ def calcB(B, alpha=1.0,
         temp_x = C * sinuy[i,:,None] * sinuz[:,None,:] 
         Bx[:,i,:] = np.sum(np.sum(temp_x * exprx[:,None],-1),-1)
         del temp_x
-        if util.Benchmark().bohrium:
-            Bx = np.array(Bx,bohrium=False)
         util.Benchmark().flush()
+    if util.Benchmark().bohrium:
+        Bx = np.array(Bx,bohrium=False)
 
     for i in range(n):        
         sincos = sinuy[i,:,None] * ucosuz[:,None,:]
@@ -60,9 +60,9 @@ def calcB(B, alpha=1.0,
         del cossin
         By[:,i,:] = np.sum(np.sum(temp_y * exprx[:,None],-1),-1)
         del temp_y
-        if util.Benchmark().bohrium:
-            By = np.array(By,bohrium=False)
         util.Benchmark().flush()
+    if util.Benchmark().bohrium:
+        By = np.array(By,bohrium=False)
 
     for i in range(n):        
         sincos = sinuy[i,:,None] * ucosuz[:,None,:]
@@ -72,9 +72,10 @@ def calcB(B, alpha=1.0,
         del cossin
         Bz[:,i,:] = np.sum(np.sum(temp_z * exprx[:,None],-1),-1)
         del temp_z
-        if util.Benchmark().bohrium:
-            Bz = np.array(Bz,bohrium=False)
         util.Benchmark().flush()
+    if util.Benchmark().bohrium:
+        Bz = np.array(Bz,bohrium=False)
+
     return (Bx, By, Bz)
 
 def main():
