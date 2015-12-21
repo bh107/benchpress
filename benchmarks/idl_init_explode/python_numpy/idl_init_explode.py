@@ -34,7 +34,13 @@ def calcB(B, alpha=1.0,
     sinuy = np.sin(uy)
     sinuz = np.sin(uz)
 
-    C =  4.0 / (n-1.0)**2 * np.sum(np.sum((B * sinuy[:,:,None])[:,None] * sinuz[:,None],-1),-1)
+#    C =  4.0 / (n-1.0)**2 * np.sum(np.sum((B * sinuy[:,:,None])[:,None] * sinuz[:,None],-1),-1)
+    C = np.empty((n,n,n,n))
+    C[:] = sinuy[:,None,:,None]
+    C *= B
+    C *= sinuz[:,None]
+    C = 4.0 / (n-1.0)**2 * np.sum(np.sum(C,-1),-1) 
+    
     l = math.pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
@@ -53,8 +59,11 @@ def calcB(B, alpha=1.0,
     cossin[:] = sinuz[None,:,None,:]
     cossin *= (u * np.cos(math.pi/y_max * u * y[:,None]))[:,None,:,None]
 
-
-    exprx = np.exp((-r * x[:,None,None]))
+#    exprx = np.exp((-r * x[:,None,None]))[:,None,None]
+    exprx = np.empty(d5)
+    exprx[:] = -x[:,None,None,None,None]
+    exprx *= r
+    exprx = np.exp(exprx)
 
 #    temp_x = C * sinuy[:,None,:,None] * sinuz[None,:,None,:]
     temp_x = np.empty(d5)
@@ -74,9 +83,9 @@ def calcB(B, alpha=1.0,
     temp_z += (alpha*math.pi/y_max) * cossin
     temp_z *= C_l
 
-    Bx = np.sum(np.sum(temp_x * exprx[:,None,None],-1),-1)
-    By = np.sum(np.sum(temp_y * exprx[:,None,None],-1),-1)
-    Bz = np.sum(np.sum(temp_z * exprx[:,None,None],-1),-1)
+    Bx = np.sum(np.sum(temp_x * exprx,-1),-1)
+    By = np.sum(np.sum(temp_y * exprx,-1),-1)
+    Bz = np.sum(np.sum(temp_z * exprx,-1),-1)
     return (Bx, By, Bz)
 
 def main():
