@@ -19,7 +19,7 @@ __kernel void heat_eq_jacobi(uint width, uint height
         DTYPE right  = in[gid+w+2+offset];
         DTYPE down   = in[gid+1+w*2+offset];
         DTYPE center = in[gid+w+1+offset];
-        DTYPE out_center = (center + up + left + right + down) / 5.0;
+        DTYPE out_center = (center + up + left + right + down) * 0.2;
         out[gid+w+1+offset] = out_center;
         d += fabs(out_center - center);
     }
