@@ -3,6 +3,7 @@ from __future__ import print_function
 from benchpress import util
 import numpy as np
 import math
+import os
 
 def window(B,a=0.37):
     assert (len(B.shape) == 2)
@@ -12,7 +13,7 @@ def window(B,a=0.37):
     b = int(np.ceil((a * (n-1) / 2)))
     wl[:b]  =  0.5 * (1 + np.cos(math.pi*(2 * np.arange(b) / (a * (n-1)) - 1)))
     wl[-b:] =  0.5 * (1 + np.cos(math.pi*(2 * np.arange(b-1,-1,-1) / (a * (n-1)) - 1)))
-    wl *= wl 
+    wl *= wl
     w = np.sqrt(wl+wl[:,None])
     return B*w
 
@@ -36,7 +37,7 @@ def calcB(B, alpha=1.0,
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
 
-    sincos = sinuy[:,None,:,None] * (u * np.cos(uz))[None,:,None,:] 
+    sincos = sinuy[:,None,:,None] * (u * np.cos(uz))[None,:,None,:]
     cossin = (u * np.cos(uy))[:,None,:,None] * sinuz[None,:,None,:]
     exprx = np.exp((-r * x[:,None,None]))
     temp_x = C * sinuy[:,None,:,None] * sinuz[None,:,None,:]
@@ -60,7 +61,9 @@ def main():
     except KeyError:
         raise ValueError('Only valid sizes are: '+str(sd.keys()))
 
-    inputfn = B.inputfn if B.inputfn else '../idl_input-float64_512*512.npz' 
+    defaultdata = os.path.dirname(os.path.realpath(__file__))
+    defaultdata = os.path.join(defaultdata,"..","idl_input-float64_512*512.npz")
+    inputfn = B.inputfn if B.inputfn else defaultdata
     B_x0 = B.load_array(inputfn, 'input', dtype=B.dtype)[::h,::w]
 
     B.start()
@@ -72,6 +75,6 @@ def main():
     if B.outputfn:
         R = Rx+Ry+Rz
         B.tofile(B.outputfn, {'res': R, 'res_x': Rx, 'res_y': Ry, 'res_z': Rz})
-    
+
 if __name__ == '__main__':
     main()
