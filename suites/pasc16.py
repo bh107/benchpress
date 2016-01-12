@@ -14,22 +14,22 @@ homedir = os.path.expanduser('~')
 mfe_input = os.path.join(homedir,"benchpress","benchmarks","idl_init_explode","idl_input-float64_512*512.npz")
 
 scripts_gpu = [
-    ('X-ray 50^3 20^2',  'xraysim',          '--size=50*20*1'),
-    ('X-ray 50^3 40^2',  'xraysim',          '--size=50*40*1'),
-    ('X-ray 50^3 80^2',  'xraysim',          '--size=50*80*1'),
-    ('X-ray 50^3 160^2',  'xraysim',          '--size=50*160*1'),
+    ('X-ray 50^3 020^2',  'xraysim',    '--size=50*20*10'),
+    ('X-ray 50^3 040^2',  'xraysim',    '--size=50*40*10'),
+    ('X-ray 50^3 080^2',  'xraysim',    '--size=50*80*10'),
+    ('X-ray 50^3 160^2',  'xraysim',    '--size=50*160*10'),
 ]
 scripts_gpu_no_xsweep = [
-    ('MC Pi 10^6',       'montecarlo_pi',    '--size=1000000*1'),
-    ('MFE 32^2',         'idl_init_explode', '--size=32*32 --inputfn=%s'%mfe_input),
+    ('MC Pi 01M',       'montecarlo_pi',    ' --size=1000000*100'),
+    ('MFE 032^2',       'idl_init_explode', '--size=32*32 --inputfn=%s'%mfe_input),
 
-    ('MC Pi 40^6',       'montecarlo_pi',    '--size=4000000*1'),
-    ('MC Pi 80^6',       'montecarlo_pi',    '--size=8000000*1'),
-    ('MC Pi 120^6',      'montecarlo_pi',    '--size=12000000*1'),
+    ('MC Pi 04M',       'montecarlo_pi',    ' --size=4000000*100'),
+    ('MC Pi 16M',       'montecarlo_pi',    '--size=16000000*100'),
+    ('MC Pi 64M',       'montecarlo_pi',    '--size=64000000*100'),
 
-    ('MFE 64^2',         'idl_init_explode', '--size=64*64   --inputfn=%s'%mfe_input),
+    ('MFE 064^2',        'idl_init_explode', '--size=64*64   --inputfn=%s'%mfe_input),
     ('MFE 128^2',        'idl_init_explode', '--size=128*128 --inputfn=%s'%mfe_input),
-    ('MFE 256^2',        'idl_init_explode', '--size=256*256 --inputfn=%s'%mfe_input),
+  #  ('MFE 256^2',        'idl_init_explode', '--size=256*256 --inputfn=%s'%mfe_input),
 ]
 
 stack_gpu = [
