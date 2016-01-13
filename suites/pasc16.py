@@ -18,18 +18,20 @@ scripts_gpu = [
     ('X-ray 50^3 040^2',  'xraysim',    '--size=50*40*10'),
     ('X-ray 50^3 080^2',  'xraysim',    '--size=50*80*10'),
     ('X-ray 50^3 160^2',  'xraysim',    '--size=50*160*10'),
+    ('X-ray 50^3 640^2',  'xraysim',    '--size=50*640*10'),
 ]
 scripts_gpu_no_xsweep = [
-    ('MC Pi 01M',       'montecarlo_pi',    ' --size=1000000*100'),
-    ('MFE 032^2',       'idl_init_explode', '--size=32*32 --inputfn=%s'%mfe_input),
+    ('MC Pi 001M',       'montecarlo_pi',    '--size=1000000*100'),
+    ('MFE 032^2',        'idl_init_explode', '--size=32*32 --inputfn=%s'%mfe_input),
 
-    ('MC Pi 04M',       'montecarlo_pi',    ' --size=4000000*100'),
-    ('MC Pi 16M',       'montecarlo_pi',    '--size=16000000*100'),
-    ('MC Pi 64M',       'montecarlo_pi',    '--size=64000000*100'),
+    ('MC Pi 004M',       'montecarlo_pi',    '--size=4000000*100'),
+    ('MC Pi 016M',       'montecarlo_pi',    '--size=16000000*100'),
+    ('MC Pi 064M',       'montecarlo_pi',    '--size=64000000*100'),
+    ('MC Pi 256M',       'montecarlo_pi',    '--size=256000000*100'),
 
     ('MFE 064^2',        'idl_init_explode', '--size=64*64   --inputfn=%s'%mfe_input),
     ('MFE 128^2',        'idl_init_explode', '--size=128*128 --inputfn=%s'%mfe_input),
-  #  ('MFE 256^2',        'idl_init_explode', '--size=256*256 --inputfn=%s'%mfe_input),
+    ('MFE 256^2',        'idl_init_explode', '--size=256*256 --inputfn=%s'%mfe_input),
 ]
 
 stack_gpu = [

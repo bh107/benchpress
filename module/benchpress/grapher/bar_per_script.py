@@ -31,7 +31,7 @@ def plot(cmds, res, baseline, args):
         if len([v for v in avg if v > 0]) == 0:
             raise ValueError("All values to display are zero in '%s'"%comp)
         c = plt.cm.jet(1. * i / (len(res) - 1))
-        b = ax.bar(ind+i*width, avg, width, color=c, log=False, yerr=err)
+        b = ax.bar(ind+i*width, avg, width, color=c, log=args.ylog, yerr=err)
         bars.append(b)
         comps.append(texsafe(comp))
         i+=1
