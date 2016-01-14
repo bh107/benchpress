@@ -12,7 +12,7 @@ def window(B,a=0.37):
     b = int(np.ceil((a * (n-1) / 2)))
     wl[:b]  =  0.5 * (1 + np.cos(math.pi*(2 * np.arange(b) / (a * (n-1)) - 1)))
     wl[-b:] =  0.5 * (1 + np.cos(math.pi*(2 * np.arange(b-1,-1,-1) / (a * (n-1)) - 1)))
-    wl *= wl 
+    wl *= wl
     w = np.sqrt(wl+wl[:,None])
     return B*w
 
@@ -39,8 +39,8 @@ def calcB(B, alpha=1.0,
     C[:] = sinuy[:,None,:,None]
     C *= B
     C *= sinuz[:,None]
-    C = 4.0 / (n-1.0)**2 * np.sum(np.sum(C,-1),-1) 
-    
+    C = 4.0 / (n-1.0)**2 * np.sum(np.sum(C,-1),-1)
+
     l = math.pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
@@ -49,11 +49,11 @@ def calcB(B, alpha=1.0,
 
     d5 = (n,n,n,n,n)
 
-#    sincos = sinuy[:,None,:,None] * (u * np.cos(uz))[None,:,None,:] 
+#    sincos = sinuy[:,None,:,None] * (u * np.cos(uz))[None,:,None,:]
     sincos = np.empty(d5)
-    sincos[:] = sinuy[:,None,:,None] 
+    sincos[:] = sinuy[:,None,:,None]
     sincos *= (u * np.cos(math.pi/z_max * u * z[:,None]))[None,:,None,:]
- 
+
 #    cossin = (u * np.cos(uy))[:,None,:,None] * sinuz[None,:,None,:]
     cossin = np.empty(d5)
     cossin[:] = sinuz[None,:,None,:]
@@ -67,7 +67,7 @@ def calcB(B, alpha=1.0,
 
 #    temp_x = C * sinuy[:,None,:,None] * sinuz[None,:,None,:]
     temp_x = np.empty(d5)
-    temp_x[:] = sinuy[:,None,:,None] 
+    temp_x[:] = sinuy[:,None,:,None]
     temp_x *= sinuz[None,:,None,:]
     temp_x *= C
 
@@ -99,18 +99,18 @@ def main():
     except KeyError:
         raise ValueError('Only valid sizes are: '+str(sd.keys()))
 
-    inputfn = B.inputfn if B.inputfn else '../idl_input-float64_512*512.npz' 
+    inputfn = B.inputfn if B.inputfn else '../idl_input-float64_512*512.npz'
     B_x0 = B.load_array(inputfn, 'input', dtype=B.dtype)[::h,::w]
 
     B.start()
-    B_x0 = window(B_x0)
-    Rx, Ry, Rz = calcB(B_x0)
+    for _ in xrange(B.size[2]):
+        Rx, Ry, Rz = calcB(window(B_x0))
     B.stop()
     B.pprint()
 
     if B.outputfn:
         R = Rx+Ry+Rz
         B.tofile(B.outputfn, {'res': R, 'res_x': Rx, 'res_y': Ry, 'res_z': Rz})
-    
+
 if __name__ == '__main__':
     main()
