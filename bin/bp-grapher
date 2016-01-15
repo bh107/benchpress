@@ -124,10 +124,16 @@ if __name__ == "__main__":
         help="Makes the y-axis logarithmic"
     )
     parser.add_argument(
+        '--xticklabel-rotation',
+        default=90,
+        type=int,
+        help="The rotation of the tick label on the x-axis"
+    )
+    parser.add_argument(
         '--fontsize',
         default=12,
         type=int,
-        help="Fontsize."
+        help="Fontsize"
     )
     parser.add_argument(
         '--stack-map',

@@ -45,7 +45,7 @@ def plot(cmds, res, baseline, args):
 
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
-    ax.set_xticklabels(cmds, rotation=+90)
+    ax.set_xticklabels(cmds, rotation=args.xticklabel_rotation)
     if baseline is None:
         ax.set_ylabel(args.data_to_display)
     else:
