@@ -92,15 +92,17 @@ def main():
 
     B = util.Benchmark()
 
-    sd = { 512:1, 256:2, 128:4, 64:8, 32:16, 16:32 }
-    try:
-        h = sd[B.size[0]]
-        w = sd[B.size[1]]
-    except KeyError:
-        raise ValueError('Only valid sizes are: '+str(sd.keys()))
-
-    inputfn = B.inputfn if B.inputfn else '../idl_input-float64_512*512.npz'
-    B_x0 = B.load_array(inputfn, 'input', dtype=B.dtype)[::h,::w]
+    if B.inputfn is None:
+        B_x0 = B.random_array((B.size[0],B.size[1]), dtype=B.dtype)
+    else:
+        inputfn = B.inputfn if B.inputfn else '../idl_input-float64_512*512.npz'
+        sd = { 512:1, 256:2, 128:4, 64:8, 32:16, 16:32 }
+        try:
+            h = sd[B.size[0]]
+            w = sd[B.size[1]]
+        except KeyError:
+            raise ValueError('Only valid sizes are: '+str(sd.keys()))
+        B_x0 = B.load_array(inputfn, 'input', dtype=B.dtype)[::h,::w]
 
     B.start()
     for _ in xrange(B.size[2]):
