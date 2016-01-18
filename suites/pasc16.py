@@ -34,9 +34,10 @@ scripts_gpu_no_xsweep = [
     ('MC Pi 10G',    'montecarlo_pi',    '--size=10000000000*5'),
     ('MC Pi 100G',   'montecarlo_pi',    '--size=100000000000*5'),
 
+    ('MFE 063^2',    'idl_init_explode', '--size=63*63*5'),
     ('MFE 100^2',    'idl_init_explode', '--size=100*100*5'),
     ('MFE 159^2',    'idl_init_explode', '--size=159*159*5'),
-    ('MFE 251^2',    'idl_init_explode', '--size=251*251*5'),
+   # ('MFE 251^2',    'idl_init_explode', '--size=251*251*5'),
 ]
 
 stack_gpu = [
