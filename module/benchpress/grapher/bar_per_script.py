@@ -37,9 +37,9 @@ def plot(cmds, res, baseline, args):
         i+=1
 
     if args.ymin is not None:
-        plt.ylim(ymin=int(args.ymin))
+        plt.ylim(ymin=float(args.ymin))
     if args.ymax is not None:
-        plt.ylim(ymax=int(args.ymax))
+        plt.ylim(ymax=float(args.ymax))
 
     plt.xlim(xmax=ind[-1]+1)
 
