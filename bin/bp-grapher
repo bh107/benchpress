@@ -124,6 +124,11 @@ if __name__ == "__main__":
         help="Makes the y-axis logarithmic"
     )
     parser.add_argument(
+        '--ylabel',
+        default=None,
+        help="Label on the y-axis"
+    )
+    parser.add_argument(
         '--xticklabel-rotation',
         default=90,
         type=int,
