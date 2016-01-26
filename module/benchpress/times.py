@@ -22,7 +22,7 @@ def parsed(results):
 
 def times(results):
     for script, bridge, manager, engine, res in from_str(results):
-        print "%s [%s]:" % (script, stack_label(res['stack'])),
+        print "%s %s [%s]:" % (script, bridge, stack_label(res['stack'])),
         if 'elapsed' not in res or len(res['elapsed']) < 1:
             print "N/A"
         else:
