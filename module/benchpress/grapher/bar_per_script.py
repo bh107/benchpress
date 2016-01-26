@@ -37,16 +37,18 @@ def plot(cmds, res, baseline, args):
         i+=1
 
     if args.ymin is not None:
-        plt.ylim(ymin=int(args.ymin))
+        plt.ylim(ymin=float(args.ymin))
     if args.ymax is not None:
-        plt.ylim(ymax=int(args.ymax))
+        plt.ylim(ymax=float(args.ymax))
 
     plt.xlim(xmax=ind[-1]+1)
 
     # add some text for labels, title and axes ticks
     ax.set_xticks(ind+(width*len(res))/2.)
-    ax.set_xticklabels(cmds, rotation=+90)
-    if baseline is None:
+    ax.set_xticklabels(cmds, rotation=args.xticklabel_rotation)
+    if args.ylabel is not None:
+        ax.set_ylabel(args.ylabel)
+    elif baseline is None:
         ax.set_ylabel(args.data_to_display)
     else:
         ax.set_ylabel('%s compared to %s'%(args.data_to_display, baseline))
