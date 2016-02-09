@@ -135,6 +135,12 @@ if __name__ == "__main__":
         help="The rotation of the tick label on the x-axis"
     )
     parser.add_argument(
+        '--no-legend',
+        default=False,
+        action='store_true',
+        help="Hide the legend box"
+    )
+    parser.add_argument(
         '--fontsize',
         default=12,
         type=int,
