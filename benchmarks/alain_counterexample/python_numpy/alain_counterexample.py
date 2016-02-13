@@ -5,13 +5,7 @@ from numpy.lib.stride_tricks import as_strided
 import numpy_force as numpy
 
 def mshare(T,S,R):
-    A = np.empty(1)
-
-    #Manual broadcast of 'A' to a vector that match 'T'
-    A = as_strided(A, shape=T.shape, strides=(0,))
-    A.strides = (0,)
-    A[:] = 42
-
+    A = np.ones_like(T)
     C = A + 43
     E = C + T + np.gather(S,R) + A
     D = C[::-1] + np.gather(S,R) + T
