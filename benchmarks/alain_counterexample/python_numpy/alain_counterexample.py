@@ -13,9 +13,9 @@ def mshare(T,S,R):
     A[:] = 42
 
     C = A + 43
-    E = C * T * np.gather(S,R) * A
-    D = C[::-1] * T * np.gather(S,R)
-    return (D,C)
+    E = C + T + np.gather(S,R) + A
+    D = C[::-1] + np.gather(S,R) + T
+    return (C,E,D)
 
 def main():
     B = util.Benchmark()
@@ -24,7 +24,7 @@ def main():
 
     T = np.ones(N)
     S = np.ones(N)
-    R = np.array(numpy.random.random_integers(0,N,N))
+    R = np.array(numpy.random.random_integers(0,N,N), dtype=np.uint64)
     B.start()
     for _ in xrange(I):
         t = mshare(T,S,R)
