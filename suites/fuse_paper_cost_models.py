@@ -53,6 +53,7 @@ stack_cpu_alain_fixed[2] =\
     ('AmosRobinson','bcexp', {'BH_PRICE_MODEL':'amos',
                               'BH_FUSER_OPTIMAL_MERGE':MaxShare_fixed_fusion}),
 ]
+stack_cpu_alain_fixed[3][0] = ('Optimal','optimal', {'BH_OPTIMAL_CACHE_PATH':"/tmp/bh_fixed_fuse_cache"})
 
 stack_cpu_calain = copy.deepcopy(stack_cpu)
 
