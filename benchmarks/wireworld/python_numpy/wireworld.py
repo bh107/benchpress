@@ -28,18 +28,19 @@ def wireworld_init(size):
 def wireworld(world, iterations):
     """TODO: Describe the benchmark."""
 
-    sim     = no_border(world, 1)   # Active Machine
-    stencil = D2P8(world)           # Stencil for counting heads
+    sim     = no_border(world, 1)          # Active Machine
+    stencil = D2P8(world)                  # Stencil for counting heads
+    NC      = sum([v==2 for v in stencil]) # Count number of head neighbors
     for _ in xrange(iterations):
-        NC = sum([v==2 for v in stencil]) # Count number of head neighbors
         # Mask conductor->head
         MASK = ((NC==1) & (sim==8)) | ((NC==2) & (sim==8))
-        sim *= ~MASK    # New head pos->0
-        sim += MASK * 1 # New head pos->1
-        MASK = (sim==8) # Mask non conductors
-        sim *= ~MASK    # conductors->0
-        sim += MASK * 4 # conductors->4
-        sim *= 2        # Upgrade all to new state
+
+        sim *= ~MASK                        # New head pos->0
+        sim += np.array(MASK * 1, np.uint8) # New head pos->1
+        MASK = (sim==8)                     # Mask non conductors
+        sim *= ~MASK                        # conductors->0
+        sim += np.array(MASK * 4, np.uint8) # conductors->4
+        sim *= 2                            # Upgrade all to new state
 
         util.Benchmark().flush()
 
