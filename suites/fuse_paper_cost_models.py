@@ -21,8 +21,17 @@ scripts_cpu_calain = [
     ('Alain Counterexample',  'alain_counterexample',  '--size=50000000*10'),
 ]
 
-MaxShare_fixed_fusion = "2:1+2,2:6+7,2:8+9,2:10+11,2:12+13,2:5+6,2:5+8,2:5+10"
-TmpElem_fixed_fusion = "2:1+2,2:6+7,2:8+9,2:10+11,2:12+13"
+def MaxShare_fixed_fusion(Iterations):
+    ret = ""
+    for i in xrange(Iterations):
+        ret += "2:1+2,%(i)d:6+7,%(i)d:8+9,%(i)d:10+11,%(i)d:12+13,%(i)d:5+6,%(i)d:5+8,%(i)d:5+10,"%{'i':i+2}
+    return ret[:-1]
+
+def TmpElem_fixed_fusion(Iterations):
+    ret = ""
+    for i in xrange(Iterations):
+        ret += "%(i)d:1+2,%(i)d:1+3,%(i)d:1+4,%(i)d:1+5,%(i)d:6+7,%(i)d:8+9,%(i)d:10+11,%(i)d:12+13,"%{'i':i+2}
+    return ret[:-1]
 
 stack_cpu = [
     [('default',    'bridge',       None)],
@@ -47,11 +56,11 @@ stack_cpu_alain_fixed[2] =\
 [
     ('UniqueViews', 'bcexp', {'BH_PRICE_MODEL':'unique_views'}),
     ('TmpElem',     'bcexp', {'BH_PRICE_MODEL':'temp_elemination',
-                              'BH_FUSER_OPTIMAL_MERGE':TmpElem_fixed_fusion}),
+                              'BH_FUSER_OPTIMAL_MERGE':TmpElem_fixed_fusion(10)}),
     ('MaxShare',    'bcexp', {'BH_PRICE_MODEL':'max_share',
-                              'BH_FUSER_OPTIMAL_MERGE':MaxShare_fixed_fusion}),
+                              'BH_FUSER_OPTIMAL_MERGE':MaxShare_fixed_fusion(10)}),
     ('AmosRobinson','bcexp', {'BH_PRICE_MODEL':'amos',
-                              'BH_FUSER_OPTIMAL_MERGE':MaxShare_fixed_fusion}),
+                              'BH_FUSER_OPTIMAL_MERGE':MaxShare_fixed_fusion(10)}),
 ]
 stack_cpu_alain_fixed[3][0] = ('Optimal','optimal', {'BH_OPTIMAL_CACHE_PATH':"/tmp/bh_fixed_fuse_cache"})
 
