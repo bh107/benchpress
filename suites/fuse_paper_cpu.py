@@ -56,18 +56,19 @@ stack_cpu = [
     [
         ('UniqueViews', 'bcexp', {'BH_PRICE_MODEL':'unique_views'}),
         ('TmpElem',     'bcexp', {'BH_PRICE_MODEL':'temp_elemination'}),
+        ('MaxShare',    'bcexp', {'BH_PRICE_MODEL':'MAX_SHARE'}),
         ('AmosRobinson','bcexp', {'BH_PRICE_MODEL':'amos'}),
     ],
     [
         ('Singleton',  'singleton',   None),
-        ('Naive',      'topological', None),
+    #    ('Naive',      'topological', None),
         ('Greedy',     'greedy',      None),
         ('Optimal',    'optimal',     None),
     ],
     [
         ('filecache',  'node', fuse_cache("true")),
         ('memcache',  'node', cache_path("", fuse_cache("true"))),
-        ('nocache',  'node', fuse_cache("false")),
+     #   ('nocache',  'node', fuse_cache("false")),
     ],
     [('pricer',     'pricer',       None)],
     [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS":"4"})],
@@ -90,6 +91,6 @@ suite_cpu_no_optimal = {
 
 suites = [
     suite_cpu,
-    suite_cpu_no_optimal,
+   # suite_cpu_no_optimal,
 ]
 
