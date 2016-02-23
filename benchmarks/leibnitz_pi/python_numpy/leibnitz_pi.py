@@ -17,6 +17,7 @@ def main():
     R = 0.0
     for _ in xrange(I):
         R += 4.0*leibnitz_pi(N)                      # Execute benchmark
+        B.flush()
     B.stop()                                    # Sample wall-clock stop
     B.pprint()                                  # Print elapsed wall-clock etc.
     if B.verbose:                               # Print more, such as results
