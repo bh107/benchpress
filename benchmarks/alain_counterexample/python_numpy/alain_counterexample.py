@@ -15,6 +15,7 @@ def main():
     U.start()
     for _ in xrange(I):
         A = np.ones_like(T)
+        A.strides = (0,)#Scalar view
         B = A + 43
         C = B + T + np.gather(S,R) + A
         D = B[::-1] + np.gather(S,R)
