@@ -26,7 +26,7 @@ scripts_cpu_alain_fixed = [
 ]
 
 scripts_cpu_calain = [
-    ('Alain Counterexample',  'alain_counterexample',  '--size=25000000*40'),
+    ('Alain Counterexample',  'alain_counterexample',  '--size=50000000*40'),
 ]
 
 def Jacobi_fixed_fusion(Iterations):
