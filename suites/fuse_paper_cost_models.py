@@ -10,23 +10,23 @@ def fuse_cache(value):
     return ret
 
 scripts_cpu = [
-    ('Game of Life',   'gameoflife',   '--size=10000*10000*10*2'),
+    ('Game of Life',   'gameoflife',   '--size=10000*10000*40*2'),
 ]
 
 scripts_cpu_jacobi = [
-    ('Jacobi Solver',  'jacobi',       '--size=14000*10'),
+    ('Jacobi Solver',  'jacobi',       '--size=14000*40'),
 ]
 
 scripts_cpu_alain = [
-    ('Alain Example',  'alain',  '--size=100000000*10'),
+    ('Alain Example',  'alain',  '--size=100000000*40'),
 ]
 
 scripts_cpu_alain_fixed = [
-    ('Alain Example Fixed',  'alain',  '--size=100000000*10'),
+    ('Alain Example Fixed',  'alain',  '--size=100000000*40'),
 ]
 
 scripts_cpu_calain = [
-    ('Alain Counterexample',  'alain_counterexample',  '--size=50000000*10'),
+    ('Alain Counterexample',  'alain_counterexample',  '--size=50000000*40'),
 ]
 
 def Jacobi_fixed_fusion(Iterations):
