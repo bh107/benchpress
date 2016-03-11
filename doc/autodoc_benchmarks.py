@@ -90,7 +90,7 @@ class RstTable(object):
         return "+%s+" % "+".join(seps)
 
     def render(self):
-        first = True 
+        first = True
         rows = []
         sepper = "-"
         for row in self.rows:
@@ -116,7 +116,7 @@ def modify_column(func, rows):
     return delta
 
 def section_ref(text):
-    
+
     return ":ref:`%s`" % text if text.strip() else text
 
 def benchmark_index(benchmarks):
@@ -129,7 +129,7 @@ def benchmark_index(benchmarks):
 
     rerow = []
     for ridx, row in enumerate(rows):
-        rerow.append(row)   
+        rerow.append(row)
         if ((ridx+1) % 15) == 0:
             rerow.append(tool_header)
     rows = rerow
@@ -150,11 +150,11 @@ def benchmark_index(benchmarks):
         cidx += ntools
         header_row.append(lang_labels[lang])
         header_widths.append(width)
-    
+
     row = []
     for col, width in zip(header_row, header_widths):
         row.append(col.ljust(width))
-    
+
     matrix = table.draw_sep(header_widths)+"\n"
     matrix += table.draw_row(header_row, header_widths)+"\n"
     matrix += table.render()
@@ -162,8 +162,8 @@ def benchmark_index(benchmarks):
     matrix += """
 
 .. [ISU] The implementation has issues... such as not using of Benchpress, segfaults, or does not run with Bohrium.
-.. [BH] The implementation makes use of Bohrium specific features, which means that Bohrum is required to run it.
-.. [IBNP] The implementation does `import bohrium as np`, which breaks the Bohrium dogma "High-Performance NumPy without changing a single line of code.
+.. [BH] The implementation makes use of Bohrium specific features, which means that Bohrium is required to run it.
+.. [IBNP] The implementation does ``import bohrium as np``, which breaks the Bohrium dogma "High-Performance NumPy without changing a single line of code.
     """
 
     return matrix
@@ -246,7 +246,7 @@ def benchmark_sections(benchmarks):
 
 def main():
     benchmarks = implementations(".."+os.sep+"benchmarks")
-  
+
     index = benchmark_index(benchmarks)
     with open(os.sep.join(["source", "benchmarks", "autodoc_index.rst"]), 'w') as fd:
         fd.write("==========\n")

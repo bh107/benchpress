@@ -14,6 +14,7 @@ suites = [{
             ('Monte Carlo PI',              'mc',               '--size=50000000*10'),
             ('Matrix Multiplication',       'mxmul',            '--size=250'),
             ('nbody',                       'nbody',            '--size=2000*10'),
+            ('Quasicrystal',                'quasicrystal',     '--size=5*37*1014*30'),
             ('1D Stencil',                  'ndstencil',        '--size=27*10*1'),
             ('2D Stencil',                  'ndstencil',        '--size=27*10*2'),
             ('3D Stencil',                  'ndstencil',        '--size=27*10*3'),
@@ -28,4 +29,3 @@ suites = [{
         'launchers':  [python_numpy],
         'bohrium': bh_stack_none
 }]
-
