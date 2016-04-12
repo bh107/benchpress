@@ -133,14 +133,12 @@ def xraysim(sourcelist,
             #raydst is now to be correlated with material/attenuation grid
             t = sceneattenuates[...,np.newaxis] * raydst
             #We sums the three dimensions
-            t = np.add.reduce(t)
-            t = np.add.reduce(t)
-            t = np.add.reduce(t)
+            t = np.sum(t, axis=(0, 1, 2))
             dtectattenuates = t.reshape(detector_resolution, detector_resolution)
 
             pixelintensity = ((np.ones(raylengths.shape) * source[power] * Const.invsqr) / raylengths).reshape(dshape)
             area = np.dot( rayudirs, pixelareavector.reshape(3,1) ).reshape(dshape)
-            result += pixelintensity * area * np.exp(- dtectattenuates)
+            result += pixelintensity * area * np.exp(-dtectattenuates)
             ret.append(result)
             if visualize:
                 low = np.minimum.reduce(result.flatten())
@@ -180,7 +178,7 @@ def main():
 
     B.start()
     for _ in xrange(iterations):
-        detector_results = xraysim(*scene,  visualize=B.visualize)
+        detector_results = xraysim(*scene, visualize=B.visualize)
         if util.Benchmark().bohrium:
             B.flush()
 
