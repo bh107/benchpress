@@ -1,70 +1,5 @@
 ##################################################################################
 #
-#   This is the "old" suite format...
-#
-# The following things seem quite useless... it should probably just be removed...
-# the idea of a "default-suite" is to have of bunch of things that are shared amongst
-# a wealth of benchmarks... time has shown us that only something like a "bridge-definition"
-# is really ever shared...
-#
-
-# Bridges  with various parameter setups
-# (alias, cmd (relative to the root of bohrium), env-vars)
-bridges = [
-    ('numpy', 'python benchmark/python/{script}.py {args}', None),
-    ('CIL', 'mono benchmark/CIL/Csharp/{script}/bin/{script}.exe {args} --bohrium=True', None),
-    ('cpp', 'benchmark/cpp/bin/{script} {args}', None)
-]
-
-# Managers above the node-vem with various parameter setups.
-# NB: the node-vem is hardcoded, the managers here will have the
-#     node-vem as child unless it is the node-vem itself
-# (alias, manager, cmd (relative to the root of bohrium), env-vars)
-managers = [
-    ('node',  'node', '',  None),
-    ('cluster',  'cluster', 'mpiexec -ppn 1 -np 1 {bridge} : -np 1 taskset -c 0 ./vem/cluster/bh_vem_cluster_slave',  None),
-]
-
-# Engines with various parameter setups
-# (alias, engine, env-vars)
-engines = [
-    ('cpu',   'cpu',    None),
-    ('gpu',   'gpu',    None),
-]
-
-# Scripts and their arguments
-# (alias, script, arguments)
-scripts   = [
-    ('Black Scholes',        'black_scholes',  '--size=100000*10'),
-    ('Monte Carlo PI',       'mc',             '--size=100000*100'),
-    ('Jacobi Stencil',       'jacobi_stencil', '--size=1000*1000*10'),
-    ('Shallow Water',        'shallow_water',  '--size=500*500*10'),
-    ('Lattice Boltzmann 2D', 'lattice_boltzmann_D2Q9', '--size=100*1000*10'),
-]
-
-# A suite example
-# Note that 'engines' and 'managers' may be undefined, in which case they are ignored
-suite = {
-    'bridges':   bridges,
-    'engines':   engines,
-    'managers':  managers,
-    'scripts':   scripts,
-}
-
-native = {
-        'bridges': [('native-numpy', 'python benchmark/python/{script}.py {args}', None)],
-        'scripts': scripts
-}
-
-suites = [suite, native]
-
-#
-#
-# End of the old suite format
-##################################################################################
-
-##################################################################################
-#
 # This is the new suite-format. A change is needed since the Bohrium configuration
 # things are getting out of hand... something more flexible and simpler is needed.
 #
@@ -118,9 +53,9 @@ cil_managed   = ('Mono/Managed', 'mono `bp-info --benchmarks`/{script}/csharp_nu
 cil_unsafe    = ('Mono/Unsafe',  'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=False {args}', {'NUMCIL_DISABLE_UNSAFE': '0'})
 cil_bohrium   = ('Mono/Bohrium', 'mono `bp-info --benchmarks`/{script}/csharp_numcil/bin/{script}.exe --bohrium=True  {args}', {'BH_GC_FLUSH': '1'})
 
-# F#
+# Chapel
 
-# ... others
+chapel_mcore  = ('Chapel/mcore', '`bp-info --benchmarks`/{script}/chapel_mcore/bin/{script} {args}', None)
 
 #
 #   Bohrium stack configurations
