@@ -72,7 +72,7 @@ do{
 } while (!stop);
 
 timer.stop();
-writeln("Heat Equation (single machine) - n: ",n,
+writeln("Heat Equation (Chapel) - n: ",n,
         ", iterations: ", iterations,
         ", elapsed-time: ", timer.elapsed(), " seconds");
 
