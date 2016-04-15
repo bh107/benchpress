@@ -2,13 +2,17 @@
 //The first integer is the domain size squired and the second integer is
 //the number of iterations.
 config const size = "100*10";//Default, 100 by 100 domain and 10 iterations
-config const epsilon = 1.0e-10;//Stop condition in amount of change
+
+//Stop condition in amount of change (ignored when 'iterations' are non-zero).
+config const epsilon = 1.0e-10;
 
 //Parse the --size argument into 'n' and 'iterations'
 use Regexp;
 const arg = size.matches(compile("(\\d+)*(\\d+)"));
-const n = size.substring(arg[1][1]) : int;
-const iterations = size.substring(arg[2][1]) : int;
+const arg_n = arg[1][1];
+const arg_i = arg[2][1];
+const n = size[arg_n.offset+1..arg_n.offset+arg_n.length] : int;
+const iterations = size[arg_i.offset+1..arg_i.offset+arg_i.length]: int;
 
 //Initiate a Timer object
 use Time;
@@ -16,11 +20,14 @@ var timer : Timer;
 
 //Now, let's implement the heat equation!
 
+//We will use the Block distribution
+use BlockDist;
+
 //A n+2 by n+2 domain.
-const Grid = {0..n+1, 0..n+1};
+const Grid = {0..n+1, 0..n+1} dmapped Block({1..n, 1..n});
 
 //A n by n domain that represents the interior of 'Grid'
-const Interior = {1..n, 1..n};
+const Interior = {1..n, 1..n} dmapped Block({1..n, 1..n});
 
 var A, T : [Grid] real;//Zero initialized as default
 
@@ -46,9 +53,23 @@ do{
   //Copy back the non-border cells
   A[Interior] = T[Interior];
 
-  //When 'delta' is smaller than 'epsilon' the calculation has converged
   iter_count += 1;
-} while (delta > epsilon && iter_count >= iterations);
+
+  //if 'iterations' is non-zero we stop after a fixed number of iterations
+  //otherwise we stop when the calculation has converged, i.e. 'delta' is smaller than 'epsilon'.
+  var stop = false;
+  if(iterations > 0)
+  {
+    if iter_count >= iterations then
+      stop = true;
+  }
+  else
+  {
+    if delta < epsilon then
+      stop = true;
+  }
+
+} while (!stop);
 
 timer.stop();
 writeln("Heat Equation (single machine) - n: ",n,
