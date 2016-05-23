@@ -59,7 +59,7 @@ def raygeometry(src, detpixpos):
     origin         = np.array([src[0],src[1],src[2]])
     rays           = detpixpos.reshape(raycount,3)[:,0:3] - origin
 
-    raydistances   = np.sqrt( np.add.reduce( rays*rays , axis=1) ).reshape(raycount,1)
+    raydistances   = np.sqrt(np.sum(rays*rays, axis=1)).reshape(raycount,1)
     unitrays       = rays / raydistances
 
     rayinverses    = np.ones(unitrays.shape) / unitrays
@@ -149,5 +149,3 @@ def runAABB( scenegrid,
 
     voxelraydistances = (t_out-t_in)*(t_out>=t_in)
     return voxelraydistances
-
-
