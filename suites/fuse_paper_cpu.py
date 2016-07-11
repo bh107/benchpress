@@ -3,7 +3,7 @@ import copy
 
 scripts_cpu = [
     ('Game of Life',            'gameoflife',               '--size=10000*10000*40*2'),
-    ('Jacobi Solver',           'jacobi',                   '--size=14000*40'),
+    ('Jacobi Solver',           'jacobi',                   '--size=10000*40'),
     ('Black Scholes',           'black_scholes',            '--size=15000000*40'),
     ('Heat Equation',           'heat_equation',            '--size=12000*12000*40'),
     ('Gauss Elimination',       'gauss',                    '--size=2800'),
@@ -12,6 +12,10 @@ scripts_cpu = [
     ('Leibnitz Pi',             'leibnitz_pi',              '--size=100000000*40'),
     ('27 Point Stencil',        'point27',                  '--size=350*40'),
     ('Rosenbrock',              'rosenbrock',               '--size=200000000*40'),
+]
+
+scripts_cpu = [
+    ('Jacobi Solver',           'jacobi',                   '--size=9000*40'),
 ]
 
 def fuse_cache(value):
@@ -38,7 +42,7 @@ stack_cpu = [
     [
         ('Singleton',  'singleton',   None),
         ('Greedy',     'greedy',      None),
-        ('Optimal',    'optimal',     None),
+#        ('Optimal',    'optimal',     None),
     ],
     [
         ('memcache',  'node', cache_path("", fuse_cache("true"))),

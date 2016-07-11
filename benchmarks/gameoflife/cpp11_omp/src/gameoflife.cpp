@@ -2,8 +2,8 @@
 #include <iomanip>
 #include <bp_util.h>
 
-#define HEIGHT 5
-#define WIDTH  5
+#define HEIGHT 1000
+#define WIDTH  1000
 
 static double SURVIVE_LOW  = 2.0;
 static double SURVIVE_HIGH = 3.0;
