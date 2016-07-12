@@ -50,12 +50,14 @@ double cnd( double x )
 
     L = fabs(x);
     K = 1.0 / (1.0 + 0.2316419 * L);
+    double K2 = K*K;
+    double K4 = K2*K2;
     w = 1.0 - 1.0 / sqrt(2 * M_PI) * exp(-L *L / 2) * (\
         a1 * K         + \
-        a2 * pow(K, 2) + \
-        a3 * pow(K, 3) + \
-        a4 * pow(K, 4) + \
-        a5 * pow(K, 5)
+        a2 * K2 + \
+        a3 * K*K2 + \
+        a4 * K4 + \
+        a5 * K*K4
     );
 
     return (x<0) ? 1.0 - w : w;
