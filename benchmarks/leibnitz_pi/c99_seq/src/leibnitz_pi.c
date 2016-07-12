@@ -12,11 +12,11 @@ double leibnitz_pi(int nelements)
 
 int main(int argc, char* argv[])
 {
-    bp_util_type bp = bp_util_create(argc, argv, 2);// Grab arguments
+    bp_util_type bp = bp_util_create(argc, argv, 1);// Grab arguments
     if (bp.args.has_error) {
         return 1;
     }
-    const int nelements = bp.args.sizes[0] * bp.args.sizes[1];
+    const int nelements = bp.args.sizes[0];
 
     bp.timer_start();                               // Start timer
     double pi = 4.0*leibnitz_pi(nelements);         // Run benchmark
