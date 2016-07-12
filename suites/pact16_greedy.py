@@ -38,13 +38,14 @@ stack_cpu = [
     [
         ('Singleton',  'singleton',   None),
         ('Greedy',     'greedy',      None),
-#        ('Optimal',    'optimal',     None),
+        ('Optimal',    'optimal',     None),
     ],
     [
-        ('memcache',  'node', cache_path("", fuse_cache("true"))),
+        ('memcache',  'node', cache_path("", fuse_cache("true"))), # Fuse cache in memory
+        ('filecache', 'node', fuse_cache("true")), # Fuse cache on the file system
     ],
     [('pricer',     'pricer',       None)],
-    [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS":"4"})],
+    [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3"})],
 ]
 
 suite_cpu = {
