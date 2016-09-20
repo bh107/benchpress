@@ -1,5 +1,4 @@
 from benchpress.default import *
-import copy
 
 scripts_cpu = [
     ('Game of Life',            'gameoflife',               '--size=9000*9000*40*2'),
@@ -14,38 +13,21 @@ scripts_cpu = [
     ('Rosenbrock',              'rosenbrock',               '--size=200000000*40'),
 ]
 
-def fuse_cache(value):
-    envs = ["BH_SINGLETON_FUSE_CACHE", "BH_TOPOLOGICAL_FUSE_CACHE",\
-            "BH_GREEDY_FUSE_CACHE", "BH_OPTIMAL_FUSE_CACHE", "BH_GENTLE_FUSE_CACHE"]
-    ret = {}
-    for env in envs:
-        ret[env] = value
-    return ret
-
-def cache_path(value, out={}):
-    envs = ["BH_SINGLETON_CACHE_PATH", "BH_TOPOLOGICAL_CACHE_PATH",\
-            "BH_GREEDY_CACHE_PATH", "BH_OPTIMAL_CACHE_PATH", "BH_GENTLE_CACHE_PATH"]
-    for env in envs:
-        out[env] = value
-    return out
-
 stack_cpu = [
     [('default',    'bridge',       None)],
+    [('bcexp',      'bcexp',        None)],
     [('bccon',      'bccon',        None)],
-    [
-        ('UniqueViews', 'bcexp', {'BH_PRICE_MODEL':'unique_views'}),
-    ],
-    [
-        ('Singleton',  'singleton',   None),
-        ('Greedy',     'greedy',      None),
-        ('Optimal',    'optimal',     None),
-    ],
-    [
-        ('memcache',  'node', cache_path("", fuse_cache("true"))), # Fuse cache in memory
-        ('filecache', 'node', fuse_cache("true")), # Fuse cache on the file system
-    ],
-    [('pricer',     'pricer',       None)],
-    [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3"})],
+    [('topological','topological',  None)],
+    [('node',       'node',         None)],
+    [('cpu',        'cpu',  {"BH_CPU_JIT_LEVEL": "3", "OMP_NUM_THREADS":"1"})],
+]
+
+stack_uni = [
+    [('default',    'bridge',       None)],
+    [('bcexp',      'bcexp',        None)],
+    [('bccon',      'bccon',        None)],
+    [('node',       'node',         None)],
+    [('uni',        'uni',          None)],
 ]
 
 suite_cpu = {
@@ -53,8 +35,13 @@ suite_cpu = {
     'launchers':  [python_bohrium],
     'bohrium': stack_cpu
 }
-
+suite_uni = {
+    'scripts': scripts_cpu,
+    'launchers':  [python_bohrium],
+    'bohrium': stack_uni
+}
 suites = [
     suite_cpu,
+    suite_uni,
 ]
 
