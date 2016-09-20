@@ -87,10 +87,10 @@ class Bar_per_script(Graph):
 
         # Extract result data
         res = {}
-        scripts = list(set([script for script, _, _, _, _ in data]))
+        scripts = list(set([script for script, _, _ in data]))
         comps = set()
         for s in scripts:
-            for script, _, _, _, r in data:
+            for script, _, r in data:
                 if script == s:
                     comp = get_stack_name(r['stack'])
                     try:

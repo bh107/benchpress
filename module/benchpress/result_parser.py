@@ -88,8 +88,6 @@ def from_str(results, wc=False):
         res.append((
             run['script_alias'],
             run['bridge_alias'],
-            run['manager_alias'],
-            run['engine_alias'],
             data
         ))
     return sorted(res)

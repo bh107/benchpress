@@ -428,7 +428,7 @@ def load_suite(filename):
 def stack_label(stack):
     """Returns a descriptive label of the stack"""
     ret = ""
-    for component in stack[1:]:
+    for component in stack:
         ret += "%s/"%component[0]
     return ret[:-1] #We remove the last "/" before returning
 
@@ -449,7 +449,6 @@ def stack_combinations(stack, tmp=[], out=[]):
 
 
 def gen_jobs_launcher_format(result_file, config, args):
-    print("Launcher style.")
 
     results = prep_results(args.repos_root, args.suite_file.name)
     suites = load_suite(args.suite_file.name)
@@ -464,131 +463,108 @@ def gen_jobs_launcher_format(result_file, config, args):
 
         for script_alias, script, script_args in suite['scripts']:
             for launcher_alias, launcher_cmd, launcher_env in suite['launchers']:
-                if "bohrium" in suite:    # Create Bohrium config
+                assert ("bohrium" in suite)
 
-                    combi = []
-                    stack_combinations(suite["bohrium"], out=combi)
-                    for stack in combi:
-                        envs = os.environ.copy()        # Orig environment variables
-                        envs_overwrite = {}             # Overwritten by components
+                combi = []
+                stack_combinations(suite["bohrium"], out=combi)
+                for stack in combi:
+                    envs = os.environ.copy()        # Orig environment variables
+                    envs_overwrite = {}             # Overwritten by components
 
-                        if launcher_env:
-                            envs_overwrite.update(launcher_env)
+                    if launcher_env:
+                        envs_overwrite.update(launcher_env)
 
-                        if not stack[0][1] == "bridge":
-                            raise Exception("First component must be a bridge.")
+                    # The bridge component is now obsolete
+                    if stack[0][1] == "bridge":
+                        stack = stack[1:]
 
-                        # Read current configuration
-                        confparser = SafeConfigParser()
-                        confparser.read(config)
+                    # Read current configuration
+                    confparser = SafeConfigParser()
+                    confparser.read(config)
 
-                        # Check config consistency
-                        for comp_alias, comp_name, comp_envs in stack:
-                            if not confparser.has_section(comp_name):
-                                if args.bh_config_file == None:
-                                    raise Exception("Component does not exist: %s\n"
-                                            "This is probably caused by not being able to find "
-                                            "the Bohrium config file.\n"
-                                            "Try setting --bh_config_file with the path to "
-                                            "the Bohrium config file"%comp_name)
-                                else:
-                                    raise Exception("Component does not exist: %s"%comp_name)
+                    # Check config consistency
+                    for comp_alias, comp_name, comp_envs in stack:
+                        if not confparser.has_section(comp_name):
+                            if args.bh_config_file == None:
+                                raise Exception("Component does not exist: %s\n"
+                                        "This is probably caused by not being able to find "
+                                        "the Bohrium config file.\n"
+                                        "Try setting --bh_config_file with the path to "
+                                        "the Bohrium config file"%comp_name)
+                            else:
+                                raise Exception("Component does not exist: %s"%comp_name)
 
-                        # Write envs
-                        for _, _, comp_envs in stack:
-                            if comp_envs is not None:
-                                envs_overwrite.update(comp_envs)
+                    # Write envs
+                    for _, _, comp_envs in stack:
+                        if comp_envs is not None:
+                            envs_overwrite.update(comp_envs)
 
-                        # List of component names
-                        stack_comps = [comp[1] for comp in stack]
+                    # List of component names
+                    stack_comps = [comp[1] for comp in stack]
 
-                        # Remove unused config sections
-                        for sec in confparser.sections():
-                            if sec not in stack_comps:
-                                confparser.remove_section(sec)
+                    # Remove unused config sections
+                    for sec in confparser.sections():
+                        if sec not in stack_comps:
+                            confparser.remove_section(sec)
 
-                        # Remove the chidren option
-                        for sec in confparser.sections():
-                            confparser.remove_option(sec, "children")
+                    # Write the stack
+                    confparser.add_section("stacks")
+                    confparser.set("stacks", "default", ", ".join(stack_comps))
 
-                        # Write the stack
-                        confparser.add_section("stack_default")
-                        confparser.set("stack_default", "type", "stack")
-                        comp_prev = "stack_default"
-                        for comp in stack_comps[1:]:
-                            confparser.set("stack_default", comp_prev, comp)
-                            comp_prev = comp
+                    bh_config = StringIO.StringIO() # Construct a new config
+                    confparser.write(bh_config)     # And write it to a string buffer
 
-                        #Let's extract the VEM and VE names in order to remain backwards compatible.
-                        engine = ""; engine_alias = ""; manager = ""; manager_alias = "";
-                        for comp_alias, comp_name, _ in stack:
-                            comp_type = confparser.get(comp_name, "type")
-                            if comp_type == "ve" and not engine:
-                                engine = comp_name
-                                engine_alias = comp_alias
-                            elif comp_type == "vem" and not manager:
-                                manager = comp_name
-                                manager_alias = comp_alias
+                    #
+                    #   Now do this...
+                    #
+                    print "Scheduling %s with %s on %s" % (script_alias, launcher_alias, stack_label(stack))
+                    run = {
+                        'stack' : stack,
+                        'script_alias':script_alias,
+                        'bridge_alias':launcher_alias,
+                        'script':script,
+                        'envs':envs,
+                        'envs_overwrite':envs_overwrite,
+                        'pre-hook': suite.get('pre-hook', None),
+                        'post-hook': suite.get('post-hook', None),
+                        'script' : script,
+                        'script_args' : script_args,
+                        'bridge_cmd' : launcher_cmd,
+                        'jobs':[],
+                        'bh_config':bh_config.getvalue(),
+                        'use_perf': args.with_perf,
+                        'use_time': args.with_time,
+                        'save_data_output': args.save_data,
+                        'pre_clean': args.pre_clean,
+                        'data_output': [],
+                        'use_slurm_default':suite.get('use_slurm_default', False),
+                        'elapsed': [],
+                        'timings': {},
+                        'time': [],
+                        'stdout': [],
+                        'stderr': [],
+                        'perf':[]
+                    }
+                    njobs = 1
+                    job_nrun = args.runs
+                    if args.multi_jobs:
+                        njobs = args.runs
+                        job_nrun = 1
+                    for _ in xrange(njobs):
+                        i += 1
+                        add_pending_job(run, job_nrun, args.partition, args.nice)
+                    results['runs'].append(run)
+                    results['meta']['ended'] = str(datetime.now())
 
-                        bh_config = StringIO.StringIO() # Construct a new config
-                        confparser.write(bh_config)     # And write it to a string buffer
-                        #print bh_config.getvalue()
+                    use_grapher = suite.get("use_grapher", "")
+                    if use_grapher and "use_grapher" in results["meta"]:
+                        existing_grapher = results["meta"]["use_grapher"]
+                        if existing_grapher and existing_grapher != use_grapher:
+                            raise Exception("Multiple different graphers. Nogo.")
+                        results["meta"]["use_grapher"] = use_grapher
 
-                        #
-                        #   Now do this...
-                        #
-                        print "Scheduling %s with %s on %s" % (script_alias, launcher_alias, stack_label(stack))
-                        run = {
-                            'stack' : stack,
-                            'script_alias':script_alias,
-                            'bridge_alias':launcher_alias,
-                            'engine_alias':engine_alias,
-                            'manager_alias':manager_alias,
-                            'script':script,
-                            'manager':manager,
-                            'engine':engine,
-                            'envs':envs,
-                            'envs_overwrite':envs_overwrite,
-                            'pre-hook': suite.get('pre-hook', None),
-                            'post-hook': suite.get('post-hook', None),
-                            'script' : script,
-                            'script_args' : script_args,
-                            'bridge_cmd' : launcher_cmd,
-                            'jobs':[],
-                            'bh_config':bh_config.getvalue(),
-                            'use_perf': args.with_perf,
-                            'use_time': args.with_time,
-                            'save_data_output': args.save_data,
-                            'pre_clean': args.pre_clean,
-                            'data_output': [],
-                            'use_slurm_default':suite.get('use_slurm_default', False),
-                            'elapsed': [],
-                            'timings': {},
-                            'time': [],
-                            'stdout': [],
-                            'stderr': [],
-                            'perf':[]
-                        }
-                        njobs = 1
-                        job_nrun = args.runs
-                        if args.multi_jobs:
-                            njobs = args.runs
-                            job_nrun = 1
-                        for _ in xrange(njobs):
-                            i += 1
-                            add_pending_job(run, job_nrun, args.partition, args.nice)
-                        results['runs'].append(run)
-                        results['meta']['ended'] = str(datetime.now())
-
-                        use_grapher = suite.get("use_grapher", "")
-                        if use_grapher and "use_grapher" in results["meta"]:
-                            existing_grapher = results["meta"]["use_grapher"]
-                            if existing_grapher and existing_grapher != use_grapher:
-                                raise Exception("Multiple different graphers. Nogo.")
-                            results["meta"]["use_grapher"] = use_grapher
-
-                        bh_config.close()
-                        write2json(result_file, results)
+                    bh_config.close()
+                    write2json(result_file, results)
 
 def gen_jobs(result_file, config, args):
     """Generates benchmark jobs based on the benchmark suites"""
