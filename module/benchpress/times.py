@@ -20,13 +20,35 @@ def raw(results):
 def parsed(results):
     pprint.pprint(from_str(results))
 
-def times(results):
+def times(results, baseline=None):
+
+    baselines = {}
+    if baseline is not None:
+        for script, bridge, res in from_str(results):
+            if baseline in bridge:
+                assert(script not in baselines)
+                baselines[script] = res
+
     for script, bridge, res in from_str(results):
         print "%s %s [%s]:" % (script, bridge, stack_label(res['stack'])),
+
         if 'elapsed' not in res or len(res['elapsed']) < 1:
+            elapsed = None
+        else:
+            elapsed = res['elapsed']
+
+        # Normalize time when using a baseline
+        if baseline is not None:
+            if script in baselines:
+                for i in range(len(elapsed)):
+                    elapsed[i] = avg(baselines[script]['elapsed']) / elapsed[i]
+            else:
+                elapsed = None
+
+        if elapsed is None:
             print "N/A"
         else:
-            print res["elapsed"],"%f (%f) %d"%(avg(res["elapsed"]), std(res["elapsed"]), len(res['elapsed']))
+            print elapsed,"%f (%f) %d"%(avg(elapsed), std(elapsed), len(elapsed))
 
 
 def fusepricer(results):
@@ -58,7 +80,8 @@ def main():
     )
     parser.add_argument(
         "--baseline",
-        help="Set a baseline run."
+        metavar="BRIDGE_LABEL",
+        help="Set a baseline."
     )
     args = parser.parse_args()
 
