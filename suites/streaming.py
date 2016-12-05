@@ -1,7 +1,7 @@
 from benchpress.default import *
 
 scripts = [
-    ('X-ray 020^3 40^2',  'xraysim',    '--size=20*40*5'),
+    ('X-ray 020^3 40^2',  'xraysim',     '--size=20*40*5'),
     ('MC Pi 0.1G',   'montecarlo_pi',    '--size=100000000*5'),
     ('MFE 040^2',    'idl_init_explode', '--size=40*40*5'),
 
@@ -9,7 +9,7 @@ scripts = [
     ('X-ray 093^3 040^2',  'xraysim',    '--size=93*40*5'),
     ('X-ray 200^3 040^2',  'xraysim',    '--size=200*40*5'),
 
-    ('MC Pi 1G',    'montecarlo_pi',    '--size=1000000000*5'),
+    ('MC Pi 1G',     'montecarlo_pi',    '--size=1000000000*5'),
     ('MC Pi 10G',    'montecarlo_pi',    '--size=10000000000*5'),
     ('MC Pi 100G',   'montecarlo_pi',    '--size=100000000000*5'),
 
