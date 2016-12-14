@@ -76,7 +76,7 @@ chapel_mcore  = ('Chapel/mcore', '`bp-info --benchmarks`/{script}/chapel_mcore/b
 bh_stack_none = [
     [('NA', 'bridge', None)],
     [('NA', 'node', None)],
-    [('NA', 'cpu', None)]
+    [('NA', 'openmp', None)]
 ]
 
 # End of the new format
