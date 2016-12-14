@@ -65,12 +65,6 @@ def plot(cmds, res, baseline, args):
 
 def get_stack_name(stack):
     names = [comp[0] for comp in stack][1:]
-    if "node" in names: names.remove("node")
-    if "bccon" in names: names.remove("bccon")
-    if "bcexp" in names: names.remove("bcexp")
-    if "pricer" in names: names.remove("pricer")
-    if "bcexp_gpu" in names: names.remove("bcexp_gpu")
-    if "dimclean" in names: names.remove("dimclean")
     ret = ""
     for name in names:
         ret += "%s/"%name
