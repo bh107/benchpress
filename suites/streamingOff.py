@@ -4,7 +4,7 @@ scripts = [
     ('X-ray 1e10',   'xraysim',          '--size=20*40*10'),
     ('MC Pi 1.2e10', 'montecarlo_pi',    '--size=100000000*10'),
     ('MFE 2.3e10',   'idl_init_explode', '--size=40*40*10'),
-    ('BEAN 5e9',     'galton_bean_machine', '--size=1000000*1000'),   
+    ('BEAN 5e9',     'galton_bean_machine', '--size=100000*10000'),   
 ]
 
 stack_openmp = [
