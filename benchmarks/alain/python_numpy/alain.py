@@ -55,7 +55,7 @@ def main():
     A = np.ones(N+2)
     E = np.ones(N+2)
     B.start()
-    for _ in xrange(I):
+    for _ in range(I):
         H = alain_all_labeled(A,E)
         B.flush()
     B.stop()

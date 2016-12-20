@@ -61,8 +61,8 @@ def main():
     put         = np.zeros( (n+1, n+1) )
     put[:,n]    = np.maximum( strike - S0* (u**asc) * (d**desc), 0 )
 
-    for i in xrange(n-1, -1, -1):
-        for j in xrange(0, i+1):
+    for i in range(n-1, -1, -1):
+        for j in range(0, i+1):
             S = S0*u*(j-1)* (d**(i-j))
             put[j,i] = max(max(strike-S, 0.0), (q*put[j+1,i+1]+(1-q) * put[j,i+1])/R)
     B.stop()

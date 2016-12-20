@@ -28,8 +28,8 @@ def addobjtoscene(scene, matscene, obj):
     if shape == Shape.cube:
         return addAAcube(scene, matscene, shapedescribers, material, reference)
     else:
-        print "Cube shaped objects are the only ones supported at this time"
-        print "Object dropped"
+        print ("Cube shaped objects are the only ones supported at this time")
+        print ("Object dropped")
 
 
 
@@ -84,7 +84,7 @@ def addAAcube( scene,
 
     if ref == Reference.absolute:
         #conversion to relative coordinates and recursive call
-        if verbose: print "addAAcube: adding a cube with absolute coordinates, experimental stage."
+        if verbose: print("addAAcube: adding a cube with absolute coordinates, experimental stage.")
         # f: x -> x_r  x_r = floor( (x - x0)/dx )
         def x_r(x, x0, x1, xr):
             dx = 1.0 * (x1 - x0) / xr

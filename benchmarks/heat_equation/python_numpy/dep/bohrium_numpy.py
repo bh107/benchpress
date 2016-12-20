@@ -8,7 +8,7 @@ def solve(grid, iter):
     south  = grid[2:  ,1:-1]
     east   = grid[1:-1,2:  ]
     west   = grid[1:-1, :-2]
-    for _ in xrange(iter):
+    for _ in range(iter):
         tmp = 0.2*(center+north+south+east+west)
         delta = np.sum(np.absolute(tmp-center))
         center[:] = tmp

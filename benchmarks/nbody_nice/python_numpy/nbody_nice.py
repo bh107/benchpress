@@ -175,7 +175,7 @@ def main():
         plt, P3 = gfx_init(x_max, y_max, z_max)
 
     B.start()                                           # Timer start
-    for timestep in xrange(0, timesteps):               # Run simulation
+    for timestep in range(0, timesteps):               # Run simulation
         if B.visualize and timestep % 10 == 0:          # With or without..
             gfx_show(plt, P3, solarsystem, asteroids)   # ..visuals
         move(solarsystem, asteroids, dt)

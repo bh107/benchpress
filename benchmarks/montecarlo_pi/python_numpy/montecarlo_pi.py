@@ -19,7 +19,7 @@ def montecarlo_pi(samples, B):
 
 def solve(samples, iterations, B):
     acc=0.0
-    for _ in xrange(iterations):
+    for _ in range(iterations):
         acc += montecarlo_pi(samples, B)
 	util.Benchmark().flush()
     acc /= iterations

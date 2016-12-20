@@ -145,7 +145,7 @@ def benchmark_index(benchmarks):
         width = 0
         if ntools>1:
             width = (ntools-1)*3
-        for idx in xrange(cidx, cidx+ntools):
+        for idx in range(cidx, cidx+ntools):
             width += table.col_widths[idx]
         cidx += ntools
         header_row.append(lang_labels[lang])

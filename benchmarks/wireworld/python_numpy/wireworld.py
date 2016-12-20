@@ -31,7 +31,7 @@ def wireworld(world, iterations):
     sim     = no_border(world, 1)          # Active Machine
     stencil = D2P8(world)                  # Stencil for counting heads
     NC      = sum([v==2 for v in stencil]) # Count number of head neighbors
-    for _ in xrange(iterations):
+    for _ in range(iterations):
         # Mask conductor->head
         MASK = ((NC==1) & (sim==8)) | ((NC==2) & (sim==8))
 

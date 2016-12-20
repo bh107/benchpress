@@ -15,7 +15,7 @@ def main():
         N,I = (B.size[0], 1)
     B.start()                                   # Sample wall-clock start
     R = 0.0
-    for _ in xrange(I):
+    for _ in range(I):
         R += 4.0*leibnitz_pi(N)                      # Execute benchmark
         B.flush()
     B.stop()                                    # Sample wall-clock stop

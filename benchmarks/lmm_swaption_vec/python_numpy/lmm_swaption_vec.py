@@ -29,7 +29,7 @@ def main(verbose=False):
         tmp = lamb*(delta*F[1:,:])/(1+delta*F[1:,:]) # Andreasen style
         mu = np.zeros((tmp.shape))
         mu[0,:] +=tmp[0,:]
-        for i in xrange(mu.shape[0]-1):
+        for i in range(mu.shape[0]-1):
             mu[i+1,:] = mu[i,:] + tmp[i+1,:]
         return mu
 
@@ -40,7 +40,7 @@ def main(verbose=False):
     B.start()
 
     # Range over a number of independent products
-    for i in xrange(len(Te_all)):
+    for i in range(len(Te_all)):
         Te = Te_all[i]
         lamb = lamb_all[i]
         Ts = Ts_all[i]
@@ -63,7 +63,7 @@ def main(verbose=False):
             F_kN = np.ones((len(maturity_structure),2*N))*f_0
 
             # Simulations of the plane F_kN for each time step.
-            for t in xrange(1,len(time_structure),1):
+            for t in range(1,len(time_structure),1):
                 F_kN_new = np.ones((len(maturity_structure)-t,2*N))
                 F_kN_new = F_kN[1:,:]*np.exp(lamb*mu(F_kN)*delta-0.5*lamb*lamb*delta+lamb*eps[t-1,:]*np.sqrt(delta))
                 F_kk[t,:] = F_kN_new[0,:]
@@ -73,7 +73,7 @@ def main(verbose=False):
 
             # Value of zero coupon bonds.
             zcb = np.ones((int((Te-ts)/delta)+1,2*N))
-            for j in xrange(len(zcb)-1):
+            for j in range(len(zcb)-1):
                 zcb[j+1,:] = zcb[j,:]/(1+delta*F_kN[j,:])
 
             # Swaption price at maturity.
@@ -81,7 +81,7 @@ def main(verbose=False):
 
             # Spot measure used for discounting.
             B_Ts = np.ones((2*N))
-            for j in xrange(int(ts/delta)):
+            for j in range(int(ts/delta)):
                 B_Ts *= (1+delta*F_kk[j,:])
 
             # Swaption price at time 0.
@@ -96,10 +96,10 @@ def main(verbose=False):
 
     if verbose:     # Print values.
         k=1
-        for i in xrange(len(Te_all)):
+        for i in range(len(Te_all)):
             Te = Te_all[i]
             Ts = Ts_all[i]
-            for j in xrange(len(Ts)):
+            for j in range(len(Ts)):
                 print("Ts %i" %Ts[j] + " Te %i " %Te + " price %.2f" % swaptions[0,k]\
                                + "(%.2f)" %swaptions[1,k])
                 k +=1

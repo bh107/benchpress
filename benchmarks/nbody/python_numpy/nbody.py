@@ -148,7 +148,7 @@ def move(galaxy, dt):
     galaxy['z'] += dt*galaxy['vz']
 
 def simulate(galaxy, timesteps, visualize=False):
-    for i in xrange(timesteps):
+    for i in range(timesteps):
         move(galaxy,dt)
         util.Benchmark().flush()
         if visualize:#NB: this is only for experiments

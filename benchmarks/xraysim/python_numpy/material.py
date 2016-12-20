@@ -6,7 +6,10 @@ Created on Tue Apr 22 09:10:36 2014
 
 import os
 from numpy import loadtxt, logspace
-from cPickle import load, dump
+try:
+    from cPickle import load, dump
+except:
+    from pickle import load, dump
 
 class Material():
     """ Material class, representing all materials """
@@ -70,7 +73,7 @@ class Material():
             self.mu = {}
 
         except ValueError as e:
-            print e
+            print(e)
             return None
 
 
@@ -136,7 +139,7 @@ class Material():
                 if file_.endswith(".csv"):
                     mat = Material( path + '/' + file_ )
                     if mat is None:
-                        print "{} failed to initialize".format(file_)
+                        print("{} failed to initialize".format(file_))
                     data[mat.uid] = mat
                 try:
                     with open(path+'/data', 'wb') as fp:
@@ -179,7 +182,7 @@ class Simplemat(Material):
             if self.uid == -1:
                 raise Exception('{} does not have a new Unique ID (Z) (or has been initialized before).'.format(self.name))
         except Exception as e:
-            print e
+            print(e)
             return
 
     def __str__(self):
@@ -204,11 +207,11 @@ if __name__ == "__main__":
     elementals = [key for key in elementals.iterkeys()]
     biotics    = [key for key in biotics.iterkeys()]
 
-    print elementals
-    print biotics
+    print(elementals)
+    print(biotics)
 
     for key, value in materials.iteritems() :
-        print key, value
+        print(key, value)
 
     from matplotlib import pyplot as plt
     i = 0

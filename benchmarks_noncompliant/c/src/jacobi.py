@@ -13,7 +13,7 @@ work        = np.empty((H+2,W+2),   dtype=np.float64, bohrium=bohrium)
 full[:]     = np.arange((H+2)*(W+2), dtype=np.float64).reshape((H+2,W+2))
 cb.flush()
 start=time.time()
-for i in xrange(I):
+for i in range(I):
     work[1:-1, 1:-1]  = full[1:-1, 1:-1]
     work[1:-1, 1:-1] += full[1:-1, 0:-2]
     work[1:-1, 1:-1] += full[1:-1, 2:  ] 

@@ -144,7 +144,7 @@ class Bar_per_script(Graph):
         tmp = comps
         comps = []
         for (old, new) in self.args.stack_map:
-            for i in xrange(len(tmp)):
+            for i in range(len(tmp)):
                 if re.search(old, tmp[i]) is not None:
                     new = tmp[i] if new == "" else new
                     comps.append((tmp[i],new))
@@ -156,7 +156,7 @@ class Bar_per_script(Graph):
         tmp = scripts
         scripts = []
         for (old, new) in self.args.script_map:
-            for i in xrange(len(tmp)):
+            for i in range(len(tmp)):
                 if re.search(old, tmp[i]) is not None:
                     new = tmp[i] if new == "" else new
                     scripts.append((tmp[i],new))

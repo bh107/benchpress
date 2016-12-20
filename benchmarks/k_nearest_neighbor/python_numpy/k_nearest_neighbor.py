@@ -20,7 +20,7 @@ def classify(sample, training, group=None, k=1):
     distance = np.sqrt(np.add.reduce(np.square(sample[:,np.newaxis]-training),-1))
     if k > 1: # for optimization
         groups = np.empty((sample.shape[0],k), dtype=group.dtype, bohrium=group.bohrium)
-    for n in xrange(k):
+    for n in range(k):
         neighbor_n = np.argmin(distance,-1)
         if k > 1: 
             groups[:,n] = group[neighbor_n]
@@ -39,7 +39,7 @@ def classify_basic(sample, training, group=None, k=1):
         group = np.arange(training.shape[0],dtype=np.int32)
     distance = np.sqrt(np.add.reduce(np.square(sample[:,np.newaxis]-training),-1))
     groups = np.empty((sample.shape[0],k), dtype=group.dtype, bohrium=group.bohrium)
-    for n in xrange(k):
+    for n in range(k):
         neighbor_n = np.argmin(distance,-1)
         groups[:,n] = group[neighbor_n]
         neighbor_n += np.arange(distance.shape[0])*distance.shape[1] #convert to a flattened index

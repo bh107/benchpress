@@ -30,8 +30,8 @@ def ladder(p, pos_start, pos_end=size):
 def nullgame(size, dtype):
     p=np.zeros((size+1,size+1), dtype=dtype)
 
-    for i in xrange(size+1):
-        for j in xrange(6):
+    for i in range(size+1):
+        for j in range(6):
             if (i+j<size):
                 p[i][i+j+1]=1.0/6.0
 
@@ -69,7 +69,7 @@ def main():
     pr_end = np.array(np.zeros(iterations, dtype=B.dtype))
 
     B.start()
-    for k in xrange(iterations):
+    for k in range(iterations):
         if B.visualize:
             # Plot the probability distribution at the k-th iteration
             pyplot.figure(1)

@@ -96,7 +96,7 @@ def simulate(H, timesteps, visualize=False):
     U = np.zeros_like(H)
     V = np.zeros_like(H)
 
-    for i in xrange(timesteps):
+    for i in range(timesteps):
         (H, U, V) = step(H, U, V)
         util.Benchmark().flush()
         if visualize:

@@ -105,7 +105,7 @@ def main():
         B_x0 = B.load_array(inputfn, 'input', dtype=B.dtype)[::h,::w]
 
     B.start()
-    for _ in xrange(B.size[2]):
+    for _ in range(B.size[2]):
         Rx, Ry, Rz = calcB(window(B_x0))
     B.stop()
     B.pprint()

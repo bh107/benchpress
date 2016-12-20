@@ -5,7 +5,7 @@ import glob
 import os
 
 def cells_from_file(path):
-    
+
     def p2i(p):
         if p == ".":
             return 0
@@ -51,7 +51,7 @@ def cells_from_file(path):
 def pprint_world(world):
 
     world_h, world_w = world.shape
-    for y in xrange(world_h):
+    for y in range(world_h):
         line = []
         for x in range(world_w):
             line.append("%d" % int(world[y][x]))
@@ -81,12 +81,12 @@ def main():
 
     paths = pattern_paths()
     for i, name in enumerate(paths):
-        print i, name
+        print (i, name)
         path = paths[name]
         patterns = cells_from_file(path)
-        print len(patterns)
+        print (len(patterns))
         for p in patterns:
-            print p
+            print (p)
         insert_cells(world, patterns)
         pprint_world(world)
         break

@@ -17,7 +17,7 @@ def point27(data, iterations):
 
     active  = no_border(data, 1)
     stencil = D3P27(data)
-    for _ in xrange(iterations):
+    for _ in range(iterations):
         active[:] = sum(stencil)/27.0
         util.Benchmark().flush()
 

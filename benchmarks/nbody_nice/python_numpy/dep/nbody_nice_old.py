@@ -97,7 +97,7 @@ def random_system(x_max, y_max, z_max, n, b, B):
     solarsystem['vx'][0]= 0
     solarsystem['vy'][0]= 0
     solarsystem['vz'][0]= 0
-    for i in xrange(1,n):
+    for i in range(1,n):
         px, py,pz = B.random_array((1,)), B.random_array((1,)), B.random_array((1,))*.01
         dist = (1.0/np.sqrt(px*px+py*py+pz*pz))-(.8-B.random_array((1,))*.1)
         px = x_max*px*dist*sign(.5-B.random_array((1,)))
@@ -116,7 +116,7 @@ def random_system(x_max, y_max, z_max, n, b, B):
 
     astoroids = {'m':np.empty(b), 'x':np.empty(b), 'y':np.empty(b),'z':np.empty(b),\
                  'vx':np.empty(b), 'vy':np.empty(b),'vz':np.empty(b)}
-    for i in xrange(b):
+    for i in range(b):
         px, py,pz = B.random_array((1,)), B.random_array((1,)), B.random_array((1,))*.01
         dist = (1.0/np.sqrt(px*px+py*py+pz*pz))-(B.random_array((1,))*.1)
         px = x_max*px*dist*sign(.5-B.random_array((1,)))

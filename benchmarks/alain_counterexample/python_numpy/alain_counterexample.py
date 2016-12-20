@@ -13,7 +13,7 @@ def main():
     S = np.ones(N)
     R = np.array(numpy.random.random_integers(0,N,N), dtype=np.uint64)
     U.start()
-    for _ in xrange(I):
+    for _ in range(I):
         A = np.ones_like(T)
         B = np.empty(len(T)+1,dtype=T.dtype)
         B[1:] = A

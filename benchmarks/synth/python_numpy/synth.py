@@ -11,7 +11,7 @@ def main():
     b = np.ones(N)
     c = np.ones(N)
 
-    for _ in xrange(I):
+    for _ in range(I):
         R = a+b+c
         util.Benchmark().flush()
 

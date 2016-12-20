@@ -25,7 +25,7 @@ def main():
 
     B.start()                                   # Sample wall-clock start
     res = 0.0
-    for _ in xrange(0, T):                      # Do T trials of..
+    for _ in range(0, T):                      # Do T trials of..
         res += rosen(dataset)                   # ..executing rosenbrock.
         util.Benchmark().flush()
     res /= T

@@ -44,22 +44,22 @@ def buildscene(
     # create empty scene
     scenegrid = coordsAAscene(scenedefs)
     scenematerials = emptyAAscene(scenedefs)
-    if verbose: print "axisaligned scene generated"
+    if verbose: print("axisaligned scene generated")
 
     # habitate scene with objects
     added, discarded = [], []
     for obj in objlist:
         if addobjtoscene(scenedefs, scenematerials, obj):
             added.append(obj[0])
-            if verbose: print "object {} included".format(obj[0])
+            if verbose: print("object {} included".format(obj[0]))
         else:
             discarded.append(obj[0])
-            if verbose: print "object {} NOT included".format(obj[0])
+            if verbose: print("object {} NOT included".format(obj[0]))
 
     if verbose:
-        print "axisaligned scene inhabited with {} objects, {} discarded".format(len(added), len(discarded))
-        print "objects added: {}".format(added)
-        print "objects discarded: {}".format(discarded)
+        print ("axisaligned scene inhabited with {} objects, {} discarded".format(len(added), len(discarded)))
+        print ("objects added: {}".format(added))
+        print ("objects discarded: {}".format(discarded))
 
     return scenegrid, scenematerials
 
@@ -176,7 +176,7 @@ def main():
     scene = setup(scene_res, detector_res)
 
     B.start()
-    for _ in xrange(iterations):
+    for _ in range(iterations):
         detector_results = xraysim(*scene, visualize=B.visualize)
         if util.Benchmark().bohrium:
             B.flush()

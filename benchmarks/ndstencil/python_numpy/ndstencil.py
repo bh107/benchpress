@@ -9,7 +9,7 @@ def create_shape(dims, size=20):
     size**2 core elements
     """
     shape=[]
-    for _ in xrange(dims):
+    for _ in range(dims):
         ds = size/dims
         shape.append(2**ds+2)
         dims-=1
@@ -44,7 +44,7 @@ def solve(stencil, world, I):
     for I iterations
     """
     FAC = 1.0/len(stencil)
-    for _ in xrange(I):
+    for _ in range(I):
         stencil[len(stencil)/2][:] = sum(stencil)*FAC
         util.Benchmark().flush()
 

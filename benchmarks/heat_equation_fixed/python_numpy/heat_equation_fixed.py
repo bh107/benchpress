@@ -18,7 +18,7 @@ def jacobi(grid, iterations, visualize=False):
     west   = grid[1:-1, 0:-2]
     south  = grid[2:  , 1:-1]
 
-    for i in xrange(iterations):
+    for i in range(iterations):
         center[:] = 0.2*(center+north+east+west+south)
 
         util.Benchmark().flush()

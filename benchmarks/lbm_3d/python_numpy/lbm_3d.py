@@ -232,9 +232,9 @@ def main():
     BOUND[:] = 0
     BOUNDi[:] = 1
     if not NO_OBST:
-        for i in xrange(nx):
-            for j in xrange(ny):
-                for k in xrange(nz):
+        for i in range(nx):
+            for j in range(ny):
+                for k in range(nz):
                     if ((i-4)**2+(j-5)**2+(k-6)**2) < 6:
                         BOUND[i,j,k] += 1.0
                         BOUNDi[i,j,k] += 0.0
@@ -243,7 +243,7 @@ def main():
     BOUNDi[:,0,:] *= 0.0
 
     B.start()
-    for ts in xrange(0, ITER):
+    for ts in range(0, ITER):
         UX, UY, UZ = the_method(
             T, F, FEQ, BOUND, BOUNDi,
             omega, deltaU, t1, t2, t3

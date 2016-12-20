@@ -281,7 +281,7 @@ def slurm_run_finished(job):
 
 def parse_run(run, job):
     """Parsing the pending run. NB: the run must be finished!"""
-    for i in xrange(job['nrun']):
+    for i in range(job['nrun']):
         base = "%s-%d"%(job['filename'], i)
         stdout = "%s.out"%base
         stderr = "%s.err"%base
@@ -357,7 +357,7 @@ def add_pending_job(setup, nrun, partition, nice):
     bridge_cmd = bridge_cmd.replace("{args}", setup['script_args'])
 
     job = "#!/bin/bash\n"
-    for i in xrange(nrun):
+    for i in range(nrun):
         tmp_config_name = "/tmp/%s_%d.config.ini"%(basename, i)
         for env_key, env_value in setup['envs'].iteritems():      #Write environment variables
             if "BASH_FUNC_module" in env_key:
@@ -550,7 +550,7 @@ def gen_jobs_launcher_format(result_file, config, args):
                     if args.multi_jobs:
                         njobs = args.runs
                         job_nrun = 1
-                    for _ in xrange(njobs):
+                    for _ in range(njobs):
                         i += 1
                         add_pending_job(run, job_nrun, args.partition, args.nice)
                     results['runs'].append(run)

@@ -37,7 +37,7 @@ def main():
 
     B.start()
     R = 0.0
-    for _ in xrange(I):
+    for _ in range(I):
         R += stream_this(generator[S], N)
     R /= I
 

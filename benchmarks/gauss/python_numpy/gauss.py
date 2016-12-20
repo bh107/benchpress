@@ -1,7 +1,6 @@
 from __future__ import print_function
 from benchpress import util
 import numpy as np
-#import sys                                     # Mysterie fix
 
 import bohrium.linalg as la
 
@@ -19,8 +18,6 @@ def main():
 
     B.start()
     R = la.gauss(S)
-#    print("Why this helps I have no idea.")    # Mysterie fix
-#    sys.stdout.flush()                         # Mysterie fix
 
     if util.Benchmark().bohrium:
         R.copy2numpy()

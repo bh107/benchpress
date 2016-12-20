@@ -40,9 +40,9 @@ def generate_gauss_matrix(filter_shape, sigma, data_type=np.float32):
     y_radius = filter_shape[0] / 2
     x_radius = filter_shape[1] / 2
 
-    for y in xrange(filter_shape[0]):
+    for y in range(filter_shape[0]):
         y_distance = y - y_radius
-        for x in xrange(filter_shape[1]):
+        for x in range(filter_shape[1]):
             x_distance = x - x_radius
             result[y, x] = np.exp(-(y_distance ** 2 + x_distance ** 2) / (2.0 * sigma ** 2))
 
@@ -119,7 +119,7 @@ def convolve2d_seperate(input, window_vectors):
     # along columns (y direction) with radius 'tmp_window_radius[0]'
     # from input pixels
 
-    for y in xrange(window_radius[0], input.shape[0] + window_radius[0]):
+    for y in range(window_radius[0], input.shape[0] + window_radius[0]):
         start_y = y - window_radius[0]
         end_y = y + window_radius[0] + 1
         col_result[start_y] = np.dot(padded_input[start_y:end_y].T, window_vectors[0][:,np.newaxis])[0]
@@ -128,7 +128,7 @@ def convolve2d_seperate(input, window_vectors):
     # and Gauss vector along rows (x direction)
     # with radius 'window_radius[1]' from input pixel
 
-    for x in xrange(window_radius[1], input.shape[1] + window_radius[1]):
+    for x in range(window_radius[1], input.shape[1] + window_radius[1]):
         start_x = x - window_radius[1]
         end_x = x + window_radius[1] + 1
         out[:, start_x] = np.dot(col_result[:, start_x:end_x], window_vectors[1][:,np.newaxis])[0]

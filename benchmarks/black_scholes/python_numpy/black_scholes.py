@@ -51,7 +51,7 @@ def price(S, I, flag='c', X=65.0, dT=(1.0/365.0), r=0.08, v=0.3, visualize=False
     T   = dT
     Ps  = []
     N   = len(S)
-    for i in xrange (I):
+    for i in range (I):
         P = np.sum(BS(flag, S, X, T, r, v)) / N
         Ps.append(P)
         T += dT

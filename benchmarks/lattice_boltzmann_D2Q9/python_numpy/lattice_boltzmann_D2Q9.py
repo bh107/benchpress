@@ -80,7 +80,7 @@ def solve(state, iterations, viz=None):
     bbRegion = state['bbRegion']
 
     # Main loop (time cycles)
-    for cycle in xrange(iterations):
+    for cycle in range(iterations):
 
       # Macroscopic variables
       rho = np.sum(fIn, axis = 0)
@@ -123,14 +123,14 @@ def solve(state, iterations, viz=None):
       fEq = np.zeros((9, lx, ly))
       #fOut = np.zeros((9, lx, ly), bohrium=fIn.bohrium)
       fOut = np.zeros((9, lx, ly))
-      for i in xrange(0, 9):
+      for i in range(0, 9):
           cu = 3 * (cx[i] * ux + cy[i] * uy)
           fEq[i] = rho * t[i] * (1 + cu + 0.5 * cu ** 2 - \
                           1.5 * (ux ** 2 + uy ** 2))
           fOut[i] = fIn[i] - omega * (fIn[i] - fEq[i])
 
       # Microscopic boundary conditions
-      for i in xrange(0, 9):
+      for i in range(0, 9):
           # Left boundary:
           fOut[i, 0, 1:ly-1] = fEq[i,0,1:ly-1] + 18 * t[i] * cx[i] * cy[i] * \
              (fIn[7,0,1:ly-1] - fIn[6,0,1:ly-1] - fEq[7,0,1:ly-1] + fEq[6,0,1:ly-1])
@@ -147,7 +147,7 @@ def solve(state, iterations, viz=None):
 
 
       # Streaming step
-      for i in xrange(0,9):
+      for i in range(0,9):
           #fIn[i] = np.roll(np.roll(fOut[i], cx[i], axis = 0), cy[i], axis = 1)
           #Replacing the np.roll() call with:
           if cx[i] == 1:

@@ -30,7 +30,7 @@ def main():
 
     # Do the matrix multiplication
     B.start()
-    for _ in xrange(I):
+    for _ in range(I):
         C += np.add.reduce(x[:,np.newaxis] * np.transpose(y), -1)
         B.flush()
     #R = np.dot(x, y)

@@ -15,7 +15,7 @@ def computation(X, I):
     E = X
     W = X
     C = X
-    for i in xrange(0, I):  # Pseudo-relaxation
+    for i in range(0, I):  # Pseudo-relaxation
         X[:] = N - S + E - W + C
 
     return X

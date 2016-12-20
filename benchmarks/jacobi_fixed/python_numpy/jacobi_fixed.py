@@ -17,7 +17,7 @@ def jacobi_fixed(data, iterations):
     d       = diagonals(data, 1)
     fak     = 1./20
 
-    for _ in xrange(iterations):
+    for _ in range(iterations):
         active[:] = (4*sum(g) + sum(d))*fak
         util.Benchmark().flush()
 

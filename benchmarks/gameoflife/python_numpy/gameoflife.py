@@ -62,7 +62,7 @@ def play(state, iterations, version=1, visualize=False):
     elif version == 2:
         update_func = update_optimized
 
-    for i in xrange(iterations):    # Run the game
+    for i in range(iterations):    # Run the game
         if visualize:
             util.plot_surface(state, "3d", 16, 1, 0)
         update_func()
