@@ -10,9 +10,8 @@ Use ``--verbose`` to print number of iterations executed and a subset of the gri
 Use ``--size=H*W*0`` to run until convergence with no limitations on number of iterations.
 
 +-------------------------------------------+-------------------------------------------+-------------------------------------------+
-| ``--size=100*100*1 --visualize``          | ``--size=100*100*100 --visualize``        |  ``--size=100*100*1000 --visualize``      |  
+| ``--size=100*100*1 --visualize``          | ``--size=100*100*100 --visualize``        |  ``--size=100*100*1000 --visualize``      |
 +-------------------------------------------+-------------------------------------------+-------------------------------------------+
 | .. image:: _static/heat_equation_0001.png | .. image:: _static/heat_equation_0100.png | .. image:: _static/heat_equation_1000.png |
 +-------------------------------------------+-------------------------------------------+-------------------------------------------+
 
-See :ref:`heat_equation_fixed` for a variation of the benchmark that only applies the stencil update, that is, it skips the convergence computation.
