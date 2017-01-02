@@ -3,7 +3,7 @@ from benchpress.default import *
 scripts = [
     ('X-ray 1e10',   'xraysim',             '--size=20*40*10'),
     ('MC Pi 1.2e10', 'montecarlo_pi',       '--size=100000000*10'),
-    ('MFE 2.3e10',   'idl_init_explode',    '--size=40*40*10'),
+    ('MFE 2.3e10',   'magnetic_field_extrapolation',    '--size=40*40*10'),
     ('BEAN 5e9',     'galton_bean_machine', '--size=100000*10000'),   
 
     ('X-ray 1e11', 'xraysim',  '--size=43*40*10'),
@@ -14,9 +14,9 @@ scripts = [
     ('MC Pi 1.2e12', 'montecarlo_pi',  '--size=10000000000*10'),
     ('MC Pi 1.2e13', 'montecarlo_pi',  '--size=100000000000*10'),
 
-    ('MFE 2.3e11', 'idl_init_explode', '--size=63*63*10'),
-    ('MFE 2.3e12', 'idl_init_explode', '--size=100*100*10'),
-    ('MFE 2.3e13', 'idl_init_explode', '--size=159*159*10'),
+    ('MFE 2.3e11', 'magnetic_field_extrapolation', '--size=63*63*10'),
+    ('MFE 2.3e12', 'magnetic_field_extrapolation', '--size=100*100*10'),
+    ('MFE 2.3e13', 'magnetic_field_extrapolation', '--size=159*159*10'),
 
     ('BEAN 5e10', 'galton_bean_machine', '--size=1000000*10000'),   
     ('BEAN 5e11', 'galton_bean_machine', '--size=10000000*10000'), 
