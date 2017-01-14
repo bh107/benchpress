@@ -6,6 +6,13 @@ from benchpress import result_parser
 import json
 import re
 
+def value_labels(ax, rects):
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
+                '%.2f' % float(height),
+                ha='center', va='bottom')
+
 def plot(cmds, res, baseline, args):
 
     import matplotlib.pyplot as plt
@@ -62,6 +69,10 @@ def plot(cmds, res, baseline, args):
                   fancybox=True,
                   shadow=True,
                   columnspacing=1)
+
+    # Now make some labels
+    value_labels(ax, ax.patches)
+
 
 def get_stack_name(stack):
     names = [comp[0] for comp in stack][1:]
