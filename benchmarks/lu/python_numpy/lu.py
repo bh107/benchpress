@@ -25,6 +25,8 @@ def main():
     B.pprint()
     if B.outputfn:
         B.tofile(B.outputfn, {'res': u})
+    if B.verbose:
+        print(u)
 
 if __name__ == "__main__":
     main()
