@@ -141,11 +141,6 @@ class Material():
                     if mat is None:
                         print("{} failed to initialize".format(file_))
                     data[mat.uid] = mat
-                try:
-                    with open(path+'/data', 'wb') as fp:
-                        dump(data, fp, protocol=-1)
-                except IOError:
-                    pass
         return data
 
     @staticmethod
