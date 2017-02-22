@@ -13,10 +13,9 @@ scripts = [
     ('27 Point Stencil',     'point27',                  '--size=350*40'),
     ('Rosenbrock',           'rosenbrock',               '--size=200000000*40'),
     ('Heat Equation',        'heat_equation',            '--size=10000*10000*40'),
-    ('Shallow Water',        'shallow_water',            '--size=8000*8000*40'),
+    ('Shallow Water',        'shallow_water',            '--size=5000*5000*40'),
     ('N-Body',               'nbody',                    '--size=5000*40'),
     ('Wire World',           'wireworld',                '--size=1000*100'),
-    ('Rosenbrock',           'rosenbrock',               '--size=500000000*40'),
 ]
 
 stack_openmp = [
