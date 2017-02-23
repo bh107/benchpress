@@ -100,6 +100,13 @@ class Grapher(object):
     def render(self):
         raise NotImplementedError()
 
+    def tofile(self, name, source):
+        """ Write 'source' to a file named 'name', which should include the extension (e.g. .html or .txt).
+            The output directory is taken from self.args.output_path """
+
+        fname = os.path.join(self.args.output_path, name)
+        with open(fname, 'w') as f:
+            f.write(source)
 
 class Graph(Grapher):
     """

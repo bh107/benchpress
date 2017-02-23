@@ -1,6 +1,6 @@
 import numpy as np
 from benchpress import result_parser
-from graph import Graph, filter_list, translate_dict
+from graph import Grapher, filter_list, translate_dict
 import json
 import re
 
@@ -13,7 +13,7 @@ def get_stack_name(stack):
     return ret[:-1]
 
 
-class Row_per_script(Graph):
+class Row_per_script(Grapher):
 
     def render(self):
 
@@ -130,4 +130,4 @@ class Row_per_script(Graph):
 
         doc = doc.replace("__TABLE__", table)
         doc = doc.replace("__TITLE__", self.args.title)
-        print doc
+        self.tofile("%s.html"%self.args.title, doc)
