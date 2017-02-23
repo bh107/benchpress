@@ -5,6 +5,8 @@ import os
 import matplotlib
 matplotlib.use('Agg')   # Essential for "headless" operation
 import pylab
+import re
+
 
 def brange(begin, end):
     thres = 0
@@ -20,6 +22,7 @@ def brange(begin, end):
         i = 2**c
         c += 1
 
+
 def sanitize_fn(filename):
     valid_chars = ".-_%s%s" % (string.digits, string.ascii_lowercase)
     sanitized = []
@@ -28,6 +31,7 @@ def sanitize_fn(filename):
             char = "_"
         sanitized.append(char)
     return "".join(sanitized)
+
 
 def texsafe(text):
     """Escape text such that it is tex-safe."""
@@ -53,10 +57,54 @@ def texsafe(text):
         escaped.append(char)
     return "".join(escaped)
 
-class Graph(object):
+
+def filter_list(_list, regex_to_include=".*", regex_not_to_include="NotIncluded"):
+    """Return a new copy of '_list' where the regex in 'regex_to_include' and 'regex_not_to_include'
+        are obeyed"""
+
+    ret = []
+    for item in _list:
+        if re.search(regex_to_include, item) is not None and \
+           re.search(regex_not_to_include, item) is None:
+            ret.append(item)
+    return ret
+
+
+def translate_dict(names, name_map):
+    """Return a dict mapping old names with new names using the (possible incomplete) 'name_map'"""
+
+    names = list(names)
+    ret = {}
+    for (old, new) in name_map:
+        if len(new) > 0:
+            for i in range(len(names)):
+                if re.search(old, names[i]) is not None:
+                    ret[names[i]] = new
+                    names.pop(i)
+                    break
+    for old, new in [(t, t) for t in names]:
+        ret[old] = new
+    return ret
+
+
+class Grapher(object):
     """
-    Baseclass for rendering Matplotlib graphs.
-    Does alot of the annoying work, just override the plot(...) method,
+    Take a result file and produces some output.
+
+    Can be just a graph, html page, or something completely different
+    """
+
+    def __init__(self, args):
+        self.args = args
+
+    def render(self):
+        raise NotImplementedError()
+
+
+class Graph(Grapher):
+    """
+    Base class for rendering Matplotlib graphs.
+    Does a lot of the annoying work, just override the plot(...) method,
     and you are good to go!
     """
 
@@ -102,7 +150,7 @@ class Graph(object):
     ]
 
     def __init__(self, args):
-        self.args = args
+        super(Graph, self).__init__(args)
         self._mpl_init()
 
     def _mpl_init(self):
@@ -152,17 +200,3 @@ class Graph(object):
             pylab.show()
 
         return paths
-
-class Grapher(object):
-    """
-    Take a result file and produces some output.
-
-    Can be just a single graph, but multiple graphs,
-    html, and other stuff is more likely.
-    """
-
-    def __init__(self, args):
-        self.args = args
-
-    def render(self, raw, data, order, baseline):
-        raise Exception("Unimplemented.")

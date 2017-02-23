@@ -1,4 +1,4 @@
-from graph import Graph, texsafe
+from graph import Graph, texsafe, filter_list, translate_dict
 import numpy as np
 from matplotlib.ticker import FormatStrFormatter
 from matplotlib import pyplot
@@ -6,12 +6,14 @@ from benchpress import result_parser
 import json
 import re
 
+
 def value_labels(ax, rects):
     for rect in rects:
         height = rect.get_height()
         ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
                 '%.2f' % float(height),
                 ha='center', va='bottom')
+
 
 def plot(cmds, res, baseline, args):
 
@@ -37,7 +39,7 @@ def plot(cmds, res, baseline, args):
         err = [v[1] for v in value]
         if len([v for v in avg if v > 0]) == 0:
             raise ValueError("All values to display are zero in '%s'"%comp)
-        c = plt.cm.jet(1. * i / max(len(res)-1,1))
+        c = plt.cm.jet(1. * i / max(len(res)-1, 1))
         b = ax.bar(ind+i*width, avg, width, color=c, log=args.ylog, yerr=err)
         bars.append(b)
         comps.append(texsafe(comp))
@@ -81,11 +83,11 @@ def get_stack_name(stack):
         ret += "%s/"%name
     return ret[:-1]
 
+
 class Bar_per_script(Graph):
 
     def render(self):
 
-        raw = json.load(open(self.args.results))
         data = result_parser.from_file(self.args.results)
 
         self.prep()             # Do some MPL-magic
@@ -111,7 +113,7 @@ class Bar_per_script(Graph):
                     else:
                         res[s] = {comp:value}
 
-        #Extract the name of the baseline component
+        # Extract the name of the baseline component
         comp_baseline = None
         if self.args.baseline is not None:
             for comp in comps:
@@ -123,7 +125,7 @@ class Bar_per_script(Graph):
                                 " %s in the result json"%self.args.baseline)
 
         if self.args.baseline is not None:
-            #Let's make all values relative compared to the baseline
+            # Let's make all values relative compared to the baseline
             for script in scripts:
                 (base_avg, base_err) = res[script][comp_baseline]
                 for comp in comps:
@@ -132,60 +134,29 @@ class Bar_per_script(Graph):
                             (avg, err) = res[script][comp]
                             res[script][comp] = (base_avg/avg, 0)
                         except (ZeroDivisionError, KeyError) as e:
-                            res[script][comp] = (0,0)
+                            res[script][comp] = (0, 0)
 
-        #Filter scripts and component stacks
-        tmp = comps
-        comps = []
-        for comp in tmp:
-            if re.search(self.args.stacks_to_display, comp) is not None and\
-                re.search(self.args.stacks_not_to_display, comp) is None:
-                comps.append(comp)
-        tmp = scripts
-        scripts = []
-        for script in tmp:
-            if re.search(self.args.scripts_to_display, script) is not None and\
-                re.search(self.args.scripts_not_to_display, script) is None:
-                scripts.append(script)
-
+        # Filter scripts and component stacks
+        comps = filter_list(comps, self.args.stacks_to_display, self.args.stacks_not_to_display)
+        scripts = filter_list(scripts, self.args.scripts_to_display, self.args.scripts_not_to_display)
         comps.sort()
         scripts.sort()
 
-        #Translate comps names
-        tmp = comps
-        comps = []
-        for (old, new) in self.args.stack_map:
-            for i in range(len(tmp)):
-                if re.search(old, tmp[i]) is not None:
-                    new = tmp[i] if new == "" else new
-                    comps.append((tmp[i],new))
-                    tmp.pop(i)
-                    break
-        comps += [(t,t) for t in tmp]
+        # Get translation of the components and scripts
+        comp_dict = translate_dict(comps, self.args.stack_map)
+        script_dict = translate_dict(scripts, self.args.script_map)
 
-        #Translate script names
-        tmp = scripts
-        scripts = []
-        for (old, new) in self.args.script_map:
-            for i in range(len(tmp)):
-                if re.search(old, tmp[i]) is not None:
-                    new = tmp[i] if new == "" else new
-                    scripts.append((tmp[i],new))
-                    tmp.pop(i)
-                    break
-        scripts += [(t,t) for t in tmp]
-
-        #Convert to a bar-plot friendly format
+        # Convert to a bar-plot friendly format
         data = []
-        for (comp_old, comp_new) in comps:
+        for comp in comps:
             values = []
-            for (script_old, script_new) in scripts:
+            for script in scripts:
                 try:
-                    values.append(res[script_old][comp_old])
+                    values.append(res[script][comp])
                 except KeyError:
-                    values.append((0,0))
-            if comp_old != comp_baseline:
-                data.append((comp_new,values))
-        plot([s[1] for s in scripts], data, self.args.baseline, self.args)
+                    values.append((0, 0))
+            if comp != comp_baseline:
+                data.append((comp_dict[comp], values))
+        plot([script_dict[s] for s in scripts], data, self.args.baseline, self.args)
         self.tofile({"title": self.args.title})
 
