@@ -60,9 +60,9 @@ def addAAcube( scene,
        """
     mincorner, maxcorner = describers
     if ref == Reference.relative:
-        x0,y0,z0 = mincorner
-        x1,y1,z1 = maxcorner
-        sshp = np.array(matscene.shape)
+        x0,y0,z0 = mincorner.astype(np.int64)
+        x1,y1,z1 = maxcorner.astype(np.int64)
+        sshp = np.array(matscene.shape, dtype=np.int)
         # guard if relative corners are bigger than scene
         x0 = x0 if x0 < sshp[0] else sshp[0]
         y0 = y0 if y0 < sshp[1] else sshp[1]
@@ -101,4 +101,3 @@ def addAAcube( scene,
         return addAAcube( scene, matscene, rel_describers, material, Reference.relative, verbose )
 
     return False
-
