@@ -16,77 +16,37 @@ def window(B,a=0.37):
     w = np.sqrt(wl+wl[:,None])
     return B*w
 
-def calcB(B, alpha=1.0,
+
+def calcB(B_x0, alpha=0.0,
           x_min = 0.0, x_max = 0.25,
           y_min = 0.0, y_max = 1.0,
           z_min = 0.0, z_max = 1.0):
 
-    n = len(B)
-    x = np.linspace(x_min,x_max,num=n,endpoint=False)
-    y = np.linspace(y_min,y_max,num=n)
-    z = np.linspace(z_min,z_max,num=n)
-    u = np.arange(n,dtype=B.dtype)
+    n = len(B_x0)
+    x = np.linspace(x_min,x_max,num=n, endpoint=False).astype(B_x0.dtype,copy=False)
+    y = np.linspace(y_min,y_max,num=n).astype(B_x0.dtype,copy=False)
+    z = np.linspace(z_min,z_max,num=n).astype(B_x0.dtype,copy=False)
+    u = np.arange(n,dtype=B_x0.dtype)
 
-
-    uy = math.pi/y_max * u * y[:,None]
-    uz = math.pi/z_max * u * z[:,None]
-
-    sinuy = np.sin(uy)
-    sinuz = np.sin(uz)
-
-#    C =  4.0 / (n-1.0)**2 * np.sum(np.sum((B * sinuy[:,:,None])[:,None] * sinuz[:,None],-1),-1)
-    C = np.empty((n,n,n,n))
-    C[:] = sinuy[:,None,:,None]
-    C *= B
-    C *= sinuz[:,None]
-    C = 4.0 / (n-1.0)**2 * np.sum(np.sum(C,-1),-1)
-
-    l = math.pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
+    # Making C
+    C = 4.0 / (n-1.0)**2 * np.sum(np.sum((B_x0 * np.sin(math.pi/y_max * u * y[:,None])[:,:,None])[:,None] * np.sin(math.pi/z_max * u * z[:,None])[:,None],-1),-1)
+    l = np.pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
 
-    C_l = C / l
+    # Calculating B
+    sincos = np.sin(math.pi/y_max * u * y[:, None])[:, None, :, None] * (u * np.cos(math.pi/z_max * u * z[:,None]))[None, :, None, :]
+    cossin = (u * np.cos(math.pi/y_max * u * y[:,None]))[:, None, :, None] * np.sin(math.pi/z_max * u * z[:,None])[None, :, None, :]
+    temp_x = C * np.sin(math.pi/y_max * u * y[:,None])[:, None, :, None] * np.sin(math.pi/z_max * u * z[:,None])[None, :, None, :]
+    temp_y = C / l * (alpha * math.pi / z_max * sincos - r * math.pi / y_max * cossin)
+    temp_z = C / l * (alpha * math.pi / y_max * cossin + r * math.pi / z_max * sincos)
+    exprx = np.exp((-r * x[:, None, None]))
 
-    d5 = (n,n,n,n,n)
-
-#    sincos = sinuy[:,None,:,None] * (u * np.cos(uz))[None,:,None,:]
-    sincos = np.empty(d5)
-    sincos[:] = sinuy[:,None,:,None]
-    sincos *= (u * np.cos(math.pi/z_max * u * z[:,None]))[None,:,None,:]
-
-#    cossin = (u * np.cos(uy))[:,None,:,None] * sinuz[None,:,None,:]
-    cossin = np.empty(d5)
-    cossin[:] = sinuz[None,:,None,:]
-    cossin *= (u * np.cos(math.pi/y_max * u * y[:,None]))[:,None,:,None]
-
-#    exprx = np.exp((-r * x[:,None,None]))[:,None,None]
-    exprx = np.empty(d5)
-    exprx[:] = -x[:,None,None,None,None]
-    exprx *= r
-    exprx = np.exp(exprx)
-
-#    temp_x = C * sinuy[:,None,:,None] * sinuz[None,:,None,:]
-    temp_x = np.empty(d5)
-    temp_x[:] = sinuy[:,None,:,None]
-    temp_x *= sinuz[None,:,None,:]
-    temp_x *= C
-
-#    temp_y = C / l * (alpha * math.pi / z_max * sincos - r * math.pi / y_max * cossin)
-    temp_y = -(math.pi/y_max) * cossin
-    temp_y *= r
-    temp_y += (alpha*math.pi/z_max) * sincos
-    temp_y *= C_l
-
-#    temp_z = C / l * (alpha * math.pi / y_max * cossin + r * math.pi / z_max * sincos)
-    temp_z = (math.pi/z_max) * sincos
-    temp_z *= r
-    temp_z += (alpha*math.pi/y_max) * cossin
-    temp_z *= C_l
-
-    Bx = np.sum(np.sum(temp_x * exprx,-1),-1)
-    By = np.sum(np.sum(temp_y * exprx,-1),-1)
-    Bz = np.sum(np.sum(temp_z * exprx,-1),-1)
+    Bx = np.sum(np.sum(temp_x * exprx[:,None,None],-1),-1)
+    By = np.sum(np.sum(temp_y * exprx[:,None,None],-1),-1)
+    Bz = np.sum(np.sum(temp_z * exprx[:,None,None],-1),-1)
     return (Bx, By, Bz)
+
 
 def main():
 
