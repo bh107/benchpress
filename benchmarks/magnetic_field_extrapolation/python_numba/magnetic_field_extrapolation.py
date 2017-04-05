@@ -34,6 +34,7 @@ def calcB_loop(B_x0, alpha=0.0,
     l = pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
+    exprx = np.exp((-r * x[:, None, None]))
 
     # Calculating B
     Bx = np.empty((n,n,n),dtype=B_x0.dtype)
@@ -57,16 +58,15 @@ def calcB_loop(B_x0, alpha=0.0,
             for k in range(n):
                 for m in range(n):
                     for q in range(n):
-                        exprx = np.exp(-r[m, q] * x[k])
-                        Bx[k, i, j] += temp_x[m, q] * exprx
-                        By[k, i, j] += temp_y[m, q] * exprx
-                        Bz[k, i, j] += temp_z[m, q] * exprx
+                        Bx[k, i, j] += temp_x[m, q] * exprx[k, m, q]
+                        By[k, i, j] += temp_y[m, q] * exprx[k, m, q]
+                        Bz[k, i, j] += temp_z[m, q] * exprx[k, m, q]
     return (Bx, By, Bz)
 
 
 #@cuda.jit()
 @numba.jit(nopython=True)
-def loop(n, Bx, By, Bz, u, y, y_max, z, z_max, alpha, C, l, r, x, temp_x, temp_y, temp_z):
+def loop(n, Bx, By, Bz, u, y, y_max, z, z_max, alpha, C, l, r, temp_x, temp_y, temp_z, exprx):
     for i in range(n):
         for j in range(n):
             for k in range(n):
@@ -82,10 +82,9 @@ def loop(n, Bx, By, Bz, u, y, y_max, z, z_max, alpha, C, l, r, x, temp_x, temp_y
             for k in range(n):
                 for m in range(n):
                     for q in range(n):
-                        exprx = exp(-r[m, q] * x[k])
-                        Bx[k, i, j] += temp_x[m, q] * exprx
-                        By[k, i, j] += temp_y[m, q] * exprx
-                        Bz[k, i, j] += temp_z[m, q] * exprx
+                        Bx[k, i, j] += temp_x[m, q] * exprx[k, m, q]
+                        By[k, i, j] += temp_y[m, q] * exprx[k, m, q]
+                        Bz[k, i, j] += temp_z[m, q] * exprx[k, m, q]
 
 
 def calcB_numba(B_x0, alpha=0.0,
@@ -105,6 +104,7 @@ def calcB_numba(B_x0, alpha=0.0,
     l = pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
+    exprx = np.exp((-r * x[:, None, None]))
 
     # Calculating B
     Bx = np.empty((n,n,n),dtype=B_x0.dtype)
@@ -113,7 +113,7 @@ def calcB_numba(B_x0, alpha=0.0,
     temp_x = np.empty((n, n), dtype=B_x0.dtype)
     temp_y = np.empty((n, n), dtype=B_x0.dtype)
     temp_z = np.empty((n, n), dtype=B_x0.dtype)
-    loop(n, Bx, By, Bz, u, y, y_max, z, z_max, alpha, C, l, r, x, temp_x, temp_y, temp_z)
+    loop(n, Bx, By, Bz, u, y, y_max, z, z_max, alpha, C, l, r, temp_x, temp_y, temp_z, exprx)
     return (Bx, By, Bz)
 
 
@@ -134,10 +134,12 @@ def main():
     B.start()
     for _ in range(B.size[2]):
         Rx, Ry, Rz = calcB_numba(window(B_x0.copy()))
+        """
         Rx1, Ry1, Rz1 = calcB_loop(window(B_x0.copy()))
         assert np.allclose(Rx, Rx1)
         assert np.allclose(Ry, Ry1)
         assert np.allclose(Rz, Rz1)
+        """
     B.stop()
     B.pprint()
 

@@ -38,10 +38,12 @@ cdef calcB(np.ndarray B_x0, T_t alpha=0.0,
     cdef T_t [:, :] C = 4.0 / (n-1.0)**2 * np.sum(np.sum((B_x0 * np.sin(np.pi/y_max * u * y[:,None])[:,:,None])[:,None] * np.sin(np.pi/z_max * u * z[:,None])[:,None],-1),-1)
     cdef T_t [:, :] l = np.pi**2 * ((u[:]*u[:] / y_max)[:,None] + (u*u / z_max))
     l[0,0] = 1.0
-    cdef T_t [:, :] r = np.empty((n,n),dtype=T)
+    r_np = np.empty((n,n),dtype=T)
+    cdef T_t [:, :] r = r_np
     for i in range(n):
         for j in range(n):
             r[i,j] = np.sqrt(l[i,j] - alpha**2)
+    cdef T_t [:, :, :] exprx = np.exp((-r_np * x[:, None, None]))
 
     # Calculating B
     cdef T_t [:, :, :] Bx = np.empty((n,n,n), dtype=T)
@@ -66,10 +68,9 @@ cdef calcB(np.ndarray B_x0, T_t alpha=0.0,
             for k in range(n):
                 for m in range(n):
                     for q in range(n):
-                        exprx = exp(-r[m, q] * x[k])
-                        Bx[k, i, j] += temp_x[m, q] * exprx
-                        By[k, i, j] += temp_y[m, q] * exprx
-                        Bz[k, i, j] += temp_z[m, q] * exprx
+                        Bx[k, i, j] += temp_x[m, q] * exprx[k, m, q]
+                        By[k, i, j] += temp_y[m, q] * exprx[k, m, q]
+                        Bz[k, i, j] += temp_z[m, q] * exprx[k, m, q]
     return (Bx, By, Bz)
 
 
@@ -90,13 +91,9 @@ def main():
 
     B.start()
     for _ in range(B.size[2]):
-        Rx, Ry, Rz = calcB(window(B_x0.copy()))
+        calcB(window(B_x0.copy()))
     B.stop()
     B.pprint()
-
-    if B.outputfn:
-        R = Rx+Ry+Rz
-        B.tofile(B.outputfn, {'res': R, 'res_x': Rx, 'res_y': Ry, 'res_z': Rz})
 
 if __name__ == '__main__':
     main()
