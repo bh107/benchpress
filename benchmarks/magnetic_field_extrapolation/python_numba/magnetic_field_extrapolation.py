@@ -31,7 +31,7 @@ def calcB_loop(B_x0, alpha=0.0,
 
     # Making C
     C = 4.0 / (n-1.0)**2 * np.sum(np.sum((B_x0 * np.sin(pi/y_max * u * y[:,None])[:,:,None])[:,None] * np.sin(pi/z_max * u * z[:,None])[:,None],-1),-1)
-    l = np.pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
+    l = pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
 
@@ -39,21 +39,21 @@ def calcB_loop(B_x0, alpha=0.0,
     Bx = np.empty((n,n,n),dtype=B_x0.dtype)
     By = np.empty((n,n,n),dtype=B_x0.dtype)
     Bz = np.empty((n,n,n),dtype=B_x0.dtype)
+    temp_x = np.empty((n, n), dtype=B_x0.dtype)
+    temp_y = np.empty((n, n), dtype=B_x0.dtype)
+    temp_z = np.empty((n, n), dtype=B_x0.dtype)
     for i in range(n):
         for j in range(n):
-            Bx[:, i, j] = 0
-            By[:, i, j] = 0
-            Bz[:, i, j] = 0
-            temp_x = np.empty((n, n), dtype=B_x0.dtype)
-            temp_y = np.empty((n, n), dtype=B_x0.dtype)
-            temp_z = np.empty((n, n), dtype=B_x0.dtype)
             for k in range(n):
+                Bx[k, i, j] = 0
+                By[k, i, j] = 0
+                Bz[k, i, j] = 0
                 for m in range(n):
-                    sincos = np.sin(np.pi * u[k] * y[i] / y_max) * (u[m] * np.cos(np.pi * u[m] * z[j] / z_max))
-                    cossin = (u[k] * np.cos(np.pi * u[k] * y[i] / y_max)) * (np.sin(np.pi * u[m] * z[j] / z_max))
-                    temp_x[k,m] = C[k,m] * (np.sin(np.pi * u[k] * y[i] / y_max) * (np.sin(np.pi * u[m] * z[j] / z_max)))
-                    temp_y[k,m] = C[k,m] / l[k,m] * (alpha * np.pi / z_max * sincos - r[k,m] * np.pi / y_max * cossin)
-                    temp_z[k,m] = C[k,m] / l[k,m] * (alpha * np.pi / y_max * cossin + r[k,m] * np.pi / z_max * sincos)
+                    sincos = np.sin(pi * k * y[i] / y_max) * (m * np.cos(pi * m * z[j] / z_max))
+                    cossin = (k * np.cos(pi * k * y[i] / y_max)) * (np.sin(pi * m * z[j] / z_max))
+                    temp_x[k,m] = C[k,m] * (np.sin(pi * k * y[i] / y_max) * (np.sin(pi * m * z[j] / z_max)))
+                    temp_y[k,m] = C[k,m] / l[k,m] * (alpha * pi / z_max * sincos - r[k,m] * pi / y_max * cossin)
+                    temp_z[k,m] = C[k,m] / l[k,m] * (alpha * pi / y_max * cossin + r[k,m] * pi / z_max * sincos)
             for k in range(n):
                 for m in range(n):
                     for q in range(n):
@@ -69,16 +69,16 @@ def calcB_loop(B_x0, alpha=0.0,
 def loop(n, Bx, By, Bz, u, y, y_max, z, z_max, alpha, C, l, r, x, temp_x, temp_y, temp_z):
     for i in range(n):
         for j in range(n):
-            Bx[:, i, j] = 0
-            By[:, i, j] = 0
-            Bz[:, i, j] = 0
             for k in range(n):
+                Bx[k, i, j] = 0
+                By[k, i, j] = 0
+                Bz[k, i, j] = 0
                 for m in range(n):
-                    sincos = sin(np.pi * u[k] * y[i] / y_max) * (u[m] * cos(np.pi * u[m] * z[j] / z_max))
-                    cossin = (u[k] * cos(np.pi * u[k] * y[i] / y_max)) * (sin(np.pi * u[m] * z[j] / z_max))
-                    temp_x[k,m] = C[k,m] * (sin(np.pi * u[k] * y[i] / y_max) * (sin(np.pi * u[m] * z[j] / z_max)))
-                    temp_y[k,m] = C[k,m] / l[k,m] * (alpha * np.pi / z_max * sincos - r[k,m] * np.pi / y_max * cossin)
-                    temp_z[k,m] = C[k,m] / l[k,m] * (alpha * np.pi / y_max * cossin + r[k,m] * np.pi / z_max * sincos)
+                    sincos = sin(pi * k * y[i] / y_max) * (m * cos(pi * m * z[j] / z_max))
+                    cossin = (k * cos(pi * k * y[i] / y_max)) * (sin(pi * m * z[j] / z_max))
+                    temp_x[k,m] = C[k,m] * (sin(pi * k * y[i] / y_max) * (sin(pi * m * z[j] / z_max)))
+                    temp_y[k,m] = C[k,m] / l[k,m] * (alpha * pi / z_max * sincos - r[k,m] * pi / y_max * cossin)
+                    temp_z[k,m] = C[k,m] / l[k,m] * (alpha * pi / y_max * cossin + r[k,m] * pi / z_max * sincos)
             for k in range(n):
                 for m in range(n):
                     for q in range(n):
@@ -102,7 +102,7 @@ def calcB_numba(B_x0, alpha=0.0,
 
     # Making C
     C = 4.0 / (n-1.0)**2 * np.sum(np.sum((B_x0 * np.sin(pi/y_max * u * y[:,None])[:,:,None])[:,None] * np.sin(pi/z_max * u * z[:,None])[:,None],-1),-1)
-    l = np.pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
+    l = pi**2 * ((u**2 / y_max)[:,None] + (u**2 / z_max))
     l[0,0] = 1.0
     r = np.sqrt(l - alpha**2)
 
@@ -134,6 +134,10 @@ def main():
     B.start()
     for _ in range(B.size[2]):
         Rx, Ry, Rz = calcB_numba(window(B_x0.copy()))
+        Rx1, Ry1, Rz1 = calcB_loop(window(B_x0.copy()))
+        assert np.allclose(Rx, Rx1)
+        assert np.allclose(Ry, Ry1)
+        assert np.allclose(Rz, Rz1)
     B.stop()
     B.pprint()
 

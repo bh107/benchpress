@@ -1,0 +1,2 @@
+import magnetic_field_extrapolation
+magnetic_field_extrapolation.main()
