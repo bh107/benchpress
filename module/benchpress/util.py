@@ -102,14 +102,14 @@ try:
     flush = bh.flush
     rand = bh.random.random_sample
     randint = bh.random.random_integers
-    randseed =  bh.random.seed
+    randseed = bh.random.seed
     bh_module_exist = True
 except ImportError:
     toarray = numpy_array
     flush = numpy_flush
     rand = np.random.random_sample
     randint = np.random.random_integers
-    randseed =  np.random.seed
+    randseed = np.random.seed
     bh_module_exist = False
 
 if bh_is_loaded_as_np:
