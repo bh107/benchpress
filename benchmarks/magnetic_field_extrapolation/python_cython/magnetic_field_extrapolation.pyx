@@ -29,10 +29,10 @@ cdef calcB(np.ndarray B_x0, T_t alpha=0.0,
           T_t z_min = 0.0, T_t z_max = 1.0):
     cdef size_t i, j, k, m, q
     cdef size_t n = len(B_x0)
-    cdef T_t [:] x = np.linspace(x_min,x_max,num=n,endpoint=False).astype(T,copy=False)
-    cdef T_t [:] y = np.linspace(y_min,y_max,num=n).astype(T,copy=False)
-    cdef T_t [:] z = np.linspace(z_min,z_max,num=n).astype(T,copy=False)
-    cdef np.ndarray u = np.arange(n,dtype=T)
+    cdef T_t [:] x = np.linspace(x_min, x_max, num=n, endpoint=False).astype(T, copy=False)
+    cdef T_t [:] y = np.linspace(y_min, y_max, num=n).astype(T, copy=False)
+    cdef T_t [:] z = np.linspace(z_min, z_max, num=n).astype(T, copy=False)
+    cdef np.ndarray u = np.arange(n, dtype=T)
 
     # Making C
     cdef T_t [:, :] C = 4.0 / (n-1.0)**2 * np.sum(np.sum((B_x0 * np.sin(np.pi/y_max * u * y[:,None])[:,:,None])[:,None] * np.sin(np.pi/z_max * u * z[:,None])[:,None],-1),-1)
@@ -44,9 +44,9 @@ cdef calcB(np.ndarray B_x0, T_t alpha=0.0,
             r[i,j] = np.sqrt(l[i,j] - alpha**2)
 
     # Calculating B
-    cdef T_t [:, :, :] Bx = np.empty((n,n,n),dtype=T)
-    cdef T_t [:, :, :] By = np.empty((n,n,n),dtype=T)
-    cdef T_t [:, :, :] Bz = np.empty((n,n,n),dtype=T)
+    cdef T_t [:, :, :] Bx = np.empty((n,n,n), dtype=T)
+    cdef T_t [:, :, :] By = np.empty((n,n,n), dtype=T)
+    cdef T_t [:, :, :] Bz = np.empty((n,n,n), dtype=T)
     cdef T_t [:, :] temp_x = np.empty((n, n), dtype=T)
     cdef T_t [:, :] temp_y = np.empty((n, n), dtype=T)
     cdef T_t [:, :] temp_z = np.empty((n, n), dtype=T)
