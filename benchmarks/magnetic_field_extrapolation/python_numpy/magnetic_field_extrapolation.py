@@ -66,7 +66,8 @@ def main():
 
     B.start()
     for _ in range(B.size[2]):
-        calcB(window(B_x0))
+        Rx, Ry, Rz = calcB(window(B_x0))
+        B.flush()
     B.stop()
     B.pprint()
 
