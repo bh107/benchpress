@@ -75,16 +75,19 @@ def translate_dict(names, name_map):
 
     names = list(names)
     ret = {}
+    ret_list = []
     for (old, new) in name_map:
         if len(new) > 0:
             for i in range(len(names)):
                 if re.search(old, names[i]) is not None:
                     ret[names[i]] = new
+                    ret_list.append(names[i])
                     names.pop(i)
                     break
     for old, new in [(t, t) for t in names]:
         ret[old] = new
-    return ret
+        ret_list.append(old)
+    return ret, ret_list
 
 
 class Grapher(object):

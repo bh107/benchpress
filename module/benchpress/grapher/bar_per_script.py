@@ -143,8 +143,8 @@ class Bar_per_script(Graph):
         scripts.sort()
 
         # Get translation of the components and scripts
-        comp_dict = translate_dict(comps, self.args.stack_map)
-        script_dict = translate_dict(scripts, self.args.script_map)
+        (comp_dict, comps) = translate_dict(comps, self.args.stack_map)
+        (script_dict, scripts) = translate_dict(scripts, self.args.script_map)
 
         # Convert to a bar-plot friendly format
         data = []
