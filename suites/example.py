@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+Example of how to generate a Benchpress suite file 
+
+"""
+
 import benchpress as bp
 from benchpress.suite_util import BP_ROOT
 

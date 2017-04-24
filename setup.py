@@ -24,7 +24,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='http://benchpress.readthedocs.io/',
+    url='http://benchpress.readthedocs.io',
 
     # Author details
     author='Mads R. B. Kristensen',

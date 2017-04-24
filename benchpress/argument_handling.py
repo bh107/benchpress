@@ -62,7 +62,3 @@ def args():
 def error(msg):
     """Raise an argparse error"""
     _parser.error(msg)
-
-
-def get_output():
-    """Return the output path """
