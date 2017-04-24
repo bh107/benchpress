@@ -89,6 +89,13 @@ def default_argparse(description):
     )
     parser.add_argument("results", help="JSON file containing results")
     parser.add_argument(
+        "-o", "--output",
+        type=argparse.FileType('w'),
+        default=None,
+        metavar="FILE",
+        help="Write output to FILE."
+    )
+    parser.add_argument(
         "--regex",
         type=str,
         default='elapsed-time: ([\d.]+)',
@@ -117,10 +124,10 @@ def default_argparse(description):
         help="All labels that match the RegEx are ignored."
     )
 
-    def label_map2tuple(string):
+    def label_map2tuple(arg_str):
         """Convert "RegEx:label,...,RegEx:label" => [("RegEx","label"),...,("RegEx","label")]"""
         ret = []
-        for tok in string.split(","):
+        for tok in arg_str.split(","):
             if ":" not in tok:
                 raise argparse.ArgumentError()
             (old, new) = tok.split(":")

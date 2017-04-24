@@ -29,7 +29,10 @@ def visualize(args):
 def main():
     parser = util.default_argparse('Prints the result of a Benchpress JSON-file.')
     args = parser.parse_args()
-    print (visualize(args))
+    if args.output is not None:
+        args.output.write(visualize(args))
+    else:
+        print(visualize(args))
 
 
 if __name__ == "__main__":
