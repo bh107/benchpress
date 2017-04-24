@@ -21,7 +21,12 @@ def visualize(args):
                     values.append(args.py_type(match.group(1)))
                 else:
                     values.append("N/A")
-        ret += "%s: %s\n" % (label_map[cmd['label']], values)
+        ret += "%s: %s" % (label_map[cmd['label']], values)
+        succeed_values = util.extract_succeed_results(cmd, args.regex, args.py_type)
+        if len(succeed_values) > 0:
+            ret += " %.4f" % util.mean(succeed_values)
+            ret += " (%.4f)" % util.standard_deviation(succeed_values)
+        ret += "\n"
     return ret
 
 

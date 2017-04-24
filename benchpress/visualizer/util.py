@@ -2,6 +2,7 @@
 
 import argparse
 import re
+import math
 
 
 def filter_cmd_list(cmd_list, regex_to_include=".*", regex_to_exclude=None, dict_key='label'):
@@ -66,6 +67,90 @@ def translate_dict(cmd_list, label_map, dict_key='label'):
         ret_map[old[dict_key]] = new[dict_key]
         ret_list.append(old)
     return ret_list, ret_map
+
+
+def mean(values):
+    """Calculate the mean.
+    
+    Parameters
+    ----------
+    values : list
+        Values to find the mean of
+        
+    Returns
+    -------
+    out : float
+        The mean
+    """
+    return sum(values)/float(len(values)) if len(values) > 0 else 0.0
+
+
+def variance(values):
+    """Calculate the variance.
+
+    Parameters
+    ----------
+    values : list
+        Values to find the variance of
+
+    Returns
+    -------
+    out : float
+        The variance
+    """
+    count = len(values)
+    if count < 2:
+        return 0.0
+    x_avg = mean(values)
+    return mean([abs(x - x_avg)**2 for x in values])
+
+
+def standard_deviation(values):
+    """Calculate the standard deviation.
+
+    Parameters
+    ----------
+    values : list
+        Values to find the standard deviation of
+
+    Returns
+    -------
+    out : float
+        The standard deviation
+    """
+    count = len(values)
+    if count < 2:
+        return 0.0
+    x_avg = mean(values)
+    return math.sqrt(mean([abs(x - x_avg)**2 for x in values]))
+
+
+def extract_succeed_results(cmd, regex, py_type=int, dict_key='stdout'):
+    """Extract the values of the succeed results
+    
+    Parameters
+    ----------
+    cmd : dict
+        The Benchpress command to extract from
+    regex : str
+        The regex that extract a value from each result
+    py_type : type
+        The Python type of the extracted 
+    dict_key : str
+        The dictionary key to extract from
+
+    Returns
+    -------
+    values : list
+        List of extracted values
+    """
+    ret = []
+    for job in cmd['jobs']:
+        for res in job['results']:
+            match = re.search(regex, res[dict_key])
+            if res['success'] and match:
+                ret.append(py_type(match.group(1)))
+    return ret
 
 
 def default_argparse(description):
