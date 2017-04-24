@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import argparse
 import json
 import re
 from benchpress.visualizer import util
@@ -12,6 +11,8 @@ def visualize(args):
     ret = ""
     with open(args.results, 'r') as json_file:
         cmd_list = json.load(json_file)
+        cmd_list = util.filter_cmd_list(cmd_list, args.labels_to_include, args.labels_to_exclude)
+        (cmd_list, label_map) = util.translate_dict(cmd_list, args.label_map)
         for cmd in cmd_list:
             values = []
             for job in cmd['jobs']:
@@ -21,7 +22,7 @@ def visualize(args):
                         values.append(args.py_type(match.group(1)))
                     else:
                         values.append("N/A")
-            ret += "%s: %s\n" % (cmd['label'], values)
+            ret += "%s: %s\n" % (label_map[cmd['label']], values)
     return ret
 
 
