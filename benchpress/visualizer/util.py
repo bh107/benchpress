@@ -87,7 +87,11 @@ def default_argparse(description):
         description=description,
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    parser.add_argument("results", help="JSON file containing results")
+    parser.add_argument(
+        "results",
+        type=argparse.FileType('r'),
+        help="JSON file containing results"
+    )
     parser.add_argument(
         "-o", "--output",
         type=argparse.FileType('w'),
