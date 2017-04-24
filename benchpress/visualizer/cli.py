@@ -3,6 +3,7 @@
 import argparse
 import json
 import re
+from benchpress.visualizer import util
 
 
 def visualize(args):
@@ -25,23 +26,8 @@ def visualize(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Prints the result of a Benchpress JSON-file.')
-    parser.add_argument("results", help="JSON file containing results")
-    parser.add_argument(
-        "--regex",
-        type=str,
-        default='elapsed-time: ([\d.]+)',
-        help="How to parse the result of each run. The RegEX should contain exactly one group."
-    )
-    parser.add_argument(
-        "--py_type",
-        choices=['float', 'int', 'str'],
-        default='float',
-        help="The Python data type of the parsed results."
-    )
+    parser = util.default_argparse('Prints the result of a Benchpress JSON-file.')
     args = parser.parse_args()
-    # Convert the type represented as a string to a Python type object e.g. "float" => float
-    args.py_type = eval(args.py_type)
     print (visualize(args))
 
 
