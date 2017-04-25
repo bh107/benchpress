@@ -230,3 +230,28 @@ def default_argparse(description):
         help="Comma separated list of original-to-new-label names"
     )
     return parser
+
+
+def texsafe(text):
+    """Escape text such that it is tex-safe."""
+    conv = {
+        '&': r'\&',
+        '%': r'\%',
+        '$': r'\$',
+        '#': r'\#',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\^{}',
+        '\\': r'\textbackslash{}',
+        '<': r'\textless',
+        '>': r'\textgreater',
+    }
+    escaped = []
+
+    for char in text:
+        if char in conv:
+            char = conv[char]
+        escaped.append(char)
+    return "".join(escaped)
