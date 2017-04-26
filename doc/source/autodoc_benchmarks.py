@@ -1,13 +1,6 @@
 #!/usr/bin/env python
-import argparse
-import textwrap
-import Cheetah
-import fnmatch
-import pprint
 import os
 import re
-
-from benchpress.version import implementations
 
 lang_labels = {
     'c':    'C',
@@ -23,12 +16,19 @@ lang_pygment = {
 }
 lang_order  = ['py', 'c', 'cpp', 'cs']
 
-benchmarks_relpath = os.sep.join(["..", "..", "..", "benchmarks"])
+benchmarks_relpath = os.path.join("..", "..", "..", "benchmarks")
+
+
+def _script_path():
+    """Returns the path to the dir this script is in"""
+    return os.path.dirname(os.path.realpath(__file__))
+
 
 def pretty_name(text):
     """Returns a rewrite like: "snakes_and_ladders" -> "Snakes And Ladders"."""
 
     return text.replace('_', ' ').title()
+
 
 def flatten(benchmarks):
     """Flattens the benchmarks into a specific ordering."""
@@ -43,7 +43,6 @@ def flatten(benchmarks):
         for lang in lang_order:
             for tool in meta["tools_by_lang"][lang]:
                 if lang in impls[bench] and tool in impls[bench][lang]:
-                    #entry_info = "+"
                     entry_info = section_ref("* <%s_%s>" % (bench, tool))
                     if impls[bench][lang][tool]["issues"]:
                         entry_info += " [ISU]_"
@@ -58,13 +57,14 @@ def flatten(benchmarks):
 
     return flat
 
+
 class RstTable(object):
 
     def __init__(self, headers, rows):
         self.headers = headers
         self.rows = rows
 
-        self.col_widths = [0]*len(rows[0])  # Determine widts of columns
+        self.col_widths = [0]*len(rows[0])  # Determine widths of columns
         for ridx, row in enumerate(rows):
             for cidx, col in enumerate(row):
                 col_len = len(col)
@@ -107,6 +107,7 @@ class RstTable(object):
 
         return "\n".join(rows)
 
+
 def modify_column(func, rows):
     """Apply 'func' to the first column in all of the supplied rows."""
 
@@ -115,14 +116,15 @@ def modify_column(func, rows):
         delta.append([func(columns[0])] + columns[1:])
     return delta
 
-def section_ref(text):
 
+def section_ref(text):
     return ":ref:`%s`" % text if text.strip() else text
+
 
 def benchmark_index(benchmarks):
     rows = flatten(benchmarks)
 
-    tool_header = [" "]+[ " ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ]
+    tool_header = [" "]+[" ".join(tool.split('_')[1:]).title() for lang in lang_order for tool in benchmarks["__meta__"]["tools_by_lang"][lang] ]
 
     rows.insert(0, tool_header)
     rows = modify_column(section_ref, rows)
@@ -168,6 +170,7 @@ def benchmark_index(benchmarks):
 
     return matrix
 
+
 def benchmark_sections(benchmarks):
 
     meta = benchmarks["__meta__"]
@@ -175,9 +178,7 @@ def benchmark_sections(benchmarks):
 
     sections = {}
     for bench_lbl in meta["benchs"]:
-        section = ""
         section_title = pretty_name(bench_lbl)
-        section_label = bench_lbl
         section = "\n".join([
             "",
             "",
@@ -191,10 +192,8 @@ def benchmark_sections(benchmarks):
         bench_path = os.sep.join([benchmarks_relpath, bench_lbl])
 
         # Add readme.rst to the section
-        bench_readme_path = os.sep.join([bench_path, "readme.rst"])
-        #print bench_readme_path[4:]
-        if os.path.exists(bench_readme_path[4:]):
-            section += "\n.. include:: %s\n" % bench_readme_path
+        if os.path.exists(os.path.join(_script_path(), "..", "..", "benchmarks", bench_lbl, "readme.rst")):
+            section += "\n.. include:: %s\n" % os.path.join(bench_path, "readme.rst")
 
         bench = benchs[bench_lbl]
         for lang in (lang for lang in lang_order if lang in bench):
@@ -244,11 +243,99 @@ def benchmark_sections(benchmarks):
 
     return sections
 
+
+def implementations(search_path, verbose=False):
+    """Walks through the filesystem looking for benchmark implementations."""
+
+    APP_NAME = 'benchpress'
+    APP_VERSION = '1.0'
+
+    ignore_dirs  = ["_utils", "_doc"]
+    ignore_files = ['empty', 'readme.rst', 'dogma.rst', '.DS_Store', 'README.rst', 'issues.rst', 'bohrium.rst', 'Makefile', '.gitignore']
+
+
+    meta = {
+        "langs": [], "tools":[], "benchs":[],
+        "nlangs": 0, "ntools": 0, "nbenchs": 0,
+        "tools_by_lang": {},
+        "ntools_by_lang": {},
+        "tool_to_lang": {}
+    }
+    benchmarks = {}
+
+    for root, dirnames, filenames in os.walk(search_path):
+        if [x for x in ignore_dirs if x in root]:    # Ignore some...
+            continue
+
+        for filename in filenames:              # Group the rest
+            if filename in ignore_files:
+                continue
+
+            match = re.match(".*\.((cpp$)|(py$)|(cs$)|(c$)$)", filename)
+
+            if verbose and not match:
+                print("Skipping file %s, it does not have the right extension" % filename)
+
+            if match:
+                dirs        = [x for x in root.split(os.sep) if x not in search_path.split(os.sep)]
+                benchmark   = dirs[0]
+                tool        = dirs[1]
+                lang        = match.group(1)
+
+                # Check that the basename matches the benchmark
+                bn = ''.join(os.path.basename(filename).split('.')[:-1])
+                if not bn == benchmark:
+                    if verbose:
+                        print("Skipping file %s, it does not match the benchmark name %s" % (filename, benchmark))
+                    continue
+
+                if benchmark not in benchmarks:
+                    benchmarks[benchmark] = {}
+                    meta["benchs"].append(benchmark)
+                    meta["nbenchs"] += 1
+
+                if lang not in benchmarks[benchmark]:
+                    benchmarks[benchmark][lang] = {}
+                    if lang not in meta["langs"]:
+                        meta["langs"].append(lang)
+                        meta["nlangs"] += 1
+
+                if tool not in benchmarks[benchmark][lang]:
+                    dogma_rst_path      = os.sep.join([search_path, benchmark, tool, "dogma.rst"])
+                    bohrium_rst_path    = os.sep.join([search_path, benchmark, tool, "bohrium.rst"])
+                    issues_rst_path     = os.sep.join([search_path, benchmark, tool, "issues.rst"])
+                    benchmarks[benchmark][lang][tool] = {
+                        'src':      os.sep.join(dirs)+os.sep+filename,
+                        'dogma':    dogma_rst_path if os.path.exists(dogma_rst_path) else "",
+                        'bohrium':  bohrium_rst_path if os.path.exists(bohrium_rst_path) else "",
+                        'issues':   issues_rst_path if os.path.exists(issues_rst_path) else "",
+                    }
+                    if tool not in meta["tools"]:
+                        meta["tools"].append(tool)
+                        meta["ntools"] += 1
+
+                if lang not in meta["tools_by_lang"]:
+                    meta["tools_by_lang"][lang] = []
+                    meta["ntools_by_lang"][lang] = 0
+
+                if tool not in meta["tools_by_lang"][lang]:
+                    meta["tools_by_lang"][lang].append(tool)
+                    meta["tools_by_lang"][lang].sort()
+                    meta["ntools_by_lang"][lang] += 1
+
+                if tool not in meta["tool_to_lang"]:
+                    meta["tool_to_lang"][tool] = lang
+
+    meta["benchs"].sort()
+
+    return {"__meta__": meta, "impls": benchmarks}
+
+
 def main():
-    benchmarks = implementations(".."+os.sep+"benchmarks")
+    benchmarks = implementations(os.path.join(_script_path(), "..", "..", "benchmarks"))
 
     index = benchmark_index(benchmarks)
-    with open(os.sep.join(["source", "benchmarks", "autodoc_index.rst"]), 'w') as fd:
+    with open(os.path.join(_script_path(), "benchmarks", "autodoc_index.rst"), 'w') as fd:
         fd.write("==========\n")
         fd.write("Benchmarks\n")
         fd.write("==========\n")
@@ -260,7 +347,7 @@ def main():
     bench_labels = [lbl for lbl in sections]
     bench_labels.sort()
     for bench_lbl in bench_labels:
-        with open(os.sep.join(["source", "benchmarks", "%s.rst" % bench_lbl]), 'w') as fd:
+        with open(os.path.join(_script_path(), "benchmarks", "%s.rst" % bench_lbl), 'w') as fd:
             fd.write(sections[bench_lbl])
             bench_lbl_listing.append(bench_lbl)
 

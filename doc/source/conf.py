@@ -15,6 +15,14 @@
 import sys
 import os
 
+# HACK: we need to run 'autodoc_benchmarks.py' as the first thing
+def _script_path():
+    """Returns the path to the dir this script is in"""
+    return os.path.dirname(os.path.realpath(__file__))
+sys.path.append(_script_path())
+import autodoc_benchmarks
+autodoc_benchmarks.main()
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -55,7 +63,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Benchpress'
-copyright = u'2015, Simon A. F. Lund'
+copyright = u'2017, Bohrium <bh107.org>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -211,7 +219,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'Benchpress.tex', u'Benchpress Documentation',
-   u'Simon A. F. Lund', 'manual'),
+   u'Bohrium <bh107.org>', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -241,7 +249,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'benchpress', u'Benchpress Documentation',
-     [u'Simon A. F. Lund'], 1)
+     [u'Bohrium <bh107.org>'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -255,7 +263,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'Benchpress', u'Benchpress Documentation',
-   u'Simon A. F. Lund', 'Benchpress', 'One line description of project.',
+   u'Bohrium <bh107.org>', 'Benchpress', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -276,9 +284,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = u'Benchpress'
-epub_author = u'Simon A. F. Lund'
-epub_publisher = u'Simon A. F. Lund'
-epub_copyright = u'2015, Simon A. F. Lund'
+epub_author = u'Bohrium <bh107.org>'
+epub_publisher = u'Bohrium <bh107.org>'
+epub_copyright = u'2017, Bohrium <bh107.org>'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'Benchpress'
