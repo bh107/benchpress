@@ -1,0 +1,45 @@
+usage: bp-chart [-h] [-o FILE] [--regex REGEX] [--py_type {float,int,str}]
+                [--labels-to-include RegEx] [--labels-to-exclude RegEx]
+                [--label-map RegEx:label,...,RegEx:label] [--title TITLE]
+                [--warmups WARMUPS] [--ymax YMAX] [--ymin YMIN] [--ylog]
+                [--ylabel YLABEL] [--xticklabel-rotation DEGREE] [--no-legend]
+                [--fontsize FONTSIZE]
+                [--pyplot-style seaborn-darkgrid]
+                results
+
+Plots the result of a Benchpress JSON-file (one bar per command)
+
+positional arguments:
+  results               JSON file containing results
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o FILE, --output FILE
+                        Write output to FILE. (default: None)
+  --regex REGEX         How to parse the result of each run. The RegEX should
+                        contain exactly one group. (default: elapsed-time:
+                        ([\d.]+))
+  --py_type {float,int,str}
+                        The Python data type of the parsed results. (default:
+                        float)
+  --labels-to-include RegEx
+                        All labels that match the RegEx are showed. (default:
+                        .*)
+  --labels-to-exclude RegEx
+                        All labels that match the RegEx are ignored. (default:
+                        None)
+  --label-map RegEx:label,...,RegEx:label
+                        Comma separated list of original-to-new-label names
+                        (default: None)
+  --title TITLE         The title of the chart. (default: None)
+  --warmups WARMUPS     Specify the amount of samples from warm-up rounds.
+                        (default: 0)
+  --ymax YMAX           Max value of the y-axis (default: None)
+  --ymin YMIN           Min value of the y-axis (default: None)
+  --ylog                Makes the y-axis logarithmic (default: False)
+  --ylabel YLABEL       Label on the y-axis (default: Elapsed time in seconds)
+  --xticklabel-rotation DEGREE
+                        The rotation of the labels on the x-axis (default: 90)
+  --no-legend           Hide the legend box (default: False)
+  --fontsize FONTSIZE   Fontsize (default: 12)
+  --pyplot-style {seaborn-darkgrid)

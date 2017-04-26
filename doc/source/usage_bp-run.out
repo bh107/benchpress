@@ -1,54 +1,21 @@
-usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--with-perf]
-              [--with-time] [--verbose] [--save-data] [--pre-clean]
-              [--restart] [--publish-cmd COMMAND]
-              [--bh-config-file BH_CONFIG_FILE] [--resume-only] [--slurm]
-              [--no-slurm] [--partition PARTITION] [--multi-jobs] [--wait]
-              [--nice NICE]
-              repos_root suite_file
+usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--slurm]
+              [--partition PARTITION] [--multi-jobs] [--wait] [--nice NICE]
 
-Runs a benchmark suite and stores the results in a json-file.
-
-positional arguments:
-  repos_root            Path to git-repository, revision will be included in
-                        result. Use "NOREPOS" if you do not want it.
-  suite_file            Path to the benchmark suite file.
+Runs a benchmark suite and stores the results in a JSON-file.
 
 optional arguments:
   -h, --help            show this help message and exit
   --output RESULT_FILE  Path to the JSON file where the benchmark results will
                         be written. If the file exist, the benchmark will
                         resume.
-  --runs RUNS           How many times should each benchmark run.
-  --with-perf           Enable the use of the perf measuring tool.
-  --with-time           Enable the use of the '/usr/bin/time -v' measuring
-                        tool.
-  --verbose             Write stdout and stderr to console when executing
-  --save-data           Save data output from benchmarks in RESULT_FILE. All
-                        benchmarks must support the --outputfn argument.
-  --pre-clean           Clean caches such as the fuse or the kernel cache
-                        before execution.
-  --restart             Restart execution or submission of failed jobs.
-  --publish-cmd COMMAND
-                        The publish command to use before exiting (use
-                        together with --wait). NB: $OUT is replaced with the
-                        name of the output JSON file.
-  --bh-config-file BH_CONFIG_FILE
-                        Override the path to the bohrium config.ini file,
-                        which is normally read from ~/.bohrium/config.ini.
-  --resume-only         Ensures that no new jobs will be generated, the script
-                        will always resume a previous run or fail.
+  --runs RUNS           How many times should each command run.
 
 SLURM Queuing System:
-  --slurm               Use the SLURM queuing system. This overwrite the
-                        default value specified in the suite
-                        ('use_slurm_default')
-  --no-slurm            Do not use the SLURM queuing system. This overwrite
-                        the default value specified in the suite
-                        ('use_slurm_default')
+  --slurm               Use the SLURM queuing system.
   --partition PARTITION
                         Submit to a specific SLURM partition.
-  --multi-jobs          Submit 'runs' SLURM jobs instead of one job with
-                        'runs' number of runs.
+  --multi-jobs          Submit 'nruns' SLURM jobs instead of one job with
+                        'nruns' number of runs.
   --wait                Wait for all SLURM jobs to finished before returning.
   --nice NICE           The scheduling priority - range is from -10000
                         (highest priority) to 10000 (lowest priority) where

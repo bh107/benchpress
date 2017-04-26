@@ -2,11 +2,7 @@
 Installation
 ============
 
-Benchpress is distributed via PyPi and Github. Which means that you can install it as a Python package (from PyPi) or use it directly from an unpacked tarball or git-clone from Github.com.
-The installation method of choice is based on what you want to do with Benchpress. Recommendations are as follows.
-
- * Install Benchpress as a Python packages from PyPi if your sole intent is to `run` benchmarks.
- * Use Benchpress directly from clone/tarball if you intend to modify it. Such as adding benchmarks, changing commands or benchmark suites.
+Benchpress is distributed via PyPi and Github, which means that you can install it from a Python package (from PyPi) or directly from an unpacked tarball or git-clone from Github.com.
 
 .. note:: Benchpress is designed to work, with minimal friction, in an environment where the user has limited system permissions. Such as shared computing environments, clusters and supercomputers. A system-wide installation of Benchpress is therefore untested. However, it should work if write permission is assigned to Benchpress users for the ``benchmarks`` folder.
 
@@ -18,7 +14,7 @@ The following shows how to do a user-mode / local installation::
 
   pip install benchpress --user
 
-Extend your ``$PATH``, such that the commands (`bp-info`, `bp-run`, `bp-times`, `bp-compile`, `and bp-grapher`) are readily available::
+Extend your ``$PATH``, such that the commands (`bp-run`, `bp-run`, `bp-cli`, `bp-chart`) are readily available::
 
   export PATH=$PATH:$HOME/.local/bin
 
@@ -40,8 +36,12 @@ or download and unpack a tarball::
   tar xzvf master.tar.gz
   cd bohrium-benchpress-*
 
-For Benchpress to operate correctly you `must` extend the two ``PATH`` and ``PYTHONPATH``. Extend ``PATH`` to include the subfolder ``bin`` and extend ``PYTHONPATH`` to include the subfolder ``module``. You can do this in whatever way your system requires, you will most likely be able to do the following::
+And install it::
 
-  source util/setbpenv.bash
+  pip install . --user
 
-Make sure you persists the changes.
+
+When developing Benchpress use PyPi's developer installation:
+
+  pip install . --user -e
+

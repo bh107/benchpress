@@ -17,7 +17,6 @@ Contents:
 |    usage_commands            |    benchmarks/*              |
 |    usage_examples            |                              |
 |    usage_suites              |                              |
-|    protocol                  |                              |
 |    implementing              |                              |
 +------------------------------+------------------------------+
 

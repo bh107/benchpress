@@ -1,0 +1,29 @@
+usage: bp-cli [-h] [-o FILE] [--regex REGEX] [--py_type {float,int,str}]
+              [--labels-to-include RegEx] [--labels-to-exclude RegEx]
+              [--label-map RegEx:label,...,RegEx:label]
+              results
+
+Prints the result of a Benchpress JSON-file.
+
+positional arguments:
+  results               JSON file containing results
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o FILE, --output FILE
+                        Write output to FILE. (default: None)
+  --regex REGEX         How to parse the result of each run. The RegEX should
+                        contain exactly one group. (default: elapsed-time:
+                        ([\d.]+))
+  --py_type {float,int,str}
+                        The Python data type of the parsed results. (default:
+                        float)
+  --labels-to-include RegEx
+                        All labels that match the RegEx are showed. (default:
+                        .*)
+  --labels-to-exclude RegEx
+                        All labels that match the RegEx are ignored. (default:
+                        None)
+  --label-map RegEx:label,...,RegEx:label
+                        Comma separated list of original-to-new-label names
+                        (default: None)

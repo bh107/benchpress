@@ -2,6 +2,8 @@
 Implementing Benchmarks
 =======================
 
+Some benchmark implementation examples.
+
 Python
 ------
 

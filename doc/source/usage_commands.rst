@@ -2,31 +2,22 @@
 Usage - Commands
 ================
 
-Benchpress provides the following commands: ``bp-info``, ``bp-run``, ``bp-times``, ``bp-compile``, and ``bp-grapher``.
+Benchpress provides the following binaries: ``bp-run``, ``bp-cli``, ``bp-chart``.
 See below for details on invoking them and see section :ref:`usage_examples` for examples of using the commands.
 
 bp-info
 -------
 
-.. literalinclude:: usage_bp-info.out
-
-bp-run
-------
-
 .. literalinclude:: usage_bp-run.out
 
-bp-times
+bp-cli
+------
+
+.. literalinclude:: usage_bp-cli.out
+
+bp-chart
 --------
 
-.. literalinclude:: usage_bp-times.out
+.. literalinclude:: usage_bp-chart.out
 
-bp-grapher
-----------
-
-.. literalinclude:: usage_bp-grapher.out
-
-bp-compile
-----------
-
-.. literalinclude:: usage_bp-compile.out
 

@@ -247,9 +247,6 @@ def benchmark_sections(benchmarks):
 def implementations(search_path, verbose=False):
     """Walks through the filesystem looking for benchmark implementations."""
 
-    APP_NAME = 'benchpress'
-    APP_VERSION = '1.0'
-
     ignore_dirs  = ["_utils", "_doc"]
     ignore_files = ['empty', 'readme.rst', 'dogma.rst', '.DS_Store', 'README.rst', 'issues.rst', 'bohrium.rst', 'Makefile', '.gitignore']
 
