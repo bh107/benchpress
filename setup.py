@@ -27,8 +27,11 @@ setup(
     url='http://benchpress.readthedocs.io',
 
     # Author details
-    author='Mads R. B. Kristensen',
-    author_email='madsbk@gmail.com',
+    author='The Benchpress Team',
+    author_email='benchpress@bh107.org',
+    maintainer='Mads R. B. Kristensen',
+    maintainer_email='madsbk@gmail.com',
+    platforms=['Linux', 'OSX'],
 
     # Choose your license
     license='GPL',
@@ -55,7 +58,7 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='Benchmark, Bohrium',
+    keywords='Benchmark, Bohrium, bh107',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
@@ -69,7 +72,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-   # install_requires=['peppercorn'],
+    install_requires=['numpy'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
