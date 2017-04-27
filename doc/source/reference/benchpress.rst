@@ -1,5 +1,5 @@
-Package
-=======
+Benchpress
+----------
 
 .. automodule:: benchpress.benchpress
     :members:
