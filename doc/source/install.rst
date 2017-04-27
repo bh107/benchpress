@@ -14,7 +14,7 @@ The following shows how to do a user-mode / local installation::
 
   pip install benchpress --user
 
-Extend your ``$PATH``, such that the commands (`bp-run`, `bp-run`, `bp-cli`, `bp-chart`) are readily available::
+Extend your ``$PATH``, such that the binaries (`bp-run`, `bp-run`, `bp-cli`, `bp-chart`) are readily available::
 
   export PATH=$PATH:$HOME/.local/bin
 
