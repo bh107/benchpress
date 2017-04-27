@@ -53,11 +53,6 @@ def _bash_job(cmd, nruns=1):
 def create_suite(cmd_list):
     """Create a suite file (JSON) based on a list of commands
     
-    A command is a Python `dict` with the keys:
-        {'label': 'Human readable label', 
-         'cmd': 'the bash command to execute, 
-         'env': 'a `dict` of environment variables to define before execution'}
-    
     Parameters
     ----------
     cmd_list : list of dict
@@ -98,11 +93,7 @@ def create_suite(cmd_list):
 def command(cmd, label, env={}):
     """Create a Benchpress command, which define a single benchmark execution
 
-    This is a help function to create a Benchpress command:
-    A Benchpress command is a Python `dict` with the keys:
-        {'label': 'Human readable label', 
-         'cmd': 'the bash command to execute, 
-         'env': 'a `dict` of environment variables to define before execution'}
+    This is a help function to create a Benchpress command, which is a Python `dict` of the parameters given.
 
     Parameters
     ----------

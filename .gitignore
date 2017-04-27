@@ -25,4 +25,6 @@ benchmarks/reactiondiffusion/csharp_numcil/src/obj
 benchmarks/shallow_water/csharp_numcil/src/obj
 benchmarks/xraysim/python_numpy/materials
 
+doc/source/autodoc_benchmarks/*.rst
+
 *.userprefs

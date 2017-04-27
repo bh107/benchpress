@@ -10,21 +10,13 @@ Contents:
 
 +------------------------------+------------------------------+
 | .. toctree::                 | .. toctree::                 |
-|    :maxdepth: 2              |    :maxdepth: 1              |
-|                              |    :glob:                    |
+|    :maxdepth: 2              |    :maxdepth: 2              |
+|                              |                              |
 |    quickstart                |                              |
 |    install                   |                              |
-|    usage_commands            |    benchmarks/*              |
+|    usage_commands            |    benchmarks                |
 |    usage_examples            |                              |
 |    usage_suites              |                              |
 |    implementing              |                              |
+|    reference/index           |                              |
 +------------------------------+------------------------------+
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

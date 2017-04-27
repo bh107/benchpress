@@ -331,8 +331,12 @@ def implementations(search_path, verbose=False):
 def main():
     benchmarks = implementations(os.path.join(_script_path(), "..", "..", "benchmarks"))
 
+    out_dir = os.path.join(_script_path(), "autodoc_benchmarks")
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
+
     index = benchmark_index(benchmarks)
-    with open(os.path.join(_script_path(), "benchmarks", "autodoc_index.rst"), 'w') as fd:
+    with open(os.path.join(out_dir, "autodoc_index.rst"), 'w') as fd:
         fd.write("==========\n")
         fd.write("Benchmarks\n")
         fd.write("==========\n")
@@ -344,7 +348,7 @@ def main():
     bench_labels = [lbl for lbl in sections]
     bench_labels.sort()
     for bench_lbl in bench_labels:
-        with open(os.path.join(_script_path(), "benchmarks", "%s.rst" % bench_lbl), 'w') as fd:
+        with open(os.path.join(out_dir, "%s.rst" % bench_lbl), 'w') as fd:
             fd.write(sections[bench_lbl])
             bench_lbl_listing.append(bench_lbl)
 

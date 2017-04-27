@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+Utilities for Generating Commands 
+---------------------------------
+"""
 
 import os
 from os.path import join, realpath
