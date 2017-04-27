@@ -48,7 +48,6 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary',
-    'numpydoc',
 ]
 
 todo_include_todos=True
