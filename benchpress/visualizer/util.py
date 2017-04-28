@@ -191,7 +191,7 @@ def default_argparse(description):
         help="How to parse the result of each run. The RegEX should contain exactly one group."
     )
     parser.add_argument(
-        "--py_type",
+        "--py-type",
         choices=['float', 'int', 'str'],
         default='float',
         # Convert the choice represented as a string to a Python type object e.g. "float" => float
