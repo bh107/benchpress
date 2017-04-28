@@ -6,11 +6,23 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 import os
+import re
 
 
 def _script_path():
     """Returns the path to the dir this script is in"""
     return os.path.dirname(os.path.realpath(__file__))
+
+
+def find_data_files(relative_to, directory, regex_exclude="\.pyc|{0}bin{0}|{0}obj{0}".format(os.sep)):
+    ret = []
+    for root, _, filenames in os.walk(os.path.join(relative_to, directory)):
+        for filename in filenames:
+            fullname = os.path.join(root, filename)
+            if not re.search(regex_exclude, fullname):
+                # NB: we remove the 'relative_to' part of the path
+                ret.append(fullname[len(os.path.normpath(relative_to))+1:])
+    return ret
 
 
 # Get the long description from the README file
@@ -90,9 +102,10 @@ setup(
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
-   # package_data={
-   #     'sample': ['package_data.dat'],
-   # },
+    package_data={
+        'benchpress': find_data_files("benchpress", "benchmarks") +
+                      find_data_files("benchpress", "suites"),
+    },
 
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:

@@ -14,7 +14,7 @@ def _script_path():
 
 
 # The path to the root of benchpress
-BP_ROOT = realpath(join(_script_path(), ".."))
+BP_ROOT = realpath(join(_script_path()))
 
 
 def benchmark_path(name, implementation, extension):

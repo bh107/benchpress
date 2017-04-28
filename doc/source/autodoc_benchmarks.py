@@ -16,7 +16,7 @@ lang_pygment = {
 }
 lang_order  = ['py', 'c', 'cpp', 'cs']
 
-benchmarks_relpath = os.path.join("..", "..", "..", "benchmarks")
+benchmarks_relpath = os.path.join("..", "..", "..", "benchpress", "benchmarks")
 
 
 def _script_path():
@@ -138,7 +138,7 @@ def benchmark_index(benchmarks):
 
     table= RstTable([], rows)
 
-    header_row      = ["%d Benchmarks "% benchmarks["__meta__"]["nbenchs"]]
+    header_row      = ["%d Benchmarks " % benchmarks["__meta__"]["nbenchs"]]
     header_widths   = [table.col_widths[0]]
 
     cidx = 1
@@ -329,7 +329,7 @@ def implementations(search_path, verbose=False):
 
 
 def main():
-    benchmarks = implementations(os.path.join(_script_path(), "..", "..", "benchmarks"))
+    benchmarks = implementations(os.path.join(_script_path(), "..", "..", "benchpress", "benchmarks"))
 
     out_dir = os.path.join(_script_path(), "autodoc_benchmarks")
     if not os.path.exists(out_dir):
