@@ -38,6 +38,7 @@ def main(args):
         bash_cmd('git clean -xdf', cwd=bp_dir)
 
     # Update the repos
+    bash_cmd('git checkout master', cwd=bp_dir)
     ret = bash_cmd('git pull', cwd=bp_dir)
     if args.only_on_changes and 'Already up-to-date' in ret:
         log += "No changes to the git repos, exiting."
