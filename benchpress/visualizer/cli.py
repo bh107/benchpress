@@ -16,12 +16,12 @@ def visualize(args):
         values = []
         for job in cmd['jobs']:
             for res in job['results']:
-                match = re.search(args.regex, res['stdout'])
+                match = re.search(args.parse_regex, res['stdout'])
                 if res['success'] and match:
                     values.append(args.py_type(match.group(1)))
                 else:
                     values.append("N/A")
-        succeed_values = util.extract_succeed_results(cmd, args.regex, args.py_type)
+        succeed_values = util.extract_succeed_results(cmd, args.parse_regex, args.py_type)
         mean = util.mean(succeed_values)
         std = util.standard_deviation(succeed_values)
         if args.csv:

@@ -185,7 +185,7 @@ def default_argparse(description):
         help="Write output to FILE."
     )
     parser.add_argument(
-        "--regex",
+        "--parse-regex",
         type=str,
         default='elapsed-time: ([\d.]+)',
         help="How to parse the result of each run. The RegEX should contain exactly one group."

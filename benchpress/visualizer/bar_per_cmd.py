@@ -44,7 +44,7 @@ def one_bar_per_cmd(args):
     values = []
     std = []
     for cmd in cmd_list:
-        res = util.extract_succeed_results(cmd, args.regex, args.py_type)
+        res = util.extract_succeed_results(cmd, args.parse_regex, args.py_type)
         if len(res) == 0:
             res = [0]
         values.append(util.mean(res))
