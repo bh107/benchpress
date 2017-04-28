@@ -5,12 +5,16 @@
 from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
-from os import path
+import os
 
-here = path.abspath(path.dirname(__file__))
+
+def _script_path():
+    """Returns the path to the dir this script is in"""
+    return os.path.dirname(os.path.realpath(__file__))
+
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(_script_path(), 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
