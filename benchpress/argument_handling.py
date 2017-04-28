@@ -59,6 +59,14 @@ def args():
     return _args
 
 
+def add_argument(*args, **kwargs):
+    """
+    add_argument(dest, ..., name=value, ...)
+    add_argument(option_string, option_string, ..., name=value, ...)
+    """
+    return _parser.add_argument(*args, **kwargs)
+
+
 def error(msg):
     """Raise an argparse error"""
-    _parser.error(msg)
+    return _parser.error(msg)

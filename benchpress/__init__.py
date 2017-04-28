@@ -16,6 +16,7 @@ from pkg_resources import get_distribution, DistributionNotFound
 import util
 import visualizer
 import suite_util
+import argument_handling
 from .benchpress import *
 
 # Set the package version
