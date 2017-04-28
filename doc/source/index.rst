@@ -13,8 +13,9 @@ Contents:
 |    :maxdepth: 2              |    :maxdepth: 2              |
 |                              |                              |
 |    quickstart                |                              |
-|    install                   |                              |
+|    install                   |    suites                    |
 |    usage_commands            |    benchmarks                |
+|    implementing              |                              |
 |    implementing              |                              |
 |    reference/index           |                              |
 +------------------------------+------------------------------+
