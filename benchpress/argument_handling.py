@@ -15,6 +15,11 @@ _parser.add_argument(
     type=int,
     help="How many times should each command run."
 )
+_parser.add_argument(
+    '--dirty',
+    action="store_true",
+    help="Do no clean up."
+)
 
 
 slurm_grp = _parser.add_argument_group('SLURM Queuing System')

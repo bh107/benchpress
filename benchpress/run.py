@@ -28,22 +28,39 @@ def write2json(json_file, obj):
 def job_execute_locally(job, verbose=False):
     """Execute the job locally"""
 
-    with open(job['filename'], 'w') as f:
-        # First we have to write the bash script to a file
-        f.write(job['script'])
-        f.flush()
-        os.fsync(f)
-        # Then we execute the bash script
+    try:
+        with open(job['filename'], 'w') as f:
+            # First we have to write the bash script to a file
+            f.write(job['script'])
+            f.flush()
+            os.fsync(f)
+            # Then we execute the bash script
+            try:
+                p = Popen(['bash', f.name], stdout=PIPE)
+                if verbose:
+                    while p.poll() is None:
+                        print (p.stdout.readline())
+                    print (p.stdout.read())
+                p.wait()
+            except KeyboardInterrupt:
+                p.kill()
+                if not args().dirty:
+                    for i in range(job['nruns']):
+                        base = "%s-%d" % (job['filename'], i)
+                        stdout = "%s.out" % base
+                        stderr = "%s.err" % base
+                        try:
+                            os.remove(stdout)
+                            os.remove(stderr)
+                        except OSError:
+                            pass
+                raise KeyboardInterrupt()   
+    finally:
         try:
-            p = Popen(['bash', f.name], stdout=PIPE)
-            if verbose:
-                while p.poll() is None:
-                    print (p.stdout.readline())
-                print (p.stdout.read())
-            p.wait()
-        except KeyboardInterrupt:
-            p.kill()
-            raise
+            if not args().dirty:
+                os.remove(job['filename'])
+        except OSError:
+            pass
 
 
 def job_gather_results(job):
@@ -67,8 +84,9 @@ def job_gather_results(job):
                     if len(result['stderr']) > 0:
                         print ("%sSTDERR:%s" % (C.WARN, C.END))
                         print ("%s\t%s%s" % (C.FAIL, result['stderr'].replace('\n', '\n\t'), C.END))
-            os.remove(stdout)
-            os.remove(stderr)
+            if not args().dirty:
+                os.remove(stdout)
+                os.remove(stderr)
         except IOError:
             print (C.WARN, "Could not find the stdout and/or the stderr file", C.END)
         # Append result of the run
