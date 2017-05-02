@@ -35,7 +35,7 @@ def one_bar_per_cmd(args):
     pylab.gca().set_axisbelow(True)
     plt.style.use(args.pyplot_style)
 
-    cmd_list = json.load(args.results)
+    cmd_list = json.load(args.results)['cmd_list']
     cmd_list = util.filter_cmd_list(cmd_list, args.labels_to_include, args.labels_to_exclude)
     (cmd_list, label_map) = util.translate_dict(cmd_list, args.label_map)
 

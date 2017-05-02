@@ -103,7 +103,8 @@ def main():
     print ("Running benchmark; results are written to: %s" % args().output)
     try:
         with open(args().output, 'r+') as json_file:
-            cmd_list = json.load(json_file)
+            suite = json.load(json_file)
+            cmd_list = suite['cmd_list']
             for cmd in cmd_list:
                 for job in cmd['jobs']:
                     if job['status'] == 'pending':
@@ -115,7 +116,7 @@ def main():
                             job['status'] = 'finished'
                         else:
                             job['status'] = 'failed'
-                        write2json(json_file, cmd_list)
+                        write2json(json_file, suite)
         print ("%sFinished execution, result written in '%s'%s" % (C.WARN, args().output, C.END))
     except KeyboardInterrupt:
         print ("%sSuspending the benchmark execution, "

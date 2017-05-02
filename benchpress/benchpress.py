@@ -4,6 +4,7 @@ import os
 import uuid
 import tempfile
 from argument_handling import args
+import time_util
 
 
 def _check_cmd(cmd_list):
@@ -77,8 +78,14 @@ def create_suite(cmd_list):
         print ("Scheduling '%s': '%s'" % (cmd['label'], cmd['cmd']))
         cmd['jobs'] = [_bash_job(cmd, nruns=nruns_per_job) for _ in range(njobs)]
 
+    # Beside the commands list, the suite file contains other relevant information:
+    suite_dict = {
+        'cmd_list': cmd_list,
+        'creation_date_utc': time_util.utcnow_str(),
+    }
+
     # Write the json file at an user specified or temporary location
-    json_string = json.dumps(cmd_list, indent=4)
+    json_string = json.dumps(suite_dict, indent=4)
     if args().output is None:
         f = tempfile.NamedTemporaryFile(delete=False, prefix='benchpress-', suffix='.json')
     else:
@@ -103,6 +110,11 @@ def command(cmd, label, env={}):
         The human readable label of the command
     env : dict
         The Python dictionary of environment variables to define before execution'
+        
+    Returns
+    -------
+    command : dict
+        The created Benchpress command        
     """
     return {'cmd': cmd,
             'label': label,

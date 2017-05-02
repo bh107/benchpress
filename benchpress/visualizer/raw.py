@@ -8,7 +8,7 @@ def visualize(args):
     """Return the visualized output"""
 
     ret = ""
-    cmd_list = json.load(args.results)
+    cmd_list = json.load(args.results)['cmd_list']
     cmd_list = util.filter_cmd_list(cmd_list, args.labels_to_include, args.labels_to_exclude)
     (cmd_list, label_map) = util.translate_dict(cmd_list, args.label_map)
     for cmd in cmd_list:
