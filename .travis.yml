@@ -8,4 +8,6 @@ before_install:
   - pip install . --user
 
 script:
+  - export
+  - ls ~/.local/lib
   - python -m benchpress.testing
