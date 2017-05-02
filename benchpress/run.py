@@ -54,7 +54,7 @@ def job_execute_locally(job, verbose=False):
                             os.remove(stderr)
                         except OSError:
                             pass
-                raise KeyboardInterrupt()   
+                raise KeyboardInterrupt()
     finally:
         try:
             if not args().dirty:
@@ -116,6 +116,7 @@ def main():
                         else:
                             job['status'] = 'failed'
                         write2json(json_file, cmd_list)
+        print ("%sFinished execution, result written in '%s'%s" % (C.WARN, args().output, C.END))
     except KeyboardInterrupt:
         print ("%sSuspending the benchmark execution, "
                "continue with: 'bp-run --output %s'%s" % (C.WARN, args().output, C.END))
