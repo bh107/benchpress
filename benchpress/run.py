@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import
 import os
 import json
 from subprocess import Popen, PIPE
-import argument_handling
-from argument_handling import args
+from . import argument_handling
+from .argument_handling import args
 
 
 class C:

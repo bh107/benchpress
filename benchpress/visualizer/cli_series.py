@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import
 import json
-import re
 from benchpress.visualizer import util
 from benchpress import time_util
 

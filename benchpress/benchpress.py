@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 import json
 import os
 import uuid
 import tempfile
-from argument_handling import args
-import time_util
+from .argument_handling import args
+from . import time_util
 
 
 def _check_cmd(cmd_list):

@@ -1,4 +1,5 @@
-import re
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
 import json
 import numpy as np
 from benchpress.visualizer import util

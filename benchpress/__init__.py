@@ -12,12 +12,13 @@ The workflow:
     - Use a visualizer such as `bp-cli` or `bp-chart` to visualize the results within the JSON file
 
 """
+from __future__ import absolute_import
 from pkg_resources import get_distribution, DistributionNotFound
-import util
-import visualizer
-import suite_util
-import argument_handling
-import time_util
+from . import util
+from . import visualizer
+from . import suite_util
+from . import argument_handling
+from . import time_util
 from .benchpress import *
 
 # Set the package version
