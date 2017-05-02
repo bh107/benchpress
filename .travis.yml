@@ -5,7 +5,8 @@ python:
 
 before_install:
   - ls
-  - pip install . --user
+  - export
+  - pip install .
 
 script:
   - export
