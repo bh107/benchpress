@@ -82,20 +82,25 @@ def main():
     if args().output is None:
         argument_handling.error("When running, please set argument '--output'")
 
-    with open(args().output, 'r+') as json_file:
-        cmd_list = json.load(json_file)
-        for cmd in cmd_list:
-            for job in cmd['jobs']:
-                if job['status'] == 'pending':
-                    # The user wants local execution
-                    print ("Executing '%s'" % (cmd['label']))
-                    job_execute_locally(job)
-                    job['results'] = job_gather_results(job)
-                    if all(res['success'] for res in job['results']):
-                        job['status'] = 'finished'
-                    else:
-                        job['status'] = 'failed'
-                    write2json(json_file, cmd_list)
+    print ("Running benchmark; results are written to: %s" % args().output)
+    try:
+        with open(args().output, 'r+') as json_file:
+            cmd_list = json.load(json_file)
+            for cmd in cmd_list:
+                for job in cmd['jobs']:
+                    if job['status'] == 'pending':
+                        # The user wants local execution
+                        print ("Executing '%s'" % (cmd['label']))
+                        job_execute_locally(job)
+                        job['results'] = job_gather_results(job)
+                        if all(res['success'] for res in job['results']):
+                            job['status'] = 'finished'
+                        else:
+                            job['status'] = 'failed'
+                        write2json(json_file, cmd_list)
+    except KeyboardInterrupt:
+        print ("%sSuspending the benchmark execution, "
+               "continue with: 'bp-run --output %s'%s" % (C.WARN, args().output, C.END))
 
 
 if __name__ == "__main__":
