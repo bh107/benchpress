@@ -4,11 +4,7 @@ python:
   - "2.7"
 
 before_install:
-  - ls
-  - export
   - pip install .
 
 script:
-  - export
-  - ls ~/.local/lib
   - python -m benchpress.testing
