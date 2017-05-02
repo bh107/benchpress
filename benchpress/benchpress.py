@@ -52,13 +52,15 @@ def _bash_job(cmd, nruns=1):
     return {'status': 'pending', 'filename': filename, 'nruns': nruns, 'script': bash}
 
 
-def create_suite(cmd_list):
+def create_suite(cmd_list, output_path=None):
     """Create a suite file (JSON) based on a list of commands
     
     Parameters
     ----------
     cmd_list : list of dict
         List of commands that makes up this benchmark suite. 
+    output_path : str
+        Path to the output file when the `--output` argument is unset. If `None`, a path to a temporary file is used.  
         
     See Also
     --------
@@ -87,10 +89,13 @@ def create_suite(cmd_list):
 
     # Write the json file at an user specified or temporary location
     json_string = json.dumps(suite_dict, indent=4)
-    if args().output is None:
-        f = tempfile.NamedTemporaryFile(delete=False, prefix='benchpress-', suffix='.json')
-    else:
+    if args().output is not None:
         f = open(args().output, 'w')
+    elif output_path is not None:
+        f = open(output_path, 'w')
+    else:
+        f = tempfile.NamedTemporaryFile(delete=False, prefix='benchpress-', suffix='.json')
+
     f.write(json_string)
     f.flush()
     os.fsync(f.fileno())
