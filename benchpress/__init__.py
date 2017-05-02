@@ -17,6 +17,7 @@ import util
 import visualizer
 import suite_util
 import argument_handling
+import time_util
 from .benchpress import *
 
 # Set the package version
