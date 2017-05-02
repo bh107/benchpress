@@ -1,14 +1,18 @@
-usage: bp-run [-h] [--output RESULT_FILE] [--runs RUNS] [--slurm]
-              [--partition PARTITION] [--multi-jobs] [--wait] [--nice NICE]
+usage: bp-run [-h] [--runs RUNS] [--dirty] [--slurm] [--partition PARTITION]
+              [--multi-jobs] [--wait] [--nice NICE]
+              suite
 
 Runs a benchmark suite and stores the results in a JSON-file.
 
+positional arguments:
+  suite                 Path to the JSON file where the benchmark results will
+                        be read and written. If the file exist, the benchmark
+                        will resume.
+
 optional arguments:
   -h, --help            show this help message and exit
-  --output RESULT_FILE  Path to the JSON file where the benchmark results will
-                        be written. If the file exist, the benchmark will
-                        resume.
   --runs RUNS           How many times should each command run.
+  --dirty               Do no clean up.
 
 SLURM Queuing System:
   --slurm               Use the SLURM queuing system.

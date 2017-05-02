@@ -16,7 +16,7 @@ Use the GCC config::
 
 And then *run* the suite::
 
-    bp-run --output nas_suite.json
+    bp-run nas_suite.json
     
 Finally, check the result:: 
 

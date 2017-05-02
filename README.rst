@@ -50,7 +50,7 @@ And run the script::
 The result is a JSON file `results.json` that encapsulate the commands that make up the benchmark suite.
 Now, use `bp-run` to run the benchmark suite::
 
-    $bp-run --output results.json
+    $bp-run results.json
     Executing 'X-ray/10*10*1'
     Executing 'X-ray/20*10*1'
     Executing 'Bean/10000*10'

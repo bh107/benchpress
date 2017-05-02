@@ -2,9 +2,9 @@
 from __future__ import absolute_import
 import os
 import json
+import argparse
 from subprocess import Popen, PIPE
 from . import argument_handling
-from .argument_handling import args
 
 
 class C:
@@ -25,7 +25,7 @@ def write2json(json_file, obj):
     os.fsync(json_file)
 
 
-def job_execute_locally(job, verbose=False):
+def job_execute_locally(job, verbose=False, dirty=False):
     """Execute the job locally"""
 
     try:
@@ -44,7 +44,7 @@ def job_execute_locally(job, verbose=False):
                 p.wait()
             except KeyboardInterrupt:
                 p.kill()
-                if not args().dirty:
+                if not dirty:
                     for i in range(job['nruns']):
                         base = "%s-%d" % (job['filename'], i)
                         stdout = "%s.out" % base
@@ -57,13 +57,13 @@ def job_execute_locally(job, verbose=False):
                 raise KeyboardInterrupt()
     finally:
         try:
-            if not args().dirty:
+            if not dirty:
                 os.remove(job['filename'])
         except OSError:
             pass
 
 
-def job_gather_results(job):
+def job_gather_results(job, dirty=False):
     """Gather the results of the bash job. NB: the job must be finished!"""
 
     ret = []
@@ -84,7 +84,7 @@ def job_gather_results(job):
                     if len(result['stderr']) > 0:
                         print ("%sSTDERR:%s" % (C.WARN, C.END))
                         print ("%s\t%s%s" % (C.FAIL, result['stderr'].replace('\n', '\n\t'), C.END))
-            if not args().dirty:
+            if not dirty:
                 os.remove(stdout)
                 os.remove(stderr)
         except IOError:
@@ -97,30 +97,76 @@ def job_gather_results(job):
 def main():
     """Run the commands in the '--output' JSON file not already finished"""
 
-    if args().output is None:
-        argument_handling.error("When running, please set argument '--output'")
+    parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a JSON-file.')
+    parser.add_argument(
+        'suite',
+        type=argparse.FileType('r+'),
+        help='Path to the JSON file where the benchmark results will be read and written. '
+             'If the file exist, the benchmark will resume.'
+    )
+    parser.add_argument(
+        '--runs',
+        default=3,
+        type=int,
+        help="How many times should each command run."
+    )
+    parser.add_argument(
+        '--dirty',
+        action="store_true",
+        help="Do no clean up."
+    )
 
-    print ("Running benchmark; results are written to: %s" % args().output)
+    slurm_grp = parser.add_argument_group('SLURM Queuing System')
+    slurm_grp.add_argument(
+        '--slurm',
+        action="store_true",
+        help="Use the SLURM queuing system."
+    )
+    slurm_grp.add_argument(
+        '--partition',
+        type=str,
+        help="Submit to a specific SLURM partition."
+    )
+    slurm_grp.add_argument(
+        '--multi-jobs',
+        action="store_true",
+        help="Submit 'nruns' SLURM jobs instead of one job with 'nruns' number of runs."
+    )
+    slurm_grp.add_argument(
+        '--wait',
+        action="store_true",
+        help="Wait for all SLURM jobs to finished before returning."
+    )
+    slurm_grp.add_argument(
+        '--nice',
+        type=int,
+        help="The scheduling priority - range is from -10000 (highest priority) to "
+             "10000 (lowest  priority) where zero is default.  Only  privileged  "
+             "users can specify a negative priority.",
+        default=0
+    )
+    args = parser.parse_args()
+
+    print ("Running benchmark; results are written to: %s" % args.suite.name)
     try:
-        with open(args().output, 'r+') as json_file:
-            suite = json.load(json_file)
-            cmd_list = suite['cmd_list']
-            for cmd in cmd_list:
-                for job in cmd['jobs']:
-                    if job['status'] == 'pending':
-                        # The user wants local execution
-                        print ("Executing '%s'" % (cmd['label']))
-                        job_execute_locally(job)
-                        job['results'] = job_gather_results(job)
-                        if all(res['success'] for res in job['results']):
-                            job['status'] = 'finished'
-                        else:
-                            job['status'] = 'failed'
-                        write2json(json_file, suite)
-        print ("%sFinished execution, result written in '%s'%s" % (C.WARN, args().output, C.END))
+        suite = json.load(args.suite)
+        cmd_list = suite['cmd_list']
+        for cmd in cmd_list:
+            for job in cmd['jobs']:
+                if job['status'] == 'pending':
+                    # The user wants local execution
+                    print ("Executing '%s'" % (cmd['label']))
+                    job_execute_locally(job)
+                    job['results'] = job_gather_results(job)
+                    if all(res['success'] for res in job['results']):
+                        job['status'] = 'finished'
+                    else:
+                        job['status'] = 'failed'
+                    write2json(args.suite, suite)
+        print ("%sFinished execution, result written in '%s'%s" % (C.WARN, args.suite.name, C.END))
     except KeyboardInterrupt:
         print ("%sSuspending the benchmark execution, "
-               "continue with: 'bp-run --output %s'%s" % (C.WARN, args().output, C.END))
+               "continue with: 'bp-run %s'%s" % (C.WARN, args.suite.name, C.END))
 
 
 if __name__ == "__main__":
