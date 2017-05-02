@@ -5,6 +5,15 @@ import re
 import math
 
 
+class Color:
+    HEAD = '\033[95m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    WARN = '\033[93m'
+    FAIL = '\033[91m'
+    END = '\033[0m'
+
+
 def filter_cmd_list(cmd_list, regex_to_include=".*", regex_to_exclude=None, dict_key='label'):
     """Filter a list of Benchpress commands
 
