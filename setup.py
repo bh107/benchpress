@@ -122,6 +122,7 @@ setup(
             'bp-cli=benchpress.visualizer.cli:main',
             'bp-chart=benchpress.visualizer.bar_per_cmd:main',
             'bp-raw=benchpress.visualizer.raw:main',
+            'bp-cli-series=benchpress.visualizer.cli_series:main',
         ],
     },
 )
