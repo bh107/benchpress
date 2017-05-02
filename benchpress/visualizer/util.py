@@ -162,7 +162,7 @@ def extract_succeed_results(cmd, regex, py_type=int, dict_key='stdout'):
     return ret
 
 
-def default_argparse(description):
+def default_argparse(description, multiple_result_files = False):
     """Get the default argparse object
     
     Call .parse_args() on the returned object to get the arguments 
@@ -181,11 +181,20 @@ def default_argparse(description):
         description=description,
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    parser.add_argument(
-        "results",
-        type=argparse.FileType('r'),
-        help="JSON file containing results"
-    )
+    if multiple_result_files:
+        parser.add_argument(
+            "results",
+            type=argparse.FileType('r'),
+            nargs='+',
+            help="JSON file containing results (accept multiple files)"
+        )
+    else:
+        parser.add_argument(
+            "results",
+            metavar="file_list",
+            type=argparse.FileType('r'),
+            help="JSON file containing results"
+        )
     parser.add_argument(
         "-o", "--output",
         type=argparse.FileType('w'),
