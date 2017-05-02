@@ -121,6 +121,7 @@ setup(
             'bp-run=benchpress.run:main',
             'bp-cli=benchpress.visualizer.cli:main',
             'bp-chart=benchpress.visualizer.bar_per_cmd:main',
+            'bp-raw=benchpress.visualizer.raw:main',
         ],
     },
 )
