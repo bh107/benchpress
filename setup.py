@@ -120,9 +120,10 @@ setup(
         'console_scripts': [
             'bp-run=benchpress.run:main',
             'bp-cli=benchpress.visualizer.cli:main',
-            'bp-chart=benchpress.visualizer.bar_per_cmd:main',
             'bp-raw=benchpress.visualizer.raw:main',
             'bp-cli-series=benchpress.visualizer.cli_series:main',
+            'bp-chart=benchpress.visualizer.bar_per_cmd:main',
+            'bp-chart-series=benchpress.visualizer.series_per_cmd:main',
         ],
     },
 )
