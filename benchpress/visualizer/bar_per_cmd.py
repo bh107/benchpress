@@ -79,9 +79,22 @@ def one_bar_per_cmd(args):
         fname = args.output.name
         fformat = fname.split('.')[-1]
         print ("Writing file '%s' using format '%s'." % (fname, fformat))
-        pylab.savefig(args.output, format=fformat)
+        if args.mpld3:
+            import mpld3
+            if fformat == "html":
+                mpld3.save_html(fig, args.output)
+            elif fformat == "json":
+                mpld3.save_json(fig, args.output)
+            else:
+                raise ValueError("--mpld3: The output must be either `html` or `json`")
+        else:
+            pylab.savefig(args.output, format=fformat)
     else:
-        pylab.show()
+        if args.mpld3:
+            import mpld3
+            mpld3.show()
+        else:
+            pylab.show()
 
 
 def main():
@@ -143,6 +156,11 @@ def main():
         type=str,
         choices=plt.style.available,
         help="The matplotlib.pyplot.style to use"
+    )
+    parser.add_argument(
+        '--mpld3',
+        action='store_true',
+        help="Generate mpld3 plots <https://mpld3.github.io>"
     )
     args = parser.parse_args()
     one_bar_per_cmd(args)
