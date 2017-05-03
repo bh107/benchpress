@@ -162,7 +162,7 @@ def extract_succeed_results(cmd, regex, py_type=int, dict_key='stdout'):
     return ret
 
 
-def default_argparse(description, multiple_result_files = False):
+def default_argparse(description, multiple_result_files=False):
     """Get the default argparse object
     
     Call .parse_args() on the returned object to get the arguments 
@@ -171,6 +171,9 @@ def default_argparse(description, multiple_result_files = False):
     ----------
     description : str
         ArgumentParser description
+        
+    multiple_result_files : bool
+        When True, the `results` arg is a list of suite files
     
     Returns
     -------
@@ -184,6 +187,7 @@ def default_argparse(description, multiple_result_files = False):
     if multiple_result_files:
         parser.add_argument(
             "results",
+            metavar="FILE",
             type=argparse.FileType('r'),
             nargs='+',
             help="JSON file containing results (accept multiple files)"
@@ -191,7 +195,7 @@ def default_argparse(description, multiple_result_files = False):
     else:
         parser.add_argument(
             "results",
-            metavar="file_list",
+            metavar="FILE_LIST",
             type=argparse.FileType('r'),
             help="JSON file containing results"
         )
