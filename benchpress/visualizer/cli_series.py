@@ -10,25 +10,9 @@ def visualize(args):
 
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
     # e.g. means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
-    means = {}
-    cmd_labels = set()
-    creation_dates = set()
-    for result in args.results:
-        suite = json.load(result)
-        creation_date = time_util.str2time(suite['creation_date_utc'])
-        cmd_list = suite['cmd_list']
-        cmd_list = util.filter_cmd_list(cmd_list, args.labels_to_include, args.labels_to_exclude)
-        for cmd in cmd_list:
-            succeed_values = util.extract_succeed_results(cmd, args.parse_regex, args.py_type)
-            mean = util.mean(succeed_values)
-            std = util.standard_deviation(succeed_values)
-            if cmd['label'] not in means:
-                means[cmd['label']] = {}
-            means[cmd['label']][creation_date] = (mean, std)
-            cmd_labels.add(cmd['label'])
-            creation_dates.add(creation_date)
+    (means, cmd_labels, creation_dates) = util.means_series_map(args)
 
-    creation_dates = sorted(list(creation_dates))
+    # Then we write the data
     ret = "Label%s " % args.csv_separator
     for creation_date in creation_dates:
         ret += "%s%s " % (creation_date, args.csv_separator)

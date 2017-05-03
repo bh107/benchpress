@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import argparse
 import re
 import math
+import json
 
 
 class Color:
@@ -277,3 +278,44 @@ def texsafe(text):
             char = conv[char]
         escaped.append(char)
     return "".join(escaped)
+
+
+def means_series_map(args):
+    """Create a dict that map a command label and date to a pair of mean and standard deviation
+
+    Such as means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
+
+    Parameters
+    ----------
+    args : argparse.Namespace
+        The parsed argparse object to build the map from.
+
+    Returns
+    -------
+    means : dict
+        The dict that maps command label and date to a pair of mean and standard deviation
+    cmd_labels : list
+        List of commands labels found in `args`
+    creation_dates : list
+        List of creation dates found in `args`
+    """
+    # First we create `means` which map a command label and date to a pair of mean and standard deviation
+    # e.g. means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
+    means = {}
+    cmd_labels = set()
+    creation_dates = set()
+    for result in args.results:
+        suite = json.load(result)
+        creation_date = suite['creation_date_utc']
+        cmd_list = suite['cmd_list']
+        cmd_list = filter_cmd_list(cmd_list, args.labels_to_include, args.labels_to_exclude)
+        for cmd in cmd_list:
+            succeed_values = extract_succeed_results(cmd, args.parse_regex, args.py_type)
+            avg = mean(succeed_values)
+            std = standard_deviation(succeed_values)
+            if cmd['label'] not in means:
+                means[cmd['label']] = {}
+            means[cmd['label']][creation_date] = (avg, std)
+            cmd_labels.add(cmd['label'])
+            creation_dates.add(creation_date)
+    return (means, sorted(list(cmd_labels)), sorted(list(creation_dates)))
