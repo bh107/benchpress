@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-import json
-import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 import pylab
 from benchpress.visualizer import util
-from benchpress import time_util
 
 
 def value_labels(ax, rects):
@@ -18,23 +14,6 @@ def value_labels(ax, rects):
 
 
 def line_per_cmd(args):
-    matplotlib.rcParams['axes.labelsize'] = args.fontsize
-    matplotlib.rcParams['axes.titlesize'] = args.fontsize + 2
-    matplotlib.rcParams['xtick.labelsize'] = args.fontsize
-    matplotlib.rcParams['ytick.labelsize'] = args.fontsize
-    matplotlib.rcParams['legend.fontsize'] = args.fontsize
-    matplotlib.rcParams['font.family'] = 'serif'
-    matplotlib.rcParams['font.serif'] = ['Computer Modern Roman']
-    matplotlib.rcParams['text.usetex'] = True
-    matplotlib.rcParams['figure.max_open_warning'] = 400
-    matplotlib.rcParams['image.cmap'] = "gray"
-    matplotlib.rcParams['image.interpolation'] = "none"
-    matplotlib.rcParams['figure.autolayout'] = True
-    pylab.clf()                     # Essential! Otherwise the plots will be f**d up!
-    pylab.figure(1)
-    pylab.gca().yaxis.grid(True)    # Makes it easier to compare bars
-    pylab.gca().xaxis.grid(False)
-    pylab.gca().set_axisbelow(True)
     plt.style.use(args.pyplot_style)
 
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
@@ -51,7 +30,7 @@ def line_per_cmd(args):
             x.append(i)
             y.append(mean)
             err.append(std)
-        lines.append(ax.errorbar(x, y, fmt='-o', label=util.texsafe(cmd_label), yerr=err))
+        lines.append(ax.errorbar(x, y, fmt='-o', yerr=err))
 
     if args.ymin is not None:
         plt.ylim(ymin=float(args.ymin))
@@ -67,12 +46,17 @@ def line_per_cmd(args):
     if not args.no_legend:
         ax.legend(lines, cmd_labels, loc='best', fancybox=True, shadow=True)
 
+    if args.mpld3:
+        import mpld3
+        from mpld3 import plugins
+        interactive_legend = plugins.InteractiveLegendPlugin(lines, cmd_labels)
+        plugins.connect(fig, interactive_legend)
+
     if args.output is not None:
         fname = args.output.name
         fformat = fname.split('.')[-1]
         print ("Writing file '%s' using format '%s'." % (fname, fformat))
         if args.mpld3:
-            import mpld3
             if fformat == "html":
                 mpld3.save_html(fig, args.output)
             elif fformat == "json":
@@ -83,7 +67,6 @@ def line_per_cmd(args):
             pylab.savefig(args.output, format=fformat)
     else:
         if args.mpld3:
-            import mpld3
             mpld3.show()
         else:
             pylab.show()
@@ -152,7 +135,7 @@ def main():
     parser.add_argument(
         '--mpld3',
         action='store_true',
-        help="Generate mpld3 plots <https://mpld3.github.io>"
+        help="Generate mpld3 plot <https://mpld3.github.io>"
     )
     args = parser.parse_args()
     line_per_cmd(args)
