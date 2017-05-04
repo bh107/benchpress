@@ -281,7 +281,7 @@ def texsafe(text):
 
 
 def means_series_map(args):
-    """Create a dict that map a command label and date to a pair of mean and standard deviation
+    """Create a dict that map a command label and meta-key to a pair of mean and standard deviation
 
     Such as means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
 
@@ -296,17 +296,17 @@ def means_series_map(args):
         The dict that maps command label and date to a pair of mean and standard deviation
     cmd_labels : list
         List of commands labels found in `args`
-    creation_dates : list
-        List of creation dates found in `args`
+    meta-keys : list
+        List of meta key values found in `args`
     """
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
     # e.g. means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
     means = {}
     cmd_labels = set()
-    creation_dates = set()
+    meta_keys = set()
     for result in args.results:
         suite = json.load(result)
-        creation_date = suite['creation_date_utc']
+        meta_key = suite[args.meta_key]
         cmd_list = suite['cmd_list']
         cmd_list = filter_cmd_list(cmd_list, args.labels_to_include, args.labels_to_exclude)
         for cmd in cmd_list:
@@ -315,7 +315,7 @@ def means_series_map(args):
             std = standard_deviation(succeed_values)
             if cmd['label'] not in means:
                 means[cmd['label']] = {}
-            means[cmd['label']][creation_date] = (avg, std)
+            means[cmd['label']][meta_key] = (avg, std)
             cmd_labels.add(cmd['label'])
-            creation_dates.add(creation_date)
-    return (means, sorted(list(cmd_labels)), sorted(list(creation_dates)))
+            meta_keys.add(meta_key)
+    return (means, sorted(list(cmd_labels)), sorted(list(meta_keys)))

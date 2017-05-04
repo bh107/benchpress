@@ -10,16 +10,16 @@ def visualize(args):
 
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
     # e.g. means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
-    (means, cmd_labels, creation_dates) = util.means_series_map(args)
+    (means, cmd_labels, meta_keys) = util.means_series_map(args)
 
     # Then we write the data
     ret = "Label%s " % args.csv_separator
-    for creation_date in creation_dates:
-        ret += "%s%s " % (creation_date, args.csv_separator)
+    for meta_key in meta_keys:
+        ret += "%s%s " % (meta_key, args.csv_separator)
     for cmd_label in cmd_labels:
         ret += "\n%s%s " % (cmd_label, args.csv_separator)
-        for creation_date in creation_dates:
-            (mean, std) = means[cmd_label].get(creation_date, (0, 0))
+        for meta_key in meta_keys:
+            (mean, std) = means[cmd_label].get(meta_key, (0, 0))
             ret += "%.4f (%.4f)%s " % (mean, std, args.csv_separator)
     return ret
 
@@ -32,6 +32,13 @@ def main():
         default=',',
         metavar="sep",
         help="Use the CSV format using 'sep' as the separator."
+    )
+    parser.add_argument(
+        '--meta-key',
+        default='creation_date_utc',
+        type=str,
+        choices=['creation_date_utc', 'tag'],
+        help="The meta key, which value vary throughout the series"
     )
     args = parser.parse_args()
     if args.output is not None:

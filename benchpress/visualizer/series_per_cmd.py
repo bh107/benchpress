@@ -18,15 +18,15 @@ def line_per_cmd(args):
 
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
     # e.g. means['Bean']['2017-05-02 13:29:34.87'] = (0.1289, 0.0006)
-    (means, cmd_labels, creation_dates) = util.means_series_map(args)
+    (means, cmd_labels, meta_keys) = util.means_series_map(args)
 
     # Let's write a plot line for each command label
     fig, ax = plt.subplots()
     lines = []
     for cmd_label in cmd_labels:
         x, y, err = ([], [], [])
-        for i in range(len(creation_dates)):
-            (mean, std) = means[cmd_label].get(creation_dates[i], (0, 0))
+        for i in range(len(meta_keys)):
+            (mean, std) = means[cmd_label].get(meta_keys[i], (0, 0))
             x.append(i)
             y.append(mean)
             err.append(std)
@@ -40,8 +40,8 @@ def line_per_cmd(args):
         plt.title(util.texsafe(args.title))
 
     # Add some text for labels, title and axes ticks
-    ax.set_xticks(range(len(creation_dates)))
-    ax.set_xticklabels(creation_dates, rotation=args.xticklabel_rotation)
+    ax.set_xticks(range(len(meta_keys)))
+    ax.set_xticklabels(meta_keys, rotation=args.xticklabel_rotation)
 
     if not args.no_legend:
         ax.legend(lines, cmd_labels, loc='best', fancybox=True, shadow=True)
@@ -131,6 +131,13 @@ def main():
         type=str,
         choices=plt.style.available,
         help="The matplotlib.pyplot.style to use"
+    )
+    parser.add_argument(
+        '--meta-key',
+        default='creation_date_utc',
+        type=str,
+        choices=['creation_date_utc', 'tag'],
+        help="The meta key, which value vary throughout the series"
     )
     parser.add_argument(
         '--mpld3',
