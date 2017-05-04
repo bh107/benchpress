@@ -114,7 +114,12 @@ def main():
         action="store_true",
         help="Do no clean up."
     )
-
+    parser.add_argument(
+        '--tag',
+        type=str,
+        default=None,
+        help="Assign a tag to the result."
+    )
     slurm_grp = parser.add_argument_group('SLURM Queuing System')
     slurm_grp.add_argument(
         '--slurm',
@@ -149,6 +154,8 @@ def main():
     print ("Running benchmark; results are written to: %s" % args.suite.name)
     try:
         suite = json.load(args.suite)
+        if args.tag is not None:
+            suite['tag'] = args.tag
         cmd_list = suite['cmd_list']
         for cmd in cmd_list:
             for job in cmd['jobs']:
