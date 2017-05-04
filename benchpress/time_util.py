@@ -16,7 +16,7 @@ def time2str(time_obj):
     time : str
         A string representing the datetime.
     """
-    return datetime.datetime.now().isoformat()
+    return time_obj.isoformat()
 
 
 def str2time(time_str):
