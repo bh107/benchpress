@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-import matplotlib.pyplot as plt
-import pylab
 from benchpress.visualizer import util
 
 
@@ -14,6 +12,12 @@ def value_labels(ax, rects):
 
 
 def line_per_cmd(args):
+    import matplotlib
+    if args.output is not None:
+        matplotlib.use('Agg') # We need this to make matplotlib work on systems with no DISPLAY
+    import matplotlib.pyplot as plt
+    import pylab
+
     plt.style.use(args.pyplot_style)
 
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
@@ -129,7 +133,6 @@ def main():
         '--pyplot-style',
         default='seaborn-darkgrid',
         type=str,
-        choices=plt.style.available,
         help="The matplotlib.pyplot.style to use"
     )
     parser.add_argument(
