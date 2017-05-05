@@ -66,9 +66,9 @@ def create_jobs(args, cmd):
 
     # Find the number of bash jobs and the number of runs with each bash job
     njobs = 1
-    nruns_per_job = args.runs
+    nruns_per_job = args.nruns
     if args.multi_jobs:
-        njobs = args.runs
+        njobs = args.nruns
         nruns_per_job = 1
     return [bash_job(args, cmd, nruns_per_job) for _ in range(njobs)]
 
@@ -153,7 +153,7 @@ def main():
              'If the file exist, the benchmark will resume.'
     )
     parser.add_argument(
-        '--runs',
+        '--nruns',
         default=3,
         type=int,
         help="How many times should each command run."

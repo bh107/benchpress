@@ -1,4 +1,4 @@
-usage: bp-run [-h] [--runs RUNS] [--dirty] [--slurm] [--partition PARTITION]
+usage: bp-run [-h] [--nruns RUNS] [--dirty] [--slurm] [--partition PARTITION]
               [--multi-jobs] [--wait] [--nice NICE]
               suite
 
@@ -11,7 +11,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --runs RUNS           How many times should each command run.
+  --nruns RUNS          How many times should each command run.
   --dirty               Do no clean up.
 
 SLURM Queuing System:
