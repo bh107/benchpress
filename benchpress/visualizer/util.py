@@ -155,8 +155,8 @@ def extract_succeed_results(cmd, regex, py_type=int, dict_key='stdout'):
         List of extracted values
     """
     ret = []
-    for job in cmd['jobs']:
-        for res in job['results']:
+    for job in cmd.get('jobs', []):
+        for res in job.get('results', []):
             match = re.search(regex, res[dict_key])
             if res['success'] and match:
                 ret.append(py_type(match.group(1)))
