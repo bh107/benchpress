@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import os
 import json
 import argparse
+import uuid
 from subprocess import Popen, PIPE
 
 
@@ -22,6 +23,54 @@ def write2json(json_file, obj):
     json_file.write(json.dumps(obj, indent=4))
     json_file.flush()
     os.fsync(json_file)
+
+
+def bash_job(args, cmd, nruns):
+    """Creates a bash job based on the 'cmd' dict that runs the 'cmd['cmd']' 'nruns' times"""
+
+    cwd = os.path.abspath(os.getcwd())
+    basename = "bh-job-%s.sh" % uuid.uuid4()
+    filename = os.path.join(cwd, basename)
+
+    bash = "#!/bin/bash\n"
+
+    # Write Slurm parameters
+    bash += "\n#SBATCH -J '%s'\n" % cmd['label']
+    bash += "#SBATCH -o /tmp/bh-slurm-%%j.out\n"
+    bash += "#SBATCH -e /tmp/bh-slurm-%%j.err\n"
+    if args.partition is not None:
+        bash += "#SBATCH -p %s\n" % args.partition
+    bash += "#SBATCH --nice=%d\n" % args.nice
+
+    # Write environment variables
+    for env_key, env_value in cmd.get('env', {}).items():
+        bash += 'export %s="%s"\n' % (env_key, env_value)
+
+    # Execute command 'nruns' times
+    for i in range(nruns):
+        # Write the command to execute
+        bash += "%s " % cmd['cmd']
+
+        # Pipe the output to file
+        outfile = "%s-%d" % (filename, i)
+        bash += '> >(tee %s.out) 2> >(tee %s.err >&2)\n' % (outfile, outfile)
+
+        # Finally, we call sync
+        bash += 'sync\n'
+
+    return {'status': 'pending', 'filename': filename, 'nruns': nruns, 'script': bash}
+
+
+def create_jobs(args, cmd):
+    """Create the list of bash jobs that will execute the 'cmd'"""
+
+    # Find the number of bash jobs and the number of runs with each bash job
+    njobs = 1
+    nruns_per_job = args.runs
+    if args.multi_jobs:
+        njobs = args.runs
+        nruns_per_job = 1
+    return [bash_job(args, cmd, nruns_per_job) for _ in range(njobs)]
 
 
 def job_execute_locally(job, verbose=False, dirty=False):
@@ -158,6 +207,8 @@ def main():
             suite['tag'] = args.tag
         cmd_list = suite['cmd_list']
         for cmd in cmd_list:
+            if 'jobs' not in cmd:
+                cmd['jobs'] = create_jobs(args, cmd)
             for job in cmd['jobs']:
                 if job['status'] == 'pending':
                     # The user wants local execution
