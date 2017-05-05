@@ -162,8 +162,8 @@ def main():
                 if job['status'] == 'pending':
                     # The user wants local execution
                     print ("Executing '%s'" % (cmd['label']))
-                    job_execute_locally(job)
-                    job['results'] = job_gather_results(job)
+                    job_execute_locally(job, dirty=args.dirty)
+                    job['results'] = job_gather_results(job, dirty=args.dirty)
                     if all(res['success'] for res in job['results']):
                         job['status'] = 'finished'
                     else:
