@@ -41,12 +41,20 @@ def bash_job(args, cmd, nruns):
     if args.partition is not None:
         bash += "#SBATCH -p %s\n" % args.partition
     bash += "#SBATCH --nice=%d\n" % args.nice
+    bash += "\n"
 
     # Write environment variables
     for env_key, env_value in cmd.get('env', {}).items():
         bash += 'export %s="%s"\n' % (env_key, env_value)
+    bash += "\n"
+
+    # Execute the warm up run
+    if args.warmup:
+        bash += "# Warm up run\n%s\n" % cmd['cmd']
+        bash += 'sync\n\n'
 
     # Execute command 'nruns' times
+    bash += "# The runs \n%s " % cmd['cmd']
     for i in range(nruns):
         # Write the command to execute
         bash += "%s " % cmd['cmd']
@@ -58,7 +66,7 @@ def bash_job(args, cmd, nruns):
         # Finally, we call sync
         bash += 'sync\n'
 
-    return {'status': 'pending', 'filename': filename, 'nruns': nruns, 'script': bash}
+    return {'status': 'pending', 'filename': filename, 'nruns': nruns, 'script': bash, 'warmup': args.warmup}
 
 
 def create_jobs(args, cmd):
@@ -75,7 +83,6 @@ def create_jobs(args, cmd):
 
 def job_execute_locally(job, verbose=False, dirty=False):
     """Execute the job locally"""
-
     try:
         with open(job['filename'], 'w') as f:
             # First we have to write the bash script to a file
@@ -157,6 +164,11 @@ def main():
         default=3,
         type=int,
         help="How many times should each command run."
+    )
+    parser.add_argument(
+        '--warmup',
+        action="store_true",
+        help="Execute one warm up run, before the measured runs"
     )
     parser.add_argument(
         '--dirty',
