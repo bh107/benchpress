@@ -18,6 +18,8 @@ def line_per_cmd(args):
     import matplotlib.pyplot as plt
     import pylab
 
+    matplotlib.rcParams.update({'figure.subplot.right': args.plot_size})
+    matplotlib.rcParams.update({'figure.subplot.bottom': args.plot_size})
     plt.style.use(args.pyplot_style)
 
     # First we create `means` which map a command label and date to a pair of mean and standard deviation
@@ -47,7 +49,7 @@ def line_per_cmd(args):
     ax.set_xticks(range(len(meta_keys)))
     ax.set_xticklabels(meta_keys, rotation=args.xticklabel_rotation)
 
-    if not args.no_legend:
+    if not args.no_legend and not args.mpld3: # mpld3 comes with its own legends
         ax.legend(lines, cmd_labels, loc='best', fancybox=True, shadow=True)
 
     if args.mpld3:
@@ -109,6 +111,12 @@ def main():
         '--ylabel',
         default="Elapsed time in seconds",
         help="Label on the y-axis"
+    )
+    parser.add_argument(
+        '--plot-size',
+        type=float,
+        default=0.7,
+        help="Size of the plot compared to total figure (0.1 to 1.0)"
     )
     parser.add_argument(
         '--xticklabel-rotation',
