@@ -27,3 +27,10 @@ try:
 except DistributionNotFound:
     # package is not installed
     pass
+
+# We expose the suite schema as the dict `suite_schema`
+def _suite_schema():
+    from os.path import join, realpath, dirname
+    import json
+    return json.load(open(join(dirname(realpath(__file__)), "suite_schema.json"), "r"))
+suite_schema = _suite_schema()

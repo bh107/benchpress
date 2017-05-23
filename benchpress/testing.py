@@ -17,6 +17,8 @@ import tempfile
 from os.path import join
 import sys
 import benchpress as bp
+import json
+import jsonschema
 
 
 def create_test_suite(suite_path):
@@ -37,7 +39,31 @@ def create_test_suite(suite_path):
     bp.create_suite(cmd_list, suite_path)
 
 
-class InitNumPy(unittest.TestCase):
+class SuiteSchema(unittest.TestCase):
+
+    def testSchema(self):
+        from . import run
+        from . import suite_schema
+        tmpdir = tempfile.mkdtemp()
+        suite_file = join(tmpdir, "res.json")
+
+        # Check after suite creation
+        create_test_suite(suite_file)
+        with open(suite_file, "r") as f:
+            suite = json.load(f)
+            jsonschema.validate(suite, suite_schema)
+
+        # Check after run
+        old_argv = sys.argv[:]
+        sys.argv[:] = [old_argv[0], suite_file]
+        run.main()
+        sys.argv = old_argv
+        with open(suite_file, "r") as f:
+            suite = json.load(f)
+            jsonschema.validate(suite, suite_schema)
+
+
+class BP(unittest.TestCase):
 
     def setUp(self):
         from . import run
@@ -57,6 +83,18 @@ class InitNumPy(unittest.TestCase):
         old_argv = sys.argv
         sys.argv = [old_argv[0], self.suite_file]
         cli.main()
+
+    def testCliCSV(self):
+        from .visualizer import cli
+        old_argv = sys.argv
+        sys.argv = [old_argv[0], self.suite_file, "--csv"]
+        cli.main()
+
+    def testJSON(self):
+        from . import suite_schema
+        with open(self.suite_file, "r") as f:
+            suite = json.load(f)
+            jsonschema.validate(suite, suite_schema)
 
 
 def main():

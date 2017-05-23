@@ -34,7 +34,6 @@ def main(args):
 
     # Clean up the repos
     if args.git_cleanup:
-        bash_cmd('git reset --hard master', cwd=bp_dir)
         bash_cmd('git clean -xdf', cwd=bp_dir)
 
     # Update the repos
