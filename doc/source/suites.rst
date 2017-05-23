@@ -1,4 +1,4 @@
-Suites
+Suite Examples
 ------
 
 .. automodule:: nas_parallel_benchmark

@@ -15,7 +15,6 @@ Contents:
 |    quickstart                |                              |
 |    install                   |    suites                    |
 |    usage_commands            |    benchmarks                |
-|    implementing              |                              |
-|    implementing              |                              |
+|    suite_file                |                              |
 |    reference/index           |                              |
 +------------------------------+------------------------------+
