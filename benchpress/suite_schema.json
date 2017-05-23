@@ -12,7 +12,8 @@
     "cmd_list": {
       "description": "List of the commands that makes up this benchmark suite",
       "type": "array",
-      "item": {
+      "items": {
+        "type": "object",
         "properties": {
           "cmd": {
             "description": "A command to execute",
@@ -66,9 +67,9 @@
             },
             "required": ["status", "nruns"]
           }
-        }
-      },
-      "required": ["cmd", "env", "label"]
+        },
+        "required": ["cmd", "env", "label"]
+      }
     }
   },
   "required": ["creation_date_utc", "cmd_list"]
