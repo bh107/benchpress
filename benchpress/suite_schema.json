@@ -1,6 +1,7 @@
 {
     "id": "https://raw.githubusercontent.com/bh107/benchpress/master/benchpress/suite_schema.json",
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Benchpress Suite Schema",
     "description": "Benchpress Suite file that contains the commands to execute and their results",
     "type": "object",
     "properties": {
