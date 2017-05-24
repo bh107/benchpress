@@ -16,9 +16,10 @@ def visualize(args):
         values = []
         for job in cmd['jobs']:
             for res in job['results']:
-                match = re.search(args.parse_regex, res['stdout'])
-                if res['success'] and match:
-                    values.append(args.py_type(match.group(1)))
+                match_list = re.findall(args.parse_regex, res['stdout'])
+                if res['success'] and len(match_list) > 0:
+                    for match in match_list:
+                        values.append(args.py_type(match))
                 else:
                     values.append("N/A")
         succeed_values = util.extract_succeed_results(cmd, args.parse_regex, args.py_type)

@@ -157,9 +157,10 @@ def extract_succeed_results(cmd, regex, py_type=int, dict_key='stdout'):
     ret = []
     for job in cmd.get('jobs', []):
         for res in job.get('results', []):
-            match = re.search(regex, res[dict_key])
-            if res['success'] and match:
-                ret.append(py_type(match.group(1)))
+            match_list = re.findall(regex, res[dict_key])
+            if res['success'] and len(match_list) > 0:
+                for match in match_list:
+                    ret.append(py_type(match))
     return ret
 
 

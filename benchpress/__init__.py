@@ -28,6 +28,7 @@ except DistributionNotFound:
     # package is not installed
     pass
 
+
 # We expose the suite schema as the dict `suite_schema`
 def _suite_schema():
     from os.path import join, realpath, dirname
