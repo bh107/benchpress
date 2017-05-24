@@ -4,7 +4,7 @@ import os
 import json
 import argparse
 import uuid
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, check_output
 
 
 class C:
@@ -118,10 +118,45 @@ def job_execute_locally(job, verbose=False, dirty=False):
             pass
 
 
-def job_gather_results(job, dirty=False):
-    """Gather the results of the bash job. NB: the job must be finished!"""
+def job_execute_slurm(job, dirty=False, partition=None):
+    """Execute the job through SLURM"""
+    try:
+        with open(job['filename'], 'w') as f:
+            # First we have to write the bash script to a file
+            f.write(job['script'])
+            f.flush()
+            os.fsync(f)
+            # Then we submit the SLURM script
+            cmd = ['sbatch']
+            if partition is not None:
+                cmd += ['-p', partition]
+            cmd += [f.name]
+            p = Popen(cmd, stdout=PIPE)
+            out, err = p.communicate()
+            job['slurm_id'] = int(out.split(' ')[-1].rstrip())
+            print ("with SLURM ID %d" % job['slurm_id'])
+    finally:
+        try:
+            if not dirty:
+                os.remove(job['filename'])
+        except OSError:
+            pass
 
-    ret = []
+
+def slurm_check_finished(job):
+    """Check if a SLUM job has finished"""
+    print ("Checking job %d"%job['slurm_id'])
+    out = check_output(['squeue'])
+    if out.find(" %d " % job['slurm_id']) != -1:
+        return False
+    else:
+        return True
+
+
+def job_gather_results(job, dirty=False):
+    """Gather the results of the bash job and updates the job status. NB: the job must be finished!"""
+
+    job['results'] = []
     for i in range(job['nruns']):
         base = "%s-%d" % (job['filename'], i)
         stdout = "%s.out" % base
@@ -145,12 +180,17 @@ def job_gather_results(job, dirty=False):
         except IOError:
             print (C.WARN, "Could not find the stdout and/or the stderr file", C.END)
         # Append result of the run
-        ret.append(result)
-    return ret
+        job['results'].append(result)
+
+    # Finally, let's update the job status
+    if all(res['success'] for res in job['results']):
+        job['status'] = 'finished'
+    else:
+        job['status'] = 'failed'
 
 
 def main():
-    """Run the commands in the '--output' JSON file not already finished"""
+    """Run the commands in the JSON file not already finished"""
 
     parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a JSON-file.')
     parser.add_argument(
@@ -197,11 +237,14 @@ def main():
         action="store_true",
         help="Submit 'nruns' SLURM jobs instead of one job with 'nruns' number of runs."
     )
+    # TODO: implement --wait
+    """
     slurm_grp.add_argument(
         '--wait',
         action="store_true",
         help="Wait for all SLURM jobs to finished before returning."
     )
+    """
     slurm_grp.add_argument(
         '--nice',
         type=int,
@@ -223,14 +266,19 @@ def main():
                 cmd['jobs'] = create_jobs(args, cmd)
             for job in cmd['jobs']:
                 if job['status'] == 'pending':
-                    # The user wants local execution
-                    print ("Executing '%s'" % (cmd['label']))
-                    job_execute_locally(job, dirty=args.dirty)
-                    job['results'] = job_gather_results(job, dirty=args.dirty)
-                    if all(res['success'] for res in job['results']):
-                        job['status'] = 'finished'
-                    else:
-                        job['status'] = 'failed'
+                    slurm_id = job.get('slurm_id', None)
+                    if args.slurm and slurm_id is None: # We need to submit the job to SLURM
+                        job_execute_slurm(job, partition=args.partition)
+
+                    elif slurm_id is not None:  # The job has already been submitted to SLURM
+                        if slurm_check_finished(job):
+                            job_gather_results(job, dirty=args.dirty)
+
+                    else:  # The user wants local execution
+                        print ("Executing '%s'" % (cmd['label']))
+                        job_execute_locally(job, dirty=args.dirty)
+                        job_gather_results(job, dirty=args.dirty)
+                    # We always need to update the json
                     write2json(args.suite, suite)
         print ("%sFinished execution, result written in '%s'%s" % (C.WARN, args.suite.name, C.END))
     except KeyboardInterrupt:
