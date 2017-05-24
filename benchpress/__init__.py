@@ -33,12 +33,8 @@ except DistributionNotFound:
 def _suite_schema():
     from os.path import join, realpath, dirname
     import json
-    import sys
-    print >> sys.stderr, join(dirname(realpath(__file__)), "suite_schema.json")
-    print >> sys.stderr, os.getcwd()
-    print >> sys.stderr, os.listdir(join(dirname(realpath(__file__))))
     try:
         return json.load(open(join(dirname(realpath(__file__)), "suite_schema.json"), "r"))
-    except IOError:
+    except IOError:  # readthedocs cannot find "suite_schema.json"
         return None
 suite_schema = _suite_schema()

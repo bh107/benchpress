@@ -189,7 +189,7 @@ def default_argparse(description, multiple_result_files=False):
     if multiple_result_files:
         parser.add_argument(
             "results",
-            metavar="FILE",
+            metavar="FILE_LIST",
             type=argparse.FileType('r'),
             nargs='+',
             help="JSON file containing results (accept multiple files)"
@@ -197,7 +197,7 @@ def default_argparse(description, multiple_result_files=False):
     else:
         parser.add_argument(
             "results",
-            metavar="FILE_LIST",
+            metavar="FILE",
             type=argparse.FileType('r'),
             help="JSON file containing results"
         )
@@ -210,9 +210,10 @@ def default_argparse(description, multiple_result_files=False):
     )
     parser.add_argument(
         "--parse-regex",
+        metavar="RegEx",
         type=str,
         default='elapsed-time: ([\d.]+)',
-        help="How to parse the result of each run. The RegEX should contain exactly one group."
+        help="How to parse the result of each run. For each RegEx match, group one is recorded as a result."
     )
     parser.add_argument(
         "--py-type",
