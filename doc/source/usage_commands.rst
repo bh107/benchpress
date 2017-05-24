@@ -4,8 +4,8 @@ Usage - Commands
 
 Benchpress provides a set of binaries for running and visualize the suite file :ref:`suite_file`.
 
-bp-info
--------
+bp-run
+------
 
 .. literalinclude:: autodoc_usage_commands/bp-run.txt
 

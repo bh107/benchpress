@@ -33,5 +33,8 @@ except DistributionNotFound:
 def _suite_schema():
     from os.path import join, realpath, dirname
     import json
+    print join(dirname(realpath(__file__)), "suite_schema.json")
+    print os.getcwd()
+    print os.listdir(join(dirname(realpath(__file__))))
     return json.load(open(join(dirname(realpath(__file__)), "suite_schema.json"), "r"))
 suite_schema = _suite_schema()
