@@ -26,5 +26,6 @@ benchmarks/shallow_water/csharp_numcil/src/obj
 benchmarks/xraysim/python_numpy/materials
 
 doc/source/autodoc_benchmarks/*.rst
+doc/source/autodoc_usage_commands/*.txt
 
 *.userprefs

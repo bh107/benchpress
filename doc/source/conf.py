@@ -16,13 +16,15 @@ import sys
 import os
 import pkg_resources
 
-# HACK: we need to run 'autodoc_benchmarks.py' as the first thing
+# HACK: we need to run 'autodoc_*.py' scripts as the first thing
 def _script_path():
     """Returns the path to the dir this script is in"""
     return os.path.dirname(os.path.realpath(__file__))
 sys.path.append(_script_path())
 import autodoc_benchmarks
 autodoc_benchmarks.main()
+import autodoc_usage_commands
+autodoc_usage_commands.main()
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
