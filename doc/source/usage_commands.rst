@@ -2,22 +2,21 @@
 Usage - Commands
 ================
 
-Benchpress provides the following binaries: ``bp-run``, ``bp-cli``, ``bp-chart``.
-See below for details on invoking them and see section :ref:`usage_examples` for examples of using the commands.
+Benchpress provides a set of binaries for running and visualize the suite file :ref:`suite_file`.
 
 bp-info
 -------
 
-.. literalinclude:: usage_bp-run.out
+.. literalinclude:: autodoc_usage_commands/bp-run.txt
 
 bp-cli
 ------
 
-.. literalinclude:: usage_bp-cli.out
+.. literalinclude:: autodoc_usage_commands/bp-cli.txt
 
 bp-chart
 --------
 
-.. literalinclude:: usage_bp-chart.out
+.. literalinclude:: autodoc_usage_commands/bp-chart.txt
 
 
