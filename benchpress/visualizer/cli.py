@@ -14,14 +14,16 @@ def visualize(args):
     (cmd_list, label_map) = util.translate_dict(cmd_list, args.label_map)
     for cmd in cmd_list:
         values = []
-        for job in cmd['jobs']:
-            for res in job['results']:
-                match_list = re.findall(args.parse_regex, res['stdout'])
-                if res['success'] and len(match_list) > 0:
-                    for match in match_list:
-                        values.append(args.py_type(match))
-                else:
-                    values.append("N/A")
+        if 'jobs' in cmd:
+            for job in cmd['jobs']:
+                if 'results' in job:
+                    for res in job['results']:
+                        match_list = re.findall(args.parse_regex, res['stdout'])
+                        if res['success'] and len(match_list) > 0:
+                            for match in match_list:
+                                values.append(args.py_type(match))
+                        else:
+                            values.append("N/A")
         succeed_values = util.extract_succeed_results(cmd, args.parse_regex, args.py_type)
         mean = util.mean(succeed_values)
         std = util.standard_deviation(succeed_values)
