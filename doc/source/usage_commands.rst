@@ -2,7 +2,7 @@
 Usage - Commands
 ================
 
-Benchpress provides a set of binaries for running and visualize the suite file :ref:`suite_file`.
+Benchpress provides a set of binaries for running and visualize the suite file :ref:`SuiteFile`.
 
 bp-run
 ------

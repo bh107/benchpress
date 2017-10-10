@@ -1,6 +1,6 @@
-==========
+==================
 Benchmark Examples
-==========
+==================
 
 Benchpress includes a collection of benchmarks:
 
