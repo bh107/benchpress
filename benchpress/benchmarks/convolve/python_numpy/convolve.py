@@ -1,20 +1,23 @@
 from __future__ import print_function
 from benchpress import util
-import numpy as np
+import bohrium as bh
+
 
 def main():
     """
-    Example parameter : --size=10000000*10*10
+    Convolve filter (any dimensional)
+    Parameter: `--size<image-size>*<filter-size>*<ndims>*<niters>`
+                where image and filter size is the size of each dimension (not their total size).
     """
     B = util.Benchmark()
-    (image_size, filter_size, I) = B.size
+    (image_size, filter_size, ndims, I) = B.size
 
-    image = B.random_array((image_size,))
-    image_filter = B.random_array((filter_size,))
+    image = B.random_array((image_size**ndims,)).reshape([image_size]*ndims)
+    image_filter = B.random_array((filter_size**ndims,)).reshape([filter_size]*ndims)
 
     B.start()
     for _ in range(I):
-        R = np.convolve(image, image_filter)
+        R = bh.convolve_scipy(image, image_filter)
         B.flush()
     B.stop()
     B.pprint()
@@ -23,6 +26,7 @@ def main():
 
     if B.verbose:
         print (R)
+
 
 if __name__ == "__main__":
     main()
