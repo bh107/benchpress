@@ -214,6 +214,10 @@ class Benchmark:
                        action   = 'store_true',
                        help     = "Disable calls to flush within benchmark iterations."
         )
+        p.add_argument('--no-do_while',
+                       action   = 'store_true',
+                       help     = "Disable Bohrium's optimized `do_while`."
+        )
 
         args, unknown = p.parse_known_args()   # Parse the arguments
 
@@ -368,6 +372,25 @@ class Benchmark:
         if self.bohrium and not self.args.no_flush:
             import bohrium as bh
             bh.flush()
+
+    def do_while(self, func, niters, *args, **kwargs):
+        """Implements `bohrium.do_while()` for regular NumPy"""
+
+        if self.bohrium and not self.visualize and not self.args.no_do_while:
+            return bh.do_while(func, niters, *args, **kwargs)
+
+        import sys
+        i = 0
+        if niters is None:
+            niters = sys.maxsize
+        while i < niters:
+            cond = func(*args, **kwargs)
+            if cond is not None and not cond:
+                break
+            i += 1
+            self.flush()
+        return i
+
 
 def main():
     B = Benchmark()

@@ -2,6 +2,7 @@ from __future__ import print_function
 from benchpress import util
 import numpy as np
 
+
 def init_grid(height, width, dtype=np.float32):
     grid        = np.zeros((height+2,width+2), dtype=dtype)
     grid[:,0]   = dtype(-273.15)
@@ -10,30 +11,27 @@ def init_grid(height, width, dtype=np.float32):
     grid[0,:]   = dtype(40.0)
     return grid
 
-def jacobi(grid, epsilon=0.005, max_iterations=None, visualize=False):
 
-    center = grid[1:-1, 1:-1]
-    north  = grid[0:-2, 1:-1]
-    east   = grid[1:-1, 2:  ]
-    west   = grid[1:-1, 0:-2]
-    south  = grid[2:  , 1:-1]
+def jacobi(B, grid, epsilon=0.005, max_iterations=None, visualize=False):
 
-    delta = epsilon + 1
-    iteration = 0
-    while delta > epsilon:
-        iteration += 1
-        work = 0.2*(center+north+east+west+south)
-        delta = np.sum(np.absolute(work-center))
+    def loop_body(grid):
+        center = grid[1:-1, 1:-1]
+        north = grid[0:-2, 1:-1]
+        east = grid[1:-1, 2:]
+        west = grid[1:-1, 0:-2]
+        south = grid[2:, 1:-1]
+        work = 0.2 * (center + north + east + west + south)
+        delta = np.sum(np.absolute(work - center))
         center[:] = work
-        util.Benchmark().flush()
-
-        if max_iterations != None and max_iterations <= iteration:
-            break
 
         if visualize:
             util.plot_surface(grid, "2d", 0, 200, -200)
+        return delta > epsilon
+
+    iteration = B.do_while(loop_body, max_iterations, grid)
 
     return iteration, grid
+
 
 def main():
     B = util.Benchmark()
@@ -50,7 +48,7 @@ def main():
         B.dump_arrays("jacobi_solve", {'input': grid})
 
     B.start()
-    M, grid = jacobi(grid, max_iterations=I, visualize=B.visualize)
+    M, grid = jacobi(B, grid, max_iterations=I, visualize=B.visualize)
     B.stop()
 
     B.pprint()
