@@ -32,9 +32,8 @@ with open(os.path.join(_script_path(), 'README.rst'), encoding='utf-8') as f:
 setup(
     name='benchpress',
 
-    # WE use the SemVer versioning <http://semver.org/>
     setup_requires=['setuptools_scm'],
-    use_scm_version=True,
+    use_scm_version={'version_scheme': 'post-release', 'local_scheme': lambda x: ''},
 
     description='Benchmark suite tool',
     long_description=long_description,

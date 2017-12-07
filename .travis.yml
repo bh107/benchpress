@@ -8,3 +8,8 @@ before_install:
 
 script:
   - python -m benchpress.testing
+
+deploy:
+  provider: pypi
+  user: $TWINE_USERNAME
+  password: $TWINE_PASSWORD
