@@ -34,5 +34,4 @@ def benchmark_path(name, implementation, extension):
     path : str
         Absolute path to the executable
     """
-
-    return realpath(join(_script_path(), "..", "benchmarks", name, implementation, "%s%s" % (name, extension)))
+    return realpath(join(_script_path(), "benchmarks", name, implementation, "%s%s" % (name, extension)))
