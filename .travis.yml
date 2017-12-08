@@ -5,18 +5,12 @@ python:
 
 before_install:
   - pip install .
-  - pip install twine --upgrade
 
 script:
   - python -m benchpress.testing
 
 deploy:
-  provider: pypi
-  user: $TWINE_USERNAME
-  password: $TWINE_PASSWORD
-
-deploy:
   provider: script
-  script: python setup.py sdist && twine upload --help && echo $TWINE_USERNAME && twine upload dist/*
+  script: python setup.py sdist && twine upload dist/*
   on:
     branch: master
