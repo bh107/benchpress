@@ -12,7 +12,6 @@ gfx_handle = None
 
 # Check whether the numpy module is overruled by Bohrium
 bh_is_loaded_as_np = np.__name__ == "bohrium"
-bh_target = np.target.TARGET if bh_is_loaded_as_np else "none"
 
 #In order to support runs without bohrium installed, we need some import hacks
 try:
@@ -177,21 +176,11 @@ class Benchmark:
                        help     = "Output file to store results in."
         )
 
-        g2 = p.add_mutually_exclusive_group()
-        g2.add_argument('--target',
-                       choices  = ['None', 'numpy', 'bhc',
-                                   'numexpr', 'pygpu', 'chapel'],
-                       default  = "None",
-                       help     = "Enable npbackend using the specified target."
-                                  " Disable npbackend using None."
-                                  " (default: %(default)s)"
-        )
-        g2.add_argument('--bohrium',
+        p.add_argument('--bohrium',
                        choices  = [True, False],
                        default  = False,
                        type     = t_or_f,
-                       help     = "Same as --target=bhc which means:"
-                                  " enable npbackend using Bohrium."
+                       help     = "Enable npbackend using Bohrium."
                                   " (default: %(default)s)"
         )
         p.add_argument('--no-extmethods',
@@ -252,14 +241,10 @@ class Benchmark:
                 """
             )
 
-        # Unify the options: 'target' and 'bohrium'
-        # TODO: This should check the environment for target.
         if bh_is_loaded_as_np:
             self.bohrium = True
-            self.target = bh_target
         else:
             self.bohrium = False
-            self.target = "none"
 
         self.no_extmethods = args.no_extmethods
 
@@ -272,14 +257,10 @@ class Benchmark:
         #self.args   = args
 
     def start(self):
-        if self.bohrium:
-            bh.target.tally()
         flush()
         self.__elapsed = time.time()
 
     def stop(self):
-        if self.bohrium:
-            bh.target.tally()
         flush()
         self.__elapsed = time.time() - self.__elapsed
 
@@ -344,9 +325,8 @@ class Benchmark:
         return self.load_arrays(filename, dtype)[label]
 
     def pprint(self):
-        print("%s - target: %s, bohrium: %s, size: %s, elapsed-time: %f" % (
+        print("%s - bohrium: %s, size: %s, elapsed-time: %f" % (
                 self.__script,
-                self.target,
                 self.bohrium,
                 '*'.join([str(s) for s in self.size]),
                 self.__elapsed
