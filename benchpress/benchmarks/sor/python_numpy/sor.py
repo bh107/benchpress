@@ -19,10 +19,10 @@ from benchpress import util
 import numpy as np
 
 def freezetrap(height, width, dtype=np.float32):
-    r0   = np.zeros(((height+2)/2,(width+2)/2), dtype=dtype)
-    r1   = np.zeros(((height+2)/2,(width+2)/2), dtype=dtype)
-    b0   = np.zeros(((height+2)/2,(width+2)/2), dtype=dtype)
-    b1   = np.zeros(((height+2)/2,(width+2)/2), dtype=dtype)
+    r0   = np.zeros(((height+2)//2,(width+2)//2), dtype=dtype)
+    r1   = np.zeros(((height+2)//2,(width+2)//2), dtype=dtype)
+    b0   = np.zeros(((height+2)//2,(width+2)//2), dtype=dtype)
+    b1   = np.zeros(((height+2)//2,(width+2)//2), dtype=dtype)
     r0[0,:]  =   40.0  # Top
     b0[0,:]  =   40.0  # Top
     r1[-1,:] = -273.15 # Bottom
