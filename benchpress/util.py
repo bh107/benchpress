@@ -92,7 +92,10 @@ def numpy_plot_surface(ary, mode="2d", colormap=0, lowerbound=-200, upperbound=2
         raise Exception("Invalid mode.")
 
 def confirm_exit(msg="Hit Enter to exit..."):
-    raw_input(msg)
+    if (sys.version_info[0] == 2):
+        raw_input(msg)
+    else:
+        input(msg)
 
 try:
     import bohrium as bh
