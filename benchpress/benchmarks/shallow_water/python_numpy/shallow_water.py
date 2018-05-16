@@ -30,10 +30,10 @@ def model(height, width, dtype=np.float32):
 
     m = np.ones((height, width), dtype=dtype)
     D = droplet(8, 8)  # simulate a water drop
-    droploc = height / 4
+    droploc = height // 4
     (dropx, dropy) = D.shape
     m[droploc:droploc + dropx, droploc:droploc + dropy] += D
-    droploc = height / 2
+    droploc = height // 2
     (dropx, dropy) = D.shape
     m[droploc:droploc + dropx, droploc:droploc + dropy] += D
 
