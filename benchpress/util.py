@@ -4,9 +4,12 @@ import pprint
 import time
 import sys
 import numpy as np
+import atexit
+
 
 gfx_handle = None
 visualization_param = None
+visualization_trace = False
 
 # Check whether the numpy module is overruled by Bohrium
 bh_is_loaded_as_np = np.__name__ == "bohrium"
@@ -93,17 +96,30 @@ def numpy_plot_surface(ary, mode="2d", colormap=0, lowerbound=-200, upperbound=2
 
 
 def confirm_exit(msg="Hit Enter to exit..."):
-    if sys.version_info[0] == 2:
-        raw_input(msg)
-    else:
-        input(msg)
+    if visualization_param is None:
+        if sys.version_info[0] == 2:
+            raw_input(msg)
+        else:
+            input(msg)
 
 
 def plot_surface_wrapper(*args):
+    global visualization_trace
+    from bohrium import visualization
+
     if visualization_param is None:
         visualization.plot_surface(*args)
-    else:
-        visualization.plot_surface(*args, param=visualization_param)
+    #else:
+    #    visualization.plot_surface(*args, param=visualization_param)
+
+    if visualization_trace or isinstance(visualization_trace, dict):
+        if not isinstance(visualization_trace, dict):
+            visualization_trace = {'org': [], 'zip': []}
+
+        org = args[0].copy2numpy()
+        compressed = visualization.compressed_copy(args[0], param=visualization_param).copy2numpy()
+        visualization_trace['org'].append(org)
+        visualization_trace['zip'].append(compressed)
 
 
 try:
@@ -153,7 +169,7 @@ class Benchmark:
     """
 
     def __init__(self):
-        global visualization_param
+        global visualization_param, visualization_trace
 
         self.__elapsed = 0.0  # The quantity measured
         self.__script = sys.argv[0]  # The script being run
@@ -208,6 +224,11 @@ class Benchmark:
         p.add_argument('--visualize-param',
                        default=None,
                        help="Set visualization parameters."
+                       )
+        p.add_argument('--visualize-trace',
+                       default=False,
+                       action='store_true',
+                       help="Dump frames to files instead of showing them"
                        )
         p.add_argument('--verbose',
                        default=False,
@@ -265,6 +286,7 @@ class Benchmark:
         self.visualize = args.visualize
         self.verbose = args.verbose
         visualization_param = args.visualize_param
+        visualization_trace = args.visualize_trace
 
     def start(self):
         flush()
@@ -392,3 +414,26 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+@atexit.register
+def goodbye():
+    if visualization_trace and bh_is_loaded_as_np:
+        orgs = np.stack(visualization_trace['org'])
+        del visualization_trace['org']
+        fname = "vtrace_org.dump"
+        print("Writing visualization trace file: %s (%s)" % (fname, orgs.shape))
+        orgs.dump(fname)
+        del orgs
+
+        zips = np.stack(visualization_trace['zip'])
+        del visualization_trace['zip']
+        fname = "vtrace_zip.dump"
+        print("Writing visualization trace file: %s (%s)" % (fname, zips.shape))
+        zips.dump(fname)
+        del zips
+
+        from bohrium import _bh
+        msg = _bh.message("statistics-detail")
+        with open("vtrace_stat.txt", "w") as f:
+            f.write(msg)
