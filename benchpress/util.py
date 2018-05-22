@@ -421,16 +421,16 @@ def goodbye():
     if visualization_trace and bh_is_loaded_as_np:
         orgs = np.stack(visualization_trace['org'])
         del visualization_trace['org']
-        fname = "vtrace_org.dump"
-        print("Writing visualization trace file: %s (%s)" % (fname, orgs.shape))
-        orgs.dump(fname)
+        fname = "vtrace_org"
+        print("Writing visualization trace file: %s.npy (%s)" % (fname, orgs.shape))
+        np.save(fname, orgs)
         del orgs
 
         zips = np.stack(visualization_trace['zip'])
         del visualization_trace['zip']
-        fname = "vtrace_zip.dump"
-        print("Writing visualization trace file: %s (%s)" % (fname, zips.shape))
-        zips.dump(fname)
+        fname = "vtrace_zip"
+        print("Writing visualization trace file: %s.npy (%s)" % (fname, zips.shape))
+        np.save(fname, zips)
         del zips
 
         from bohrium import _bh
