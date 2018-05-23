@@ -7,10 +7,6 @@ import numpy as np
 import atexit
 
 gfx_handle = None
-visualization_param = None
-visualization_trace = {'org': [], 'zip': []}
-visualization_trace_fname = None  # When None, no tracing
-visualization_dry = False
 
 # Check whether the numpy module is overruled by Bohrium
 bh_is_loaded_as_np = np.__name__ == "bohrium"
@@ -20,6 +16,19 @@ try:
     import numpy_force as np
 except ImportError:
     import numpy as np
+
+
+class VisualArgs:
+    def __init__(self, args):
+        self.count = -1
+        self.rate = args.visualize_rate
+        self.param = args.visualize_param
+        self.trace = {'org': [], 'zip': []}
+        self.trace_fname = args.visualize_trace  # When None, no tracing
+        self.dry = args.visualize_dry
+
+
+_visual_args = None  # When None, no visualization
 
 
 def numpy_flush():
@@ -97,7 +106,7 @@ def numpy_plot_surface(ary, mode="2d", colormap=0, lowerbound=-200, upperbound=2
 
 
 def confirm_exit(msg="Hit Enter to exit..."):
-    if visualization_trace_fname is None and not visualization_dry:
+    if _visual_args.trace_fname is None and not _visual_args.dry:
         if sys.version_info[0] == 2:
             raw_input(msg)
         else:
@@ -105,22 +114,26 @@ def confirm_exit(msg="Hit Enter to exit..."):
 
 
 def plot_surface_wrapper(*args):
-    global visualization_trace
+    global _visual_args
     from bohrium import visualization
 
-    if visualization_dry:  # We force the visualization process on a dry run
-        visualization.compressed_copy(args[0], param=visualization_param).copy2numpy()
+    _visual_args.count += 1
+    if not (_visual_args.count % _visual_args.rate == 0):
+        return
+
+    if _visual_args.dry:  # We force the visualization process on a dry run
+        visualization.compressed_copy(args[0], param=_visual_args.param).copy2numpy()
     else:
-        if visualization_trace_fname is None:  # We don't show visualization when tracing
-            if visualization_param is None:
+        if _visual_args.trace_fname is None:  # We don't show visualization when tracing
+            if _visual_args.param is None:
                 visualization.plot_surface(*args)
             else:
-                visualization.plot_surface(*args, param=visualization_param)
+                visualization.plot_surface(*args, param=_visual_args.param)
         else:
             org = args[0].copy2numpy()
-            compressed = visualization.compressed_copy(args[0], param=visualization_param).copy2numpy()
-            visualization_trace['org'].append(org)
-            visualization_trace['zip'].append(compressed)
+            compressed = visualization.compressed_copy(args[0], param=_visual_args.param).copy2numpy()
+            _visual_args.trace['org'].append(org)
+            _visual_args.trace['zip'].append(compressed)
 
 
 try:
@@ -170,7 +183,7 @@ class Benchmark:
     """
 
     def __init__(self):
-        global visualization_param, visualization_trace_fname, visualization_dry
+        global _visual_args
 
         self.__elapsed = 0.0  # The quantity measured
         self.__script = sys.argv[0]  # The script being run
@@ -221,6 +234,11 @@ class Benchmark:
                        default=False,
                        action='store_true',
                        help="Enable visualization in script."
+                       )
+        p.add_argument('--visualize-rate',
+                       default=1,
+                       type=int,
+                       help="The rate of visualization (Default: 1, which means all frame)"
                        )
         p.add_argument('--visualize-param',
                        default=None,
@@ -289,11 +307,10 @@ class Benchmark:
             self.bohrium = False
 
         self.no_extmethods = args.no_extmethods
-        self.visualize = args.visualize
         self.verbose = args.verbose
-        visualization_param = args.visualize_param
-        visualization_trace_fname = args.visualize_trace
-        visualization_dry = args.visualize_dry
+        self.visualize = args.visualize
+        if self.visualize:
+            _visual_args = VisualArgs(args)
 
     def start(self):
         flush()
@@ -425,22 +442,22 @@ if __name__ == "__main__":
 
 @atexit.register
 def goodbye():
-    if visualization_trace_fname is not None and bh_is_loaded_as_np:
-        orgs = np.stack(visualization_trace['org'])
-        del visualization_trace['org']
-        fname = "%s_org" % visualization_trace_fname
+    if _visual_args.trace_fname is not None and bh_is_loaded_as_np:
+        orgs = np.stack(_visual_args.trace['org'])
+        del _visual_args.trace['org']
+        fname = "%s_org" % _visual_args.trace_fname
         print("Writing visualization trace file: %s.npy (%s)" % (fname, orgs.shape))
         np.save(fname, orgs)
         del orgs
 
-        zips = np.stack(visualization_trace['zip'])
-        del visualization_trace['zip']
-        fname = "%s_zip" % visualization_trace_fname
+        zips = np.stack(_visual_args.trace['zip'])
+        del _visual_args.trace['zip']
+        fname = "%s_zip" % _visual_args.trace_fname
         print("Writing visualization trace file: %s.npy (%s)" % (fname, zips.shape))
         np.save(fname, zips)
         del zips
 
         from bohrium import _bh
         msg = _bh.message("statistics-detail")
-        with open("%s_stat.txt" % visualization_trace_fname, "w") as f:
+        with open("%s_stat.txt" % _visual_args.trace_fname, "w") as f:
             f.write(msg)
