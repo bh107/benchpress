@@ -442,7 +442,9 @@ if __name__ == "__main__":
 
 @atexit.register
 def goodbye():
-    if _visual_args.trace_fname is not None and bh_is_loaded_as_np:
+    if _visual_args is not None \
+            and _visual_args.trace_fname is not None \
+            and bh_is_loaded_as_np:
         orgs = np.stack(_visual_args.trace['org'])
         del _visual_args.trace['org']
         fname = "%s_org" % _visual_args.trace_fname
