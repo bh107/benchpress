@@ -188,12 +188,10 @@ def main():
     I = B.size[2]
 
     state = cylinder(H, W, obstacle=True)
-    print("*"*1000)
     B.start()
     solve(state, I, B.visualize)
     B.stop()
     B.pprint()
-    print("*" * 1000)
 
 
 if __name__ == "__main__":
