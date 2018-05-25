@@ -8,7 +8,6 @@ Copyright (C) 2006 Jonas Latt
 Address: Rue General Dufour 24,  1211 Geneva 4, Switzerland
 E-mail: Jonas.Latt@cui.unige.ch
 """
-import threading
 from benchpress import util
 import numpy as np
 
@@ -19,6 +18,7 @@ cy      = [  0,   0,  1,  0, -1,    1,   1,  -1,  -1]
 opp     = [ 0,   3,  4,  1,  2,    7,   8,   5,   6]
 uMax    = 0.02 # maximum velocity of Poiseuille inflow
 Re      = 100  # Reynolds number
+
 
 def cylinder(height, width, obstacle=True, dtype=np.float32):
     assert(height > 2)
@@ -66,6 +66,7 @@ def cylinder(height, width, obstacle=True, dtype=np.float32):
     state['bbRegion'] = bbRegion
 
     return state
+
 
 def solve(state, iterations, viz=None):
 
@@ -176,43 +177,9 @@ def solve(state, iterations, viz=None):
               fIn[i] = t1
           else:
               fIn[i] = fOut[i]
+      if viz:
+          util.plot_surface(ux.T, "2d", 0, ux.max(), ux.min())
 
-      if viz and not cycle % 10:
-          viz['axes1'].clear()
-          viz['axes2'].clear()
-          viz['axes3'].clear()
-          viz['axes1'].imshow(fIn[4].T.copy())
-          viz['axes2'].imshow(ux.T.copy())
-          viz['axes3'].imshow(uy.T.copy())
-          viz['canvas'].show()
-
-def setup_viz(state):
-    """Setup visualization."""
-
-    import matplotlib
-    import matplotlib.figure
-    import matplotlib.backends.backend_tkagg
-    import Tkinter
-    import threading
-
-    viz = {}
-
-    # Initialise Tk ...
-    figure = matplotlib.figure.Figure()
-    figure.set_size_inches((8, 6))
-
-    viz['axes1'] = figure.add_subplot(311)
-    viz['axes2'] = figure.add_subplot(312)
-    viz['axes3'] = figure.add_subplot(313)
-
-    viz['tk'] = Tkinter.Tk()
-    viz['canvas'] = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(
-        figure,
-        master=viz['tk']
-    )
-    viz['canvas'].get_tk_widget().pack(expand = True, fill = Tkinter.BOTH)
-
-    return viz 
 
 def main():
     B = util.Benchmark()
@@ -220,24 +187,14 @@ def main():
     W = B.size[1]
     I = B.size[2]
 
-    state = cylinder(H, W, obstacle=False)
-
-    viz = None
-    if B.verbose:
-        viz = setup_viz(state)
-
+    state = cylinder(H, W, obstacle=True)
+    print("*"*1000)
     B.start()
-    if viz:
-        thread = threading.Thread(target = solve, args=(state, I, viz))
-        thread.start()
-        viz['tk'].mainloop()   
-    else:
-        R = solve(state, I, viz)
+    solve(state, I, B.visualize)
     B.stop()
     B.pprint()
+    print("*" * 1000)
 
-    if B.outputfn:
-        B.tofile(B.outputfn, {'res': np.array(R)})
 
 if __name__ == "__main__":
     main()
