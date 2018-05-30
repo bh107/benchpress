@@ -28,7 +28,8 @@ def visualize(args):
         mean = util.mean(succeed_values)
         std = util.standard_deviation(succeed_values)
         if args.csv:
-            ret += "%s, %.4f, %.4f" % (label_map[cmd['label']], mean, std)
+            sep = args.csv_separator
+            ret += "%s%s %.4f%s %.4f" % (label_map[cmd['label']], sep, mean, sep, std)
         else:
             ret += "%s: %s" % (label_map[cmd['label']], values)
             if len(succeed_values) > 0:
