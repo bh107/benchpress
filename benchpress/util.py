@@ -304,14 +304,15 @@ class Benchmark:
         self.__elapsed = time.time() - self.__elapsed
 
     def save_data(self, data_dict):
-        """Save `data_dict` as a npz archive when --outputfn is used """
+        """Save `data_dict` as a npz archive when --outputfn is used"""
         assert(isinstance(data_dict, dict))
         if self.outputfn is not None:
             # Clean `data_dict` for Bohrium arrays
-            nobh_data = {}
+            nobh_data = {"_bhary_keys": []}
             for k in data_dict.keys():
                 if hasattr(data_dict[k], "copy2numpy"):
                     nobh_data[k] = data_dict[k].copy2numpy()
+                    nobh_data["_bhary_keys"].append(k)
                 else:
                     nobh_data[k] = data_dict[k]
             np.savez_compressed(self.outputfn, **nobh_data)
@@ -322,11 +323,15 @@ class Benchmark:
             return None
         else:
             nobh_data = np.load(self.inputfn)
+            bhary_keys = nobh_data["_bhary_keys"]
             ret = {}
-            # Convert numpy arrays into bohrium arrays
             for k in nobh_data.keys():
-                if bh_is_loaded_as_np and hasattr(nobh_data[k], "shape") and hasattr(nobh_data[k], "dtype"):
-                    ret[k] = np.array(nobh_data[k])
+                if k == "_bhary_keys":
+                    continue
+                # Convert numpy arrays into bohrium arrays
+                if bh_is_loaded_as_np and k in bhary_keys:
+                    a = nobh_data[k]
+                    ret[k] = bh.array(a, bohrium=True)
                 else:
                     ret[k] = nobh_data[k]
             return ret

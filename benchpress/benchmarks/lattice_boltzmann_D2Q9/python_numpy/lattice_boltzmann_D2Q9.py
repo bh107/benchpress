@@ -37,11 +37,6 @@ def cylinder(height, width, obstacle=True):
 
     col = np.arange(1, ly - 1)
 
-    # We need some of the constants as 3D numpy arrays
-    t_3d = np.asarray(t)[:, np.newaxis, np.newaxis]
-    cx_3d = np.asarray(cx)[:, np.newaxis, np.newaxis]
-    cy_3d = np.asarray(cy)[:, np.newaxis, np.newaxis]
-
     # Place obstacle
     if obstacle:
         y, x = np.meshgrid(np.arange(ly), np.arange(lx))
@@ -51,8 +46,13 @@ def cylinder(height, width, obstacle=True):
     else:
         bbRegion = None
 
+    # We need some of the constants as 3D numpy arrays
+    t_3d = np.asarray(t)[:, np.newaxis, np.newaxis]
+    cx_3d = np.asarray(cx)[:, np.newaxis, np.newaxis]
+    cy_3d = np.asarray(cy)[:, np.newaxis, np.newaxis]
+
     # Initial condition: (rho=0, u=0) ==> fIn[i] = t[i]
-    fIn = t_3d.repeat(lx, axis=1).repeat(ly, axis=2)
+    fIn = np.array(t_3d.repeat(lx, axis=1).repeat(ly, axis=2))
 
     state['fIn'] = fIn
     state['cx_3d'] = cx_3d
@@ -65,8 +65,8 @@ def cylinder(height, width, obstacle=True):
 
 def solve(state, iterations, viz=None):
     # load the state
-    ly = state['ly']
-    lx = state['lx']
+    ly = int(state['ly'])
+    lx = int(state['lx'])
     fIn = state['fIn']
     cx_3d = state['cx_3d']
     cy_3d = state['cy_3d']
