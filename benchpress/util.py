@@ -200,23 +200,23 @@ class Benchmark:
                        help="Tell the the script which primitive type to use."
                             " (default: %(default)s)"
                        )
-        g1 = p.add_mutually_exclusive_group()
-        g1.add_argument('--inputfn',
-                        help="Input file to use as data. When not set, random data is used."
-                        )
-        g1.add_argument('--seed',
-                        default=42,
-                        help="The seed to use when using random data."
-                        )
-        p.add_argument('--dumpinput',
-                       default=False,
-                       action='store_true',
-                       help="Dumps the benchmark input to file."
+        p.add_argument('--seed',
+                       default=42,
+                       help="The seed to use when using random data."
+                       )
+        p.add_argument('--inputfn',
+                       default=None,
+                       help="Input file to use as data.",
+                       metavar="FILE",
+                       type=str,
                        )
         p.add_argument('--outputfn',
-                       help="Output file to store results in."
+                       default=None,
+                       help="Output file to store results in (.npz extension will " 
+                            "be appended to the file name if it is not already there).",
+                       metavar="FILE",
+                       type=str,
                        )
-
         p.add_argument('--bohrium',
                        choices=[True, False],
                        default=False,
@@ -276,7 +276,6 @@ class Benchmark:
         self.args = args
         self.size = [int(i) for i in args.size.split("*")] if args.size else []
         self.dtype = eval("np.%s" % args.dtype)
-        self.dumpinput = args.dumpinput
         self.inputfn = args.inputfn
         self.outputfn = args.outputfn
         self.seed = int(args.seed)
@@ -284,22 +283,6 @@ class Benchmark:
 
         if len(self.size) == 0:
             raise argparse.ArgumentTypeError('Size must be specified e.g. --size=100*10*1')
-
-        if not bh_is_loaded_as_np and args.bohrium:
-            print(
-                """
-                !!!!!!!
-
-                WARNING:
-
-                --bohrium does not enable Bohrium!
-
-                Unless the benchmark does an explicit check (which it should not).
-                To enable Bohrium, overload NumPy with 'python -m bohrium ...'
-
-                !!!!!!!
-                """
-            )
 
         if bh_is_loaded_as_np:
             self.bohrium = True
@@ -320,64 +303,33 @@ class Benchmark:
         flush()
         self.__elapsed = time.time() - self.__elapsed
 
-    def tofile(self, filename, arrays):
-        for k in arrays:
-            arrays[k] = toarray(arrays[k], bohrium=False)
-        np.savez(filename, **arrays)
+    def save_data(self, data_dict):
+        """Save `data_dict` as a npz archive when --outputfn is used """
+        assert(isinstance(data_dict, dict))
+        if self.outputfn is not None:
+            # Clean `data_dict` for Bohrium arrays
+            nobh_data = {}
+            for k in data_dict.keys():
+                if hasattr(data_dict[k], "copy2numpy"):
+                    nobh_data[k] = data_dict[k].copy2numpy()
+                else:
+                    nobh_data[k] = data_dict[k]
+            np.savez_compressed(self.outputfn, **nobh_data)
 
-    def dump_arrays(self, prefix, arrays):
-        """
-        Dumps a dict of arrays organized such as:
-
-        arrays = {'lbl1': array1, 'lbl2': array2}
-
-        Into a file using the following naming convention:
-        "prefix_lbl1-DTYPE-SHAPE_lbl2-DTYPE-SHAPE"
-
-        The arrays are stored as .npz files.
-        """
-        names = []
-        for k in arrays:
-            names.append("%s-%s-%s" % (
-                k,
-                arrays[k].dtype,
-                '*'.join([str(x) for x in (arrays[k].shape)])))
-        filename = "%s_%s" % (prefix, '_'.join(names))
-        self.tofile(filename, arrays)
-
-    def load_arrays(self, filename=None, dtype=None):
-        """
-        Load arrays from disk (npz-file) and ensure they
-        are in the right "space", that is, Numpy or Bohrium.
-
-        Optionally convert the array dtype.
-
-        :filename: npz-file containing arrays.
-        :dtype: Convert arrays to this dtype; None = No conversion.
-        """
-
-        if not filename:  # Default to the cmd-line parameter
-            filename = self.inputfn
-
-        npz = np.load(filename)  # Load the arrays from disk (npz-file)
-
-        arrays = {}  # Make sure arrays are in the correct space
-        for k in npz:
-            if dtype:  # Convert type when requested
-                arrays[k] = toarray(npz[k], bohrium=self.bohrium, dtype=dtype)
-            else:  # Othervise, use format they are stored in.
-                arrays[k] = toarray(npz[k], bohrium=self.bohrium)
-
-        del npz  # We no longer need these
-
-        return arrays
-
-    def load_array(self, filename=None, label='input', dtype=None):
-
-        if not filename:
-            filename = self.inputfn
-
-        return self.load_arrays(filename, dtype)[label]
+    def load_data(self):
+        """Load the npz archive specified by --inputfn or None is not set"""
+        if self.inputfn is None:
+            return None
+        else:
+            nobh_data = np.load(self.inputfn)
+            ret = {}
+            # Convert numpy arrays into bohrium arrays
+            for k in nobh_data.keys():
+                if bh_is_loaded_as_np and hasattr(nobh_data[k], "shape") and hasattr(nobh_data[k], "dtype"):
+                    ret[k] = np.array(nobh_data[k])
+                else:
+                    ret[k] = nobh_data[k]
+            return ret
 
     def pprint(self):
         print("%s - bohrium: %s, size: %s, elapsed-time: %f" % (
