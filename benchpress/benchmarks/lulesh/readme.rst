@@ -1,1 +1,0 @@
-Experimenting with the LULESH proxy application.
