@@ -72,19 +72,17 @@ def cylinder(height, width, obstacle=True):
     return state
 
 
-def solve(state, iterations, viz=None):
-    # load the state
+def solve(B, state, timesteps, visualize=False):
+    # load the ready only state
     ly = int(state['ly'])
     lx = int(state['lx'])
-    fIn = state['fIn']
+    col = state['col']
     cx_3d = state['cx_3d']
     cy_3d = state['cy_3d']
-    col = state['col']
-    omega = state['omega']
     bbRegion = state['bbRegion']
+    omega = state['omega']
 
-    # Main loop (time cycles)
-    for cycle in range(iterations):
+    def loop_body(fIn):
 
         # Macroscopic variables
         rho = np.sum(fIn, axis=0)
@@ -180,8 +178,10 @@ def solve(state, iterations, viz=None):
                 fIn[i] = t1
             else:
                 fIn[i] = fOut[i]
-        if viz:
+        if visualize:
             util.plot_surface(ux.T, "2d", 0, state['viz_max'], state['viz_min'])
+
+    B.do_while(loop_body, timesteps, state['fIn'])
 
 
 def main():
@@ -192,9 +192,8 @@ def main():
     state = B.load_data()
     if state is None:
         state = cylinder(H, W)
-
     B.start()
-    solve(state, I, B.visualize)
+    solve(B, state, I, B.visualize)
     B.stop()
     B.save_data(state)
     B.pprint()
