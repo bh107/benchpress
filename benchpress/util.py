@@ -323,7 +323,7 @@ class Benchmark:
             return None
         else:
             nobh_data = np.load(self.inputfn)
-            bhary_keys = nobh_data["_bhary_keys"]
+            bhary_keys = nobh_data["_bhary_keys"].tolist()
             ret = {}
             for k in nobh_data.keys():
                 if k == "_bhary_keys":
