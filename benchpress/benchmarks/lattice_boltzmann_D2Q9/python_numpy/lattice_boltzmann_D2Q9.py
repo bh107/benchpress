@@ -58,8 +58,17 @@ def cylinder(height, width, obstacle=True):
     state['cx_3d'] = cx_3d
     state['cy_3d'] = cy_3d
     state['col'] = col
-    state['omega'] = omega
+    state['omega'] = float(omega)
     state['bbRegion'] = bbRegion
+
+    # We save the visualize limits in order to make it constant
+    # We find the limit by calculating the first iteration if `ux`
+    ux = np.sum(cx_3d * fIn, axis=0) / np.sum(fIn, axis=0)
+    L = ly - 2.0
+    y = col - 0.5
+    ux[0, 1:ly - 1] = 4 * uMax / (L ** 2) * (y * L - y ** 2)
+    state['viz_max'] = ux.max()
+    state['viz_min'] = ux.min()
     return state
 
 
@@ -172,7 +181,7 @@ def solve(state, iterations, viz=None):
             else:
                 fIn[i] = fOut[i]
         if viz:
-            util.plot_surface(ux.T, "2d", 0, ux.max(), ux.min())
+            util.plot_surface(ux.T, "2d", 0, state['viz_max'], state['viz_min'])
 
 
 def main():
