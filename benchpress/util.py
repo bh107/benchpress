@@ -5,6 +5,7 @@ import time
 import sys
 import numpy as np
 import atexit
+import gzip
 
 gfx_handle = None
 
@@ -134,6 +135,7 @@ def plot_surface_wrapper(*args):
             compressed = visualization.compressed_copy(args[0], param=_visual_args.param).copy2numpy()
             _visual_args.trace['org'].append(org)
             _visual_args.trace['zip'].append(compressed)
+            print("plot_surface %s: %s" % (_visual_args.count, len(_visual_args.trace['org'])),file=sys.stderr)
 
 
 try:
@@ -396,25 +398,29 @@ def main():
 if __name__ == "__main__":
     main()
 
+    
+def dump_visualization_trace_file(visual_args,field):
+    fname = "%s_%s.npy.gz" % (visual_args.trace_fname, field);
+    print("Dumping %s" % fname,file=sys.stderr)
+    data  = np.stack(visual_args.trace[field])    
+    del visual_args.trace[field]
+    
+    print("Writing visualization trace file: %s (%s)" % (fname, data.shape))    
+    f = gzip.GzipFile("%s" % fname,"w")
+    np.save(f, data)
+    del data
+    f.close()
+
+    
 
 @atexit.register
 def goodbye():
     if _visual_args is not None \
             and _visual_args.trace_fname is not None \
             and bh_is_loaded_as_np:
-        orgs = np.stack(_visual_args.trace['org'])
-        del _visual_args.trace['org']
-        fname = "%s_org" % _visual_args.trace_fname
-        print("Writing visualization trace file: %s.npy (%s)" % (fname, orgs.shape))
-        np.save(fname, orgs)
-        del orgs
 
-        zips = np.stack(_visual_args.trace['zip'])
-        del _visual_args.trace['zip']
-        fname = "%s_zip" % _visual_args.trace_fname
-        print("Writing visualization trace file: %s.npy (%s)" % (fname, zips.shape))
-        np.save(fname, zips)
-        del zips
+        dump_visualization_trace_file(_visual_args,"org")
+        dump_visualization_trace_file(_visual_args,"zip");
 
         from bohrium import _bh
         msg = _bh.message("statistics-detail")
