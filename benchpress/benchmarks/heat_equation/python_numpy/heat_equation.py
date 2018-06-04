@@ -1,6 +1,6 @@
 from __future__ import print_function
-from benchpress.benchmarks import util
 import numpy as np
+from benchpress.benchmarks import util
 
 bench = util.Benchmark("Solving the heat equation using the jacobi method", "height*width*iterations")
 

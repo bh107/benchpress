@@ -8,9 +8,10 @@ So what does this code example illustrate?
 
 Adapted from: http://people.sc.fsu.edu/~jburkardt/m_src/shallow_water_2d/
 """
-from benchpress.benchmarks import util
 import numpy as np
+from benchpress.benchmarks import util
 
+bench = util.Benchmark("Shallow Water", "height*width*iterations")
 g = 9.80665  # gravitational acceleration
 
 
@@ -19,11 +20,8 @@ def droplet(height, width, data_type=np.float32):
 
     x = np.array(np.linspace(-1, 1, num=width, endpoint=True), dtype=data_type)
     y = np.array(np.linspace(-1, 1, num=width, endpoint=True), dtype=data_type)
-
     (xx, yy) = np.meshgrid(x, y)
-
     droplet = height * np.exp(-5 * (xx ** 2 + yy ** 2))
-
     return droplet
 
 
@@ -41,8 +39,7 @@ def model(height, width, dtype=np.float32):
     return {"H": m, "U": np.zeros_like(m), "V": np.zeros_like(m)}
 
 
-def simulate(B, state, timesteps, visualize=False):
-
+def simulate(state, timesteps):
     # FLOP count: i*(12*s + 4*s**2 + 14*s**2 + 9*s**2 + 4*s**2 + 9*s**2 + 14*s**2 + 6*s**2 + 19*s**2 + 19*s**2)
     # where s is size and i is iterations
     def loop_body(H, U, V, dt=0.02, dx=1.0, dy=1.0):
@@ -102,31 +99,25 @@ def simulate(B, state, timesteps, visualize=False):
                                       (Ux[:-1, :] * Vx[:-1, :] / Hx[:-1, :])) + \
                          (dt / dy) * ((Vy[:, 1:] ** 2 / Hy[:, 1:] + g / 2 * Hy[:, 1:] ** 2) -
                                       (Vy[:, :-1] ** 2 / Hy[:, :-1] + g / 2 * Hy[:, :-1] ** 2))
-        if visualize:
-            util.plot_surface(H, "3d", 0, 0, 5.5)
+        bench.plot_surface(H, "3d", 0, 0, 5.5)
 
-    B.do_while(loop_body, timesteps, state['H'], state['U'], state['V'])
+    bench.do_while(loop_body, timesteps, state['H'], state['U'], state['V'])
 
 
 def main():
-    B = util.Benchmark()
-    H = B.size[0]
-    W = B.size[1]
-    I = B.size[2]
+    H = bench.args.size[0]
+    W = bench.args.size[1]
+    I = bench.args.size[2]
 
-    state = B.load_data()
+    state = bench.load_data()
     if state is None:
-        state = model(H, W, dtype=B.dtype)
+        state = model(H, W, dtype=bench.dtype)
 
-    B.start()
-    simulate(B, state, I, visualize=B.visualize)
-    B.stop()
-    B.save_data(state)
-    B.pprint()
-    if B.verbose:
-        print("Iterations=%s, State: %s." % (I, state))
-    if B.visualize:
-        util.confirm_exit()
+    bench.start()
+    simulate(state, I)
+    bench.stop()
+    bench.save_data(state)
+    bench.pprint()
 
 
 if __name__ == "__main__":

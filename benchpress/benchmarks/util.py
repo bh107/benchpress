@@ -288,6 +288,7 @@ class Benchmark:
         def surface3d():
             import matplotlib.pyplot as plt
             from matplotlib.ticker import LinearLocator, FormatStrFormatter
+            from mpl_toolkits.mplot3d import axes3d, Axes3D  # We need this import for projection='3d' to work
 
             if self.numpy_viz_handle is None:
                 self.numpy_viz_handle = {
