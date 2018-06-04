@@ -135,7 +135,7 @@ def plot_surface_wrapper(*args):
             compressed = visualization.compressed_copy(args[0], param=_visual_args.param).copy2numpy()
             _visual_args.trace['org'].append(org)
             _visual_args.trace['zip'].append(compressed)
-            print("plot_surface %s: %s" % (_visual_args.count, len(_visual_args.trace['org'])),file=sys.stderr)
+            print("plot_surface %s: %s" % (_visual_args.count, len(_visual_args.trace['org'])), file=sys.stderr)
 
 
 try:
@@ -214,7 +214,7 @@ class Benchmark:
                        )
         p.add_argument('--outputfn',
                        default=None,
-                       help="Output file to store results in (.npz extension will " 
+                       help="Output file to store results in (.npz extension will "
                             "be appended to the file name if it is not already there).",
                        metavar="FILE",
                        type=str,
@@ -307,7 +307,7 @@ class Benchmark:
 
     def save_data(self, data_dict):
         """Save `data_dict` as a npz archive when --outputfn is used"""
-        assert(isinstance(data_dict, dict))
+        assert (isinstance(data_dict, dict))
         if self.outputfn is not None:
             # Clean `data_dict` for Bohrium arrays
             nobh_data = {"_bhary_keys": []}
@@ -398,29 +398,26 @@ def main():
 if __name__ == "__main__":
     main()
 
-    
-def dump_visualization_trace_file(visual_args,field):
+
+def dump_visualization_trace_file(visual_args, field):
     fname = "%s_%s.npy.gz" % (visual_args.trace_fname, field);
-    print("Dumping %s" % fname,file=sys.stderr)
-    data  = np.stack(visual_args.trace[field])    
+    data = np.stack(visual_args.trace[field])
     del visual_args.trace[field]
-    
-    print("Writing visualization trace file: %s (%s)" % (fname, data.shape))    
-    f = gzip.GzipFile("%s" % fname,"w")
+
+    print("Writing visualization trace file: %s (%s)" % (fname, data.shape))
+    f = gzip.GzipFile("%s" % fname, "w")
     np.save(f, data)
     del data
     f.close()
 
-    
 
 @atexit.register
 def goodbye():
     if _visual_args is not None \
             and _visual_args.trace_fname is not None \
             and bh_is_loaded_as_np:
-
-        dump_visualization_trace_file(_visual_args,"org")
-        dump_visualization_trace_file(_visual_args,"zip");
+        dump_visualization_trace_file(_visual_args, "org")
+        dump_visualization_trace_file(_visual_args, "zip")
 
         from bohrium import _bh
         msg = _bh.message("statistics-detail")
