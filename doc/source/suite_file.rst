@@ -9,11 +9,11 @@ In Python, it is easy to create a suite file. You start by creating a list of :p
 
     [{
       'label': 'X-ray/10*10*1', # The label of the command
-      'cmd': 'python xraysim.py --size=10*10*1',  # The command to execute
+      'cmd': 'python xraysim.py 10*10*1',  # The command to execute
       'env': {}  # The environment variables that will be defined before execution
     }, {
       'label': 'X-ray/20*10*1',
-      'cmd': 'python xraysim.py --size=20*10*1',
+      'cmd': 'python xraysim.py 20*10*1',
       'env': {}
     }]
 
@@ -37,7 +37,7 @@ A example of a suite file that contains two commands; one finished and one pendi
         "creation_date_utc": "2017-05-23T09:02:25.373696",
         "cmd_list": [
             {
-                "cmd": "python xraysim.py --size=10*10*1",
+                "cmd": "python xraysim.py 10*10*1",
                 "jobs": [
                     {
                         "status": "finished",
@@ -56,7 +56,7 @@ A example of a suite file that contains two commands; one finished and one pendi
                 "label": "X-ray/10*10*1"
             },
             {
-                "cmd": "python xraysim.py --size=20*10*1",
+                "cmd": "python xraysim.py 20*10*1",
                 "jobs": [
                     {
                         "status": "pending",
