@@ -1,6 +1,6 @@
 # By  Natalino Busa <https://gist.github.com/natalinobusa/4633275>
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
 """

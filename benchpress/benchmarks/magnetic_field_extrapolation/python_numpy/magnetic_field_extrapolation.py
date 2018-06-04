@@ -1,6 +1,6 @@
 # This Python file uses the following encoding: utf-8
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 import math
 

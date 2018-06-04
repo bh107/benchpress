@@ -4,7 +4,7 @@ Parameter: `--size<image-size>*<filter-size>*<niters>`.
 """
 
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
 

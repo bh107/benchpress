@@ -6,7 +6,7 @@ GPL
 @author: Rasmus Nordfang
 """
 
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
 import time as tid

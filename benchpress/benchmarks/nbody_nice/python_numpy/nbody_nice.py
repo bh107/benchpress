@@ -10,7 +10,7 @@ This is done to keep the simulation simple enough for teaching purposes
 
 """
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 try:
     import numpy_force as npf

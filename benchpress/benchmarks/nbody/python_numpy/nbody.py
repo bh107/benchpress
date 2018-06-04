@@ -10,7 +10,7 @@ This is done to keep the simulation simple enough for teaching purposes
 All the work is done in the calc_force, move and random_galaxy functions.
 To vectorize the code these are the functions to transform.
 """
-from benchpress import util
+from benchpress.benchmarks import util
 if util.Benchmark().bohrium:
     import bohrium as np
 else:

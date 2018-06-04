@@ -9,7 +9,7 @@ Copyright (C) 2006 Jonas Latt
 Address: Rue General Dufour 24,  1211 Geneva 4, Switzerland
 E-mail: Jonas.Latt@cui.unige.ch
 """
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
 # D2Q9 Lattice constants

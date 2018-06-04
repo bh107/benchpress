@@ -1,5 +1,5 @@
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 from bohrium.stdviews import D2P8, no_border
 

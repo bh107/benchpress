@@ -8,7 +8,7 @@ So what does this code example illustrate?
 
 Adapted from: http://people.sc.fsu.edu/~jburkardt/m_src/shallow_water_2d/
 """
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
 g = 9.80665  # gravitational acceleration

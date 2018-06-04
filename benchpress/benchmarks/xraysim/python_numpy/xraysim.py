@@ -12,7 +12,7 @@ from xraysimgeometry import coordsAAscene, raygeometry, detectorgeometry, runAAB
 import numpy as np
 from material import Material
 from scene_objects import snake, man, fivecubes
-from benchpress import util
+from benchpress.benchmarks import util
 
 class Const:
     EPS = 1e-5

@@ -5,7 +5,7 @@ Game of Life
 
 So what does this code example illustrate?
 """
-from benchpress import util
+from benchpress.benchmarks import util
 from gameoflife_utils import pattern_paths, insert_cells, cells_from_file
 import numpy as np
 

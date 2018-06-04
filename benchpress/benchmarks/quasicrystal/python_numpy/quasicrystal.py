@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
 def main():

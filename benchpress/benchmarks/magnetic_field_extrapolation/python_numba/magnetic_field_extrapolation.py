@@ -1,5 +1,5 @@
 # This Python file uses the following encoding: utf-8
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 from math import cos, sin, exp, pi
 import numba
