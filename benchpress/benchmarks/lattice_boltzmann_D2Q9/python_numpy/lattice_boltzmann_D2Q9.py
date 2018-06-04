@@ -9,8 +9,10 @@ Copyright (C) 2006 Jonas Latt
 Address: Rue General Dufour 24,  1211 Geneva 4, Switzerland
 E-mail: Jonas.Latt@cui.unige.ch
 """
-from benchpress.benchmarks import util
 import numpy as np
+from benchpress.benchmarks import util
+
+bench = util.Benchmark("The Lattice Boltzmann Methods D2Q9", "height*width*iterations")
 
 # D2Q9 Lattice constants
 t = [4 / 9., 1 / 9., 1 / 9., 1 / 9., 1 / 9., 1 / 36., 1 / 36., 1 / 36., 1 / 36.]
@@ -72,7 +74,7 @@ def cylinder(height, width, obstacle=True):
     return state
 
 
-def solve(B, state, timesteps, visualize=False):
+def solve(state, timesteps):
     # load the ready only state
     ly = int(state['ly'])
     lx = int(state['lx'])
@@ -178,29 +180,23 @@ def solve(B, state, timesteps, visualize=False):
                 fIn[i] = t1
             else:
                 fIn[i] = fOut[i]
-        if visualize:
-            util.plot_surface(ux.T, "2d", 0, state['viz_max'], state['viz_min'])
+        bench.plot_surface(ux.T, "2d", 0, state['viz_max'], state['viz_min'])
 
-    B.do_while(loop_body, timesteps, state['fIn'])
+    bench.do_while(loop_body, timesteps, state['fIn'])
 
 
 def main():
-    B = util.Benchmark()
-    H = B.size[0]
-    W = B.size[1]
-    I = B.size[2]
-    state = B.load_data()
+    H = bench.args.size[0]
+    W = bench.args.size[1]
+    I = bench.args.size[2]
+    state = bench.load_data()
     if state is None:
         state = cylinder(H, W)
-    B.start()
-    solve(B, state, I, B.visualize)
-    B.stop()
-    B.save_data(state)
-    B.pprint()
-    if B.verbose:
-        print("Iterations=%s, State: %s." % (I, state))
-    if B.visualize:
-        util.confirm_exit()
+    bench.start()
+    solve(state, I)
+    bench.stop()
+    bench.save_data(state)
+    bench.pprint()
 
 
 if __name__ == "__main__":
