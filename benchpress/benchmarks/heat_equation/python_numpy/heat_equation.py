@@ -2,6 +2,8 @@ from __future__ import print_function
 from benchpress.benchmarks import util
 import numpy as np
 
+bench = util.Benchmark("Solving the heat equation using the jacobi method", "height*width*iterations")
+
 
 def init_grid(height, width, dtype=np.float32):
     grid = np.zeros((height + 2, width + 2), dtype=dtype)
@@ -12,7 +14,7 @@ def init_grid(height, width, dtype=np.float32):
     return grid
 
 
-def jacobi(B, grid, epsilon=0.005, max_iterations=None, visualize=False):
+def jacobi(grid, epsilon=0.005, max_iterations=None):
     def loop_body(grid):
         center = grid[1:-1, 1:-1]
         north = grid[0:-2, 1:-1]
@@ -22,36 +24,29 @@ def jacobi(B, grid, epsilon=0.005, max_iterations=None, visualize=False):
         work = 0.2 * (center + north + east + west + south)
         delta = np.sum(np.absolute(work - center))
         center[:] = work
-
-        if visualize:
-            util.plot_surface(grid, "2d", 0, 200, -200)
+        bench.plot_surface(grid, "2d", 0, 200, -200)
         return delta > epsilon
 
-    B.do_while(loop_body, max_iterations, grid)
+    bench.do_while(loop_body, max_iterations, grid)
     return grid
 
 
 def main():
-    B = util.Benchmark()
-    H = B.size[0]
-    W = B.size[1]
-    I = B.size[2]
+    H = bench.args.size[0]
+    W = bench.args.size[1]
+    I = bench.args.size[2]
 
-    grid = B.load_data()
+    grid = bench.load_data()
     if grid is not None:
         grid = grid['grid']
     else:
-        grid = init_grid(H, W, dtype=B.dtype)
+        grid = init_grid(H, W, dtype=bench.dtype)
 
-    B.start()
-    grid = jacobi(B, grid, max_iterations=I, visualize=B.visualize)
-    B.stop()
-    B.save_data({'grid': grid})
-    B.pprint()
-    if B.verbose:
-        print("Iterations=%s, Grid: %s." % (I, grid))
-    if B.visualize:
-        util.confirm_exit()
+    bench.start()
+    grid = jacobi(grid, max_iterations=I)
+    bench.stop()
+    bench.save_data({'grid': grid})
+    bench.pprint()
 
 
 if __name__ == "__main__":

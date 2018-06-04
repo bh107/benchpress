@@ -8,4 +8,4 @@ This submodule of benchpress consist of a broad range of benchmarks in different
 """
 from __future__ import absolute_import
 
-from . import util
+from . import util as util
