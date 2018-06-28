@@ -54,7 +54,7 @@ def bash_job(args, cmd, nruns):
         bash += 'sync\n\n'
 
     # Execute command 'nruns' times
-    bash += "# The runs \n%s " % cmd['cmd']
+    bash += "# The runs \n"
     for i in range(nruns):
         # Write the command to execute
         bash += "%s " % cmd['cmd']

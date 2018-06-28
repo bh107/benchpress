@@ -27,14 +27,14 @@ From clone or tarball
 
 Clone the repos::
 
-  git clone git@bitbucket.org:bohrium/benchpress.git
+  git clone https://github.com/bh107/benchpress.git
   cd benchpress
 
 or download and unpack a tarball::
 
-  wget https://bitbucket.org/bohrium/benchpress/get/master.tar.gz
-  tar xzvf master.tar.gz
-  cd bohrium-benchpress-*
+  wget https://github.com/bh107/benchpress/archive/master.zip
+  unzip master.zip
+  cd bohrium-benchpress
 
 And install it::
 

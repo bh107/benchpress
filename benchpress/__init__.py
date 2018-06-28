@@ -34,7 +34,8 @@ def _suite_schema():
     from os.path import join, realpath, dirname
     import json
     try:
-        return json.load(open(join(dirname(realpath(__file__)), "suite_schema.json"), "r"))
+        with open(join(dirname(realpath(__file__)), "suite_schema.json"), "r") as f:
+            return json.load(f)
     except IOError:  # readthedocs cannot find "suite_schema.json"
         return None
 suite_schema = _suite_schema()
