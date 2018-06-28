@@ -364,6 +364,8 @@ class Benchmark:
 
         import sys
         i = 0
+        func.__globals__['get_iterator'] = lambda x=0: i + x
+
         if niters is None:
             niters = sys.maxsize
         while i < niters:
