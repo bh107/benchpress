@@ -375,6 +375,20 @@ class Benchmark:
 
         import sys
         i = 0
+        func.__globals__['get_iterator'] = lambda x=0: i + x
+
+        def get_grid(*args):
+            assert(len(args) > 0)
+            grid = args[::-1]
+            iterators = ()
+            for dim, iterations in enumerate(grid):
+                it = int(i/step_delay) % iterations
+                step_delay *= iterations
+                iterators = (it,) + iterators
+            return iterators
+
+        func.__globals__['get_grid'] = lambda args: get_grid(args)
+
         if niters is None:
             niters = sys.maxsize
         while i < niters:
