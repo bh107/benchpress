@@ -21,17 +21,18 @@ import json
 import jsonschema
 import re
 
-
-def create_test_suite(suite_path):
-    from benchpress.suite_util import BP_ROOT
-
-    scripts = [
+scripts = [
 #        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
 #        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
         ('shallow_water', 'shallow_water', "100*100*1"),
         ('lattice_boltzmann_D2Q9', 'lattice_boltzmann_D2Q9', "100*100*1"),
         ('heat_equation', 'heat_equation', "100*100*1"),
+        ('black_scholes', 'black_scholes', "100*100"),
     ]
+
+
+def create_test_suite(suite_path):
+    from benchpress.suite_util import BP_ROOT
 
     cmd_list = []
     for label, name, size in scripts:
@@ -87,13 +88,14 @@ class BP(unittest.TestCase):
         tmp_result = join(self.tmpdir, "res.txt")
         sys.argv = [old_argv[0], self.suite_file, "--csv", "--output", tmp_result]
         cli.main()
-        # We open the output file and check for some elapsed time
+        # We open the output file and check for an elapsed time for each benchmark
         with open(tmp_result, "r") as f:
             res = f.read()
-            match = re.search(", (\d+\.\d+),", res)
-            self.assertTrue(match)
-            elapsed_time = float(match.group(1))
-            self.assertGreater(elapsed_time, 0)
+            for s in scripts:
+                match = re.search("%s.+, (\d+\.\d+)," % s[0], res)
+                self.assertTrue(match)
+                elapsed_time = float(match.group(1))
+                self.assertGreater(elapsed_time, 0)
 
     def testJSON(self):
         from . import suite_schema
