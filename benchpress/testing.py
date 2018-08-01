@@ -7,7 +7,7 @@ Testing of Benchpress
 To run the test use::
 
     python -m benchpress.testing
-    
+
 .. note:: Do not run this file directly such as ``python benchpress/testing.py`` it will not work!
 
 """
@@ -19,23 +19,26 @@ import sys
 import benchpress as bp
 import json
 import jsonschema
+import re
 
 
 def create_test_suite(suite_path):
     from benchpress.suite_util import BP_ROOT
 
     scripts = [
-        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
-        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
+#        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
+#        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
+        ('shallow_water', 'shallow_water', "100*100*1"),
+        ('lattice_boltzmann_D2Q9', 'lattice_boltzmann_D2Q9', "100*100*1"),
+        ('heat_equation', 'heat_equation', "100*100*1"),
     ]
 
     cmd_list = []
-    for label, name, sizes in scripts:
-        for size in sizes:
-            full_label = "%s/%s" % (label, size)
-            bash_cmd = "python {root}/benchmarks/{script}/python_numpy/{script}.py --size={size}" \
+    for label, name, size in scripts:
+        full_label = "%s/%s" % (label, size)
+        bash_cmd = "python {root}/benchmarks/{script}/python_numpy/{script}.py {size}" \
                 .format(root=BP_ROOT, script=name, size=size)
-            cmd_list.append(bp.command(bash_cmd, full_label))
+        cmd_list.append(bp.command(bash_cmd, full_label))
     bp.create_suite(cmd_list, suite_path)
 
 
@@ -81,14 +84,16 @@ class BP(unittest.TestCase):
     def testCli(self):
         from .visualizer import cli
         old_argv = sys.argv
-        sys.argv = [old_argv[0], self.suite_file]
+        tmp_result = join(self.tmpdir, "res.txt")
+        sys.argv = [old_argv[0], self.suite_file, "--csv", "--output", tmp_result]
         cli.main()
-
-    def testCliCSV(self):
-        from .visualizer import cli
-        old_argv = sys.argv
-        sys.argv = [old_argv[0], self.suite_file, "--csv"]
-        cli.main()
+        # We open the output file and check for some elapsed time
+        with open(tmp_result, "r") as f:
+            res = f.read()
+            match = re.search(", (\d+\.\d+),", res)
+            self.assertTrue(match)
+            elapsed_time = float(match.group(1))
+            self.assertGreater(elapsed_time, 0)
 
     def testJSON(self):
         from . import suite_schema
