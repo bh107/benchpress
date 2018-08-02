@@ -30,6 +30,7 @@ scripts = [
     ('black_scholes', 'black_scholes', "100*100"),
     ('convolve', 'convolve', "1000*10*2*10"),
     ('convolve1d', 'convolve1d', "1000*10*1000"),
+    ('galton_bean_machine', 'galton_bean_machine', "1000*100"),
 ]
 
 
