@@ -24,13 +24,15 @@ import re
 scripts = [
     #        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
     #        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
-    ('shallow_water', 'shallow_water', "100*100*1"),
-    ('lattice_boltzmann_D2Q9', 'lattice_boltzmann_D2Q9', "100*100*1"),
-    ('heat_equation', 'heat_equation', "100*100*1"),
-    ('black_scholes', 'black_scholes', "100*100"),
-    ('convolve', 'convolve', "1000*10*2*10"),
-    ('convolve1d', 'convolve1d', "1000*10*1000"),
-    ('galton_bean_machine', 'galton_bean_machine', "1000*100"),
+    ('shallow_water', "100*100*1"),
+    ('lattice_boltzmann_D2Q9', "100*100*1"),
+    ('heat_equation', "100*100*1"),
+    ('black_scholes', "100*100"),
+    ('convolve', "1000*10*2*10"),
+    ('convolve1d', "1000*10*1000"),
+    ('galton_bean_machine', "1000*100"),
+    ('gameoflife', "100*100*100*1"),
+    ('gauss', "100*100"),
 ]
 
 
@@ -38,8 +40,8 @@ def create_test_suite(suite_path):
     from benchpress.suite_util import BP_ROOT
 
     cmd_list = []
-    for label, name, size in scripts:
-        full_label = "%s/%s" % (label, size)
+    for name, size in scripts:
+        full_label = "%s/%s" % (name, size)
         bash_cmd = "python {root}/benchmarks/{script}/python_numpy/{script}.py {size}" \
             .format(root=BP_ROOT, script=name, size=size)
         cmd_list.append(bp.command(bash_cmd, full_label))
