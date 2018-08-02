@@ -33,6 +33,7 @@ scripts = [
     ('galton_bean_machine', "1000*100"),
     ('gameoflife', "100*100*100*1"),
     ('gauss', "100*100"),
+    ('leibnitz_pi', "10000*100"),
 ]
 
 
