@@ -3,6 +3,8 @@ import argparse
 import time
 import sys
 import gzip
+import operator
+import functools
 
 # In order to support runs without bohrium installed, we need some import hacks. The result is:
 #   * `np` will point to either Bohrium or Numpy
@@ -188,24 +190,25 @@ class Benchmark:
         ))
         self.confirm_exit()
 
-    def random_array(self, shape):
-        """Return a random array of the given shape. The dtype and whether it is a Bohrium
-           or regular NumPy arrays, is determent by the --dtype and -m bohrium command line arguments
-        """
-        if self.dtype is None:
-            if issubclass(numpy.dtype(self.dtype).type, numpy.integer):
-                if bohrium is not None:
-                    # If bohrium is installed, we always uses the random123 in Bohrium even when running pure NumPy
-                    ret = bohrium.random.randint(shape, bohrium=bh_is_loaded_as_np)
-                else:
-                    ret = numpy.random.randint(shape)
+    def random_array(self, shape, dtype=None):
+        """Return a random array of the given shape and dtype. If dtype is None, the type is determent by
+        the --dtype command line arguments"""
+
+        dtype = self.dtype if dtype is None else dtype
+        size = functools.reduce(operator.mul, shape)
+        if issubclass(numpy.dtype(dtype).type, numpy.integer):
+            if bohrium is not None:
+                # If bohrium is installed, we always uses the random123 in Bohrium even when running pure NumPy
+                ret = bohrium.random.randint(1, size=size,  bohrium=bh_is_loaded_as_np)
             else:
-                if bohrium is not None:
-                    # If bohrium is installed, we always uses the random123 in Bohrium even when running pure NumPy
-                    ret = bohrium.random.rand(shape, bohrium=bh_is_loaded_as_np)
-                else:
-                    ret = numpy.random.rand(shape)
-        return np.array(ret, dtype=self.dtype)
+                ret = numpy.random.randint(1, size=size)
+        else:
+            if bohrium is not None:
+                # If bohrium is installed, we always uses the random123 in Bohrium even when running pure NumPy
+                ret = bohrium.random.rand(*shape, bohrium=bh_is_loaded_as_np)
+            else:
+                ret = numpy.random.rand(*shape)
+        return np.array(ret, dtype=dtype)
 
     def do_while(self, func, niters, *args, **kwargs):
         """Implements `bohrium.do_while()` for regular NumPy"""
