@@ -22,13 +22,15 @@ import jsonschema
 import re
 
 scripts = [
-#        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
-#        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
-        ('shallow_water', 'shallow_water', "100*100*1"),
-        ('lattice_boltzmann_D2Q9', 'lattice_boltzmann_D2Q9', "100*100*1"),
-        ('heat_equation', 'heat_equation', "100*100*1"),
-        ('black_scholes', 'black_scholes', "100*100"),
-    ]
+    #        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
+    #        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
+    ('shallow_water', 'shallow_water', "100*100*1"),
+    ('lattice_boltzmann_D2Q9', 'lattice_boltzmann_D2Q9', "100*100*1"),
+    ('heat_equation', 'heat_equation', "100*100*1"),
+    ('black_scholes', 'black_scholes', "100*100"),
+    ('convolve', 'convolve', "1000*10*2*10"),
+    ('convolve1d', 'convolve1d', "1000*10*1000"),
+]
 
 
 def create_test_suite(suite_path):
@@ -38,7 +40,7 @@ def create_test_suite(suite_path):
     for label, name, size in scripts:
         full_label = "%s/%s" % (label, size)
         bash_cmd = "python {root}/benchmarks/{script}/python_numpy/{script}.py {size}" \
-                .format(root=BP_ROOT, script=name, size=size)
+            .format(root=BP_ROOT, script=name, size=size)
         cmd_list.append(bp.command(bash_cmd, full_label))
     bp.create_suite(cmd_list, suite_path)
 
@@ -93,9 +95,10 @@ class BP(unittest.TestCase):
             res = f.read()
             for s in scripts:
                 match = re.search("%s.+, (\d+\.\d+)," % s[0], res)
-                self.assertTrue(match)
+                self.assertTrue(match, "Elapsed time wasn't found in the '%s' run" % s[0])
                 elapsed_time = float(match.group(1))
-                self.assertGreater(elapsed_time, 0)
+                self.assertGreater(elapsed_time, 0,
+                                   "Elapsed time was zero in the '%s' run. The output was:\n%s" % (s[0], res))
 
     def testJSON(self):
         from . import suite_schema

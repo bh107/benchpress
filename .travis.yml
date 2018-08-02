@@ -6,6 +6,7 @@ python:
 before_install:
   - pip install .
   - pip install twine
+  - pip install scipy
 
 script:
   - python -m benchpress.testing
