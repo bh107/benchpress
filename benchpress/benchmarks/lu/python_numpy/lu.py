@@ -1,32 +1,31 @@
 from __future__ import print_function
 from benchpress.benchmarks import util
 import numpy as np
-import bohrium.linalg as la
+
+bench = util.Benchmark("LU decomposition on the matrix so that A = L*U", "<size>")
+
+
+def lu(a):
+    """
+    Perform LU decomposition on the matrix `a` so that A = L*U
+    """
+    u = a.copy()
+    l = np.identity(a.shape[0], a.dtype)
+    for c in range(1, u.shape[0]):
+        l[c:, c - 1] = (u[c:, c - 1] / u[c - 1, c - 1:c])
+        u[c:, c - 1:] = u[c:, c - 1:] - l[c:, c - 1][:, None] * u[c - 1, c - 1:]
+        bench.flush()
+    return (l, u)
+
 
 def main():
-    B = util.Benchmark()
-    N = B.size[0]
+    n = bench.args.size[0]
+    matrix = bench.random_array((n, n))
+    bench.start()
+    res = lu(matrix)
+    bench.stop()
+    bench.pprint()
 
-    if B.inputfn:
-        a = B.load_array()
-    else:
-        a = B.random_array((N,N), dtype=B.dtype)
-
-    if B.dumpinput:
-        B.dump_arrays("lu", {'input': a})
-
-    B.start()
-    (l, u) = la.lu(a)
-    if util.Benchmark().bohrium:
-        l.copy2numpy()
-        u.copy2numpy()
-    B.stop()
-
-    B.pprint()
-    if B.outputfn:
-        B.tofile(B.outputfn, {'res': u})
-    if B.verbose:
-        print(u)
 
 if __name__ == "__main__":
     main()
