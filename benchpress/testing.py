@@ -38,6 +38,7 @@ scripts = [
     ('magnetic_field_extrapolation', "16*16*10"),
     ('montecarlo_pi', "100000*10"),
     ('nbody', "100*10"),
+    ('nbody_nice', "10*100*10"),
 ]
 
 
