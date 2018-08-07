@@ -36,6 +36,7 @@ scripts = [
     ('lu', "100*100"),
     ('leibnitz_pi', "10000*100"),
     ('magnetic_field_extrapolation', "16*16*10"),
+    ('montecarlo_pi', "100000*10"),
 ]
 
 
