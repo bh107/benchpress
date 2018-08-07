@@ -2,43 +2,29 @@ from __future__ import print_function
 from benchpress.benchmarks import util
 import numpy as np
 
+bench = util.Benchmark("Rosenbrock", "size*iterations")
+
+
 def rosen(x):
     return np.sum(
-        100.0*(x[1:]-x[:-1]**2.0)**2.0 + \
-        (1-x[:-1])**2.0
+        100.0 * (x[1:] - x[:-1] ** 2.0) ** 2.0 + \
+        (1 - x[:-1]) ** 2.0
     )
 
+
 def main():
-    B = util.Benchmark()                        # Initialize Benchpress
-    N, T = B.size                               # Grab command-line arguments
+    N, T = bench.args.size  # Grab command-line arguments
+    dataset = np.arange(N, dtype=bench.dtype) / bench.dtype(N)
 
-    if B.inputfn:
-        dataset = B.load_array()
-    else:
-        dataset = np.arange(
-            N,
-            dtype=B.dtype
-        ) / B.dtype(N)                       # Create psuedo-data
-
-    if B.dumpinput:
-        B.dump_arrays("rosenbrock", {'input': dataset})
-
-    B.start()                                   # Sample wall-clock start
+    bench.start()  # Sample wall-clock start
     res = 0.0
-    for _ in range(0, T):                      # Do T trials of..
-        res += rosen(dataset)                   # ..executing rosenbrock.
-        util.Benchmark().flush()
+    for _ in range(0, T):  # Do T trials of..
+        res += rosen(dataset)  # ..executing rosenbrock.
+        bench.flush()
     res /= T
-    B.stop()                                    # Sample wall-clock stop
-    B.pprint()                                  # Print elapsed wall-clock etc.
+    bench.stop()  # Sample wall-clock stop
+    bench.pprint()  # Print elapsed wall-clock etc.
 
-    R = np.zeros((1), dtype=B.dtype)
-    R[0] = res
-    if B.outputfn:
-        B.tofile(B.outputfn, {'res':R})
-
-    if B.verbose:                               # Print more, such as results
-        print(R)
 
 if __name__ == "__main__":
     main()
