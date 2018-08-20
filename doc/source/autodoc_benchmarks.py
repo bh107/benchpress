@@ -248,7 +248,7 @@ def implementations(search_path, verbose=False):
     """Walks through the filesystem looking for benchmark implementations."""
 
     ignore_dirs  = ["_utils", "_doc"]
-    ignore_files = ['empty', 'readme.rst', 'dogma.rst', '.DS_Store', 'README.rst', 'issues.rst', 'bohrium.rst', 'Makefile', '.gitignore']
+    ignore_files = ['__init__.py', 'util.py', 'empty', 'readme.rst', 'dogma.rst', '.DS_Store', 'README.rst', 'issues.rst', 'bohrium.rst', 'Makefile', '.gitignore']
 
 
     meta = {
