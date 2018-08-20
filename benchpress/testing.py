@@ -43,6 +43,7 @@ scripts = [
     ('rosenbrock', "1000*10"),
     ('snakes_and_ladders', "100*10"),
     ('wireworld', "10*10"),
+    ('wisp', "20*20*5"),
 ]
 
 
