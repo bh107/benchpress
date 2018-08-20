@@ -41,6 +41,7 @@ scripts = [
     ('nbody_nice', "10*100*10"),
     ('quasicrystal', "5*37*64*5"),
     ('rosenbrock', "1000*10"),
+    ('snakes_and_ladders', "100*100"),
 ]
 
 
