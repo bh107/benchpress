@@ -40,7 +40,6 @@ scripts = [
     ('quasicrystal', "5*37*64*5"),
     ('rosenbrock', "1000*10"),
     ('snakes_and_ladders', "100*10"),
-    ('wireworld', "10*10"),
     ('wisp', "20*10*5"),
     ('xraysim', "10*10*1"),
 ]
