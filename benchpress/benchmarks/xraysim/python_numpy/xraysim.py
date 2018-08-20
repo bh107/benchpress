@@ -11,18 +11,22 @@ from xraysimphysics import emptyAAscene, addobjtoscene
 from xraysimgeometry import coordsAAscene, raygeometry, detectorgeometry, runAABB
 import numpy as np
 from material import Material
-from scene_objects import snake, man, fivecubes
+from scene_objects import snake
 from benchpress.benchmarks import util
+
+bench = util.Benchmark("X-ray sim", "<screen-res>*<detector-res>*<iterations>")
+
 
 class Const:
     EPS = 1e-5
     invsqr = 1.0 / (np.pi * 4)
 
+
 def buildscene(
-    scenedefs,      # scenedefinitions
-    objlist,        # list of objects, obj=
-    verbose=False   # printing status updates along the way
-    ):
+        scenedefs,  # scenedefinitions
+        objlist,  # list of objects, obj=
+        verbose=False  # printing status updates along the way
+):
     """ Builds and returns a (sparse) scenegrid, and a (dense) voxel array,
         describing what materials are in which voxels
 
@@ -64,16 +68,13 @@ def buildscene(
     return scenegrid, scenematerials
 
 
-
 def xraysim(sourcelist,
             detectordeflist,
             scenegrid,
             scenematerials,
             materials,
             scene_resolution,
-            detector_resolution,
-            verbose=False,
-            visualize=False):
+            detector_resolution):
     """ performs the calculations figuring out what is detected
         INPUT:
         sourcelist: list of np.array([
@@ -118,11 +119,11 @@ def xraysim(sourcelist,
 
         # preprocess the scene physics
         # building a map of attenuation coefficients
-        sceneattenuates =  np.zeros(scenematerials.shape)
+        sceneattenuates = np.zeros(scenematerials.shape)
 
         for material_id in materials.keys():
             sceneattenuates += (scenematerials == material_id) \
-                    * materials[material_id].getMu(senergy)
+                               * materials[material_id].getMu(senergy)
 
         ret = []
         for pixelpositions, pixelareavector, dshape, result in detectors:
@@ -130,26 +131,28 @@ def xraysim(sourcelist,
             rayudirs, raylengths, rayinverse = raygeometry(rayorigin, pixelpositions)
             raydst = runAABB(scenegrid, rayudirs, rayorigin, rayinverse)
 
-            #raydst is now to be correlated with material/attenuation grid
-            t = sceneattenuates[...,np.newaxis] * raydst
-            #We sums the three dimensions
+            # raydst is now to be correlated with material/attenuation grid
+            t = sceneattenuates[..., np.newaxis] * raydst
+            # We sums the three dimensions
             t = np.sum(t, axis=(0, 1, 2))
             dtectattenuates = t.reshape(detector_resolution, detector_resolution)
-            pixelintensity = ((Const.invsqr * source[power] * np.ones(raylengths.shape[0])[..., np.newaxis]) / raylengths).reshape(dshape)
-            area = np.dot( rayudirs, pixelareavector.reshape(3,1) ).reshape(dshape)
+            pixelintensity = ((Const.invsqr * source[power] * np.ones(raylengths.shape[0])[
+                ..., np.newaxis]) / raylengths).reshape(dshape)
+            area = np.dot(rayudirs, pixelareavector.reshape(3, 1)).reshape(dshape)
             result += pixelintensity * area * np.exp(-dtectattenuates)
             ret.append(result)
-            if visualize:
+            if bench.args.visualize:
                 low = np.minimum.reduce(result.flatten())
                 high = np.maximum.reduce(result.flatten())
                 if util.Benchmark().bohrium:
-                    low  = low.copy2numpy()
+                    low = low.copy2numpy()
                     high = high.copy2numpy()
-                util.plot_surface(result, "2d", 0, low-0.001*low, high-0.5*high)
-                util.plot_surface(result, "2d", 0, low-0.001*low, high-0.5*high)
+                util.plot_surface(result, "2d", 0, low - 0.001 * low, high - 0.5 * high)
+                util.plot_surface(result, "2d", 0, low - 0.001 * low, high - 0.5 * high)
 
-    #We return only the result of the detectors
+    # We return only the result of the detectors
     return ret
+
 
 def setup(scene_res, detector_res):
     """Returns a scene to xray
@@ -168,27 +171,21 @@ def setup(scene_res, detector_res):
 
     return (srclist, detectorlist, scenegrid, scenematerials, materials, scene_res, detector_res)
 
+
 def main():
-    B = util.Benchmark()
-    scene_res = B.size[0]
-    detector_res = B.size[1]
-    iterations = B.size[2]
+    scene_res = bench.args.size[0]
+    detector_res = bench.args.size[1]
+    iterations = bench.args.size[2]
     scene = setup(scene_res, detector_res)
 
-    B.start()
+    bench.start()
     for _ in range(iterations):
-        detector_results = xraysim(*scene, visualize=B.visualize)
-        if util.Benchmark().bohrium:
-            B.flush()
+        detector_results = xraysim(*scene)
+        bench.flush()
+    bench.stop()
+    bench.pprint()
+    bench.confirm_exit()
 
-    B.stop()
-    B.pprint()
-
-    if B.outputfn:
-        B.tofile(B.outputfn, {'res': detector_results[0]})
-
-    if B.visualize:
-        util.confirm_exit()
 
 if __name__ == '__main__':
     main()

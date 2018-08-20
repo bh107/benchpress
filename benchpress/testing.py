@@ -22,8 +22,6 @@ import jsonschema
 import re
 
 scripts = [
-    #        ('X-ray', 'xraysim', ["10*10*1", "20*10*1"]),
-    #        ('Bean', 'galton_bean_machine', ["10000*10", "20000*10"]),
     ('shallow_water', "100*100*1"),
     ('lattice_boltzmann_D2Q9', "100*100*1"),
     ('heat_equation', "100*100*1"),
@@ -43,7 +41,8 @@ scripts = [
     ('rosenbrock', "1000*10"),
     ('snakes_and_ladders', "100*10"),
     ('wireworld', "10*10"),
-    ('wisp', "20*20*5"),
+    ('wisp', "20*10*5"),
+    ('xraysim', "10*10*1"),
 ]
 
 
