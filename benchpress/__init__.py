@@ -14,11 +14,11 @@ The workflow:
 """
 from __future__ import absolute_import
 from pkg_resources import get_distribution, DistributionNotFound
-from . import util
 from . import visualizer
 from . import suite_util
 from . import argument_handling
 from . import time_util
+from . import benchmarks
 from .benchpress import *
 
 # Set the package version
@@ -38,4 +38,6 @@ def _suite_schema():
             return json.load(f)
     except IOError:  # readthedocs cannot find "suite_schema.json"
         return None
+
+
 suite_schema = _suite_schema()

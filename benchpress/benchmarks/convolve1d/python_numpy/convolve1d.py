@@ -4,28 +4,25 @@ Parameter: `--size<image-size>*<filter-size>*<niters>`.
 """
 
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
+
+bench = util.Benchmark("Convolution Filter 1D", "<image-size>*<filter-size>*<niters>")
 
 
 def main():
-    B = util.Benchmark()
-    (image_size, filter_size, I) = B.size
+    (image_size, filter_size, I) = bench.args.size
 
-    image = B.random_array((image_size,))
-    image_filter = B.random_array((filter_size,))
+    image = bench.random_array((image_size,))
+    image_filter = bench.random_array((filter_size,))
 
-    B.start()
+    bench.start()
     for _ in range(I):
         R = np.convolve(image, image_filter)
-        B.flush()
-    B.stop()
-    B.pprint()
-    if B.outputfn:
-        B.tofile(B.outputfn, {'res': R})
-
-    if B.verbose:
-        print (R)
+        bench.flush()
+    bench.stop()
+    bench.save_data({'res': R})
+    bench.pprint()
 
 
 if __name__ == "__main__":

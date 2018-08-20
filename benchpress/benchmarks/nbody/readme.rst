@@ -1,4 +1,4 @@
-Similates a galaxy expanding, params --size=N*iterations::
+Similates a galaxy expanding, params N*iterations::
 
-  --size=1000*10
+  1000*10
 

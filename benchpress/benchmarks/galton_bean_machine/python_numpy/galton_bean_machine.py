@@ -1,33 +1,32 @@
 from __future__ import print_function
-from benchpress import util
+from benchpress.benchmarks import util
 import numpy as np
 
+bench = util.Benchmark("Galton Bean Machine", "<num_of_beans>*<height>")
 
-def bean(B, num_beans, height):
-    return np.sum(np.sign(B.random_array((num_beans, height))-0.5), axis=1)
+
+def bean(num_beans, height):
+    return np.sum(np.sign(bench.random_array((num_beans, height)) - 0.5), axis=1)
 
 
 def main():
-    B = util.Benchmark()
-    num_beans, height = B.size
+    num_beans, height = bench.args.size
 
-    B.start()
-    R = bean(B, num_beans, height)
-    B.stop()
+    bench.start()
+    R = bean(num_beans, height)
+    bench.stop()
+    bench.save_data({'res': R})
+    bench.pprint()
 
-    B.pprint()
-    if B.verbose:
-        print(R)
-    if B.visualize:
+    if bench.args.visualize:
         from matplotlib import pyplot
-        bins   = 100
+        bins = 100
         pyplot.hist(R, bins)
         pyplot.title("Galton Normal distribution")
         pyplot.xlabel("Value")
         pyplot.ylabel("Frequency")
         pyplot.show()
-    if B.outputfn:
-        B.tofile(B.outputfn, {'res': R})
+
 
 if __name__ == "__main__":
     main()

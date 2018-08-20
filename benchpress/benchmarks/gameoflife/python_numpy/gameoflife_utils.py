@@ -4,8 +4,8 @@ import pprint
 import glob
 import os
 
-def cells_from_file(path):
 
+def cells_from_file(path):
     def p2i(p):
         if p == ".":
             return 0
@@ -14,10 +14,10 @@ def cells_from_file(path):
         elif p == "O":
             return 1
 
-    patterns = []               # Grab patterns
+    patterns = []  # Grab patterns
     with open(path) as fd:
-        height, width       = 1, 1
-        y_offset, x_offset  = 0, 0
+        height, width = 1, 1
+        y_offset, x_offset = 0, 0
         pattern = None
         for line in fd.readlines():
             line = line.strip()
@@ -25,7 +25,7 @@ def cells_from_file(path):
                 prefix, cy, cx = line.split(" ")
                 if pattern:
                     patterns.append((pattern, y_offset, x_offset, height, width))
-                pattern = []    # Reset pattern
+                pattern = []  # Reset pattern
                 y_offset, x_offset = int(cy), int(cx)
                 height, width = 1, 1
                 continue
@@ -38,7 +38,7 @@ def cells_from_file(path):
 
         patterns.append((pattern, y_offset, x_offset, height, width))
 
-    arrays = []                 # Convert to NumPy arrays
+    arrays = []  # Convert to NumPy arrays
     for pattern, y_offset, x_offset, height, width in patterns:
         ary = np.zeros((height, width))
         for y, line in enumerate(pattern):
@@ -48,8 +48,8 @@ def cells_from_file(path):
 
     return arrays
 
-def pprint_world(world):
 
+def pprint_world(world):
     world_h, world_w = world.shape
     for y in range(world_h):
         line = []
@@ -57,16 +57,17 @@ def pprint_world(world):
             line.append("%d" % int(world[y][x]))
         print("".join(line))
 
-def insert_cells(world, patterns):
 
-    world_h, world_w    = world.shape
-    offset_h, offset_w  = world_h/2, world_w/2
+def insert_cells(world, patterns):
+    world_h, world_w = world.shape
+    offset_h, offset_w = world_h / 2, world_w / 2
 
     for nr, (pattern, y, x) in enumerate(patterns):
         height, width = pattern.shape
         y = y + offset_h
         x = x + offset_w
-        world[y:y+height, x:x+width] = pattern
+        world[y:y + height, x:x + width] = pattern
+
 
 def pattern_paths(path="cells"):
     paths = {}
@@ -75,6 +76,7 @@ def pattern_paths(path="cells"):
         name = os.path.splitext(basename)[0]
         paths[name] = path
     return paths
+
 
 def main():
     world = np.zeros((50, 185))
@@ -90,6 +92,7 @@ def main():
         insert_cells(world, patterns)
         pprint_world(world)
         break
+
 
 if __name__ == "__main__":
     main()
