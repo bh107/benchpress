@@ -30,7 +30,7 @@ Specify what to benchmark by implementing a Python script that generates command
     for label, name, sizes in scripts:
         for size in sizes:
             full_label = "%s/%s" % (label, size)
-            bash_cmd = "python {root}/benchmarks/{script}/python_numpy/{script}.py --size={size}" \
+            bash_cmd = "python {root}/benchmarks/{script}/python_numpy/{script}.py {size}" \
                         .format(root=BP_ROOT, script=name, size=size)
             cmd_list.append(bp.command(bash_cmd, full_label))
 
