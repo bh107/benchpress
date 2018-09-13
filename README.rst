@@ -40,7 +40,7 @@ Specify what to benchmark by implementing a Python script that generates command
 
 And run the script::
 
-    $ python suites/simple_example.py -o my_benchmark.json
+    $ python suites/simple_example.py --output my_benchmark.json
     Scheduling 'X-ray/10*10*1': 'python xraysim/python_numpy/xraysim.py --size=10*10*1'
     Scheduling 'X-ray/20*10*1': 'python xraysim/python_numpy/xraysim.py --size=20*10*1'
     Scheduling 'Bean/10000*10': 'python galton_bean_machine/python_numpy/galton_bean_machine.py --size=10000*10'
