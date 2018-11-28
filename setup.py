@@ -118,6 +118,7 @@ setup(
     entry_points={
         'console_scripts': [
             'bp-run=benchpress.run:main',
+            'bp-info=benchpress.info:main',
             'bp-cli=benchpress.visualizer.cli:main',
             'bp-raw=benchpress.visualizer.raw:main',
             'bp-cli-series=benchpress.visualizer.cli_series:main',
