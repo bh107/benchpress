@@ -124,6 +124,7 @@ setup(
             'bp-cli-series=benchpress.visualizer.cli_series:main',
             'bp-chart=benchpress.visualizer.bar_per_cmd:main',
             'bp-chart-series=benchpress.visualizer.series_per_cmd:main',
+            'bp-total=benchpress.visualizer.totaltime:main',
         ],
     },
 )
