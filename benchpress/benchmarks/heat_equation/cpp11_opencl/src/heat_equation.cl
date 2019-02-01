@@ -1,6 +1,6 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-__kernel void heat_eq_jacobi(uint width, uint height 
+__kernel void heat_eq_jacobi(uint width, uint height
                              , __global DTYPE* in
                              , __global DTYPE* out
                              , __global DTYPE* delta)
@@ -11,7 +11,7 @@ __kernel void heat_eq_jacobi(uint width, uint height
     uint w = width + 2;
     uint h = height + 2;
     DTYPE d = 0.0;
-    for (uint i = 0; i < height; ++i) 
+    for (uint i = 0; i < height; ++i)
     {
         uint offset = i*w;
         DTYPE up     = in[gid+1+offset];
