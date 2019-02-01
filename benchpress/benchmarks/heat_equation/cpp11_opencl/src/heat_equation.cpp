@@ -20,12 +20,11 @@ cl::Kernel kernel;
 #define STR(s) #s
 #define xSTR(s) STR(s)
 
-
 int main (int argc, char** argv)
 {
     if (argc != 5)
     {
-        std::cout << "Usage: " << argv[0] << " OPENCL-FILE WIDTH HEIGHT ITERATIONS" << std::endl;
+        std::cout << "Usage: " << argv[0] << " HEAT-EQ-KERNEL-FILE WIDTH HEIGHT ITERATIONS" << std::endl;
         return 0;
     }
     // Commandline arguments
@@ -46,7 +45,7 @@ int main (int argc, char** argv)
             context = cl::Context(CL_DEVICE_TYPE_GPU, props);
             foundPlatform = true;
             break;
-        } 
+        }
         catch (cl::Error e)
         {
             foundPlatform = false;
@@ -80,7 +79,7 @@ int main (int argc, char** argv)
     {
         std::cout << program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(devices[0]) << std::endl;
     }
-    kernel = cl::Kernel(program, "heat_equation");
+    kernel = cl::Kernel(program, "heat_eq_jacobi");
 
     // Set up model
     unsigned int w = width+2;
@@ -107,7 +106,7 @@ int main (int argc, char** argv)
             printf ("%lf ", grid[j+i*w]);
         }
         printf ("\n");
-    }       
+    }
 #endif
     // Start timing
     timeval t_start,t_end;
@@ -130,7 +129,7 @@ int main (int argc, char** argv)
         kernel.setArg(2,inDev);
         kernel.setArg(3,outDev);
         kernel.setArg(4,deltaDev);
-        commandQueue.enqueueNDRangeKernel(kernel, cl::NullRange, 
+        commandQueue.enqueueNDRangeKernel(kernel, cl::NullRange,
                                           cl::NDRange((width/TPB+1)*TPB), cl::NDRange(TPB));
         commandQueue.enqueueReadBuffer(deltaDev, CL_FALSE, 0, delta_size, deltaHostPtr);
         commandQueue.finish();
@@ -154,7 +153,7 @@ int main (int argc, char** argv)
             printf ("%lf ", grid[j+i*w]);
         }
         printf ("\n");
-    }       
+    }
 #endif
     double d_time = (t_end.tv_sec - t_start.tv_sec) + (t_end.tv_usec - t_start.tv_usec)/1000000.0;
     std::cout << argv[0] << " - iter: " << iter << " size: " << width << "*" << height << " elapsed-time: " <<
