@@ -18,8 +18,11 @@ def main():
     for _ in range(niter):
         pi += 4.0 * leibnitz_pi(size)  # Execute benchmark
         bench.flush()
+    pi /= niter
     bench.stop()
     bench.pprint()
+    if bench.args.verbose:
+        print(pi)
 
 
 if __name__ == "__main__":
