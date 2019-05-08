@@ -88,7 +88,7 @@ def one_bar_per_cmd(args):
             else:
                 raise ValueError("--mpld3: The output must be either `html` or `json`")
         else:
-            pylab.savefig(args.output.name, format=fformat)
+            pylab.savefig(fname, format=fformat)
     else:
         if args.mpld3:
             import mpld3
