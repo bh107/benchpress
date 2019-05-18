@@ -4,6 +4,7 @@ import argparse
 
 _parser = argparse.ArgumentParser(description='Runs a benchmark suite and stores the results in a JSON-file.')
 _parser.add_argument(
+    '-o',
     '--output',
     type=str,
     metavar='RESULT_FILE',
