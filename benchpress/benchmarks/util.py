@@ -47,9 +47,10 @@ class Benchmark:
     the statements in-between start() and stop() are measured.
     """
 
-    def __init__(self, description, size_pattern):
+    def __init__(self, description, size_pattern, delimiter="*"):
         self._elapsed = 0.0  # The quantity measured
         self._script = sys.argv[0]  # The script being run
+        self.delimiter = delimiter
 
         # Construct argument parser
         p = argparse.ArgumentParser(description=description)
@@ -124,7 +125,7 @@ class Benchmark:
                        )
 
         self.args = p.parse_args()  # Parse the arguments
-        self.args.size = [int(i) for i in self.args.size.split("*")] if self.args.size else []
+        self.args.size = [eval(i) for i in self.args.size.split(self.delimiter)] if self.args.size else []
         self.dtype = eval("numpy.%s" % self.args.dtype)
         if self.args.visualize:
             self._visual_args = VisualArgs(self.args)
